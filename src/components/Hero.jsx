@@ -1,0 +1,134 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ArrowRight } from 'lucide-react';
+
+export default function Hero() {
+  const sectionRef = useRef(null);
+  const overlineRef = useRef(null);
+  const line1Ref = useRef(null);
+  const line2Ref = useRef(null);
+  const subtitleRef = useRef(null);
+  const statsRef = useRef(null);
+  const ctaRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.fromTo(overlineRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 })
+        .fromTo(line1Ref.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, '-=0.6')
+        .fromTo(line2Ref.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, '-=0.6')
+        .fromTo(subtitleRef.current, { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.5')
+        .fromTo(statsRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.4')
+        .fromTo(ctaRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3');
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const stats = [
+    { label: 'PROPERTIES MANAGED', value: '50+' },
+    { label: 'AVG REVENUE LIFT', value: '+22%' },
+    { label: 'MARKETS', value: 'US-WIDE' },
+  ];
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative h-[100dvh] min-h-[700px] flex items-end overflow-hidden"
+    >
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1518732714860-b62714ce0c59?w=1920&q=80&auto=format')`,
+        }}
+      />
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#161910] via-[#161910]/80 to-[#13342D]/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#161910] via-transparent to-transparent opacity-60" />
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 md:pb-24">
+        <div className="max-w-2xl">
+          {/* Overline */}
+          <p
+            ref={overlineRef}
+            className="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-6 opacity-0"
+          >
+            REVENUE MANAGEMENT FOR SHORT-TERM RENTALS
+          </p>
+
+          {/* Heading */}
+          <h1 className="mb-6">
+            <span
+              ref={line1Ref}
+              className="block text-[clamp(40px,7vw,64px)] leading-[1.05] text-[#E8E6E1] lowercase opacity-0"
+              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, letterSpacing: '0.5px' }}
+            >
+              every night has
+            </span>
+            <span
+              ref={line2Ref}
+              className="block text-[clamp(48px,9vw,80px)] leading-[1.0] text-[#7A8B76] lowercase opacity-0"
+              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic', letterSpacing: '0.5px' }}
+            >
+              its price.
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p
+            ref={subtitleRef}
+            className="text-[15px] leading-[1.7] text-[#C8C4BC] max-w-[520px] mb-8 opacity-0"
+          >
+            We combine dynamic pricing tools with expert strategy to maximize
+            your rental income — while you stay in control.
+          </p>
+
+          {/* Stats Bar */}
+          <div
+            ref={statsRef}
+            className="flex flex-wrap gap-6 md:gap-10 mb-8 opacity-0"
+          >
+            {stats.map((stat, i) => (
+              <div key={i} className="flex flex-col gap-0.5">
+                <span
+                  className="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase"
+                >
+                  {stat.label}
+                </span>
+                <span
+                  className="text-[18px] text-[#E8E6E1] font-medium"
+                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                >
+                  {stat.value}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div ref={ctaRef} className="opacity-0">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(19,52,45,0.35)]"
+              style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
+            >
+              <span className="absolute inset-0 bg-[#1E4A40] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
+              <span className="relative z-10">schedule a strategy call</span>
+              <ArrowRight className="relative z-10 w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-40">
+        <span className="font-bold uppercase text-[8px] tracking-[3px] text-[#E8E6E1]">SCROLL</span>
+        <div className="w-px h-8 bg-gradient-to-b from-[#E8E6E1] to-transparent" />
+      </div>
+    </section>
+  );
+}
