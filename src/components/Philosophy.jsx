@@ -55,7 +55,7 @@ export default function Philosophy() {
             className="philo-reveal opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#C8C4BC] lowercase"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            "what should I charge?"
+            "what should <span className="inline" style={{ textTransform: 'uppercase' }}>I</span> charge?"
           </h2>
         </div>
 

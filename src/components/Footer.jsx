@@ -2,7 +2,7 @@ import { Linkedin } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#161910] rounded-t-[3rem] pt-16 pb-8">
+    <footer className="bg-[#161910] pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
@@ -72,7 +72,7 @@ export default function Footer() {
               </span>
             </div>
             <a
-              href="#"
+              href="https://www.linkedin.com/company/revfactor/"
               className="w-9 h-9 rounded-full bg-[#E8E6E1]/5 flex items-center justify-center hover:bg-[#E8E6E1]/10 transition-colors duration-200"
               aria-label="LinkedIn"
             >

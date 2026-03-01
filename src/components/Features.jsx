@@ -105,9 +105,9 @@ function StrategyTypewriter() {
           LIVE
         </span>
       </div>
-      <div className="bg-[#161910] rounded-[12px] p-4 min-h-[52px]">
+      <div className="bg-[#161910] rounded-[12px] p-4 h-[72px] overflow-hidden">
         <p
-          className="text-[13px] text-[#7A8B76]"
+          className="text-[13px] text-[#7A8B76] line-clamp-2"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
           <span className="text-[#5D6D59]">→ </span>

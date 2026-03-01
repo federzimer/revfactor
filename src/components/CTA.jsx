@@ -1,11 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
+import ScheduleModal from './ScheduleModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CTA() {
+  const [scheduleOpen, setScheduleOpen] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export default function CTA() {
   }, []);
 
   return (
+    <>
     <section ref={sectionRef} id="contact" className="bg-[#3F261F] py-20 md:py-28">
       <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
         <p className="cta-animate opacity-0 font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-5">
@@ -48,17 +51,21 @@ export default function CTA() {
           pricing, and show you exactly where the revenue opportunity lies.
         </p>
         <div className="cta-animate opacity-0">
-          <a
-            href="#"
+          <button
+            onClick={() => setScheduleOpen(true)}
             className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(93,109,89,0.35)]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
             <span className="relative z-10">schedule a strategy call</span>
             <ArrowRight className="relative z-10 w-4 h-4" />
-          </a>
+          </button>
         </div>
       </div>
     </section>
+
+    {/* Schedule Modal — conditionally mounted */}
+    {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
+    </>
   );
 }

@@ -1,34 +1,49 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
   {
-    quote:
-      "RevFactor transformed how we think about pricing. We went from gut-feeling rates to data-driven strategy — and our revenue shows it.",
-    name: 'SARAH M.',
-    property: 'Mountain Retreat',
-    location: 'Asheville, NC',
-    metric: '+28% RevPAR',
+    id: 1,
+    rating: 5,
+    quote: [
+      "In my humble opinion, there is no better revenue manager out there.",
+      "But in the first year, every single property saw significant growth.",
+      "I've seen the same results on all my properties since joining.",
+    ],
+    author: 'Sarah from The Kawrells',
+    verified: true,
+    property: '', // TODO: add property type
+    location: '', // TODO: add location
+    metric: '',   // TODO: add metric
   },
   {
-    quote:
-      "They don't just set prices and disappear. The ongoing strategy adjustments and monthly reporting give us total confidence.",
-    name: 'JAMES & LISA K.',
-    property: 'Lakefront Cabin',
-    location: 'Lake Tahoe, CA',
-    metric: '+19% Occupancy',
+    id: 2,
+    rating: 5,
+    quote: [
+      "The best way I can describe their service is that it just works.",
+      "I could fan girl about the job they do all day long.",
+    ],
+    author: 'Emily Karnaz',
+    verified: true,
+    property: '', // TODO: add property type
+    location: '', // TODO: add location
+    metric: '',   // TODO: add metric
   },
   {
-    quote:
-      "We manage 12 properties and RevFactor treats each one individually. The market intelligence they provide is genuinely impressive.",
-    name: 'DAVID R.',
-    property: 'Portfolio Manager',
-    location: 'Smoky Mountains, TN',
-    metric: '+34% Revenue',
+    id: 3,
+    rating: 5,
+    quote: [
+      "Federico's aggressive approach to pricing has been a game-changer for our portfolio.",
+    ],
+    author: 'Cheyenne',
+    verified: true,
+    property: '', // TODO: add property type
+    location: '', // TODO: add location
+    metric: '',   // TODO: add metric
   },
 ];
 
@@ -76,34 +91,59 @@ export default function SocialProof() {
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
+          {testimonials.map((t) => (
             <div
-              key={i}
-              className="testimonial-card opacity-0 bg-white rounded-[20px] p-7 shadow-[0_2px_12px_rgba(22,25,16,0.05)] border border-[#C8C4BC]/15 flex flex-col"
+              key={t.id}
+              className="testimonial-card bg-white rounded-[20px] p-7 shadow-[0_2px_12px_rgba(22,25,16,0.05)] border border-[#C8C4BC]/15 flex flex-col"
             >
-              <Quote className="w-6 h-6 text-[#5D6D59]/30 mb-4" />
-              <blockquote
-                className="text-[18px] leading-[1.5] text-[#3F261F] mb-6 flex-1"
-                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
-              >
-                {t.quote}
+              {/* Stars */}
+              <div className="flex items-center gap-0.5 mb-4">
+                {Array.from({ length: t.rating }).map((_, j) => (
+                  <Star key={j} className="w-4 h-4 fill-[#D9A05B] text-[#D9A05B]" />
+                ))}
+              </div>
+
+              {/* Quotes */}
+              <blockquote className="mb-6 flex-1 space-y-2">
+                {t.quote.map((line, j) => (
+                  <p
+                    key={j}
+                    className="text-[18px] leading-[1.5] text-[#3F261F]"
+                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
+                  >
+                    "{line}"
+                  </p>
+                ))}
               </blockquote>
+
+              {/* Author */}
               <div className="pt-4 border-t border-[#C8C4BC]/20">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-bold uppercase text-[9px] tracking-[2.5px] text-[#3F261F] mb-0.5">
-                      {t.name}
+                      {t.author}
                     </p>
-                    <p className="text-[12px] text-[#76574C]">
-                      {t.property} · {t.location}
-                    </p>
+                    {(t.property || t.location) && (
+                      <p className="text-[12px] text-[#76574C]">
+                        {[t.property, t.location].filter(Boolean).join(' · ')}
+                      </p>
+                    )}
                   </div>
-                  <span
-                    className="inline-block px-2.5 py-1 bg-[#5D6D59]/10 text-[#5D6D59] rounded-full text-[11px] font-medium"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                  >
-                    {t.metric}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {t.metric && (
+                      <span
+                        className="inline-block px-2.5 py-1 bg-[#5D6D59]/10 text-[#5D6D59] rounded-full text-[11px] font-medium"
+                        style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                      >
+                        {t.metric}
+                      </span>
+                    )}
+                    {t.verified && (
+                      <span className="inline-block px-2 py-1 bg-[#5D6D59]/10 text-[#5D6D59] rounded-full text-[8px] font-bold uppercase tracking-[1.5px]">
+                        VERIFIED
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

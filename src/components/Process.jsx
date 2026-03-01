@@ -51,25 +51,42 @@ function RevenueChart() {
 }
 
 function HeatmapCalendar() {
-  const cells = Array.from({ length: 28 }, (_, i) => {
-    const heat = Math.sin(i * 0.4) * 0.5 + 0.5;
-    return heat;
-  });
+  const cellsRef = useRef([]);
+
+  useEffect(() => {
+    const cells = cellsRef.current.filter(Boolean);
+    if (!cells.length) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(cells, {
+        fill: () => gsap.utils.random(['#D9A05B', '#BD5E3B', '#8F6E62', '#D9A05B']),
+        duration: 2,
+        stagger: 0.1,
+        yoyo: true,
+        repeat: -1,
+        ease: 'sine.inOut',
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div className="grid grid-cols-7 gap-1.5 max-w-[220px] mx-auto">
-      {cells.map((heat, i) => (
-        <div
+    <svg viewBox="0 0 400 300" className="w-full max-w-sm drop-shadow-2xl">
+      <rect x="50" y="50" width="300" height="200" rx="16" fill="white" opacity="0.05" />
+      {Array.from({ length: 24 }).map((_, i) => (
+        <rect
           key={i}
-          className="w-full aspect-square rounded-md"
-          style={{
-            backgroundColor: `rgba(232, 230, 225, ${0.15 + heat * 0.6})`,
-            animation: `pulse ${2 + Math.random() * 2}s ease-in-out infinite`,
-            animationDelay: `${i * 0.1}s`,
-          }}
+          ref={(el) => (cellsRef.current[i] = el)}
+          x={70 + (i % 6) * 45}
+          y={70 + Math.floor(i / 6) * 45}
+          width="35"
+          height="35"
+          rx="6"
+          fill="#8F6E62"
         />
       ))}
-    </div>
+    </svg>
   );
 }
 
