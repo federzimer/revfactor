@@ -128,7 +128,7 @@ function SubscribeModal({ onClose }) {
           </button>
 
           {/* Badge */}
-          <span className="inline-block px-3 py-1.5 rounded-full bg-[#5D6D59]/10 text-[#5D6D59] font-bold uppercase text-[9px] tracking-[2.5px] mb-4">
+          <span className="inline-block px-3 py-1.5 rounded-full bg-[#5D6D59]/10 text-[#5D6D59] font-bold uppercase text-[9px] tracking-[2.5px] mb-4" data-umami-event="CTA-1">
             SUBSCRIBE
           </span>
 
@@ -152,20 +152,18 @@ function SubscribeModal({ onClose }) {
                 role="radio"
                 aria-checked={selectedCount === count}
                 onClick={() => setSelectedCount(count)}
-                className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-[12px] border transition-all duration-[200ms] text-left ${
-                  selectedCount === count
+                className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-[12px] border transition-all duration-[200ms] text-left ${selectedCount === count
                     ? 'border-[#13342D] bg-[#13342D]/5'
                     : 'border-[#C8C4BC]/30 hover:border-[#C8C4BC]/60'
-                }`}
+                  }`}
                 style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
               >
                 {/* Custom radio indicator */}
                 <div
-                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors duration-[200ms] ${
-                    selectedCount === count
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors duration-[200ms] ${selectedCount === count
                       ? 'border-[#13342D] bg-[#13342D]'
                       : 'border-[#C8C4BC]'
-                  }`}
+                    }`}
                 >
                   {selectedCount === count && <Check className="w-3 h-3 text-white" />}
                 </div>
@@ -178,9 +176,8 @@ function SubscribeModal({ onClose }) {
                   {Array.from({ length: count }).map((_, i) => (
                     <Building2
                       key={i}
-                      className={`w-3.5 h-3.5 transition-colors duration-[200ms] ${
-                        selectedCount === count ? 'text-[#13342D]' : 'text-[#8F6E62]'
-                      }`}
+                      className={`w-3.5 h-3.5 transition-colors duration-[200ms] ${selectedCount === count ? 'text-[#13342D]' : 'text-[#8F6E62]'
+                        }`}
                     />
                   ))}
                 </div>
@@ -192,11 +189,10 @@ function SubscribeModal({ onClose }) {
           <button
             onClick={handleCheckout}
             disabled={!selectedCount}
-            className={`w-full flex items-center justify-center gap-2 py-3.5 font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-all duration-[200ms] ${
-              selectedCount
+            className={`w-full flex items-center justify-center gap-2 py-3.5 font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-all duration-[200ms] ${selectedCount
                 ? 'bg-[#13342D] text-[#E8E6E1] hover:scale-[1.02] cursor-pointer'
                 : 'bg-[#C8C4BC]/40 text-[#8F6E62] cursor-not-allowed'
-            }`}
+              }`}
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             {selectedCount && (
@@ -241,7 +237,7 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 transition-all duration-[350ms] ${scrolled
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[85%] md:w-auto px-3 py-2.5 rounded-full flex items-center gap-1 transition-all duration-[350ms] ${scrolled
           ? 'bg-[#DDDAD3]/60 backdrop-blur-[12px] border border-[#C8C4BC]/40 shadow-[0_4px_24px_rgba(22,25,16,0.08)]'
           : 'bg-transparent border border-transparent'
           }`}
@@ -278,11 +274,10 @@ export default function Navbar() {
             href="https://owner.revfactor.io"
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1.5 px-4 py-2 border font-bold uppercase text-[9px] tracking-[2px] rounded-full transition-all duration-[200ms] hover:scale-[1.02] ${
-              scrolled
-                ? 'border-[#3F261F]/30 text-[#3F261F] hover:bg-[#3F261F]/5'
-                : 'border-[#E8E6E1]/30 text-[#E8E6E1] hover:bg-[#E8E6E1]/5'
-            }`}
+            className={`inline-flex items-center gap-1.5 px-4 py-2 border font-bold uppercase text-[9px] tracking-[2px] rounded-full transition-all duration-[200ms] hover:scale-[1.02] ${scrolled
+                ? 'border-[#3F261F]/30 text-[#3F261F] hover:bg-[#3F261F] hover:text-[#DDDAD3] hover:border-[#3F261F]'
+                : 'border-[#E8E6E1]/30 text-[#E8E6E1] hover:bg-[#3F261F] hover:text-[#DDDAD3] hover:border-[#3F261F]'
+              }`}
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <Building2 className="w-3 h-3" />
@@ -306,18 +301,38 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`md:hidden ml-2 p-2 transition-colors duration-200 ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
+          className={`md:hidden ml-auto p-2 transition-colors duration-200 ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
             }`}
           aria-label="Toggle menu"
         >
-          <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
-            <path
-              d={menuOpen ? 'M1 1L17 11M1 11L17 1' : 'M0 1H18M0 6H18M0 11H18'}
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
+          <div className="relative w-[18px] h-[18px]">
+            {/* Top → slides to center + rotates to form \ */}
+            <span
+              className="absolute left-[2px] right-[2px] h-[1.5px] rounded-full bg-current"
+              style={{
+                top: menuOpen ? '8.25px' : '3.25px',
+                transform: menuOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                transition: 'top 300ms cubic-bezier(0.25, 0.1, 0.25, 1), transform 300ms cubic-bezier(0.25, 0.1, 0.25, 1)',
+              }}
             />
-          </svg>
+            {/* Middle → fades out */}
+            <span
+              className="absolute left-[2px] right-[2px] h-[1.5px] rounded-full bg-current top-[8.25px]"
+              style={{
+                opacity: menuOpen ? 0 : 1,
+                transition: 'opacity 200ms cubic-bezier(0.25, 0.1, 0.25, 1)',
+              }}
+            />
+            {/* Bottom → slides to center + rotates to form / */}
+            <span
+              className="absolute left-[2px] right-[2px] h-[1.5px] rounded-full bg-current"
+              style={{
+                top: menuOpen ? '8.25px' : '13.25px',
+                transform: menuOpen ? 'rotate(-45deg)' : 'rotate(0deg)',
+                transition: 'top 300ms cubic-bezier(0.25, 0.1, 0.25, 1), transform 300ms cubic-bezier(0.25, 0.1, 0.25, 1)',
+              }}
+            />
+          </div>
         </button>
 
         {/* Mobile Dropdown */}

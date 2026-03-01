@@ -1,4 +1,4 @@
-import { Linkedin } from 'lucide-react';
+import { Instagram, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -71,13 +71,26 @@ export default function Footer() {
                 Revenue Engine Active
               </span>
             </div>
-            <a
-              href="https://www.linkedin.com/company/revfactor/"
-              className="w-9 h-9 rounded-full bg-[#E8E6E1]/5 flex items-center justify-center hover:bg-[#E8E6E1]/10 transition-colors duration-200"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-4 h-4 text-[#8F6E62]" />
-            </a>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://www.instagram.com/revfactor"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-[#E8E6E1]/5 flex items-center justify-center hover:bg-[#E8E6E1]/10 transition-colors duration-200"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-4 h-4 text-[#8F6E62]" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/revfactor/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-[#E8E6E1]/5 flex items-center justify-center hover:bg-[#E8E6E1]/10 transition-colors duration-200"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-4 h-4 text-[#8F6E62]" />
+              </a>
+            </div>
           </div>
         </div>
 

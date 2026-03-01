@@ -8,23 +8,19 @@ gsap.registerPlugin(ScrollTrigger);
 const faqs = [
   {
     q: 'how does your pricing model work?',
-    a: 'We operate on a success-based fee structure — our compensation is tied to your revenue performance. This means our incentives are perfectly aligned with yours: we only win when you win. No upfront costs, no lock-in contracts.',
-  },
-  {
-    q: 'what kind of results can I expect?',
-    a: 'Most clients see a 15-30% increase in revenue within the first 90 days. Results vary based on your market, property type, and current pricing strategy. We provide clear benchmarks and transparent monthly reporting so you always know where you stand.',
+    a: 'We operate on a flat monthly fee designed to pay for itself — seriously',
   },
   {
     q: 'do I lose control of my pricing?',
-    a: "Absolutely not. You retain full visibility and final approval over all pricing decisions. We provide the strategy, data, and recommendations — you decide what gets implemented. Think of us as your revenue co-pilot, not autopilot.",
+    a: "Absolutely not. You retain full visibility over all pricing decisions. We provide the strategy, data, and recommendations. Think of us as your revenue co-pilot, not autopilot.",
   },
   {
     q: 'what pricing tools do you work with?',
-    a: 'We work with leading dynamic pricing platforms including PriceLabs, Beyond, and Wheelhouse. We calibrate and layer expert strategy on top of these tools — because algorithms alone miss the nuance that drives real revenue.',
+    a: 'We work with the leading dynamic pricing platform PriceLabs. We calibrate and layer expert strategy on top of it — because algorithms alone miss the nuance that drives real revenue.',
   },
   {
     q: 'how many properties do I need to get started?',
-    a: 'We work with hosts managing as few as one property to portfolios of 50+. Our strategy is customized to your scale and goals. Whether you have a single luxury cabin or a growing portfolio, the approach adapts.',
+    a: 'We work with hosts managing as few as one property to larger portfolios. Our strategy is customized to your scale and goals. Whether you have a single luxury cabin or a growing portfolio, the approach adapts.',
   },
   {
     q: 'how do you handle my data and access?',
@@ -57,9 +53,8 @@ function AccordionItem({ item, isOpen, onToggle }) {
           {item.q}
         </span>
         <ChevronDown
-          className={`w-5 h-5 text-[#8F6E62] flex-shrink-0 transition-transform duration-300 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
+          className={`w-5 h-5 text-[#8F6E62] flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''
+            }`}
           style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
         />
       </button>

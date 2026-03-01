@@ -29,8 +29,8 @@ export default function Hero() {
   }, []);
 
   const stats = [
-    { label: 'PROPERTIES MANAGED', value: '50+' },
-    { label: 'AVG REVENUE LIFT', value: '+22%' },
+    { label: 'PROPERTIES MANAGED', value: '100+' },
+    // { label: 'AVG REVENUE LIFT', value: '+22%' },
     { label: 'MARKETS', value: 'US-WIDE' },
   ];
 
@@ -116,6 +116,7 @@ export default function Hero() {
             <div ref={ctaRef} className="opacity-0">
               <button
                 onClick={() => setScheduleOpen(true)}
+                data-umami-event="CTA-2"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(19,52,45,0.35)]"
                 style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
               >
