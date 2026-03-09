@@ -1,4 +1,5 @@
 import { Instagram, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -28,7 +29,13 @@ export default function Footer() {
                 COMPANY
               </p>
               <div className="space-y-2.5">
-                {['About', 'Blog', 'Careers'].map((link) => (
+                <Link
+                  to="/about"
+                  className="block text-[13px] text-[#8F6E62] hover:text-[#E8E6E1] transition-colors duration-200"
+                >
+                  About
+                </Link>
+                {['Blog', 'Careers'].map((link) => (
                   <a
                     key={link}
                     href="#"

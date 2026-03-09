@@ -12,6 +12,7 @@ import CTA from './components/CTA';
 import Footer from './components/Footer';
 import ReviewPage from './components/ReviewPage';
 import FeedbackPage from './components/FeedbackPage';
+import AboutPage from './components/AboutPage';
 
 function LandingPage() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/review" element={<ReviewPage />} />
       <Route path="/feedback" element={<FeedbackPage />} />
+      <Route path="/about" element={<AboutPage />} />
     </Routes>
   );
 }
