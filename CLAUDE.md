@@ -144,8 +144,8 @@ npm run build
 
 | Element | Font | Weight | Case | Size | Spacing |
 |---------|------|--------|------|------|---------|
-| Headings | Cormorant Garamond | 400 | lowercase | clamp(32-80px) | 0.5px |
-| Emphasis/Subheadings | Cormorant Garamond Italic | 300-400 | lowercase | same | 0.5px |
+| Headings | Cormorant Garamond | 400 | sentence case | clamp(32-80px) | 0.5px |
+| Emphasis/Subheadings | Cormorant Garamond Italic | 300-400 | sentence case | same | 0.5px |
 | Labels/Badges | Helvetica | 700 (Bold) | ALL CAPS | 9-10px | 2-3px |
 | Body | Helvetica | 400 | normal | 14-15px | standard |
 | Data/Metrics | JetBrains Mono | 400-500 | varies | 11-22px | standard |

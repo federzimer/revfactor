@@ -81,10 +81,10 @@ export default function SocialProof() {
             CLIENT RESULTS
           </span>
           <h2
-            className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F] lowercase"
+            className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F]"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            real hosts,{' '}
+            Real hosts,{' '}
             <span style={{ fontStyle: 'italic' }}>real revenue.</span>
           </h2>
         </div>

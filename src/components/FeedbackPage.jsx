@@ -55,10 +55,10 @@ export default function FeedbackPage() {
       >
         <Link
           to="/"
-          className="text-[22px] font-normal lowercase tracking-[0.5px] px-3 text-[#3F261F] transition-colors duration-[350ms]"
+          className="text-[22px] font-normal tracking-[0.5px] px-3 text-[#3F261F] transition-colors duration-[350ms]"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
-          revfactor
+          RevFactor
         </Link>
         <Link
           to="/"
@@ -82,10 +82,10 @@ export default function FeedbackPage() {
             YOUR VOICE MATTERS
           </p>
           <h1
-            className="feedback-animate opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#3F261F] lowercase mb-5"
+            className="feedback-animate opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#3F261F] mb-5"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            we'd love your{' '}
+            We'd love your{' '}
             <span style={{ fontStyle: 'italic', color: '#7A8B76' }}>feedback</span>
           </h1>
           <p className="feedback-animate opacity-0 text-[15px] leading-[1.7] text-[#76574C] max-w-xl mx-auto">

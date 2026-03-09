@@ -289,10 +289,10 @@ export default function AboutPage() {
       >
         <Link
           to="/"
-          className="text-[22px] font-normal lowercase tracking-[0.5px] px-3 text-[#E8E6E1] transition-colors duration-[350ms]"
+          className="text-[22px] font-normal tracking-[0.5px] px-3 text-[#E8E6E1] transition-colors duration-[350ms]"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
-          revfactor
+          RevFactor
         </Link>
         <Link
           to="/"
@@ -318,10 +318,10 @@ export default function AboutPage() {
             </span>
 
             <h1
-              className="about-animate opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#E8E6E1] lowercase mb-6"
+              className="about-animate opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#E8E6E1] mb-6"
               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, letterSpacing: '0.5px' }}
             >
-              revenue management{' '}
+              Revenue management{' '}
               <em
                 className="not-italic"
                 style={{ fontStyle: 'italic', color: '#7A8B76' }}

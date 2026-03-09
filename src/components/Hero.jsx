@@ -67,14 +67,14 @@ export default function Hero() {
             <h1 className="mb-6">
               <span
                 ref={line1Ref}
-                className="block text-[clamp(40px,7vw,64px)] leading-[1.05] text-[#E8E6E1] lowercase opacity-0"
+                className="block text-[clamp(40px,7vw,64px)] leading-[1.05] text-[#E8E6E1] opacity-0"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, letterSpacing: '0.5px' }}
               >
-                every night has
+                Every night has
               </span>
               <span
                 ref={line2Ref}
-                className="block text-[clamp(48px,9vw,80px)] leading-[1.0] text-[#7A8B76] lowercase opacity-0"
+                className="block text-[clamp(48px,9vw,80px)] leading-[1.0] text-[#7A8B76] opacity-0"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic', letterSpacing: '0.5px' }}
               >
                 its price.

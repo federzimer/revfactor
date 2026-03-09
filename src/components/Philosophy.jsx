@@ -52,10 +52,10 @@ export default function Philosophy() {
             MOST HOSTS ASK
           </p>
           <h2
-            className="philo-reveal opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#C8C4BC] lowercase"
+            className="philo-reveal opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#C8C4BC]"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            "what should <span className="inline" style={{ textTransform: 'uppercase' }}>I</span> charge?"
+            "What should I charge?"
           </h2>
         </div>
 
@@ -72,10 +72,10 @@ export default function Philosophy() {
             WE ASK
           </p>
           <h2
-            className="philo-reveal opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#E8E6E1] lowercase"
+            className="philo-reveal opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#E8E6E1]"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
           >
-            "what is every night worth?"
+            "What is every night worth?"
           </h2>
         </div>
 

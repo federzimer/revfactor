@@ -103,11 +103,11 @@ export default function ScheduleModal({ onClose }) {
               </span>
               <h2
                 id="schedule-modal-title"
-                className="text-[clamp(24px,3.5vw,32px)] leading-[1.1] text-[#3F261F] lowercase"
+                className="text-[clamp(24px,3.5vw,32px)] leading-[1.1] text-[#3F261F]"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
                 data-umami-event="CTA-2"
               >
-                schedule your strategy call
+                Schedule your strategy call
               </h2>
             </div>
 

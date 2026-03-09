@@ -7,23 +7,23 @@ gsap.registerPlugin(ScrollTrigger);
 
 const faqs = [
   {
-    q: 'how does your pricing model work?',
+    q: 'How does your pricing model work?',
     a: 'We operate on a flat monthly fee designed to pay for itself — seriously',
   },
   {
-    q: 'do I lose control of my pricing?',
+    q: 'Do I lose control of my pricing?',
     a: "Absolutely not. You retain full visibility over all pricing decisions. We provide the strategy, data, and recommendations. Think of us as your revenue co-pilot, not autopilot.",
   },
   {
-    q: 'what pricing tools do you work with?',
+    q: 'What pricing tools do you work with?',
     a: 'We work with the leading dynamic pricing platform PriceLabs. We calibrate and layer expert strategy on top of it — because algorithms alone miss the nuance that drives real revenue.',
   },
   {
-    q: 'how many properties do I need to get started?',
+    q: 'How many properties do I need to get started?',
     a: 'We work with hosts managing as few as one property to larger portfolios. Our strategy is customized to your scale and goals. Whether you have a single luxury cabin or a growing portfolio, the approach adapts.',
   },
   {
-    q: 'how do you handle my data and access?',
+    q: 'How do you handle my data and access?',
     a: 'We follow strict data security practices. Your PMS and channel manager access is handled through secure, permissioned integrations. We never share your data with third parties and you can revoke access at any time.',
   },
 ];
@@ -47,7 +47,7 @@ function AccordionItem({ item, isOpen, onToggle }) {
         className="w-full flex items-center justify-between py-6 text-left group cursor-pointer"
       >
         <span
-          className="text-[clamp(18px,3vw,22px)] text-[#3F261F] lowercase pr-4"
+          className="text-[clamp(18px,3vw,22px)] text-[#3F261F] pr-4"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
         >
           {item.q}
@@ -110,10 +110,10 @@ export default function FAQ() {
             COMMON QUESTIONS
           </span>
           <h2
-            className="faq-animate opacity-0 text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F] lowercase"
+            className="faq-animate opacity-0 text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F]"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            everything you need{' '}
+            Everything you need{' '}
             <span style={{ fontStyle: 'italic' }}>to know.</span>
           </h2>
         </div>

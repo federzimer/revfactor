@@ -9,16 +9,16 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <h3
-              className="text-[28px] text-[#E8E6E1] lowercase mb-2"
+              className="text-[28px] text-[#E8E6E1] mb-2"
               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
             >
-              revfactor
+              RevFactor
             </h3>
             <p
-              className="text-[16px] text-[#8F6E62] lowercase"
+              className="text-[16px] text-[#8F6E62]"
               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic' }}
             >
-              intelligent pricing for inspired stays
+              Intelligent pricing for inspired stays
             </p>
           </div>
 

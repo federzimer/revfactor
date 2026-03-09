@@ -135,10 +135,10 @@ function SubscribeModal({ onClose }) {
           {/* Heading */}
           <h2
             id="subscribe-modal-title"
-            className="text-[clamp(28px,4vw,36px)] leading-[1.1] text-[#3F261F] lowercase mb-2"
+            className="text-[clamp(28px,4vw,36px)] leading-[1.1] text-[#3F261F] mb-2"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
           >
-            how many properties?
+            How many properties?
           </h2>
           <p className="text-[14px] leading-[1.6] text-[#76574C] mb-6">
             Select the number of properties you want to manage with RevFactor.
@@ -246,11 +246,11 @@ export default function Navbar() {
         {/* Wordmark */}
         <a
           href="#"
-          className={`text-[22px] font-normal lowercase tracking-[0.5px] px-3 transition-colors duration-[350ms] ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
+          className={`text-[22px] font-normal tracking-[0.5px] px-3 transition-colors duration-[350ms] ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
             }`}
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
-          revfactor
+          RevFactor
         </a>
 
         {/* Desktop Links */}

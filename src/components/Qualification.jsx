@@ -54,10 +54,10 @@ export default function Qualification() {
             IS THIS FOR YOU?
           </span>
           <h2
-            className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F] lowercase"
+            className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F]"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            the right fit{' '}
+            The right fit{' '}
             <span style={{ fontStyle: 'italic' }}>matters.</span>
           </h2>
         </div>
@@ -67,10 +67,10 @@ export default function Qualification() {
           {/* For You */}
           <div className="qual-animate opacity-0 bg-[#1E4A40] rounded-[24px] p-8 md:p-10">
             <h3
-              className="text-[24px] text-[#E8E6E1] lowercase mb-6"
+              className="text-[24px] text-[#E8E6E1] mb-6"
               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
             >
-              revfactor is for you if...
+              RevFactor is for you if...
             </h3>
             <div className="space-y-4">
               {forYou.map((item, i) => (
@@ -87,10 +87,10 @@ export default function Qualification() {
           {/* Not For You */}
           <div className="qual-animate opacity-0 bg-white rounded-[24px] p-8 md:p-10 border border-[#C8C4BC]/20">
             <h3
-              className="text-[24px] text-[#3F261F] lowercase mb-6"
+              className="text-[24px] text-[#3F261F] mb-6"
               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
             >
-              we might not be the right fit if...
+              We might not be the right fit if...
             </h3>
             <div className="space-y-4">
               {notForYou.map((item, i) => (
