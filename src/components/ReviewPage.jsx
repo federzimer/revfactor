@@ -33,7 +33,7 @@ export default function ReviewPage() {
       >
         <Link
           to="/"
-          className="text-[22px] font-normal lowercase tracking-[0.5px] px-3 text-[#3F261F] transition-colors duration-[350ms]"
+          className="text-[22px] font-normal tracking-[0.5px] px-3 text-[#3F261F] transition-colors duration-[350ms]"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
           revfactor
@@ -60,10 +60,10 @@ export default function ReviewPage() {
             DISCOVER REVFACTOR
           </p>
           <h1
-            className="review-animate opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#3F261F] lowercase mb-5"
+            className="review-animate opacity-0 text-[clamp(32px,6vw,56px)] leading-[1.1] text-[#3F261F] mb-5"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            see how we can transform{' '}
+            See how we can transform{' '}
             <span style={{ fontStyle: 'italic', color: '#7A8B76' }}>your revenue</span>
           </h1>
           <p className="review-animate opacity-0 text-[15px] leading-[1.7] text-[#76574C] max-w-2xl mx-auto">
@@ -84,10 +84,10 @@ export default function ReviewPage() {
                 <Play className="w-3.5 h-3.5 text-[#E8E6E1]" />
               </div>
               <h2
-                className="text-[clamp(22px,3vw,28px)] text-[#3F261F] lowercase"
+                className="text-[clamp(22px,3vw,28px)] text-[#3F261F]"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
               >
-                service overview
+                Service overview
               </h2>
             </div>
             <div className="aspect-video w-full rounded-[12px] overflow-hidden bg-[#C8C4BC]">
@@ -116,10 +116,10 @@ export default function ReviewPage() {
                 <Calendar className="w-3.5 h-3.5 text-[#E8E6E1]" />
               </div>
               <h2
-                className="text-[clamp(22px,3vw,28px)] text-[#3F261F] lowercase"
+                className="text-[clamp(22px,3vw,28px)] text-[#3F261F]"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
               >
-                schedule your discovery call
+                Schedule your discovery call
               </h2>
             </div>
 
@@ -167,11 +167,11 @@ export default function ReviewPage() {
               TAKE THE NEXT STEP
             </p>
             <h2
-              className="text-[clamp(26px,4vw,36px)] leading-[1.15] text-[#3F261F] lowercase mb-4"
+              className="text-[clamp(26px,4vw,36px)] leading-[1.15] text-[#3F261F] mb-4"
               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
             >
-              ready to maximize your{' '}
-              <span style={{ fontStyle: 'italic', color: '#7A8B76' }}>str revenue?</span>
+              Ready to maximize your{' '}
+              <span style={{ fontStyle: 'italic', color: '#7A8B76' }}>STR revenue?</span>
             </h2>
             <p className="text-[15px] leading-[1.7] text-[#76574C] max-w-lg mx-auto mb-8">
               Join the growing number of successful STR owners who trust RevFactor

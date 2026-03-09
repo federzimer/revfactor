@@ -40,10 +40,10 @@ export default function CTA() {
           READY TO START?
         </p>
         <h2
-          className="cta-animate opacity-0 text-[clamp(32px,5vw,44px)] leading-[1.15] text-[#E8E6E1] lowercase mb-4"
+          className="cta-animate opacity-0 text-[clamp(32px,5vw,44px)] leading-[1.15] text-[#E8E6E1] mb-4"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
         >
-          ready to maximize{' '}
+          Ready to maximize{' '}
           <span style={{ fontStyle: 'italic' }}>your revenue?</span>
         </h2>
         <p className="cta-animate opacity-0 text-[15px] leading-[1.7] text-[#8F6E62] max-w-lg mx-auto mb-10">

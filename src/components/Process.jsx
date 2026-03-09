@@ -142,21 +142,21 @@ function OccupancyEKG() {
 const steps = [
   {
     number: '01',
-    title: 'discover',
+    title: 'Discover',
     copy: "We audit your property's market position, pricing gaps, and revenue potential.",
     bg: 'bg-[#13342D]',
     Visual: RevenueChart,
   },
   {
     number: '02',
-    title: 'strategize',
+    title: 'Strategize',
     copy: 'We build a custom pricing strategy calibrated to your market, events, and goals.',
     bg: 'bg-[#3F261F]',
     Visual: HeatmapCalendar,
   },
   {
     number: '03',
-    title: 'optimize',
+    title: 'Optimize',
     copy: 'Daily monitoring, strategic adjustments, and monthly reporting — revenue on autopilot.',
     bg: 'bg-[#5D6D59]',
     Visual: OccupancyEKG,
@@ -209,10 +209,10 @@ export default function Process() {
             HOW IT WORKS
           </span>
           <h2
-            className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F] lowercase"
+            className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F]"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            three steps to{' '}
+            Three steps to{' '}
             <span style={{ fontStyle: 'italic' }}>optimized revenue.</span>
           </h2>
         </div>
@@ -235,7 +235,7 @@ export default function Process() {
                     {step.number}
                   </span>
                   <h3
-                    className="text-[clamp(36px,5vw,52px)] leading-[1.05] text-[#E8E6E1] lowercase mb-4"
+                    className="text-[clamp(36px,5vw,52px)] leading-[1.05] text-[#E8E6E1] mb-4"
                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
                   >
                     {step.title}

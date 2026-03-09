@@ -182,13 +182,13 @@ export default function Pain() {
 
             <h2 className="pain-animate opacity-0 mb-6">
               <span
-                className="block text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F] lowercase"
+                className="block text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F]"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
               >
-                pricing without strategy
+                Pricing without strategy
               </span>
               <span
-                className="block text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#1E4A40] lowercase"
+                className="block text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#1E4A40]"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
               >
                 is just guessing.

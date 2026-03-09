@@ -272,10 +272,10 @@ export default function Features() {
             OUR APPROACH
           </span>
           <h2
-            className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F] lowercase"
+            className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#3F261F]"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            revenue intelligence,{' '}
+            Revenue intelligence,{' '}
             <span style={{ fontStyle: 'italic' }}>not just tools.</span>
           </h2>
         </div>
