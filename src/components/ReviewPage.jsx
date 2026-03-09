@@ -36,7 +36,7 @@ export default function ReviewPage() {
           className="text-[22px] font-normal tracking-[0.5px] px-3 text-[#3F261F] transition-colors duration-[350ms]"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
-          RevFactor
+          revfactor
         </Link>
         <Link
           to="/"

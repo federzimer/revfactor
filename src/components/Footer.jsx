@@ -12,7 +12,7 @@ export default function Footer() {
               className="text-[28px] text-[#E8E6E1] mb-2"
               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
             >
-              RevFactor
+              revfactor
             </h3>
             <p
               className="text-[16px] text-[#8F6E62]"

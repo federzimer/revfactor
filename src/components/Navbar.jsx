@@ -250,7 +250,7 @@ export default function Navbar() {
             }`}
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
-          RevFactor
+          revfactor
         </a>
 
         {/* Desktop Links */}
