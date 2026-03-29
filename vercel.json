@@ -1,11 +1,11 @@
 {
   "rewrites": [
-    { "source": "/blog", "destination": "https://ghostlatest-production-a8c8.up.railway.app/" },
-    { "source": "/blog/:path*", "destination": "https://ghostlatest-production-a8c8.up.railway.app/:path*" },
-    { "source": "/assets/:path*", "destination": "https://ghostlatest-production-a8c8.up.railway.app/assets/:path*" },
-    { "source": "/content/:path*", "destination": "https://ghostlatest-production-a8c8.up.railway.app/content/:path*" },
-    { "source": "/public/:path*", "destination": "https://ghostlatest-production-a8c8.up.railway.app/public/:path*" },
-    { "source": "/ghost/:path*", "destination": "https://ghostlatest-production-a8c8.up.railway.app/ghost/:path*" },
+    { "source": "/blog", "destination": "https://ghost-production-22b0.up.railway.app/" },
+    { "source": "/blog/:path*", "destination": "https://ghost-production-22b0.up.railway.app/:path*" },
+    { "source": "/assets/:path*", "destination": "https://ghost-production-22b0.up.railway.app/assets/:path*" },
+    { "source": "/content/:path*", "destination": "https://ghost-production-22b0.up.railway.app/content/:path*" },
+    { "source": "/public/:path*", "destination": "https://ghost-production-22b0.up.railway.app/public/:path*" },
+    { "source": "/ghost/:path*", "destination": "https://ghost-production-22b0.up.railway.app/ghost/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

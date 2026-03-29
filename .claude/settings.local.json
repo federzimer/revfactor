@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:ghostlatest-production-a8c8.up.railway.app)",
+      "WebFetch(domain:www.revfactor.io)"
+    ]
+  }
+}
