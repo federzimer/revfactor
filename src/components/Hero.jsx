@@ -128,11 +128,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-40">
-          <span className="font-bold uppercase text-[8px] tracking-[3px] text-[#E8E6E1]">SCROLL</span>
-          <div className="w-px h-8 bg-gradient-to-b from-[#E8E6E1] to-transparent" />
-        </div>
       </section>
 
       {/* Schedule Modal — conditionally mounted */}
