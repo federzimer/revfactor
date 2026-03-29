@@ -1,9 +1,7 @@
 {
   "rewrites": [
-    { "source": "/blog", "destination": "https://ghostlatest-production-a8c8.up.railway.app/blog" },
-    { "source": "/blog/:path*", "destination": "https://ghostlatest-production-a8c8.up.railway.app/blog/:path*" },
-    { "source": "/coming-soon", "destination": "https://ghostlatest-production-a8c8.up.railway.app/blog/coming-soon" },
-    { "source": "/coming-soon/", "destination": "https://ghostlatest-production-a8c8.up.railway.app/blog/coming-soon/" },
+    { "source": "/blog", "destination": "https://ghostlatest-production-a8c8.up.railway.app/" },
+    { "source": "/blog/:path*", "destination": "https://ghostlatest-production-a8c8.up.railway.app/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
