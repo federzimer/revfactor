@@ -54,6 +54,12 @@ body::after {
 ::-webkit-scrollbar-track { background: var(--color-bone); }
 ::-webkit-scrollbar-thumb { background: var(--color-walnut-light); border-radius: 3px; }
 
+/* GSAP animation guard: opacity-0 only applies when JS is active.
+   Non-JS crawlers (and browsers with JS off) see all content at full opacity. */
+html:not(.js) .opacity-0 {
+  opacity: 1 !important;
+}
+
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(1.4); }

@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.jsx';
+import Hero from '../components/Hero.jsx';
+import Pain from '../components/Pain.jsx';
+import Features from '../components/Features.jsx';
+import Philosophy from '../components/Philosophy.jsx';
+import Process from '../components/Process.jsx';
+import SocialProof from '../components/SocialProof.jsx';
+import Qualification from '../components/Qualification.jsx';
+import FAQ from '../components/FAQ.jsx';
+import CTA from '../components/CTA.jsx';
+import Footer from '../components/Footer.jsx';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "RevFactor",
+  "description": "Expert revenue management and dynamic pricing strategy for short-term rental properties across the United States.",
+  "url": "https://revfactor.io",
+  "logo": "https://revfactor.io/og-image.png",
+  "serviceType": "Revenue Management",
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "knowsAbout": [
+    "Dynamic Pricing",
+    "Short-Term Rental Revenue Management",
+    "Airbnb Optimization",
+    "Vacation Rental Pricing Strategy",
+    "PriceLabs",
+    "Wheelhouse",
+    "Beyond Pricing"
+  ],
+  "sameAs": []
+};
+---
+
+<BaseLayout
+  title="RevFactor — Intelligent Pricing for Inspired Stays"
+  description="RevFactor delivers expert dynamic pricing strategy for short-term rental hosts — combining cutting-edge tools with hands-on expertise to maximize your rental income."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />
+  </Fragment>
+
+  <Navbar client:load />
+  <main>
+    <Hero client:load />
+    <Pain client:visible />
+    <Features client:visible />
+    <Philosophy client:visible />
+    <Process client:visible />
+    <SocialProof client:visible />
+    <Qualification client:visible />
+    <FAQ client:visible />
+    <CTA client:visible />
+  </main>
+  <Footer client:visible />
+</BaseLayout>

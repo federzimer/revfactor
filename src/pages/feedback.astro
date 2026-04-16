@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeedbackPage from '../components/FeedbackPage.jsx';
+---
+
+<BaseLayout
+  title="Leave a Review — RevFactor"
+  description="Share your experience with RevFactor. Your feedback helps other STR property owners find expert revenue management."
+>
+  <FeedbackPage client:only="react" />
+</BaseLayout>

@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ReviewPage from '../components/ReviewPage.jsx';
+---
+
+<BaseLayout
+  title="Book a Discovery Call — RevFactor"
+  description="Watch the RevFactor service overview and schedule your free 30-minute discovery call to see how expert revenue management can increase your STR income."
+>
+  <ReviewPage client:only="react" />
+</BaseLayout>

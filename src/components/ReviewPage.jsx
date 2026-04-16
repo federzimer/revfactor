@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Play, Calendar, ArrowRight, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 export default function ReviewPage() {
   const pageRef = useRef(null);
@@ -31,15 +30,15 @@ export default function ReviewPage() {
         className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 bg-[#DDDAD3]/60 backdrop-blur-[12px] border border-[#C8C4BC]/40 shadow-[0_4px_24px_rgba(22,25,16,0.08)]"
         style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
       >
-        <Link
-          to="/"
+        <a
+          href="/"
           className="text-[22px] font-normal tracking-[0.5px] px-3 text-[#3F261F] transition-colors duration-[350ms]"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
           revfactor
-        </Link>
-        <Link
-          to="/"
+        </a>
+        <a
+          href="/"
           className="hidden md:inline-flex items-center gap-2 ml-2 px-5 py-2 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
           style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
         >
@@ -49,7 +48,7 @@ export default function ReviewPage() {
           />
           <ArrowLeft className="relative z-10 w-3 h-3" />
           <span className="relative z-10">back to home</span>
-        </Link>
+        </a>
       </nav>
 
       {/* Main Content */}
