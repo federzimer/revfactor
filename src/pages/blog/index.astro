@@ -32,7 +32,7 @@ const schema = {
 
   <!-- Minimal nav for blog -->
   <nav
-    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 bg-[#DDDAD3]/60 backdrop-blur-[12px] border border-[#C8C4BC]/40 shadow-[0_4px_24px_rgba(22,25,16,0.08)]"
+    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 bg-[#DDDAD3]/60 backdrop-blur-[12px] border border-[#CCC8BF]/40 shadow-[0_4px_12px_rgba(22,25,16,0.08)]"
   >
     <a
       href="/"
@@ -95,8 +95,10 @@ const schema = {
               });
               return (
                 <article
-                  class="group bg-[#E8E6E1] rounded-[20px] overflow-hidden hover:shadow-[0_8px_32px_rgba(22,25,16,0.1)] transition-shadow duration-300"
-                  style="box-shadow: 0 2px 12px rgba(22,25,16,0.05);"
+                  class="group bg-[#E8E6E1] rounded-[12px] overflow-hidden transition-all duration-[350ms]"
+                  style="box-shadow: 0 1px 3px rgba(22,25,16,0.06); transition-timing-function: cubic-bezier(0.25,0.1,0.25,1);"
+                  onmouseenter="this.style.transform='translateY(-2px) scale(1.01)';this.style.boxShadow='0 12px 32px rgba(22,25,16,0.10)'"
+                  onmouseleave="this.style.transform='';this.style.boxShadow='0 1px 3px rgba(22,25,16,0.06)'"
                 >
                   <a href={`/blog/${post.id}`} class="block p-7">
                     <!-- Category badge -->

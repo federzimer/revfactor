@@ -69,7 +69,7 @@ const schema = {
 
   <!-- Minimal nav -->
   <nav
-    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 bg-[#DDDAD3]/60 backdrop-blur-[12px] border border-[#C8C4BC]/40 shadow-[0_4px_24px_rgba(22,25,16,0.08)]"
+    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 bg-[#DDDAD3]/60 backdrop-blur-[12px] border border-[#CCC8BF]/40 shadow-[0_4px_12px_rgba(22,25,16,0.08)]"
   >
     <a
       href="/"
@@ -120,7 +120,7 @@ const schema = {
         </p>
 
         <!-- Meta -->
-        <div class="flex flex-wrap items-center gap-4 pb-8 border-b border-[#C8C4BC]/40">
+        <div class="flex flex-wrap items-center gap-4 pb-8 border-b border-[#CCC8BF]/40">
           <div class="flex items-center gap-2">
             <div class="w-7 h-7 rounded-full bg-[#13342D] flex items-center justify-center">
               <span class="text-[10px] text-[#E8E6E1] font-bold">RF</span>
@@ -147,7 +147,7 @@ const schema = {
     <div class="max-w-3xl mx-auto px-6 md:px-12 pb-24">
       <!-- Table of Contents (if headings exist) -->
       {headings.length > 1 && (
-        <aside class="mb-10 p-6 bg-[#E8E6E1] rounded-[16px]" style="box-shadow: 0 2px 12px rgba(22,25,16,0.05);">
+        <aside class="mb-10 p-6 bg-[#E8E6E1] rounded-[12px]" style="box-shadow: 0 1px 3px rgba(22,25,16,0.06);">
           <p class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-3">IN THIS ARTICLE</p>
           <nav aria-label="Table of contents">
             <ol class="space-y-1.5">
@@ -173,11 +173,11 @@ const schema = {
 
       <!-- Tags -->
       {post.data.tags.length > 0 && (
-        <div class="mt-12 pt-8 border-t border-[#C8C4BC]/40">
+        <div class="mt-12 pt-8 border-t border-[#CCC8BF]/40">
           <p class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-3">TOPICS</p>
           <div class="flex flex-wrap gap-2">
             {post.data.tags.map((tag) => (
-              <span class="px-3 py-1 bg-[#E8E6E1] text-[#76574C] text-[12px] rounded-full border border-[#C8C4BC]/40">
+              <span class="px-3 py-1 bg-[#E8E6E1] text-[#76574C] text-[12px] rounded-full border border-[#CCC8BF]/40">
                 {tag}
               </span>
             ))}
@@ -199,7 +199,7 @@ const schema = {
           Let's talk about your{' '}
           <em style="font-style: italic; color: #7A8B76;">properties</em>
         </h2>
-        <p class="text-[14px] leading-[1.7] text-[#C8C4BC] mb-7 max-w-md mx-auto">
+        <p class="text-[14px] leading-[1.7] text-[#CCC8BF] mb-7 max-w-md mx-auto">
           Schedule a free 30-minute discovery call to see what expert revenue management could do for your STR portfolio.
         </p>
         <a
@@ -286,7 +286,7 @@ const schema = {
   }
   .prose-rf :global(hr) {
     border: none;
-    border-top: 1px solid #C8C4BC;
+    border-top: 1px solid #CCC8BF;
     margin: 2rem 0;
   }
   .prose-rf :global(code) {
