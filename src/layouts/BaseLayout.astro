@@ -74,6 +74,15 @@ const canonicalUrl = Astro.url.href;
     src="https://umami-rgc.up.railway.app/script.js"
     data-website-id="fd5982fb-76c6-4a8c-bf65-2ad69c72c306"
   ></script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CTGBJ9RLK"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1CTGBJ9RLK');
+  </script>
 </head>
 <body>
   <slot />
