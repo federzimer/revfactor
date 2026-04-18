@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutPage from '../components/AboutPage.jsx';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "RevFactor",
+  "url": "https://revfactor.io",
+  "description": "Short-term rental revenue management across 24 US states and 56 markets.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "value": 10
+  }
+};
+---
+
+<BaseLayout
+  title="Where We Operate — RevFactor"
+  description="RevFactor manages 165+ short-term rental properties across 24 states and 56 US markets — from mountain cabins to coastal condos."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+  <AboutPage client:only="react" />
+</BaseLayout>

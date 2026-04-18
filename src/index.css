@@ -4,7 +4,7 @@
 @theme {
   --color-bone: #DDDAD3;
   --color-bone-light: #E8E6E1;
-  --color-bone-dark: #C8C4BC;
+  --color-bone-dark: #CCC8BF;
   --color-moss: #5D6D59;
   --color-moss-light: #7A8B76;
   --color-cedar: #13342D;
@@ -54,6 +54,12 @@ body::after {
 ::-webkit-scrollbar-track { background: var(--color-bone); }
 ::-webkit-scrollbar-thumb { background: var(--color-walnut-light); border-radius: 3px; }
 
+/* GSAP animation guard: opacity-0 only applies when JS is active.
+   Non-JS crawlers (and browsers with JS off) see all content at full opacity. */
+html:not(.js) .opacity-0 {
+  opacity: 1 !important;
+}
+
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(1.4); }
@@ -67,4 +73,12 @@ body::after {
 @keyframes slide-up {
   from { transform: translateY(100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

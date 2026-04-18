@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { ArrowLeft, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import us from 'us-atlas/states-10m.json';
@@ -287,15 +286,15 @@ export default function AboutPage() {
         className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 bg-[#161910]/60 backdrop-blur-[12px] border border-[#E8E6E1]/10 shadow-[0_4px_24px_rgba(22,25,16,0.2)]"
         style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
       >
-        <Link
-          to="/"
+        <a
+          href="/"
           className="text-[22px] font-normal tracking-[0.5px] px-3 text-[#E8E6E1] transition-colors duration-[350ms]"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
           revfactor
-        </Link>
-        <Link
-          to="/"
+        </a>
+        <a
+          href="/"
           className="hidden md:inline-flex items-center gap-2 ml-2 px-5 py-2 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
           style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
         >
@@ -305,7 +304,7 @@ export default function AboutPage() {
           />
           <ArrowLeft className="relative z-10 w-3 h-3" />
           <span className="relative z-10">back to home</span>
-        </Link>
+        </a>
       </nav>
 
       {/* Main Content */}

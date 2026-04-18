@@ -1,0 +1,164 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const categories = ['All', 'Strategy', 'Pricing', 'Markets', 'Tools', 'Case Study'];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "RevFactor Journal",
+  "description": "Expert insights on short-term rental revenue management, dynamic pricing strategy, and STR market analysis.",
+  "url": "https://revfactor.io/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "RevFactor",
+    "url": "https://revfactor.io"
+  }
+};
+---
+
+<BaseLayout
+  title="Journal — RevFactor | STR Revenue Management Insights"
+  description="Expert insights on short-term rental pricing strategy, dynamic revenue management, and market analysis. Written by the RevFactor team."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+
+  <!-- Minimal nav for blog -->
+  <nav
+    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 bg-[#DDDAD3]/60 backdrop-blur-[12px] border border-[#CCC8BF]/40 shadow-[0_4px_12px_rgba(22,25,16,0.08)]"
+  >
+    <a
+      href="/"
+      class="text-[22px] font-normal tracking-[0.5px] px-3 text-[#3F261F]"
+      style="font-family: 'Cormorant Garamond', Georgia, serif;"
+    >
+      revfactor
+    </a>
+    <a
+      href="/"
+      class="hidden md:inline-flex items-center gap-2 ml-2 px-5 py-2 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full"
+    >
+      ← home
+    </a>
+  </nav>
+
+  <main class="min-h-screen bg-[#DDDAD3]">
+    <!-- Header -->
+    <section class="pt-32 md:pt-40 pb-16 md:pb-20">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="mb-8">
+          <ol class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#8F6E62]">
+            <li><a href="/" class="hover:text-[#3F261F] transition-colors">Home</a></li>
+            <li aria-hidden="true" class="opacity-40">/</li>
+            <li aria-current="page" class="text-[#3F261F]">Journal</li>
+          </ol>
+        </nav>
+
+        <div class="max-w-2xl">
+          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-5">
+            EXPERT INSIGHTS
+          </p>
+          <h1
+            class="text-[clamp(36px,7vw,64px)] leading-[1.05] text-[#3F261F] mb-5"
+            style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; letter-spacing: 0.5px;"
+          >
+            The Revenue<br />
+            <em style="font-style: italic; color: #7A8B76;">Journal</em>
+          </h1>
+          <p class="text-[15px] leading-[1.7] text-[#76574C] max-w-lg">
+            Strategy, market analysis, and pricing insights from the RevFactor team — written for serious STR operators.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Posts Grid -->
+    <section class="pb-24">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        {posts.length === 0 ? (
+          <p class="text-[15px] text-[#76574C]">No posts yet — check back soon.</p>
+        ) : (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {posts.map((post) => {
+              const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              });
+              return (
+                <article
+                  class="group bg-[#E8E6E1] rounded-[12px] overflow-hidden transition-all duration-[350ms]"
+                  style="box-shadow: 0 1px 3px rgba(22,25,16,0.06); transition-timing-function: cubic-bezier(0.25,0.1,0.25,1);"
+                  onmouseenter="this.style.transform='translateY(-2px) scale(1.01)';this.style.boxShadow='0 12px 32px rgba(22,25,16,0.10)'"
+                  onmouseleave="this.style.transform='';this.style.boxShadow='0 1px 3px rgba(22,25,16,0.06)'"
+                >
+                  <a href={`/blog/${post.id}`} class="block p-7">
+                    <!-- Category badge -->
+                    <span class="inline-block px-2.5 py-1 rounded-full bg-[#5D6D59]/10 text-[#5D6D59] font-bold uppercase text-[8px] tracking-[2px] mb-4">
+                      {post.data.category}
+                    </span>
+
+                    <h2
+                      class="text-[clamp(20px,2.5vw,26px)] leading-[1.2] text-[#3F261F] mb-3 group-hover:text-[#13342D] transition-colors"
+                      style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
+                    >
+                      {post.data.title}
+                    </h2>
+
+                    <p class="text-[13px] leading-[1.6] text-[#76574C] mb-5 line-clamp-3">
+                      {post.data.description}
+                    </p>
+
+                    <!-- Meta row -->
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <time
+                          datetime={post.data.pubDate.toISOString()}
+                          class="text-[11px] font-bold uppercase tracking-[1.5px] text-[#8F6E62]"
+                        >
+                          {formattedDate}
+                        </time>
+                      </div>
+                      {post.data.readingTime && (
+                        <span class="text-[11px] text-[#8F6E62]">
+                          {post.data.readingTime} min read
+                        </span>
+                      )}
+                    </div>
+                  </a>
+                </article>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#161910] py-8">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-3">
+      <p class="text-[11px] text-[#8F6E62]/50">
+        &copy; 2025 RevFactor. Past performance is not indicative of future results.
+      </p>
+      <p class="text-[11px] text-[#8F6E62]/30">Precision revenue craft.</p>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
