@@ -24,3 +24,12 @@ dist-ssr
 *.sw?
 revfactor-home-page.mp4
 .astro/
+
+# Raw video files (large — transcripts committed separately)
+instagram_videos/*.mp4
+instagram_videos/tmp_audio.mp3
+
+# Test artifacts
+test-results/
+tests/report/
+tests/screenshots/
