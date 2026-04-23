@@ -212,19 +212,19 @@ function SubscribeModal({ onClose }) {
 }
 
 /* ─── Navbar ─── */
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar({ lightBg = false }) {
+  const [scrolled, setScrolled] = useState(lightBg);
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
+      setScrolled(lightBg || window.scrollY > 80);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lightBg]);
 
   const navLinks = [
     { label: 'APPROACH', href: '/#approach' },
