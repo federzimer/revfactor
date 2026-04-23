@@ -44,6 +44,12 @@ const titleSize: Record<string, string> = {
   sm:   'text-[24px]',
   wide: 'text-[clamp(44px,5vw,84px)]',
 };
+
+const POST_TEMPLATES = [
+  '/blog-mockups/post-classic',
+  '/blog-mockups/post-immersive',
+  '/blog-mockups/post-split',
+];
 ---
 
 <BaseLayout
@@ -106,9 +112,9 @@ const titleSize: Record<string, string> = {
 
       <!-- OVERLAY GRID -->
       <section data-cards class="grid grid-cols-1 md:grid-cols-12 gap-6 pt-20 pb-24">
-        {posts.map(p => (
+        {posts.map((p, i) => (
           <a
-            href="#"
+            href={POST_TEMPLATES[i % POST_TEMPLATES.length]}
             data-cat={p.cat}
             class:list={['post-card ov-card relative block rounded-[16px] overflow-hidden text-[#E8E6E1] bg-[#13342D] group', sizeClasses[p.size]]}
             style="isolation:isolate;"
@@ -154,15 +160,6 @@ const titleSize: Record<string, string> = {
   </main>
 
   <Footer client:load />
-
-  <!-- Mockup switcher -->
-  <div class="fixed bottom-6 right-6 z-[60] bg-[#161910] text-[#E8E6E1] rounded-full px-2 py-1.5 flex items-center gap-1 shadow-xl text-[11px]">
-    <span class="px-2 text-[#DDDAD3]/60 uppercase tracking-[1.5px] font-bold text-[9px]">Layout</span>
-    <a href="/journal" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">01 Journal</a>
-    <a href="/blog-mockups/masonry" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">02 Masonry</a>
-    <a href="/blog-mockups/overlay" class="px-3 py-1.5 rounded-full bg-[#E8E6E1] text-[#161910] font-bold uppercase text-[9px] tracking-[1.5px]">03 Overlay</a>
-    <a href="/blog-mockups/dispatch" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">04 Dispatch</a>
-  </div>
 
   <script is:inline>
     (function() {

@@ -46,6 +46,12 @@ const editorPicks = [
   { cat: 'Yield Management', date: 'Jan 12, 2026', read: '12 min', title: 'Why your pricing app is wrong about weekends' },
   { cat: 'Revenue Basics',   date: 'Jan 05, 2026', read: '8 min',  title: 'The three metrics every host should watch daily' },
 ];
+
+const POST_TEMPLATES = [
+  '/blog-mockups/post-classic',
+  '/blog-mockups/post-immersive',
+  '/blog-mockups/post-split',
+];
 ---
 
 <BaseLayout
@@ -175,7 +181,7 @@ const editorPicks = [
       <!-- LATEST TAB: featured + column list -->
       <div class="tab-panel grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-10" data-panel="latest">
         <!-- Featured item -->
-        <a href="#" data-cat={latestPosts[0].cat} class="post-card block group">
+        <a href={POST_TEMPLATES[0]} data-cat={latestPosts[0].cat} class="post-card block group">
           <div class="relative overflow-hidden rounded-[16px] mb-5" style="aspect-ratio:16/10;">
             <img src={latestPosts[0].img} alt="" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"/>
             <span class="absolute top-4 left-4 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{latestPosts[0].cat}</span>
@@ -198,7 +204,7 @@ const editorPicks = [
         <!-- Column list -->
         <div class="flex flex-col divide-y divide-[#C8C4BC]">
           {latestPosts.slice(1).map((p, i) => (
-            <a href="#" data-cat={p.cat} class="post-card group py-6 first:pt-0 last:pb-0 flex items-start gap-5">
+            <a href={POST_TEMPLATES[(i + 1) % POST_TEMPLATES.length]} data-cat={p.cat} class="post-card group py-6 first:pt-0 last:pb-0 flex items-start gap-5">
               <div class="text-[32px] text-[#C8C4BC] leading-none flex-shrink-0 w-12" style="font-family:'JetBrains Mono',monospace; font-weight:500;">
                 {String(i + 2).padStart(2, '0')}
               </div>
@@ -221,7 +227,7 @@ const editorPicks = [
       <!-- TRENDING TAB -->
       <div class="tab-panel hidden grid-cols-1 md:grid-cols-3 gap-8" data-panel="trending">
         {trendingPosts.map((p, i) => (
-          <a href="#" data-cat={p.cat} class="post-card group block">
+          <a href={POST_TEMPLATES[i % POST_TEMPLATES.length]} data-cat={p.cat} class="post-card group block">
             <div class="flex items-center gap-2 mb-3">
               <span class="text-[11px] text-[#C8C4BC]" style="font-family:'JetBrains Mono',monospace; font-weight:500;">#{i + 1}</span>
               <span class="text-[10.5px] font-bold uppercase tracking-[2px] text-[#5D6D59]">{p.cat}</span>
@@ -238,7 +244,7 @@ const editorPicks = [
       <div class="tab-panel hidden" data-panel="editorspicks">
         <div class="flex flex-col divide-y divide-[#C8C4BC]">
           {editorPicks.map((p, i) => (
-            <a href="#" data-cat={p.cat} class="post-card group py-8 first:pt-0 flex items-center gap-8 flex-wrap">
+            <a href={POST_TEMPLATES[i % POST_TEMPLATES.length]} data-cat={p.cat} class="post-card group py-8 first:pt-0 flex items-center gap-8 flex-wrap">
               <div class="w-14 h-14 rounded-full bg-[#13342D] text-[#E8E6E1] flex items-center justify-center flex-shrink-0" style="font-family:'Cormorant Garamond',Georgia,serif;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
               </div>
@@ -309,15 +315,6 @@ const editorPicks = [
   </main>
 
   <Footer client:load />
-
-  <!-- Mockup switcher -->
-  <div class="fixed bottom-6 right-6 z-[60] bg-[#161910] text-[#E8E6E1] rounded-full px-2 py-1.5 flex items-center gap-1 shadow-xl text-[11px]">
-    <span class="px-2 text-[#DDDAD3]/60 uppercase tracking-[1.5px] font-bold text-[9px]">Layout</span>
-    <a href="/journal" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">01 Journal</a>
-    <a href="/blog-mockups/masonry" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">02 Masonry</a>
-    <a href="/blog-mockups/overlay" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">03 Overlay</a>
-    <a href="/blog-mockups/dispatch" class="px-3 py-1.5 rounded-full bg-[#E8E6E1] text-[#161910] font-bold uppercase text-[9px] tracking-[1.5px]">04 Dispatch</a>
-  </div>
 
   <style>
     @keyframes ticker {
