@@ -1,0 +1,517 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+
+// Blog title: "The Curve" — from Federico's own words ("operators who care about the curve")
+// Positioning: Field notes on the cabin economy
+
+const categories = [
+  { name: 'All',              count: 84, desc: 'The full archive.' },
+  { name: 'Revenue Basics',   count: 14, desc: 'ADR, RevPAR, pacing, the fundamentals nobody teaches.' },
+  { name: 'Pricing Strategy', count: 22, desc: 'Dynamic pricing, seasonality, event-aware rates.' },
+  { name: 'Tools & PMS',      count: 11, desc: 'PriceLabs, Hospitable, OwnerRez — honest reviews.' },
+  { name: 'Launch Playbook',  count: 9,  desc: 'New listing pricing. Zero-to-booked in 60 days.' },
+  { name: 'Client Results',   count: 12, desc: 'Real portfolios, real numbers, real case studies.' },
+  { name: 'Market Data',      count: 8,  desc: 'Occupancy, ADR trends, booking window analysis.' },
+  { name: 'Market Guides',    count: 6,  desc: '56 markets, 24 states — location-specific pricing.' },
+  { name: 'Yield Management', count: 7,  desc: 'Airline yield principles applied to STR.' },
+  { name: 'Industry News',    count: 5,  desc: 'Airbnb algorithm, OTA policy, regulation tracking.' },
+];
+
+// FEATURED — full-column overlay card (image + text-on-image)
+const featured = {
+  href: '/blog-mockups/post-classic',
+  cat: 'Pricing Strategy',
+  img: 'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=2400&q=90',
+  date: 'Apr 18, 2026',
+  read: '9 min read',
+  title: 'The rate elasticity map of the Smoky Mountains',
+  excerpt: 'A season of 14,000 bookings, plotted. How sensitive are guests to a $25 swing — and where the elasticity curve breaks along the Blue Ridge Parkway.',
+};
+
+// Live market ticker — placeholder values; swap with AirROI /markets/adr + /occupancy feed (daily cache).
+const tickerItems = [
+  { label: 'Smokies ADR',      value: '$312', delta: '+4.2%' },
+  { label: 'Gatlinburg Occ.',  value: '71%',  delta: '+1.8pt' },
+  { label: 'Myrtle Beach ADR', value: '$248', delta: '-2.1%' },
+  { label: 'Poconos RevPAR',   value: '$186', delta: '+6.4%' },
+  { label: 'Tucson Occ.',      value: '64%',  delta: '+3.0pt' },
+  { label: 'Tahoe ADR',        value: '$512', delta: '+8.7%' },
+  { label: 'Sedona RevPAR',    value: '$284', delta: '+1.2%' },
+];
+
+// This Week in Pricing — placeholder values; swap with AirROI /markets/* aggregates.
+const thisWeekStats: [string, string, string][] = [
+  ['+18%',  'Revenue vs. comp set', 'RevFactor clients, Q1 2026'],
+  ['72%',   'Avg. occupancy',       '165 properties, last 30d'],
+  ['$312',  'Smokies avg ADR',      '+4.2% WoW'],
+  ['$184K', 'Lift captured',        'Blueridge, 11 months'],
+];
+
+// Masonry grid — varying aspect ratios for visual rhythm
+type Post = {
+  href: string;
+  cat: string;
+  variant: 'overlay' | 'text' | 'cedar' | 'moss';
+  ar?: string;
+  img?: string;
+  date: string;
+  read: string;
+  title: string;
+  excerpt?: string;
+  quote?: string;
+};
+
+const masonryPosts: Post[] = [
+  { href: '/blog-mockups/post-immersive', cat: 'Revenue Basics',   variant: 'overlay', ar: '3/4.5', img: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1200&q=85', date: 'Apr 12', read: '7 min',  title: 'The quiet math of midweek shoulder season' },
+  { href: '/blog-mockups/post-split',     cat: 'Market Data',      variant: 'text',    date: 'Apr 05', read: '11 min', title: 'Q1 2026: the great flattening of ADR', excerpt: 'Across tier-two markets, the gap between $180 and $240 is collapsing. The per-night arbitrage is moving — here\'s where.', quote: '"The anchor moved, not the ceiling."' },
+  { href: '/blog-mockups/post-classic',   cat: 'Tools & PMS',      variant: 'overlay', ar: '4/3',    img: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1200&q=85', date: 'Mar 28', read: '6 min',  title: 'What we learned shipping the Hostaway connector' },
+  { href: '/blog-mockups/post-split',     cat: 'Client Results',   variant: 'cedar',   date: 'Case study · Fort Worth', read: '8 min', title: '+$20K peak season. Minimum stays did it.', excerpt: 'Two downtown studio apartments ranked #2 and #5 in the market. What changed: we dropped the weekend minimum from 7 nights to 1.' },
+  { href: '/blog-mockups/post-immersive', cat: 'Tools & PMS',      variant: 'overlay', ar: '1/1',    img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85',  date: 'Mar 11', read: '5 min',  title: 'Pacing Tool v3' },
+  { href: '/blog-mockups/post-classic',   cat: 'Pricing Strategy', variant: 'text',    date: 'Mar 03', read: '10 min', title: "The minimum stay lever: an operator's fieldbook", excerpt: 'When to hold at three nights, when to break down to one, and the gap-fill math most DP tools get wrong.' },
+  { href: '/blog-mockups/post-split',     cat: 'Market Data',      variant: 'moss',    date: 'Frameworks', read: '6 min', title: 'ADR vs. occupancy: stop choosing.', excerpt: "The false binary costing portfolios six figures. A cleaner frame for thinking about yield." },
+  { href: '/blog-mockups/post-classic',   cat: 'Pricing Strategy', variant: 'overlay', ar: '2/3',    img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=85',  date: 'Feb 24', read: '7 min',  title: "Pricing for events you didn't know were happening" },
+  { href: '/blog-mockups/post-split',     cat: 'Client Results',   variant: 'overlay', ar: '4/3',    img: 'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1400&q=85', date: 'Mar 19', read: '8 min',  title: 'How Blueridge Retreats added $184K in 11 months' },
+  { href: '/blog-mockups/post-classic',   cat: 'Pricing Strategy', variant: 'overlay', ar: '3/4.5', img: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85',  date: 'Feb 15', read: '6 min',  title: 'The anatomy of a weekend surge' },
+  { href: '/blog-mockups/post-immersive', cat: 'Client Results',   variant: 'text',    date: 'Feb 02', read: '9 min',  title: 'Mountain Valley Lodges: 18 months on dynamic pricing', excerpt: "A candid retrospective. What worked, what didn't, and the single change that moved the needle most.", quote: '"We stopped pricing by intuition. RevPAR moved 23%."' },
+  { href: '/blog-mockups/post-split',     cat: 'Yield Management', variant: 'overlay', ar: '16/10',  img: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=85', date: 'Jan 26', read: '7 min',  title: 'The booking window is closing' },
+  { href: '/blog-mockups/post-classic',   cat: 'Launch Playbook',  variant: 'text',    date: 'Jan 19', read: '14 min', title: "The first 60 days: a new listing's pricing playbook", excerpt: 'Market penetration pricing, strategic 20% discount placement, and the review acceleration tactic that compounds forever.' },
+  { href: '/blog-mockups/post-classic',   cat: 'Market Data',      variant: 'overlay', ar: '1/1',    img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=900&q=85',  date: 'Jan 19', read: '5 min',  title: 'The Ozarks report: Jan 2026' },
+  { href: '/blog-mockups/post-immersive', cat: 'Revenue Basics',   variant: 'text',    date: 'Jan 08', read: '8 min',  title: 'Why we stopped chasing occupancy', excerpt: "After a year of pushing for 80%+ on a portfolio that should have been priced for scarcity, we learned the expensive version of a simple lesson." },
+];
+---
+
+<BaseLayout
+  title="The Curve — RevFactor's Field Notes on the Cabin Economy"
+  description="Field notes on short-term rental pricing, pacing, and yield — from Federico Zimerman and the RevFactor team. Published every Thursday."
+>
+  <Navbar client:load />
+
+  <!-- HERO -->
+  <section class="blog-hero relative overflow-hidden text-[#E8E6E1]" style="min-height:92vh;">
+    <div
+      id="heroBg"
+      class="absolute inset-0 will-change-transform"
+      style="background-image: url('https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=2400&q=85'); background-size:cover; background-position:center; transform:scale(1.04);"
+    ></div>
+    <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.35) 40%, rgba(22,25,16,0.85) 100%);"></div>
+    <!-- Subtle top gradient for navigation legibility -->
+    <div class="absolute top-0 inset-x-0 z-[2] h-40 pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.15) 60%, transparent 100%);"></div>
+
+    <div class="relative z-[3] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-16 md:pb-24 pt-40" style="min-height:92vh;">
+      <div class="max-w-2xl">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-6">
+          THE REVFACTOR JOURNAL · SINCE 2024
+        </p>
+        <h1 class="mb-6">
+          <span
+            class="block text-[#E8E6E1]"
+            style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(40px,7vw,64px); line-height:1.05; letter-spacing:0.5px;"
+          >
+            The price of
+          </span>
+          <span
+            class="block text-[#7A8B76]"
+            style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-style:italic; font-size:clamp(48px,9vw,80px); line-height:1.0; letter-spacing:0.5px;"
+          >
+            a good stay.
+          </span>
+        </h1>
+        <p class="text-[15px] leading-[1.7] text-[#C8C4BC] max-w-[520px] mb-8">
+          A working journal on pricing, pacing, and yield — across 1,800+ short-term rentals, one night at a time.
+        </p>
+        <div class="flex flex-wrap gap-6 md:gap-10">
+          <div class="flex flex-col gap-0.5">
+            <span class="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase">Properties</span>
+            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">165</span>
+          </div>
+          <div class="flex flex-col gap-0.5">
+            <span class="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase">Coverage</span>
+            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">56 Markets</span>
+          </div>
+          <div class="flex flex-col gap-0.5">
+            <span class="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase">Latest dispatch</span>
+            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">Thursday, Apr 24</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE TICKER (deep muted green, below hero) -->
+  <div class="bg-[#0C201B] text-[#E8E6E1] border-y border-[#E8E6E1]/5">
+    <div class="relative overflow-hidden">
+      <div class="flex items-center gap-2 py-3 px-6 md:px-12">
+        <span class="flex-shrink-0 px-2.5 py-1 rounded-full bg-[#5D6D59]/25 text-[#A9BBA3] font-bold uppercase text-[8.5px] tracking-[2px] flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#7A8B76]" style="animation:pulse-dot 2s ease-in-out infinite;"></span>
+          live market ticker
+        </span>
+        <div class="flex-1 overflow-hidden relative">
+          <div class="flex gap-10 whitespace-nowrap" style="animation: ticker 60s linear infinite;">
+            {[...tickerItems, ...tickerItems].map(t => (
+              <span class="inline-flex items-center gap-2 text-[11.5px]" style="font-family:'JetBrains Mono',monospace;">
+                <span class="text-[#DDDAD3]/50 uppercase tracking-[0.5px]">{t.label}</span>
+                <span class="text-[#E8E6E1] font-medium">{t.value}</span>
+                <span class:list={[t.delta.startsWith('+') ? 'text-[#7A8B76]' : 'text-[#B87F6E]']}>{t.delta}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="bg-[#DDDAD3]">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+      <!-- FEATURED — full-column with text-on-image overlay -->
+      <section class="pt-16 pb-4" data-cards>
+        <a class="post-card group block relative overflow-hidden rounded-[20px] text-[#E8E6E1]" data-cat={featured.cat} href={featured.href} style="aspect-ratio:21/9;">
+          <img src={featured.img} alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-[1.04]" style="transition-timing-function:cubic-bezier(0.25,0.1,0.25,1);"/>
+          <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(22,25,16,0.35) 0%, rgba(22,25,16,0.15) 35%, rgba(22,25,16,0.95) 100%);"></div>
+          <div class="absolute inset-0 z-[1]" style="background: linear-gradient(90deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.15) 55%, transparent 80%);"></div>
+          <span class="absolute top-6 left-6 z-[2] px-3 py-1.5 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">Featured · {featured.cat}</span>
+          <span class="absolute top-6 right-6 z-[2] px-3 py-1.5 rounded-full bg-[#13342D]/92 text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#7A8B76]" style="animation:pulse-dot 2s ease-in-out infinite;"></span>
+            New this week
+          </span>
+          <div class="absolute left-0 right-0 bottom-0 p-8 md:p-12 z-[2] max-w-4xl">
+            <div class="flex items-center gap-3 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/80 mb-4" style="font-family:'JetBrains Mono',monospace;">
+              <span>{featured.date}</span><span>·</span><span>{featured.read}</span>
+            </div>
+            <h2 class="text-[#E8E6E1] leading-[1] mb-5" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(36px,5vw,72px); letter-spacing:-0.5px; text-wrap:balance;">{featured.title}</h2>
+            <p class="text-[15px] md:text-[17px] leading-[1.5] text-[#DDDAD3]/85 max-w-2xl mb-6">{featured.excerpt}</p>
+            <div class="flex items-center gap-3">
+              <img src="/team/federico.jpg" alt="Federico Zimerman" class="w-11 h-11 rounded-full object-cover ring-2 ring-[#E8E6E1]/25" />
+              <div>
+                <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#E8E6E1]">federico zimerman</div>
+                <div class="text-[12px] text-[#DDDAD3]/70">Founder · RevFactor</div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </section>
+
+      <!-- This Week in Pricing — live data widget (under featured) -->
+      <section class="pt-8 pb-4">
+        <div class="rounded-[20px] bg-[#13342D] text-[#E8E6E1] p-8 md:p-14">
+          <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+            <div>
+              <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#A9BBA3] mb-2 inline-block">The portfolio, this week</span>
+              <h3 class="leading-[1.1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">Inside our book, <em style="font-style:italic; color:#A9BBA3; font-weight:300;">in numbers.</em></h3>
+            </div>
+            <span class="font-bold uppercase text-[9px] tracking-[2px] text-[#A9BBA3] flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#7A8B76]" style="animation:pulse-dot 2s ease-in-out infinite;"></span>
+              Updated {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+            </span>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {thisWeekStats.map(([num, label, sub]) => (
+              <div class="bg-[#E8E6E1]/5 rounded-[14px] p-6 border border-[#E8E6E1]/10">
+                <div class="text-[#E8E6E1] leading-none mb-3" style="font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(28px,3.5vw,40px);">{num}</div>
+                <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#A9BBA3] mb-1">{label}</div>
+                <div class="text-[15px] text-[#DDDAD3]/85" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400;">{sub}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION HEAD -->
+      <div class="pt-10 pb-6">
+        <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-3 block">The archive</span>
+        <h2 class="text-[#3F261F] leading-[1.05]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(32px,4vw,52px);">Essays, field notes,<br/><em style="font-style:italic; color:#7A8B76;">and market reports.</em></h2>
+      </div>
+
+      <!-- CATEGORY DROPDOWN + SEARCH (above masonry, under title) -->
+      <div class="flex items-center gap-4 pb-10 flex-wrap md:flex-nowrap">
+        <!-- Combobox wrapper (relative anchor for panel) -->
+        <div class="relative w-full md:max-w-[450px]">
+          <!-- Combobox button -->
+          <button
+            id="cbBtn"
+            class="group flex items-center gap-3 pl-3 pr-4 rounded-full bg-white/60 hover:bg-white border border-[#C8C4BC] hover:border-[#3F261F]/40 transition-all duration-200 w-full"
+            style="transition-timing-function:cubic-bezier(0.25,0.1,0.25,1); height:64px;"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
+            <span class="w-10 h-10 rounded-full bg-[#13342D] flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-[#E8E6E1]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+            </span>
+            <div class="flex-1 text-left">
+              <div class="font-bold uppercase text-[8.5px] tracking-[2px] text-[#8F6E62] leading-none mb-0.5">Currently viewing</div>
+              <div id="cbActive" class="text-[16px] text-[#3F261F] leading-tight" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">All Entries</div>
+            </div>
+            <span id="cbCount" class="text-[13px] text-[#76574C] flex-shrink-0" style="font-family:'JetBrains Mono',monospace; font-weight:500;">84</span>
+            <svg class="w-3 h-3 text-[#3F261F] transition-transform duration-200 ml-1" id="cbChev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+
+          <!-- Combobox panel (anchored directly under button) -->
+          <div id="cbPanel" class="hidden absolute left-0 right-0 top-[calc(100%+6px)] z-50 rounded-[16px] bg-[#E8E6E1] border border-[#C8C4BC] shadow-[0_20px_48px_rgba(22,25,16,0.18)] overflow-hidden">
+          <div class="px-4 py-3 border-b border-[#C8C4BC] flex items-center gap-2 bg-white/50">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#76574C" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="cbFilter" type="text" placeholder="Filter desks…" class="bg-transparent text-[13px] text-[#3F261F] placeholder:text-[#8F6E62] outline-none flex-1" />
+            <kbd class="font-mono text-[10px] text-[#8F6E62] border border-[#C8C4BC] rounded px-1.5 py-0.5">ESC</kbd>
+          </div>
+          <div id="cbList" class="max-h-[380px] overflow-y-auto py-2">
+            {categories.map((c, i) => (
+              <button
+                class="cb-item w-full px-4 py-3 flex items-center gap-3 text-left hover:bg-[#DDDAD3] transition-colors group"
+                data-cat={c.name}
+                data-count={c.count}
+              >
+                <span class:list={['cb-dot w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors', i === 0 ? 'bg-[#13342D]' : 'bg-[#C8C4BC] group-hover:bg-[#5D6D59]']}></span>
+                <span class="flex-1 min-w-0">
+                  <span class="block text-[22px] leading-[1.15] mb-0.5 text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">{c.name}</span>
+                  <span class="block text-[13px] text-[#8F6E62] truncate">{c.desc}</span>
+                </span>
+                <span class="font-bold uppercase text-[13px] tracking-[1px] text-[#76574C] tabular-nums flex-shrink-0" style="font-family:'JetBrains Mono',monospace;">{c.count}</span>
+              </button>
+            ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Search pill — matches dropdown height, green icon circle, right-aligned -->
+        <label class="flex items-center gap-3 pl-3 pr-5 rounded-full border border-[#C8C4BC] bg-white/60 hover:bg-white transition-colors w-full md:max-w-[450px] md:ml-auto" style="height:64px;">
+          <span class="w-10 h-10 rounded-full bg-[#13342D] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-[#E8E6E1]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          </span>
+          <input id="search" type="search" placeholder="Search field notes…" class="bg-transparent text-[15px] text-[#3F261F] placeholder:text-[#8F6E62] outline-none flex-1" />
+        </label>
+      </div>
+
+      <!-- MASONRY GRID -->
+      <section class="masonry-grid" data-cards>
+        {masonryPosts.map(p => (
+          <a
+            href={p.href}
+            data-cat={p.cat}
+            class:list={[
+              'post-card block mb-6 rounded-[16px] overflow-hidden transition-all duration-[350ms] group',
+              p.variant === 'text'    && 'bg-[#E8E6E1] border border-[#C8C4BC] p-8 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(22,25,16,0.08)]',
+              p.variant === 'cedar'   && 'bg-[#13342D] text-[#E8E6E1] p-8 hover:bg-[#1E4A40] hover:-translate-y-1',
+              p.variant === 'moss'    && 'bg-[#5D6D59] text-[#E8E6E1] p-8 hover:bg-[#7A8B76] hover:-translate-y-1',
+              p.variant === 'overlay' && 'relative text-[#E8E6E1]',
+            ]}
+            style="break-inside:avoid;"
+          >
+            {p.variant === 'overlay' ? (
+              <>
+                <div class="relative overflow-hidden rounded-[16px]" style={`aspect-ratio:${p.ar};`}>
+                  <img src={p.img} alt="" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]" />
+                  <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 40%, rgba(22,25,16,0.85));"></div>
+                  <span class="absolute top-4 left-4 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
+                  <div class="absolute left-0 right-0 bottom-0 p-6 z-[2]">
+                    <div class="flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/80 mb-2" style="font-family:'JetBrains Mono',monospace;">
+                      <span>{p.date}</span><span>·</span><span>{p.read}</span>
+                    </div>
+                    <h3 class="text-[#E8E6E1] leading-[1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(22px,2.5vw,30px); text-wrap:balance;">{p.title}</h3>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div class:list={['flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase mb-4', p.variant === 'text' ? 'text-[#8F6E62]' : 'text-[#DDDAD3]/75']} style="font-family:'JetBrains Mono',monospace;">
+                  <span>{p.cat}</span><span>·</span><span>{p.date}</span><span>·</span><span>{p.read}</span>
+                </div>
+                <h3 class:list={['leading-[1.1] mb-4', p.variant === 'text' ? 'text-[#3F261F]' : 'text-[#E8E6E1]']} style={`font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:${p.variant === 'cedar' ? '32px' : p.variant === 'moss' ? '30px' : '26px'};`}>{p.title}</h3>
+                {p.excerpt && <p class:list={['text-[14px] leading-[1.6]', p.variant === 'text' ? 'text-[#76574C]' : 'text-[#DDDAD3]/85']}>{p.excerpt}</p>}
+                {p.quote && (
+                  <blockquote class:list={['mt-5 pt-5 border-t text-[20px] leading-[1.3]', p.variant === 'text' ? 'border-[#C8C4BC] text-[#3F261F]' : 'border-[#DDDAD3]/30 text-[#E8E6E1]']} style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300;">
+                    {p.quote}
+                  </blockquote>
+                )}
+                <span class:list={['inline-flex items-center gap-2 mt-5 text-[11px] font-bold uppercase tracking-[2px]', p.variant === 'text' ? 'text-[#3F261F]' : 'text-[#E8E6E1]']}>
+                  Read essay
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </>
+            )}
+          </a>
+        ))}
+
+        <!-- FILLER CARD — end-of-masonry text callout (no image, skipped by filter) -->
+        <div
+          class="block mb-6 rounded-[16px] bg-[#13342D] text-[#E8E6E1] p-8"
+          data-filler
+          style="break-inside:avoid;"
+        >
+          <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#A9BBA3] mb-4 inline-block">The archive · 84 essays</span>
+          <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:30px;">
+            Read the book,<br/><em style="font-style:italic; color:#A9BBA3; font-weight:300;">one Thursday at a time.</em>
+          </h3>
+          <p class="text-[14px] leading-[1.6] text-[#DDDAD3]/80 mb-5">
+            Every essay on pricing, pacing, yield, and the markets RevFactor watches — collected in one place.
+          </p>
+          <a href="#newsletter" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#E8E6E1] hover:text-[#A9BBA3] transition-colors">
+            Get it Thursdays
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- PAGINATION -->
+      <nav class="pb-16 flex items-center justify-center gap-2 flex-wrap" aria-label="Pagination">
+        <button class="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[#C8C4BC] bg-white/40 hover:bg-white text-[#3F261F] font-bold uppercase text-[10px] tracking-[2px] transition-colors disabled:opacity-40" disabled>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+          Prev
+        </button>
+        <div class="flex items-center gap-1 mx-2" style="font-family:'JetBrains Mono',monospace;">
+          <button class="w-10 h-10 rounded-full bg-[#13342D] text-[#E8E6E1] font-medium text-[13px] tabular-nums">1</button>
+          <button class="w-10 h-10 rounded-full text-[#3F261F] hover:bg-white font-medium text-[13px] tabular-nums">2</button>
+          <button class="w-10 h-10 rounded-full text-[#3F261F] hover:bg-white font-medium text-[13px] tabular-nums">3</button>
+          <span class="px-2 text-[#8F6E62] text-[13px]">…</span>
+          <button class="w-10 h-10 rounded-full text-[#3F261F] hover:bg-white font-medium text-[13px] tabular-nums">6</button>
+        </div>
+        <button class="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[#C8C4BC] bg-white/40 hover:bg-white text-[#3F261F] font-bold uppercase text-[10px] tracking-[2px] transition-colors">
+          Next
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </nav>
+
+      <!-- Newsletter -->
+      <section id="newsletter" class="my-24 rounded-[20px] bg-[#5E2824] text-[#E8E6E1] px-8 md:px-16 py-16 md:py-20 text-center">
+        <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#E8C7C1]/85 mb-5 inline-block">RevFactor Journal</span>
+        <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">
+          Outprice the market.<br/><em style="font-style:italic; color:#F0C9C2; font-weight:300;">Every Thursday.</em>
+        </h3>
+        <p class="text-[15px] leading-[1.6] text-[#F0DAD5]/75 max-w-xl mx-auto mb-8">
+          Pricing strategy, market moves, and operator field notes from inside 1,800+ listings. Written for people who actually read the calendar view.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
+          <input type="email" placeholder="you@cabin.co" required class="flex-1 px-5 py-3 rounded-full bg-[#E8E6E1]/10 border border-[#E8E6E1]/25 text-[14px] text-[#E8E6E1] placeholder:text-[#E8C7C1]/55 outline-none" />
+          <button type="submit" class="px-6 py-3 rounded-full bg-[#E8E6E1] text-[#5E2824] font-bold uppercase text-[10px] tracking-[2px] hover:scale-[1.02] transition-transform">Subscribe</button>
+        </form>
+        <div class="text-[11px] text-[#F0DAD5]/55 mt-5">Join 12,400 operators · unsubscribe anytime · no spam</div>
+      </section>
+    </div>
+  </main>
+
+  <Footer client:load />
+
+  <!-- Mockup switcher -->
+  <div class="fixed bottom-6 right-6 z-[60] bg-[#161910] text-[#E8E6E1] rounded-full px-2 py-1.5 flex items-center gap-1 shadow-xl text-[11px]">
+    <span class="px-2 text-[#DDDAD3]/60 uppercase tracking-[1.5px] font-bold text-[9px]">Layout</span>
+    <a href="/journal" class="px-3 py-1.5 rounded-full bg-[#E8E6E1] text-[#161910] font-bold uppercase text-[9px] tracking-[1.5px]">01 Journal</a>
+    <a href="/blog-mockups/masonry" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">02 Masonry</a>
+    <a href="/blog-mockups/overlay" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">03 Overlay</a>
+    <a href="/blog-mockups/dispatch" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">04 Dispatch</a>
+  </div>
+
+  <style>
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 24px;
+      padding: 0 0 64px;
+    }
+    @media (max-width: 900px) { .masonry-grid { column-count: 2; } }
+    @media (max-width: 600px) { .masonry-grid { column-count: 1; } }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
+
+  <script is:inline>
+    // Parallax hero
+    (function() {
+      const heroBg = document.getElementById('heroBg');
+      if (heroBg) {
+        window.addEventListener('scroll', () => {
+          const y = window.scrollY;
+          if (y < 900) heroBg.style.transform = `scale(1.04) translateY(${y * 0.25}px)`;
+        }, { passive: true });
+      }
+
+      const cbBtn = document.getElementById('cbBtn');
+      const cbPanel = document.getElementById('cbPanel');
+      const cbChev = document.getElementById('cbChev');
+      const cbFilter = document.getElementById('cbFilter');
+      const cbActive = document.getElementById('cbActive');
+      const cbCount = document.getElementById('cbCount');
+      const cbItems = document.querySelectorAll('.cb-item');
+      const searchEl = document.getElementById('search');
+      let activeCat = 'All';
+      let query = '';
+
+      function openPanel() {
+        if (cbPanel) cbPanel.classList.remove('hidden');
+        if (cbChev) cbChev.style.transform = 'rotate(180deg)';
+        if (cbBtn) cbBtn.setAttribute('aria-expanded', 'true');
+        if (cbFilter) cbFilter.focus();
+      }
+      function closePanel() {
+        if (cbPanel) cbPanel.classList.add('hidden');
+        if (cbChev) cbChev.style.transform = '';
+        if (cbBtn) cbBtn.setAttribute('aria-expanded', 'false');
+        if (cbFilter) cbFilter.value = '';
+        cbItems.forEach(i => { i.style.display = ''; });
+      }
+      if (cbBtn) cbBtn.addEventListener('click', function(ev) {
+        ev.stopPropagation();
+        if (cbPanel && cbPanel.classList.contains('hidden')) openPanel();
+        else closePanel();
+      });
+      document.addEventListener('click', function(ev) {
+        const target = ev.target;
+        if (cbPanel && cbBtn && target instanceof Node) {
+          if (!cbPanel.contains(target) && !cbBtn.contains(target)) closePanel();
+        }
+      });
+      document.addEventListener('keydown', function(ev) {
+        if (ev.key === 'Escape') closePanel();
+      });
+
+      if (cbFilter) cbFilter.addEventListener('input', function() {
+        const q = cbFilter.value.toLowerCase();
+        cbItems.forEach(item => {
+          const cat = (item.getAttribute('data-cat') || '').toLowerCase();
+          item.style.display = cat.includes(q) ? '' : 'none';
+        });
+      });
+
+      cbItems.forEach(item => {
+        item.addEventListener('click', function() {
+          activeCat = item.getAttribute('data-cat') || 'All';
+          const count = item.getAttribute('data-count') || '84';
+          if (cbActive) cbActive.textContent = activeCat === 'All' ? 'All Entries' : activeCat;
+          if (cbCount) cbCount.textContent = count;
+          cbItems.forEach(i => {
+            const dot = i.querySelector('.cb-dot');
+            if (dot) {
+              dot.classList.remove('bg-[#13342D]');
+              dot.classList.add('bg-[#C8C4BC]');
+            }
+          });
+          const dot = item.querySelector('.cb-dot');
+          if (dot) {
+            dot.classList.remove('bg-[#C8C4BC]');
+            dot.classList.add('bg-[#13342D]');
+          }
+          closePanel();
+          filter();
+        });
+      });
+
+      function filter() {
+        document.querySelectorAll('[data-cards] .post-card').forEach(card => {
+          const cat = card.getAttribute('data-cat') || '';
+          const text = (card.textContent || '').toLowerCase();
+          const catMatch = activeCat === 'All' || cat === activeCat;
+          const searchMatch = !query || text.includes(query);
+          card.style.display = (catMatch && searchMatch) ? '' : 'none';
+        });
+      }
+      if (searchEl) searchEl.addEventListener('input', function() {
+        query = searchEl.value.toLowerCase();
+        filter();
+      });
+    })();
+  </script>
+</BaseLayout>

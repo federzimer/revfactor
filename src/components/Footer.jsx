@@ -35,7 +35,7 @@ export default function Footer() {
                   About
                 </a>
                 <a
-                  href="#"
+                  href="/journal"
                   className="block text-[13px] text-[#8F6E62] hover:text-[#E8E6E1] transition-colors duration-200"
                 >
                   Journal

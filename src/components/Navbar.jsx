@@ -227,10 +227,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: 'APPROACH', href: '#approach' },
-    { label: 'PROCESS', href: '#process' },
-    { label: 'RESULTS', href: '#results' },
-    { label: 'FAQ', href: '#faq' },
+    { label: 'APPROACH', href: '/#approach' },
+    { label: 'PROCESS', href: '/#process' },
+    { label: 'RESULTS', href: '/#results' },
+    { label: 'JOURNAL', href: '/journal' },
+    { label: 'FAQ', href: '/#faq' },
   ];
 
   return (
@@ -245,7 +246,8 @@ export default function Navbar() {
       >
         {/* Wordmark */}
         <a
-          href="#"
+          href="/"
+          aria-label="RevFactor home"
           className={`text-[22px] font-normal tracking-[0.5px] px-3 transition-colors duration-[350ms] ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
             }`}
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
