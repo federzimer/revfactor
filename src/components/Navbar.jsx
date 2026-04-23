@@ -230,8 +230,8 @@ export default function Navbar() {
     { label: 'APPROACH', href: '/#approach' },
     { label: 'PROCESS', href: '/#process' },
     { label: 'RESULTS', href: '/#results' },
-    { label: 'JOURNAL', href: '/journal' },
     { label: 'FAQ', href: '/#faq' },
+    { label: 'JOURNAL', href: '/journal' },
   ];
 
   return (
