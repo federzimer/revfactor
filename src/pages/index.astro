@@ -12,18 +12,48 @@ import FAQ from '../components/FAQ.jsx';
 import CTA from '../components/CTA.jsx';
 import Footer from '../components/Footer.jsx';
 
-const schema = {
+// Founder schema — biggest GEO win: AI engines cite named experts, not anonymous services.
+// TODO: fill in sameAs with Federico's LinkedIn/Instagram/X URLs when confirmed.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Federico Zimerman",
+  "givenName": "Federico",
+  "familyName": "Zimerman",
+  "jobTitle": "Founder, RevFactor",
+  "worksFor": { "@type": "Organization", "name": "RevFactor", "url": "https://revfactor.io" },
+  "knowsAbout": [
+    "Short-Term Rental Revenue Management",
+    "Dynamic Pricing",
+    "Airbnb Pricing Strategy",
+    "Vacation Rental Yield Management",
+    "PriceLabs"
+  ],
+  "sameAs": [
+    // "https://www.linkedin.com/in/federico-zimerman",
+    // "https://www.instagram.com/federicozimerman",
+  ]
+};
+
+const orgSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://revfactor.io/#organization",
   "name": "RevFactor",
   "description": "Expert revenue management and dynamic pricing strategy for short-term rental properties across the United States.",
   "url": "https://revfactor.io",
-  "logo": "https://revfactor.io/og-image.png",
-  "serviceType": "Revenue Management",
-  "areaServed": {
-    "@type": "Country",
-    "name": "United States"
+  // Schema.org logo expects a square/wordmark image, not the OG banner. Replace with /logos/revfactor-logo.png once produced.
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://revfactor.io/og-image.png",
+    "width": 1200,
+    "height": 630
   },
+  "image": "https://revfactor.io/og-image.png",
+  "founder": { "@type": "Person", "name": "Federico Zimerman" },
+  "serviceType": "Revenue Management",
+  "priceRange": "$$$",
+  "areaServed": { "@type": "Country", "name": "United States" },
   "knowsAbout": [
     "Dynamic Pricing",
     "Short-Term Rental Revenue Management",
@@ -33,16 +63,78 @@ const schema = {
     "Wheelhouse",
     "Beyond Pricing"
   ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "bestRating": "5",
+    "ratingCount": "3",
+    "reviewCount": "3"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Sarah" },
+      "reviewBody": "In my humble opinion, there is no better revenue manager out there. But in the first year, every single property saw significant growth. I've seen the same results on all my properties since joining."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Emily Karnaz" },
+      "reviewBody": "The best way I can describe their service is that it just works. I could fan girl about the job they do all day long."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Cheyenne" },
+      "reviewBody": "Federico's aggressive approach to pricing has been a game-changer for our portfolio."
+    }
+  ],
   "sameAs": []
+};
+
+// Mirrors src/components/FAQ.jsx — keep in sync if FAQ copy changes.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does your pricing model work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We operate on a flat monthly fee designed to pay for itself — seriously." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I lose control of my pricing?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Absolutely not. You retain full visibility over all pricing decisions. We provide the strategy, data, and recommendations. Think of us as your revenue co-pilot, not autopilot." }
+    },
+    {
+      "@type": "Question",
+      "name": "What pricing tools do you work with?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We work with the leading dynamic pricing platform PriceLabs. We calibrate and layer expert strategy on top of it — because algorithms alone miss the nuance that drives real revenue." }
+    },
+    {
+      "@type": "Question",
+      "name": "How many properties do I need to get started?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We work with hosts managing as few as one property to larger portfolios. Our strategy is customized to your scale and goals. Whether you have a single luxury cabin or a growing portfolio, the approach adapts." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you handle my data and access?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We follow strict data security practices. Your PMS and channel manager access is handled through secure, permissioned integrations. We never share your data with third parties and you can revoke access at any time." }
+    }
+  ]
 };
 ---
 
 <BaseLayout
   title="RevFactor — Intelligent Pricing for Inspired Stays"
-  description="RevFactor delivers expert dynamic pricing strategy for short-term rental hosts — combining cutting-edge tools with hands-on expertise to maximize your rental income."
+  description="Expert dynamic pricing strategy for short-term rental hosts. Maximize revenue without giving up control. Schedule a strategy call."
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </Fragment>
 
   <Navbar client:load />

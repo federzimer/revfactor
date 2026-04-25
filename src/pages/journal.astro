@@ -380,11 +380,11 @@ const masonryPosts: Post[] = [
         <p class="text-[15px] leading-[1.6] text-[#F0DAD5]/75 max-w-xl mx-auto mb-8">
           Pricing strategy, market moves, and operator field notes from inside 1,800+ listings. Written for people who actually read the calendar view.
         </p>
-        <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
-          <input type="email" placeholder="you@cabin.co" required class="flex-1 px-5 py-3 rounded-full bg-[#E8E6E1]/10 border border-[#E8E6E1]/25 text-[14px] text-[#E8E6E1] placeholder:text-[#E8C7C1]/55 outline-none" />
-          <button type="submit" class="px-6 py-3 rounded-full bg-[#E8E6E1] text-[#5E2824] font-bold uppercase text-[10px] tracking-[2px] hover:scale-[1.02] transition-transform">Subscribe</button>
+        <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto" novalidate>
+          <input id="newsletter-email" type="email" name="email" placeholder="you@cabin.co" required autocomplete="email" class="flex-1 px-5 py-3 rounded-full bg-[#E8E6E1]/10 border border-[#E8E6E1]/25 text-[14px] text-[#E8E6E1] placeholder:text-[#E8C7C1]/55 outline-none" />
+          <button id="newsletter-submit" type="submit" class="px-6 py-3 rounded-full bg-[#E8E6E1] text-[#5E2824] font-bold uppercase text-[10px] tracking-[2px] hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed">Subscribe</button>
         </form>
-        <div class="text-[11px] text-[#F0DAD5]/55 mt-5">Join 12,400 operators · unsubscribe anytime · no spam</div>
+        <div id="newsletter-status" class="text-[11px] text-[#F0DAD5]/55 mt-5" role="status" aria-live="polite">Join 12,400 operators · unsubscribe anytime · no spam</div>
       </section>
     </div>
   </main>
@@ -502,6 +502,46 @@ const masonryPosts: Post[] = [
       if (searchEl) searchEl.addEventListener('input', function() {
         query = searchEl.value.toLowerCase();
         filter();
+      });
+    })();
+
+    // Newsletter signup → /api/subscribe (Supabase-backed)
+    (function () {
+      var form = document.getElementById('newsletter-form');
+      var emailEl = document.getElementById('newsletter-email');
+      var btn = document.getElementById('newsletter-submit');
+      var statusEl = document.getElementById('newsletter-status');
+      if (!form || !emailEl || !btn || !statusEl) return;
+
+      var EMAIL_RX = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+      var defaultStatus = statusEl.textContent;
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var email = (emailEl.value || '').trim();
+        if (!EMAIL_RX.test(email)) {
+          statusEl.textContent = 'Please enter a valid email.';
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = 'Subscribing…';
+        statusEl.textContent = defaultStatus;
+
+        try {
+          var res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email: email, source: 'journal' }),
+          });
+          if (!res.ok) throw new Error('http ' + res.status);
+          btn.textContent = 'Subscribed ✓';
+          statusEl.textContent = 'You\u2019re on the list. First dispatch arrives Thursday.';
+          emailEl.value = '';
+        } catch (err) {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+          statusEl.textContent = 'Something went wrong. Try again in a moment.';
+        }
       });
     })();
   </script>
