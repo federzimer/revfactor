@@ -286,10 +286,10 @@ export default function Navbar({ lightBg = false }) {
             owner portal
           </a>
 
-          {/* Subscribe — primary */}
+          {/* Subscribe — primary (transparent border keeps box-model height matched to Owner Portal's 1px border) */}
           <button
             onClick={() => setModalOpen(true)}
-            className="inline-flex items-center px-5 py-2 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <span

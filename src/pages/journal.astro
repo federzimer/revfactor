@@ -199,7 +199,7 @@ const masonryPosts: Post[] = [
           <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
             <div>
               <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#A9BBA3] mb-2 inline-block">Properties Managed</span>
-              <h3 class="leading-[1.1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">Our host's revenue <em style="font-style:italic; color:#A9BBA3; font-weight:300;">returns.</em></h3>
+              <h3 class="leading-[1.1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">Our host's <em style="font-style:italic; color:#A9BBA3; font-weight:300;">revenue returns.</em></h3>
             </div>
             <span class="font-bold uppercase text-[9px] tracking-[2px] text-[#A9BBA3] flex items-center gap-2">
               <span class="w-1.5 h-1.5 rounded-full bg-[#7A8B76]" style="animation:pulse-dot 2s ease-in-out infinite;"></span>
@@ -224,10 +224,10 @@ const masonryPosts: Post[] = [
         <h2 class="text-[#3F261F] leading-[1.05]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(32px,4vw,52px);">Essays, field notes,<br/><em style="font-style:italic; color:#7A8B76;">and market reports.</em></h2>
       </div>
 
-      <!-- CATEGORY DROPDOWN + SEARCH (above masonry, under title) -->
-      <div class="flex items-center gap-4 pb-10 flex-wrap md:flex-nowrap">
-        <!-- Combobox wrapper (relative anchor for panel) -->
-        <div class="relative w-full md:max-w-[450px]">
+      <!-- CATEGORY DROPDOWN + SEARCH (above masonry, under title) — widths align to masonry column grid (3 cols × 24px gap) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 items-center pb-10">
+        <!-- Combobox wrapper (relative anchor for panel) — left masonry column -->
+        <div class="relative w-full md:col-start-1">
           <!-- Combobox button -->
           <button
             id="cbBtn"
@@ -273,8 +273,8 @@ const masonryPosts: Post[] = [
           </div>
         </div>
 
-        <!-- Search pill — matches dropdown height, green icon circle, right-aligned -->
-        <label class="flex items-center gap-3 pl-3 pr-5 rounded-full border border-[#C8C4BC] bg-white/60 hover:bg-white transition-colors w-full md:max-w-[450px] md:ml-auto" style="height:64px;">
+        <!-- Search pill — matches dropdown height, green icon circle, aligned to right masonry column -->
+        <label class="flex items-center gap-3 pl-3 pr-5 rounded-full border border-[#C8C4BC] bg-white/60 hover:bg-white transition-colors w-full md:col-start-3" style="height:64px;">
           <span class="w-10 h-10 rounded-full bg-[#13342D] flex items-center justify-center flex-shrink-0">
             <svg class="w-4 h-4 text-[#E8E6E1]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
           </span>
@@ -353,7 +353,7 @@ const masonryPosts: Post[] = [
       </section>
 
       <!-- PAGINATION -->
-      <nav class="pb-16 flex items-center justify-center gap-2 flex-wrap" aria-label="Pagination">
+      <nav class="pb-4 flex items-center justify-center gap-2 flex-wrap" aria-label="Pagination">
         <button class="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[#C8C4BC] bg-white/40 hover:bg-white text-[#3F261F] font-bold uppercase text-[10px] tracking-[2px] transition-colors disabled:opacity-40" disabled>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
           Prev
@@ -372,7 +372,7 @@ const masonryPosts: Post[] = [
       </nav>
 
       <!-- Newsletter -->
-      <section id="newsletter" class="my-24 rounded-[20px] bg-[#5E2824] text-[#E8E6E1] px-8 md:px-16 py-16 md:py-20 text-center">
+      <section id="newsletter" class="mt-8 mb-24 rounded-[20px] bg-[#5E2824] text-[#E8E6E1] px-8 md:px-16 py-16 md:py-20 text-center">
         <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#E8C7C1]/85 mb-5 inline-block">RevFactor Journal</span>
         <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">
           Outprice the market.<br/><em style="font-style:italic; color:#F0C9C2; font-weight:300;">Every Thursday.</em>
