@@ -40,12 +40,15 @@ export default function Hero() {
         ref={sectionRef}
         className="relative h-[100dvh] min-h-[700px] flex items-end overflow-hidden"
       >
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1559767949-0faa5c7e9992?w=1920&q=80&auto=format')`,
-          }}
+        {/* Background Image — <img> instead of CSS backgroundImage so it has alt text + descriptive filename for image SEO */}
+        <img
+          src="/images/str-revenue-management-hero.jpg"
+          alt="Mountain cabin short-term rental at dusk — RevFactor delivers expert dynamic pricing strategy for STR hosts"
+          fetchpriority="high"
+          decoding="async"
+          width="2400"
+          height="1600"
+          className="absolute inset-0 w-full h-full object-cover"
         />
 
         {/* Gradient Overlay */}

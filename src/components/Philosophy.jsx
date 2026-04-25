@@ -36,12 +36,15 @@ export default function Philosophy() {
       ref={sectionRef}
       className="relative py-32 md:py-44 overflow-hidden bg-[#161910]"
     >
-      {/* Parallax Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-10"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80&auto=format')`,
-        }}
+      {/* Parallax Background — <img> with alt text for image SEO; opacity-10 keeps the dark mood overlay */}
+      <img
+        src="/images/dynamic-pricing-strategy-mountain-cabin.jpg"
+        alt="Mountain cabin overlooking valley at sunrise — illustrating the philosophy that every night has its true market value"
+        loading="lazy"
+        decoding="async"
+        width="2400"
+        height="1600"
+        className="absolute inset-0 w-full h-full object-cover opacity-10"
       />
 
       {/* Content */}

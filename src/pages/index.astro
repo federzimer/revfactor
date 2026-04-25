@@ -30,8 +30,7 @@ const personSchema = {
     "PriceLabs"
   ],
   "sameAs": [
-    // "https://www.linkedin.com/in/federico-zimerman",
-    // "https://www.instagram.com/federicozimerman",
+    "https://www.linkedin.com/in/federico-zimerman-23ab3345/"
   ]
 };
 
@@ -132,9 +131,9 @@ const faqSchema = {
   description="Expert dynamic pricing strategy for short-term rental hosts. Maximize revenue without giving up control. Schedule a strategy call."
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </Fragment>
 
   <Navbar client:load />
