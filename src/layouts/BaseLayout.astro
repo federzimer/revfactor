@@ -9,6 +9,7 @@ interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   publishedTime,
   modifiedTime,
   author,
+  noindex = false,
 } = Astro.props;
 
 const canonicalUrl = Astro.url.href;
@@ -40,7 +42,7 @@ const canonicalUrl = Astro.url.href;
   <!-- SEO -->
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1"} />
   <link rel="canonical" href={canonicalUrl} />
 
   <!-- Open Graph -->
