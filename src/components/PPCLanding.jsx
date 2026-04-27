@@ -31,7 +31,7 @@ const PROCESS_STEPS = [
   {
     n: "01",
     title: "Strategy Call",
-    body: "30 minutes. We review your portfolio, market, and current pricing. You leave with concrete revenue recommendations whether you work with us or not.",
+    body: "30 minutes with Federico or Emily. We review your portfolio, market, and current pricing. You leave with concrete revenue recommendations whether you work with us or not.",
   },
   {
     n: "02",
@@ -41,7 +41,7 @@ const PROCESS_STEPS = [
   {
     n: "03",
     title: "Ongoing Strategy",
-    body: "Monthly strategy calls, dynamic pricing calibration, calendar optimization, and comp tracking. Flat $320/mo per property.",
+    body: "Monthly strategy calls with Federico or Emily, dynamic pricing calibration, calendar optimization, and comp tracking. Flat $320/mo per property.",
   },
 ];
 
@@ -58,22 +58,20 @@ export default function PPCLanding({
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const open = () => setScheduleOpen(true);
   const calRef = useRef(null);
-  const [calHeight, setCalHeight] = useState(900);
+  const [calHeight, setCalHeight] = useState(640);
 
-  // Cal.com sends `__dimensionChanged` postMessage events with the iframe's
-  // actual content height — listen and resize so we never get inner scrollbars.
+  // Cal.com posts iframe dimensions via postMessage. Match permissively — any
+  // event whose data carries a sane `iframeHeight`/`height` number wins.
   useEffect(() => {
     const onMessage = (e) => {
       if (!e.data || typeof e.data !== 'object') return;
-      const t = e.data.type || (e.data.data && e.data.data.type);
       const h =
-        (e.data.data && (e.data.data.iframeHeight || e.data.data.height)) ||
-        e.data.iframeHeight ||
-        e.data.height;
-      if (t === '__dimensionChanged' || t === 'dimension-changed' || t === '__resize') {
-        const next = Number(h);
-        if (Number.isFinite(next) && next > 0) setCalHeight(Math.max(next, 600));
-      }
+        e.data?.data?.iframeHeight ??
+        e.data?.iframeHeight ??
+        e.data?.data?.height ??
+        e.data?.height;
+      const n = Number(h);
+      if (Number.isFinite(n) && n > 200 && n < 2000) setCalHeight(n);
     };
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
@@ -81,8 +79,8 @@ export default function PPCLanding({
 
   return (
     <>
-      {/* ─── HERO with image background (mirrors home Hero.jsx pattern) ─── */}
-      <section className="relative min-h-[78vh] md:min-h-[88vh] flex items-end overflow-hidden">
+      {/* ─── HERO with image background + inline calendar (right column on desktop) ─── */}
+      <section id="schedule" className="relative overflow-hidden">
         <picture>
           <source
             type="image/webp"
@@ -102,36 +100,54 @@ export default function PPCLanding({
         <div className="absolute inset-0 bg-gradient-to-tr from-[#161910] via-[#161910]/85 to-[#13342D]/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#161910] via-transparent to-transparent opacity-60" />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-16 md:pt-40 md:pb-24">
-          <div className="max-w-2xl">
-            <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-6">
-              {eyebrow}
-            </p>
-            <h1
-              className="text-[clamp(36px,6vw,68px)] leading-[1.05] text-[#E8E6E1] mb-6"
-              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, letterSpacing: '0.5px' }}
-            >
-              {headlinePart1}{' '}
-              {headlinePart2Italic && (
-                <span style={{ fontStyle: 'italic', color: '#7A8B76' }}>
-                  {headlinePart2Italic}
-                </span>
-              )}
-            </h1>
-            <p className="text-[15px] md:text-[16px] leading-[1.7] text-[#C8C4BC] max-w-xl mb-8">
-              {subhead}
-            </p>
-            <button
-              onClick={open}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(93,109,89,0.35)]"
-            >
-              <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
-              <span className="relative z-10">{ctaText}</span>
-              <ArrowRight className="relative z-10 w-4 h-4" />
-            </button>
-            <p className="text-[12px] text-[#8F6E62] mt-4">
-              30 minutes. No obligation. Real revenue recommendations even if we don't work together.
-            </p>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-12 md:pt-36 md:pb-20">
+          <div className="grid md:grid-cols-[1fr_minmax(380px,440px)] gap-10 md:gap-12 items-start">
+            {/* LEFT — copy */}
+            <div className="md:pt-6">
+              <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-6">
+                {eyebrow}
+              </p>
+              <h1
+                className="text-[clamp(34px,5vw,56px)] leading-[1.05] text-[#E8E6E1] mb-5"
+                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, letterSpacing: '0.5px' }}
+              >
+                {headlinePart1}{' '}
+                {headlinePart2Italic && (
+                  <span style={{ fontStyle: 'italic', color: '#7A8B76' }}>
+                    {headlinePart2Italic}
+                  </span>
+                )}
+              </h1>
+              <p className="text-[15px] leading-[1.65] text-[#C8C4BC] max-w-xl mb-6">
+                {subhead}
+              </p>
+              <ul className="space-y-2 mb-2">
+                {[
+                  '+18% revenue lift vs. comp set',
+                  'Direct access to Federico or Emily',
+                  '$320/mo flat — no revenue-share gotchas',
+                  '30 min · no obligation · free',
+                ].map((line) => (
+                  <li key={line} className="flex items-start gap-2.5 text-[14px] text-[#C8C4BC]">
+                    <Check className="w-4 h-4 text-[#7A8B76] flex-shrink-0 mt-[3px]" strokeWidth={3} />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* RIGHT — inline Cal.com embed */}
+            <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(0,0,0,0.35)] border border-white/10">
+              <iframe
+                ref={calRef}
+                src="https://schedule.revfactor.io/embed"
+                title="Schedule a strategy call with RevFactor"
+                className="w-full border-0 block"
+                style={{ height: `${calHeight}px`, minHeight: '560px', overflow: 'hidden' }}
+                scrolling="no"
+                allow="payment"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -187,7 +203,7 @@ export default function PPCLanding({
       </section>
 
       {/* ─── COMPARISON TABLE ─── */}
-      <section className="bg-[#E8E6E1] py-20 md:py-24">
+      <section id="difference" className="bg-[#E8E6E1] py-20 md:py-24">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
             THE DIFFERENCE
@@ -302,36 +318,6 @@ export default function PPCLanding({
                 </p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── INLINE CALENDAR EMBED ─── */}
-      <section id="schedule" className="bg-[#DDDAD3] py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 md:px-12">
-          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
-            BOOK A CALL
-          </p>
-          <h2
-            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-4 text-center"
-            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
-          >
-            Pick a time to{' '}
-            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>talk strategy</span>
-          </h2>
-          <p className="text-[14px] leading-[1.7] text-[#76574C] max-w-lg mx-auto mb-10 text-center">
-            30-minute strategy call with Federico. We'll review your portfolio, comp set, and where the revenue opportunity is.
-          </p>
-          <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]">
-            <iframe
-              ref={calRef}
-              src="https://schedule.revfactor.io/embed"
-              title="Schedule a strategy call with RevFactor"
-              className="w-full border-0 block"
-              style={{ height: `${calHeight}px`, minHeight: '600px', overflow: 'hidden' }}
-              scrolling="no"
-              allow="payment"
-            />
           </div>
         </div>
       </section>
