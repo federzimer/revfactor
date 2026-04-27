@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+import PPCLanding from '../components/PPCLanding.jsx';
+
+const comparisonRows = [
+  { label: "Initial portfolio audit", tool: true },
+  { label: "Pricing recommendations", tool: true },
+  { label: "Ongoing monthly strategy call", tool: false },
+  { label: "Calendar optimization, not just pricing", tool: false },
+  { label: "Comp tracking week-over-week", tool: false },
+  { label: "Listing photography + copy review", tool: false },
+  { label: "Channel mix strategy (Airbnb vs. VRBO vs. direct)", tool: false },
+  { label: "Custom playbook for events + shoulder season", tool: false },
+  { label: "Founder-led, not handed off to a junior", tool: false },
+];
+
+const faqs = [
+  {
+    q: "How is this different from a typical STR consultant?",
+    a: "Most consultants run a one-time audit, hand over a deck, and disappear. RevFactor partners ongoing — monthly strategy calls, weekly comp tracking, calendar optimization, listing audits. We're a permanent part of your revenue team.",
+  },
+  {
+    q: "Do you work with hosts who only have 1 property?",
+    a: "Yes. Whether you have 1 luxury cabin or 50 properties across multiple markets, the strategy adapts. The fee scales with your portfolio (volume discounts past 5 properties).",
+  },
+  {
+    q: "Who actually does the work?",
+    a: "Federico Zimerman (founder) leads strategy on every account. No 'senior consultant pitches, junior consultant executes' bait-and-switch.",
+  },
+  {
+    q: "What's the revenue lift?",
+    a: "+18% average vs. comp set. Top performers: +20% (Kassidy & Erin Warren) to +75% (Kate Henry) year-over-year.",
+  },
+  {
+    q: "How does pricing work?",
+    a: "Flat $320/month per property. No percent-of-revenue gotchas. Volume discounts past 5 properties.",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.revfactor.io/" },
+    { "@type": "ListItem", "position": 2, "name": "Short-Term Rental Consultant", "item": "https://www.revfactor.io/short-term-rental-consultant" },
+  ],
+};
+---
+
+<BaseLayout
+  title="Short-Term Rental Consultant — Founder-Led STR Revenue Strategy | RevFactor"
+  description="An STR consultant who actually stays around. Founder-led revenue strategy, monthly partnership, +18% lift vs comp set. $320/mo flat per property."
+>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <Navbar client:load />
+  <main>
+    <PPCLanding
+      client:load
+      eyebrow="STR REVENUE CONSULTING"
+      headlinePart1="An STR consultant who"
+      headlinePart2Italic="actually stays around."
+      subhead="Most consultants run an audit, hand over a deck, and disappear. RevFactor partners ongoing — monthly strategy calls, weekly comp tracking, calendar optimization. Founder-led. +18% revenue lift across our portfolio."
+      ctaText="Talk to a strategist"
+      comparisonRows={comparisonRows}
+      faqs={faqs}
+      finalCtaPretext="READY FOR A REAL PARTNER?"
+    />
+  </main>
+  <Footer client:visible />
+</BaseLayout>

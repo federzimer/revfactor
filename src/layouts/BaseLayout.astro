@@ -85,6 +85,42 @@ const canonicalUrl = Astro.url.href;
     gtag('js', new Date());
     gtag('config', 'G-1CTGBJ9RLK');
     gtag('config', 'AW-18106897053');
+
+    // Cal.com booking listener — fires Google Ads "Strategy Call Booked" conversion
+    // and GA4 event when any embedded Cal.com iframe completes a booking.
+    // Cal.com sends `{ type: 'bookingSuccessful', data: {...} }` via postMessage.
+    (function () {
+      var bookedThisSession = false;
+      window.addEventListener('message', function (e) {
+        if (!e.data || typeof e.data !== 'object') return;
+        var type = e.data.type || (e.data.data && e.data.data.type);
+        if (type !== 'bookingSuccessful' && type !== 'bookingSuccessfulV2') return;
+        if (bookedThisSession) return;
+        bookedThisSession = true;
+
+        gtag('event', 'conversion', {
+          send_to: 'AW-18106897053/WkHxCOKD46McEJ2lhbpD',
+          value: 1500.00,
+          currency: 'USD'
+        });
+        gtag('event', 'strategy_call_booked', {
+          value: 1500,
+          currency: 'USD',
+          source: 'cal_com_embed'
+        });
+      });
+    })();
+
+    // Phone click listener — fires "Phone Click" conversion on tel: links.
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
+      if (!a) return;
+      gtag('event', 'conversion', {
+        send_to: 'AW-18106897053/eLI7CMiey6McEJ2lhbpD',
+        value: 100.00,
+        currency: 'USD'
+      });
+    });
   </script>
 </head>
 <body>
