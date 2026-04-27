@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.jsx';
-import Footer from '../components/Footer.jsx';
+import PPCNavbar from '../components/PPCNavbar.jsx';
 import PPCLanding from '../components/PPCLanding.jsx';
 
 const comparisonRows = [
@@ -58,7 +57,7 @@ const breadcrumbSchema = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
 
-  <Navbar client:load />
+  <PPCNavbar client:load />
   <main>
     <PPCLanding
       client:load
@@ -72,5 +71,4 @@ const breadcrumbSchema = {
       finalCtaPretext="READY FOR A REAL PARTNER?"
     />
   </main>
-  <Footer client:visible />
 </BaseLayout>

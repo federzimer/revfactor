@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navbar from '../../components/Navbar.jsx';
-import Footer from '../../components/Footer.jsx';
+import PPCNavbar from '../../components/PPCNavbar.jsx';
 import PPCLanding from '../../components/PPCLanding.jsx';
 
 // Conquest landing page — positioned as "the layer above PriceLabs", NOT a competitor.
@@ -63,7 +62,7 @@ const breadcrumbSchema = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
 
-  <Navbar client:load />
+  <PPCNavbar client:load />
   <main>
     <PPCLanding
       client:load
@@ -77,5 +76,4 @@ const breadcrumbSchema = {
       finalCtaPretext="GET MORE FROM YOUR PRICING TOOL"
     />
   </main>
-  <Footer client:visible />
 </BaseLayout>
