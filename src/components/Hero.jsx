@@ -40,16 +40,24 @@ export default function Hero() {
         ref={sectionRef}
         className="relative h-[100dvh] min-h-[700px] flex items-end overflow-hidden"
       >
-        {/* Background Image — <img> instead of CSS backgroundImage so it has alt text + descriptive filename for image SEO */}
-        <img
-          src="/images/str-revenue-management-hero.jpg"
-          alt="Mountain cabin short-term rental at dusk — RevFactor delivers expert dynamic pricing strategy for STR hosts"
-          fetchpriority="high"
-          decoding="async"
-          width="2400"
-          height="1600"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        {/* Background — <picture> with WebP srcset (1200w mobile / 1920w desktop) + JPG fallback for older Safari.
+            Self-hosted, descriptive filenames, alt text — fully indexable by Google + LLM crawlers. */}
+        <picture>
+          <source
+            type="image/webp"
+            srcSet="/images/str-revenue-management-hero-1200.webp 1200w, /images/str-revenue-management-hero-1920.webp 1920w"
+            sizes="100vw"
+          />
+          <img
+            src="/images/str-revenue-management-hero-fallback.jpg"
+            alt="Mountain cabin short-term rental at dusk — RevFactor delivers expert dynamic pricing strategy for STR hosts"
+            fetchpriority="high"
+            decoding="async"
+            width="1920"
+            height="1280"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </picture>
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-tr from-[#161910] via-[#161910]/80 to-[#13342D]/30" />
