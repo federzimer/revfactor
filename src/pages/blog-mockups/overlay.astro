@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
+
+const categories = [
+  { label: 'All', value: 'All' },
+  { label: 'Revenue Basics', value: 'Revenue Basics' },
+  { label: 'Pricing', value: 'Pricing Strategy' },
+  { label: 'Tools & PMS', value: 'Tools & PMS' },
+  { label: 'Launch', value: 'Launch Playbook' },
+  { label: 'Client Results', value: 'Client Results' },
+  { label: 'Market Data', value: 'Market Data' },
+  { label: 'Market Guides', value: 'Market Guides' },
+  { label: 'Yield', value: 'Yield Management' },
+  { label: 'News', value: 'Industry News' },
+];
+
+const posts = [
+  { size: 'xl',   cat: 'Pricing Strategy', catLabel: 'Featured · Pricing', img: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1800&q=85', date: 'Apr 18, 2026', read: '9 min read', title: 'The rate elasticity map of the Smoky Mountains', byline: 'Federico Zimerman' },
+  { size: 'lg',   cat: 'Pricing Strategy', catLabel: 'Revenue', img: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=900&q=85', date: 'Apr 12', read: '7 min', title: 'The quiet math of midweek shoulder season' },
+  { size: 'md',   cat: 'Market Data', catLabel: 'Market Data', img: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1400&q=85', date: 'Apr 05', read: '11 min', title: 'Q1 2026: the great flattening of ADR' },
+  { size: 'sm',   cat: 'Tools & PMS', catLabel: 'Tools', img: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=900&q=85', date: 'Mar 28', read: '6 min', title: 'Hostaway connector deep dive' },
+  { size: 'sm',   cat: 'Tools & PMS', catLabel: 'Product', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85', date: 'Mar 11', read: '5 min', title: "Pacing Tool v3: what's new, what's gone" },
+  { size: 'wide', cat: 'Client Results', catLabel: 'Client Results', img: 'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=2000&q=85', date: 'Mar 19, 2026', read: '8 min · Blueridge Retreats · 22 properties', title: 'How Blueridge Retreats', italic: 'added $184K in 11 months.' },
+  { size: 'md',   cat: 'Pricing Strategy', catLabel: 'Revenue', img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1400&q=85', date: 'Mar 03', read: '10 min', title: 'The minimum stay lever: a fieldbook' },
+  { size: 'md',   cat: 'Pricing Strategy', catLabel: 'Pricing', img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=1400&q=85', date: 'Feb 24', read: '7 min', title: "Pricing for events you didn't know were happening" },
+  { size: 'sm',   cat: 'Market Data', catLabel: 'Market', img: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85', date: 'Feb 15', read: '6 min', title: 'ADR vs. occupancy: stop choosing' },
+  { size: 'sm',   cat: 'Client Results', catLabel: 'Client Results', img: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85', date: 'Feb 02', read: '9 min', title: 'Mountain Valley Lodges: 18 months in' },
+  { size: 'sm',   cat: 'Yield Management', catLabel: 'Revenue', img: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=85', date: 'Jan 26', read: '7 min', title: 'The booking window is closing' },
+];
+
+const sizeClasses: Record<string, string> = {
+  xl:   'md:col-span-8  aspect-[16/11]',
+  lg:   'md:col-span-4  aspect-[3/4]',
+  md:   'md:col-span-6  aspect-[4/3]',
+  sm:   'md:col-span-4  aspect-[4/5]',
+  wide: 'md:col-span-12 aspect-[21/9]',
+};
+const titleSize: Record<string, string> = {
+  xl:   'text-[clamp(40px,4vw,64px)]',
+  lg:   'text-[clamp(26px,2.2vw,32px)]',
+  md:   'text-[clamp(28px,2.5vw,38px)]',
+  sm:   'text-[24px]',
+  wide: 'text-[clamp(44px,5vw,84px)]',
+};
+
+const POST_TEMPLATES = [
+  '/blog-mockups/post-classic',
+  '/blog-mockups/post-immersive',
+  '/blog-mockups/post-split',
+];
+---
+
+<BaseLayout
+  title="The Journal — RevFactor"
+  description="A written record of how we think about pricing, pacing, and yield across 1,800+ short-term rentals."
+>
+  <Navbar client:load />
+
+  <!-- CINEMATIC HERO -->
+  <section class="relative overflow-hidden text-[#E8E6E1]" style="height:96vh; min-height:640px;">
+    <div id="heroBg" class="absolute inset-0 will-change-transform bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=2400&q=85'); transform:scale(1.05);"></div>
+    <div class="absolute inset-0 z-[1]" style="background: linear-gradient(105deg, rgba(22,25,16,0.8) 0%, rgba(22,25,16,0.35) 55%, transparent 100%);"></div>
+
+    <div class="relative z-[2] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-20 pt-40">
+      <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#DDDAD3]/80 mb-5 inline-block">The RevFactor Journal · Since 2024</span>
+      <h1 class="text-[#E8E6E1] mb-8" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(72px,11vw,180px); line-height:0.88; letter-spacing:-2px; max-width:1100px;">
+        The math of<br/>a <em style="font-style:italic; color:#A9BBA3; font-weight:300;">good stay.</em>
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 items-end pt-6 border-t border-[#DDDAD3]/25">
+        <p class="text-[#DDDAD3]/90" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300; font-size:clamp(18px,1.8vw,24px); line-height:1.4;">
+          A written record of how we think about pricing, pacing, and yield across 1,800+ short-term rentals — cabins, beach houses, lodges, and the occasional fire tower.
+        </p>
+        <div>
+          <div class="font-bold uppercase text-[9.5px] tracking-[2.5px] text-[#DDDAD3]/65 mb-2">Essays</div>
+          <div class="text-[#E8E6E1] leading-none" style="font-family:'JetBrains Mono',monospace; font-weight:500; font-size:32px;">84</div>
+          <div class="text-[#DDDAD3]/65 mt-1.5" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300; font-size:14px;">since Jan 2024</div>
+        </div>
+        <div>
+          <div class="font-bold uppercase text-[9.5px] tracking-[2.5px] text-[#DDDAD3]/65 mb-2">Revenue influenced</div>
+          <div class="text-[#E8E6E1] leading-none" style="font-family:'JetBrains Mono',monospace; font-weight:500; font-size:32px;">$4.2M</div>
+          <div class="text-[#DDDAD3]/65 mt-1.5" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300; font-size:14px;">reader-attributed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="bg-[#DDDAD3]">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+      <!-- CATEGORY UX: STICKY FLOATING PILL w/ sliding indicator + hover-scale chips -->
+      <div
+        id="floatFilter"
+        class="sticky top-[88px] z-40 mt-8 mx-auto w-fit max-w-full relative flex items-center gap-0 p-1.5 rounded-full border border-[#C8C4BC] shadow-[0_8px_24px_rgba(22,25,16,0.12)]"
+        style="background: rgba(221,218,211,0.9); backdrop-filter: blur(14px); overflow-x:auto; scroll-behavior:smooth;"
+      >
+        <!-- Sliding indicator behind active chip -->
+        <div id="ovPill" class="absolute top-1.5 bottom-1.5 bg-[#13342D] rounded-full transition-all duration-[400ms] pointer-events-none z-[1] shadow-[inset_0_0_0_1px_rgba(232,230,225,0.12)]" style="transition-timing-function:cubic-bezier(0.34,1.25,0.64,1); left:6px; width:48px;"></div>
+
+        {categories.map((c, i) => (
+          <button
+            class:list={['ov-chip relative z-[2] flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-[1.5px] transition-colors duration-[200ms] border-0 bg-transparent', i === 0 ? 'text-[#E8E6E1]' : 'text-[#3F261F] hover:text-[#13342D]']}
+            data-cat={c.value}
+          >{c.label}</button>
+        ))}
+        <div class="hidden md:flex items-center gap-2 pl-3 ml-2 border-l border-[#C8C4BC] relative z-[2]">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#76574C" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="search" type="search" placeholder="Search…" class="bg-transparent text-[13px] text-[#3F261F] placeholder:text-[#8F6E62] italic outline-none w-32" />
+        </div>
+      </div>
+
+      <!-- OVERLAY GRID -->
+      <section data-cards class="grid grid-cols-1 md:grid-cols-12 gap-6 pt-20 pb-24">
+        {posts.map((p, i) => (
+          <a
+            href={POST_TEMPLATES[i % POST_TEMPLATES.length]}
+            data-cat={p.cat}
+            class:list={['post-card ov-card relative block rounded-[16px] overflow-hidden text-[#E8E6E1] bg-[#13342D] group', sizeClasses[p.size]]}
+            style="isolation:isolate;"
+          >
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[800ms] group-hover:scale-[1.05]" style={`background-image:url('${p.img}'); transition-timing-function:cubic-bezier(0.25,0.1,0.25,1);`}></div>
+            <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(22,25,16,0.25) 0%, transparent 40%, rgba(22,25,16,0.85) 100%);"></div>
+            <span class="absolute top-5 left-5 z-[2] px-3 py-1.5 rounded-full bg-[#DDDAD3]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.catLabel}</span>
+            <div class="absolute left-0 right-0 bottom-0 p-8 z-[2]">
+              <div class="flex items-center gap-3.5 text-[10.5px] uppercase text-[#DDDAD3]/80 mb-3" style="font-family:'JetBrains Mono',monospace; letter-spacing:0.5px;">
+                {p.date && <span>{p.date}</span>}
+                {p.read && <><span>·</span><span>{p.read}</span></>}
+              </div>
+              <h3 class:list={['text-[#E8E6E1] leading-[1]', titleSize[p.size]]} style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; text-transform:lowercase; text-wrap:balance; letter-spacing:0.3px;">
+                {p.title}
+                {p.italic && <><br/><em style="font-style:italic;">{p.italic}</em></>}
+              </h3>
+              {p.byline && (
+                <div class="flex items-center gap-2.5 mt-4 pt-4 border-t border-[#DDDAD3]/25">
+                  <div class="w-7 h-7 rounded-full bg-[#C8C4BC] flex items-center justify-center text-[#3F261F] font-bold text-[10px]" style="font-family:'Cormorant Garamond',Georgia,serif;">FZ</div>
+                  <span class="font-bold uppercase text-[9px] tracking-[2px] text-[#DDDAD3]/85">{p.byline}</span>
+                </div>
+              )}
+            </div>
+          </a>
+        ))}
+      </section>
+
+      <!-- Newsletter -->
+      <section class="mb-24 rounded-[20px] bg-[#161910] text-[#E8E6E1] px-8 md:px-16 py-16 md:py-20 text-center">
+        <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#DDDAD3]/80 mb-5 inline-block">Thursday dispatch</span>
+        <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">
+          One essay, one chart, one decision<br/><em style="font-style:italic; color:#A9BBA3; font-weight:300;">— every Thursday.</em>
+        </h3>
+        <p class="text-[15px] leading-[1.6] text-[#DDDAD3]/70 max-w-xl mx-auto mb-8">
+          Pricing strategy, market moves, and operator field notes. Written for people who read the calendar view.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
+          <input type="email" placeholder="you@cabin.co" required class="flex-1 px-5 py-3 rounded-full bg-[#E8E6E1]/10 border border-[#E8E6E1]/20 text-[14px] text-[#E8E6E1] placeholder:text-[#DDDAD3]/50 outline-none" />
+          <button type="submit" class="px-6 py-3 rounded-full bg-[#E8E6E1] text-[#161910] font-bold uppercase text-[10px] tracking-[2px] hover:scale-[1.02] transition-transform">Subscribe</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <Footer client:load />
+
+  <script is:inline>
+    (function() {
+      const heroBg = document.getElementById('heroBg');
+      if (heroBg) {
+        window.addEventListener('scroll', () => {
+          const y = window.scrollY;
+          if (y < 1000) heroBg.style.transform = `scale(1.05) translateY(${y * 0.3}px)`;
+        }, { passive: true });
+      }
+
+      const chips = document.querySelectorAll('.ov-chip');
+      const pill = document.getElementById('ovPill');
+      const bar = document.getElementById('floatFilter');
+      const searchEl = document.getElementById('search');
+      const cards = document.querySelectorAll('[data-cards] .ov-card');
+      let activeCat = 'All';
+      let query = '';
+
+      function movePill(target) {
+        if (!pill || !bar || !target) return;
+        const barRect = bar.getBoundingClientRect();
+        const tabRect = target.getBoundingClientRect();
+        pill.style.left = (tabRect.left - barRect.left + bar.scrollLeft) + 'px';
+        pill.style.width = tabRect.width + 'px';
+      }
+
+      function filter() {
+        cards.forEach(card => {
+          const cat = card.getAttribute('data-cat') || '';
+          const text = (card.textContent || '').toLowerCase();
+          const catMatch = activeCat === 'All' || cat === activeCat;
+          const searchMatch = !query || text.includes(query);
+          card.style.display = (catMatch && searchMatch) ? '' : 'none';
+        });
+      }
+
+      chips.forEach(ch => ch.addEventListener('click', function(ev) {
+        ev.preventDefault();
+        chips.forEach(c => {
+          c.classList.remove('text-[#E8E6E1]');
+          c.classList.add('text-[#3F261F]');
+        });
+        ch.classList.remove('text-[#3F261F]');
+        ch.classList.add('text-[#E8E6E1]');
+        activeCat = ch.getAttribute('data-cat') || 'All';
+        movePill(ch);
+        ch.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        filter();
+      }));
+      if (searchEl) searchEl.addEventListener('input', function() {
+        query = searchEl.value.toLowerCase();
+        filter();
+      });
+
+      window.addEventListener('load', function() { movePill(chips[0]); });
+      window.addEventListener('resize', function() {
+        const active = document.querySelector('.ov-chip.text-\\[\\#E8E6E1\\]') || chips[0];
+        movePill(active);
+      });
+      setTimeout(function() { movePill(chips[0]); }, 150);
+    })();
+  </script>
+</BaseLayout>

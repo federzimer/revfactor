@@ -1,0 +1,301 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
+
+const toc = [
+  { href: '#sec-what-elasticity-looks-like', label: 'What elasticity looks like' },
+  { href: '#sec-the-bend',                   label: 'The bend in the curve' },
+  { href: '#sec-why-moves',                  label: 'Why the threshold moves' },
+  { href: '#sec-what-to-do',                 label: 'What to do with this' },
+  { href: '#sec-faq',                        label: 'Frequently asked' },
+];
+
+const related = [
+  { href: '/blog-mockups/post-immersive', cat: 'Revenue Basics', date: 'Apr 12, 2026', read: '7 min', title: 'The quiet math of midweek shoulder season', img: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1000&q=80' },
+  { href: '/blog-mockups/post-split',     cat: 'Market Data',    date: 'Apr 05, 2026', read: '11 min', title: 'Q1 2026: the great flattening of ADR',            img: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1000&q=80' },
+  { href: '/blog-mockups/post-immersive', cat: 'Pricing Strategy', date: 'Mar 03, 2026', read: '10 min', title: "The minimum stay lever: an operator's fieldbook", img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80' },
+];
+---
+
+<BaseLayout
+  title="The Rate Elasticity Map of the Smoky Mountains — The Curve"
+  description="A season of 14,000 bookings, plotted. How sensitive are guests to a $25 swing — and where the elasticity curve breaks along the Blue Ridge Parkway."
+  type="article"
+  publishedTime="2026-04-18T00:00:00Z"
+  author="Federico Zimerman"
+>
+  <Navbar client:load lightBg />
+
+  <!-- Read progress bar -->
+  <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-[#13342D] z-[100] transition-[width] duration-75" style="width:0;"></div>
+
+  <article>
+    <!-- HERO — centered title above full-width image -->
+    <div class="max-w-5xl mx-auto px-6 md:px-12 pt-36 md:pt-44 pb-12 text-center">
+      <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-8 inline-block">
+        Pricing Strategy · Field Report
+      </span>
+      <h1 class="text-[#3F261F] mb-6 mx-auto" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(44px,6vw,84px); line-height:1; max-width:980px; letter-spacing:-0.5px;">
+        The Rate Elasticity Map<br/>of the <em style="font-style:italic; color:#13342D;">Smoky Mountains.</em>
+      </h1>
+      <p class="text-[#76574C] max-w-2xl mx-auto mb-12" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300; font-size:clamp(20px,2.2vw,26px); line-height:1.35;">
+        A season of 14,000 bookings, plotted. How sensitive are guests to a $25 swing — and where the elasticity curve breaks along the Blue Ridge Parkway.
+      </p>
+      <div class="flex items-center justify-center gap-8 flex-wrap py-6 border-y border-[#C8C4BC] max-w-3xl mx-auto mb-12">
+        {[
+          ['Published', 'Apr 18, 2026'],
+          ['Read time', '9 minutes'],
+          ['Market', 'Smoky Mountains, TN'],
+          ['Sample', '14,112 bookings'],
+        ].map(([label, val]) => (
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#8F6E62; letter-spacing:0.5px; text-transform:uppercase;">
+            <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#3F261F] mb-1" style="font-family:inherit;">{label}</div>
+            <div>{val}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div class="max-w-6xl mx-auto px-6 md:px-12 mb-16">
+      <div class="rounded-[24px] overflow-hidden" style="aspect-ratio:21/9;">
+        <img src="https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=2400&q=85" alt="Smoky Mountains cabin" class="w-full h-full object-cover" />
+      </div>
+    </div>
+
+    <!-- BODY + TOC -->
+    <div class="max-w-6xl mx-auto px-6 md:px-12 grid md:grid-cols-[1fr_240px] gap-16 md:gap-20 pb-24">
+      <div class="max-w-2xl min-w-0">
+
+        <!-- Byline bar -->
+        <div class="flex items-center justify-between gap-6 mb-12 pb-8 border-b border-[#C8C4BC] flex-wrap">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-[#C8C4BC] flex items-center justify-center text-[#3F261F] font-bold text-[13px]" style="font-family:'Cormorant Garamond',Georgia,serif;">FZ</div>
+            <div>
+              <div class="text-[18px] text-[#3F261F] leading-tight" style="font-family:'Cormorant Garamond',Georgia,serif;">federico zimerman</div>
+              <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62]">Founder · RevFactor</div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Share</button>
+            <button class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Save</button>
+          </div>
+        </div>
+
+        <p class="prose-body first-letter:float-left first-letter:text-[72px] first-letter:leading-[0.9] first-letter:mr-3 first-letter:mt-2 first-letter:text-[#13342D]" style="font-family:'Cormorant Garamond',Georgia,serif;">
+          <strong class="font-semibold">Elasticity, in economics,</strong> is a dry word. In the mountains it means something more specific: the moment a traveler, halfway through a TripAdvisor tab, decides that $289 is too much to sleep among trees. We've been collecting those moments for eighteen months.
+        </p>
+
+        <p class="prose-body">This is the first in a series of field reports using RevFactor's aggregated data. For Q3 2025 we pulled every booking confirmed across 412 short-term rentals within a 60-mile radius of Gatlinburg — <strong>14,112 bookings</strong> in total, spanning $89 to $1,240 per night. Then we plotted them.</p>
+
+        <section id="sec-what-elasticity-looks-like">
+          <h2 class="prose-h2">What Elasticity Looks Like on the Ground</h2>
+          <p class="prose-body">Classical price elasticity assumes a single curve. In a mountain-cabin market with 412 distinct listings, you get 412 curves — each shaped by square footage, hot-tub presence, walking distance to a brewery, and the quality of the front porch.</p>
+          <p class="prose-body">But when you stack them, a market-level pattern emerges. For most weekend nights between April and October, demand is remarkably flat in the $180–$240 range. <em>A $20 swing moves volume by less than 3%.</em> Above $240, the curve bends sharply.</p>
+
+          <figure class="my-10">
+            <img src="https://images.unsplash.com/photo-1464454709131-ffd692591ee5?auto=format&fit=crop&w=2000&q=85" alt="" class="w-full rounded-[16px]" />
+            <figcaption class="text-[13px] text-[#8F6E62] text-center mt-3" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic;">A typical mid-tier cabin near Pigeon Forge. This listing sat at $189–$229 for the bulk of the season, with almost no occupancy penalty for the higher anchor.</figcaption>
+          </figure>
+
+          <p class="prose-body">The flat middle is the interesting story. It implies operators are leaving $15–$25 per night on the table by anchoring too low — and that the weekly <code class="px-1.5 py-0.5 rounded bg-[#C8C4BC] text-[13px]" style="font-family:'JetBrains Mono',monospace;">rebase</code> many PMS tools perform is compressing rates into a zone guests are barely noticing.</p>
+
+          <!-- Stat callout -->
+          <div class="grid grid-cols-3 gap-4 my-10 p-6 rounded-[16px] bg-[#5D6D59]/10 border border-[#5D6D59]/20">
+            {[['$23', 'Median unclaimed per night'], ['412', 'Listings analyzed'], ['+11.4%', 'RevPAR lift, simulated']].map(([num, label]) => (
+              <div class="text-center">
+                <div class="text-[#13342D] mb-1.5" style="font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(22px,3vw,32px);">{num}</div>
+                <div class="font-bold uppercase text-[8.5px] tracking-[1.5px] text-[#5D6D59]">{label}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="sec-the-bend">
+          <h2 class="prose-h2">The Bend in the Curve</h2>
+          <p class="prose-body">Every market has a threshold price. Above it, bookings don't just slow — they fall off a cliff. For the Smokies in Q3, that threshold sat at <strong>$248/night</strong> for 2BR listings.</p>
+          <p class="prose-body">We graphed the delta between list price and booked price for 4,300 two-bedroom cabins. The result is the clearest breakpoint we've seen in a North American STR market:</p>
+
+          <div class="my-10 overflow-x-auto">
+            <table class="w-full text-[14px] border-collapse">
+              <thead>
+                <tr class="border-b-2 border-[#3F261F]">
+                  {['Price band', 'Listings', 'Occupancy', 'ADR', 'RevPAR vs. market'].map(h => (
+                    <th class="text-left py-3 px-3 font-bold uppercase text-[10px] tracking-[2px] text-[#3F261F]">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody style="font-family:'JetBrains Mono',monospace;">
+                <tr class="border-b border-[#C8C4BC]"><td class="py-3 px-3" style="font-family:'Cormorant Garamond',Georgia,serif;">$149 – $179</td><td class="py-3 px-3 tabular-nums">624</td><td class="py-3 px-3 tabular-nums">81.2%</td><td class="py-3 px-3 tabular-nums">$164</td><td class="py-3 px-3 tabular-nums text-[#B87F6E]">−8.1%</td></tr>
+                <tr class="border-b border-[#C8C4BC]"><td class="py-3 px-3" style="font-family:'Cormorant Garamond',Georgia,serif;">$180 – $219</td><td class="py-3 px-3 tabular-nums">1,402</td><td class="py-3 px-3 tabular-nums">78.5%</td><td class="py-3 px-3 tabular-nums">$201</td><td class="py-3 px-3 tabular-nums text-[#5D6D59]">+2.4%</td></tr>
+                <tr class="border-b border-[#C8C4BC] bg-[#5D6D59]/5"><td class="py-3 px-3 font-semibold" style="font-family:'Cormorant Garamond',Georgia,serif;">$220 – $248</td><td class="py-3 px-3 tabular-nums">1,089</td><td class="py-3 px-3 tabular-nums">76.9%</td><td class="py-3 px-3 tabular-nums">$234</td><td class="py-3 px-3 tabular-nums font-semibold text-[#5D6D59]">+11.4%</td></tr>
+                <tr class="border-b border-[#C8C4BC]"><td class="py-3 px-3" style="font-family:'Cormorant Garamond',Georgia,serif;">$249 – $289</td><td class="py-3 px-3 tabular-nums">812</td><td class="py-3 px-3 tabular-nums">61.3%</td><td class="py-3 px-3 tabular-nums">$267</td><td class="py-3 px-3 tabular-nums text-[#B87F6E]">−4.8%</td></tr>
+                <tr><td class="py-3 px-3" style="font-family:'Cormorant Garamond',Georgia,serif;">$290+</td><td class="py-3 px-3 tabular-nums">373</td><td class="py-3 px-3 tabular-nums">44.1%</td><td class="py-3 px-3 tabular-nums">$321</td><td class="py-3 px-3 tabular-nums text-[#B87F6E]">−19.6%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="prose-body">The $220–$248 band is the sweet spot. It is also the band most operators in the market are under-indexing against — we found that only 29% of comparable listings anchored there as their weekend default.</p>
+        </section>
+
+        <!-- Pullquote -->
+        <aside class="my-14 border-l-4 border-[#13342D] pl-6 py-4">
+          <p class="text-[28px] md:text-[32px] leading-[1.2] text-[#3F261F] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300;">
+            the best rate is not the highest one the calendar will bear — it is the last dollar the guest doesn't think about.
+          </p>
+          <cite class="font-bold uppercase text-[10px] tracking-[2px] text-[#8F6E62] not-italic">— Federico Zimerman, RevFactor</cite>
+        </aside>
+
+        <section id="sec-why-moves">
+          <h2 class="prose-h2">Why the Threshold Moves</h2>
+          <p class="prose-body">The $248 line is not static. It drifts week-to-week based on three signals our model tracks:</p>
+          <ol class="prose-ol">
+            <li><strong>Cohort arrival</strong> — Tuesday-to-Thursday bookings show a $12 higher threshold than Friday-to-Sunday arrivals. Leisure travelers think in trip cost; business-adjacent guests think in per-night.</li>
+            <li><strong>Advance window</strong> — Bookings made 21+ days out tolerate another $18 above threshold. Last-minute guests tolerate less; they're shopping the map.</li>
+            <li><strong>Photo quality</strong> — Listings in the top quartile by image score clear the threshold by $35 before seeing volume drop-off.</li>
+          </ol>
+          <p class="prose-body">None of this is revolutionary. But the magnitudes are specific, measurable, and operationally useful. We've built them into the Pacing Tool's default recommendations for Smokies markets starting this week.</p>
+        </section>
+
+        <section id="sec-what-to-do">
+          <h2 class="prose-h2">What to Do With This on Monday</h2>
+          <p class="prose-body">If you operate in the Smokies and want to act on this today:</p>
+          <ul class="prose-ul">
+            <li>Pull your Q3 2025 weekend ADR. If it sits below $220, consider a <strong>10–14% bump</strong> in your base — watch occupancy for two weeks before re-evaluating.</li>
+            <li>If you sit above $248, the data suggests <strong>trimming 4–8%</strong> will net more RevPAR, not less.</li>
+            <li>Separate your midweek and weekend pricing curves entirely. They are behaving like different markets.</li>
+          </ul>
+          <p class="prose-body">This analysis will rerun on Q4 data in early February. The threshold will have moved — it always does when the leaves drop — but the <em>shape</em> of the curve is stable enough to bet against.</p>
+        </section>
+
+        <section id="sec-faq">
+          <h2 class="prose-h2">Frequently Asked</h2>
+          <div class="space-y-3 mt-6">
+            {[
+              ['Does this apply to 1BR listings?', 'Partially. The threshold exists but sits lower — around $189/night in our sample. 1BR demand is also more sensitive to photo quality and porch amenities than to price.'],
+              ['How do you account for seasonality?', 'We segment by week rather than blanket seasons. Each data point is compared only against bookings from the same ISO week in the prior two years.'],
+              ['Is the sample biased toward RevFactor clients?', 'Yes, and we note it. 61% of the sample is under dynamic pricing via RevFactor. The 39% non-client listings serve as a control group and show the same $248 breakpoint.'],
+              ['Can I get the underlying data?', 'Anonymized, booking-level data is available to RevFactor clients. Non-clients can request the aggregated Q3 dataset by emailing research@revfactor.io.'],
+            ].map(([q, a]) => (
+              <details class="faq-item group rounded-[12px] border border-[#C8C4BC] bg-white/40 overflow-hidden">
+                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 hover:bg-white/70 transition-colors">
+                  <span class="text-[16px] text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">{q}</span>
+                  <svg class="w-3.5 h-3.5 text-[#3F261F] transition-transform group-open:rotate-45 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                </summary>
+                <div class="px-5 pb-5 text-[14px] leading-[1.6] text-[#76574C]">{a}</div>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <!-- Author card -->
+        <div class="mt-16 p-8 rounded-[16px] bg-[#E8E6E1] border border-[#C8C4BC] flex gap-6 items-start flex-wrap md:flex-nowrap">
+          <div class="w-16 h-16 rounded-full bg-[#13342D] flex items-center justify-center text-[#E8E6E1] font-bold text-[18px] flex-shrink-0" style="font-family:'Cormorant Garamond',Georgia,serif;">FZ</div>
+          <div>
+            <h4 class="text-[22px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">federico zimerman</h4>
+            <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
+            <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">Federico spent 10 years in airline revenue management before applying those principles to short-term rentals. RevFactor's pricing strategies are battle-tested across 165+ properties in 24 states. He writes the Thursday dispatch.</p>
+            <div class="flex gap-2">
+              <a href="https://www.linkedin.com/in/federico-zimerman-23ab3345/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Follow on LinkedIn</a>
+              <a href="/journal" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">More essays</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOC (sticky) -->
+      <aside class="md:sticky md:top-24 md:self-start md:pl-6 md:border-l border-[#C8C4BC]">
+        <h5 class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-4">In this essay</h5>
+        <ul class="space-y-2.5" id="toc">
+          {toc.map((item, i) => (
+            <li>
+              <a href={item.href} class="toc-link block text-[13px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
+                <span class="inline-block w-5 text-[#C8C4BC] mr-1" style="font-family:'JetBrains Mono',monospace;">{String(i + 1).padStart(2, '0')}</span>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+
+    <!-- Related posts -->
+    <section class="max-w-7xl mx-auto px-6 md:px-12 pb-24">
+      <div class="flex items-end justify-between mb-10 flex-wrap gap-4">
+        <div>
+          <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-2 block">Keep reading</span>
+          <h2 class="text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,40px);">More <em style="font-style:italic; color:#7A8B76;">from The Curve.</em></h2>
+        </div>
+        <a href="/journal" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#3F261F] hover:text-[#13342D] transition-colors">
+          All field notes
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {related.map(p => (
+          <a href={p.href} class="group block">
+            <div class="relative overflow-hidden rounded-[12px] mb-4" style="aspect-ratio:4/3;">
+              <span class="absolute top-3 left-3 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
+              <img src={p.img} alt="" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"/>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[1.5px] text-[#8F6E62] mb-2">
+              <span>{p.date}</span><span>·</span><span>{p.read}</span>
+            </div>
+            <h3 class="text-[20px] leading-[1.15] text-[#3F261F] group-hover:text-[#13342D] transition-colors" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">{p.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+
+  <Footer client:load />
+
+  <!-- Post switcher -->
+  <div class="fixed bottom-6 right-6 z-[60] bg-[#161910] text-[#E8E6E1] rounded-full px-2 py-1.5 flex items-center gap-1 shadow-xl text-[11px]">
+    <span class="px-2 text-[#DDDAD3]/60 uppercase tracking-[1.5px] font-bold text-[9px]">Post</span>
+    <a href="/blog-mockups/post-classic"   class="px-3 py-1.5 rounded-full bg-[#E8E6E1] text-[#161910] font-bold uppercase text-[9px] tracking-[1.5px]">A · Classic</a>
+    <a href="/blog-mockups/post-immersive" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">B · Immersive</a>
+    <a href="/blog-mockups/post-split"     class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">C · Split</a>
+    <span class="mx-1 w-px h-5 bg-[#E8E6E1]/20"></span>
+    <a href="/journal" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">← Index</a>
+  </div>
+
+  <style>
+    .prose-body { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 19px; line-height: 1.65; color: #3F261F; margin: 0 0 1.5em; }
+    .prose-h2   { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.15; color: #3F261F; margin: 2.5em 0 0.75em; letter-spacing: -0.25px; }
+    .prose-ol, .prose-ul { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 18px; line-height: 1.65; color: #3F261F; padding-left: 1.5em; margin: 0 0 1.5em; }
+    .prose-ol li, .prose-ul li { margin-bottom: 0.6em; }
+    .prose-ol { list-style: decimal; }
+    .prose-ul { list-style: disc; }
+    .prose-body strong, .prose-ol strong, .prose-ul strong { color: #13342D; font-weight: 600; }
+    .prose-body em, .prose-ol em, .prose-ul em { color: #5D6D59; font-style: italic; }
+    .toc-link.active { color: #13342D; font-weight: 600; }
+  </style>
+
+  <script>
+    // Read progress bar
+    const bar = document.getElementById('progressBar');
+    const article = document.querySelector('article');
+    window.addEventListener('scroll', () => {
+      if (!article || !bar) return;
+      const rect = article.getBoundingClientRect();
+      const total = article.offsetHeight - window.innerHeight;
+      const scrolled = -rect.top;
+      const pct = Math.max(0, Math.min(100, (scrolled / total) * 100));
+      bar.style.width = pct + '%';
+    }, { passive: true });
+
+    // Active TOC item based on scroll position
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href')));
+    function updateTOC() {
+      const y = window.scrollY + 200;
+      let activeIdx = 0;
+      sections.forEach((sec, i) => { if (sec && sec.offsetTop <= y) activeIdx = i; });
+      tocLinks.forEach((l, i) => l.classList.toggle('active', i === activeIdx));
+    }
+    window.addEventListener('scroll', updateTOC, { passive: true });
+    updateTOC();
+  </script>
+</BaseLayout>

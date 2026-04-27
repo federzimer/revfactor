@@ -1,0 +1,299 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
+
+const toc = [
+  { href: '#sec-the-problem', label: 'The problem' },
+  { href: '#sec-what-we-did', label: 'What we did' },
+  { href: '#sec-the-numbers', label: 'The numbers' },
+  { href: '#sec-playbook',    label: 'The playbook' },
+  { href: '#sec-faq',         label: 'Frequently asked' },
+];
+
+const related = [
+  { href: '/blog-mockups/post-classic',   cat: 'Pricing Strategy', date: 'Apr 18', read: '9 min',  title: 'The rate elasticity map of the Smoky Mountains', img: 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1000&q=80' },
+  { href: '/blog-mockups/post-immersive', cat: 'Revenue Basics',   date: 'Apr 12', read: '7 min',  title: 'The quiet math of midweek shoulder season',      img: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1000&q=80' },
+  { href: '/blog-mockups/post-classic',   cat: 'Yield Management', date: 'Jan 26', read: '7 min',  title: 'The booking window is closing',                  img: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1000&q=80' },
+];
+---
+
+<BaseLayout
+  title="How Blueridge Retreats Added $184K in 11 Months — The Curve"
+  description="A 22-property portfolio, a stubborn pacing problem, and the pricing cadence that finally cracked shoulder season."
+  type="article"
+  publishedTime="2026-03-19T00:00:00Z"
+  author="Federico Zimerman"
+>
+  <Navbar client:load />
+
+  <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-[#13342D] z-[100] transition-[width] duration-75" style="width:0;"></div>
+
+  <article>
+    <!-- SPLIT HERO: half cedar, half image -->
+    <section class="grid md:grid-cols-2" style="min-height:calc(100vh - 80px);">
+      <!-- Left: cedar panel with title -->
+      <div class="bg-[#13342D] text-[#E8E6E1] flex items-end p-8 md:p-16 pt-32 md:pt-40 relative">
+        <div class="max-w-xl">
+          <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-6 inline-block">Case study · Blueridge Retreats</span>
+          <h1 class="text-[#E8E6E1] mb-6" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(44px,6vw,88px); line-height:0.95; letter-spacing:-1px;">
+            +$184K<br/><em style="font-style:italic; color:#A9BBA3; font-weight:300;">in 11 months.</em>
+          </h1>
+          <p class="mb-10" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300; font-size:clamp(18px,1.8vw,22px); color:rgba(221,218,211,0.85); line-height:1.4;">
+            A 22-property portfolio, a stubborn pacing problem, and the pricing cadence that finally cracked shoulder season.
+          </p>
+          <div class="flex flex-wrap gap-8 pt-7 border-t border-[#DDDAD3]/25" style="font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(221,218,211,0.7); letter-spacing:0.5px; text-transform:uppercase;">
+            <div>
+              <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Client</div>
+              <div>Blueridge Retreats</div>
+            </div>
+            <div>
+              <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Portfolio</div>
+              <div>22 properties</div>
+            </div>
+            <div>
+              <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Market</div>
+              <div>Blue Ridge, GA</div>
+            </div>
+            <div>
+              <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Timeline</div>
+              <div>11 months</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-8">
+            <div class="w-10 h-10 rounded-full bg-[#DDDAD3]/20 flex items-center justify-center text-[#E8E6E1] font-bold text-[12px]" style="font-family:'Cormorant Garamond',Georgia,serif;">FZ</div>
+            <div>
+              <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#E8E6E1]">federico zimerman</div>
+              <div class="text-[12px] text-[#DDDAD3]/70">Founder · RevFactor · Mar 19, 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right: full image -->
+      <div class="bg-cover bg-center min-h-[400px]" style="background-image:url('https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=2000&q=85');"></div>
+    </section>
+
+    <!-- KEY METRICS STRIP -->
+    <section class="bg-[#E8E6E1] border-y border-[#C8C4BC] py-12">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+        {[
+          ['+$184K', 'Revenue added', '11-month period'],
+          ['+23%',   'RevPAR lift',   'vs. pre-RevFactor baseline'],
+          ['72%',    'Avg occupancy', 'up from 64%'],
+          ['$312',   'Avg weekend ADR', 'up from $261'],
+        ].map(([num, label, sub]) => (
+          <div>
+            <div class="text-[#13342D] leading-none mb-2" style="font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(32px,4vw,48px);">{num}</div>
+            <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#3F261F] mb-1">{label}</div>
+            <div class="text-[13px] text-[#8F6E62]" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic;">{sub}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- BODY + TOC -->
+    <div class="max-w-6xl mx-auto px-6 md:px-12 grid md:grid-cols-[1fr_240px] gap-16 md:gap-20 py-20">
+      <div class="max-w-2xl min-w-0">
+
+        <p class="prose-body first-letter:float-left first-letter:text-[72px] first-letter:leading-[0.9] first-letter:mr-3 first-letter:mt-2 first-letter:text-[#13342D]">
+          <strong>When Blueridge Retreats reached out in May 2025</strong>, they were running 22 cabins in the North Georgia mountains with a set-and-forget PriceLabs setup. Pacing was stuck: 64% average occupancy, a shoulder-season that felt like a black hole, and a pricing floor that hadn't moved in 18 months.
+        </p>
+
+        <p class="prose-body">The team — Sarah and her two cohosts — had the hardest problem in STR operations: everything looked fine from the dashboard. No single property was broken. They were getting bookings. The reviews were great. But the portfolio total wasn't growing, and the shoulder quarters were slowly eating into the peak.</p>
+
+        <section id="sec-the-problem">
+          <h2 class="prose-h2">The Problem</h2>
+          <p class="prose-body">We pulled their 18-month booking history on the first call and ran it through our pacing analysis. Three things jumped out immediately:</p>
+          <ol class="prose-ol">
+            <li><strong>Weekend rates were compressed</strong> by 12–15% below the comp set's median. PriceLabs' min-price rule had been set too aggressively and was anchoring too low.</li>
+            <li><strong>Midweek was dead</strong> — 31% occupancy across the portfolio in shoulder months, with a 3-night minimum stay fighting the math.</li>
+            <li><strong>Length-of-stay discounts were non-existent</strong>, which meant 4-night bookings were paying the same rate-per-night as 2-night bookings. Portfolio-wide, this was leaving real money on the table.</li>
+          </ol>
+        </section>
+
+        <section id="sec-what-we-did">
+          <h2 class="prose-h2">What We Did</h2>
+          <p class="prose-body">The RevFactor playbook for a portfolio this size runs in four phases, executed over the first 30 days:</p>
+
+          <figure class="my-10">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=85" alt="" class="w-full rounded-[16px]" />
+            <figcaption class="text-[13px] text-[#8F6E62] text-center mt-3" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic;">A typical Blueridge property. The pacing problem wasn't the listings — it was the rules around them.</figcaption>
+          </figure>
+
+          <ol class="prose-ol">
+            <li><strong>Week 1: Audit & stabilize.</strong> We raised the min-price floor 12% across the portfolio and rebuilt each property's competitive set from scratch (most were still using PriceLabs' default 10-mile radius).</li>
+            <li><strong>Week 2: Minimum stay restructure.</strong> Dropped from 3-night to 1-night minimum on Tuesday and Wednesday only. Weekend stayed at 2-night minimum. This alone lifted shoulder-season bookings 22%.</li>
+            <li><strong>Week 3: Length-of-stay discounts.</strong> 10% off 4-night stays, 18% off 7+. Structured to incentivize exactly the guest profile Blueridge wanted — longer stays, fewer turnovers.</li>
+            <li><strong>Week 4: Event calendar + forecast.</strong> Loaded 60 days of local events (concerts, festivals, weddings at nearby venues) into the forecast model with custom rate modifiers.</li>
+          </ol>
+        </section>
+
+        <section id="sec-the-numbers">
+          <h2 class="prose-h2">The Numbers</h2>
+          <p class="prose-body">Month-over-month trajectory, 11 months after kickoff:</p>
+
+          <div class="my-10 overflow-x-auto">
+            <table class="w-full text-[14px] border-collapse">
+              <thead>
+                <tr class="border-b-2 border-[#3F261F]">
+                  {['Quarter', 'Revenue', 'Occupancy', 'ADR', 'RevPAR lift'].map(h => (
+                    <th class="text-left py-3 px-3 font-bold uppercase text-[10px] tracking-[2px] text-[#3F261F]">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody style="font-family:'JetBrains Mono',monospace;">
+                <tr class="border-b border-[#C8C4BC]"><td class="py-3 px-3" style="font-family:'Cormorant Garamond',Georgia,serif;">Pre-RevFactor baseline</td><td class="py-3 px-3 tabular-nums">—</td><td class="py-3 px-3 tabular-nums">64%</td><td class="py-3 px-3 tabular-nums">$261</td><td class="py-3 px-3 tabular-nums">—</td></tr>
+                <tr class="border-b border-[#C8C4BC]"><td class="py-3 px-3" style="font-family:'Cormorant Garamond',Georgia,serif;">Q3 2025 (ramp)</td><td class="py-3 px-3 tabular-nums">+$38K</td><td class="py-3 px-3 tabular-nums">67%</td><td class="py-3 px-3 tabular-nums">$278</td><td class="py-3 px-3 tabular-nums text-[#5D6D59]">+8.9%</td></tr>
+                <tr class="border-b border-[#C8C4BC]"><td class="py-3 px-3" style="font-family:'Cormorant Garamond',Georgia,serif;">Q4 2025 (peak)</td><td class="py-3 px-3 tabular-nums">+$62K</td><td class="py-3 px-3 tabular-nums">73%</td><td class="py-3 px-3 tabular-nums">$298</td><td class="py-3 px-3 tabular-nums text-[#5D6D59]">+14.2%</td></tr>
+                <tr class="border-b border-[#C8C4BC] bg-[#5D6D59]/5"><td class="py-3 px-3 font-semibold" style="font-family:'Cormorant Garamond',Georgia,serif;">Q1 2026 (stable)</td><td class="py-3 px-3 tabular-nums">+$84K</td><td class="py-3 px-3 tabular-nums font-semibold">72%</td><td class="py-3 px-3 tabular-nums font-semibold">$312</td><td class="py-3 px-3 tabular-nums font-semibold text-[#5D6D59]">+23.1%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="my-12 border-l-4 border-[#13342D] pl-6 py-4 bg-[#E8E6E1] rounded-r-[12px] p-6">
+            <p class="text-[22px] md:text-[26px] leading-[1.3] text-[#3F261F] mb-3" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300;">
+              "We stopped pricing by intuition. RevPAR moved 23%, and I got my Sunday nights back."
+            </p>
+            <cite class="font-bold uppercase text-[10px] tracking-[2px] text-[#8F6E62] not-italic">— Sarah, Blueridge Retreats</cite>
+          </aside>
+        </section>
+
+        <section id="sec-playbook">
+          <h2 class="prose-h2">The Playbook You Can Run</h2>
+          <p class="prose-body">You don't need to be a RevFactor client to run this playbook. If you operate a small-to-mid portfolio and you're where Blueridge was in May 2025, these are the five moves that account for ~80% of the lift:</p>
+          <ul class="prose-ul">
+            <li>Audit your PriceLabs min-price floor. If it hasn't moved in 12 months, it's probably too low.</li>
+            <li>Rebuild your comp set. Don't let PriceLabs default the radius — pick 8–12 properties you'd actually compete against.</li>
+            <li>Separate your midweek and weekend minimum stays. They're different markets.</li>
+            <li>Add length-of-stay discounts that start at 4 nights. Target the guest profile you want.</li>
+            <li>Load the local event calendar at least 60 days out. Set custom rate modifiers for each.</li>
+          </ul>
+          <p class="prose-body">What RevFactor adds on top: daily monitoring, competitive rate shifts, and the judgment calls the dashboard can't make for you. If you want to see what we'd do with your portfolio, <a href="/" class="text-[#13342D] underline underline-offset-4 decoration-[#C8C4BC] hover:decoration-[#13342D]">start here</a>.</p>
+        </section>
+
+        <section id="sec-faq">
+          <h2 class="prose-h2">Frequently Asked</h2>
+          <div class="space-y-3 mt-6">
+            {[
+              ['How long before I see results?', 'Blueridge saw a 9% RevPAR lift in Q3 (ramp period) and 14% by Q4. Most clients see meaningful movement within 60 days, stabilizing by month 4.'],
+              ['Do I need to switch off PriceLabs?', 'No. RevFactor works on top of PriceLabs (or Wheelhouse, Beyond, etc.). We take co-host access and manage the strategy layer.'],
+              ['What if my portfolio is smaller than 22 properties?', 'The playbook works for single listings too. The absolute dollar lift is smaller, but the percentage RevPAR lift is comparable.'],
+              ['Can I see more case studies?', 'Yes. Most of our results are in our testimonial reel. Email us for the full case-study pack.'],
+            ].map(([q, a]) => (
+              <details class="faq-item group rounded-[12px] border border-[#C8C4BC] bg-white/40 overflow-hidden">
+                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 hover:bg-white/70 transition-colors">
+                  <span class="text-[16px] text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif;">{q}</span>
+                  <svg class="w-3.5 h-3.5 text-[#3F261F] transition-transform group-open:rotate-45 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                </summary>
+                <div class="px-5 pb-5 text-[14px] leading-[1.6] text-[#76574C]">{a}</div>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <div class="mt-16 p-8 rounded-[16px] bg-[#E8E6E1] border border-[#C8C4BC] flex gap-6 items-start flex-wrap md:flex-nowrap">
+          <div class="w-16 h-16 rounded-full bg-[#13342D] flex items-center justify-center text-[#E8E6E1] font-bold text-[18px] flex-shrink-0" style="font-family:'Cormorant Garamond',Georgia,serif;">FZ</div>
+          <div>
+            <h4 class="text-[22px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">federico zimerman</h4>
+            <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
+            <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">Federico spent 10 years in airline revenue management before applying those principles to short-term rentals. RevFactor's pricing strategies are battle-tested across 165+ properties in 24 states.</p>
+            <div class="flex gap-2">
+              <a href="https://www.linkedin.com/in/federico-zimerman-23ab3345/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Follow on LinkedIn</a>
+              <a href="/journal" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">More essays</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="md:sticky md:top-24 md:self-start md:pl-6 md:border-l border-[#C8C4BC]">
+        <h5 class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-4">In this essay</h5>
+        <ul class="space-y-2.5" id="toc">
+          {toc.map((item, i) => (
+            <li>
+              <a href={item.href} class="toc-link block text-[13px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
+                <span class="inline-block w-5 text-[#C8C4BC] mr-1" style="font-family:'JetBrains Mono',monospace;">{String(i + 1).padStart(2, '0')}</span>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+
+    <!-- Related -->
+    <section class="max-w-7xl mx-auto px-6 md:px-12 pb-24">
+      <div class="flex items-end justify-between mb-10 flex-wrap gap-4">
+        <div>
+          <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-2 block">Keep reading</span>
+          <h2 class="text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,40px);">More <em style="font-style:italic; color:#7A8B76;">from The Curve.</em></h2>
+        </div>
+        <a href="/journal" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#3F261F] hover:text-[#13342D] transition-colors">
+          All field notes
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {related.map(p => (
+          <a href={p.href} class="group block">
+            <div class="relative overflow-hidden rounded-[12px] mb-4" style="aspect-ratio:4/3;">
+              <span class="absolute top-3 left-3 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
+              <img src={p.img} alt="" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"/>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[1.5px] text-[#8F6E62] mb-2">
+              <span>{p.date}</span><span>·</span><span>{p.read}</span>
+            </div>
+            <h3 class="text-[20px] leading-[1.15] text-[#3F261F] group-hover:text-[#13342D] transition-colors" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">{p.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+
+  <Footer client:load />
+
+  <div class="fixed bottom-6 right-6 z-[60] bg-[#161910] text-[#E8E6E1] rounded-full px-2 py-1.5 flex items-center gap-1 shadow-xl text-[11px]">
+    <span class="px-2 text-[#DDDAD3]/60 uppercase tracking-[1.5px] font-bold text-[9px]">Post</span>
+    <a href="/blog-mockups/post-classic"   class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">A · Classic</a>
+    <a href="/blog-mockups/post-immersive" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">B · Immersive</a>
+    <a href="/blog-mockups/post-split"     class="px-3 py-1.5 rounded-full bg-[#E8E6E1] text-[#161910] font-bold uppercase text-[9px] tracking-[1.5px]">C · Split</a>
+    <span class="mx-1 w-px h-5 bg-[#E8E6E1]/20"></span>
+    <a href="/journal" class="px-3 py-1.5 rounded-full hover:bg-[#E8E6E1]/10 font-bold uppercase text-[9px] tracking-[1.5px]">← Index</a>
+  </div>
+
+  <style>
+    .prose-body { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 19px; line-height: 1.65; color: #3F261F; margin: 0 0 1.5em; }
+    .prose-h2   { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.15; color: #3F261F; margin: 2.5em 0 0.75em; letter-spacing: -0.25px; }
+    .prose-ol, .prose-ul { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 18px; line-height: 1.65; color: #3F261F; padding-left: 1.5em; margin: 0 0 1.5em; }
+    .prose-ol li, .prose-ul li { margin-bottom: 0.6em; }
+    .prose-ol { list-style: decimal; }
+    .prose-ul { list-style: disc; }
+    .prose-body strong, .prose-ol strong { color: #13342D; font-weight: 600; }
+    .prose-body em { color: #5D6D59; font-style: italic; }
+    .toc-link.active { color: #13342D; font-weight: 600; }
+  </style>
+
+  <script>
+    const bar = document.getElementById('progressBar');
+    const article = document.querySelector('article');
+    window.addEventListener('scroll', () => {
+      if (article && bar) {
+        const rect = article.getBoundingClientRect();
+        const total = article.offsetHeight - window.innerHeight;
+        const scrolled = -rect.top;
+        const pct = Math.max(0, Math.min(100, (scrolled / total) * 100));
+        bar.style.width = pct + '%';
+      }
+    }, { passive: true });
+
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href')));
+    function updateTOC() {
+      const y = window.scrollY + 200;
+      let activeIdx = 0;
+      sections.forEach((sec, i) => { if (sec && sec.offsetTop <= y) activeIdx = i; });
+      tocLinks.forEach((l, i) => l.classList.toggle('active', i === activeIdx));
+    }
+    window.addEventListener('scroll', updateTOC, { passive: true });
+    updateTOC();
+  </script>
+</BaseLayout>

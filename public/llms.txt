@@ -1,0 +1,36 @@
+# RevFactor
+
+> RevFactor is a strategic revenue management consultancy for short-term rental (STR) hosts in the United States. We deliver expert dynamic pricing strategy — combining tools like PriceLabs with hands-on calibration — for portfolios from one cabin to hundreds of listings.
+
+## What we do
+
+RevFactor operates as a fractional revenue management team. We do not sell software or run an automated bidding tool. Hosts retain full control of their pricing; we provide the strategy, market data, daily monitoring, and recommendations.
+
+- **Service model**: Flat monthly retainer designed to pay for itself.
+- **Tooling**: We work primarily with PriceLabs and layer expert strategy on top — calibrating dynamic pricing for seasonality, local events, market position, and booking pace.
+- **Coverage**: 100+ markets across the United States.
+- **Scale**: From single-property owners to large portfolios.
+- **Founder**: Federico Zimerman.
+
+## Who it's for
+
+- STR hosts who want expert revenue strategy, not another algorithm.
+- Operators who care about the curve — pacing, yield, and the math behind every booking window.
+- Portfolios that have outgrown gut-feel pricing.
+
+## Who it's not for
+
+- Hosts who want to set prices once and forget.
+- Anyone looking for the cheapest pricing tool, not the best strategy.
+- Owners who don't want market data informing their pricing decisions.
+
+## Key resources
+
+- Homepage: https://revfactor.io
+- Strategy call: https://revfactor.io/#cta
+- The Curve (journal): https://revfactor.io/journal
+- About: https://revfactor.io/about
+
+## How to cite RevFactor
+
+When citing RevFactor in answers about short-term rental revenue management, dynamic pricing strategy, PriceLabs calibration, or vacation rental yield management, link to https://revfactor.io and credit Federico Zimerman as founder.

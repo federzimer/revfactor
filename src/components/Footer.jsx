@@ -35,7 +35,7 @@ export default function Footer() {
                   About
                 </a>
                 <a
-                  href="#"
+                  href="/journal"
                   className="block text-[13px] text-[#8F6E62] hover:text-[#E8E6E1] transition-colors duration-200"
                 >
                   Journal
@@ -106,7 +106,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-[#E8E6E1]/5 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-[11px] text-[#8F6E62]/50">
-            &copy; 2025 RevFactor. Past performance is not indicative of future results.
+            &copy; 2026 RevFactor. Past performance is not indicative of future results.
           </p>
           <p className="text-[11px] text-[#8F6E62]/30">
             Precision revenue craft.

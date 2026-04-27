@@ -212,25 +212,26 @@ function SubscribeModal({ onClose }) {
 }
 
 /* ─── Navbar ─── */
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar({ lightBg = false }) {
+  const [scrolled, setScrolled] = useState(lightBg);
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
+      setScrolled(lightBg || window.scrollY > 80);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lightBg]);
 
   const navLinks = [
-    { label: 'APPROACH', href: '#approach' },
-    { label: 'PROCESS', href: '#process' },
-    { label: 'RESULTS', href: '#results' },
-    { label: 'FAQ', href: '#faq' },
+    { label: 'APPROACH', href: '/#approach' },
+    { label: 'PROCESS', href: '/#process' },
+    { label: 'RESULTS', href: '/#results' },
+    { label: 'FAQ', href: '/#faq' },
+    { label: 'JOURNAL', href: '/journal' },
   ];
 
   return (
@@ -245,7 +246,8 @@ export default function Navbar() {
       >
         {/* Wordmark */}
         <a
-          href="#"
+          href="/"
+          aria-label="RevFactor home"
           className={`text-[22px] font-normal tracking-[0.5px] px-3 transition-colors duration-[350ms] ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
             }`}
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
@@ -284,10 +286,10 @@ export default function Navbar() {
             owner portal
           </a>
 
-          {/* Subscribe — primary */}
+          {/* Subscribe — primary (transparent border keeps box-model height matched to Owner Portal's 1px border) */}
           <button
             onClick={() => setModalOpen(true)}
-            className="inline-flex items-center px-5 py-2 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <span
