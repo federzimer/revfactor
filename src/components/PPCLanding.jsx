@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, X } from 'lucide-react';
 import ScheduleModal from './ScheduleModal';
 
@@ -57,6 +57,27 @@ export default function PPCLanding({
 }) {
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const open = () => setScheduleOpen(true);
+  const calRef = useRef(null);
+  const [calHeight, setCalHeight] = useState(900);
+
+  // Cal.com sends `__dimensionChanged` postMessage events with the iframe's
+  // actual content height — listen and resize so we never get inner scrollbars.
+  useEffect(() => {
+    const onMessage = (e) => {
+      if (!e.data || typeof e.data !== 'object') return;
+      const t = e.data.type || (e.data.data && e.data.data.type);
+      const h =
+        (e.data.data && (e.data.data.iframeHeight || e.data.data.height)) ||
+        e.data.iframeHeight ||
+        e.data.height;
+      if (t === '__dimensionChanged' || t === 'dimension-changed' || t === '__resize') {
+        const next = Number(h);
+        if (Number.isFinite(next) && next > 0) setCalHeight(Math.max(next, 600));
+      }
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, []);
 
   return (
     <>
@@ -208,7 +229,7 @@ export default function PPCLanding({
       </section>
 
       {/* ─── TESTIMONIALS ─── */}
-      <section className="bg-[#DDDAD3] py-20 md:py-24">
+      <section id="results" className="bg-[#DDDAD3] py-20 md:py-24">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
             DOCUMENTED RESULTS
@@ -248,7 +269,7 @@ export default function PPCLanding({
       </section>
 
       {/* ─── HOW IT WORKS ─── */}
-      <section className="bg-[#161910] py-20 md:py-24">
+      <section id="process" className="bg-[#161910] py-20 md:py-24">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-4 text-center">
             HOW IT WORKS
@@ -303,19 +324,20 @@ export default function PPCLanding({
           </p>
           <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]">
             <iframe
+              ref={calRef}
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
               className="w-full border-0 block"
-              style={{ height: '720px', minHeight: '600px' }}
+              style={{ height: `${calHeight}px`, minHeight: '600px', overflow: 'hidden' }}
+              scrolling="no"
               allow="payment"
-              loading="lazy"
             />
           </div>
         </div>
       </section>
 
       {/* ─── FAQ ─── */}
-      <section className="bg-[#E8E6E1] py-20 md:py-24">
+      <section id="faq" className="bg-[#E8E6E1] py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 md:px-12">
           <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
             QUESTIONS
@@ -373,6 +395,19 @@ export default function PPCLanding({
           </button>
         </div>
       </section>
+
+      {/* ─── Minimal footer (no off-page links — ClickFunnels style) ─── */}
+      <footer className="bg-[#161910] py-8">
+        <div className="max-w-5xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-[#8F6E62]">
+          <span
+            className="text-[18px] tracking-[0.5px] text-[#C8C4BC]"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
+          >
+            revfactor
+          </span>
+          <span>© {new Date().getFullYear()} RevFactor — Revenue strategy for STR hosts.</span>
+        </div>
+      </footer>
 
       {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>
