@@ -60,37 +60,58 @@ export default function PPCLanding({
 
   return (
     <>
-      {/* ─── HERO ─── */}
-      <section className="relative bg-[#DDDAD3] pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
-        <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-6">
-            {eyebrow}
-          </p>
-          <h1
-            className="text-[clamp(36px,6vw,68px)] leading-[1.05] text-[#3F261F] mb-6 max-w-4xl"
-            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
-          >
-            {headlinePart1}{' '}
-            {headlinePart2Italic && (
-              <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>
-                {headlinePart2Italic}
-              </span>
-            )}
-          </h1>
-          <p className="text-[16px] md:text-[17px] leading-[1.6] text-[#76574C] max-w-2xl mb-10">
-            {subhead}
-          </p>
-          <button
-            onClick={open}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(19,52,45,0.35)]"
-          >
-            <span className="absolute inset-0 bg-[#1E4A40] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
-            <span className="relative z-10">{ctaText}</span>
-            <ArrowRight className="relative z-10 w-4 h-4" />
-          </button>
-          <p className="text-[12px] text-[#8F6E62] mt-4">
-            30 minutes. No obligation. Real revenue recommendations even if we don't work together.
-          </p>
+      {/* ─── HERO with image background (mirrors home Hero.jsx pattern) ─── */}
+      <section className="relative min-h-[78vh] md:min-h-[88vh] flex items-end overflow-hidden">
+        <picture>
+          <source
+            type="image/webp"
+            srcSet="/images/dynamic-pricing-strategy-mountain-cabin-1200.webp 1200w, /images/dynamic-pricing-strategy-mountain-cabin-1920.webp 1920w"
+            sizes="100vw"
+          />
+          <img
+            src="/images/dynamic-pricing-strategy-mountain-cabin-fallback.jpg"
+            alt="Short-term rental at dusk — RevFactor revenue strategy for STR hosts"
+            fetchpriority="high"
+            decoding="async"
+            width="1920"
+            height="1280"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </picture>
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#161910] via-[#161910]/85 to-[#13342D]/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#161910] via-transparent to-transparent opacity-60" />
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-16 md:pt-40 md:pb-24">
+          <div className="max-w-2xl">
+            <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-6">
+              {eyebrow}
+            </p>
+            <h1
+              className="text-[clamp(36px,6vw,68px)] leading-[1.05] text-[#E8E6E1] mb-6"
+              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, letterSpacing: '0.5px' }}
+            >
+              {headlinePart1}{' '}
+              {headlinePart2Italic && (
+                <span style={{ fontStyle: 'italic', color: '#7A8B76' }}>
+                  {headlinePart2Italic}
+                </span>
+              )}
+            </h1>
+            <p className="text-[15px] md:text-[16px] leading-[1.7] text-[#C8C4BC] max-w-xl mb-8">
+              {subhead}
+            </p>
+            <button
+              onClick={open}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(93,109,89,0.35)]"
+            >
+              <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
+              <span className="relative z-10">{ctaText}</span>
+              <ArrowRight className="relative z-10 w-4 h-4" />
+            </button>
+            <p className="text-[12px] text-[#8F6E62] mt-4">
+              30 minutes. No obligation. Real revenue recommendations even if we don't work together.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -260,6 +281,35 @@ export default function PPCLanding({
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── INLINE CALENDAR EMBED ─── */}
+      <section id="schedule" className="bg-[#DDDAD3] py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 md:px-12">
+          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
+            BOOK A CALL
+          </p>
+          <h2
+            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-4 text-center"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
+          >
+            Pick a time to{' '}
+            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>talk strategy</span>
+          </h2>
+          <p className="text-[14px] leading-[1.7] text-[#76574C] max-w-lg mx-auto mb-10 text-center">
+            30-minute strategy call with Federico. We'll review your portfolio, comp set, and where the revenue opportunity is.
+          </p>
+          <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]">
+            <iframe
+              src="https://schedule.revfactor.io/embed"
+              title="Schedule a strategy call with RevFactor"
+              className="w-full border-0 block"
+              style={{ height: '720px', minHeight: '600px' }}
+              allow="payment"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
