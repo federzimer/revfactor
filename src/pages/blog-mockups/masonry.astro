@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
+
+const categories = [
+  'All', 'Revenue Basics', 'Pricing Strategy', 'Tools & PMS',
+  'Launch Playbook', 'Client Results', 'Market Data',
+  'Market Guides', 'Yield Management', 'Industry News',
+];
+
+type Post = {
+  cat: string;
+  href: string;
+  variant: 'overlay' | 'text' | 'cedar' | 'moss';
+  ar?: string;
+  img?: string;
+  title: string;
+  date: string;
+  read: string;
+  excerpt?: string;
+  quote?: string;
+};
+
+const posts: Post[] = [
+  { cat: 'Pricing Strategy', href: '/blog-mockups/post-immersive', variant: 'overlay', ar: '3/4.5', img: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1200&q=85', date: 'Apr 18', read: '9 min', title: 'The rate elasticity map of the Smoky Mountains' },
+  { cat: 'Pricing Strategy', href: '/blog-mockups/post-classic', variant: 'text', date: 'Apr 12', read: '7 min read', title: 'The quiet math of midweek shoulder season', excerpt: 'Tuesdays are where cabins get written off. 90 days of mid-market listings to find the pricing floor that pays.', quote: '"$89 occupied still beats $149 empty — until it doesn\'t."' },
+  { cat: 'Market Data', href: '/blog-mockups/post-immersive', variant: 'overlay', ar: '4/3', img: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=85', date: 'Apr 05', read: '11 min', title: 'Q1 2026: the great flattening of ADR across tier-two markets' },
+  { cat: 'Client Results', href: '/blog-mockups/post-split', variant: 'cedar', date: 'Case study', read: '8 min', title: '+$184K in 11 months.', excerpt: 'How Blueridge Retreats cracked shoulder season across a 22-property portfolio.' },
+  { cat: 'Tools & PMS', href: '/blog-mockups/post-immersive', variant: 'overlay', ar: '16/10', img: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1200&q=85', date: 'Mar 28', read: '6 min', title: 'What we learned shipping the Hostaway connector' },
+  { cat: 'Tools & PMS', href: '/blog-mockups/post-immersive', variant: 'overlay', ar: '1/1', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85', date: 'Mar 11', read: '5 min', title: 'Pacing Tool v3' },
+  { cat: 'Pricing Strategy', href: '/blog-mockups/post-classic', variant: 'text', date: 'Mar 03', read: '10 min', title: "The minimum stay lever: an operator's fieldbook", excerpt: 'When to hold at three nights, when to break down to one, and the gap-fill math most DP tools get wrong.' },
+  { cat: 'Pricing Strategy', href: '/blog-mockups/post-immersive', variant: 'overlay', ar: '2/3', img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=85', date: 'Feb 24', read: '7 min', title: "Pricing for events you didn't know were happening" },
+  { cat: 'Market Data', href: '/blog-mockups/post-split', variant: 'moss', date: 'Market', read: '6 min', title: 'ADR vs. occupancy: stop choosing.', excerpt: "The false binary that's costing portfolios six figures. A cleaner frame for thinking about yield." },
+  { cat: 'Client Results', href: '/blog-mockups/post-immersive', variant: 'overlay', ar: '4/3', img: 'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1200&q=85', date: 'Mar 19', read: '8 min', title: 'How Blueridge Retreats added $184K in 11 months' },
+  { cat: 'Pricing Strategy', href: '/blog-mockups/post-immersive', variant: 'overlay', ar: '3/4.5', img: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85', date: 'Feb 15', read: '6 min', title: 'The anatomy of a weekend surge' },
+  { cat: 'Client Results', href: '/blog-mockups/post-classic', variant: 'text', date: 'Feb 02', read: '9 min', title: 'Mountain Valley Lodges: 18 months on dynamic pricing', excerpt: "A candid retrospective. What worked, what didn't, and the single change that moved the needle most.", quote: '"We stopped pricing by intuition. RevPAR moved 23%."' },
+  { cat: 'Yield Management', href: '/blog-mockups/post-immersive', variant: 'overlay', ar: '16/10', img: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=85', date: 'Jan 26', read: '7 min', title: 'The booking window is closing' },
+  { cat: 'Market Data', href: '/blog-mockups/post-immersive', variant: 'overlay', ar: '1/1', img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=900&q=85', date: 'Jan 19', read: '5 min', title: 'The Ozarks report: Jan 2026' },
+];
+---
+
+<BaseLayout
+  title="The Journal — RevFactor"
+  description="Pricing strategy, market data, and field notes from 1,800+ short-term rentals."
+>
+  <Navbar client:load />
+
+  <!-- HERO — typographic + image mosaic -->
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-40 md:pt-44 pb-10">
+    <div class="inline-flex items-center gap-2 mb-6">
+      <span class="w-1.5 h-1.5 rounded-full bg-[#5D6D59]"></span>
+      <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62]">The RevFactor Journal · 84 essays</span>
+    </div>
+    <h1 class="text-[#3F261F] mb-6" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(64px,10vw,156px); line-height:0.88; letter-spacing:-2px;">
+      The cabin<br/><em style="font-style:italic; color:#7A8B76; font-weight:300;">economy, observed.</em>
+    </h1>
+    <p class="text-[#76574C] max-w-3xl" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300; font-size:clamp(20px,2.4vw,32px); line-height:1.3;">
+      Pricing strategy, market data, and field notes from 1,800+ short-term rentals under our dynamic pricing engine.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1.3fr] gap-4 mt-12" style="height:clamp(280px, 44vh, 480px);">
+      <div class="rounded-[12px] transition-transform duration-[600ms] hover:-translate-y-1 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1600&q=85');"></div>
+      <div class="rounded-[12px] transition-transform duration-[600ms] hover:-translate-y-1 bg-cover bg-center md:h-auto h-[200px]" style="background-image:url('https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=900&q=85');"></div>
+      <div class="rounded-[12px] transition-transform duration-[600ms] hover:-translate-y-1 bg-cover bg-center md:h-auto h-[200px]" style="background-image:url('https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1200&q=85');"></div>
+    </div>
+
+    <!-- HERO BAR: meta + search -->
+    <div class="flex items-center justify-between gap-6 flex-wrap py-6 mt-6 border-y border-[#C8C4BC]">
+      <div class="flex gap-8 flex-wrap text-[11px] text-[#8F6E62]" style="font-family:'JetBrains Mono',monospace; letter-spacing:0.5px; text-transform:uppercase;">
+        <span><b class="text-[#3F261F] font-bold text-[10px] tracking-[2px] mr-2" style="font-family:inherit;">Updated</b>Apr 21, 2026</span>
+        <span><b class="text-[#3F261F] font-bold text-[10px] tracking-[2px] mr-2" style="font-family:inherit;">Issue</b>12</span>
+        <span><b class="text-[#3F261F] font-bold text-[10px] tracking-[2px] mr-2" style="font-family:inherit;">Written by</b>Federico Zimerman</span>
+      </div>
+      <label class="flex items-center gap-2 px-4 py-2 rounded-full border border-[#C8C4BC] bg-white/30 w-full sm:w-80">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#76574C" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Search the archive…" class="bg-transparent text-[13px] text-[#3F261F] placeholder:text-[#8F6E62] outline-none flex-1" />
+      </label>
+    </div>
+  </section>
+
+  <main class="bg-[#DDDAD3]">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+      <!-- CATEGORY UX: MORPHING SEGMENTED TABS with sliding pill indicator -->
+      <div class="flex items-center justify-between gap-4 py-8 flex-wrap">
+        <div class="relative inline-flex items-center p-1.5 rounded-full bg-[#E8E6E1] border border-[#C8C4BC] overflow-x-auto max-w-full" id="segBar" style="scroll-behavior:smooth;">
+          <!-- Sliding pill indicator -->
+          <div id="segPill" class="absolute top-1.5 bottom-1.5 bg-[#13342D] rounded-full transition-all duration-[350ms] pointer-events-none z-[1]" style="transition-timing-function:cubic-bezier(0.25,0.1,0.25,1); left:6px; width:60px;"></div>
+          {categories.map((c, i) => (
+            <button
+              class:list={['seg-tab relative z-[2] flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-[1.5px] transition-colors duration-[200ms]', i === 0 ? 'text-[#E8E6E1]' : 'text-[#3F261F] hover:text-[#13342D]']}
+              data-cat={c}
+            >{c}</button>
+          ))}
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#8F6E62; letter-spacing:0.5px;">
+          SHOWING <b style="color:#3F261F;" id="count">14</b> / 84
+        </div>
+      </div>
+
+      <!-- MASONRY -->
+      <section data-cards class="pb-16" style="column-count:3; column-gap:24px;">
+        {posts.map(p => (
+          <a
+            href={p.href}
+            data-cat={p.cat}
+            class:list={[
+              'post-card block mb-12 rounded-[16px] overflow-hidden transition-all duration-[350ms] group',
+              p.variant === 'text' && 'bg-[#E8E6E1] border border-[#C8C4BC] p-8 hover:bg-[#C8C4BC] hover:-translate-y-1',
+              p.variant === 'cedar' && 'bg-[#13342D] text-[#E8E6E1] p-8 hover:bg-[#1E4A40] hover:-translate-y-1',
+              p.variant === 'moss' && 'bg-[#5D6D59] text-[#E8E6E1] p-8 hover:bg-[#7A8B76] hover:-translate-y-1',
+              p.variant === 'overlay' && 'relative text-[#E8E6E1]',
+            ]}
+            style="break-inside:avoid;"
+          >
+            {p.variant === 'overlay' ? (
+              <>
+                <div class="relative overflow-hidden rounded-[16px]" style={`aspect-ratio:${p.ar};`}>
+                  <img src={p.img} alt="" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]" />
+                  <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 40%, rgba(22,25,16,0.85));"></div>
+                  <span class="absolute top-4 left-4 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
+                  <div class="absolute left-0 right-0 bottom-0 p-6 z-[2]">
+                    <div class="flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/80 mb-2" style="font-family:'JetBrains Mono',monospace;">
+                      <span>{p.date}</span><span>·</span><span>{p.read}</span>
+                    </div>
+                    <h3 class="text-[#E8E6E1] leading-[1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(22px,2.5vw,30px); text-wrap:balance;">{p.title}</h3>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div class:list={['flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase mb-4', p.variant === 'text' ? 'text-[#8F6E62]' : 'text-[#DDDAD3]/75']} style="font-family:'JetBrains Mono',monospace;">
+                  <span>{p.date}</span><span>·</span><span>{p.read}</span>
+                </div>
+                <h3 class:list={['leading-[1.05] mb-4', p.variant === 'text' ? 'text-[#3F261F]' : 'text-[#E8E6E1]']} style={`font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:${p.variant === 'cedar' ? '36px' : p.variant === 'moss' ? '32px' : '28px'};`}>{p.title}</h3>
+                {p.excerpt && <p class:list={['text-[14px] leading-[1.6]', p.variant === 'text' ? 'text-[#76574C]' : 'text-[#DDDAD3]/85']}>{p.excerpt}</p>}
+                {p.quote && (
+                  <blockquote class:list={['mt-5 pt-5 border-t text-[22px] leading-[1.3]', p.variant === 'text' ? 'border-[#C8C4BC] text-[#3F261F]' : 'border-[#DDDAD3]/30 text-[#E8E6E1]']} style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300;">
+                    {p.quote}
+                  </blockquote>
+                )}
+                <span class:list={['inline-flex items-center gap-2 mt-5 text-[11px] font-bold uppercase tracking-[2px]', p.variant === 'text' ? 'text-[#3F261F]' : 'text-[#E8E6E1]']}>
+                  Read essay
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </>
+            )}
+          </a>
+        ))}
+      </section>
+
+      <!-- Newsletter -->
+      <section class="my-16 rounded-[20px] bg-[#161910] text-[#E8E6E1] px-8 md:px-16 py-16 md:py-20 text-center">
+        <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#DDDAD3]/80 mb-5 inline-block">Thursday dispatch</span>
+        <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">
+          One essay. One chart.<br/><em style="font-style:italic; color:#A9BBA3; font-weight:300;">One decision.</em>
+        </h3>
+        <p class="text-[15px] leading-[1.6] text-[#DDDAD3]/70 max-w-xl mx-auto mb-8">
+          Every Thursday. Pricing strategy, market moves, and operator field notes. No fluff, no product pitches.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
+          <input type="email" placeholder="you@cabin.co" required class="flex-1 px-5 py-3 rounded-full bg-[#E8E6E1]/10 border border-[#E8E6E1]/20 text-[14px] text-[#E8E6E1] placeholder:text-[#DDDAD3]/50 outline-none" />
+          <button type="submit" class="px-6 py-3 rounded-full bg-[#E8E6E1] text-[#161910] font-bold uppercase text-[10px] tracking-[2px] hover:scale-[1.02] transition-transform">Subscribe</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <Footer client:load />
+
+  <style>
+    @media (max-width: 900px) { section[data-cards] { column-count: 2 !important; } }
+    @media (max-width: 600px) { section[data-cards] { column-count: 1 !important; } }
+  </style>
+
+  <script is:inline>
+    (function() {
+      const cards = document.querySelectorAll('[data-cards] .post-card');
+      const tabs = document.querySelectorAll('.seg-tab');
+      const pill = document.getElementById('segPill');
+      const segBar = document.getElementById('segBar');
+      const searchEl = document.getElementById('search');
+      const countEl = document.getElementById('count');
+      let activeCat = 'All';
+      let query = '';
+
+      function movePill(targetTab) {
+        if (!pill || !segBar || !targetTab) return;
+        const barRect = segBar.getBoundingClientRect();
+        const tabRect = targetTab.getBoundingClientRect();
+        pill.style.left = (tabRect.left - barRect.left + segBar.scrollLeft) + 'px';
+        pill.style.width = tabRect.width + 'px';
+      }
+
+      function filter() {
+        let visible = 0;
+        cards.forEach(card => {
+          const cat = card.getAttribute('data-cat') || '';
+          const text = (card.textContent || '').toLowerCase();
+          const catMatch = activeCat === 'All' || cat === activeCat;
+          const searchMatch = !query || text.includes(query);
+          const show = catMatch && searchMatch;
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        if (countEl) countEl.textContent = String(visible);
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          tabs.forEach(t => {
+            t.classList.remove('text-[#E8E6E1]');
+            t.classList.add('text-[#3F261F]');
+          });
+          tab.classList.remove('text-[#3F261F]');
+          tab.classList.add('text-[#E8E6E1]');
+          movePill(tab);
+          activeCat = tab.getAttribute('data-cat') || 'All';
+          tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          filter();
+        });
+      });
+      if (searchEl) searchEl.addEventListener('input', function() {
+        query = searchEl.value.toLowerCase();
+        filter();
+      });
+
+      window.addEventListener('load', function() { movePill(tabs[0]); });
+      window.addEventListener('resize', function() {
+        const active = document.querySelector('.seg-tab.text-\\[\\#E8E6E1\\]') || tabs[0];
+        movePill(active);
+      });
+      setTimeout(function() { movePill(tabs[0]); }, 150);
+    })();
+  </script>
+</BaseLayout>

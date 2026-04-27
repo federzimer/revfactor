@@ -231,6 +231,7 @@ export default function Navbar({ lightBg = false }) {
     { label: 'PROCESS', href: '/#process' },
     { label: 'RESULTS', href: '/#results' },
     { label: 'FAQ', href: '/#faq' },
+    { label: 'JOURNAL', href: '/journal' },
   ];
 
   return (
