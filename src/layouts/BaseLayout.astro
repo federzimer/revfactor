@@ -77,13 +77,14 @@ const canonicalUrl = Astro.url.href;
     data-website-id="fd5982fb-76c6-4a8c-bf65-2ad69c72c306"
   ></script>
 
-  <!-- Google Analytics -->
+  <!-- Google Analytics + Google Ads (one gtag.js load handles both IDs) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CTGBJ9RLK"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-1CTGBJ9RLK');
+    gtag('config', 'AW-18106897053');
   </script>
 </head>
 <body>
