@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
+import PPCLanding from '../../components/PPCLanding.jsx';
+
+// Conquest landing page — positioned as "the layer above PriceLabs", NOT a competitor.
+// Compliance: no claims that we're "better than" PriceLabs.
+// Strategy: reframe as complementary, earn the click without trademark issues.
+
+const comparisonRows = [
+  { label: "Daily price points based on demand", tool: true },
+  { label: "Comp set benchmarking data", tool: true },
+  { label: "Customizable rules + min/max bands", tool: true },
+  { label: "Strategic comp positioning (not just data)", tool: false },
+  { label: "Length-of-stay strategy by season", tool: false },
+  { label: "Listing copy + photo audit", tool: false },
+  { label: "Monthly human strategy review", tool: false },
+  { label: "Channel mix optimization", tool: false },
+  { label: "Custom playbook for events + holidays", tool: false },
+];
+
+const faqs = [
+  {
+    q: "Should I cancel my pricing tool subscription?",
+    a: "No — keep it. RevFactor works on top of any pricing tool, including PriceLabs. We calibrate the rules, set the strategy your tool executes, and audit performance monthly. Tool + strategist beats either alone.",
+  },
+  {
+    q: "Does RevFactor replace my pricing tool?",
+    a: "We don't. Tools are great at executing daily price changes at scale — they're built for that. Where they fall short is strategy, positioning, and the human judgment calls a tool can't make. We layer that on.",
+  },
+  {
+    q: "How does the partnership work?",
+    a: "We connect to your PMS and pricing tool, audit current performance, and build a custom strategy. Monthly strategy call, weekly comp tracking, ongoing calibration. Flat $320/mo per property.",
+  },
+  {
+    q: "What revenue lift can I expect?",
+    a: "+18% average vs. comp set across our portfolio. Top performers see +20% to +75% year-over-year. Most clients see meaningful lift within the first 60 days.",
+  },
+  {
+    q: "What if I'm not using a pricing tool yet?",
+    a: "Even better — we'll recommend the right tool for your portfolio (we work with PriceLabs most often) and build the strategy from day one.",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.revfactor.io/" },
+    { "@type": "ListItem", "position": 2, "name": "Compare", "item": "https://www.revfactor.io/vs/" },
+    { "@type": "ListItem", "position": 3, "name": "RevFactor + PriceLabs", "item": "https://www.revfactor.io/vs/pricelabs" },
+  ],
+};
+---
+
+<BaseLayout
+  title="RevFactor + PriceLabs — Strategy on Top of Your Pricing Tool"
+  description="Already using PriceLabs? Layer RevFactor on top for strategic positioning, monthly review, and +18% revenue lift vs. comp set. Tools alone leave money on the table."
+>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <Navbar client:load />
+  <main>
+    <PPCLanding
+      client:load
+      eyebrow="REVFACTOR + YOUR PRICING TOOL"
+      headlinePart1="Already pricing automatically?"
+      headlinePart2Italic="Get more from it."
+      subhead="Pricing tools execute. RevFactor sets the strategy they execute. Layer real revenue strategy on top of any pricing tool — comp positioning, length-of-stay rules, monthly recalibration. +18% revenue lift across our portfolio."
+      ctaText="See how we layer on"
+      comparisonRows={comparisonRows}
+      faqs={faqs}
+      finalCtaPretext="GET MORE FROM YOUR PRICING TOOL"
+    />
+  </main>
+  <Footer client:visible />
+</BaseLayout>
