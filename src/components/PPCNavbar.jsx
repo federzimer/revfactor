@@ -6,8 +6,9 @@ import { useEffect, useState } from 'react';
    primary CTA scrolls to #schedule. */
 
 const navLinks = [
-  { label: 'STRATEGY', href: '#process' },
+  { label: 'DIFFERENCE', href: '#difference' },
   { label: 'RESULTS', href: '#results' },
+  { label: 'STRATEGY', href: '#process' },
   { label: 'FAQ', href: '#faq' },
 ];
 
