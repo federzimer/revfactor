@@ -516,15 +516,31 @@ const masonryPosts: Post[] = [
       var EMAIL_RX = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
       var defaultStatus = statusEl.textContent;
 
+      // Inline-style override for the success message — larger + brighter + italic Cormorant.
+      // Kept off the default class so the "Join 12,400 operators" footnote stays small.
+      function applySuccessStyle() {
+        statusEl.style.fontSize = '18px';
+        statusEl.style.fontFamily = "'Cormorant Garamond', Georgia, serif";
+        statusEl.style.fontStyle = 'italic';
+        statusEl.style.color = '#F0DAD5';
+        statusEl.style.opacity = '1';
+        statusEl.style.marginTop = '20px';
+      }
+      function resetStatusStyle() {
+        statusEl.style.cssText = '';
+      }
+
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         var email = (emailEl.value || '').trim();
         if (!EMAIL_RX.test(email)) {
+          resetStatusStyle();
           statusEl.textContent = 'Please enter a valid email.';
           return;
         }
         btn.disabled = true;
         btn.textContent = 'Subscribing…';
+        resetStatusStyle();
         statusEl.textContent = defaultStatus;
 
         try {
@@ -535,11 +551,13 @@ const masonryPosts: Post[] = [
           });
           if (!res.ok) throw new Error('http ' + res.status);
           btn.textContent = 'Subscribed ✓';
-          statusEl.textContent = 'You\u2019re on the list. First dispatch arrives Thursday.';
+          applySuccessStyle();
+          statusEl.textContent ='You\u2019re on the list. First dispatch arrives Thursday.';
           emailEl.value = '';
         } catch (err) {
           btn.disabled = false;
           btn.textContent = 'Subscribe';
+          resetStatusStyle();
           statusEl.textContent = 'Something went wrong. Try again in a moment.';
         }
       });
