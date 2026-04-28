@@ -6,6 +6,9 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests/playwright/specs',
   outputDir: './tests/playwright/reports',
+  // Baselines for visual regression tests live in a dedicated dir so they're
+  // easy to commit + review separately from generated artifacts.
+  snapshotPathTemplate: './tests/playwright/visual-baselines/{arg}{ext}',
   timeout: 60_000,
   expect: { timeout: 10_000 },
   retries: 0,
