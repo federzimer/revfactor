@@ -12,16 +12,22 @@ import ScheduleModal from './ScheduleModal';
 const TESTIMONIALS = [
   {
     name: "Kate Henry",
+    initials: "KH",
+    role: "STR Host · Year-over-year",
     metric: "+75%",
     quote: "Federico's strategic approach unlocked revenue I didn't know my property had. Up 75% year-over-year.",
   },
   {
     name: "Kassidy & Erin Warren",
+    initials: "KW",
+    role: "STR Hosts · Sustained growth",
     metric: "+20%",
     quote: "Steady, sustainable growth. They don't just set prices — they build a strategy that adapts to the market.",
   },
   {
     name: "Sarah",
+    initials: "S",
+    role: "Multi-property STR Host",
     metric: "5★",
     quote: "In my humble opinion, there is no better revenue manager out there. Every property has seen significant growth.",
   },
@@ -97,8 +103,11 @@ export default function PPCLanding({
             className="absolute inset-0 w-full h-full object-cover"
           />
         </picture>
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#161910] via-[#161910]/85 to-[#13342D]/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#161910] via-transparent to-transparent opacity-60" />
+        {/* Lightened gradient — was dual-overlay charcoal that washed out the cabin.
+            Now: directional left-side darkening so headline stays legible, but the
+            cabin actually shows on the right 50% of the hero. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#161910] via-[#161910]/75 to-[#161910]/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#161910]/70 via-transparent to-transparent" />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-16 md:pt-40 md:pb-24">
           <div className="max-w-2xl">
@@ -130,6 +139,20 @@ export default function PPCLanding({
             <p className="text-[12px] text-[#8F6E62] mt-4">
               30 minutes. No obligation. Real revenue recommendations even if we don't work together.
             </p>
+            {/* Founder signature — adds human authority above the fold without
+                requiring a photo asset (Federico's photo not yet in repo). */}
+            <div className="mt-6 flex items-center gap-3 pt-5 border-t border-[#3F261F]/40 max-w-xs">
+              <div
+                className="w-9 h-9 rounded-full bg-[#5D6D59] text-[#E8E6E1] flex items-center justify-center text-[12px] font-bold tracking-wider flex-shrink-0"
+                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                FZ
+              </div>
+              <div className="leading-tight">
+                <p className="text-[12px] text-[#C8C4BC] font-medium">Federico Zimerman</p>
+                <p className="text-[10px] uppercase tracking-[1.5px] text-[#7A8B76] font-bold">Founder · STR strategist</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -184,6 +207,95 @@ export default function PPCLanding({
         </div>
       </section>
 
+      {/* ─── TESTIMONIALS ─── (Moved up: social proof before objections.
+           Hero → +18% strip → testimonials → schedule lets PPC visitors hit a
+           booking surface within 2 scrolls instead of 5.) */}
+      <section id="results" className="bg-[#DDDAD3] py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 md:px-12">
+          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
+            DOCUMENTED RESULTS
+          </p>
+          <h2
+            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-12 text-center max-w-2xl mx-auto"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
+          >
+            Hosts seeing{' '}
+            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>real revenue lift</span>
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t, i) => (
+              <div
+                key={i}
+                className="bg-[#E8E6E1] rounded-[20px] p-7 border border-[#C8C4BC] flex flex-col"
+              >
+                <div className="flex items-center justify-between mb-5">
+                  {/* Initial avatar — branded circle stand-in until real client photos are sourced */}
+                  <div
+                    className="w-12 h-12 rounded-full bg-[#5D6D59] text-[#E8E6E1] flex items-center justify-center text-[14px] font-bold tracking-wider flex-shrink-0"
+                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  >
+                    {t.initials}
+                  </div>
+                  <div
+                    className="text-[32px] text-[#5D6D59] leading-none"
+                    style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
+                  >
+                    {t.metric}
+                  </div>
+                </div>
+                <p
+                  className="text-[15px] leading-[1.6] text-[#3F261F] mb-5 italic flex-grow"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
+                >
+                  "{t.quote}"
+                </p>
+                <div className="border-t border-[#C8C4BC] pt-4">
+                  <p className="text-[14px] font-bold text-[#3F261F] mb-1">
+                    {t.name}
+                  </p>
+                  <p className="text-[10px] uppercase tracking-[1.5px] text-[#76574C] font-bold">
+                    {t.role}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── INLINE CALENDAR EMBED ─── (Moved up: directly after testimonials,
+           so a converted visitor can book within 2 scrolls of the hero. The
+           comparison table and process now act as objection handlers for
+           visitors who scrolled past the calendar without booking.) */}
+      <section id="schedule" className="bg-[#DDDAD3] py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-12">
+          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
+            BOOK A CALL
+          </p>
+          <h2
+            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-4 text-center"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
+          >
+            Pick a time to{' '}
+            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>talk strategy</span>
+          </h2>
+          <p className="text-[14px] leading-[1.7] text-[#76574C] max-w-lg mx-auto mb-8 text-center">
+            30-minute call with Federico or Emily. We'll review your portfolio, comp set, and where the revenue opportunity is.
+          </p>
+          <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]">
+            <iframe
+              ref={calRef}
+              src="https://schedule.revfactor.io/embed"
+              title="Schedule a strategy call with RevFactor"
+              className="w-full border-0 block"
+              style={{ height: `${calHeight}px`, minHeight: '560px', overflow: 'hidden' }}
+              scrolling="no"
+              allow="payment"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ─── COMPARISON TABLE ─── */}
       <section id="difference" className="bg-[#E8E6E1] py-20 md:py-24">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
@@ -226,46 +338,6 @@ export default function PPCLanding({
         </div>
       </section>
 
-      {/* ─── TESTIMONIALS ─── */}
-      <section id="results" className="bg-[#DDDAD3] py-20 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
-            DOCUMENTED RESULTS
-          </p>
-          <h2
-            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-12 text-center max-w-2xl mx-auto"
-            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
-          >
-            Hosts seeing{' '}
-            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>real revenue lift</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t, i) => (
-              <div
-                key={i}
-                className="bg-[#E8E6E1] rounded-[20px] p-7 border border-[#C8C4BC]"
-              >
-                <div
-                  className="text-[28px] text-[#5D6D59] mb-4"
-                  style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
-                >
-                  {t.metric}
-                </div>
-                <p
-                  className="text-[15px] leading-[1.6] text-[#3F261F] mb-5 italic"
-                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
-                >
-                  "{t.quote}"
-                </p>
-                <p className="font-bold uppercase text-[10px] tracking-[2px] text-[#76574C]">
-                  — {t.name}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── HOW IT WORKS ─── */}
       <section id="process" className="bg-[#161910] py-20 md:py-24">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
@@ -300,36 +372,6 @@ export default function PPCLanding({
                 </p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── INLINE CALENDAR EMBED ─── */}
-      <section id="schedule" className="bg-[#DDDAD3] py-16 md:py-20">
-        <div className="max-w-3xl mx-auto px-6 md:px-12">
-          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
-            BOOK A CALL
-          </p>
-          <h2
-            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-4 text-center"
-            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
-          >
-            Pick a time to{' '}
-            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>talk strategy</span>
-          </h2>
-          <p className="text-[14px] leading-[1.7] text-[#76574C] max-w-lg mx-auto mb-8 text-center">
-            30-minute call with Federico or Emily. We'll review your portfolio, comp set, and where the revenue opportunity is.
-          </p>
-          <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]">
-            <iframe
-              ref={calRef}
-              src="https://schedule.revfactor.io/embed"
-              title="Schedule a strategy call with RevFactor"
-              className="w-full border-0 block"
-              style={{ height: `${calHeight}px`, minHeight: '560px', overflow: 'hidden' }}
-              scrolling="no"
-              allow="payment"
-            />
           </div>
         </div>
       </section>
@@ -406,6 +448,21 @@ export default function PPCLanding({
           <span>© {new Date().getFullYear()} RevFactor — Revenue strategy for STR hosts.</span>
         </div>
       </footer>
+
+      {/* ─── Sticky mobile CTA ─── (Always-visible book-call bar at the bottom
+           of the viewport on phones. ClickFunnels-standard for PPC pages so a
+           visitor 8 sections deep is always one tap from the calendar.) */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 px-4 pb-[max(env(safe-area-inset-bottom),12px)] pt-3 bg-gradient-to-t from-[#161910] via-[#161910]/95 to-[#161910]/80 backdrop-blur-sm">
+        <button
+          onClick={open}
+          className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full active:scale-[0.98] transition-transform"
+        >
+          <span>Talk to Federico — Free 30 min</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      </div>
+      {/* Spacer so the sticky bar never covers the final CTA on mobile */}
+      <div className="md:hidden h-20" aria-hidden="true" />
 
       {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>
