@@ -33,3 +33,8 @@ instagram_videos/tmp_audio.mp3
 test-results/
 tests/report/
 tests/screenshots/
+tests/playwright/videos/
+tests/playwright/screenshots/
+tests/playwright/reports/
+playwright-report/
+scripts/.env
