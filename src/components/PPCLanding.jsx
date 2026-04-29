@@ -111,6 +111,12 @@ export default function PPCLanding({
   comparisonRows,
   faqs,
   finalCtaPretext = "Ready to talk strategy?",
+  // Hero image base name from public/heroes/ — each PPC page passes its own.
+  // Files: <heroBase>-1200.webp, -1920.webp, -2400.webp must all exist.
+  // Available: clifftop (V3 dusk), aframe (V4 golden hour), snowcap (V2 peaks),
+  // meadow (V1 hazy mountains).
+  heroBase = "clifftop",
+  heroAlt = "Modern luxury short-term rental — RevFactor revenue management",
 }) {
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const open = () => setScheduleOpen(true);
@@ -153,12 +159,12 @@ export default function PPCLanding({
         <picture>
           <source
             type="image/webp"
-            srcSet="/images/cabin-hero-1200.webp 1200w, /images/cabin-hero-1920.webp 1920w, /images/cabin-hero-fallback.webp 2400w"
+            srcSet={`/heroes/${heroBase}-1200.webp 1200w, /heroes/${heroBase}-1920.webp 1920w, /heroes/${heroBase}-2400.webp 2400w`}
             sizes="100vw"
           />
           <img
-            src="/images/cabin-hero-1920.webp"
-            alt="Modern luxury short-term rental at dusk over a cloud sea — RevFactor revenue management"
+            src={`/heroes/${heroBase}-1920.webp`}
+            alt={heroAlt}
             fetchpriority="high"
             decoding="async"
             width="1920"
