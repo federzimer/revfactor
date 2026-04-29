@@ -15,7 +15,7 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'STR REVENUE STRATEGY',
     headlinePart1: 'Most STRs lose 18% in revenue.',
     headlinePart2Italic: 'We get it back.',
-    subhead: 'Monthly strategy with Federico or Emily. Weekly comp tracking. Documented +18% lift across our portfolio. Flat $320/mo per property.',
+    subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. Federico stays on every account — monthly strategy, weekly comp tracking, calendar optimization. Documented +18% lift. Flat $320/mo.',
     ctaText: 'Talk to Federico',
   },
   // Tool Intent campaign — searcher is shopping a pricing tool, reframe the category
@@ -23,7 +23,7 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'BEYOND PRICING TOOLS',
     headlinePart1: 'Pricing tools set numbers.',
     headlinePart2Italic: 'We set strategy.',
-    subhead: 'A real strategist works alongside your tool to extract the revenue your algorithm leaves on the table. Hosts see +18% lift. $320/mo flat.',
+    subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work — and pull back the 18% your algorithm leaves on the table. Works alongside any tool. Flat $320/mo.',
     ctaText: 'Talk to Federico',
   },
   // Conquest campaign — searcher is on PriceLabs / Wheelhouse / Beyond
@@ -31,7 +31,7 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'STRATEGY YOUR TOOL CAN’T SHIP',
     headlinePart1: 'Already on PriceLabs?',
     headlinePart2Italic: 'You’re probably 18% short.',
-    subhead: 'Your pricing algorithm sets numbers. We build the strategy that makes them work — comp tracking, calendar optimization, channel mix. +18% lift across our portfolio.',
+    subhead: 'Algorithms set the numbers. They can’t set the strategy that makes the numbers actually work — comp positioning, length-of-stay rules, channel mix, listing audit. That’s us. Documented +18% lift across our portfolio.',
     ctaText: 'Get a strategy review',
   },
 };
@@ -163,7 +163,7 @@ export default function PPCLanding({
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-16 md:pt-40 md:pb-24">
           <div className="max-w-2xl">
-            <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-6">
+            <p className="font-bold uppercase text-[11px] tracking-[3px] text-[#7A8B76] mb-6">
               {eyebrow}
             </p>
             <h1
@@ -177,12 +177,12 @@ export default function PPCLanding({
                 </span>
               )}
             </h1>
-            <p className="text-[15px] md:text-[16px] leading-[1.7] text-[#C8C4BC] max-w-xl mb-8">
+            <p className="text-[17px] md:text-[19px] leading-[1.55] text-[#E8E6E1] max-w-xl mb-8">
               {subhead}
             </p>
             <button
               onClick={open}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(93,109,89,0.35)]"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[12px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(93,109,89,0.35)]"
             >
               <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
               <span className="relative z-10">{ctaText}</span>
@@ -191,27 +191,27 @@ export default function PPCLanding({
             {/* Risk-reversal — explicit guarantee badge under the CTA. Reframes
                 the call as "free advice, not a sales pitch" → lifts CVR for
                 cold paid traffic. */}
-            <div className="mt-4 flex items-start gap-2 max-w-md">
-              <ShieldCheck className="w-4 h-4 text-[#7A8B76] mt-[2px] flex-shrink-0" />
-              <p className="text-[12px] leading-[1.5] text-[#C8C4BC]">
+            <div className="mt-5 flex items-start gap-2.5 max-w-lg">
+              <ShieldCheck className="w-5 h-5 text-[#7A8B76] mt-[2px] flex-shrink-0" />
+              <p className="text-[14px] leading-[1.55] text-[#C8C4BC]">
                 <span className="font-bold text-[#E8E6E1]">Our promise:</span>{' '}
                 You walk away with 3 specific revenue recommendations for your property — even if we never work together.
               </p>
             </div>
             {/* Founder signature — Federico's actual photo + name above fold for trust */}
-            <div className="mt-6 flex items-center gap-3 pt-5 border-t border-[#3F261F]/40 max-w-xs">
+            <div className="mt-7 flex items-center gap-4 pt-5 border-t border-[#3F261F]/40 max-w-md">
               <img
                 src="/team/federico.jpg"
                 alt="Federico Zimerman, founder of RevFactor"
-                width="44"
-                height="44"
+                width="68"
+                height="68"
                 loading="eager"
                 decoding="async"
-                className="w-11 h-11 rounded-full object-cover border-2 border-[#7A8B76] flex-shrink-0"
+                className="w-[68px] h-[68px] rounded-full object-cover border-2 border-[#7A8B76] flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
               />
               <div className="leading-tight">
-                <p className="text-[13px] text-[#E8E6E1] font-medium">Federico Zimerman</p>
-                <p className="text-[10px] uppercase tracking-[1.5px] text-[#7A8B76] font-bold">Founder · STR strategist</p>
+                <p className="text-[16px] text-[#E8E6E1] font-medium mb-0.5">Federico Zimerman</p>
+                <p className="text-[11px] uppercase tracking-[1.5px] text-[#7A8B76] font-bold">Founder · STR Revenue Strategist</p>
               </div>
             </div>
           </div>
