@@ -303,28 +303,17 @@ export default function PPCLanding({
               </div>
             </div>
 
-            {/* RIGHT — calendar card embedded directly in the hero */}
-            <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.45)] border border-white/10">
-              <div className="px-5 py-4 bg-[#13342D] border-b border-[#13342D]">
-                <p className="font-bold uppercase text-[10px] tracking-[2.5px] text-[#A8BBA3] mb-1">
-                  BOOK A CALL
-                </p>
-                <h2
-                  className="text-[20px] md:text-[22px] leading-[1.15] text-[#E8E6E1]"
-                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
-                >
-                  Pick a time to{' '}
-                  <span style={{ fontStyle: 'italic', color: '#A8BBA3' }}>talk strategy</span>
-                </h2>
-              </div>
-              <iframe
-                src="https://schedule.revfactor.io/embed"
-                title="Schedule a strategy call with RevFactor"
-                className="w-full border-0 block"
-                style={{ height: `${calHeight}px`, minHeight: '720px', overflow: 'hidden' }}
-                allow="payment"
-              />
-            </div>
+            {/* RIGHT — iframe sits naked (no outer wrapper card). The
+                scheduler app already renders its own branded green header
+                + calendar card, so doubling up looks redundant. Subtle
+                drop shadow keeps it feeling "embedded" against the dark hero. */}
+            <iframe
+              src="https://schedule.revfactor.io/embed"
+              title="Schedule a strategy call with RevFactor"
+              className="w-full border-0 block rounded-[20px] shadow-[0_24px_80px_rgba(0,0,0,0.45)]"
+              style={{ height: `${calHeight}px`, minHeight: '720px', overflow: 'hidden' }}
+              allow="payment"
+            />
           </div>
         </section>
       ) : (
