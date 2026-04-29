@@ -55,6 +55,13 @@ function readMessageVariant() {
 // language verbatim (no fabricated first-person speech).
 const TESTIMONIALS = [
   {
+    name: "Zoey Berghoff",
+    initials: "ZB",
+    role: "STR Host · Property launch",
+    metric: "$30K",
+    quote: "$30,000 single booking on launch property — RevFactor priced the listing into a high-demand window before reviews stacked up.",
+  },
+  {
     name: "Kate Henry",
     initials: "KH",
     role: "STR Host · Documented case study",
@@ -287,35 +294,34 @@ export default function PPCLanding({
             Hosts seeing{' '}
             <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>real revenue lift</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {TESTIMONIALS.map((t, i) => (
               <div
                 key={i}
-                className="bg-[#E8E6E1] rounded-[20px] p-7 border border-[#C8C4BC] flex flex-col"
+                className="bg-[#E8E6E1] rounded-[20px] p-5 border border-[#C8C4BC] flex flex-col"
               >
-                <div className="flex items-center justify-between mb-5">
-                  {/* Initial avatar — branded circle stand-in until real client photos are sourced */}
+                <div className="flex items-center justify-between mb-4">
                   <div
-                    className="w-12 h-12 rounded-full bg-[#5D6D59] text-[#E8E6E1] flex items-center justify-center text-[14px] font-bold tracking-wider flex-shrink-0"
+                    className="w-10 h-10 rounded-full bg-[#5D6D59] text-[#E8E6E1] flex items-center justify-center text-[12px] font-bold tracking-wider flex-shrink-0"
                     style={{ fontFamily: "'JetBrains Mono', monospace" }}
                   >
                     {t.initials}
                   </div>
                   <div
-                    className="text-[32px] text-[#5D6D59] leading-none"
+                    className="text-[26px] text-[#5D6D59] leading-none"
                     style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
                   >
                     {t.metric}
                   </div>
                 </div>
                 <p
-                  className="text-[15px] leading-[1.6] text-[#3F261F] mb-5 italic flex-grow"
+                  className="text-[15px] leading-[1.55] text-[#3F261F] mb-4 italic flex-grow"
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
                 >
                   "{t.quote}"
                 </p>
-                <div className="border-t border-[#C8C4BC] pt-4">
-                  <p className="text-[14px] font-bold text-[#3F261F] mb-1">
+                <div className="border-t border-[#C8C4BC] pt-3">
+                  <p className="text-[14px] font-bold text-[#3F261F] mb-0.5">
                     {t.name}
                   </p>
                   <p className="text-[10px] uppercase tracking-[1.5px] text-[#76574C] font-bold">

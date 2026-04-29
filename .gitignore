@@ -33,3 +33,6 @@ instagram_videos/tmp_audio.mp3
 test-results/
 tests/report/
 tests/screenshots/
+
+# Image candidate gallery (browseable, gitignored)
+_image-gallery/
