@@ -153,12 +153,12 @@ export default function PPCLanding({
         <picture>
           <source
             type="image/webp"
-            srcSet="/images/cabin-hero-1200.webp 1200w, /images/cabin-hero-1920.webp 1920w"
+            srcSet="/images/cabin-hero-1200.webp 1200w, /images/cabin-hero-1920.webp 1920w, /images/cabin-hero-fallback.webp 2400w"
             sizes="100vw"
           />
           <img
-            src="/images/cabin-hero-fallback.webp"
-            alt="Alpine cabin at golden hour — short-term rental property managed by RevFactor"
+            src="/images/cabin-hero-1920.webp"
+            alt="Modern luxury short-term rental at dusk over a cloud sea — RevFactor revenue management"
             fetchpriority="high"
             decoding="async"
             width="1920"
