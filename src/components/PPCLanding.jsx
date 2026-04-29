@@ -49,26 +49,30 @@ function readMessageVariant() {
    Sections: Hero → +18% claim → Tools-vs-Strategy table → Testimonials →
              How it works → FAQ → Final CTA. */
 
+// Testimonials sourced from RevFactor_Digital_PR_Onboarding_COMPLETED.docx
+// (Federico's verified client case studies) and the live revfactor.io
+// homepage. Names + metrics are real; quote fields use the case-study
+// language verbatim (no fabricated first-person speech).
 const TESTIMONIALS = [
   {
     name: "Kate Henry",
     initials: "KH",
-    role: "STR Host · Year-over-year",
+    role: "STR Host · Documented case study",
     metric: "+75%",
-    quote: "Federico's strategic approach unlocked revenue I didn't know my property had. Up 75% year-over-year.",
+    quote: "$4,000 → $7,000 in one month. +75% revenue lift after RevFactor took over pricing strategy.",
   },
   {
     name: "Kassidy & Erin Warren",
     initials: "KW",
-    role: "STR Hosts · Sustained growth",
+    role: "STR Hosts · Sustained portfolio growth",
     metric: "+20%",
-    quote: "Steady, sustainable growth. They don't just set prices — they build a strategy that adapts to the market.",
+    quote: "+20% monthly revenue increase, sustained across multiple properties.",
   },
   {
-    name: "Sarah",
-    initials: "S",
-    role: "Multi-property STR Host",
-    metric: "5★",
+    name: "Sarah from The Kawrells",
+    initials: "SK",
+    role: "STR Host · Live testimonial",
+    metric: "Verified",
     quote: "In my humble opinion, there is no better revenue manager out there. Every property has seen significant growth.",
   },
 ];
@@ -237,10 +241,10 @@ export default function PPCLanding({
               className="text-[clamp(36px,5vw,52px)] text-[#E8E6E1] leading-none mb-2"
               style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
             >
-              +75%
+              100+
             </div>
             <div className="font-bold uppercase text-[9px] tracking-[2px] text-[#7A8B76]">
-              Top performer (Kate Henry)
+              Properties managed
             </div>
           </div>
           <div>
