@@ -79,6 +79,21 @@ const canonicalUrl = Astro.url.href;
     data-website-id="fd5982fb-76c6-4a8c-bf65-2ad69c72c306"
   ></script>
 
+  <!-- Microsoft Clarity — session recording + heatmaps (free).
+       Project ID env-overridable via PUBLIC_CLARITY_ID; default placeholder
+       must be replaced with the real ID from https://clarity.microsoft.com
+       (create a project for revfactor.io). The script self-skips if the ID
+       is still the placeholder so we don't ship broken telemetry. -->
+  <script is:inline define:vars={{ clarityId: import.meta.env.PUBLIC_CLARITY_ID || 'REPLACE_WITH_CLARITY_ID' }}>
+    if (clarityId && clarityId !== 'REPLACE_WITH_CLARITY_ID') {
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        var y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", clarityId);
+    }
+  </script>
+
   <!-- Google Analytics + Google Ads (one gtag.js load handles both IDs) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CTGBJ9RLK"></script>
   <script is:inline>

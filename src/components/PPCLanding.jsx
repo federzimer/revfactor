@@ -1,6 +1,46 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Check, X } from 'lucide-react';
+import { ArrowRight, Check, X, ShieldCheck } from 'lucide-react';
 import ScheduleModal from './ScheduleModal';
+
+/* ─── Dynamic Text Replacement (DTR) variants ───
+   The 3 paid Google Ads campaigns each pass a ?msg=<key> query param so the
+   landing page headline + subhead matches the search intent that produced
+   the click. Configured in deploy_campaigns.py as Final URL Suffix.
+
+   When ?msg is absent (organic, direct, or unrecognized), the .astro page's
+   own headline/subhead props serve as the default (no DTR override). */
+const MESSAGE_VARIANTS = {
+  // Consultant Intent campaign — searcher already knows they want a consultant
+  consultant: {
+    eyebrow: 'STR REVENUE STRATEGY',
+    headlinePart1: 'Most STRs lose 18% in revenue.',
+    headlinePart2Italic: 'We get it back.',
+    subhead: 'Monthly strategy with Federico or Emily. Weekly comp tracking. Documented +18% lift across our portfolio. Flat $320/mo per property.',
+    ctaText: 'Talk to Federico',
+  },
+  // Tool Intent campaign — searcher is shopping a pricing tool, reframe the category
+  tool: {
+    eyebrow: 'BEYOND PRICING TOOLS',
+    headlinePart1: 'Pricing tools set numbers.',
+    headlinePart2Italic: 'We set strategy.',
+    subhead: 'A real strategist works alongside your tool to extract the revenue your algorithm leaves on the table. Hosts see +18% lift. $320/mo flat.',
+    ctaText: 'Talk to Federico',
+  },
+  // Conquest campaign — searcher is on PriceLabs / Wheelhouse / Beyond
+  conquest: {
+    eyebrow: 'STRATEGY YOUR TOOL CAN’T SHIP',
+    headlinePart1: 'Already on PriceLabs?',
+    headlinePart2Italic: 'You’re probably 18% short.',
+    subhead: 'Your pricing algorithm sets numbers. We build the strategy that makes them work — comp tracking, calendar optimization, channel mix. +18% lift across our portfolio.',
+    ctaText: 'Get a strategy review',
+  },
+};
+
+function readMessageVariant() {
+  if (typeof window === 'undefined') return null;
+  const m = new URLSearchParams(window.location.search).get('msg');
+  return m && MESSAGE_VARIANTS[m] ? MESSAGE_VARIANTS[m] : null;
+}
 
 /* ─── PPC Landing Page Component ───
    Single-purpose conversion-optimized page for paid search traffic.
@@ -52,11 +92,11 @@ const PROCESS_STEPS = [
 ];
 
 export default function PPCLanding({
-  eyebrow,
-  headlinePart1,
-  headlinePart2Italic,
-  subhead,
-  ctaText = "Schedule a free strategy call",
+  eyebrow: defaultEyebrow,
+  headlinePart1: defaultHeadlinePart1,
+  headlinePart2Italic: defaultHeadlinePart2Italic,
+  subhead: defaultSubhead,
+  ctaText: defaultCtaText = "Schedule a free strategy call",
   comparisonRows,
   faqs,
   finalCtaPretext = "Ready to talk strategy?",
@@ -66,8 +106,20 @@ export default function PPCLanding({
   const calRef = useRef(null);
   const [calHeight, setCalHeight] = useState(640);
 
-  // Cal.com posts iframe dimensions via postMessage. Match permissively — any
-  // event whose data carries a sane `iframeHeight`/`height` number wins.
+  // DTR — read ?msg= URL param after mount and override hero copy if it
+  // matches a known variant. Server-rendered HTML uses the .astro page's
+  // default props; the swap happens on client hydration. Page is noindex,
+  // so SEO impact of the brief content swap is irrelevant.
+  const [variant, setVariant] = useState(null);
+  useEffect(() => { setVariant(readMessageVariant()); }, []);
+  const eyebrow = variant?.eyebrow ?? defaultEyebrow;
+  const headlinePart1 = variant?.headlinePart1 ?? defaultHeadlinePart1;
+  const headlinePart2Italic = variant?.headlinePart2Italic ?? defaultHeadlinePart2Italic;
+  const subhead = variant?.subhead ?? defaultSubhead;
+  const ctaText = variant?.ctaText ?? defaultCtaText;
+
+  // Schedule iframe at schedule.revfactor.io is a custom Next.js app —
+  // it posts iframe dimensions via postMessage so the parent can resize.
   useEffect(() => {
     const onMessage = (e) => {
       if (!e.data || typeof e.data !== 'object') return;
@@ -90,16 +142,16 @@ export default function PPCLanding({
         <picture>
           <source
             type="image/webp"
-            srcSet="/images/dynamic-pricing-strategy-mountain-cabin-1200.webp 1200w, /images/dynamic-pricing-strategy-mountain-cabin-1920.webp 1920w"
+            srcSet="/images/cabin-hero-1200.webp 1200w, /images/cabin-hero-1920.webp 1920w"
             sizes="100vw"
           />
           <img
-            src="/images/dynamic-pricing-strategy-mountain-cabin-fallback.jpg"
-            alt="Short-term rental at dusk — RevFactor revenue strategy for STR hosts"
+            src="/images/cabin-hero-fallback.webp"
+            alt="Alpine cabin at golden hour — short-term rental property managed by RevFactor"
             fetchpriority="high"
             decoding="async"
             width="1920"
-            height="1280"
+            height="1048"
             className="absolute inset-0 w-full h-full object-cover"
           />
         </picture>
@@ -136,20 +188,29 @@ export default function PPCLanding({
               <span className="relative z-10">{ctaText}</span>
               <ArrowRight className="relative z-10 w-4 h-4" />
             </button>
-            <p className="text-[12px] text-[#8F6E62] mt-4">
-              30 minutes. No obligation. Real revenue recommendations even if we don't work together.
-            </p>
-            {/* Founder signature — adds human authority above the fold without
-                requiring a photo asset (Federico's photo not yet in repo). */}
+            {/* Risk-reversal — explicit guarantee badge under the CTA. Reframes
+                the call as "free advice, not a sales pitch" → lifts CVR for
+                cold paid traffic. */}
+            <div className="mt-4 flex items-start gap-2 max-w-md">
+              <ShieldCheck className="w-4 h-4 text-[#7A8B76] mt-[2px] flex-shrink-0" />
+              <p className="text-[12px] leading-[1.5] text-[#C8C4BC]">
+                <span className="font-bold text-[#E8E6E1]">Our promise:</span>{' '}
+                You walk away with 3 specific revenue recommendations for your property — even if we never work together.
+              </p>
+            </div>
+            {/* Founder signature — Federico's actual photo + name above fold for trust */}
             <div className="mt-6 flex items-center gap-3 pt-5 border-t border-[#3F261F]/40 max-w-xs">
-              <div
-                className="w-9 h-9 rounded-full bg-[#5D6D59] text-[#E8E6E1] flex items-center justify-center text-[12px] font-bold tracking-wider flex-shrink-0"
-                style={{ fontFamily: "'JetBrains Mono', monospace" }}
-              >
-                FZ
-              </div>
+              <img
+                src="/team/federico.jpg"
+                alt="Federico Zimerman, founder of RevFactor"
+                width="44"
+                height="44"
+                loading="eager"
+                decoding="async"
+                className="w-11 h-11 rounded-full object-cover border-2 border-[#7A8B76] flex-shrink-0"
+              />
               <div className="leading-tight">
-                <p className="text-[12px] text-[#C8C4BC] font-medium">Federico Zimerman</p>
+                <p className="text-[13px] text-[#E8E6E1] font-medium">Federico Zimerman</p>
                 <p className="text-[10px] uppercase tracking-[1.5px] text-[#7A8B76] font-bold">Founder · STR strategist</p>
               </div>
             </div>
@@ -266,20 +327,23 @@ export default function PPCLanding({
       {/* ─── INLINE CALENDAR EMBED ─── (Moved up: directly after testimonials,
            so a converted visitor can book within 2 scrolls of the hero. The
            comparison table and process now act as objection handlers for
-           visitors who scrolled past the calendar without booking.) */}
-      <section id="schedule" className="bg-[#DDDAD3] py-16 md:py-20">
+           visitors who scrolled past the calendar without booking.
+           Asymmetric vertical padding: tight to the testimonial section above
+           — visitors who saw +75% / +20% / 5★ should hit the calendar
+           immediately, not scroll past 200px of dead space first.) */}
+      <section id="schedule" className="bg-[#DDDAD3] pt-4 pb-12 md:pt-6 md:pb-16">
         <div className="max-w-3xl mx-auto px-6 md:px-12">
-          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
+          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-3 text-center">
             BOOK A CALL
           </p>
           <h2
-            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-4 text-center"
+            className="text-[clamp(26px,4vw,38px)] leading-[1.15] text-[#3F261F] mb-3 text-center"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
             Pick a time to{' '}
             <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>talk strategy</span>
           </h2>
-          <p className="text-[14px] leading-[1.7] text-[#76574C] max-w-lg mx-auto mb-8 text-center">
+          <p className="text-[14px] leading-[1.5] text-[#76574C] max-w-lg mx-auto mb-6 text-center">
             30-minute call with Federico or Emily. We'll review your portfolio, comp set, and where the revenue opportunity is.
           </p>
           <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]">
