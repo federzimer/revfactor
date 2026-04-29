@@ -15,24 +15,24 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'STR REVENUE STRATEGY',
     headlinePart1: 'Most STRs lose 18% in revenue.',
     headlinePart2Italic: 'We get it back.',
-    subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. Federico stays on every account — monthly strategy, weekly comp tracking, calendar optimization. Documented +18% lift. Flat $320/mo.',
-    ctaText: 'Talk to Federico',
+    subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account — monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +18% lift. Flat $320/mo.',
+    ctaText: 'Talk to a strategist',
   },
   // Tool Intent campaign — searcher is shopping a pricing tool, reframe the category
   tool: {
     eyebrow: 'BEYOND PRICING TOOLS',
     headlinePart1: 'Pricing tools set numbers.',
     headlinePart2Italic: 'We set strategy.',
-    subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work — and pull back the 18% your algorithm leaves on the table. Works alongside any tool. Flat $320/mo.',
-    ctaText: 'Talk to Federico',
+    subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work — and pull back the 18% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist + 24/7 dashboard messaging. Flat $320/mo.',
+    ctaText: 'Talk to a strategist',
   },
   // Conquest campaign — searcher is on PriceLabs / Wheelhouse / Beyond
   conquest: {
     eyebrow: 'STRATEGY YOUR TOOL CAN’T SHIP',
     headlinePart1: 'Already on PriceLabs?',
     headlinePart2Italic: 'You’re probably 18% short.',
-    subhead: 'Algorithms set the numbers. They can’t set the strategy that makes the numbers actually work — comp positioning, length-of-stay rules, channel mix, listing audit. That’s us. Documented +18% lift across our portfolio.',
-    ctaText: 'Get a strategy review',
+    subhead: 'Algorithms set the numbers. They can’t set the strategy that makes the numbers actually work — comp positioning, length-of-stay rules, channel mix, listing audit. A seasoned pricing strategist does. Documented +18% lift across our portfolio. Plus 24/7 dashboard messaging.',
+    ctaText: 'Talk to a strategist',
   },
 };
 
@@ -77,17 +77,17 @@ const PROCESS_STEPS = [
   {
     n: "01",
     title: "Strategy Call",
-    body: "30 minutes with Federico or Emily. We review your portfolio, market, and current pricing. You leave with concrete revenue recommendations whether you work with us or not.",
+    body: "30 minutes with a seasoned pricing strategist. We review your portfolio, market, and current pricing. You leave with concrete revenue recommendations whether you work with us or not.",
   },
   {
     n: "02",
     title: "Onboarding & Audit",
-    body: "We connect to your PMS, audit your listings, and benchmark your performance against the comp set. You see the revenue gap on day one.",
+    body: "We connect to your PMS, audit your listings, and benchmark your performance against the comp set. You see the revenue gap on day one — and get RevFactor dashboard access with 24/7 messaging into your strategist.",
   },
   {
     n: "03",
     title: "Ongoing Strategy",
-    body: "Monthly strategy calls with Federico or Emily, dynamic pricing calibration, calendar optimization, and comp tracking. Flat $320/mo per property.",
+    body: "Monthly strategy calls with your dedicated strategist, dynamic pricing calibration, calendar optimization, and comp tracking. Always-on dashboard messaging between calls. Flat $320/mo per property.",
   },
 ];
 
@@ -193,7 +193,7 @@ export default function PPCLanding({
                 cold paid traffic. */}
             <div className="mt-5 flex items-start gap-2.5 max-w-lg">
               <ShieldCheck className="w-5 h-5 text-[#7A8B76] mt-[2px] flex-shrink-0" />
-              <p className="text-[14px] leading-[1.55] text-[#C8C4BC]">
+              <p className="text-[15px] leading-[1.55] text-[#C8C4BC]">
                 <span className="font-bold text-[#E8E6E1]">Our promise:</span>{' '}
                 You walk away with 3 specific revenue recommendations for your property — even if we never work together.
               </p>
@@ -219,7 +219,7 @@ export default function PPCLanding({
       </section>
 
       {/* ─── +18% PROOF STRIP ─── */}
-      <section className="bg-[#13342D] py-14">
+      <section className="bg-[#13342D] py-10">
         <div className="max-w-5xl mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
             <div
@@ -271,13 +271,13 @@ export default function PPCLanding({
       {/* ─── TESTIMONIALS ─── (Moved up: social proof before objections.
            Hero → +18% strip → testimonials → schedule lets PPC visitors hit a
            booking surface within 2 scrolls instead of 5.) */}
-      <section id="results" className="bg-[#DDDAD3] py-20 md:py-24">
+      <section id="results" className="bg-[#DDDAD3] py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
             DOCUMENTED RESULTS
           </p>
           <h2
-            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-12 text-center max-w-2xl mx-auto"
+            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-8 text-center max-w-2xl mx-auto"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
             Hosts seeing{' '}
@@ -343,8 +343,8 @@ export default function PPCLanding({
             Pick a time to{' '}
             <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>talk strategy</span>
           </h2>
-          <p className="text-[14px] leading-[1.5] text-[#76574C] max-w-lg mx-auto mb-6 text-center">
-            30-minute call with Federico or Emily. We'll review your portfolio, comp set, and where the revenue opportunity is.
+          <p className="text-[15px] leading-[1.55] text-[#76574C] max-w-lg mx-auto mb-6 text-center">
+            30-minute call with a seasoned RevFactor pricing strategist. We'll review your portfolio, comp set, and where the revenue opportunity is.
           </p>
           <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]">
             <iframe
@@ -361,13 +361,13 @@ export default function PPCLanding({
       </section>
 
       {/* ─── COMPARISON TABLE ─── */}
-      <section id="difference" className="bg-[#E8E6E1] py-20 md:py-24">
+      <section id="difference" className="bg-[#E8E6E1] py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
             THE DIFFERENCE
           </p>
           <h2
-            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-12 text-center max-w-2xl mx-auto"
+            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-8 text-center max-w-2xl mx-auto"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
             Tools alone vs.{' '}
@@ -383,7 +383,7 @@ export default function PPCLanding({
             {comparisonRows.map((row, i) => (
               <div
                 key={i}
-                className={`grid grid-cols-3 px-6 py-5 text-[14px] ${i % 2 === 0 ? 'bg-[#DDDAD3]' : 'bg-[#E8E6E1]'}`}
+                className={`grid grid-cols-3 px-6 py-4 text-[15px] ${i % 2 === 0 ? 'bg-[#DDDAD3]' : 'bg-[#E8E6E1]'}`}
               >
                 <div className="text-[#3F261F] font-medium">{row.label}</div>
                 <div className="text-center">
@@ -403,7 +403,7 @@ export default function PPCLanding({
       </section>
 
       {/* ─── HOW IT WORKS ─── */}
-      <section id="process" className="bg-[#161910] py-20 md:py-24">
+      <section id="process" className="bg-[#161910] py-12 md:py-16">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-4 text-center">
             HOW IT WORKS
@@ -431,7 +431,7 @@ export default function PPCLanding({
                 >
                   {step.title}
                 </h3>
-                <p className="text-[14px] leading-[1.6] text-[#8F6E62]">
+                <p className="text-[15px] leading-[1.6] text-[#8F6E62]">
                   {step.body}
                 </p>
               </div>
@@ -441,13 +441,13 @@ export default function PPCLanding({
       </section>
 
       {/* ─── FAQ ─── */}
-      <section id="faq" className="bg-[#E8E6E1] py-20 md:py-24">
+      <section id="faq" className="bg-[#E8E6E1] py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-12">
           <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-4 text-center">
             QUESTIONS
           </p>
           <h2
-            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-12 text-center"
+            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#3F261F] mb-8 text-center"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
             Things hosts{' '}
@@ -463,7 +463,7 @@ export default function PPCLanding({
                   <span>{q.q}</span>
                   <span className="text-[#5D6D59] group-open:rotate-45 transition-transform duration-200">+</span>
                 </summary>
-                <p className="mt-4 text-[14px] leading-[1.7] text-[#76574C]">
+                <p className="mt-4 text-[15px] leading-[1.7] text-[#76574C]">
                   {q.a}
                 </p>
               </details>
@@ -473,7 +473,7 @@ export default function PPCLanding({
       </section>
 
       {/* ─── FINAL CTA ─── */}
-      <section className="bg-[#3F261F] py-20 md:py-24">
+      <section className="bg-[#3F261F] py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
           <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-5">
             {finalCtaPretext}
@@ -521,7 +521,7 @@ export default function PPCLanding({
           onClick={open}
           className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full active:scale-[0.98] transition-transform"
         >
-          <span>Talk to Federico — Free 30 min</span>
+          <span>Talk to a strategist — Free 30 min</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>
