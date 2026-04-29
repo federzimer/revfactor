@@ -92,7 +92,7 @@ export default function ScheduleModal({ onClose }) {
           aria-modal="true"
           aria-labelledby="schedule-modal-title"
           tabIndex={-1}
-          className="relative bg-white rounded-[20px] w-full max-w-[700px] max-h-[90dvh] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.2)] outline-none flex flex-col"
+          className="relative bg-white rounded-[20px] w-full max-w-[760px] h-[92dvh] max-h-[1000px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.2)] outline-none flex flex-col"
           style={{ opacity: 0 }}
         >
           {/* Header */}
@@ -121,12 +121,15 @@ export default function ScheduleModal({ onClose }) {
             </button>
           </div>
 
-          {/* Iframe */}
-          <div className="flex-1 min-h-[500px] px-4 pb-4">
+          {/* Iframe — flex-1 lets it own all remaining vertical space inside the
+              modal panel (panel = 92dvh, header eats ~110px, so iframe gets the
+              rest). min-h-[820px] floor matches the inline embed so the date
+              grid + selected-time strip never clip on first render. */}
+          <div className="flex-1 min-h-[820px] px-4 pb-4 overflow-y-auto">
             <iframe
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
-              className="w-full h-full min-h-[500px] rounded-[12px] border-0"
+              className="w-full h-full min-h-[820px] rounded-[12px] border-0 block"
               allow="payment"
             />
           </div>

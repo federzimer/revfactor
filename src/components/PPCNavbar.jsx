@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
    No off-page links — anchors smooth-scroll to in-page section IDs. */
 
 const navLinks = [
-  { label: 'DIFFERENCE', href: '#difference' },
   { label: 'RESULTS', href: '#results' },
   { label: 'STRATEGY', href: '#process' },
   { label: 'FAQ', href: '#faq' },
@@ -77,7 +76,7 @@ export default function PPCNavbar() {
             className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           />
-          <span className="relative z-10">Talk to a strategist</span>
+          <span className="relative z-10">Book Free Strategy Call</span>
         </a>
       </div>
 
@@ -134,7 +133,7 @@ export default function PPCNavbar() {
             onClick={scrollTo('#schedule')}
             className="block mt-2 w-full text-center py-3 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full"
           >
-            Talk to a strategist
+            Book Free Strategy Call
           </a>
         </div>
       )}

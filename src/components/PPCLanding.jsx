@@ -16,7 +16,7 @@ const MESSAGE_VARIANTS = {
     headlinePart1: 'Most STRs lose 18% in revenue.',
     headlinePart2Italic: 'We get it back.',
     subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account — monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +18% lift. Flat $320/mo.',
-    ctaText: 'Talk to a strategist',
+    ctaText: 'Book Free Strategy Call',
   },
   // Tool Intent campaign — searcher is shopping a pricing tool, reframe the category
   tool: {
@@ -24,7 +24,7 @@ const MESSAGE_VARIANTS = {
     headlinePart1: 'Pricing tools set numbers.',
     headlinePart2Italic: 'We set strategy.',
     subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work — and pull back the 18% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist + 24/7 dashboard messaging. Flat $320/mo.',
-    ctaText: 'Talk to a strategist',
+    ctaText: 'Book Free Strategy Call',
   },
   // Conquest campaign — searcher is on PriceLabs / Wheelhouse / Beyond
   conquest: {
@@ -32,7 +32,7 @@ const MESSAGE_VARIANTS = {
     headlinePart1: 'Already on PriceLabs?',
     headlinePart2Italic: 'You’re probably 18% short.',
     subhead: 'Algorithms set the numbers. They can’t set the strategy that makes the numbers actually work — comp positioning, length-of-stay rules, channel mix, listing audit. A seasoned pricing strategist does. Documented +18% lift across our portfolio. Plus 24/7 dashboard messaging.',
-    ctaText: 'Talk to a strategist',
+    ctaText: 'Book Free Strategy Call',
   },
 };
 
@@ -40,6 +40,66 @@ function readMessageVariant() {
   if (typeof window === 'undefined') return null;
   const m = new URLSearchParams(window.location.search).get('msg');
   return m && MESSAGE_VARIANTS[m] ? MESSAGE_VARIANTS[m] : null;
+}
+
+/* ─── Animation primitives ───
+   Lightweight IntersectionObserver-based reveal + count-up. No GSAP dep here
+   (the brand site uses GSAP elsewhere; this keeps the PPC bundle small). */
+function useInView(ref, threshold = 0.25) {
+  const [seen, setSeen] = useState(false);
+  useEffect(() => {
+    if (!ref.current || seen) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setSeen(true); obs.disconnect(); } },
+      { threshold, rootMargin: '0px 0px -10% 0px' }
+    );
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [ref, threshold, seen]);
+  return seen;
+}
+
+// Animated number that ticks from 0 → target over `duration` ms when first
+// scrolled into view. Pass `prefix` (e.g. "+", "$") and `suffix` (e.g. "%").
+function CountUp({ to, prefix = '', suffix = '', duration = 1400, decimals = 0 }) {
+  const [val, setVal] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref);
+  useEffect(() => {
+    if (!inView) return;
+    let raf, start;
+    const tick = (ts) => {
+      if (!start) start = ts;
+      const t = Math.min(1, (ts - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      setVal(to * eased);
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, to, duration]);
+  const display = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toLocaleString();
+  return <span ref={ref}>{prefix}{display}{suffix}</span>;
+}
+
+// Scroll-reveal wrapper: fades + slides up its children when scrolled into
+// view. Accepts an optional `delay` (ms) for stagger.
+function Reveal({ children, delay = 0, className = '' }) {
+  const ref = useRef(null);
+  const inView = useInView(ref);
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 700ms cubic-bezier(0.25, 0.1, 0.25, 1) ${delay}ms, transform 700ms cubic-bezier(0.25, 0.1, 0.25, 1) ${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
 }
 
 /* ─── PPC Landing Page Component ───
@@ -53,34 +113,34 @@ function readMessageVariant() {
 // (Federico's verified client case studies) and the live revfactor.io
 // homepage. Names + metrics are real; quote fields use the case-study
 // language verbatim (no fabricated first-person speech).
+// Set `photo: "/team/<name>.jpg"` only after the image file is actually
+// committed to public/team/. Until then, leave undefined so the initials
+// circle renders cleanly. Drop new photos at /Users/aaronwhittaker/Claude/
+// RevFactor/public/team/<filename>.jpg and add the path here.
 const TESTIMONIALS = [
   {
     name: "Zoey Berghoff",
     initials: "ZB",
+    // photo: "/team/zoey-berghoff.jpg",  // ← drop file here
     role: "STR Host · Property launch",
-    metric: "$30K",
-    quote: "$30,000 single booking on launch property — RevFactor priced the listing into a high-demand window before reviews stacked up.",
+    metric: "$30K+",
+    quote: "$30,000+ single booking on launch property — RevFactor priced the listing into a high-demand window before reviews stacked up.",
   },
   {
-    name: "Kate Henry",
-    initials: "KH",
-    role: "STR Host · Documented case study",
-    metric: "+75%",
-    quote: "$4,000 → $7,000 in one month. +75% revenue lift after RevFactor took over pricing strategy.",
-  },
-  {
-    name: "Kassidy & Erin Warren",
-    initials: "KW",
-    role: "STR Hosts · Sustained portfolio growth",
+    name: "Kassidy",
+    initials: "K",
+    // photo: "/team/kassidy.jpg",  // ← drop file here
+    role: "STR Host · Sustained portfolio growth",
     metric: "+20%",
     quote: "+20% monthly revenue increase, sustained across multiple properties.",
   },
   {
-    name: "Sarah from The Kawrells",
-    initials: "SK",
-    role: "STR Host · Live testimonial",
-    metric: "Verified",
-    quote: "In my humble opinion, there is no better revenue manager out there. Every property has seen significant growth.",
+    name: "Kate Henry",
+    initials: "KH",
+    photo: "/team/kate-henry.jpg",
+    role: "STR Host · Documented case study",
+    metric: "+75%",
+    quote: "$4,000 → $7,000 in one month. +75% revenue lift after RevFactor took over pricing strategy.",
   },
 ];
 
@@ -121,7 +181,11 @@ export default function PPCLanding({
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const open = () => setScheduleOpen(true);
   const calRef = useRef(null);
-  const [calHeight, setCalHeight] = useState(640);
+  // Default tall enough that the calendar's date grid + bottom legend always
+  // show without scrolling on mobile + desktop. The scheduler app posts a
+  // height update via postMessage when the user changes step (date → time →
+  // form → confirmed) — until then this minimum keeps the embed unclipped.
+  const [calHeight, setCalHeight] = useState(820);
 
   // DTR — read ?msg= URL param after mount and override hero copy if it
   // matches a known variant. Server-rendered HTML uses the .astro page's
@@ -210,7 +274,7 @@ export default function PPCLanding({
                 cold paid traffic. */}
             <div className="mt-5 flex items-start gap-2.5 max-w-lg">
               <ShieldCheck className="w-5 h-5 text-[#7A8B76] mt-[2px] flex-shrink-0" />
-              <p className="text-[15px] leading-[1.55] text-[#C8C4BC]">
+              <p className="text-[16px] leading-[1.55] text-[#C8C4BC]">
                 <span className="font-bold text-[#E8E6E1]">Our promise:</span>{' '}
                 You walk away with 3 specific revenue recommendations for your property — even if we never work together.
               </p>
@@ -224,7 +288,7 @@ export default function PPCLanding({
                 height="68"
                 loading="eager"
                 decoding="async"
-                className="w-[68px] h-[68px] rounded-full object-cover border-2 border-[#7A8B76] flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
+                className="w-[68px] h-[68px] rounded-full object-cover flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
               />
               <div className="leading-tight">
                 <p className="text-[16px] text-[#E8E6E1] font-medium mb-0.5">Federico Zimerman</p>
@@ -235,53 +299,27 @@ export default function PPCLanding({
         </div>
       </section>
 
-      {/* ─── +18% PROOF STRIP ─── */}
-      <section className="bg-[#13342D] py-10">
+      {/* ─── PROOF STRIP — animated count-up on scroll ─── */}
+      <section className="bg-[#13342D] py-12">
         <div className="max-w-5xl mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div
-              className="text-[clamp(36px,5vw,52px)] text-[#E8E6E1] leading-none mb-2"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
-            >
-              +18%
-            </div>
-            <div className="font-bold uppercase text-[9px] tracking-[2px] text-[#7A8B76]">
-              Avg revenue lift vs. comp set
-            </div>
-          </div>
-          <div>
-            <div
-              className="text-[clamp(36px,5vw,52px)] text-[#E8E6E1] leading-none mb-2"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
-            >
-              100+
-            </div>
-            <div className="font-bold uppercase text-[9px] tracking-[2px] text-[#7A8B76]">
-              Properties managed
-            </div>
-          </div>
-          <div>
-            <div
-              className="text-[clamp(36px,5vw,52px)] text-[#E8E6E1] leading-none mb-2"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
-            >
-              $320
-            </div>
-            <div className="font-bold uppercase text-[9px] tracking-[2px] text-[#7A8B76]">
-              /mo flat per property
-            </div>
-          </div>
-          <div>
-            <div
-              className="text-[clamp(36px,5vw,52px)] text-[#E8E6E1] leading-none mb-2"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
-            >
-              30 min
-            </div>
-            <div className="font-bold uppercase text-[9px] tracking-[2px] text-[#7A8B76]">
-              Free strategy call
-            </div>
-          </div>
+          {[
+            { to: 18,  prefix: '+', suffix: '%',     label: 'Avg revenue lift vs. comp set' },
+            { to: 100, prefix: '',  suffix: '+',     label: 'Properties managed' },
+            { to: 320, prefix: '$', suffix: '',      label: '/mo flat per property' },
+            { to: 30,  prefix: '',  suffix: ' min',  label: 'Free strategy call' },
+          ].map((s, i) => (
+            <Reveal key={i} delay={i * 100}>
+              <div
+                className="text-[clamp(36px,5vw,52px)] text-[#E8E6E1] leading-none mb-2"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
+              >
+                <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} />
+              </div>
+              <div className="font-bold uppercase text-[11px] tracking-[2px] text-[#A8BBA3]">
+                {s.label}
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
@@ -300,41 +338,55 @@ export default function PPCLanding({
             Hosts seeing{' '}
             <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>real revenue lift</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TESTIMONIALS.map((t, i) => (
+              <Reveal key={i} delay={i * 120} className="h-full">
               <div
-                key={i}
-                className="bg-[#E8E6E1] rounded-[20px] p-5 border border-[#C8C4BC] flex flex-col"
+                className="h-full bg-[#E8E6E1] rounded-[20px] p-6 md:p-7 border border-[#C8C4BC] flex flex-col transition-transform duration-[350ms] hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(22,25,16,0.10)]"
+                style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
               >
                 <div className="flex items-center justify-between mb-4">
+                  {t.photo ? (
+                    <img
+                      src={t.photo}
+                      alt={t.name}
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-14 h-14 rounded-full object-cover flex-shrink-0"
+                      onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'flex'; }}
+                    />
+                  ) : null}
                   <div
-                    className="w-10 h-10 rounded-full bg-[#5D6D59] text-[#E8E6E1] flex items-center justify-center text-[12px] font-bold tracking-wider flex-shrink-0"
+                    className={`w-14 h-14 rounded-full bg-[#5D6D59] text-[#E8E6E1] items-center justify-center text-[14px] font-bold tracking-wider flex-shrink-0 ${t.photo ? 'hidden' : 'flex'}`}
                     style={{ fontFamily: "'JetBrains Mono', monospace" }}
                   >
                     {t.initials}
                   </div>
                   <div
-                    className="text-[26px] text-[#5D6D59] leading-none"
+                    className="text-[32px] text-[#5D6D59] leading-none"
                     style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
                   >
                     {t.metric}
                   </div>
                 </div>
                 <p
-                  className="text-[15px] leading-[1.55] text-[#3F261F] mb-4 italic flex-grow"
+                  className="text-[16px] leading-[1.55] text-[#3F261F] mb-5 italic flex-grow"
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
                 >
                   "{t.quote}"
                 </p>
-                <div className="border-t border-[#C8C4BC] pt-3">
-                  <p className="text-[14px] font-bold text-[#3F261F] mb-0.5">
+                <div className="border-t border-[#C8C4BC] pt-4">
+                  <p className="text-[16px] font-bold text-[#3F261F] mb-0.5">
                     {t.name}
                   </p>
-                  <p className="text-[10px] uppercase tracking-[1.5px] text-[#76574C] font-bold">
+                  <p className="text-[11px] uppercase tracking-[1.5px] text-[#76574C] font-bold">
                     {t.role}
                   </p>
                 </div>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -359,7 +411,7 @@ export default function PPCLanding({
             Pick a time to{' '}
             <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>talk strategy</span>
           </h2>
-          <p className="text-[15px] leading-[1.55] text-[#76574C] max-w-lg mx-auto mb-6 text-center">
+          <p className="text-[16px] leading-[1.55] text-[#76574C] max-w-lg mx-auto mb-6 text-center">
             30-minute call with a seasoned RevFactor pricing strategist. We'll review your portfolio, comp set, and where the revenue opportunity is.
           </p>
           <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]">
@@ -368,7 +420,7 @@ export default function PPCLanding({
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
               className="w-full border-0 block"
-              style={{ height: `${calHeight}px`, minHeight: '560px', overflow: 'hidden' }}
+              style={{ height: `${calHeight}px`, minHeight: '820px', overflow: 'hidden' }}
               scrolling="no"
               allow="payment"
             />
@@ -399,7 +451,7 @@ export default function PPCLanding({
             {comparisonRows.map((row, i) => (
               <div
                 key={i}
-                className={`grid grid-cols-3 px-6 py-4 text-[15px] ${i % 2 === 0 ? 'bg-[#DDDAD3]' : 'bg-[#E8E6E1]'}`}
+                className={`grid grid-cols-3 px-6 py-4 text-[16px] ${i % 2 === 0 ? 'bg-[#DDDAD3]' : 'bg-[#E8E6E1]'}`}
               >
                 <div className="text-[#3F261F] font-medium">{row.label}</div>
                 <div className="text-center">
@@ -421,22 +473,22 @@ export default function PPCLanding({
       {/* ─── HOW IT WORKS ─── */}
       <section id="process" className="bg-[#161910] py-12 md:py-16">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-4 text-center">
+          <p className="font-bold uppercase text-[11px] tracking-[3px] text-[#7A8B76] mb-4 text-center">
             HOW IT WORKS
           </p>
           <h2
-            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#E8E6E1] mb-14 text-center max-w-2xl mx-auto"
+            className="text-[clamp(28px,4.5vw,42px)] leading-[1.15] text-[#E8E6E1] mb-10 text-center max-w-2xl mx-auto"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
             From{' '}
-            <span style={{ fontStyle: 'italic', color: '#7A8B76' }}>strategy call</span>{' '}
+            <span style={{ fontStyle: 'italic', color: '#A8BBA3' }}>strategy call</span>{' '}
             to monthly partner
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {PROCESS_STEPS.map((step) => (
               <div key={step.n}>
                 <div
-                  className="text-[14px] text-[#7A8B76] mb-3"
+                  className="text-[16px] text-[#A8BBA3] mb-3"
                   style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
                 >
                   {step.n}
@@ -447,7 +499,7 @@ export default function PPCLanding({
                 >
                   {step.title}
                 </h3>
-                <p className="text-[15px] leading-[1.6] text-[#8F6E62]">
+                <p className="text-[16px] leading-[1.65] text-[#DDDAD3]">
                   {step.body}
                 </p>
               </div>
@@ -479,7 +531,7 @@ export default function PPCLanding({
                   <span>{q.q}</span>
                   <span className="text-[#5D6D59] group-open:rotate-45 transition-transform duration-200">+</span>
                 </summary>
-                <p className="mt-4 text-[15px] leading-[1.7] text-[#76574C]">
+                <p className="mt-4 text-[16px] leading-[1.7] text-[#76574C]">
                   {q.a}
                 </p>
               </details>
@@ -501,7 +553,7 @@ export default function PPCLanding({
             Book a free 30-minute{' '}
             <span style={{ fontStyle: 'italic' }}>strategy call</span>
           </h2>
-          <p className="text-[15px] leading-[1.7] text-[#8F6E62] max-w-lg mx-auto mb-10">
+          <p className="text-[16px] leading-[1.7] text-[#8F6E62] max-w-lg mx-auto mb-10">
             We'll review your market, current pricing, and where the revenue opportunity is —
             even if you don't end up working with us.
           </p>
@@ -537,7 +589,7 @@ export default function PPCLanding({
           onClick={open}
           className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full active:scale-[0.98] transition-transform"
         >
-          <span>Talk to a strategist — Free 30 min</span>
+          <span>Book Free Strategy Call</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>
