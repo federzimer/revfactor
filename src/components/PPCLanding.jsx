@@ -121,7 +121,7 @@ const TESTIMONIALS = [
   {
     name: "Zoey Berghoff",
     initials: "ZB",
-    // photo: "/team/zoey-berghoff.jpg",  // ← drop file here
+    photo: "/team/zoey-berghoff.jpg",
     role: "STR Host · Property launch",
     metric: "$30K+",
     quote: "$30,000+ single booking on launch property — RevFactor priced the listing into a high-demand window before reviews stacked up.",
@@ -129,7 +129,7 @@ const TESTIMONIALS = [
   {
     name: "Kassidy",
     initials: "K",
-    // photo: "/team/kassidy.jpg",  // ← drop file here
+    photo: "/team/kassidy.jpg",
     role: "STR Host · Sustained portfolio growth",
     metric: "+20%",
     quote: "+20% monthly revenue increase, sustained across multiple properties.",
