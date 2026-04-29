@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PPCNavbar from '../components/PPCNavbar.jsx';
 import PPCLanding from '../components/PPCLanding.jsx';
+import ExitIntent from '../components/ExitIntent.jsx';
 
 const comparisonRows = [
   { label: "Initial portfolio audit", tool: true },
@@ -77,5 +78,6 @@ const breadcrumbSchema = {
       faqs={faqs}
       finalCtaPretext="READY TO STOP LEAVING REVENUE BEHIND?"
     />
+    <ExitIntent client:load />
   </main>
 </BaseLayout>
