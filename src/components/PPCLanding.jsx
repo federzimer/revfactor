@@ -177,6 +177,11 @@ export default function PPCLanding({
   // meadow (V1 hazy mountains).
   heroBase = "clifftop",
   heroAlt = "Modern luxury short-term rental — RevFactor revenue management",
+  // "stacked" (default, image bg + CTA above the comparison/testimonials/calendar
+  // sections) or "split" (calendar embedded RIGHT-of-hero, headline on the LEFT).
+  // Split layout = ClickFunnels-style book-without-scrolling treatment for paid
+  // traffic. A/B test variant.
+  layout = "stacked",
 }) {
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const open = () => setScheduleOpen(true);
@@ -192,7 +197,17 @@ export default function PPCLanding({
   // default props; the swap happens on client hydration. Page is noindex,
   // so SEO impact of the brief content swap is irrelevant.
   const [variant, setVariant] = useState(null);
-  useEffect(() => { setVariant(readMessageVariant()); }, []);
+  // Layout A/B: ?v=split overrides the page's default layout prop. Lets us
+  // run an A/B test by sending half the paid traffic with ?v=split appended.
+  const [layoutOverride, setLayoutOverride] = useState(null);
+  useEffect(() => {
+    setVariant(readMessageVariant());
+    if (typeof window !== 'undefined') {
+      const v = new URLSearchParams(window.location.search).get('v');
+      if (v === 'split' || v === 'stacked') setLayoutOverride(v);
+    }
+  }, []);
+  const effectiveLayout = layoutOverride || layout;
   const eyebrow = variant?.eyebrow ?? defaultEyebrow;
   const headlinePart1 = variant?.headlinePart1 ?? defaultHeadlinePart1;
   const headlinePart2Italic = variant?.headlinePart2Italic ?? defaultHeadlinePart2Italic;
@@ -218,7 +233,102 @@ export default function PPCLanding({
 
   return (
     <>
-      {/* ─── HERO with image background (single-column copy + CTA) ─── */}
+      {/* ─── HERO ─── Two layouts: "stacked" (image bg + CTA, calendar lives
+           in #schedule below) or "split" (calendar embedded right-of-hero so
+           visitors book without scrolling). Toggled via layout prop or
+           ?v=split URL param for A/B testing. */}
+      {effectiveLayout === 'split' ? (
+        <section className="relative min-h-[88vh] md:min-h-[92vh] flex items-center overflow-hidden bg-[#161910]">
+          {/* Tiny background image — set on right column behind the calendar
+              card for visual continuity, faded so the card stays readable. */}
+          <picture>
+            <source
+              type="image/webp"
+              srcSet={`/heroes/${heroBase}-1200.webp 1200w, /heroes/${heroBase}-1920.webp 1920w, /heroes/${heroBase}-2400.webp 2400w`}
+              sizes="100vw"
+            />
+            <img
+              src={`/heroes/${heroBase}-1920.webp`}
+              alt={heroAlt}
+              fetchpriority="high"
+              decoding="async"
+              width="1920"
+              height="1048"
+              className="absolute inset-0 w-full h-full object-cover opacity-40"
+            />
+          </picture>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#161910] via-[#161910]/85 to-[#161910]/40" />
+
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-12 md:pt-32 md:pb-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            {/* LEFT — copy + risk-reversal + founder signature */}
+            <div className="lg:pr-6">
+              <p className="font-bold uppercase text-[11px] tracking-[3px] text-[#A8BBA3] mb-5">
+                {eyebrow}
+              </p>
+              <h1
+                className="text-[clamp(34px,5.4vw,60px)] leading-[1.05] text-[#E8E6E1] mb-5"
+                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, letterSpacing: '0.5px' }}
+              >
+                {headlinePart1}{' '}
+                {headlinePart2Italic && (
+                  <span style={{ fontStyle: 'italic', color: '#A8BBA3' }}>
+                    {headlinePart2Italic}
+                  </span>
+                )}
+              </h1>
+              <p className="text-[16px] md:text-[18px] leading-[1.55] text-[#DDDAD3] mb-6">
+                {subhead}
+              </p>
+              <div className="flex items-start gap-2.5 mb-6">
+                <ShieldCheck className="w-5 h-5 text-[#A8BBA3] mt-[2px] flex-shrink-0" />
+                <p className="text-[15px] leading-[1.55] text-[#C8C4BC]">
+                  <span className="font-bold text-[#E8E6E1]">Our promise:</span>{' '}
+                  3 specific revenue recommendations even if we never work together.
+                </p>
+              </div>
+              <div className="flex items-center gap-3 pt-5 border-t border-[#3F261F]/40">
+                <img
+                  src="/team/federico.jpg"
+                  alt="Federico Zimerman, founder of RevFactor"
+                  width="56"
+                  height="56"
+                  loading="eager"
+                  decoding="async"
+                  className="w-14 h-14 rounded-full object-cover flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
+                />
+                <div className="leading-tight">
+                  <p className="text-[15px] text-[#E8E6E1] font-medium mb-0.5">Federico Zimerman</p>
+                  <p className="text-[10px] uppercase tracking-[1.5px] text-[#A8BBA3] font-bold">Founder · STR Revenue Strategist</p>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT — calendar card embedded directly in the hero */}
+            <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.45)] border border-white/10">
+              <div className="px-5 py-4 bg-[#13342D] border-b border-[#13342D]">
+                <p className="font-bold uppercase text-[10px] tracking-[2.5px] text-[#A8BBA3] mb-1">
+                  BOOK A CALL
+                </p>
+                <h2
+                  className="text-[20px] md:text-[22px] leading-[1.15] text-[#E8E6E1]"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
+                >
+                  Pick a time to{' '}
+                  <span style={{ fontStyle: 'italic', color: '#A8BBA3' }}>talk strategy</span>
+                </h2>
+              </div>
+              <iframe
+                src="https://schedule.revfactor.io/embed"
+                title="Schedule a strategy call with RevFactor"
+                className="w-full border-0 block"
+                style={{ height: `${calHeight}px`, minHeight: '720px', overflow: 'hidden' }}
+                allow="payment"
+              />
+            </div>
+          </div>
+        </section>
+      ) : (
+      /* ─── STACKED HERO (default) — image background + CTA, calendar in #schedule below ─── */
       <section className="relative min-h-[78vh] md:min-h-[88vh] flex items-end overflow-hidden">
         <picture>
           <source
@@ -298,6 +408,7 @@ export default function PPCLanding({
           </div>
         </div>
       </section>
+      )}
 
       {/* ─── PROOF STRIP — animated count-up on scroll ─── */}
       <section className="bg-[#13342D] py-12">
