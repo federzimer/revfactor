@@ -62,17 +62,22 @@ test.describe('RevFactor — strategy call booking flow', () => {
     // 1. Land on PPC page
     await page.goto(PAGE_PATH, { waitUntil: 'networkidle' });
     await shot(page, '01-mobile-landing');
-    await expect(page.locator('h1')).toContainText(/STR consultant/i);
+    // Default headline (no ?msg= URL param) should be the loss-framing variant.
+    await expect(page.locator('h1')).toContainText(/lose 18%/i);
 
-    // 2. Sticky mobile CTA visible at viewport bottom
-    const stickyCta = page.locator('button').filter({ hasText: /talk to federico/i });
+    // 2. Sticky mobile CTA visible at viewport bottom. Use the .last() match
+    // so we get the bottom-of-viewport sticky bar, not the top navbar CTA
+    // (the new minimal PPCNavbar shows a "Talk to Federico" anchor too).
+    const stickyCta = page.locator('button').filter({ hasText: /free 30 min/i });
     await expect(stickyCta).toBeVisible();
     const stickyBox = await stickyCta.boundingBox();
     const viewport = page.viewportSize();
     expect(stickyBox.y + stickyBox.height).toBeGreaterThan(viewport.height - 100);
     console.log(`  ✓ Sticky CTA at y=${Math.round(stickyBox.y)} (viewport h=${viewport.height})`);
 
-    // 3. Click sticky CTA → schedule modal opens
+    // 3. Click sticky CTA. The current sticky-bar implementation triggers
+    // setScheduleOpen (modal), but the navbar's Talk-to-Federico anchor
+    // smooth-scrolls to #schedule. Both flows end at the calendar.
     const t0 = Date.now();
     await stickyCta.click();
     // Modal contains an iframe pointing at the custom scheduler. Scope to a
