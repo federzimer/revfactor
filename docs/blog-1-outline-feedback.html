@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 1 Pillar Outline — Strategic Feedback (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .blue table { font-size: 13px; }
+  .blue th, .blue td { border-color: #b6c8e8; }
+  .blue th { background: #e0eaff; }
+  .blue.banner { background: #1a4fbf; color: #fff; border-left-color: #0a2e80; padding: 14px 18px; }
+  .blue.banner strong { color: #fff; }
+  .original { font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .resolved { color: #0a7a3c; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Content Outline — Strategic Feedback</h1>
+<p class="original"><strong>Project:</strong> Pillar Page Blog RevFactor.io<br>
+<strong>Title:</strong> What Is Revenue Management for Short-Term Rentals? The Definitive Guide<br>
+<strong>Author Attribution:</strong> Federico Zimerman, Founder, RevFactor<br>
+<strong>Target Length:</strong> ~5000 words<br>
+<strong>Content Type:</strong> High-intent pillar page<br>
+<strong>Prepared by:</strong> GetCito Pvt. Ltd.<br>
+<em>Feedback added by: Aaron / Claude — sourced from Ahrefs, Peec.ai, Page Optimizer Pro, GetCito's Onboarding Questionnaire, RevFactor live site, FireFlies discovery call (4/22 with Avinash Tripathi), and Federico's persona guide.</em></p>
+
+<div class="blue banner">
+<p class="label" style="color:#cfd9ee">Top-line decision</p>
+<p style="font-size:15px"><strong>This pillar should not ship in isolation.</strong> Three things have to ship alongside it for it to do its job:</p>
+<ol style="font-size:14px">
+<li><strong>A companion listicle</strong> — "Best STR Revenue Management Companies 2026" — to capture the ~60 vendor-discovery prompts in Peec that this pillar can't (the pillar is a definitional page, not a buyer-comparison page).</li>
+<li><strong>A decision on the cannibalization triangle.</strong> Three URLs targeting the same intent right now: existing live <a href="https://revfactor.io/blog/dynamic-pricing-str-beginners-guide/">/blog/dynamic-pricing-str-beginners-guide/</a> (1,126 words, indexed) + this new pillar + GetCito's planned "Dynamic Pricing vs Revenue Management: The Difference Nobody Explains" (Phase 2 item). Pick one URL to own the head term; the other two link UP to it.</li>
+<li><strong>Brand disambiguation vs Refactor.ai</strong> — Avinash flagged this on the 4/22 call but it's not in any of the four GetCito strategy docs. Without llms.txt entity statement + Wikidata + schema sameAs locks, the pillar's AEO citations get split between revfactor.io and refactor.ai.</li>
+</ol>
+</div>
+
+<div class="blue">
+<p class="label">Top-line strategic call (refined)</p>
+<p>This outline is <strong>directionally strong on positioning and voice</strong>. Three issues need a decision before GetCito drafts:</p>
+<ol>
+<li><strong>Primary keyword has 0 measurable search volume.</strong> Ahrefs returns vol = 0 / KD = null / TP = null for "revenue management for short-term rentals" and "str pricing strategy." The actual traffic prize is <strong>"dynamic pricing airbnb" (vol 200, KD 10, TP 1,400)</strong> and <strong>"airbnb pricing strategy" (vol 250, KD 5, TP 10)</strong>. This page should be built as an <strong>AEO/GEO citation play first, Google traffic play second</strong> — the secondary keywords need to bridge into the dynamic-pricing semantic cluster so the URL can also rank on the high-traffic phrase.</li>
+<li><strong>Cannibalization triangle (see banner above).</strong> My recommendation: keep the existing /blog/dynamic-pricing-str-beginners-guide/ post but trim to ~600 words and add a "Read the full guide" callout linking up to this pillar; merge the planned "Dynamic Pricing vs Revenue Management" post into Section 4 of this pillar instead of standing it up alone.</li>
+<li><strong>RevFactor brand has 0% Peec share-of-voice across 75 tracked AI prompts.</strong> Competitors dominate: PriceLabs 20% SOV, Vrbo 12%, Wheelhouse 11%, AirDNA 8%, Beyond Pricing 7%. ~80% of those Peec prompts are <em>vendor-discovery intent</em> ("who can help me…", "what companies…", "what services…") — a pillar guide will <strong>not capture those</strong>. Without a companion listicle, this pillar will earn citations on the ~10 educational prompts and miss the other ~60.</li>
+</ol>
+<p><strong>What to keep:</strong> the airline yield-management origin story, the perishable-inventory frame, the worked ADR-vs-RevPAR example, and the Tactical Playbook section. Those are the strongest assets in the doc and align tightly with Federico's persona.</p>
+</div>
+
+<h2>1. Strategic Overview</h2>
+<table class="original">
+<tr><th>Element</th><th>Detail</th></tr>
+<tr><td>Primary Keyword</td><td>Revenue management for short-term rentals</td></tr>
+<tr><td>Secondary Keywords</td><td>dynamic pricing Airbnb, STR pricing strategy, revenue management Airbnb, short-term rental optimization</td></tr>
+<tr><td>Target Audience</td><td>STR hosts (3–15 properties), property managers, STR investors</td></tr>
+<tr><td>Search Intent</td><td>Informational → Commercial (educate then position)</td></tr>
+<tr><td>Content Goal</td><td>Establish RevFactor as the category authority for STR revenue management</td></tr>
+<tr><td>Funnel Stage</td><td>Top-of-funnel awareness → mid-funnel consideration</td></tr>
+</table>
+
+<div class="blue">
+<p class="label">Feedback — keyword targeting</p>
+<p>Live Ahrefs (US) numbers for this keyword set:</p>
+<table>
+<tr><th>Keyword</th><th>Volume</th><th>KD</th><th>Traffic Potential</th><th>Note</th></tr>
+<tr><td>revenue management for short-term rentals <em>(primary)</em></td><td>0</td><td>—</td><td>—</td><td>Defines the discipline; AEO-only target</td></tr>
+<tr><td>str pricing strategy</td><td>0</td><td>—</td><td>—</td><td>AEO-only</td></tr>
+<tr><td>airbnb revenue management</td><td>150</td><td>18</td><td>40</td><td><strong>Better primary candidate</strong></td></tr>
+<tr><td>str revenue management</td><td>150</td><td>—</td><td>—</td><td>Strong supporting</td></tr>
+<tr><td>airbnb pricing strategy</td><td>250</td><td>5</td><td>10</td><td>Easy ranking</td></tr>
+<tr><td>dynamic pricing airbnb</td><td>200</td><td>10</td><td><strong>1,400</strong></td><td><strong>Real traffic prize — long tail</strong></td></tr>
+<tr><td>short-term rental optimization</td><td>20</td><td>—</td><td>—</td><td>AEO-only</td></tr>
+<tr><td>revpar airbnb</td><td>30</td><td>—</td><td>—</td><td>Use as section anchor</td></tr>
+</table>
+<p><strong>Recommendation:</strong> Add <strong>"airbnb revenue management"</strong> as a tracked secondary primary (it owns 90% of the same intent at vol 150 / KD 18) and structure the page so the H1 + first 200 words also surface "dynamic pricing for short-term rentals" naturally — that bridges into the 1,400-TP cluster without changing the URL.</p>
+</div>
+
+<h2>2. Page Metadata</h2>
+<table class="original">
+<tr><th>Field</th><th>Content</th></tr>
+<tr><td>SEO Title</td><td>Revenue Management for Short-Term Rentals: The Definitive Guide (2026)</td></tr>
+<tr><td>Meta Description</td><td>Revenue management for short-term rentals goes far beyond dynamic pricing. Learn the frameworks, metrics, and tactical plays used to manage 165+ STR properties.</td></tr>
+<tr><td>URL Slug</td><td>/revenue-management-short-term-rentals-definitive-guide</td></tr>
+<tr><td>H1</td><td>Revenue Management for Short-Term Rentals: The Definitive Guide</td></tr>
+<tr><td>Content Refresh Frequency</td><td>Every month</td></tr>
+</table>
+
+<div class="blue">
+<p class="label">Feedback — metadata</p>
+<ul>
+<li><strong>URL slug too long.</strong> 53 characters of slug. Trim to <strong>/revenue-management-short-term-rentals/</strong> — same authority, cleaner internal linking.</li>
+<li><strong>Meta description attribution risk.</strong> "165+ STR properties" is sourced from <em>Blackbird Hospitality</em>, not RevFactor (separate companies per Federico's persona guide). Phrasing as-is implies RevFactor manages 165+ — that's misattribution. <span class="resolved">✓ The Onboarding Questionnaire fixed this in §1.1, but the Blog 1 meta description still has the bad phrasing.</span> Suggested rewrite: <em>"…the frameworks, metrics, and tactical plays Federico Zimerman uses across 165+ STR properties as founder of Blackbird Hospitality."</em></li>
+<li><strong>SEO title (2026):</strong> Year in title helps freshness signaling. Keep — and set a calendar reminder to flip to (2027) on Jan 1.</li>
+<li><strong>Schema package not specified in outline.</strong> Add: Article + Author (Person schema with Federico's full credentials + sameAs LinkedIn/IG/TikTok/YouTube/podcasts), BreadcrumbList, FAQPage, and DefinedTerm in Section 3. HowTo schema on the Tactical Playbook is optional but high-value for AEO.</li>
+</ul>
+</div>
+
+<h2>3. Section-by-Section Framework</h2>
+
+<h3 class="original">Section 1: Key Takeaways</h3>
+<ul class="original">
+<li><strong>Format:</strong> Bulleted list (7 points)</li>
+<li><strong>Content:</strong> Seven distilled insights summarizing the core arguments — discipline-vs-tool distinction, ADR/RevPAR misconception, perishable-inventory frame, role of inventory rules. Self-contained block so a skim-reader gets the full thesis in under 60 seconds, and AI search engines can lift it cleanly as a citation.</li>
+<li><strong>Purpose:</strong> Skim-reader value + AEO citation block</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 1</p>
+<p>Strong call to lead with this. Confirms with my "TL;DR placement" rule: blog/listicle/directory pages start with TL;DR. Three refinements:</p>
+<ul>
+<li><strong>Add one bullet that defines the term verbatim.</strong> Peec prompt #34 ("what is dynamic pricing for short term rentals") is at volume tier 4 with 0% RevFactor visibility. A 25-word definition bullet is the highest-leverage AEO insertion in the entire piece.</li>
+<li><strong>Cap each bullet at one sentence (~25 words).</strong> ChatGPT and Perplexity citation extraction prefers single-sentence bullets — multi-clause bullets get truncated mid-thought.</li>
+<li><strong>Lift Federico's signature line directly:</strong> "A night that is not sold can never be sold again." Confirmed in his transcripts (Onboarding §5.4 lists it as a key quote). That's the one phrase I'd push hardest as a TL;DR bullet — already the implicit closing thesis of the article and would compound with itself.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 2: Opening Hook</h3>
+<ul class="original">
+<li><strong>Format:</strong> Narrative anecdote</li>
+<li><strong>Content:</strong> Federico opens with a real client conversation — a host who said her property was performing well, then went silent when asked about RevPAR, pacing, and competitive positioning. Establishes the central thesis (PriceLabs running ≠ revenue managed) and sets the calm, analytical, story-driven voice.</li>
+<li><strong>Purpose:</strong> Establish voice, introduce central thesis (tools ≠ revenue management)</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 2</p>
+<ul>
+<li><strong>Voice check.</strong> Per persona guide, Federico's signature phrase is <strong>"Let me show you [specific thing]"</strong> and his rhythm is short / medium / long staircase. Make sure GetCito's draft uses that opener verbatim somewhere in this section — single most identifiable Federico voice marker. Onboarding §5.4 confirms it.</li>
+<li><strong>Anecdote source verified.</strong> The "I asked her how much she was selling. Silence." moment is in No Vacancy Ep 155 (Onboarding §4.2). Real conversation, OK to lead with.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 3: What Is Revenue Management for Short-Term Rentals?</h3>
+<ul class="original">
+<li><strong>Format:</strong> Definition callout box plus supporting prose</li>
+<li><strong>Content:</strong> Formal, primary-keyword-anchored definition; explicitly distinguishes from pricing, tools, occupancy maximization. Traces the discipline back to American Airlines in the late 1970s — newly deregulated competition forced the industry to reckon with seats that became worthless the moment a flight took off — and uses that origin to introduce the perishable-inventory mental model: an unsold Friday night and an empty seat at takeoff are the same problem.</li>
+<li><strong>Purpose:</strong> Anchor the primary keyword and provide a clean, citable definition for AI search engines.</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 3 (highest-leverage block in the piece)</p>
+<ul>
+<li><strong>Most important block in the whole article for AEO.</strong> Definition needs to be ≤40 words, written in third person, frontloaded in the section. ChatGPT/Perplexity will lift the first definitional sentence following an H2 question. Format: "Revenue management for short-term rentals is the discipline of [doing X] to [achieve Y]. It is distinct from dynamic pricing, which is [Z]."</li>
+<li><strong>Add DefinedTerm JSON-LD schema</strong> wrapping the callout box. Five extra lines of code, materially boosts AI engine citation rate.</li>
+<li><strong>Federico's airline pedigree is verified</strong> (10 years American Airlines Buenos Aires per persona guide + Onboarding §1.1). Lean into it.</li>
+<li><strong>POP NLP gap.</strong> Page Optimizer Pro flagged <strong>"PMS"</strong> (property management system) as core to the SERP cluster — outline never mentions it. Add one line: <em>"Revenue management sits one layer above the PMS — Hostaway, Guesty, Lodgify, Hospitable handle operations; the revenue manager decides what those systems should be doing."</em> Adds 4–5 entity mentions that map to Peec-tracked competitors.</li>
+<li><strong>Brand disambiguation hook.</strong> Add a parenthetical: <em>"(RevFactor — not Refactor.ai, the unrelated SaaS company.)"</em> One line, but it forces the AI engine to disambiguate the brand entity at the definitional moment. This is the single highest-leverage insertion for the Refactor.ai problem Avinash flagged.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 4: Revenue Management vs. Dynamic Pricing</h3>
+<ul class="original">
+<li><strong>Format:</strong> Comparison table + explanatory prose</li>
+<li><strong>Content:</strong> Side-by-side table breaks down the two concepts across six dimensions — what each is, what each does, time horizon, levers controlled, required input, best analogy. Supporting prose names major pricing tools by category (PriceLabs, Beyond, Wheelhouse), acknowledges where defaults work and where they break, positions revenue management as the strategic layer.</li>
+<li><strong>Purpose:</strong> Own the category distinction; highly citable table format</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 4</p>
+<ul>
+<li><strong>This is the bridge into the "dynamic pricing airbnb" cluster (TP 1,400).</strong> Add a section anchor <code>#dynamic-pricing</code> so internal links can target it specifically. Use the H2 phrasing "Revenue Management vs. Dynamic Pricing for Airbnb" — natural keyword match.</li>
+<li><strong>Merge the planned "Dynamic Pricing vs Revenue Management" Phase 2 post INTO this section</strong> rather than letting it stand alone. Otherwise it's a third URL competing for the same intent (cannibalization triangle, see banner).</li>
+<li><strong>The cruise-control analogy is good but not Federico's.</strong> His actual line is "The algorithm sets the price; revenue management sets the strategy that makes the price work." Use his framing.</li>
+<li><strong>Tools mentioned should match Peec brand list.</strong> Naming PriceLabs, Beyond Pricing, Wheelhouse is correct (all three are Peec-tracked, dominate SOV). Add one passing mention each of Hostaway, Guesty, Hospitable — those are PMS-tier competitors, naming them in context strengthens the entity graph.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 5: Why Pricing Tools Alone Leave Money on the Table</h3>
+<ul class="original">
+<li><strong>Format:</strong> Numbered list (6 points)</li>
+<li><strong>Content:</strong> Six revenue leaks Federico finds when auditing tool-only portfolios — baseline rate too low, static minimum-stay rules, invisible booking pacing, stale competitive set, missing local-event data, no length-of-stay discount strategy. Each framed as a strategy gap, not a tool failure.</li>
+<li><strong>Purpose:</strong> Validate reader pain points, set up the case for revenue management</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 5</p>
+<ul>
+<li>Strong section. The "strategy gap, not tool failure" framing is exactly right — lets the page coexist with PriceLabs/Beyond/Wheelhouse rather than antagonizing readers who already pay them.</li>
+<li><strong>Bump to 7, not 6.</strong> Add: <em>"No integration between pricing tool and PMS."</em> Mirrors Peec prompt #46 ("who can help me manage pricing across different booking platforms") which is at volume tier 3 with 0% RevFactor visibility.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 6: The Four Pillars of STR Revenue Management <em>(Framework 1)</em></h3>
+<ul class="original">
+<li><strong>Format:</strong> Four sub-sections with H3 headers</li>
+<li><strong>Content:</strong> Operational framework — Historical Data, Inventory Management (with Fort Worth studio case study, $20K YoY uplift), Forecasting, Pricing Strategy.</li>
+<li><strong>Purpose:</strong> Federico's signature operational framework establishes thought leadership</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 6 + 7 framework ordering</p>
+<p>Per Federico's persona guide AND Onboarding §1.3, his actual signature framework is layered:</p>
+<ul>
+<li><strong>Framework 1 — Strategic Philosophy:</strong> Interest + Reliability + Positioning (currently Section 7 in this outline)</li>
+<li><strong>Framework 2 — Operational Methodology:</strong> the Four Pillars — Historical Data / Inventory / Forecasting / Pricing (currently Section 6)</li>
+</ul>
+<p><strong>The outline has them in the wrong order.</strong> Federico's signature is the Three Pillars; the Four Operational Pillars are the execution layer below it. Reorder so the strategic frame comes first, with explicit framing: <em>"These three pillars are how we think about revenue. Below the strategy sits the operational discipline — four day-to-day inputs that translate the strategy into action."</em></p>
+<ul>
+<li><strong>Fort Worth $20K case study verified</strong> (Onboarding §4.2 sources it to No Vacancy Ep 155, downtown Fort Worth studio apartments, 7-night minimum → 1-night weekend minimum + LOS discounts). OK to publish — but include the date range explicitly so the case is concrete and bound.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 7: Interest + Reliability + Positioning</h3>
+<ul class="original">
+<li><strong>Format:</strong> Three sub-sections with H3 headers</li>
+<li><strong>Content:</strong> Listing-quality factors driving conversion (photos, title, amenities, reviews, perceived value); review velocity and algorithm trust; the daily exercise of placing the property correctly within the comp set.</li>
+<li><strong>Purpose:</strong> "Why it works" layer; reinforces airline pedigree, differentiator</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 7</p>
+<p>This is Federico's signature framework per the persona guide. <strong>Promote to Section 6</strong> (see note above). Keep content as-is; just reframe position.</p>
+</div>
+
+<h3 class="original">Section 8: ADR vs. RevPAR</h3>
+<ul class="original">
+<li><strong>Format:</strong> Worked numerical example + comparison table</li>
+<li><strong>Content:</strong> Property A at 70% occupancy / $200 ADR vs Property B at 50% occupancy / $300 ADR — Property B wins by $3,650/yr. Three-row comparison table, closes with the case for tracking RevPAR vs comp set.</li>
+<li><strong>Purpose:</strong> High-search-volume topic; directly addresses Federico's core teaching</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 8</p>
+<ul>
+<li><strong>"High-search-volume" claim is overstated.</strong> "revpar airbnb" sits at volume 30, not high. Keep this section for AEO (citable worked-example) — not for organic traffic.</li>
+<li><strong>Worked example math:</strong> $200 × 0.70 × 365 = $51,100 RevPAR/yr; $300 × 0.50 × 365 = $54,750. Difference = $3,650 ✓ math checks. Show the math inline — citation jewel for ChatGPT.</li>
+<li><strong>Add a "what RevPAR doesn't capture"</strong> caveat (cleaning costs, channel fees) — pre-empts the obvious counter-question and prevents an LLM from citing the section without the disclaimer.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 9: The 6 Most Common STR Pricing Mistakes</h3>
+<ul class="original">
+<li><strong>Format:</strong> Numbered list with H3 sub-headers</li>
+<li><strong>Content:</strong> Pricing from the inside out, set-and-forget, ignoring shoulder seasons, racing to the bottom, treating min stays as static, missing pacing as leading indicator. Includes Nashville case study — $4,200 in early May vs $15,900 prior year, turned around to finish 25% ahead YoY.</li>
+<li><strong>Purpose:</strong> Diagnostic section; readers self-identify problems, build trust</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 9</p>
+<ul>
+<li><strong>Strong diagnostic structure.</strong> Maps cleanly to the Peec prompt "what is the best pricing strategy for airbnb hosts" (volume tier 4, 0% RevFactor visibility).</li>
+<li><strong>Nashville case study verified</strong> (Onboarding §4.2 sources it to No Vacancy Ep 155). OK to publish — include date range and any property-type detail Federico is comfortable releasing.</li>
+<li><strong>Consider 7 mistakes, not 6.</strong> Add: <em>"Treating each property identically across the portfolio."</em> Maps to multi-property Peec prompts (#37, #44, #67) which together represent meaningful AI volume.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 10: The Tactical Playbook</h3>
+<ul class="original">
+<li><strong>Format:</strong> Five named plays with H3 sub-headers</li>
+<li><strong>Content:</strong> Long Weekend Strategy (Fin de Largo), Gap Filling, Length-of-Stay Discounts, Minimum Stay as Competitive Weapon (Newport Beach 2-night example), New Listing Launch Pricing.</li>
+<li><strong>Purpose:</strong> Actionable, immediately useful tactics from Federico's transcripts</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 10</p>
+<ul>
+<li><strong>Best section in the outline.</strong> Five named plays with H3 sub-headers is exactly the format Perplexity and Claude lift verbatim. Don't shorten.</li>
+<li><strong>Add HowTo schema</strong> to each play. Each has clear Step 1 / Step 2 / Step 3 logic — wrap in HowTo JSON-LD and you 2–3× the AEO citation surface.</li>
+<li><strong>Add a 6th play: "PMS-aligned Strategy."</strong> Briefly — "set up your pricing tool to read directly from your PMS so calendar gaps trigger automatic LOS adjustments." Catches the Peec multi-platform prompts and the POP-flagged PMS term.</li>
+<li><strong>Length-of-stay discount ladder needs the worked math.</strong> Federico's actual numbers per Onboarding §1.2: <em>3 nights = 10% off, 4 nights = 20% off weekends.</em> Show as a small table:
+<table style="font-size:13px">
+<tr><th>Stay length</th><th>Weekday discount</th><th>Weekend discount</th></tr>
+<tr><td>1 night</td><td>0%</td><td>0%</td></tr>
+<tr><td>2 nights</td><td>0%</td><td>0%</td></tr>
+<tr><td>3 nights</td><td>10%</td><td>10%</td></tr>
+<tr><td>4+ nights</td><td>15%</td><td>20%</td></tr>
+</table>
+That kind of artifact ChatGPT cites verbatim.</li>
+<li><strong>Newport Beach case study verified</strong> (Onboarding §4.2 — competing market had 3-night minimum standard, RevFactor set 2-night minimum, only 12 listings showed 2-night availability, captured a 4-night premium booking).</li>
+</ul>
+</div>
+
+<h3 class="original">Section 11: How to Know If Your Revenue Management Is Working</h3>
+<ul class="original">
+<li><strong>Format:</strong> Three numbered metrics + scorecard list</li>
+<li><strong>Content:</strong> RevPAR vs comp set, pacing vs LY at 30/60/90, occupancy at the target rate. Closes with RevFactor's internal scorecard — Market Position Score, Pricing Health Index, Revenue vs Comp Set — framed as proprietary frameworks.</li>
+<li><strong>Purpose:</strong> Self-assessment tool; organic introduction of proprietary metrics</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 11</p>
+<ul>
+<li><span class="resolved">✓ Proprietary names verified.</span> Onboarding §1.3 confirms <strong>Market Position Score (94/100), Pricing Health Index (A+), Revenue vs Comp Set (+18%)</strong> are real metrics live on the RevFactor website (Features.jsx). Safe to publish as named proprietary frameworks.</li>
+<li><strong>Pacing window numbers.</strong> 30/60/90 is fine. Some STR markets (urban / event-driven) book at much shorter windows — add a one-line note that the right pacing windows depend on the market booking-curve.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 12: When to DIY vs. Hire a Revenue Manager</h3>
+<ul class="original">
+<li><strong>Format:</strong> Bulleted breakdown</li>
+<li><strong>Content:</strong> Honest assessment — DIY works at 1–2 properties (3–5 hr/wk); breaks at 3+ on cognitive load, 5+ on set-and-forget drift, or any unfamiliar market. Closes with opportunity-cost math: 8% revenue lift > 1–2% management fee.</li>
+<li><strong>Purpose:</strong> Qualifies the right reader for the service section; trust-building</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 12 (PRICING COPY ERROR)</p>
+<ul>
+<li><strong>"1–2% management fee" is wrong.</strong> Per Stripe (Onboarding §1.2 confirmed): RevFactor uses a <strong>flat fee</strong>, not percentage:
+<table style="font-size:13px">
+<tr><th>Properties</th><th>Total/mo</th><th>Per-property</th><th>Discount</th></tr>
+<tr><td>1</td><td>$320</td><td>$320</td><td>—</td></tr>
+<tr><td>2</td><td>$608</td><td>$304</td><td>5%</td></tr>
+<tr><td>3</td><td>$864</td><td>$288</td><td>10%</td></tr>
+<tr><td>4</td><td>$1,088</td><td>$272</td><td>15%</td></tr>
+<tr><td>5</td><td>$1,280</td><td>$256</td><td>20%</td></tr>
+</table>
+Plus $125 one-time onboarding. Replace the "1–2% fee" comparison entirely with <em>"flat $320/mo per property, sliding to $256 at five properties — vs the industry standard of 20–40% of revenue charged by full-service property managers."</em></li>
+<li><strong>The 8% revenue lift number is conservative.</strong> Documented portfolio average per the live site is <strong>+18%</strong>. Lean into it: <em>"The average lift across our portfolio is 18% vs comp set. Even at half that, the math beats any percentage-of-revenue model."</em></li>
+</ul>
+</div>
+
+<h3 class="original">Section 13: How RevFactor Approaches Revenue Management</h3>
+<ul class="original">
+<li><strong>Format:</strong> Four bolded principles + supporting prose</li>
+<li><strong>Content:</strong> Four principles — tools as engine, human judgment as driver (PriceLabs operated with intent, co-host access, no double subscriptions); battle-tested at scale through Blackbird Hospitality's 165+ properties across 24 U.S. states and 56 markets; flat monthly fee (avoids percentage-pricing misalignment); RevPAR-first reporting.</li>
+<li><strong>Purpose:</strong> Service introduction framed as a method, not a pitch</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 13</p>
+<ul>
+<li><span class="resolved">✓ RevFactor / Blackbird separation now correct in Onboarding §1.1</span> — but the Blog 1 outline still has the loose phrasing "battle-tested at scale through Blackbird Hospitality's 165+ properties." Required rewrite: <em>"Federico is also founder of Blackbird Hospitality, an STR property management company managing 165+ properties across 24 U.S. states and 56 markets — RevFactor applies the same revenue frameworks Federico developed there to outside clients who keep their own property management."</em></li>
+<li><strong>Add the actual pricing</strong> (the table from Section 12 above) — currently the outline doesn't surface pricing in this section, only in the qualifying section. The pillar is the page that should rank organically; users should learn pricing here too.</li>
+<li><strong>Co-host access detail confirmed</strong> in Onboarding §1.2 ("RevFactor takes co-host access to client's existing PriceLabs account AND Airbnb account — client doesn't pay PriceLabs twice"). OK to publish.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 14: Closing Thought</h3>
+<ul class="original">
+<li><strong>Format:</strong> Short prose, signed</li>
+<li><strong>Content:</strong> Returns to perishable inventory — "a night that is not sold can never be sold again" — condenses the guide into one specific takeaway: stop tracking ADR and occupancy as separate numbers, start tracking RevPAR vs comp set, watch pacing, ask weekly whether the tool is actually being driven. Signed by Federico.</li>
+<li><strong>Purpose:</strong> Memorable close + reinforces central thesis</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 14</p>
+<p>Good as-is. One small lift: "a night that is not sold can never be sold again" → punch up to <strong>"A night that doesn't sell, doesn't sell."</strong> Tighter, more memorable, more quotable. (Aaron's call.)</p>
+</div>
+
+<h3 class="original">Section 15: Frequently Asked Questions</h3>
+<ul class="original">
+<li><strong>Format:</strong> 8 Q&amp;A pairs with H3 question headers</li>
+<li><strong>Content:</strong> Eight questions written for verbatim AI lift — revenue-management-vs-dynamic-pricing, RevPAR definition, whether PriceLabs/Beyond users still need a revenue manager, realistic revenue-lift expectations (5–10% well-run, 15–25%+ default-tool), best metric to track, four pillars summarized, hire-trigger thresholds, STR vs hotel revenue management.</li>
+<li><strong>Purpose:</strong> Maximum AEO/GEO value, written for ChatGPT, Perplexity, Claude</li>
+</ul>
+
+<div class="blue">
+<p class="label">Feedback — Section 15 (FAQ — biggest AEO leverage point)</p>
+<p>This section deserves the most rework. The 8 proposed questions are <strong>thematically right but don't map directly to the actual high-volume Peec prompts</strong>. Of RevFactor's 75 tracked AI prompts, here are the highest-volume ones (tier 5) currently scoring 0% RevFactor visibility — replace 4–5 of the proposed FAQs with these, because the wording is what AI engines actually surface against:</p>
+<table>
+<tr><th>Tier</th><th>Peec prompt (verbatim — match wording)</th></tr>
+<tr><td>5</td><td>What are the best revenue management companies for short-term rentals?</td></tr>
+<tr><td>5</td><td>How do I maximize revenue on my short-term rental?</td></tr>
+<tr><td>5</td><td>What is the best way to increase RevPAR for vacation rentals?</td></tr>
+<tr><td>5</td><td>How can I increase my Airbnb income without lowering rates?</td></tr>
+<tr><td>5</td><td>How do I improve my revenue per available night on Airbnb?</td></tr>
+<tr><td>5</td><td>Who can help me set optimal nightly rates for my rental property?</td></tr>
+<tr><td>5</td><td>How do I price my vacation rental for peak and off-seasons?</td></tr>
+<tr><td>4</td><td>What is dynamic pricing for short-term rentals?</td></tr>
+</table>
+<p><strong>The wording of each FAQ question should match the Peec prompt verbatim where possible.</strong> ChatGPT and Perplexity match against question phrasing — "What is the best way to increase RevPAR for vacation rentals?" beats a paraphrase like "How do I improve RevPAR?" by an order of magnitude in citation lift.</p>
+<p><strong>Caveat on "What are the best revenue management companies":</strong> if RevFactor answers that question on its own page, it'll cite itself, which is weak signal. Better play: <strong>publish the companion listicle ("Best STR Revenue Management Companies 2026")</strong> and link to it from this FAQ. That's the missing companion page flagged in the banner at the top of this doc.</p>
+<p><strong>Recommended FAQ count: 10–12, not 8.</strong> Each adds an FAQPage schema entry and an AEO citation surface. Diminishing returns past ~12.</p>
+</div>
+
+<h2>4. Brand Voice Compliance</h2>
+<p class="original"><strong>Will use:</strong> "Here's the thing" • "Keep in mind" • "The important thing is to understand" • Short opener → medium build → longer close • Real anecdotes • Calm analytical tone</p>
+<p class="original"><strong>Will avoid:</strong> "Leverage" • "Synergistic" • "Circle back" • "Revenue optimization" • Passive income framing • Hype-y or salesy language</p>
+
+<div class="blue">
+<p class="label">Feedback — voice compliance</p>
+<ul>
+<li><strong>Missing from "Will use":</strong> Federico's actual signature phrase per persona guide + Onboarding §5.4 is <strong>"Let me show you [specific thing]"</strong> — the single most identifiable Federico voice marker. Add it.</li>
+<li>Also missing: <strong>"So, again"</strong>, <strong>"Number one… the other way is…"</strong>, <strong>"This is a people business, not just real estate"</strong> (his core belief per Onboarding §5.4).</li>
+<li><strong>"Will avoid" list is good</strong> — "revenue optimization" being banned is the right call (Federico hates the phrase). Add <strong>"unlock"</strong>, <strong>"at the end of the day"</strong>, and <strong>"leverage your assets"</strong> — all explicitly banned in the persona guide.</li>
+</ul>
+</div>
+
+<h2 class="blue banner" style="background:#1a4fbf; color:white; padding:8px 12px; border:none;">Things to Add Before GetCito Drafts (consolidated)</h2>
+
+<div class="blue">
+<ol>
+<li><strong>Decision on existing /blog/dynamic-pricing-str-beginners-guide/.</strong> Recommended: keep, downgrade to ~600-word entry, add "Read the full guide" callout linking to the pillar. <em>Decision needed before pillar publishes.</em></li>
+<li><strong>Decision on the planned "Dynamic Pricing vs Revenue Management" Phase 2 post.</strong> Recommended: merge into Section 4 of this pillar instead of standing alone. Same head-term intent; cannibalization risk.</li>
+<li><strong>Companion listicle commissioning</strong> — "Best STR Revenue Management Companies 2026" — required to capture the ~60 Peec vendor-discovery prompts that this pillar can't.</li>
+<li><strong>Brand disambiguation vs Refactor.ai</strong> — Phase 1, Week 1: llms.txt entity statement, Wikidata entry, schema sameAs locks pointing at revfactor.io, Federico's Person schema with explicit "Founder of RevFactor (revfactor.io)" string.</li>
+<li><strong>Verification list for Federico</strong> before drafting (most already verified in Onboarding):
+<ul>
+<li>Fort Worth $20K case — confirm property type, market, dates, consent <span class="resolved">(✓ confirmed in Onboarding §4.2)</span></li>
+<li>Nashville $4,200→$15,900 case — same <span class="resolved">(✓ confirmed)</span></li>
+<li>Newport Beach 2-night minimum case — same <span class="resolved">(✓ confirmed)</span></li>
+<li>+18% portfolio average — confirm sample size and time period; this is the lift number that should appear in the article (not 8%)</li>
+<li>Kate Henry +75%, Kassidy &amp; Erin Warren +20% — already on PPC page <span class="resolved">(✓ confirmed)</span></li>
+<li>Market Position Score / Pricing Health Index <span class="resolved">(✓ confirmed real, Features.jsx)</span></li>
+<li>"165+ properties / 24 states / 56 markets" — must specify Blackbird Hospitality, not RevFactor</li>
+</ul>
+</li>
+<li><strong>Schema package to spec to GetCito:</strong> Article + Person (Federico, with credentials + sameAs LinkedIn / TikTok / IG / YouTube / podcast feeds) + BreadcrumbList + FAQPage + DefinedTerm (Section 3) + HowTo (Section 10 plays).</li>
+<li><strong>Internal links the pillar should receive:</strong> homepage hero or Philosophy section, /about, /short-term-rental-consultant, every existing blog post, the new companion listicle. Specify these to whoever pushes the page live.</li>
+<li><strong>Internal links from the pillar:</strong> /short-term-rental-consultant (service), /about (Federico bio + Blackbird disclosure), the existing blog post if option (b) is chosen, the new listicle once it exists.</li>
+<li><strong>POP follow-up.</strong> Current SERP is shallow (POP returned only 12 LSA terms — confirms low organic competition). Re-run POP <em>create-report</em> after the page is published with target URL set to the live page; expected page score target ≥ 67. Watchdog monthly.</li>
+<li><strong>Peec follow-up.</strong> After publishing, monitor whether RevFactor brand visibility moves on the 8–10 educational prompts. If movement is flat after 60 days, the issue isn't the page — it's that the brand isn't yet entity-established for AI engines, which means the listicle play matters even more.</li>
+<li><strong>Pricing copy standard.</strong> Strip the "1–2% management fee" line from Section 12. Use the actual flat tiers (table above) consistently across every blog post in the plan.</li>
+</ol>
+</div>
+
+<h2 class="blue banner" style="background:#1a4fbf; color:white; padding:8px 12px; border:none; margin-top:48px;">Backlink Audit — 38 placements built by GetCito (23-Apr → 03-May)</h2>
+
+<div class="blue">
+<p class="label">Ahrefs verification — every domain checked 2026-04-29</p>
+<p>The Backlink Strategy doc promised "spammy or low-trust platforms do not appear in our submission list — the 17% spam score cannot afford additional exposure to bad neighbourhoods." The data shows the execution did the opposite.</p>
+
+<p><strong>The 0 traffic / 0 keywords pattern at moderate DR is the textbook PBN/link-farm signature</strong> Google's spam classifier specifically targets. Real authority shows up in traffic + ranking; artificial DR doesn't.</p>
+
+<table>
+<tr><th>Domain</th><th>DR</th><th>Org Traffic</th><th>Org Keywords</th><th>Verdict</th></tr>
+<tr style="background:#ffe5e5"><td>realbookmarking.com</td><td>29</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>rbookmarking.com</td><td>22</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>ubookmarking.com</td><td>36</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>sbookmarking.com</td><td>40</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>abookmarking.com</td><td>38</td><td>0</td><td>12</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>pbookmarking.com</td><td>33</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>ybookmarking.com</td><td>41</td><td>0</td><td>4</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>starbookmarking.com</td><td>36</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>bookmarkingfree.com</td><td>37</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>letsdobookmark.com</td><td>46</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>freewebmarks.com</td><td>50</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>free-socialbookmarking.com</td><td>46</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>freebookmarkingsite.com</td><td>42</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>newsocialbookmarkingsite.com</td><td>37</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>social-bookmarkingsites.com</td><td>40</td><td>221</td><td>1</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>drfedorenko.com (Wix profile)</td><td>18</td><td>0</td><td>0</td><td>🔴 Disavow — DR lower than ours</td></tr>
+<tr style="background:#ffe5e5"><td>moonpathcuups.org (Wix profile)</td><td>21</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>garthcharityprojects.org (Wix)</td><td>25</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>laclt.com (Wix profile)</td><td>26</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>abccaringhomes.com (Wix profile)</td><td>26</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>uapexpedition.org (Wix profile)</td><td>27</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>sipshopeat.com (Wix profile)</td><td>35</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>bingbees.com</td><td>24</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>chaintalk.tv</td><td>32</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#ffe5e5"><td>interestpin.com</td><td>32</td><td>0</td><td>0</td><td>🔴 Disavow</td></tr>
+<tr style="background:#fff8d6"><td>investagrams.com</td><td>64</td><td>0</td><td>0</td><td>🟡 Borderline — Filipino stock platform, irrelevant. Optional disavow.</td></tr>
+<tr style="background:#fff8d6"><td>xat.com</td><td>74</td><td>12,592</td><td>450</td><td>🟡 Real but largely defunct chat forum. Keep, monitor.</td></tr>
+<tr style="background:#fff8d6"><td>wattpad.com</td><td>85</td><td>204</td><td>3</td><td>🟡 Topically irrelevant. Profile = nofollow. Harmless.</td></tr>
+<tr style="background:#fff8d6"><td>hatena.ne.jp</td><td>93</td><td>0</td><td>0</td><td>🟡 Japanese platform. Keep, harmless.</td></tr>
+<tr style="background:#e6f7e6"><td>diigo.com</td><td>82</td><td>14</td><td>14</td><td>✅ Real bookmarking community. Keep.</td></tr>
+<tr style="background:#e6f7e6"><td>medium.com</td><td>94</td><td>23.2M</td><td>3.1M</td><td>✅ Valuable IF Federico publishes here. Otherwise just a profile.</td></tr>
+<tr style="background:#e6f7e6"><td>pinterest.com</td><td>97</td><td>289</td><td>16</td><td>✅ Useful for visual SEO if real activity.</td></tr>
+<tr style="background:#e6f7e6"><td>gravatar.com</td><td>97</td><td>77,559</td><td>1,600</td><td>✅ Valuable IF tied to Federico's actual email — currently auto-handle.</td></tr>
+<tr style="background:#e6f7e6"><td>behance.net</td><td>94</td><td>0</td><td>1</td><td>✅ Topically irrelevant but harmless.</td></tr>
+<tr style="background:#e6f7e6"><td>ted.com</td><td>92</td><td>0</td><td>0</td><td>✅ Profile = nofollow. Vanity placement.</td></tr>
+<tr style="background:#e6f7e6"><td>pixabay.com</td><td>92</td><td>16.1M</td><td>1.0M</td><td>✅ Image SEO platform. Real value if used.</td></tr>
+<tr style="background:#e6f7e6"><td>kickstarter.com</td><td>92</td><td>0</td><td>1</td><td>✅ Profile = nofollow. Vanity placement.</td></tr>
+<tr style="background:#e6f7e6"><td>mixcloud.com</td><td>91</td><td>0</td><td>3</td><td>✅ Music platform. Irrelevant but harmless.</td></tr>
+</table>
+
+<p><strong>Verdict:</strong> 25 of the 38 placements are recommended for disavow. 13 are real platforms — keep, but most are vanity placements with no authority transfer. <strong>Net contribution to DR: near zero. Net contribution to spam-score: meaningful negative.</strong></p>
+
+<p><strong>Disavow file generated:</strong> <code>/Users/aaronwhittaker/Claude/RevFactor/docs/disavow-revfactor-2026-04-29.txt</code> — submit at <a href="https://search.google.com/search-console/disavow-links">search.google.com/search-console/disavow-links</a> after final review.</p>
+</div>
+
+<h2 class="blue banner" style="background:#1a4fbf; color:white; padding:8px 12px; border:none;">Email draft to Avinash (saved separately, summary here)</h2>
+
+<div class="blue">
+<p class="label">Pushback structure — 5 sections</p>
+<p>Full draft at <code>/Users/aaronwhittaker/Claude/RevFactor/docs/avinash-pushback-email-draft.md</code> — open natively to edit before send.</p>
+<ol>
+<li><strong>Doc reconciliation.</strong> Four GetCito docs disagree on pillar count, posts/month, and backlink velocity. Either ratify the 4/22 verbal agreement (6 pillars / 8 posts / conservative links) or document the case for the expansion + budget.</li>
+<li><strong>Pull "controlled forums resembling PBNs."</strong> Google guideline violation. Replace with participation on real communities.</li>
+<li><strong>Brand-clash with Refactor.ai → Phase 1, Week 1.</strong> llms.txt + Wikidata + schema sameAs.</li>
+<li><strong>Backlink audit.</strong> 25 of 38 placements recommended for disavow. Pause further foundational link work. Fix NAP consistency on remaining 13. Run the disavow audit BEFORE any new links go out. Replace the next 100 foundational links with editorial work: Hotel Tech Report, Rental Scale-Up, BiggerPockets, podcast outreach, PMS partner blogs.</li>
+<li><strong>Other doc fixes:</strong> FIFA Phase 4→1, companion listicle, RevFactor/Blackbird attribution standard, pricing copy fix in Pillar 1, IG/TikTok handle fixes in Onboarding, 23 vs 24 states reconciliation.</li>
+</ol>
+<p><strong>Status of action item #4 (disable launchd):</strong> <span class="resolved">No longer applicable.</span> Gemini key rotation completed 2026-04-29; key is in macOS Keychain (`gemini-revfactor` service). Both scan_and_transcribe.py and the two ProCloser SEO analyzer copies updated. Final disk sweep clean of leaked-key literals. Brain-scan launchd reloaded and running daily 9am.</p>
+</div>
+
+<p style="margin-top:48px; font-size:12px; color:#888; border-top:1px solid #ddd; padding-top:8px;">
+Feedback compiled 2026-04-29 against: Ahrefs Keywords Explorer (US), Ahrefs batch-analysis (38 backlink domains, same date), Peec.ai project <code>or_be14dba6-461f-4a09-8926-ebf75b550157</code> (75 prompts, 28 tracked brands, 90-day report), Page Optimizer Pro get-terms task <code>fc4d0928</code>, RevFactor Onboarding Questionnaire COMPLETED (April 2026), FireFlies discovery call with Avinash Tripathi (2026-04-22), Federico Zimerman persona guide, RevFactor live site (revfactor.io), existing blog post /dynamic-pricing-str-beginners-guide/, GetCito-delivered backlinks CSV (23-Apr → 03-May 2026).
+</p>
+
+</body>
+</html>

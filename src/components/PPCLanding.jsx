@@ -15,7 +15,7 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'STR REVENUE STRATEGY',
     headlinePart1: 'Most STRs lose 18% in revenue.',
     headlinePart2Italic: 'We get it back.',
-    subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account — monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +18% lift. Flat $320/mo.',
+    subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account. Monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +18% lift. Flat $320/mo.',
     ctaText: 'Book Free Strategy Call',
   },
   // Tool Intent campaign — searcher is shopping a pricing tool, reframe the category
@@ -23,7 +23,7 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'BEYOND PRICING TOOLS',
     headlinePart1: 'Pricing tools set numbers.',
     headlinePart2Italic: 'We set strategy.',
-    subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work — and pull back the 18% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist + 24/7 dashboard messaging. Flat $320/mo.',
+    subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work and pull back the 18% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist plus 24/7 dashboard messaging. Flat $320/mo.',
     ctaText: 'Book Free Strategy Call',
   },
   // Conquest campaign — searcher is on PriceLabs / Wheelhouse / Beyond
@@ -31,7 +31,7 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'STRATEGY YOUR TOOL CAN’T SHIP',
     headlinePart1: 'Already on PriceLabs?',
     headlinePart2Italic: 'You’re probably 18% short.',
-    subhead: 'Algorithms set the numbers. They can’t set the strategy that makes the numbers actually work — comp positioning, length-of-stay rules, channel mix, listing audit. A seasoned pricing strategist does. Documented +18% lift across our portfolio. Plus 24/7 dashboard messaging.',
+    subhead: 'Algorithms set the numbers. They can’t set the strategy that makes the numbers actually work. Comp positioning, length-of-stay rules, channel mix, listing audit. A seasoned pricing strategist does. Documented +18% lift across our portfolio. Plus 24/7 dashboard messaging.',
     ctaText: 'Book Free Strategy Call',
   },
 };
@@ -124,7 +124,7 @@ const TESTIMONIALS = [
     photo: "/team/zoey-berghoff.jpg",
     role: "STR Host · Property launch",
     metric: "$30K+",
-    quote: "$30,000+ single booking on launch property — RevFactor priced the listing into a high-demand window before reviews stacked up.",
+    quote: "$30,000+ single booking on launch property. RevFactor priced the listing into a high-demand window before reviews stacked up.",
   },
   {
     name: "Kassidy",
@@ -153,7 +153,7 @@ const PROCESS_STEPS = [
   {
     n: "02",
     title: "Onboarding & Audit",
-    body: "We connect to your PMS, audit your listings, and benchmark your performance against the comp set. You see the revenue gap on day one — and get RevFactor dashboard access with 24/7 messaging into your strategist.",
+    body: "We connect to your PMS, audit your listings, and benchmark your performance against the comp set. You see the revenue gap on day one. Plus RevFactor dashboard access with 24/7 messaging into your strategist.",
   },
   {
     n: "03",
@@ -176,7 +176,7 @@ export default function PPCLanding({
   // Available: clifftop (V3 dusk), aframe (V4 golden hour), snowcap (V2 peaks),
   // meadow (V1 hazy mountains).
   heroBase = "clifftop",
-  heroAlt = "Modern luxury short-term rental — RevFactor revenue management",
+  heroAlt = "Modern luxury short-term rental property managed by RevFactor",
   // "stacked" (default, image bg + CTA above the comparison/testimonials/calendar
   // sections) or "split" (calendar embedded RIGHT-of-hero, headline on the LEFT).
   // Split layout = ClickFunnels-style book-without-scrolling treatment for paid
@@ -303,17 +303,19 @@ export default function PPCLanding({
               </div>
             </div>
 
-            {/* RIGHT — iframe sits naked (no outer wrapper card). The
-                scheduler app already renders its own branded green header
-                + calendar card, so doubling up looks redundant. Subtle
-                drop shadow keeps it feeling "embedded" against the dark hero. */}
-            <iframe
-              src="https://schedule.revfactor.io/embed"
-              title="Schedule a strategy call with RevFactor"
-              className="w-full border-0 block rounded-[20px] shadow-[0_24px_80px_rgba(0,0,0,0.45)]"
-              style={{ height: `${calHeight}px`, minHeight: '720px', overflow: 'hidden' }}
-              allow="payment"
-            />
+            {/* RIGHT — iframe flush against a bone-colored backing column so
+                the scheduler app's own bone page background blends in (no
+                visible "box"). Slight rounded corners on the column anchor
+                it visually without the heavy card treatment. */}
+            <div className="bg-[#DDDAD3] rounded-[16px] overflow-hidden">
+              <iframe
+                src="https://schedule.revfactor.io/embed"
+                title="Schedule a strategy call with RevFactor"
+                className="w-full border-0 block"
+                style={{ height: `${calHeight}px`, minHeight: '720px', overflow: 'hidden' }}
+                allow="payment"
+              />
+            </div>
           </div>
         </section>
       ) : (
@@ -375,7 +377,7 @@ export default function PPCLanding({
               <ShieldCheck className="w-5 h-5 text-[#7A8B76] mt-[2px] flex-shrink-0" />
               <p className="text-[16px] leading-[1.55] text-[#C8C4BC]">
                 <span className="font-bold text-[#E8E6E1]">Our promise:</span>{' '}
-                You walk away with 3 specific revenue recommendations for your property — even if we never work together.
+                You walk away with 3 specific revenue recommendations for your property, even if we never work together.
               </p>
             </div>
             {/* Founder signature — Federico's actual photo + name above fold for trust */}
@@ -403,8 +405,8 @@ export default function PPCLanding({
       <section className="bg-[#13342D] py-12">
         <div className="max-w-5xl mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
-            { to: 18,  prefix: '+', suffix: '%',     label: 'Avg revenue lift vs. comp set' },
-            { to: 100, prefix: '',  suffix: '+',     label: 'Properties managed' },
+            { to: 18,  prefix: '+', suffix: '%',     label: 'Avg revenue lift' },
+            { to: 165, prefix: '',  suffix: '+',     label: 'Properties managed' },
             { to: 320, prefix: '$', suffix: '',      label: '/mo flat per property' },
             { to: 30,  prefix: '',  suffix: ' min',  label: 'Free strategy call' },
           ].map((s, i) => (
@@ -472,7 +474,7 @@ export default function PPCLanding({
                   </div>
                 </div>
                 <p
-                  className="text-[16px] leading-[1.55] text-[#3F261F] mb-5 italic flex-grow"
+                  className="text-[18px] md:text-[19px] leading-[1.5] text-[#3F261F] mb-5 italic flex-grow"
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
                 >
                   "{t.quote}"
@@ -654,8 +656,8 @@ export default function PPCLanding({
             <span style={{ fontStyle: 'italic' }}>strategy call</span>
           </h2>
           <p className="text-[16px] leading-[1.7] text-[#8F6E62] max-w-lg mx-auto mb-10">
-            We'll review your market, current pricing, and where the revenue opportunity is —
-            even if you don't end up working with us.
+            We'll review your market, current pricing, and where the revenue opportunity is.
+            Even if you don't end up working with us.
           </p>
           <button
             onClick={open}
@@ -677,7 +679,7 @@ export default function PPCLanding({
           >
             revfactor
           </span>
-          <span>© {new Date().getFullYear()} RevFactor — Revenue strategy for STR hosts.</span>
+          <span>© {new Date().getFullYear()} RevFactor. Revenue strategy for STR hosts.</span>
         </div>
       </footer>
 
