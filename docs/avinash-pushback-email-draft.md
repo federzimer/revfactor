@@ -6,7 +6,7 @@
 
 **Attachments:**
 - `blog-1-outline-feedback.docx` — annotated Pillar 1 outline with all detailed feedback inline
-- `disavow-revfactor-2026-04-29.txt` — proposed disavow file (25 domains)
+- `revfactor-content-brain.docx` — comprehensive content brain for your writers (Federico's voice, frameworks, verbatim quotes, verified case studies, brand rules)
 
 ---
 
@@ -48,11 +48,9 @@ Your own Backlink Strategy doc says: *"Spammy or low-trust platforms do not appe
 
 **Action requested:**
 
-1. **Pause further foundational link work** until we agree on the next 60 days of plan.
-2. I'm preparing a **disavow file covering 25 of the 38 domains** (15 bookmark farms + 7 Wix parasites + 3 dead platforms — attached). Confirm none of those were planned anchors before I submit it to GSC.
-3. **Fix NAP consistency** on the 13 profiles we keep — pick one handle (`revfactor` is shortest and cleanest), update everywhere.
-4. **Run the spam-score audit** the strategy doc promised in Phase 3 — but FIRST, before any new links go on the profile. Don't pour clean water into a dirty bucket.
-5. **Replace the next 100 foundational links** with editorial outreach: Hotel Tech Report listing, Rental Scale-Up feature pitch, Reddit/BiggerPockets community engagement, podcast outreach pipeline, PMS partner blog pitches. 8 high-effort editorial placements over 60 days will move DR more than 800 foundational submissions ever will.
+1. **Pause further foundational link work** until we agree on the next 60 days of plan. Google's spam classifier (SpamBrain) is already auto-filtering most of what was built — we don't need to disavow, but we shouldn't keep adding to that pile either.
+2. **Fix NAP consistency** on the 38 profiles already built — pick one handle (`revfactor` is shortest and cleanest), update everywhere. Five different handles across the placements (`revfactormarketing`, `revfactrevenue`, `Revfactor`, `revfactor`, `thoughtfullychocolate8a90b78b45`) makes the entity-fragmentation problem worse, not better.
+3. **Replace the next 100 foundational links** with editorial outreach: Hotel Tech Report listing, Rental Scale-Up feature pitch, Reddit/BiggerPockets community engagement, podcast outreach pipeline, PMS partner blog pitches. 8 high-effort editorial placements over 60 days will move DR more than 800 foundational submissions ever will.
 
 Scope split, to confirm: I own HARO/Featured/Qwoted/Connectively pitch motion (per the 4/22 call). GetCito covers everything else off-page.
 
