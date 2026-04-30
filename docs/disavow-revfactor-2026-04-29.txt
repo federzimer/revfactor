@@ -1,0 +1,56 @@
+# Disavow file for revfactor.io
+# Generated 2026-04-29 from Ahrefs batch analysis of 38 backlinks built by GetCito (23-Apr to 03-May 2026).
+# Submit at: https://search.google.com/search-console/disavow-links
+# Reasoning: see /Users/aaronwhittaker/Claude/RevFactor/docs/blog-1-outline-feedback.html
+#
+# Selection criteria:
+#   - DR 18-50 with org_traffic = 0 and org_keywords = 0 → classic PBN/link-farm signature
+#   - Wix-template "/profile/<random_handle>/profile" parasitic profile pages
+#   - Topically irrelevant niche/dead platforms with no Federico activity
+#
+# Format: one domain per line. Domain-level disavow (not URL-level) since these are
+# entire bad neighborhoods, not isolated pages.
+
+# === Bookmark farms (15 of 16 — Diigo retained as legitimate platform) ===
+domain:abookmarking.com
+domain:bookmarkingfree.com
+domain:freebookmarkingsite.com
+domain:free-socialbookmarking.com
+domain:freewebmarks.com
+domain:letsdobookmark.com
+domain:newsocialbookmarkingsite.com
+domain:pbookmarking.com
+domain:rbookmarking.com
+domain:realbookmarking.com
+domain:sbookmarking.com
+domain:social-bookmarkingsites.com
+domain:starbookmarking.com
+domain:ubookmarking.com
+domain:ybookmarking.com
+
+# === Wix-template parasite profiles (7) ===
+# All match the pattern <random-small-business>.com/profile/revfactormarketing<digits>/profile
+# 100% nofollow by Wix default, topically irrelevant, DR 18-35 with 0 traffic.
+domain:abccaringhomes.com
+domain:drfedorenko.com
+domain:garthcharityprojects.org
+domain:laclt.com
+domain:moonpathcuups.org
+domain:sipshopeat.com
+domain:uapexpedition.org
+
+# === Sketchy/dead platforms with 0 traffic ===
+domain:bingbees.com
+domain:chaintalk.tv
+domain:interestpin.com
+
+# === KEEP (do NOT disavow — but monitor) ===
+# Real platforms with real authority. Profile pages mostly nofollow but harmless.
+# - diigo.com (DR 82, real bookmarking community)
+# - medium.com (DR 94, valuable IF Federico actually publishes here)
+# - pinterest.com (DR 97, useful for visual SEO if real activity)
+# - gravatar.com (DR 97, valuable IF tied to Federico's actual email)
+# - ted.com, behance.net, mixcloud.com, wattpad.com, hatena.ne.jp, pixabay.com,
+#   kickstarter.com, xat.com, investagrams.com — irrelevant but harmless platform profiles
+
+# Total disavowed: 25 domains (out of 38 placements GetCito reported)
