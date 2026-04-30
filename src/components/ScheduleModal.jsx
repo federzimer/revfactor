@@ -1,16 +1,32 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { X } from 'lucide-react';
 
 /* ─── Schedule Modal ───
    Renders an iframe with the RevFactor scheduling embed.
-   Mounted/unmounted by parent via conditional rendering.
-   Handles its own exit animation before calling onClose. */
+   Auto-sizes panel height to the iframe's posted content height
+   (scheduler app sends iframeHeight via postMessage as the user moves
+   through date → time → form → confirmed). Falls back to 720px default
+   with a max-h:92dvh safety cap. */
 export default function ScheduleModal({ onClose }) {
   const isClosingRef = useRef(false);
   const overlayRef = useRef(null);
   const panelRef = useRef(null);
+  const [iframeContentHeight, setIframeContentHeight] = useState(720);
+
+  // Listen for postMessage from the scheduler iframe to auto-resize.
+  useEffect(() => {
+    const onMsg = (e) => {
+      if (!e.data || typeof e.data !== 'object') return;
+      const h = e.data.iframeHeight ?? e.data.height
+              ?? e.data.data?.height ?? e.data.data?.iframeHeight;
+      const n = Number(h);
+      if (Number.isFinite(n) && n > 400 && n < 1600) setIframeContentHeight(n);
+    };
+    window.addEventListener('message', onMsg);
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
 
   // Entrance animation + scroll lock on mount
   useEffect(() => {
@@ -36,7 +52,6 @@ export default function ScheduleModal({ onClose }) {
     };
   }, []);
 
-  // Close with exit animation, then unmount via parent
   const handleClose = useCallback(() => {
     if (isClosingRef.current) return;
     isClosingRef.current = true;
@@ -71,28 +86,33 @@ export default function ScheduleModal({ onClose }) {
     if (e.target === e.currentTarget) handleClose();
   };
 
+  // Visible iframe area = posted height minus the 48px we clip from top
+  // (embed page wraps card in py-12 = 48px). Min 480 so first paint isn't
+  // squished while iframe is loading.
+  const visibleIframeHeight = Math.max(480, iframeContentHeight - 48);
+
   return createPortal(
     <div
       ref={overlayRef}
       className="fixed inset-0 z-[9998]"
       style={{ opacity: 0 }}
     >
-      {/* Backdrop */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[4px]" />
 
-      {/* Centering wrapper */}
       <div
         className="relative flex items-center justify-center min-h-full p-4"
         onClick={handleOverlayClick}
       >
-        {/* Panel */}
+        {/* Panel — max-h:92dvh capped, height auto-grows to header + iframe.
+            On short viewports panel hits the cap and the iframe wrapper
+            scrolls inside. */}
         <div
           ref={panelRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby="schedule-modal-title"
           tabIndex={-1}
-          className="relative bg-white rounded-[20px] w-full max-w-[760px] h-[92dvh] max-h-[1000px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.2)] outline-none flex flex-col"
+          className="relative bg-white rounded-[20px] w-full max-w-[760px] max-h-[92dvh] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.2)] outline-none flex flex-col"
           style={{ opacity: 0 }}
         >
           {/* Header */}
@@ -111,7 +131,6 @@ export default function ScheduleModal({ onClose }) {
               </h2>
             </div>
 
-            {/* Close button */}
             <button
               onClick={handleClose}
               aria-label="Close schedule dialog"
@@ -121,15 +140,19 @@ export default function ScheduleModal({ onClose }) {
             </button>
           </div>
 
-          {/* Iframe with embed-page py-12 padding clipped via overflow:hidden
-              + marginTop:-48 (matches inline + split-hero treatments). Tight
-              calendar without the bone halo. */}
-          <div className="flex-1 px-4 pb-4 overflow-hidden" style={{ height: '624px' }}>
+          {/* Iframe wrapper — height grows with iframe content (postMessage);
+              overflow-y:auto + min-h-0 lets it scroll inside on short
+              viewports when panel hits max-h cap. marginTop:-48 clips the
+              top py-12 padding on the embed page so no bone halo. */}
+          <div
+            className="min-h-0 px-4 pb-4 overflow-x-hidden overflow-y-auto"
+            style={{ height: `${visibleIframeHeight}px` }}
+          >
             <iframe
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
               className="w-full rounded-[12px] border-0 block"
-              style={{ marginTop: '-48px', height: '720px' }}
+              style={{ marginTop: '-48px', height: `${iframeContentHeight}px` }}
               allow="payment"
             />
           </div>

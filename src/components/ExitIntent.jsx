@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { X, Calendar, ShieldCheck, ArrowRight } from 'lucide-react';
+import { X } from 'lucide-react';
 
 /* ─── Exit-Intent Strategy-Call Capture ───
-   When the visitor's cursor leaves the top edge of the viewport (about
-   to switch tabs / close window / hit URL bar), surface a "don't leave
-   money on the table, book your free strategy call" prompt with the
-   calendar embedded directly in the popup. One-shot per session.
+   When the visitor's cursor leaves the top edge of the viewport, surface
+   a 2-line headline plus the calendar embedded directly. One-shot per
+   session.
 
    Triggers ONLY:
      - desktop (mouse leave from top)
@@ -22,6 +21,8 @@ export default function ExitIntent() {
   const [open, setOpen] = useState(false);
   const overlayRef = useRef(null);
   const panelRef = useRef(null);
+  // Posted iframe content height. Default 720 = empty calendar state.
+  const [iframeContentHeight, setIframeContentHeight] = useState(720);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -34,7 +35,6 @@ export default function ExitIntent() {
     const trigger = (reason) => {
       if (Date.now() - armedAt < ARM_DELAY) return;
       if (sessionStorage.getItem(STORAGE_KEY)) return;
-      // Skip if any modal is already open
       if (document.querySelector('[role="dialog"]')) return;
       sessionStorage.setItem(STORAGE_KEY, String(Date.now()));
       setOpen(true);
@@ -66,6 +66,21 @@ export default function ExitIntent() {
     };
   }, []);
 
+  // Listen for postMessage from the scheduler iframe to auto-resize the
+  // panel. Same pattern as ScheduleModal so popup grows with calendar
+  // content (date → time → form → confirmed each post different heights).
+  useEffect(() => {
+    const onMsg = (e) => {
+      if (!e.data || typeof e.data !== 'object') return;
+      const h = e.data.iframeHeight ?? e.data.height
+              ?? e.data.data?.height ?? e.data.data?.iframeHeight;
+      const n = Number(h);
+      if (Number.isFinite(n) && n > 400 && n < 1600) setIframeContentHeight(n);
+    };
+    window.addEventListener('message', onMsg);
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
   // Close on Escape + lock body scroll while open
   useEffect(() => {
     if (!open) return;
@@ -92,6 +107,9 @@ export default function ExitIntent() {
 
   if (!open) return null;
 
+  // Visible iframe area = posted height minus the 48px we clip from top.
+  const visibleIframeHeight = Math.max(480, iframeContentHeight - 48);
+
   return (
     <div
       ref={overlayRef}
@@ -110,34 +128,22 @@ export default function ExitIntent() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="exit-intent-title"
-        className="relative bg-[#DDDAD3] rounded-[20px] w-full max-w-[760px] h-[92dvh] max-h-[920px] shadow-[0_24px_80px_rgba(0,0,0,0.4)] outline-none flex flex-col overflow-hidden"
+        className="relative bg-[#DDDAD3] rounded-[20px] w-full max-w-[760px] max-h-[92dvh] shadow-[0_24px_80px_rgba(0,0,0,0.4)] outline-none flex flex-col overflow-hidden"
         style={{ animation: 'eiSlideUp 350ms cubic-bezier(0.25,0.1,0.25,1)' }}
       >
-        {/* Header */}
-        <div className="px-6 md:px-8 pt-6 md:pt-7 pb-4 bg-[#DDDAD3] flex items-start justify-between">
-          <div className="flex-1 pr-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#5D6D59]/15 mb-3">
-              <Calendar className="w-3.5 h-3.5 text-[#5D6D59]" />
-              <span className="font-bold uppercase text-[10px] tracking-[2px] text-[#5D6D59]">
-                Before you go
-              </span>
-            </div>
-            <h2
-              id="exit-intent-title"
-              className="text-[clamp(22px,3.4vw,30px)] leading-[1.15] text-[#3F261F]"
-              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
-            >
-              Don't leave revenue on the table.{' '}
-              <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>Book your free strategy call.</span>
-            </h2>
-            <p className="mt-2 text-[15px] leading-[1.5] text-[#76574C] max-w-lg">
-              30 minutes with a seasoned RevFactor pricing strategist. We'll spot the revenue gaps in your portfolio. No pitch.
-            </p>
-            <div className="mt-3 flex items-center gap-2 text-[13px] text-[#5D6D59]">
-              <ShieldCheck className="w-4 h-4 flex-shrink-0" />
-              <span className="font-medium">Walk away with 3 specific recommendations, even if we never work together.</span>
-            </div>
-          </div>
+        {/* Header — just the 2-line headline, forced break.
+            Line 1: "Don't leave revenue on the table."
+            Line 2: italic "Book your free strategy call." */}
+        <div className="px-6 md:px-8 pt-6 md:pt-7 pb-4 flex items-start justify-between">
+          <h2
+            id="exit-intent-title"
+            className="text-[clamp(22px,3.4vw,30px)] leading-[1.2] text-[#3F261F] flex-1 pr-3"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
+          >
+            Don't leave revenue on the table.
+            <br />
+            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>Book your free strategy call.</span>
+          </h2>
           <button
             onClick={close}
             aria-label="Close popup"
@@ -147,14 +153,17 @@ export default function ExitIntent() {
           </button>
         </div>
 
-        {/* Calendar iframe with embed-page padding clipped via marginTop
-            (matches inline + split-hero + ScheduleModal treatments). */}
-        <div className="px-3 pb-3 overflow-hidden" style={{ height: '624px' }}>
+        {/* Calendar iframe — auto-resized via postMessage; clip top padding
+            with marginTop:-48; scroll inside on short viewports. */}
+        <div
+          className="min-h-0 px-3 pb-3 overflow-x-hidden overflow-y-auto"
+          style={{ height: `${visibleIframeHeight}px` }}
+        >
           <iframe
             src="https://schedule.revfactor.io/embed"
             title="Schedule a strategy call with RevFactor"
             className="w-full border-0 block rounded-[14px]"
-            style={{ marginTop: '-48px', height: '720px' }}
+            style={{ marginTop: '-48px', height: `${iframeContentHeight}px` }}
             allow="payment"
           />
         </div>
