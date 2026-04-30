@@ -36,3 +36,5 @@ tests/screenshots/
 
 # Image candidate gallery (browseable, gitignored)
 _image-gallery/
+.vercel
+.env

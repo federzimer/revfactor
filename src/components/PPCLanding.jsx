@@ -1,6 +1,48 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, X, ShieldCheck } from 'lucide-react';
+import { GrowthBook } from '@growthbook/growthbook-react';
 import ScheduleModal from './ScheduleModal';
+
+/* ─── GrowthBook A/B testing ───
+   PUBLIC_GROWTHBOOK_KEY is set in Vercel env (encrypted) and exposed to
+   client at build time. When set, the SDK fetches the ppc_hero_layout
+   feature flag and assigns visitors to stacked or split via cookie-backed
+   id (stable per visitor on repeat visits). When unset, the SDK no-ops
+   and the layout prop / ?v= URL param wins. */
+const GROWTHBOOK_KEY = import.meta.env.PUBLIC_GROWTHBOOK_KEY;
+const gb = new GrowthBook({
+  apiHost: 'https://cdn.growthbook.io',
+  clientKey: GROWTHBOOK_KEY || '',
+  enableDevMode: import.meta.env.DEV,
+  // Per-visitor sticky bucketing. Cookie 'gb_visitor' is set on first visit
+  // and re-used for variant assignment. Falls back to a random id if cookie
+  // can't be read (server-side / first paint).
+  trackingCallback: (experiment, result) => {
+    if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+    // Forward GrowthBook variant assignment to GA4 so we can attribute
+    // book_strategy_call conversions back to stacked vs split.
+    window.gtag('event', 'experiment_viewed', {
+      experiment_id: experiment.key,
+      variation_id: result.variationId,
+      variation_value: String(result.value),
+    });
+  },
+});
+
+function getOrSetVisitorId() {
+  if (typeof document === 'undefined') return 'ssr';
+  const m = document.cookie.match(/(?:^|;\s*)gb_visitor=([^;]+)/);
+  if (m) return m[1];
+  const id = (crypto.randomUUID && crypto.randomUUID()) ||
+             (Math.random().toString(36).slice(2) + Date.now().toString(36));
+  document.cookie = `gb_visitor=${id}; max-age=${60 * 60 * 24 * 365}; path=/; SameSite=Lax`;
+  return id;
+}
+
+if (GROWTHBOOK_KEY && typeof window !== 'undefined') {
+  gb.setAttributes({ id: getOrSetVisitorId(), url: window.location.pathname });
+  gb.loadFeatures({ autoRefresh: false }).catch(() => { /* fail open: defaults apply */ });
+}
 
 /* ─── Dynamic Text Replacement (DTR) variants ───
    The 3 paid Google Ads campaigns each pass a ?msg=<key> query param so the
@@ -197,17 +239,34 @@ export default function PPCLanding({
   // default props; the swap happens on client hydration. Page is noindex,
   // so SEO impact of the brief content swap is irrelevant.
   const [variant, setVariant] = useState(null);
-  // Layout A/B: ?v=split overrides the page's default layout prop. Lets us
-  // run an A/B test by sending half the paid traffic with ?v=split appended.
+  // Layout A/B: precedence is URL override (?v=split for QA) > GrowthBook
+  // feature flag (production traffic split) > page-level layout prop default.
+  // Read GrowthBook directly via gb.evalFeature() instead of the React hook
+  // (the hook needs a Provider in the parent tree; we'd rather keep this
+  // component standalone since it's mounted via Astro's client:load).
   const [layoutOverride, setLayoutOverride] = useState(null);
+  const [gbLayout, setGbLayout] = useState(null);
   useEffect(() => {
     setVariant(readMessageVariant());
     if (typeof window !== 'undefined') {
       const v = new URLSearchParams(window.location.search).get('v');
       if (v === 'split' || v === 'stacked') setLayoutOverride(v);
     }
+    if (GROWTHBOOK_KEY) {
+      const tick = () => {
+        try {
+          const v = gb.getFeatureValue('ppc_hero_layout', '');
+          if (v === 'split' || v === 'stacked') setGbLayout(v);
+        } catch { /* fail open */ }
+      };
+      tick();
+      // Re-check after features load (~50-200ms post-mount).
+      const t1 = setTimeout(tick, 250);
+      const t2 = setTimeout(tick, 1000);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
+    }
   }, []);
-  const effectiveLayout = layoutOverride || layout;
+  const effectiveLayout = layoutOverride || gbLayout || layout;
   const eyebrow = variant?.eyebrow ?? defaultEyebrow;
   const headlinePart1 = variant?.headlinePart1 ?? defaultHeadlinePart1;
   const headlinePart2Italic = variant?.headlinePart2Italic ?? defaultHeadlinePart2Italic;
