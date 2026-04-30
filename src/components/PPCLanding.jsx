@@ -362,16 +362,16 @@ export default function PPCLanding({
               </div>
             </div>
 
-            {/* RIGHT — iframe flush against a bone-colored backing column so
-                the scheduler app's own bone page background blends in (no
-                visible "box"). Slight rounded corners on the column anchor
-                it visually without the heavy card treatment. */}
-            <div className="bg-[#DDDAD3] rounded-[16px] overflow-hidden">
+            {/* RIGHT — iframe with embed-page py-12 padding clipped via
+                overflow:hidden + marginTop:-48 on the iframe. Calendar sits
+                tight, no surrounding bone halo. Permanent fix is to remove
+                py-12 from the schedule.revfactor.io/embed page (Fede). */}
+            <div className="rounded-[16px] overflow-hidden" style={{ height: '624px' }}>
               <iframe
                 src="https://schedule.revfactor.io/embed"
                 title="Schedule a strategy call with RevFactor"
                 className="w-full border-0 block"
-                style={{ height: `${calHeight}px`, minHeight: '720px', overflow: 'hidden' }}
+                style={{ marginTop: '-48px', height: '720px', overflow: 'hidden' }}
                 allow="payment"
               />
             </div>
@@ -575,13 +575,17 @@ export default function PPCLanding({
           <p className="text-[16px] leading-[1.55] text-[#76574C] max-w-lg mx-auto mb-6 text-center">
             30-minute call with a seasoned RevFactor pricing strategist. We'll review your portfolio, comp set, and where the revenue opportunity is.
           </p>
-          <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]">
+          {/* Inline calendar with the same clip treatment as split-hero. */}
+          <div
+            className="rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]"
+            style={{ height: '624px' }}
+          >
             <iframe
               ref={calRef}
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
               className="w-full border-0 block"
-              style={{ height: `${calHeight}px`, minHeight: '820px', overflow: 'hidden' }}
+              style={{ marginTop: '-48px', height: '720px', overflow: 'hidden' }}
               scrolling="no"
               allow="payment"
             />

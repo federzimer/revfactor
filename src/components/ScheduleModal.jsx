@@ -121,15 +121,15 @@ export default function ScheduleModal({ onClose }) {
             </button>
           </div>
 
-          {/* Iframe — flex-1 lets it own all remaining vertical space inside the
-              modal panel (panel = 92dvh, header eats ~110px, so iframe gets the
-              rest). min-h-[820px] floor matches the inline embed so the date
-              grid + selected-time strip never clip on first render. */}
-          <div className="flex-1 min-h-[820px] px-4 pb-4 overflow-y-auto">
+          {/* Iframe with embed-page py-12 padding clipped via overflow:hidden
+              + marginTop:-48 (matches inline + split-hero treatments). Tight
+              calendar without the bone halo. */}
+          <div className="flex-1 px-4 pb-4 overflow-hidden" style={{ height: '624px' }}>
             <iframe
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
-              className="w-full h-full min-h-[820px] rounded-[12px] border-0 block"
+              className="w-full rounded-[12px] border-0 block"
+              style={{ marginTop: '-48px', height: '720px' }}
               allow="payment"
             />
           </div>

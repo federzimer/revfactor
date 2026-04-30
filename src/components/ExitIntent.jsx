@@ -147,13 +147,14 @@ export default function ExitIntent() {
           </button>
         </div>
 
-        {/* Calendar iframe — fills remaining vertical space */}
-        <div className="flex-1 px-3 pb-3 overflow-hidden">
+        {/* Calendar iframe with embed-page padding clipped via marginTop
+            (matches inline + split-hero + ScheduleModal treatments). */}
+        <div className="px-3 pb-3 overflow-hidden" style={{ height: '624px' }}>
           <iframe
             src="https://schedule.revfactor.io/embed"
             title="Schedule a strategy call with RevFactor"
-            className="w-full h-full border-0 block rounded-[14px]"
-            style={{ minHeight: '500px' }}
+            className="w-full border-0 block rounded-[14px]"
+            style={{ marginTop: '-48px', height: '720px' }}
             allow="payment"
           />
         </div>
