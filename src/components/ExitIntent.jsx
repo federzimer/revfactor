@@ -120,6 +120,12 @@ export default function ExitIntent() {
       <style>{`
         @keyframes eiFadeIn { from { opacity:0 } to { opacity:1 } }
         @keyframes eiSlideUp { from { transform: translateY(24px); opacity:0 } to { transform: translateY(0); opacity:1 } }
+        /* Hide the visible scrollbar on the iframe wrapper while keeping
+           scroll capability. Visitor on a short viewport can still swipe/
+           wheel to reach the bottom of the calendar; no double-scrollbar
+           competing with the panel/page scrollbar visually. */
+        .ei-iframe-wrap { scrollbar-width: none; -ms-overflow-style: none; }
+        .ei-iframe-wrap::-webkit-scrollbar { display: none; width: 0; height: 0; }
       `}</style>
       <div className="absolute inset-0 bg-black/70 backdrop-blur-[4px]" />
 
@@ -154,9 +160,12 @@ export default function ExitIntent() {
         </div>
 
         {/* Calendar iframe — auto-resized via postMessage; clip top padding
-            with marginTop:-48; scroll inside on short viewports. */}
+            with marginTop:-48. overflow-y:auto allows scroll on short
+            viewports (panel can hit max-h:92dvh cap), but the visible
+            scrollbar is hidden via .ei-iframe-wrap CSS to prevent the
+            double-scrollbar look. */}
         <div
-          className="min-h-0 px-3 pb-3 overflow-x-hidden overflow-y-auto"
+          className="ei-iframe-wrap min-h-0 px-3 pb-3 overflow-x-hidden overflow-y-auto"
           style={{ height: `${visibleIframeHeight}px` }}
         >
           <iframe
