@@ -97,6 +97,13 @@ export default function ScheduleModal({ onClose }) {
       className="fixed inset-0 z-[9998]"
       style={{ opacity: 0 }}
     >
+      {/* Hide visible scrollbar on the iframe wrapper while keeping scroll
+          capability so visitors on short viewports can still reach the
+          bottom of the calendar without seeing a competing scrollbar. */}
+      <style>{`
+        .sm-iframe-wrap { scrollbar-width: none; -ms-overflow-style: none; }
+        .sm-iframe-wrap::-webkit-scrollbar { display: none; width: 0; height: 0; }
+      `}</style>
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[4px]" />
 
       <div
@@ -145,7 +152,7 @@ export default function ScheduleModal({ onClose }) {
               viewports when panel hits max-h cap. marginTop:-48 clips the
               top py-12 padding on the embed page so no bone halo. */}
           <div
-            className="min-h-0 px-4 pb-4 overflow-x-hidden overflow-y-auto"
+            className="sm-iframe-wrap min-h-0 px-4 pb-4 overflow-x-hidden overflow-y-auto"
             style={{ height: `${visibleIframeHeight}px` }}
           >
             <iframe

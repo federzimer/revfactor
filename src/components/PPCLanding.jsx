@@ -226,7 +226,14 @@ export default function PPCLanding({
   layout = "stacked",
 }) {
   const [scheduleOpen, setScheduleOpen] = useState(false);
-  const open = () => setScheduleOpen(true);
+  // All page CTAs scroll to the inline #schedule section instead of opening
+  // a duplicate-calendar modal. ExitIntent popup is the only place that
+  // still uses an embedded calendar (since the user is mid-exit and we
+  // want to keep them in-context).
+  const open = () => {
+    const el = typeof document !== 'undefined' && document.getElementById('schedule');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
   const calRef = useRef(null);
   // Default tall enough that the calendar's date grid + bottom legend always
   // show without scrolling on mobile + desktop. The scheduler app posts a
