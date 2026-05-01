@@ -120,12 +120,14 @@ export default function ExitIntent() {
       <style>{`
         @keyframes eiFadeIn { from { opacity:0 } to { opacity:1 } }
         @keyframes eiSlideUp { from { transform: translateY(24px); opacity:0 } to { transform: translateY(0); opacity:1 } }
-        /* Hide the visible scrollbar on the iframe wrapper while keeping
-           scroll capability. Visitor on a short viewport can still swipe/
-           wheel to reach the bottom of the calendar; no double-scrollbar
-           competing with the panel/page scrollbar visually. */
-        .ei-iframe-wrap { scrollbar-width: none; -ms-overflow-style: none; }
-        .ei-iframe-wrap::-webkit-scrollbar { display: none; width: 0; height: 0; }
+        /* Style the iframe-wrapper scrollbar to match the rest of the
+           site (6px bone track + walnut-light thumb, see src/index.css).
+           Keeps scroll capability for short-viewport users; tracks the
+           same look as the global page scrollbar. */
+        .ei-iframe-wrap { scrollbar-width: thin; scrollbar-color: #8F6E62 #DDDAD3; }
+        .ei-iframe-wrap::-webkit-scrollbar { width: 6px; }
+        .ei-iframe-wrap::-webkit-scrollbar-track { background: #DDDAD3; }
+        .ei-iframe-wrap::-webkit-scrollbar-thumb { background: #8F6E62; border-radius: 3px; }
       `}</style>
       <div className="absolute inset-0 bg-black/70 backdrop-blur-[4px]" />
 

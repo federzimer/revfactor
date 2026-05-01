@@ -101,8 +101,10 @@ export default function ScheduleModal({ onClose }) {
           capability so visitors on short viewports can still reach the
           bottom of the calendar without seeing a competing scrollbar. */}
       <style>{`
-        .sm-iframe-wrap { scrollbar-width: none; -ms-overflow-style: none; }
-        .sm-iframe-wrap::-webkit-scrollbar { display: none; width: 0; height: 0; }
+        .sm-iframe-wrap { scrollbar-width: thin; scrollbar-color: #8F6E62 #DDDAD3; }
+        .sm-iframe-wrap::-webkit-scrollbar { width: 6px; }
+        .sm-iframe-wrap::-webkit-scrollbar-track { background: #DDDAD3; }
+        .sm-iframe-wrap::-webkit-scrollbar-thumb { background: #8F6E62; border-radius: 3px; }
       `}</style>
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[4px]" />
 

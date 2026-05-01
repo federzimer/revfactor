@@ -369,16 +369,21 @@ export default function PPCLanding({
               </div>
             </div>
 
-            {/* RIGHT — iframe with embed-page py-12 padding clipped via
-                overflow:hidden + marginTop:-48 on the iframe. Calendar sits
-                tight, no surrounding bone halo. Permanent fix is to remove
-                py-12 from the schedule.revfactor.io/embed page (Fede). */}
-            <div className="rounded-[16px] overflow-hidden" style={{ height: '624px' }}>
+            {/* RIGHT — iframe sized to posted calHeight so the whole calendar
+                renders inline with no internal scrollbar. embed-page py-12 is
+                clipped via overflow:hidden + marginTop:-48; wrapper height is
+                calHeight - 48 so the visible region exactly matches content.
+                Permanent fix: Fede removes py-12 from schedule.revfactor.io. */}
+            <div
+              className="rounded-[16px] overflow-hidden"
+              style={{ height: `${Math.max(480, calHeight - 48)}px` }}
+            >
               <iframe
                 src="https://schedule.revfactor.io/embed"
                 title="Schedule a strategy call with RevFactor"
                 className="w-full border-0 block"
-                style={{ marginTop: '-48px', height: '720px', overflow: 'hidden' }}
+                style={{ marginTop: '-48px', height: `${calHeight}px`, overflow: 'hidden' }}
+                scrolling="no"
                 allow="payment"
               />
             </div>
