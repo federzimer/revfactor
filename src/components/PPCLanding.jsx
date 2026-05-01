@@ -84,6 +84,28 @@ function readMessageVariant() {
   return m && MESSAGE_VARIANTS[m] ? MESSAGE_VARIANTS[m] : null;
 }
 
+/* ─── Subhead A/B/C test ───
+   Three rewrites of the default hero subhead, tested against the page's
+   built-in copy. Drops the "24/7 dashboard messaging" claim (visitors can
+   message anytime but humans answer business hours — overpromise) and
+   bakes in volume-discount language so single-property and portfolio
+   prospects both see the relevant pricing signal.
+
+   Priority: DTR (?msg=) > test variant (?sh= or GB flag) > page default.
+   That keeps Google Ads campaigns on their tuned messaging while the
+   experiment runs on baseline (organic / direct / SEO) traffic. */
+const SUBHEAD_VARIANTS = {
+  b: 'Your tool sets the number. We set the strategy. Comp tracking, calendar moves, length-of-stay rules, channel mix — the work that recovers the 18% an algorithm can’t see. Direct access to a senior strategist. $320/month per property, less per door at scale.',
+  c: 'Most STRs run a pricing tool and stop there. They leave 18% on the table. We pull it back with the work a tool can’t do — comp positioning, calendar timing, length-of-stay strategy — every move a human catches that an algorithm misses. $320/month per property, volume pricing past 5.',
+  d: 'A pricing tool sets your nightly number. That’s about all it can do. The 18% lift comes from the work around it — comp tracking, calendar moves, length-of-stay rules — judgment calls a strategist makes that an algorithm can’t. You get one. $320/month per property, less per door at scale.',
+};
+
+function readSubheadOverride() {
+  if (typeof window === 'undefined') return null;
+  const sh = new URLSearchParams(window.location.search).get('sh');
+  return sh && SUBHEAD_VARIANTS[sh] ? sh : null;
+}
+
 /* ─── Animation primitives ───
    Lightweight IntersectionObserver-based reveal + count-up. No GSAP dep here
    (the brand site uses GSAP elsewhere; this keeps the PPC bundle small). */
@@ -257,8 +279,11 @@ export default function PPCLanding({
   // component standalone since it's mounted via Astro's client:load).
   const [layoutOverride, setLayoutOverride] = useState(null);
   const [gbLayout, setGbLayout] = useState(null);
+  const [subheadOverride, setSubheadOverride] = useState(null);
+  const [gbSubhead, setGbSubhead] = useState(null);
   useEffect(() => {
     setVariant(readMessageVariant());
+    setSubheadOverride(readSubheadOverride());
     if (typeof window !== 'undefined') {
       const v = new URLSearchParams(window.location.search).get('v');
       if (v === 'split' || v === 'stacked') setLayoutOverride(v);
@@ -268,6 +293,8 @@ export default function PPCLanding({
         try {
           const v = gb.getFeatureValue('ppc_hero_layout', '');
           if (v === 'split' || v === 'stacked') setGbLayout(v);
+          const s = gb.getFeatureValue('ppc_subhead_variant', '');
+          if (s in SUBHEAD_VARIANTS) setGbSubhead(s);
         } catch { /* fail open */ }
       };
       tick();
@@ -281,7 +308,11 @@ export default function PPCLanding({
   const eyebrow = variant?.eyebrow ?? defaultEyebrow;
   const headlinePart1 = variant?.headlinePart1 ?? defaultHeadlinePart1;
   const headlinePart2Italic = variant?.headlinePart2Italic ?? defaultHeadlinePart2Italic;
-  const subhead = variant?.subhead ?? defaultSubhead;
+  // Subhead resolution: DTR campaign (?msg=) wins; otherwise test variant
+  // (?sh= URL > GB flag) wins; otherwise page default.
+  const subheadKey = subheadOverride || gbSubhead;
+  const subhead = variant?.subhead
+    ?? (subheadKey ? SUBHEAD_VARIANTS[subheadKey] : defaultSubhead);
   const ctaText = variant?.ctaText ?? defaultCtaText;
 
   // Schedule iframe at schedule.revfactor.io is a custom Next.js app —
