@@ -335,7 +335,13 @@ export default function PPCLanding({
               </picture>
             );
           })()}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#161910] via-[#161910]/70 to-[#161910]/15" />
+          {/* Sub-lg (single-column, copy stacked above calendar): darker
+              top-down gradient so the headline reads against the brighter
+              parts of the image. lg+ (two-column, copy on left): horizontal
+              gradient — darker on left where text sits, image visible right
+              behind the calendar. */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#161910]/85 via-[#161910]/55 to-[#161910]/20 lg:hidden" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#161910] via-[#161910]/70 to-[#161910]/15 hidden lg:block" />
 
           <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-12 md:pt-32 md:pb-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             {/* LEFT — copy + risk-reversal + founder signature */}
