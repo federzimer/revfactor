@@ -1,0 +1,285 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- ====================================================================
+       7 Leaks — RevFactor brand redesign
+       Replaces GetCito's image2.png. Fixes:
+       - lowercase title (brand rule)
+       - monochrome palette (cedar / moss / tobacco / walnut, no rainbow)
+       - JetBrains Mono numbers
+       - reordered by impact (pacing first, integration last)
+       - emblem-style center mark instead of cropped wordmark
+       ==================================================================== -->
+
+  <defs>
+    <filter id="noise2">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#DDDAD3"/>
+  <rect width="1920" height="1080" filter="url(#noise2)"/>
+
+  <!-- Section label -->
+  <text x="960" y="100"
+        font-family="Helvetica, Arial, sans-serif"
+        font-weight="700"
+        font-size="20"
+        letter-spacing="3"
+        fill="#76574C"
+        text-anchor="middle">WHERE PRICING TOOLS LEAVE MONEY ON THE TABLE</text>
+
+  <!-- Title -->
+  <text x="960" y="200"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-size="84"
+        fill="#13342D"
+        text-anchor="middle">the seven leaks</text>
+
+  <!-- Subtitle -->
+  <text x="960" y="260"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-style="italic"
+        font-size="28"
+        fill="#76574C"
+        text-anchor="middle">ordered by frequency. all seven are invisible to the tool itself.</text>
+
+  <!-- Center radial diagram. Circle has 7 nodes around it. -->
+  <!-- Center coordinates: 960, 720. Radius for nodes: 280. -->
+
+  <!-- Dashed connecting circle -->
+  <circle cx="960" cy="720" r="280" fill="none"
+          stroke="#76574C" stroke-width="1.5" stroke-dasharray="6 10" opacity="0.4"/>
+
+  <!-- Center emblem disc -->
+  <circle cx="960" cy="720" r="110" fill="#13342D"/>
+  <circle cx="960" cy="720" r="100" fill="none" stroke="#5D6D59" stroke-width="1"/>
+  <text x="960" y="700"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-style="italic"
+        font-size="34"
+        fill="#DDDAD3"
+        text-anchor="middle">revfactor</text>
+  <text x="960" y="745"
+        font-family="'JetBrains Mono', monospace"
+        font-weight="500"
+        font-size="11"
+        letter-spacing="3"
+        fill="#7A8B76"
+        text-anchor="middle">7 LEAKS</text>
+
+  <!-- Node template:
+       - position calculated from angle θ (degrees) starting from -90 (top), going clockwise
+       - radius 280 from center (960, 720)
+       - node disc r=44, label text positioned outside
+       Angles: 7 nodes evenly spaced = 360/7 ≈ 51.43°
+       Starting at -90 (top): 0=-90, 1=-38.57, 2=12.86, 3=64.29, 4=115.71, 5=167.14, 6=218.57
+  -->
+
+  <!-- Node 01 — Pacing invisible (top, cedar, leading impact) -->
+  <g transform="translate(960, 440)">
+    <circle r="46" fill="#13342D"/>
+    <text y="-2"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">01</text>
+    <text y="20"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="9"
+          letter-spacing="2"
+          fill="#7A8B76"
+          text-anchor="middle">LEADING INDICATOR</text>
+    <!-- Label above the node -->
+    <text y="-80"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="22"
+          fill="#13342D"
+          text-anchor="middle">pacing is invisible</text>
+    <text y="-52"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C"
+          text-anchor="middle">by the time occupancy looks soft, the month is lost.</text>
+  </g>
+
+  <!-- Node 02 — Base rate anchored too low (upper right, moss) -->
+  <g transform="translate(1179, 614)">
+    <circle r="46" fill="#5D6D59"/>
+    <text y="8"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">02</text>
+    <!-- Label to the right -->
+    <text x="68" y="-8"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="22"
+          fill="#13342D">base rate too low</text>
+    <text x="68" y="20"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C">tool optimizes from the floor.</text>
+    <text x="68" y="42"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C">it never interrogates the floor.</text>
+  </g>
+
+  <!-- Node 03 — No LOS strategy (right, tobacco) -->
+  <g transform="translate(1235, 833)">
+    <circle r="46" fill="#3F261F"/>
+    <text y="8"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">03</text>
+    <text x="68" y="-8"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="22"
+          fill="#13342D">no length-of-stay ladder</text>
+    <text x="68" y="20"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C">flat nightly rate is the simplest</text>
+    <text x="68" y="42"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C">and almost always wrong approach.</text>
+  </g>
+
+  <!-- Node 04 — Minimum stays static (lower right, walnut) -->
+  <g transform="translate(1057, 996)">
+    <circle r="46" fill="#76574C"/>
+    <text y="8"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">04</text>
+    <!-- Label below -->
+    <text y="80"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="22"
+          fill="#13342D"
+          text-anchor="middle">minimum stays are static</text>
+    <text y="106"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C"
+          text-anchor="middle">july rule destroys you in february.</text>
+  </g>
+
+  <!-- Node 05 — Stale comp set (lower left, walnut) -->
+  <g transform="translate(862, 996)">
+    <circle r="46" fill="#76574C"/>
+    <text y="8"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">05</text>
+    <text y="80"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="22"
+          fill="#13342D"
+          text-anchor="middle">stale comp set</text>
+    <text y="106"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C"
+          text-anchor="middle">benchmarking against a phantom market.</text>
+  </g>
+
+  <!-- Node 06 — Local events generic (left, moss) -->
+  <g transform="translate(685, 833)">
+    <circle r="46" fill="#5D6D59"/>
+    <text y="8"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">06</text>
+    <text x="-68" y="-8"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="22"
+          fill="#13342D"
+          text-anchor="end">local events too generic</text>
+    <text x="-68" y="20"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C"
+          text-anchor="end">the regional rodeo doubles demand.</text>
+    <text x="-68" y="42"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C"
+          text-anchor="end">the tool has never heard of it.</text>
+  </g>
+
+  <!-- Node 07 — No PMS-pricing integration (upper left, tobacco) -->
+  <g transform="translate(741, 614)">
+    <circle r="46" fill="#3F261F"/>
+    <text y="8"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">07</text>
+    <text x="-68" y="-8"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="22"
+          fill="#13342D"
+          text-anchor="end">no pms-pricing sync</text>
+    <text x="-68" y="20"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C"
+          text-anchor="end">it's a stack problem, not strategy.</text>
+    <text x="-68" y="42"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="16"
+          fill="#76574C"
+          text-anchor="end">biggest lifts hide in the plumbing.</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="960" y="1050"
+        font-family="'JetBrains Mono', monospace"
+        font-weight="500"
+        font-size="14"
+        letter-spacing="2"
+        fill="#76574C"
+        text-anchor="middle">REVFACTOR.IO  ·  REVENUE MANAGEMENT FOR SHORT-TERM RENTALS</text>
+</svg>

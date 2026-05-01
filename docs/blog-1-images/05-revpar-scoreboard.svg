@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- ====================================================================
+       RevPAR vs ADR scoreboard — replaces the off-brand money/cash image.
+       Uses the worked-arithmetic from §"ADR vs RevPAR" so the visual
+       earns its placement (it teaches the lesson, not decorates it).
+       ==================================================================== -->
+
+  <defs>
+    <filter id="noise5">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#DDDAD3"/>
+  <rect width="1920" height="1080" filter="url(#noise5)"/>
+
+  <!-- Section label -->
+  <text x="960" y="100"
+        font-family="Helvetica, Arial, sans-serif"
+        font-weight="700"
+        font-size="20"
+        letter-spacing="3"
+        fill="#76574C"
+        text-anchor="middle">THE ONLY SCOREBOARD THAT MATTERS</text>
+
+  <!-- Title -->
+  <text x="960" y="200"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-size="84"
+        fill="#13342D"
+        text-anchor="middle">revpar wins by ten dollars a night.</text>
+
+  <!-- Subtitle -->
+  <text x="960" y="260"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-style="italic"
+        font-size="28"
+        fill="#76574C"
+        text-anchor="middle">two properties. same year. one looks busier. the other made more money.</text>
+
+  <!-- Two property cards side by side -->
+
+  <!-- Property A — Bone-light card -->
+  <g transform="translate(160, 360)">
+    <rect width="780" height="520" rx="16" fill="#E8E6E1" stroke="#CCC8BF" stroke-width="1"/>
+    <!-- Header bar -->
+    <rect width="780" height="80" rx="16" fill="#E8E6E1"/>
+    <rect y="64" width="780" height="16" fill="#E8E6E1"/>
+    <text x="40" y="50"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="14"
+          letter-spacing="3"
+          fill="#5D6D59">PROPERTY  A</text>
+    <text x="40" y="120"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-style="italic"
+          font-size="32"
+          fill="#76574C">looks busier on the calendar.</text>
+
+    <!-- Stats stack -->
+    <g transform="translate(40, 180)">
+      <line x1="0" y1="0" x2="700" y2="0" stroke="#CCC8BF" stroke-width="1"/>
+      <text y="38"
+            font-family="Helvetica, Arial, sans-serif"
+            font-weight="700"
+            font-size="10"
+            letter-spacing="2"
+            fill="#76574C">OCCUPANCY</text>
+      <text x="700" y="38"
+            font-family="'JetBrains Mono', monospace"
+            font-weight="500"
+            font-size="32"
+            fill="#161910"
+            text-anchor="end">70%</text>
+
+      <line x1="0" y1="60" x2="700" y2="60" stroke="#CCC8BF" stroke-width="1"/>
+      <text y="98"
+            font-family="Helvetica, Arial, sans-serif"
+            font-weight="700"
+            font-size="10"
+            letter-spacing="2"
+            fill="#76574C">ADR</text>
+      <text x="700" y="98"
+            font-family="'JetBrains Mono', monospace"
+            font-weight="500"
+            font-size="32"
+            fill="#161910"
+            text-anchor="end">$200</text>
+
+      <line x1="0" y1="120" x2="700" y2="120" stroke="#CCC8BF" stroke-width="1"/>
+      <text y="158"
+            font-family="Helvetica, Arial, sans-serif"
+            font-weight="700"
+            font-size="10"
+            letter-spacing="2"
+            fill="#13342D">REVPAR  (PER NIGHT)</text>
+      <text x="700" y="158"
+            font-family="'JetBrains Mono', monospace"
+            font-weight="500"
+            font-size="44"
+            fill="#13342D"
+            text-anchor="end">$140</text>
+
+      <line x1="0" y1="180" x2="700" y2="180" stroke="#CCC8BF" stroke-width="1"/>
+      <text y="218"
+            font-family="Helvetica, Arial, sans-serif"
+            font-weight="700"
+            font-size="10"
+            letter-spacing="2"
+            fill="#76574C">ANNUALIZED REVENUE</text>
+      <text x="700" y="218"
+            font-family="'JetBrains Mono', monospace"
+            font-weight="500"
+            font-size="32"
+            fill="#161910"
+            text-anchor="end">$51,100</text>
+    </g>
+  </g>
+
+  <!-- Property B — Cedar card (the winner) -->
+  <g transform="translate(980, 360)">
+    <rect width="780" height="520" rx="16" fill="#13342D"/>
+    <text x="40" y="50"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="14"
+          letter-spacing="3"
+          fill="#7A8B76">PROPERTY  B</text>
+    <text x="40" y="120"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-style="italic"
+          font-size="32"
+          fill="#DDDAD3">made $3,650 more.</text>
+
+    <g transform="translate(40, 180)">
+      <line x1="0" y1="0" x2="700" y2="0" stroke="#1E4A40" stroke-width="1"/>
+      <text y="38"
+            font-family="Helvetica, Arial, sans-serif"
+            font-weight="700"
+            font-size="10"
+            letter-spacing="2"
+            fill="#7A8B76">OCCUPANCY</text>
+      <text x="700" y="38"
+            font-family="'JetBrains Mono', monospace"
+            font-weight="500"
+            font-size="32"
+            fill="#DDDAD3"
+            text-anchor="end">50%</text>
+
+      <line x1="0" y1="60" x2="700" y2="60" stroke="#1E4A40" stroke-width="1"/>
+      <text y="98"
+            font-family="Helvetica, Arial, sans-serif"
+            font-weight="700"
+            font-size="10"
+            letter-spacing="2"
+            fill="#7A8B76">ADR</text>
+      <text x="700" y="98"
+            font-family="'JetBrains Mono', monospace"
+            font-weight="500"
+            font-size="32"
+            fill="#DDDAD3"
+            text-anchor="end">$300</text>
+
+      <line x1="0" y1="120" x2="700" y2="120" stroke="#1E4A40" stroke-width="1"/>
+      <text y="158"
+            font-family="Helvetica, Arial, sans-serif"
+            font-weight="700"
+            font-size="10"
+            letter-spacing="2"
+            fill="#7A8B76">REVPAR  (PER NIGHT)</text>
+      <text x="700" y="158"
+            font-family="'JetBrains Mono', monospace"
+            font-weight="500"
+            font-size="44"
+            fill="#7A8B76"
+            text-anchor="end">$150</text>
+
+      <line x1="0" y1="180" x2="700" y2="180" stroke="#1E4A40" stroke-width="1"/>
+      <text y="218"
+            font-family="Helvetica, Arial, sans-serif"
+            font-weight="700"
+            font-size="10"
+            letter-spacing="2"
+            fill="#7A8B76">ANNUALIZED REVENUE</text>
+      <text x="700" y="218"
+            font-family="'JetBrains Mono', monospace"
+            font-weight="500"
+            font-size="32"
+            fill="#DDDAD3"
+            text-anchor="end">$54,750</text>
+    </g>
+  </g>
+
+  <!-- Lower-half: callout strip -->
+  <g transform="translate(160, 920)">
+    <rect width="1600" height="80" rx="40" fill="#3F261F"/>
+    <text x="60" y="48"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="11"
+          letter-spacing="2"
+          fill="#7A8B76">DELTA</text>
+    <text x="180" y="50"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-style="italic"
+          font-size="32"
+          fill="#DDDAD3">+$10 per available night, every night, all year</text>
+    <text x="1540" y="50"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="32"
+          fill="#DDDAD3"
+          text-anchor="end">+$3,650 / yr</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="960" y="1050"
+        font-family="'JetBrains Mono', monospace"
+        font-weight="500"
+        font-size="14"
+        letter-spacing="2"
+        fill="#76574C"
+        text-anchor="middle">REVFACTOR.IO  ·  REVPAR IS THE ONLY METRIC THAT CAPTURES BOTH</text>
+</svg>

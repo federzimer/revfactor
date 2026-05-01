@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- ====================================================================
+       Strategic Philosophy — RevFactor brand redesign
+       Replaces GetCito's image1.png. Fixes:
+       - lowercase heading per brand rule
+       - JetBrains Mono numbers (01/02/03 — full set, not just 02/03/04)
+       - ALL CAPS Helvetica labels for "interest / reliability / positioning"
+       - Cedar (#13342D), Moss (#5D6D59), Tobacco (#3F261F) palette only
+       - Bone (#DDDAD3) background with subtle noise grain
+       ==================================================================== -->
+
+  <defs>
+    <!-- Subtle noise/grain overlay (matches brand body::after) -->
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0"/>
+    </filter>
+
+    <!-- Connector line style -->
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5D6D59"/>
+    </marker>
+  </defs>
+
+  <!-- Background: Bone -->
+  <rect width="1920" height="1080" fill="#DDDAD3"/>
+  <rect width="1920" height="1080" filter="url(#noise)" opacity="1"/>
+
+  <!-- Section label -->
+  <text x="160" y="160"
+        font-family="Helvetica, Arial, sans-serif"
+        font-weight="700"
+        font-size="20"
+        letter-spacing="3"
+        fill="#76574C">THE STRATEGIC FRAME</text>
+
+  <!-- Headline (lowercase, Cormorant italic) -->
+  <text x="160" y="280"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-style="italic"
+        font-size="120"
+        fill="#13342D">strategic philosophy</text>
+
+  <!-- Subheading (Cormorant lowercase, walnut) -->
+  <text x="160" y="360"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-size="32"
+        fill="#76574C">the three factors that decide whether a guest books at the price you set.</text>
+
+  <!-- ============================================================
+       Three pillar columns — Interest, Reliability, Positioning
+       Each column: number disc, icon block, label, body
+       ============================================================ -->
+
+  <!-- Column 1: INTEREST (Cedar) -->
+  <g transform="translate(220, 510)">
+    <!-- Number disc -->
+    <circle cx="0" cy="0" r="42" fill="#13342D"/>
+    <text x="0" y="10"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">01</text>
+
+    <!-- Icon block (cedar bg) -->
+    <rect x="60" y="-90" width="240" height="240" rx="12" fill="#13342D"/>
+
+    <!-- Icon: heart conversation (interest = appeal) -->
+    <g transform="translate(180, 30)" fill="none" stroke="#DDDAD3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="-30" cy="-15" r="22" />
+      <path d="M-30,12 Q-30,42 -10,52 Q-30,42 -30,72 L-50,72 Q-70,72 -70,52 L-70,32 Q-70,12 -50,12 Z"/>
+      <path d="M30,-15 m-22,0 a22,22 0 1,0 44,0 a22,22 0 1,0 -44,0"/>
+      <path d="M30,12 Q30,42 10,52 Q30,42 30,72 L50,72 Q70,72 70,52 L70,32 Q70,12 50,12 Z"/>
+      <!-- Hearts -->
+      <path d="M-15,-30 a6,6 0 0,1 12,0 a6,6 0 0,1 12,0 c0,6 -12,18 -12,18 c0,0 -12,-12 -12,-18 z" fill="#DDDAD3"/>
+      <path d="M3,-30 a6,6 0 0,1 12,0 a6,6 0 0,1 12,0 c0,6 -12,18 -12,18 c0,0 -12,-12 -12,-18 z" fill="#DDDAD3"/>
+    </g>
+
+    <!-- Label -->
+    <text x="180" y="220"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="20"
+          letter-spacing="3"
+          fill="#13342D"
+          text-anchor="middle">INTEREST</text>
+
+    <!-- Body -->
+    <text x="180" y="270"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="22"
+          fill="#161910"
+          text-anchor="middle">
+      <tspan x="180" dy="0">your conversion rate.</tspan>
+      <tspan x="180" dy="32">photos, title, amenities,</tspan>
+      <tspan x="180" dy="32">reviews, perceived value.</tspan>
+    </text>
+  </g>
+
+  <!-- Column 2: RELIABILITY (Moss) -->
+  <g transform="translate(900, 510)">
+    <circle cx="0" cy="0" r="42" fill="#5D6D59"/>
+    <text x="0" y="10"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">02</text>
+
+    <rect x="60" y="-90" width="240" height="240" rx="12" fill="#5D6D59"/>
+
+    <!-- Icon: refresh-arrows around gear (reliability = consistency) -->
+    <g transform="translate(180, 30)" fill="none" stroke="#DDDAD3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Gear -->
+      <circle cx="0" cy="0" r="22"/>
+      <circle cx="0" cy="0" r="8" fill="#DDDAD3"/>
+      <g stroke-width="6">
+        <line x1="0" y1="-30" x2="0" y2="-38"/>
+        <line x1="0" y1="30" x2="0" y2="38"/>
+        <line x1="-30" y1="0" x2="-38" y2="0"/>
+        <line x1="30" y1="0" x2="38" y2="0"/>
+        <line x1="-21" y1="-21" x2="-27" y2="-27"/>
+        <line x1="21" y1="-21" x2="27" y2="-27"/>
+        <line x1="-21" y1="21" x2="-27" y2="27"/>
+        <line x1="21" y1="21" x2="27" y2="27"/>
+      </g>
+      <!-- Refresh arrows -->
+      <path d="M-50,-50 A60,60 0 0,1 50,-50" stroke-width="3"/>
+      <polyline points="40,-58 50,-50 42,-40"/>
+      <path d="M50,50 A60,60 0 0,1 -50,50" stroke-width="3"/>
+      <polyline points="-40,58 -50,50 -42,40"/>
+    </g>
+
+    <text x="180" y="220"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="20"
+          letter-spacing="3"
+          fill="#13342D"
+          text-anchor="middle">RELIABILITY</text>
+
+    <text x="180" y="270"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="22"
+          fill="#161910"
+          text-anchor="middle">
+      <tspan x="180" dy="0">review velocity + cadence.</tspan>
+      <tspan x="180" dy="32">the airbnb algorithm and</tspan>
+      <tspan x="180" dy="32">guests both reward consistency.</tspan>
+    </text>
+  </g>
+
+  <!-- Column 3: POSITIONING (Tobacco) -->
+  <g transform="translate(1580, 510)">
+    <circle cx="0" cy="0" r="42" fill="#3F261F"/>
+    <text x="0" y="10"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="22"
+          letter-spacing="2"
+          fill="#DDDAD3"
+          text-anchor="middle">03</text>
+
+    <rect x="-300" y="-90" width="240" height="240" rx="12" fill="#3F261F"/>
+
+    <!-- Icon: people grid with location pin (positioning = where you sit in the comp set) -->
+    <g transform="translate(-180, 30)" fill="none" stroke="#DDDAD3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Center figure -->
+      <circle cx="0" cy="-25" r="14"/>
+      <path d="M-22,15 Q0,-5 22,15 L22,40 L-22,40 Z"/>
+      <!-- Left figure -->
+      <circle cx="-58" cy="-15" r="11"/>
+      <path d="M-72,15 Q-58,0 -44,15 L-44,40 L-72,40 Z"/>
+      <!-- Right figure -->
+      <circle cx="58" cy="-15" r="11"/>
+      <path d="M44,15 Q58,0 72,15 L72,40 L44,40 Z"/>
+      <!-- Location pin overhead -->
+      <path d="M0,-65 a14,14 0 1,1 0,-0.001 z M0,-50 L0,-40" fill="#DDDAD3"/>
+      <circle cx="0" cy="-65" r="5" fill="#3F261F"/>
+    </g>
+
+    <text x="-180" y="220"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="20"
+          letter-spacing="3"
+          fill="#13342D"
+          text-anchor="middle">POSITIONING</text>
+
+    <text x="-180" y="270"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="22"
+          fill="#161910"
+          text-anchor="middle">
+      <tspan x="-180" dy="0">where you sit vs the comp set.</tspan>
+      <tspan x="-180" dy="32">price on perception, not cost.</tspan>
+      <tspan x="-180" dy="32">guests don't see your mortgage.</tspan>
+    </text>
+  </g>
+
+  <!-- Connecting line under the three columns -->
+  <line x1="220" y1="510" x2="1400" y2="510"
+        stroke="#76574C" stroke-width="1.5" stroke-dasharray="6 8" opacity="0.5"/>
+
+  <!-- Footer attribution -->
+  <text x="160" y="1020"
+        font-family="'JetBrains Mono', monospace"
+        font-weight="500"
+        font-size="14"
+        letter-spacing="2"
+        fill="#76574C">REVFACTOR.IO  ·  REVENUE MANAGEMENT FOR SHORT-TERM RENTALS</text>
+</svg>

@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- ====================================================================
+       6 Tactical Plays — RevFactor brand redesign
+       Replaces GetCito's image3.png. Was already 60% on-brand
+       (cedar bg + bone cards). Polish:
+       - lowercase title ("six tactical plays" — Cormorant)
+       - JetBrains Mono play numbers
+       - Helvetica ALL CAPS labels
+       - moss accent rule on each card
+       ==================================================================== -->
+
+  <defs>
+    <filter id="noise3">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0"/>
+    </filter>
+  </defs>
+
+  <!-- Cedar background -->
+  <rect width="1920" height="1080" fill="#13342D"/>
+  <rect width="1920" height="1080" filter="url(#noise3)"/>
+
+  <!-- Section label -->
+  <text x="960" y="100"
+        font-family="Helvetica, Arial, sans-serif"
+        font-weight="700"
+        font-size="20"
+        letter-spacing="3"
+        fill="#7A8B76"
+        text-anchor="middle">THE TACTICAL PLAYBOOK</text>
+
+  <!-- Title -->
+  <text x="960" y="200"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-size="84"
+        fill="#DDDAD3"
+        text-anchor="middle">six plays that move revenue</text>
+
+  <!-- Subtitle -->
+  <text x="960" y="260"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-style="italic"
+        font-size="28"
+        fill="#7A8B76"
+        text-anchor="middle">tools in a toolkit, not a script — when and how is the strategy.</text>
+
+  <!-- Card grid: 3 columns × 2 rows
+       Card: 480w × 280h, rounded 12, bone-light bg, walnut text
+       Spacing: 80px gap. Total grid: 3*480 + 2*80 = 1600w, starts at x=160
+       Row spacing: 80px gap. Top: 360, Bottom: 720
+  -->
+
+  <!-- Reusable card template via copy-paste with content swapped.
+       Each card: number disc (top-left, moss accent), play name (Cormorant),
+       label (ALL CAPS), body (Helvetica), and a moss horizontal rule. -->
+
+  <!-- Card 1: Long Weekend Strategy -->
+  <g transform="translate(160, 360)">
+    <rect width="480" height="280" rx="12" fill="#E8E6E1"/>
+    <line x1="40" y1="220" x2="120" y2="220" stroke="#5D6D59" stroke-width="2"/>
+    <text x="40" y="60"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="14"
+          letter-spacing="3"
+          fill="#5D6D59">PLAY  01</text>
+    <text x="40" y="115"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="36"
+          fill="#13342D">long weekend strategy</text>
+    <text x="40" y="170"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="18"
+          fill="#76574C">
+      <tspan x="40" dy="0">raise weekend rates aggressively,</tspan>
+      <tspan x="40" dy="24">layer tiered LOS discounts to</tspan>
+      <tspan x="40" dy="24">capture longer stays at premium.</tspan>
+    </text>
+  </g>
+
+  <!-- Card 2: Gap Filling -->
+  <g transform="translate(720, 360)">
+    <rect width="480" height="280" rx="12" fill="#E8E6E1"/>
+    <line x1="40" y1="220" x2="120" y2="220" stroke="#5D6D59" stroke-width="2"/>
+    <text x="40" y="60"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="14"
+          letter-spacing="3"
+          fill="#5D6D59">PLAY  02</text>
+    <text x="40" y="115"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="36"
+          fill="#13342D">gap filling</text>
+    <text x="40" y="170"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="18"
+          fill="#76574C">
+      <tspan x="40" dy="0">conditional 20% off — only when</tspan>
+      <tspan x="40" dy="24">a gap night is part of a longer stay.</tspan>
+      <tspan x="40" dy="24">protect the rate, capture the gap.</tspan>
+    </text>
+  </g>
+
+  <!-- Card 3: LOS Discounts -->
+  <g transform="translate(1280, 360)">
+    <rect width="480" height="280" rx="12" fill="#E8E6E1"/>
+    <line x1="40" y1="220" x2="120" y2="220" stroke="#5D6D59" stroke-width="2"/>
+    <text x="40" y="60"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="14"
+          letter-spacing="3"
+          fill="#5D6D59">PLAY  03</text>
+    <text x="40" y="115"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="36"
+          fill="#13342D">length-of-stay ladder</text>
+    <text x="40" y="170"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="18"
+          fill="#76574C">
+      <tspan x="40" dy="0">structure your discount ladder to</tspan>
+      <tspan x="40" dy="24">reward longer stays. higher revenue,</tspan>
+      <tspan x="40" dy="24">fewer turnovers, lower costs.</tspan>
+    </text>
+  </g>
+
+  <!-- Card 4: Minimum Stay Edge -->
+  <g transform="translate(160, 720)">
+    <rect width="480" height="280" rx="12" fill="#E8E6E1"/>
+    <line x1="40" y1="220" x2="120" y2="220" stroke="#5D6D59" stroke-width="2"/>
+    <text x="40" y="60"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="14"
+          letter-spacing="3"
+          fill="#5D6D59">PLAY  04</text>
+    <text x="40" y="115"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="36"
+          fill="#13342D">minimum stay edge</text>
+    <text x="40" y="170"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="18"
+          fill="#76574C">
+      <tspan x="40" dy="0">beat the market minimum by one</tspan>
+      <tspan x="40" dy="24">night. capture the demand pool</tspan>
+      <tspan x="40" dy="24">your competitors are hidden from.</tspan>
+    </text>
+  </g>
+
+  <!-- Card 5: New Listing Launch -->
+  <g transform="translate(720, 720)">
+    <rect width="480" height="280" rx="12" fill="#E8E6E1"/>
+    <line x1="40" y1="220" x2="120" y2="220" stroke="#5D6D59" stroke-width="2"/>
+    <text x="40" y="60"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="14"
+          letter-spacing="3"
+          fill="#5D6D59">PLAY  05</text>
+    <text x="40" y="115"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="36"
+          fill="#13342D">new listing launch</text>
+    <text x="40" y="170"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="18"
+          fill="#76574C">
+      <tspan x="40" dy="0">price 15-25% below market for</tspan>
+      <tspan x="40" dy="24">30-60 days. fill the calendar.</tspan>
+      <tspan x="40" dy="24">stack reviews. then scale rates.</tspan>
+    </text>
+  </g>
+
+  <!-- Card 6: PMS Sync -->
+  <g transform="translate(1280, 720)">
+    <rect width="480" height="280" rx="12" fill="#E8E6E1"/>
+    <line x1="40" y1="220" x2="120" y2="220" stroke="#5D6D59" stroke-width="2"/>
+    <text x="40" y="60"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="14"
+          letter-spacing="3"
+          fill="#5D6D59">PLAY  06</text>
+    <text x="40" y="115"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="36"
+          fill="#13342D">pms-aligned strategy</text>
+    <text x="40" y="170"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="18"
+          fill="#76574C">
+      <tspan x="40" dy="0">connect pricing tool + pms in</tspan>
+      <tspan x="40" dy="24">real time. an unfilled tuesday</tspan>
+      <tspan x="40" dy="24">auto-triggers an LOS discount.</tspan>
+    </text>
+  </g>
+
+  <!-- Footer -->
+  <text x="960" y="1050"
+        font-family="'JetBrains Mono', monospace"
+        font-weight="500"
+        font-size="14"
+        letter-spacing="2"
+        fill="#7A8B76"
+        text-anchor="middle">REVFACTOR.IO  ·  REVENUE MANAGEMENT FOR SHORT-TERM RENTALS</text>
+</svg>
