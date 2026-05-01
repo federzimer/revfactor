@@ -303,6 +303,21 @@ export default function PPCLanding({
 
   return (
     <>
+      {/* Mobile-only tobacco text-shadow on the hero italic so it stays
+          legible against the brighter parts of the cliffside/cabin image
+          when the page is single-column (sub-md). Desktop already has a
+          dark gradient under the headline area. */}
+      <style>{`
+        @media (max-width: 767px) {
+          .ppc-hero-italic {
+            text-shadow:
+              0 0 10px rgba(63, 38, 31, 0.95),
+              0 0 6px rgba(63, 38, 31, 0.95),
+              0 1px 2px rgba(63, 38, 31, 1);
+          }
+        }
+      `}</style>
+
       {/* ─── HERO ─── Two layouts: "stacked" (image bg + CTA, calendar lives
            in #schedule below) or "split" (calendar embedded right-of-hero so
            visitors book without scrolling). Toggled via layout prop or
@@ -355,7 +370,7 @@ export default function PPCLanding({
               >
                 {headlinePart1}{' '}
                 {headlinePart2Italic && (
-                  <span style={{ fontStyle: 'italic', color: '#A8BBA3' }}>
+                  <span className="ppc-hero-italic" style={{ fontStyle: 'italic', color: '#A8BBA3' }}>
                     {headlinePart2Italic}
                   </span>
                 )}
@@ -441,7 +456,7 @@ export default function PPCLanding({
             >
               {headlinePart1}{' '}
               {headlinePart2Italic && (
-                <span style={{ fontStyle: 'italic', color: '#7A8B76' }}>
+                <span className="ppc-hero-italic" style={{ fontStyle: 'italic', color: '#7A8B76' }}>
                   {headlinePart2Italic}
                 </span>
               )}
@@ -789,8 +804,10 @@ export default function PPCLanding({
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>
-      {/* Spacer so the sticky bar never covers the final CTA on mobile */}
-      <div className="md:hidden h-20" aria-hidden="true" />
+      {/* Spacer so the sticky bar never covers the final CTA on mobile.
+          bg-onyx so when fully scrolled there's no bone-light gap between
+          the footer and the sticky bar's translucent top edge. */}
+      <div className="md:hidden h-20 bg-[#161910]" aria-hidden="true" />
 
       {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>
