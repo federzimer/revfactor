@@ -369,21 +369,18 @@ export default function PPCLanding({
               </div>
             </div>
 
-            {/* RIGHT — iframe sized to posted calHeight so the whole calendar
-                renders inline with no internal scrollbar. embed-page py-12 is
-                clipped via overflow:hidden + marginTop:-48; wrapper height is
-                calHeight - 48 so the visible region exactly matches content.
-                Permanent fix: Fede removes py-12 from schedule.revfactor.io. */}
+            {/* RIGHT — viewport-capped iframe wrapper; iframe handles its own
+                internal scroll on tall steps (form). marginTop:-48 clips the
+                embed page's py-12 top padding so no bone halo. */}
             <div
               className="rounded-[16px] overflow-hidden"
-              style={{ height: `${Math.max(480, calHeight - 48)}px` }}
+              style={{ height: 'min(720px, calc(100vh - 200px))' }}
             >
               <iframe
                 src="https://schedule.revfactor.io/embed"
                 title="Schedule a strategy call with RevFactor"
                 className="w-full border-0 block"
-                style={{ marginTop: '-48px', height: `${calHeight}px`, overflow: 'hidden' }}
-                scrolling="no"
+                style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
                 allow="payment"
               />
             </div>
@@ -587,18 +584,20 @@ export default function PPCLanding({
           <p className="text-[16px] leading-[1.55] text-[#76574C] max-w-lg mx-auto mb-6 text-center">
             30-minute call with a seasoned RevFactor pricing strategist. We'll review your portfolio, comp set, and where the revenue opportunity is.
           </p>
-          {/* Inline calendar with the same clip treatment as split-hero. */}
+          {/* Inline calendar — fixed-cap height so the page never grows
+              taller than ~720px for the embed; the iframe handles its own
+              internal scroll on tall steps (form, etc.). marginTop:-48
+              clips the embed page's py-12 top padding. */}
           <div
             className="rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]"
-            style={{ height: `${Math.max(480, calHeight - 48)}px` }}
+            style={{ height: 'min(720px, calc(100vh - 160px))' }}
           >
             <iframe
               ref={calRef}
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
               className="w-full border-0 block"
-              style={{ marginTop: '-48px', height: `${calHeight}px`, overflow: 'hidden' }}
-              scrolling="no"
+              style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
               allow="payment"
             />
           </div>

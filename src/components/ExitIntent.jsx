@@ -167,15 +167,14 @@ export default function ExitIntent() {
             scrollbar is hidden via .ei-iframe-wrap CSS to prevent the
             double-scrollbar look. */}
         <div
-          className="ei-iframe-wrap min-h-0 px-3 pb-3 overflow-x-hidden overflow-y-auto"
-          style={{ height: `${visibleIframeHeight}px` }}
+          className="ei-iframe-wrap min-h-0 px-3 pb-3 overflow-hidden"
+          style={{ height: 'min(720px, calc(92dvh - 120px))' }}
         >
           <iframe
             src="https://schedule.revfactor.io/embed"
             title="Schedule a strategy call with RevFactor"
             className="w-full border-0 block rounded-[14px]"
-            style={{ marginTop: '-48px', height: `${iframeContentHeight}px` }}
-            scrolling="no"
+            style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
             allow="payment"
           />
         </div>

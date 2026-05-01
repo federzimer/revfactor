@@ -149,20 +149,20 @@ export default function ScheduleModal({ onClose }) {
             </button>
           </div>
 
-          {/* Iframe wrapper — height grows with iframe content (postMessage);
-              overflow-y:auto + min-h-0 lets it scroll inside on short
-              viewports when panel hits max-h cap. marginTop:-48 clips the
-              top py-12 padding on the embed page so no bone halo. */}
+          {/* Iframe wrapper — flex-1 fills remaining panel space (capped by
+              panel max-h:92dvh). overflow:hidden so no outer scrollbar; the
+              iframe handles its own scroll when content overflows. iframe
+              height = wrapper + 48 to compensate for the marginTop:-48 clip
+              that hides the embed page's py-12 top padding. */}
           <div
-            className="sm-iframe-wrap min-h-0 px-4 pb-4 overflow-x-hidden overflow-y-auto"
-            style={{ height: `${visibleIframeHeight}px` }}
+            className="sm-iframe-wrap min-h-0 px-4 pb-4 overflow-hidden"
+            style={{ height: 'min(720px, calc(92dvh - 100px))' }}
           >
             <iframe
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
               className="w-full rounded-[12px] border-0 block"
-              style={{ marginTop: '-48px', height: `${iframeContentHeight}px` }}
-              scrolling="no"
+              style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
               allow="payment"
             />
           </div>
