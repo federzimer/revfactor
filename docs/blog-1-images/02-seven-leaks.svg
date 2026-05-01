@@ -1,25 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" width="1920" height="1200">
   <!-- ====================================================================
-       7 Leaks — RevFactor brand redesign
-       Replaces GetCito's image2.png. Fixes:
-       - lowercase title (brand rule)
-       - monochrome palette (cedar / moss / tobacco / walnut, no rainbow)
-       - JetBrains Mono numbers
-       - reordered by impact (pacing first, integration last)
-       - emblem-style center mark instead of cropped wordmark
+       7 Leaks v2 — clean grid layout (replaces circular crowded version)
+       4 cards on top row, 3 cards on bottom row centered.
+       No overlap, plenty of breathing room.
        ==================================================================== -->
 
   <defs>
-    <filter id="noise2">
+    <filter id="noise2v2">
       <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
       <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0"/>
     </filter>
   </defs>
 
-  <rect width="1920" height="1080" fill="#DDDAD3"/>
-  <rect width="1920" height="1080" filter="url(#noise2)"/>
+  <rect width="1920" height="1200" fill="#DDDAD3"/>
+  <rect width="1920" height="1200" filter="url(#noise2v2)"/>
 
-  <!-- Section label -->
+  <!-- Header -->
   <text x="960" y="100"
         font-family="Helvetica, Arial, sans-serif"
         font-weight="700"
@@ -28,7 +24,6 @@
         fill="#76574C"
         text-anchor="middle">WHERE PRICING TOOLS LEAVE MONEY ON THE TABLE</text>
 
-  <!-- Title -->
   <text x="960" y="200"
         font-family="'Cormorant Garamond', Georgia, serif"
         font-weight="400"
@@ -36,7 +31,6 @@
         fill="#13342D"
         text-anchor="middle">the seven leaks</text>
 
-  <!-- Subtitle -->
   <text x="960" y="260"
         font-family="'Cormorant Garamond', Georgia, serif"
         font-weight="400"
@@ -45,237 +39,242 @@
         fill="#76574C"
         text-anchor="middle">ordered by frequency. all seven are invisible to the tool itself.</text>
 
-  <!-- Center radial diagram. Circle has 7 nodes around it. -->
-  <!-- Center coordinates: 960, 720. Radius for nodes: 280. -->
-
-  <!-- Dashed connecting circle -->
-  <circle cx="960" cy="720" r="280" fill="none"
-          stroke="#76574C" stroke-width="1.5" stroke-dasharray="6 10" opacity="0.4"/>
-
-  <!-- Center emblem disc -->
-  <circle cx="960" cy="720" r="110" fill="#13342D"/>
-  <circle cx="960" cy="720" r="100" fill="none" stroke="#5D6D59" stroke-width="1"/>
-  <text x="960" y="700"
-        font-family="'Cormorant Garamond', Georgia, serif"
-        font-weight="400"
-        font-style="italic"
-        font-size="34"
-        fill="#DDDAD3"
-        text-anchor="middle">revfactor</text>
-  <text x="960" y="745"
-        font-family="'JetBrains Mono', monospace"
-        font-weight="500"
-        font-size="11"
-        letter-spacing="3"
-        fill="#7A8B76"
-        text-anchor="middle">7 LEAKS</text>
-
-  <!-- Node template:
-       - position calculated from angle θ (degrees) starting from -90 (top), going clockwise
-       - radius 280 from center (960, 720)
-       - node disc r=44, label text positioned outside
-       Angles: 7 nodes evenly spaced = 360/7 ≈ 51.43°
-       Starting at -90 (top): 0=-90, 1=-38.57, 2=12.86, 3=64.29, 4=115.71, 5=167.14, 6=218.57
+  <!-- Card grid: 4 cards top row at y=360, 3 cards bottom row centered at y=780
+       Card: 420w × 360h, rounded 12, bone-light bg
+       Top row: x = 60, 540, 1020, 1500 (gap 60)
+       Bottom row: x = 300, 780, 1260 (3 cards centered)
   -->
 
-  <!-- Node 01 — Pacing invisible (top, cedar, leading impact) -->
-  <g transform="translate(960, 440)">
-    <circle r="46" fill="#13342D"/>
-    <text y="-2"
+  <!-- ============== TOP ROW (4 cards) ============== -->
+
+  <!-- Card 01 — Pacing invisible (cedar accent) -->
+  <g transform="translate(60, 360)">
+    <rect width="420" height="360" rx="12" fill="#E8E6E1"/>
+    <rect x="0" y="0" width="420" height="6" fill="#13342D"/>
+    <text x="40" y="80"
           font-family="'JetBrains Mono', monospace"
           font-weight="500"
-          font-size="22"
-          letter-spacing="2"
-          fill="#DDDAD3"
-          text-anchor="middle">01</text>
-    <text y="20"
+          font-size="64"
+          fill="#13342D">01</text>
+    <text x="40" y="155"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="700"
-          font-size="9"
+          font-size="11"
           letter-spacing="2"
-          fill="#7A8B76"
-          text-anchor="middle">LEADING INDICATOR</text>
-    <!-- Label above the node -->
-    <text y="-80"
-          font-family="Helvetica, Arial, sans-serif"
-          font-weight="700"
-          font-size="22"
-          fill="#13342D"
-          text-anchor="middle">pacing is invisible</text>
-    <text y="-52"
+          fill="#5D6D59">LEADING INDICATOR</text>
+    <text x="40" y="210"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="32"
+          fill="#13342D">pacing is invisible</text>
+    <text x="40" y="262"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="400"
           font-size="16"
-          fill="#76574C"
-          text-anchor="middle">by the time occupancy looks soft, the month is lost.</text>
+          fill="#76574C">
+      <tspan x="40" dy="0">how bookings accumulate</tspan>
+      <tspan x="40" dy="22">week-over-week vs last year.</tspan>
+      <tspan x="40" dy="22">by the time occupancy looks</tspan>
+      <tspan x="40" dy="22">soft, the month is already lost.</tspan>
+    </text>
   </g>
 
-  <!-- Node 02 — Base rate anchored too low (upper right, moss) -->
-  <g transform="translate(1179, 614)">
-    <circle r="46" fill="#5D6D59"/>
-    <text y="8"
+  <!-- Card 02 — Base rate too low (moss accent) -->
+  <g transform="translate(540, 360)">
+    <rect width="420" height="360" rx="12" fill="#E8E6E1"/>
+    <rect x="0" y="0" width="420" height="6" fill="#5D6D59"/>
+    <text x="40" y="80"
           font-family="'JetBrains Mono', monospace"
           font-weight="500"
-          font-size="22"
-          letter-spacing="2"
-          fill="#DDDAD3"
-          text-anchor="middle">02</text>
-    <!-- Label to the right -->
-    <text x="68" y="-8"
+          font-size="64"
+          fill="#5D6D59">02</text>
+    <text x="40" y="155"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="700"
-          font-size="22"
+          font-size="11"
+          letter-spacing="2"
+          fill="#5D6D59">FLOOR PROBLEM</text>
+    <text x="40" y="210"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="32"
           fill="#13342D">base rate too low</text>
-    <text x="68" y="20"
+    <text x="40" y="262"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="400"
           font-size="16"
-          fill="#76574C">tool optimizes from the floor.</text>
-    <text x="68" y="42"
-          font-family="Helvetica, Arial, sans-serif"
-          font-weight="400"
-          font-size="16"
-          fill="#76574C">it never interrogates the floor.</text>
+          fill="#76574C">
+      <tspan x="40" dy="0">tool optimizes from the floor.</tspan>
+      <tspan x="40" dy="22">it never interrogates the floor.</tspan>
+      <tspan x="40" dy="22">rates move on a curve — but</tspan>
+      <tspan x="40" dy="22">it's the wrong curve.</tspan>
+    </text>
   </g>
 
-  <!-- Node 03 — No LOS strategy (right, tobacco) -->
-  <g transform="translate(1235, 833)">
-    <circle r="46" fill="#3F261F"/>
-    <text y="8"
+  <!-- Card 03 — No LOS ladder (tobacco accent) -->
+  <g transform="translate(1020, 360)">
+    <rect width="420" height="360" rx="12" fill="#E8E6E1"/>
+    <rect x="0" y="0" width="420" height="6" fill="#3F261F"/>
+    <text x="40" y="80"
           font-family="'JetBrains Mono', monospace"
           font-weight="500"
-          font-size="22"
-          letter-spacing="2"
-          fill="#DDDAD3"
-          text-anchor="middle">03</text>
-    <text x="68" y="-8"
+          font-size="64"
+          fill="#3F261F">03</text>
+    <text x="40" y="155"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="700"
-          font-size="22"
+          font-size="11"
+          letter-spacing="2"
+          fill="#5D6D59">STRUCTURE</text>
+    <text x="40" y="210"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="32"
           fill="#13342D">no length-of-stay ladder</text>
-    <text x="68" y="20"
+    <text x="40" y="262"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="400"
           font-size="16"
-          fill="#76574C">flat nightly rate is the simplest</text>
-    <text x="68" y="42"
-          font-family="Helvetica, Arial, sans-serif"
-          font-weight="400"
-          font-size="16"
-          fill="#76574C">and almost always wrong approach.</text>
+          fill="#76574C">
+      <tspan x="40" dy="0">flat nightly rate is the simplest</tspan>
+      <tspan x="40" dy="22">approach — and almost always</tspan>
+      <tspan x="40" dy="22">wrong. tools support LOS</tspan>
+      <tspan x="40" dy="22">structures. they don't design them.</tspan>
+    </text>
   </g>
 
-  <!-- Node 04 — Minimum stays static (lower right, walnut) -->
-  <g transform="translate(1057, 996)">
-    <circle r="46" fill="#76574C"/>
-    <text y="8"
+  <!-- Card 04 — Minimum stays static (walnut accent) -->
+  <g transform="translate(1500, 360)">
+    <rect width="420" height="360" rx="12" fill="#E8E6E1"/>
+    <rect x="0" y="0" width="420" height="6" fill="#76574C"/>
+    <text x="40" y="80"
           font-family="'JetBrains Mono', monospace"
           font-weight="500"
-          font-size="22"
-          letter-spacing="2"
-          fill="#DDDAD3"
-          text-anchor="middle">04</text>
-    <!-- Label below -->
-    <text y="80"
+          font-size="64"
+          fill="#76574C">04</text>
+    <text x="40" y="155"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="700"
-          font-size="22"
-          fill="#13342D"
-          text-anchor="middle">minimum stays are static</text>
-    <text y="106"
+          font-size="11"
+          letter-spacing="2"
+          fill="#5D6D59">SEASONAL MISMATCH</text>
+    <text x="40" y="210"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="32"
+          fill="#13342D">minimum stays are static</text>
+    <text x="40" y="262"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="400"
           font-size="16"
-          fill="#76574C"
-          text-anchor="middle">july rule destroys you in february.</text>
+          fill="#76574C">
+      <tspan x="40" dy="0">a 3-night minimum that works</tspan>
+      <tspan x="40" dy="22">in july destroys you in february.</tspan>
+      <tspan x="40" dy="22">two demand pools, one rule</tspan>
+      <tspan x="40" dy="22">trying to serve both.</tspan>
+    </text>
   </g>
 
-  <!-- Node 05 — Stale comp set (lower left, walnut) -->
-  <g transform="translate(862, 996)">
-    <circle r="46" fill="#76574C"/>
-    <text y="8"
+  <!-- ============== BOTTOM ROW (3 cards centered) ============== -->
+
+  <!-- Card 05 — Stale comp set (walnut) -->
+  <g transform="translate(300, 780)">
+    <rect width="420" height="360" rx="12" fill="#E8E6E1"/>
+    <rect x="0" y="0" width="420" height="6" fill="#76574C"/>
+    <text x="40" y="80"
           font-family="'JetBrains Mono', monospace"
           font-weight="500"
-          font-size="22"
-          letter-spacing="2"
-          fill="#DDDAD3"
-          text-anchor="middle">05</text>
-    <text y="80"
+          font-size="64"
+          fill="#76574C">05</text>
+    <text x="40" y="155"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="700"
-          font-size="22"
-          fill="#13342D"
-          text-anchor="middle">stale comp set</text>
-    <text y="106"
+          font-size="11"
+          letter-spacing="2"
+          fill="#5D6D59">PHANTOM MARKET</text>
+    <text x="40" y="210"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="32"
+          fill="#13342D">stale comp set</text>
+    <text x="40" y="262"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="400"
           font-size="16"
-          fill="#76574C"
-          text-anchor="middle">benchmarking against a phantom market.</text>
+          fill="#76574C">
+      <tspan x="40" dy="0">tools auto-build comp sets on</tspan>
+      <tspan x="40" dy="22">bedrooms + location. half the time</tspan>
+      <tspan x="40" dy="22">that's wrong style, wrong size,</tspan>
+      <tspan x="40" dy="22">wrong guest profile.</tspan>
+    </text>
   </g>
 
-  <!-- Node 06 — Local events generic (left, moss) -->
-  <g transform="translate(685, 833)">
-    <circle r="46" fill="#5D6D59"/>
-    <text y="8"
+  <!-- Card 06 — Local events generic (moss) -->
+  <g transform="translate(780, 780)">
+    <rect width="420" height="360" rx="12" fill="#E8E6E1"/>
+    <rect x="0" y="0" width="420" height="6" fill="#5D6D59"/>
+    <text x="40" y="80"
           font-family="'JetBrains Mono', monospace"
           font-weight="500"
-          font-size="22"
-          letter-spacing="2"
-          fill="#DDDAD3"
-          text-anchor="middle">06</text>
-    <text x="-68" y="-8"
+          font-size="64"
+          fill="#5D6D59">06</text>
+    <text x="40" y="155"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="700"
-          font-size="22"
-          fill="#13342D"
-          text-anchor="end">local events too generic</text>
-    <text x="-68" y="20"
+          font-size="11"
+          letter-spacing="2"
+          fill="#5D6D59">DEMAND BLINDSPOT</text>
+    <text x="40" y="210"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="32"
+          fill="#13342D">local events too generic</text>
+    <text x="40" y="262"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="400"
           font-size="16"
-          fill="#76574C"
-          text-anchor="end">the regional rodeo doubles demand.</text>
-    <text x="-68" y="42"
-          font-family="Helvetica, Arial, sans-serif"
-          font-weight="400"
-          font-size="16"
-          fill="#76574C"
-          text-anchor="end">the tool has never heard of it.</text>
+          fill="#76574C">
+      <tspan x="40" dy="0">event databases catch the obvious</tspan>
+      <tspan x="40" dy="22">— super bowl, big festivals.</tspan>
+      <tspan x="40" dy="22">the regional rodeo doubles demand.</tspan>
+      <tspan x="40" dy="22">the tool hasn't heard of it.</tspan>
+    </text>
   </g>
 
-  <!-- Node 07 — No PMS-pricing integration (upper left, tobacco) -->
-  <g transform="translate(741, 614)">
-    <circle r="46" fill="#3F261F"/>
-    <text y="8"
+  <!-- Card 07 — No PMS sync (tobacco) -->
+  <g transform="translate(1260, 780)">
+    <rect width="420" height="360" rx="12" fill="#E8E6E1"/>
+    <rect x="0" y="0" width="420" height="6" fill="#3F261F"/>
+    <text x="40" y="80"
           font-family="'JetBrains Mono', monospace"
           font-weight="500"
-          font-size="22"
-          letter-spacing="2"
-          fill="#DDDAD3"
-          text-anchor="middle">07</text>
-    <text x="-68" y="-8"
+          font-size="64"
+          fill="#3F261F">07</text>
+    <text x="40" y="155"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="700"
-          font-size="22"
-          fill="#13342D"
-          text-anchor="end">no pms-pricing sync</text>
-    <text x="-68" y="20"
+          font-size="11"
+          letter-spacing="2"
+          fill="#5D6D59">STACK PROBLEM</text>
+    <text x="40" y="210"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-size="32"
+          fill="#13342D">no pms-pricing sync</text>
+    <text x="40" y="262"
           font-family="Helvetica, Arial, sans-serif"
           font-weight="400"
           font-size="16"
-          fill="#76574C"
-          text-anchor="end">it's a stack problem, not strategy.</text>
-    <text x="-68" y="42"
-          font-family="Helvetica, Arial, sans-serif"
-          font-weight="400"
-          font-size="16"
-          fill="#76574C"
-          text-anchor="end">biggest lifts hide in the plumbing.</text>
+          fill="#76574C">
+      <tspan x="40" dy="0">calendar gaps and last-minute</tspan>
+      <tspan x="40" dy="22">cancellations should trigger LOS</tspan>
+      <tspan x="40" dy="22">adjustments. they don't, because</tspan>
+      <tspan x="40" dy="22">your tools aren't talking.</tspan>
+    </text>
   </g>
 
   <!-- Footer -->
-  <text x="960" y="1050"
+  <text x="960" y="1170"
         font-family="'JetBrains Mono', monospace"
         font-weight="500"
         font-size="14"
