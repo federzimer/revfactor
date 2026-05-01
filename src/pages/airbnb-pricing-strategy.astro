@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PPCNavbar from '../components/PPCNavbar.jsx';
+import PPCLanding from '../components/PPCLanding.jsx';
+import ExitIntent from '../components/ExitIntent.jsx';
+
+const comparisonRows = [
+  { label: "Sets daily price points", tool: true },
+  { label: "Comp set benchmarking", tool: true },
+  { label: "Calendar-aware demand modeling", tool: true },
+  { label: "Strategic positioning vs. comp set", tool: false },
+  { label: "Length-of-stay rules tuned to your market", tool: false },
+  { label: "Minimum-night strategy across seasons", tool: false },
+  { label: "Listing copy + photo audit", tool: false },
+  { label: "Monthly strategy call with a real human", tool: false },
+  { label: "Custom playbook for events, holidays, shoulder season", tool: false },
+];
+
+const faqs = [
+  {
+    q: "Do I have to switch pricing tools?",
+    a: "No. RevFactor works on top of whatever pricing tool you already use, including PriceLabs, Wheelhouse, or Beyond Pricing. Or none at all. We calibrate the algorithm and layer strategy on top of it.",
+  },
+  {
+    q: "How is this different from a pricing tool?",
+    a: "Pricing tools set numbers based on data. We set strategy based on context: market shifts, listing positioning, channel mix, seasonality, your portfolio's specific revenue goals. Tools alone leave money on the table.",
+  },
+  {
+    q: "What's the actual revenue lift?",
+    a: "Documented +18% average vs. comp set across our portfolio. Top performers see +20% (Kassidy & Erin Warren) to +75% (Kate Henry) year-over-year.",
+  },
+  {
+    q: "How does pricing work?",
+    a: "Flat $320/month per property. No percent-of-revenue gotchas, no setup fees. Volume discounts kick in past 5 properties.",
+  },
+  {
+    q: "How fast can we get started?",
+    a: "Strategy call within 48 hours of booking. If we're a fit, onboarding takes about a week. You see comp-set benchmarks on day one.",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.revfactor.io/" },
+    { "@type": "ListItem", "position": 2, "name": "Airbnb Pricing Strategy", "item": "https://www.revfactor.io/airbnb-pricing-strategy" },
+  ],
+};
+---
+
+<BaseLayout
+  title="Airbnb Pricing Strategy | Beyond Auto-Pricing | RevFactor"
+  description="A pricing tool sets prices. RevFactor sets the strategy that makes them work. +18% revenue lift vs. comp set. Flat $320/mo per property."
+  noindex={true}
+>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <PPCNavbar client:load />
+  <main>
+    <PPCLanding
+      client:load
+      heroBase="cliffside"
+      heroAlt="Modern cantilevered short-term rental on a forested cliff at golden hour, RevFactor revenue strategy"
+      eyebrow="BEYOND PRICING TOOLS"
+      headlinePart1="Your pricing tool is leaving 18% on the table."
+      headlinePart2Italic="We extract it."
+      subhead="Algorithms set numbers. We build the strategy that makes them work: comp positioning, length-of-stay rules, listing audits, monthly recalibration. +18% lift across our portfolio. Direct access to a seasoned strategist plus 24/7 dashboard messaging. $320/mo per property."
+      ctaText="Book Free Strategy Call"
+      comparisonRows={comparisonRows}
+      faqs={faqs}
+      finalCtaPretext="STOP LEAVING REVENUE TO YOUR ALGORITHM."
+    />
+    <ExitIntent client:load />
+  </main>
+</BaseLayout>

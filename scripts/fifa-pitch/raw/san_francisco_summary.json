@@ -1,0 +1,16 @@
+{
+  "market": {
+    "country": "United States",
+    "region": "California",
+    "locality": "San Jose",
+    "district": null
+  },
+  "occupancy": 0.48,
+  "average_daily_rate": 202.8,
+  "rev_par": 101.0,
+  "revenue": 21055.7,
+  "booking_lead_time": 31.9,
+  "length_of_stay": 7.8,
+  "min_nights": 7.1,
+  "active_listings_count": 2194.0
+}

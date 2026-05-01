@@ -219,3 +219,7 @@ ScrollTrigger is used for scroll-based reveals. Most elements use a class-based 
 9. **Port 4321:** Dev server runs on port 4321 (not the default 5173). This is intentional — configured in `vite.config.js`.
 
 10. **Leftover Vite assets:** `public/vite.svg` and `src/assets/react.svg` are default Vite scaffold files and can be removed.
+
+## QA / functional testing
+
+User-facing flows are tested with Playwright via the [qa-flow-tester skill](/Users/aaronwhittaker/.claude/skills/qa-flow-tester/SKILL.md). Tests live at [tests/playwright/specs/](tests/playwright/specs/). Setup, decision tree, and a working reference test are documented in the skill — copy the pattern from [/Users/aaronwhittaker/Claude/cynthiastayscurated/tests/playwright/specs/travel-quote.spec.js](/Users/aaronwhittaker/Claude/cynthiastayscurated/tests/playwright/specs/travel-quote.spec.js) when adding the first flow.

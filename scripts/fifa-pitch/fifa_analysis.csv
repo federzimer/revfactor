@@ -1,0 +1,12 @@
+city,key,stadium,active_listings,ttm_adr,ttm_occupancy,june_july_3yr_avg_adr,june_2025_adr,july_2025_adr,june_july_3yr_avg_occupancy,fifa_window_booked_adr,fifa_window_available_adr,fifa_window_fill_rate,control_window_booked_adr,control_window_fill_rate,uplift_pct_vs_3yr_junejul,uplift_pct_vs_control_window,dollar_uplift_vs_3yr,fill_rate_ratio_fifa_vs_control
+Kansas City,kansas_city,Arrowhead Stadium,1326.1,218.4,0.48,195.42,229.8,220.1,0.58,325.62,615.59,0.27,236.63,0.212,66.6,37.6,130.2,1.27
+Seattle,seattle,Lumen Field,5415.6,237.6,0.55,240.08,284.1,282.5,0.71,385.74,472.14,0.305,268.21,0.247,60.7,43.8,145.66,1.23
+Philadelphia,philadelphia,Lincoln Financial Field,4494.8,186.2,0.44,165.32,195.5,186.9,0.55,253.99,376.91,0.199,210.83,0.206,53.6,20.5,88.67,0.97
+Atlanta,atlanta,Mercedes-Benz Stadium,5389.8,232.5,0.42,200.22,235.8,235.0,0.52,305.17,454.58,0.138,270.05,0.131,52.4,13.0,104.95,1.05
+Miami,miami,Hard Rock Stadium (Miami Gardens),7944.6,290.6,0.5,236.05,278.3,266.4,0.54,344.05,517.43,0.146,294.88,0.13,45.8,16.7,108.0,1.12
+Dallas,dallas,AT&T Stadium (Arlington),4124.3,231.7,0.44,210.13,248.5,230.7,0.56,304.64,579.37,0.19,248.16,0.113,45.0,22.8,94.51,1.68
+Houston,houston,NRG Stadium,8584.8,208.3,0.42,179.22,209.6,205.8,0.52,251.52,360.52,0.143,209.12,0.093,40.3,20.3,72.3,1.54
+Boston,boston,Gillette Stadium (Foxborough),2788.1,287.7,0.51,278.82,308.2,303.5,0.62,388.41,434.37,0.34,329.45,0.3,39.3,17.9,109.59,1.13
+New York,new_york,"MetLife Stadium (East Rutherford, NJ)",11659.7,226.2,0.5,206.03,220.1,215.3,0.55,245.08,259.11,0.217,226.29,0.239,19.0,8.3,39.05,0.91
+San Jose,san_francisco,Levi's Stadium (Santa Clara),2194.0,202.8,0.48,183.72,228.8,210.8,0.63,206.56,252.25,0.181,200.73,0.157,12.4,2.9,22.84,1.15
+Los Angeles,los_angeles,SoFi Stadium (Inglewood),10263.8,316.8,0.48,297.92,324.9,318.9,0.56,303.41,358.37,0.156,260.25,0.188,1.8,16.6,5.49,0.83

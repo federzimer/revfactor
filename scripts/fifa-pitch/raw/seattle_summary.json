@@ -1,0 +1,16 @@
+{
+  "market": {
+    "country": "United States",
+    "region": "Washington",
+    "locality": "Seattle",
+    "district": null
+  },
+  "occupancy": 0.55,
+  "average_daily_rate": 237.6,
+  "rev_par": 133.4,
+  "revenue": 33582.8,
+  "booking_lead_time": 42.1,
+  "length_of_stay": 5.6,
+  "min_nights": 9.5,
+  "active_listings_count": 5415.6
+}

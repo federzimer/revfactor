@@ -9,6 +9,7 @@ interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   publishedTime,
   modifiedTime,
   author,
+  noindex = false,
 } = Astro.props;
 
 const canonicalUrl = Astro.url.href;
@@ -40,7 +42,7 @@ const canonicalUrl = Astro.url.href;
   <!-- SEO -->
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1"} />
   <link rel="canonical" href={canonicalUrl} />
 
   <!-- Open Graph -->
@@ -77,6 +79,21 @@ const canonicalUrl = Astro.url.href;
     data-website-id="fd5982fb-76c6-4a8c-bf65-2ad69c72c306"
   ></script>
 
+  <!-- Microsoft Clarity — session recording + heatmaps (free).
+       Project ID env-overridable via PUBLIC_CLARITY_ID; default placeholder
+       must be replaced with the real ID from https://clarity.microsoft.com
+       (create a project for revfactor.io). The script self-skips if the ID
+       is still the placeholder so we don't ship broken telemetry. -->
+  <script is:inline define:vars={{ clarityId: import.meta.env.PUBLIC_CLARITY_ID || 'REPLACE_WITH_CLARITY_ID' }}>
+    if (clarityId && clarityId !== 'REPLACE_WITH_CLARITY_ID') {
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        var y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", clarityId);
+    }
+  </script>
+
   <!-- Google Analytics + Google Ads (one gtag.js load handles both IDs) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CTGBJ9RLK"></script>
   <script is:inline>
@@ -85,6 +102,42 @@ const canonicalUrl = Astro.url.href;
     gtag('js', new Date());
     gtag('config', 'G-1CTGBJ9RLK');
     gtag('config', 'AW-18106897053');
+
+    // Cal.com booking listener — fires Google Ads "Strategy Call Booked" conversion
+    // and GA4 event when any embedded Cal.com iframe completes a booking.
+    // Cal.com sends `{ type: 'bookingSuccessful', data: {...} }` via postMessage.
+    (function () {
+      var bookedThisSession = false;
+      window.addEventListener('message', function (e) {
+        if (!e.data || typeof e.data !== 'object') return;
+        var type = e.data.type || (e.data.data && e.data.data.type);
+        if (type !== 'bookingSuccessful' && type !== 'bookingSuccessfulV2') return;
+        if (bookedThisSession) return;
+        bookedThisSession = true;
+
+        gtag('event', 'conversion', {
+          send_to: 'AW-18106897053/WkHxCOKD46McEJ2lhbpD',
+          value: 1500.00,
+          currency: 'USD'
+        });
+        gtag('event', 'strategy_call_booked', {
+          value: 1500,
+          currency: 'USD',
+          source: 'cal_com_embed'
+        });
+      });
+    })();
+
+    // Phone click listener — fires "Phone Click" conversion on tel: links.
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
+      if (!a) return;
+      gtag('event', 'conversion', {
+        send_to: 'AW-18106897053/eLI7CMiey6McEJ2lhbpD',
+        value: 100.00,
+        currency: 'USD'
+      });
+    });
   </script>
 </head>
 <body>
