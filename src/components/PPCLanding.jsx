@@ -218,6 +218,10 @@ export default function PPCLanding({
   // Available: clifftop (V3 dusk), aframe (V4 golden hour), snowcap (V2 peaks),
   // meadow (V1 hazy mountains).
   heroBase = "clifftop",
+  // Optional override for the split-hero variant only — lets a brighter
+  // image surface behind the calendar without changing the stacked hero.
+  // Falls back to heroBase when not provided.
+  splitHeroBase,
   heroAlt = "Modern luxury short-term rental property managed by RevFactor",
   // "stacked" (default, image bg + CTA above the comparison/testimonials/calendar
   // sections) or "split" (calendar embedded RIGHT-of-hero, headline on the LEFT).
@@ -305,25 +309,33 @@ export default function PPCLanding({
            ?v=split URL param for A/B testing. */}
       {effectiveLayout === 'split' ? (
         <section className="relative min-h-[88vh] md:min-h-[92vh] flex items-center overflow-hidden bg-[#161910]">
-          {/* Tiny background image — set on right column behind the calendar
-              card for visual continuity, faded so the card stays readable. */}
-          <picture>
-            <source
-              type="image/webp"
-              srcSet={`/heroes/${heroBase}-1200.webp 1200w, /heroes/${heroBase}-1920.webp 1920w, /heroes/${heroBase}-2400.webp 2400w`}
-              sizes="100vw"
-            />
-            <img
-              src={`/heroes/${heroBase}-1920.webp`}
-              alt={heroAlt}
-              fetchpriority="high"
-              decoding="async"
-              width="1920"
-              height="1048"
-              className="absolute inset-0 w-full h-full object-cover opacity-40"
-            />
-          </picture>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#161910] via-[#161910]/85 to-[#161910]/40" />
+          {/* Background image — full opacity, lighter directional gradient so
+              the image actually reads behind the calendar. Gradient tint
+              keeps headline legible on the left half. Same treatment as
+              stacked hero. splitHeroBase lets the page swap in a brighter
+              image for this variant only. */}
+          {(() => {
+            const splitBase = splitHeroBase || heroBase;
+            return (
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={`/heroes/${splitBase}-1200.webp 1200w, /heroes/${splitBase}-1920.webp 1920w, /heroes/${splitBase}-2400.webp 2400w`}
+                  sizes="100vw"
+                />
+                <img
+                  src={`/heroes/${splitBase}-1920.webp`}
+                  alt={heroAlt}
+                  fetchpriority="high"
+                  decoding="async"
+                  width="1920"
+                  height="1048"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </picture>
+            );
+          })()}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#161910] via-[#161910]/70 to-[#161910]/15" />
 
           <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-12 md:pt-32 md:pb-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             {/* LEFT — copy + risk-reversal + founder signature */}
