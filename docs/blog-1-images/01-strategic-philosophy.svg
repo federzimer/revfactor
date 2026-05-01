@@ -1,0 +1,197 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- ====================================================================
+       Strategic Philosophy v2 — clean three-column layout, no rsvg-rendered icons.
+       Replaces complex icon paths (which rendered as silhouettes) with
+       large numeric pillars + iconography expressed through type only.
+       ==================================================================== -->
+
+  <defs>
+    <filter id="noise1v2">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#DDDAD3"/>
+  <rect width="1920" height="1080" filter="url(#noise1v2)"/>
+
+  <!-- Section label -->
+  <text x="960" y="100"
+        font-family="Helvetica, Arial, sans-serif"
+        font-weight="700"
+        font-size="20"
+        letter-spacing="3"
+        fill="#76574C"
+        text-anchor="middle">THE STRATEGIC FRAME</text>
+
+  <!-- Headline -->
+  <text x="960" y="200"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-style="italic"
+        font-size="84"
+        fill="#13342D"
+        text-anchor="middle">strategic philosophy</text>
+
+  <!-- Subhead -->
+  <text x="960" y="260"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-size="28"
+        fill="#76574C"
+        text-anchor="middle">the three factors that decide whether a guest books at the price you set.</text>
+
+  <!-- Three pillar columns. 3 cards: 480w × 540h, x = 100, 720, 1340 -->
+
+  <!-- Column 1: INTEREST (cedar) -->
+  <g transform="translate(100, 360)">
+    <rect width="480" height="540" rx="12" fill="#13342D"/>
+    <text x="240" y="120"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="80"
+          fill="#7A8B76"
+          text-anchor="middle">01</text>
+    <line x1="200" y1="160" x2="280" y2="160" stroke="#7A8B76" stroke-width="2"/>
+    <text x="240" y="220"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="14"
+          letter-spacing="3"
+          fill="#7A8B76"
+          text-anchor="middle">INTEREST</text>
+    <text x="240" y="290"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-style="italic"
+          font-size="38"
+          fill="#DDDAD3"
+          text-anchor="middle">your conversion</text>
+    <text x="240" y="335"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-style="italic"
+          font-size="38"
+          fill="#DDDAD3"
+          text-anchor="middle">rate.</text>
+    <text x="240" y="420"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="18"
+          fill="#CCC8BF"
+          text-anchor="middle">
+      <tspan x="240" dy="0">photos. title. amenities.</tspan>
+      <tspan x="240" dy="28">reviews. perceived value.</tspan>
+      <tspan x="240" dy="40" font-style="italic" font-family="'Cormorant Garamond', Georgia, serif" font-size="22">a healthy listing first.</tspan>
+    </text>
+  </g>
+
+  <!-- Column 2: RELIABILITY (moss) -->
+  <g transform="translate(720, 360)">
+    <rect width="480" height="540" rx="12" fill="#5D6D59"/>
+    <text x="240" y="120"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="80"
+          fill="#13342D"
+          text-anchor="middle">02</text>
+    <line x1="200" y1="160" x2="280" y2="160" stroke="#13342D" stroke-width="2"/>
+    <text x="240" y="220"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="14"
+          letter-spacing="3"
+          fill="#13342D"
+          text-anchor="middle">RELIABILITY</text>
+    <text x="240" y="290"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-style="italic"
+          font-size="38"
+          fill="#DDDAD3"
+          text-anchor="middle">review velocity</text>
+    <text x="240" y="335"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-style="italic"
+          font-size="38"
+          fill="#DDDAD3"
+          text-anchor="middle">+ cadence.</text>
+    <text x="240" y="420"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="18"
+          fill="#E8E6E1"
+          text-anchor="middle">
+      <tspan x="240" dy="0">the airbnb algorithm rewards</tspan>
+      <tspan x="240" dy="28">consistency. so do guests.</tspan>
+      <tspan x="240" dy="40" font-style="italic" font-family="'Cormorant Garamond', Georgia, serif" font-size="22">launch is its own discipline.</tspan>
+    </text>
+  </g>
+
+  <!-- Column 3: POSITIONING (tobacco) -->
+  <g transform="translate(1340, 360)">
+    <rect width="480" height="540" rx="12" fill="#3F261F"/>
+    <text x="240" y="120"
+          font-family="'JetBrains Mono', monospace"
+          font-weight="500"
+          font-size="80"
+          fill="#7A8B76"
+          text-anchor="middle">03</text>
+    <line x1="200" y1="160" x2="280" y2="160" stroke="#7A8B76" stroke-width="2"/>
+    <text x="240" y="220"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="700"
+          font-size="14"
+          letter-spacing="3"
+          fill="#7A8B76"
+          text-anchor="middle">POSITIONING</text>
+    <text x="240" y="290"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-style="italic"
+          font-size="38"
+          fill="#DDDAD3"
+          text-anchor="middle">where you sit</text>
+    <text x="240" y="335"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-weight="400"
+          font-style="italic"
+          font-size="38"
+          fill="#DDDAD3"
+          text-anchor="middle">vs the comp set.</text>
+    <text x="240" y="420"
+          font-family="Helvetica, Arial, sans-serif"
+          font-weight="400"
+          font-size="18"
+          fill="#CCC8BF"
+          text-anchor="middle">
+      <tspan x="240" dy="0">price on perception, not cost.</tspan>
+      <tspan x="240" dy="28">guests don't see your mortgage.</tspan>
+      <tspan x="240" dy="40" font-style="italic" font-family="'Cormorant Garamond', Georgia, serif" font-size="22">you're on an island otherwise.</tspan>
+    </text>
+  </g>
+
+  <!-- Footer connector -->
+  <text x="960" y="990"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-style="italic"
+        font-size="28"
+        fill="#76574C"
+        text-anchor="middle">these three pillars are how we </text>
+  <text x="960" y="990"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-style="italic"
+        font-size="28"
+        fill="#76574C"
+        text-anchor="middle"></text>
+  <text x="960" y="1030"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="400"
+        font-style="italic"
+        font-size="28"
+        fill="#13342D"
+        text-anchor="middle">think about revenue. below the strategy sits the operational discipline.</text>
+</svg>
