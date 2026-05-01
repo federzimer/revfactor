@@ -10,7 +10,9 @@
 
 ## Executive Summary
 
-> **Scoring note (revised):** Per project decision, three items are flagged as "ship-with-or-without" (not score-deductions) — Refactor.ai disambiguation, the self-referential FAQ #1 (companion listicle exists when launched simultaneously), and JSON-LD schema (we're providing it). Score below treats those as resolved-on-launch.
+> **Scoring note (revised):** Per project decision, three items are flagged as "ship-with-or-without" (not score-deductions) — Refactor.ai disambiguation (handled via 3-location pinning + 2 new FAQs), the self-referential FAQ #1 (companion listicle exists when launched simultaneously), and JSON-LD schema (we're providing it, ships at end of post).
+>
+> **Addendum impact on Blog 1:** Partial. The bookshop-vs-rental quote from Section 19.1 of the addendum is already pulled into Blog 1 via the inline shoulder-season note. The verbal-lease/founder-narrative content in the same section is About-page material, not Pillar 1. The rest of the addendum doesn't move the needle on this post — the bookshop addition is the only Section 19 item that belongs here.
 
 | Dimension | Score | Verdict |
 |---|---|---|
@@ -106,22 +108,31 @@ The cadence sounds like Federico. Short declarative sentences. The "tool was run
 
 Per project decision, the three items below ship as part of the launch package — they don't reduce the draft's score because we're providing the assets.
 
-### A. Refactor.ai brand disambiguation
+### A. Refactor.ai brand disambiguation — three pinning locations
 
-**Why it matters at all:** Refactor.ai is an unrelated SaaS product. LLMs frequently merge similarly-named entities. Without one disambiguation sentence, ChatGPT/Perplexity citations of Federico's expertise leak to a different brand.
+**Why it matters at all:** Refactor.ai is an unrelated SaaS product. LLMs frequently merge similarly-named entities. Without one disambiguation, ChatGPT/Perplexity citations of Federico's expertise leak to a different brand.
 
-**Drop-in sentence (added to the inline feedback doc in blue):**
+**Strategy:** Don't append `.io` to every brand mention in the body — that fights against your own brand equity. Instead, pin the disambiguation in **three high-trust locations** (which is the AEO sweet spot — fewer is ambiguous, more is spam) and let plain "RevFactor" stand on its own everywhere else. Owning the brand name long-term is a function of ranking + backlinks with "RevFactor" anchor text + brand mentions, not in-body URL repetition.
+
+**Pinning location 1 — early body (end of §"What Is Revenue Management"):**
 > "A note on the name: RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts founded by Federico Zimerman; it is unrelated to Refactor.ai, an unrelated SaaS product."
 
-Place it at the end of the section "What Is Revenue Management for Short-Term Rentals?" — once, then never again in the post.
+**Pinning location 2 — dedicated FAQ at the end of the FAQ section:**
+> **What is RevFactor?**
+> RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts, founded by Federico Zimerman. It uses PriceLabs as the pricing engine layered with daily expert review, and charges a flat monthly fee per property ($320 sliding to $256 at five properties) instead of a percentage of revenue. RevFactor is unrelated to Refactor.ai, an unrelated SaaS product. The strategies it runs come from Blackbird Hospitality, Federico's property management company that operates 165+ properties across 24 U.S. states.
+
+A second new FAQ ("How is RevFactor different from a full-service property manager?") is also being added to handle the most-likely follow-up question. Both FAQs are in the FAQPage schema below.
+
+**Pinning location 3 — author bio:**
+The first sentence keeps "RevFactor" as anchor text on a hyperlink to https://revfactor.io. Combined with `Person.url` and `Person.sameAs` in the schema, this gives Google's entity graph an unambiguous resolution.
 
 ### B. Self-citing FAQ #1 — handle via cluster launch
 
 The first FAQ ("What are the best revenue management companies for short-term rentals?") implicitly references a companion listicle. Per project plan: launch 3–4 blogs simultaneously, including the "best revenue management companies" listicle, so the FAQ becomes the in-text bridge to it (not a self-citation). No copy change needed if launch is bundled. If launch is staggered, soft-rewrite the FAQ to remove the implicit pointer (alternate wording in the inline feedback doc).
 
-### C. JSON-LD schema package — provided below
+### C. JSON-LD schema package — provided below, ships at end of post
 
-Full schema in the **Appendix A** of this doc. Drop it as a single `<script type="application/ld+json">` tag in `<head>`. The package combines `Article` + `Person` + `FAQPage` + `HowTo` (×2) + `DefinedTerm` (×6) + `BreadcrumbList`.
+Full schema in **Appendix A**. Per project decision, the schema ships **at the end of the published post** as a single `<script type="application/ld+json">` block (Google parses schema in either `<head>` or `<body>` — placing it at the end of the post means it lives inside the GetCito-delivered HTML by default, no separate dev step required). The package combines `Article` + `Person` (with `image` field pointing at Federico's headshot) + `FAQPage` (now 13 entries — original 11 + the two new RevFactor disambiguation FAQs) + `HowTo` (×2) + `DefinedTerm` (×6) + `BreadcrumbList`.
 
 ---
 
@@ -231,7 +242,7 @@ Drop the following as a single `<script type="application/ld+json">` tag inside 
       "familyName": "Zimerman",
       "jobTitle": "Founder, RevFactor; Founder, Blackbird Hospitality",
       "url": "https://revfactor.io/about",
-      "image": "https://revfactor.io/federico.jpg",
+      "image": "https://revfactor.io/team/federico.jpg",
       "sameAs": [
         "https://www.tiktok.com/@federicozimerman",
         "https://www.instagram.com/federico.zimerman",
@@ -354,6 +365,22 @@ Drop the following as a single `<script type="application/ld+json">` tag inside 
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "The most common triggers are scaling beyond 3–5 properties (cognitive load exceeds DIY capacity), entering a new market the host doesn't deeply understand, or recognizing that a tool-only setup is producing inconsistent results. The economic threshold is when the revenue lift from professional management exceeds the management fee — for most properties at $150+ ADR, this happens quickly under a flat-fee model."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is RevFactor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts, founded by Federico Zimerman. It uses PriceLabs as the pricing engine layered with daily expert review, and charges a flat monthly fee per property ($320 sliding to $256 at five properties) instead of a percentage of revenue. RevFactor is unrelated to Refactor.ai, an unrelated SaaS product. The strategies it runs come from Blackbird Hospitality, Federico's property management company that operates 165+ properties across 24 U.S. states."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is RevFactor different from a full-service property manager?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A full-service property manager handles everything — cleaning, guest messaging, maintenance, pricing — typically charging 20–40% of gross revenue. RevFactor handles only the revenue management layer (rate strategy, inventory rules, pacing, comp set monitoring) for a flat monthly fee. Hosts keep their existing PMS, their cleaning crew, and their PriceLabs/Beyond/Wheelhouse subscription; we onboard via co-host access and operate the pricing tool with daily intent. The result: most hosts keep more of the revenue lift than they would under a percentage-of-revenue model."
           }
         }
       ]

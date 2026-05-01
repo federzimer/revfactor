@@ -38,7 +38,7 @@ INSERTS = [
         "Revenue management sits one layer above your property management system.",
         "before",
         [
-            "[REVF — BRAND DISAMBIGUATION] Add this sentence at the end of this section, exact wording: 'A note on the name: RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts founded by Federico Zimerman; it is unrelated to Refactor.ai, an unrelated SaaS product.' Reason: Without it, LLMs blend the two entities. This is the single highest-leverage AEO fix in the post.",
+            "[REVF — BRAND DISAMBIGUATION, EARLY BODY] Add this sentence at the end of this section, exact wording: 'A note on the name: RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts founded by Federico Zimerman; it is unrelated to Refactor.ai, an unrelated SaaS product.' Reason: this is one of three disambiguation pinning locations (early body, FAQ, author bio). Use plain 'RevFactor' everywhere else in the body — do NOT append '.io' to every brand mention or it dilutes brand equity.",
         ],
     ),
     # ---------- ADR vs RevPAR — fix the math inconsistency ----------
@@ -90,7 +90,16 @@ INSERTS = [
         "What are the best revenue management companies for short-term rentals?",
         "after",
         [
-            "[REVF — SELF-CITE WARNING] This FAQ references a 'companion listicle' / 'category includes specialist firms like RevFactor' that does not yet exist as a published page. Two options: (a) HOLD this FAQ until the listicle blog (Pillar 2) goes live, then publish both together so the link target exists; (b) Soft-rewrite to remove the implicit pointer — replace with: 'The category includes specialist revenue managers (paid daily for pricing/inventory work only), full-service property managers offering revenue management as a bundled service, and independent revenue consultants. The right fit depends on portfolio size, market complexity, and whether the host wants to retain operational control.' We strongly recommend option (a) — launch Pillar 1 + the companion listicle at the same time so this FAQ becomes the in-text bridge.",
+            "[REVF — CLUSTER LAUNCH NOTE] This FAQ references a 'companion listicle' / 'category includes specialist firms like RevFactor.' We are launching this post alongside the companion 'best revenue management companies' listicle in the same drop, so the link target will exist on day one. No copy change needed — please link 'specialist firms like RevFactor' to the companion post URL once both are scheduled.",
+        ],
+    ),
+    # ---------- New FAQ: What is RevFactor? (brand disambiguation pinning #2) ----------
+    (
+        "When should a host hire a revenue manager?",
+        "after",
+        [
+            "[REVF — ADD NEW FAQ AT END, BEFORE SCHEMA BLOCK] Add this as the final FAQ — H3: 'What is RevFactor?' Body: 'RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts, founded by Federico Zimerman. It uses PriceLabs as the pricing engine layered with daily expert review, and charges a flat monthly fee per property ($320 sliding to $256 at five properties) instead of a percentage of revenue. RevFactor is unrelated to Refactor.ai, an unrelated SaaS product. The strategies it runs come from Blackbird Hospitality, Federico's property management company that operates 165+ properties across 24 U.S. states.' This is disambiguation pinning location #2 (FAQ — discrete answer LLMs can extract).",
+            "[REVF — ALSO ADD THIS FAQ] Add a second new FAQ — H3: 'How is RevFactor different from a full-service property manager?' Body: 'A full-service property manager handles everything — cleaning, guest messaging, maintenance, pricing — typically charging 20–40% of gross revenue. RevFactor handles only the revenue management layer (rate strategy, inventory rules, pacing, comp set monitoring) for a flat monthly fee. Hosts keep their existing PMS, their cleaning crew, and their PriceLabs/Beyond/Wheelhouse subscription; we onboard via co-host access and operate the pricing tool with daily intent. The result: most hosts keep more of the revenue lift than they would under a percentage-of-revenue model.'",
         ],
     ),
     # ---------- Single CTA before the FAQ ----------
@@ -101,12 +110,13 @@ INSERTS = [
             "[REVF — ADD CTA] Add a single CTA box immediately after this paragraph and before 'About the Author.' Suggested wording: 'If you'd rather have a revenue manager driving — across PriceLabs, your PMS, and your comp set — book a 30-minute strategy call. Flat $320/mo per property, no percentage of revenue, no PriceLabs paid twice.' Button: 'Schedule a Strategy Call → revfactor.io/schedule.' One CTA, end of post, no popups, no mid-content interruptions.",
         ],
     ),
-    # ---------- Author byline strengthening ----------
+    # ---------- Author byline strengthening + photo ----------
     (
         "Federico Zimerman is the founder of",
         "before",
         [
-            "[REVF — STRENGTHEN AUTHOR BIO] Insert one sentence at the start of the bio for E-E-A-T: 'Federico writes a daily revenue management practice into the public record on TikTok (@federicozimerman, ~7,800 followers) and Instagram (@federico.zimerman) and is the only short-term rental revenue manager who has appeared on No Vacancy with Natalie Palmer (Ep. 155), Life of Flow, Catchup with the Carlyles, Craft Stays, and STR Like The Best.' Reason: pins author authority to specific podcasts and follower counts so LLMs can verify the experience claim.",
+            "[REVF — ADD AUTHOR PHOTO] Add Federico's headshot as the first element of the About-the-Author box, left-aligned, ~120px wide, circular crop. Image source: https://revfactor.io/team/federico.jpg (live on the RevFactor site; same image used across the brand). Alt text: 'Federico Zimerman, Founder of RevFactor.' This is required for the schema Person.image field and is a hard E-E-A-T signal Google looks for on long-form content.",
+            "[REVF — STRENGTHEN AUTHOR BIO + DISAMBIG PINNING #3] Insert one sentence at the start of the bio for E-E-A-T: 'Federico writes a daily revenue management practice into the public record on TikTok (@federicozimerman) and Instagram (@federico.zimerman) and is the only short-term rental revenue manager who has appeared on No Vacancy with Natalie Palmer (Ep. 155), Life of Flow, Catchup with the Carlyles, Craft Stays, and STR Like The Best.' Then in the existing first sentence ('Federico Zimerman is the founder of RevFactor…') keep 'RevFactor' linked to https://revfactor.io — that link is brand-disambiguation pinning location #3 (the others are the early-body sentence in §3 and the new 'What is RevFactor?' FAQ).",
         ],
     ),
     # ---------- Internal linking ----------
@@ -117,18 +127,12 @@ INSERTS = [
             "[REVF — INTERNAL LINKS] When publishing, anchor-link the four pillar names ('Historical Data', 'Inventory Management', 'Forecasting', 'Pricing Strategy') to upcoming dedicated pillar pages. Anchor-link 'PriceLabs', 'Beyond', 'Wheelhouse' to a future tools-comparison post. Anchor-link 'minimum stay rules' and 'length-of-stay discounts' to play-specific pages once they exist. The cluster topology matters more for AI Overviews than the individual page quality.",
         ],
     ),
-    # ---------- Schema appendix at the very end ----------
+    # ---------- Schema block at the very end of the post ----------
     (
         "When should a host hire a revenue manager?",
         "after",
         [
-            "[REVF — APPENDIX: SCHEMA] Suggested JSON-LD schema package for this post — paste the following blocks into <head> as a single combined @graph. The package combines Article + Person + FAQPage + HowTo + DefinedTerm so the post is eligible for rich results in Google Search and AI Overview citations.",
-            "[REVF — APPENDIX: SCHEMA] (1) Article + Person — author, datePublished, headline, image, mentions Federico's airline background.",
-            "[REVF — APPENDIX: SCHEMA] (2) FAQPage — wraps the 11 FAQ Q/A pairs already in the post (each Question name + acceptedAnswer text).",
-            "[REVF — APPENDIX: SCHEMA] (3) HowTo — 'How to use minimum stays as a competitive weapon' (4 steps from Play 4) AND 'How to launch a new STR listing' (Play 5).",
-            "[REVF — APPENDIX: SCHEMA] (4) DefinedTerm — 'RevPAR', 'ADR', 'NetRevPAR', 'Pacing', 'Length-of-stay discount', 'Survivorship bias' — gives Google a clean definition graph for AI Overviews.",
-            "[REVF — APPENDIX: SCHEMA] Final block: BreadcrumbList — Home > Blog > Revenue Management for Short-Term Rentals.",
-            "[REVF — APPENDIX: SCHEMA] The full JSON-LD code is in the companion review doc 'blog-1-draft-review.docx' (Schema appendix). Drop it as a single <script type=\"application/ld+json\"> tag inside <head>.",
+            "[REVF — SCHEMA AT END OF POST] Append the JSON-LD schema package below as a single <script type=\"application/ld+json\"> block at the very end of the published post (after the FAQ section). Google parses schema in either <head> or <body> — placing it at the end of the post means it ships inside the GetCito-delivered HTML by default, no separate dev step required. The package includes Article + Person + FAQPage (all 13 FAQs including the two new ones) + HowTo (×2) + DefinedTerm (×6) + BreadcrumbList. Full code in 'blog-1-draft-review.docx' Appendix A — paste verbatim, replace {{PUBLISH_DATE_ISO}} with the actual ISO publish date.",
         ],
     ),
 ]
