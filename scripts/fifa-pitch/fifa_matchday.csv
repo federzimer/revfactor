@@ -1,0 +1,12 @@
+city,key,num_matches,matchday_nights_n,baseline_junejul_adr_3yr,baseline_junejul_occ_3yr,matchday_booked_adr,matchday_asking_adr,matchday_fill_rate,nonmatch_booked_adr,nonmatch_asking_adr,nonmatch_fill_rate,matchday_asking_vs_baseline_pct,matchday_asking_vs_nonmatch_asking_pct,matchday_booked_vs_baseline_pct,matchday_fill_vs_nonmatch_fill_ratio
+Kansas City,kansas_city,6,12,195.42,0.58,447.72,699.73,0.42,271.35,578.2,0.2,258.1,21.0,129.1,2.1
+Dallas,dallas,9,18,210.13,0.56,319.25,623.36,0.24,292.12,541.68,0.15,196.7,15.1,51.9,1.6
+Philadelphia,philadelphia,6,12,165.32,0.55,301.25,476.79,0.29,232.99,332.51,0.16,188.4,43.4,82.2,1.81
+Atlanta,atlanta,8,16,200.22,0.52,317.8,471.34,0.17,296.38,442.92,0.12,135.4,6.4,58.7,1.42
+Houston,houston,7,14,179.22,0.52,268.74,416.96,0.18,241.87,328.91,0.12,132.7,26.8,49.9,1.5
+Miami,miami,7,14,236.05,0.54,358.54,532.61,0.19,335.93,508.92,0.12,125.6,4.7,51.9,1.58
+Seattle,seattle,6,12,240.08,0.71,422.48,532.58,0.38,369.41,445.28,0.27,121.8,19.6,76.0,1.41
+Boston,boston,7,14,278.82,0.62,425.66,450.91,0.48,367.55,425.11,0.26,61.7,6.1,52.7,1.85
+San Jose,san_francisco,6,12,183.72,0.63,229.1,272.43,0.23,196.54,243.29,0.16,48.3,12.0,24.7,1.44
+New York,new_york,8,16,206.03,0.55,254.27,257.28,0.23,238.7,260.38,0.21,24.9,-1.2,23.4,1.1
+Los Angeles,los_angeles,8,16,297.92,0.56,313.56,365.82,0.18,296.34,353.18,0.14,22.8,3.6,5.2,1.29

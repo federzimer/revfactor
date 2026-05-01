@@ -11,34 +11,57 @@ from docx import Document
 from docx.shared import RGBColor
 
 BLUE = RGBColor(0x1A, 0x4F, 0xBF)
+GREEN = RGBColor(0x0A, 0x7A, 0x3C)
 DOCX = "/Users/aaronwhittaker/Claude/RevFactor/docs/revfactor-content-brain.docx"
 
 doc = Document(DOCX)
 
 in_round2_section = False
-colored_count = 0
+in_delta_section = False
+blue_count = 0
+green_count = 0
 
 for para in doc.paragraphs:
     text = para.text or ""
 
-    # Detect when we enter the Round-2 section
-    if "Round-2 Deep Mine" in text or "Round-2 Deep Mine — Additional" in text:
+    # Section transitions
+    if "Round-2 Deep Mine" in text:
         in_round2_section = True
+        in_delta_section = False  # exiting any delta section if we re-enter round-2
+    if "Updates Since v1 Sent to GetCito" in text or "19. Updates Since" in text:
+        in_round2_section = False
+        in_delta_section = True
 
-    has_marker = "[ROUND-2]" in text or "[ROUND-2 START" in text or "[ROUND-2 START —" in text
+    has_round2_marker = "[ROUND-2]" in text or "[ROUND-2 START" in text
+    has_delta_marker = "[DELTA]" in text
 
-    if in_round2_section or has_marker:
-        # Strip the marker text from runs
+    target_color = None
+    if in_delta_section or has_delta_marker:
+        target_color = GREEN
+    elif in_round2_section or has_round2_marker:
+        target_color = BLUE
+
+    if target_color:
+        # Strip marker text from runs and color them
         for run in para.runs:
             if run.text:
                 run.text = (run.text
                     .replace("[ROUND-2 START — added 2026-04-30 from a deeper pass through 3 long-form YouTube interviews previously flagged as not yet mined: Craft Stays (\"75 Properties Later: Why a Delisted Airbnb Made Federico\"), Catchup with the Carlyles (\"A Journey through Hospitality\"), and Life of Flow (\"How to Build a Profitable Airbnb Business\"). Color-coded blue to distinguish from the original brain content above.]", "*Round-2 deep-mine content (2026-04-30) — added from Craft Stays, Catchup with the Carlyles, and Life of Flow long-form interviews. Color-coded blue to distinguish from the original brain content above.*")
                     .replace("[ROUND-2] ", "")
                     .replace("[ROUND-2]", "")
+                    .replace("[DELTA] ", "")
+                    .replace("[DELTA]", "")
                 )
-                # Color the run blue
-                run.font.color.rgb = BLUE
-        colored_count += 1
+                run.font.color.rgb = target_color
+        if target_color == GREEN:
+            green_count += 1
+        else:
+            blue_count += 1
+    else:
+        colored_count_unset = 0  # original content stays default
+
+# For backward compat in print
+colored_count = blue_count + green_count
 
 # Also walk tables in case any are inside Round-2 section (they shouldn't be, but safety)
 # Tables before the round-2 section should remain default-colored
@@ -51,4 +74,4 @@ for tbl in doc.tables:
     pass
 
 doc.save(DOCX)
-print(f"Colored {colored_count} paragraphs blue. Saved to {DOCX}")
+print(f"Colored {blue_count} paragraphs blue + {green_count} paragraphs green. Saved to {DOCX}")

@@ -1,0 +1,16 @@
+{
+  "market": {
+    "country": "United States",
+    "region": "Pennsylvania",
+    "locality": "Philadelphia",
+    "district": null
+  },
+  "occupancy": 0.44,
+  "average_daily_rate": 186.2,
+  "rev_par": 84.5,
+  "revenue": 18761.9,
+  "booking_lead_time": 33.2,
+  "length_of_stay": 5.3,
+  "min_nights": 12.8,
+  "active_listings_count": 4494.8
+}

@@ -1,0 +1,2746 @@
+{
+  "market": {
+    "country": "United States",
+    "region": "Missouri",
+    "locality": "Kansas City",
+    "district": null
+  },
+  "results": [
+    {
+      "date": "2026-04-24",
+      "booked_count": 551,
+      "available_count": 1227,
+      "booked_rate_avg": 245.7,
+      "available_rate_avg": 214.4,
+      "fill_rate": 0.45
+    },
+    {
+      "date": "2026-04-25",
+      "booked_count": 526,
+      "available_count": 1252,
+      "booked_rate_avg": 237.8,
+      "available_rate_avg": 208.2,
+      "fill_rate": 0.42
+    },
+    {
+      "date": "2026-04-26",
+      "booked_count": 362,
+      "available_count": 1416,
+      "booked_rate_avg": 193.4,
+      "available_rate_avg": 201.3,
+      "fill_rate": 0.26
+    },
+    {
+      "date": "2026-04-27",
+      "booked_count": 317,
+      "available_count": 1461,
+      "booked_rate_avg": 183.2,
+      "available_rate_avg": 203.6,
+      "fill_rate": 0.22
+    },
+    {
+      "date": "2026-04-28",
+      "booked_count": 301,
+      "available_count": 1477,
+      "booked_rate_avg": 182.2,
+      "available_rate_avg": 206.6,
+      "fill_rate": 0.2
+    },
+    {
+      "date": "2026-04-29",
+      "booked_count": 314,
+      "available_count": 1464,
+      "booked_rate_avg": 191.3,
+      "available_rate_avg": 208.5,
+      "fill_rate": 0.21
+    },
+    {
+      "date": "2026-04-30",
+      "booked_count": 380,
+      "available_count": 1398,
+      "booked_rate_avg": 216.3,
+      "available_rate_avg": 220.6,
+      "fill_rate": 0.27
+    },
+    {
+      "date": "2026-05-01",
+      "booked_count": 451,
+      "available_count": 1314,
+      "booked_rate_avg": 240.9,
+      "available_rate_avg": 228.4,
+      "fill_rate": 0.34
+    },
+    {
+      "date": "2026-05-02",
+      "booked_count": 443,
+      "available_count": 1322,
+      "booked_rate_avg": 235.4,
+      "available_rate_avg": 221.9,
+      "fill_rate": 0.34
+    },
+    {
+      "date": "2026-05-03",
+      "booked_count": 313,
+      "available_count": 1452,
+      "booked_rate_avg": 205.2,
+      "available_rate_avg": 210.6,
+      "fill_rate": 0.22
+    },
+    {
+      "date": "2026-05-04",
+      "booked_count": 280,
+      "available_count": 1485,
+      "booked_rate_avg": 197.3,
+      "available_rate_avg": 209.1,
+      "fill_rate": 0.19
+    },
+    {
+      "date": "2026-05-05",
+      "booked_count": 275,
+      "available_count": 1490,
+      "booked_rate_avg": 200.0,
+      "available_rate_avg": 209.8,
+      "fill_rate": 0.18
+    },
+    {
+      "date": "2026-05-06",
+      "booked_count": 287,
+      "available_count": 1478,
+      "booked_rate_avg": 204.3,
+      "available_rate_avg": 219.7,
+      "fill_rate": 0.19
+    },
+    {
+      "date": "2026-05-07",
+      "booked_count": 325,
+      "available_count": 1440,
+      "booked_rate_avg": 223.7,
+      "available_rate_avg": 227.3,
+      "fill_rate": 0.23
+    },
+    {
+      "date": "2026-05-08",
+      "booked_count": 400,
+      "available_count": 1365,
+      "booked_rate_avg": 246.5,
+      "available_rate_avg": 234.6,
+      "fill_rate": 0.29
+    },
+    {
+      "date": "2026-05-09",
+      "booked_count": 379,
+      "available_count": 1386,
+      "booked_rate_avg": 230.2,
+      "available_rate_avg": 228.0,
+      "fill_rate": 0.27
+    },
+    {
+      "date": "2026-05-10",
+      "booked_count": 273,
+      "available_count": 1492,
+      "booked_rate_avg": 192.3,
+      "available_rate_avg": 217.2,
+      "fill_rate": 0.18
+    },
+    {
+      "date": "2026-05-11",
+      "booked_count": 259,
+      "available_count": 1506,
+      "booked_rate_avg": 176.3,
+      "available_rate_avg": 217.8,
+      "fill_rate": 0.17
+    },
+    {
+      "date": "2026-05-12",
+      "booked_count": 280,
+      "available_count": 1485,
+      "booked_rate_avg": 175.1,
+      "available_rate_avg": 226.5,
+      "fill_rate": 0.19
+    },
+    {
+      "date": "2026-05-13",
+      "booked_count": 273,
+      "available_count": 1492,
+      "booked_rate_avg": 192.3,
+      "available_rate_avg": 229.2,
+      "fill_rate": 0.18
+    },
+    {
+      "date": "2026-05-14",
+      "booked_count": 347,
+      "available_count": 1418,
+      "booked_rate_avg": 247.0,
+      "available_rate_avg": 237.7,
+      "fill_rate": 0.24
+    },
+    {
+      "date": "2026-05-15",
+      "booked_count": 454,
+      "available_count": 1311,
+      "booked_rate_avg": 278.3,
+      "available_rate_avg": 245.4,
+      "fill_rate": 0.35
+    },
+    {
+      "date": "2026-05-16",
+      "booked_count": 457,
+      "available_count": 1308,
+      "booked_rate_avg": 268.9,
+      "available_rate_avg": 235.1,
+      "fill_rate": 0.35
+    },
+    {
+      "date": "2026-05-17",
+      "booked_count": 309,
+      "available_count": 1456,
+      "booked_rate_avg": 211.4,
+      "available_rate_avg": 226.5,
+      "fill_rate": 0.21
+    },
+    {
+      "date": "2026-05-18",
+      "booked_count": 255,
+      "available_count": 1510,
+      "booked_rate_avg": 193.8,
+      "available_rate_avg": 231.9,
+      "fill_rate": 0.17
+    },
+    {
+      "date": "2026-05-19",
+      "booked_count": 243,
+      "available_count": 1522,
+      "booked_rate_avg": 185.7,
+      "available_rate_avg": 236.2,
+      "fill_rate": 0.16
+    },
+    {
+      "date": "2026-05-20",
+      "booked_count": 254,
+      "available_count": 1511,
+      "booked_rate_avg": 191.0,
+      "available_rate_avg": 242.4,
+      "fill_rate": 0.17
+    },
+    {
+      "date": "2026-05-21",
+      "booked_count": 295,
+      "available_count": 1470,
+      "booked_rate_avg": 233.1,
+      "available_rate_avg": 264.9,
+      "fill_rate": 0.2
+    },
+    {
+      "date": "2026-05-22",
+      "booked_count": 417,
+      "available_count": 1348,
+      "booked_rate_avg": 268.7,
+      "available_rate_avg": 277.0,
+      "fill_rate": 0.31
+    },
+    {
+      "date": "2026-05-23",
+      "booked_count": 442,
+      "available_count": 1323,
+      "booked_rate_avg": 277.1,
+      "available_rate_avg": 267.8,
+      "fill_rate": 0.33
+    },
+    {
+      "date": "2026-05-24",
+      "booked_count": 363,
+      "available_count": 1402,
+      "booked_rate_avg": 236.0,
+      "available_rate_avg": 262.2,
+      "fill_rate": 0.26
+    },
+    {
+      "date": "2026-05-25",
+      "booked_count": 268,
+      "available_count": 1497,
+      "booked_rate_avg": 208.9,
+      "available_rate_avg": 248.3,
+      "fill_rate": 0.18
+    },
+    {
+      "date": "2026-05-26",
+      "booked_count": 258,
+      "available_count": 1507,
+      "booked_rate_avg": 206.7,
+      "available_rate_avg": 247.6,
+      "fill_rate": 0.17
+    },
+    {
+      "date": "2026-05-27",
+      "booked_count": 263,
+      "available_count": 1502,
+      "booked_rate_avg": 215.6,
+      "available_rate_avg": 253.8,
+      "fill_rate": 0.18
+    },
+    {
+      "date": "2026-05-28",
+      "booked_count": 288,
+      "available_count": 1477,
+      "booked_rate_avg": 247.4,
+      "available_rate_avg": 266.4,
+      "fill_rate": 0.19
+    },
+    {
+      "date": "2026-05-29",
+      "booked_count": 344,
+      "available_count": 1421,
+      "booked_rate_avg": 256.6,
+      "available_rate_avg": 281.8,
+      "fill_rate": 0.24
+    },
+    {
+      "date": "2026-05-30",
+      "booked_count": 347,
+      "available_count": 1418,
+      "booked_rate_avg": 250.2,
+      "available_rate_avg": 283.3,
+      "fill_rate": 0.24
+    },
+    {
+      "date": "2026-05-31",
+      "booked_count": 252,
+      "available_count": 1513,
+      "booked_rate_avg": 216.5,
+      "available_rate_avg": 283.2,
+      "fill_rate": 0.17
+    },
+    {
+      "date": "2026-06-01",
+      "booked_count": 244,
+      "available_count": 1519,
+      "booked_rate_avg": 219.3,
+      "available_rate_avg": 300.5,
+      "fill_rate": 0.16
+    },
+    {
+      "date": "2026-06-02",
+      "booked_count": 242,
+      "available_count": 1521,
+      "booked_rate_avg": 222.0,
+      "available_rate_avg": 310.8,
+      "fill_rate": 0.16
+    },
+    {
+      "date": "2026-06-03",
+      "booked_count": 258,
+      "available_count": 1505,
+      "booked_rate_avg": 232.7,
+      "available_rate_avg": 325.0,
+      "fill_rate": 0.17
+    },
+    {
+      "date": "2026-06-04",
+      "booked_count": 311,
+      "available_count": 1452,
+      "booked_rate_avg": 271.1,
+      "available_rate_avg": 338.4,
+      "fill_rate": 0.21
+    },
+    {
+      "date": "2026-06-05",
+      "booked_count": 358,
+      "available_count": 1405,
+      "booked_rate_avg": 293.8,
+      "available_rate_avg": 359.8,
+      "fill_rate": 0.25
+    },
+    {
+      "date": "2026-06-06",
+      "booked_count": 339,
+      "available_count": 1424,
+      "booked_rate_avg": 286.4,
+      "available_rate_avg": 351.1,
+      "fill_rate": 0.24
+    },
+    {
+      "date": "2026-06-07",
+      "booked_count": 261,
+      "available_count": 1502,
+      "booked_rate_avg": 266.7,
+      "available_rate_avg": 343.9,
+      "fill_rate": 0.17
+    },
+    {
+      "date": "2026-06-08",
+      "booked_count": 251,
+      "available_count": 1512,
+      "booked_rate_avg": 251.6,
+      "available_rate_avg": 361.3,
+      "fill_rate": 0.17
+    },
+    {
+      "date": "2026-06-09",
+      "booked_count": 272,
+      "available_count": 1491,
+      "booked_rate_avg": 265.7,
+      "available_rate_avg": 381.3,
+      "fill_rate": 0.18
+    },
+    {
+      "date": "2026-06-10",
+      "booked_count": 310,
+      "available_count": 1453,
+      "booked_rate_avg": 289.7,
+      "available_rate_avg": 433.6,
+      "fill_rate": 0.21
+    },
+    {
+      "date": "2026-06-11",
+      "booked_count": 333,
+      "available_count": 1430,
+      "booked_rate_avg": 326.8,
+      "available_rate_avg": 529.4,
+      "fill_rate": 0.23
+    },
+    {
+      "date": "2026-06-12",
+      "booked_count": 391,
+      "available_count": 1372,
+      "booked_rate_avg": 342.1,
+      "available_rate_avg": 592.1,
+      "fill_rate": 0.28
+    },
+    {
+      "date": "2026-06-13",
+      "booked_count": 413,
+      "available_count": 1350,
+      "booked_rate_avg": 372.8,
+      "available_rate_avg": 623.7,
+      "fill_rate": 0.31
+    },
+    {
+      "date": "2026-06-14",
+      "booked_count": 383,
+      "available_count": 1380,
+      "booked_rate_avg": 354.3,
+      "available_rate_avg": 639.8,
+      "fill_rate": 0.28
+    },
+    {
+      "date": "2026-06-15",
+      "booked_count": 523,
+      "available_count": 1240,
+      "booked_rate_avg": 395.8,
+      "available_rate_avg": 689.5,
+      "fill_rate": 0.42
+    },
+    {
+      "date": "2026-06-16",
+      "booked_count": 572,
+      "available_count": 1191,
+      "booked_rate_avg": 414.0,
+      "available_rate_avg": 700.7,
+      "fill_rate": 0.48
+    },
+    {
+      "date": "2026-06-17",
+      "booked_count": 381,
+      "available_count": 1382,
+      "booked_rate_avg": 323.8,
+      "available_rate_avg": 672.5,
+      "fill_rate": 0.28
+    },
+    {
+      "date": "2026-06-18",
+      "booked_count": 384,
+      "available_count": 1379,
+      "booked_rate_avg": 354.5,
+      "available_rate_avg": 675.8,
+      "fill_rate": 0.28
+    },
+    {
+      "date": "2026-06-19",
+      "booked_count": 542,
+      "available_count": 1221,
+      "booked_rate_avg": 455.1,
+      "available_rate_avg": 699.9,
+      "fill_rate": 0.44
+    },
+    {
+      "date": "2026-06-20",
+      "booked_count": 556,
+      "available_count": 1207,
+      "booked_rate_avg": 459.5,
+      "available_rate_avg": 703.9,
+      "fill_rate": 0.46
+    },
+    {
+      "date": "2026-06-21",
+      "booked_count": 356,
+      "available_count": 1407,
+      "booked_rate_avg": 317.8,
+      "available_rate_avg": 675.9,
+      "fill_rate": 0.25
+    },
+    {
+      "date": "2026-06-22",
+      "booked_count": 295,
+      "available_count": 1468,
+      "booked_rate_avg": 262.8,
+      "available_rate_avg": 675.6,
+      "fill_rate": 0.2
+    },
+    {
+      "date": "2026-06-23",
+      "booked_count": 326,
+      "available_count": 1437,
+      "booked_rate_avg": 331.4,
+      "available_rate_avg": 677.0,
+      "fill_rate": 0.23
+    },
+    {
+      "date": "2026-06-24",
+      "booked_count": 514,
+      "available_count": 1249,
+      "booked_rate_avg": 477.8,
+      "available_rate_avg": 691.1,
+      "fill_rate": 0.41
+    },
+    {
+      "date": "2026-06-25",
+      "booked_count": 577,
+      "available_count": 1186,
+      "booked_rate_avg": 519.0,
+      "available_rate_avg": 699.5,
+      "fill_rate": 0.49
+    },
+    {
+      "date": "2026-06-26",
+      "booked_count": 557,
+      "available_count": 1206,
+      "booked_rate_avg": 533.1,
+      "available_rate_avg": 686.5,
+      "fill_rate": 0.46
+    },
+    {
+      "date": "2026-06-27",
+      "booked_count": 541,
+      "available_count": 1222,
+      "booked_rate_avg": 489.5,
+      "available_rate_avg": 694.0,
+      "fill_rate": 0.44
+    },
+    {
+      "date": "2026-06-28",
+      "booked_count": 313,
+      "available_count": 1450,
+      "booked_rate_avg": 307.3,
+      "available_rate_avg": 690.6,
+      "fill_rate": 0.22
+    },
+    {
+      "date": "2026-06-29",
+      "booked_count": 269,
+      "available_count": 1494,
+      "booked_rate_avg": 221.1,
+      "available_rate_avg": 688.0,
+      "fill_rate": 0.18
+    },
+    {
+      "date": "2026-06-30",
+      "booked_count": 266,
+      "available_count": 1497,
+      "booked_rate_avg": 216.0,
+      "available_rate_avg": 681.7,
+      "fill_rate": 0.18
+    },
+    {
+      "date": "2026-07-01",
+      "booked_count": 286,
+      "available_count": 1463,
+      "booked_rate_avg": 257.8,
+      "available_rate_avg": 703.2,
+      "fill_rate": 0.2
+    },
+    {
+      "date": "2026-07-02",
+      "booked_count": 433,
+      "available_count": 1316,
+      "booked_rate_avg": 407.7,
+      "available_rate_avg": 743.3,
+      "fill_rate": 0.33
+    },
+    {
+      "date": "2026-07-03",
+      "booked_count": 470,
+      "available_count": 1279,
+      "booked_rate_avg": 429.0,
+      "available_rate_avg": 727.8,
+      "fill_rate": 0.37
+    },
+    {
+      "date": "2026-07-04",
+      "booked_count": 375,
+      "available_count": 1374,
+      "booked_rate_avg": 396.1,
+      "available_rate_avg": 704.9,
+      "fill_rate": 0.27
+    },
+    {
+      "date": "2026-07-05",
+      "booked_count": 262,
+      "available_count": 1487,
+      "booked_rate_avg": 244.8,
+      "available_rate_avg": 687.1,
+      "fill_rate": 0.18
+    },
+    {
+      "date": "2026-07-06",
+      "booked_count": 241,
+      "available_count": 1508,
+      "booked_rate_avg": 206.2,
+      "available_rate_avg": 676.8,
+      "fill_rate": 0.16
+    },
+    {
+      "date": "2026-07-07",
+      "booked_count": 232,
+      "available_count": 1517,
+      "booked_rate_avg": 192.3,
+      "available_rate_avg": 674.9,
+      "fill_rate": 0.15
+    },
+    {
+      "date": "2026-07-08",
+      "booked_count": 256,
+      "available_count": 1493,
+      "booked_rate_avg": 215.6,
+      "available_rate_avg": 684.3,
+      "fill_rate": 0.17
+    },
+    {
+      "date": "2026-07-09",
+      "booked_count": 316,
+      "available_count": 1433,
+      "booked_rate_avg": 299.4,
+      "available_rate_avg": 690.5,
+      "fill_rate": 0.22
+    },
+    {
+      "date": "2026-07-10",
+      "booked_count": 466,
+      "available_count": 1283,
+      "booked_rate_avg": 395.0,
+      "available_rate_avg": 710.2,
+      "fill_rate": 0.36
+    },
+    {
+      "date": "2026-07-11",
+      "booked_count": 499,
+      "available_count": 1250,
+      "booked_rate_avg": 397.1,
+      "available_rate_avg": 650.3,
+      "fill_rate": 0.4
+    },
+    {
+      "date": "2026-07-12",
+      "booked_count": 306,
+      "available_count": 1443,
+      "booked_rate_avg": 259.2,
+      "available_rate_avg": 529.2,
+      "fill_rate": 0.21
+    },
+    {
+      "date": "2026-07-13",
+      "booked_count": 226,
+      "available_count": 1523,
+      "booked_rate_avg": 191.4,
+      "available_rate_avg": 407.9,
+      "fill_rate": 0.15
+    },
+    {
+      "date": "2026-07-14",
+      "booked_count": 214,
+      "available_count": 1535,
+      "booked_rate_avg": 183.8,
+      "available_rate_avg": 376.3,
+      "fill_rate": 0.14
+    },
+    {
+      "date": "2026-07-15",
+      "booked_count": 211,
+      "available_count": 1538,
+      "booked_rate_avg": 191.5,
+      "available_rate_avg": 348.6,
+      "fill_rate": 0.14
+    },
+    {
+      "date": "2026-07-16",
+      "booked_count": 211,
+      "available_count": 1538,
+      "booked_rate_avg": 219.7,
+      "available_rate_avg": 343.9,
+      "fill_rate": 0.14
+    },
+    {
+      "date": "2026-07-17",
+      "booked_count": 233,
+      "available_count": 1516,
+      "booked_rate_avg": 267.7,
+      "available_rate_avg": 338.9,
+      "fill_rate": 0.15
+    },
+    {
+      "date": "2026-07-18",
+      "booked_count": 224,
+      "available_count": 1525,
+      "booked_rate_avg": 262.0,
+      "available_rate_avg": 323.2,
+      "fill_rate": 0.15
+    },
+    {
+      "date": "2026-07-19",
+      "booked_count": 177,
+      "available_count": 1572,
+      "booked_rate_avg": 208.3,
+      "available_rate_avg": 299.7,
+      "fill_rate": 0.11
+    },
+    {
+      "date": "2026-07-20",
+      "booked_count": 160,
+      "available_count": 1589,
+      "booked_rate_avg": 177.4,
+      "available_rate_avg": 290.6,
+      "fill_rate": 0.1
+    },
+    {
+      "date": "2026-07-21",
+      "booked_count": 157,
+      "available_count": 1592,
+      "booked_rate_avg": 183.7,
+      "available_rate_avg": 285.8,
+      "fill_rate": 0.1
+    },
+    {
+      "date": "2026-07-22",
+      "booked_count": 154,
+      "available_count": 1595,
+      "booked_rate_avg": 182.5,
+      "available_rate_avg": 293.1,
+      "fill_rate": 0.1
+    },
+    {
+      "date": "2026-07-23",
+      "booked_count": 188,
+      "available_count": 1561,
+      "booked_rate_avg": 243.0,
+      "available_rate_avg": 294.7,
+      "fill_rate": 0.12
+    },
+    {
+      "date": "2026-07-24",
+      "booked_count": 237,
+      "available_count": 1512,
+      "booked_rate_avg": 254.3,
+      "available_rate_avg": 296.1,
+      "fill_rate": 0.16
+    },
+    {
+      "date": "2026-07-25",
+      "booked_count": 215,
+      "available_count": 1534,
+      "booked_rate_avg": 248.4,
+      "available_rate_avg": 285.5,
+      "fill_rate": 0.14
+    },
+    {
+      "date": "2026-07-26",
+      "booked_count": 156,
+      "available_count": 1593,
+      "booked_rate_avg": 197.5,
+      "available_rate_avg": 267.9,
+      "fill_rate": 0.1
+    },
+    {
+      "date": "2026-07-27",
+      "booked_count": 142,
+      "available_count": 1607,
+      "booked_rate_avg": 161.5,
+      "available_rate_avg": 267.2,
+      "fill_rate": 0.09
+    },
+    {
+      "date": "2026-07-28",
+      "booked_count": 135,
+      "available_count": 1614,
+      "booked_rate_avg": 153.2,
+      "available_rate_avg": 265.5,
+      "fill_rate": 0.08
+    },
+    {
+      "date": "2026-07-29",
+      "booked_count": 132,
+      "available_count": 1617,
+      "booked_rate_avg": 162.5,
+      "available_rate_avg": 267.1,
+      "fill_rate": 0.08
+    },
+    {
+      "date": "2026-07-30",
+      "booked_count": 159,
+      "available_count": 1590,
+      "booked_rate_avg": 187.4,
+      "available_rate_avg": 275.0,
+      "fill_rate": 0.1
+    },
+    {
+      "date": "2026-07-31",
+      "booked_count": 179,
+      "available_count": 1570,
+      "booked_rate_avg": 220.4,
+      "available_rate_avg": 274.3,
+      "fill_rate": 0.11
+    },
+    {
+      "date": "2026-08-01",
+      "booked_count": 160,
+      "available_count": 1583,
+      "booked_rate_avg": 215.9,
+      "available_rate_avg": 250.2,
+      "fill_rate": 0.1
+    },
+    {
+      "date": "2026-08-02",
+      "booked_count": 125,
+      "available_count": 1618,
+      "booked_rate_avg": 187.5,
+      "available_rate_avg": 234.8,
+      "fill_rate": 0.08
+    },
+    {
+      "date": "2026-08-03",
+      "booked_count": 98,
+      "available_count": 1645,
+      "booked_rate_avg": 154.2,
+      "available_rate_avg": 229.4,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-08-04",
+      "booked_count": 104,
+      "available_count": 1639,
+      "booked_rate_avg": 171.7,
+      "available_rate_avg": 229.3,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-08-05",
+      "booked_count": 105,
+      "available_count": 1638,
+      "booked_rate_avg": 177.6,
+      "available_rate_avg": 232.9,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-08-06",
+      "booked_count": 124,
+      "available_count": 1619,
+      "booked_rate_avg": 233.9,
+      "available_rate_avg": 237.0,
+      "fill_rate": 0.08
+    },
+    {
+      "date": "2026-08-07",
+      "booked_count": 168,
+      "available_count": 1575,
+      "booked_rate_avg": 256.2,
+      "available_rate_avg": 241.7,
+      "fill_rate": 0.11
+    },
+    {
+      "date": "2026-08-08",
+      "booked_count": 161,
+      "available_count": 1582,
+      "booked_rate_avg": 249.4,
+      "available_rate_avg": 233.5,
+      "fill_rate": 0.1
+    },
+    {
+      "date": "2026-08-09",
+      "booked_count": 97,
+      "available_count": 1646,
+      "booked_rate_avg": 185.0,
+      "available_rate_avg": 224.8,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-08-10",
+      "booked_count": 87,
+      "available_count": 1656,
+      "booked_rate_avg": 171.1,
+      "available_rate_avg": 223.9,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-08-11",
+      "booked_count": 82,
+      "available_count": 1661,
+      "booked_rate_avg": 169.6,
+      "available_rate_avg": 226.5,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-08-12",
+      "booked_count": 82,
+      "available_count": 1661,
+      "booked_rate_avg": 167.0,
+      "available_rate_avg": 230.0,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-08-13",
+      "booked_count": 90,
+      "available_count": 1653,
+      "booked_rate_avg": 198.4,
+      "available_rate_avg": 238.0,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-08-14",
+      "booked_count": 104,
+      "available_count": 1639,
+      "booked_rate_avg": 249.8,
+      "available_rate_avg": 238.5,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-08-15",
+      "booked_count": 104,
+      "available_count": 1639,
+      "booked_rate_avg": 252.1,
+      "available_rate_avg": 233.3,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-08-16",
+      "booked_count": 80,
+      "available_count": 1663,
+      "booked_rate_avg": 224.1,
+      "available_rate_avg": 224.5,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-08-17",
+      "booked_count": 72,
+      "available_count": 1671,
+      "booked_rate_avg": 226.8,
+      "available_rate_avg": 224.4,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-08-18",
+      "booked_count": 71,
+      "available_count": 1672,
+      "booked_rate_avg": 234.0,
+      "available_rate_avg": 225.0,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-08-19",
+      "booked_count": 96,
+      "available_count": 1647,
+      "booked_rate_avg": 193.1,
+      "available_rate_avg": 233.2,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-08-20",
+      "booked_count": 88,
+      "available_count": 1655,
+      "booked_rate_avg": 240.3,
+      "available_rate_avg": 240.2,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-08-21",
+      "booked_count": 94,
+      "available_count": 1649,
+      "booked_rate_avg": 256.0,
+      "available_rate_avg": 246.0,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-08-22",
+      "booked_count": 94,
+      "available_count": 1649,
+      "booked_rate_avg": 251.4,
+      "available_rate_avg": 238.5,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-08-23",
+      "booked_count": 69,
+      "available_count": 1674,
+      "booked_rate_avg": 223.9,
+      "available_rate_avg": 224.6,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-08-24",
+      "booked_count": 61,
+      "available_count": 1682,
+      "booked_rate_avg": 188.7,
+      "available_rate_avg": 223.3,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-08-25",
+      "booked_count": 54,
+      "available_count": 1689,
+      "booked_rate_avg": 216.9,
+      "available_rate_avg": 223.8,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-08-26",
+      "booked_count": 58,
+      "available_count": 1685,
+      "booked_rate_avg": 221.5,
+      "available_rate_avg": 230.5,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-08-27",
+      "booked_count": 65,
+      "available_count": 1678,
+      "booked_rate_avg": 226.7,
+      "available_rate_avg": 240.9,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-08-28",
+      "booked_count": 74,
+      "available_count": 1669,
+      "booked_rate_avg": 258.3,
+      "available_rate_avg": 247.1,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-08-29",
+      "booked_count": 72,
+      "available_count": 1671,
+      "booked_rate_avg": 253.6,
+      "available_rate_avg": 237.5,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-08-30",
+      "booked_count": 60,
+      "available_count": 1683,
+      "booked_rate_avg": 214.1,
+      "available_rate_avg": 220.9,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-08-31",
+      "booked_count": 51,
+      "available_count": 1692,
+      "booked_rate_avg": 227.3,
+      "available_rate_avg": 218.8,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-01",
+      "booked_count": 48,
+      "available_count": 1690,
+      "booked_rate_avg": 232.4,
+      "available_rate_avg": 222.7,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-02",
+      "booked_count": 49,
+      "available_count": 1689,
+      "booked_rate_avg": 235.6,
+      "available_rate_avg": 229.1,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-03",
+      "booked_count": 58,
+      "available_count": 1680,
+      "booked_rate_avg": 264.6,
+      "available_rate_avg": 242.6,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-04",
+      "booked_count": 87,
+      "available_count": 1651,
+      "booked_rate_avg": 339.0,
+      "available_rate_avg": 256.0,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-09-05",
+      "booked_count": 96,
+      "available_count": 1642,
+      "booked_rate_avg": 328.6,
+      "available_rate_avg": 243.0,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-09-06",
+      "booked_count": 76,
+      "available_count": 1662,
+      "booked_rate_avg": 342.7,
+      "available_rate_avg": 226.6,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-09-07",
+      "booked_count": 41,
+      "available_count": 1697,
+      "booked_rate_avg": 322.0,
+      "available_rate_avg": 219.8,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-09-08",
+      "booked_count": 41,
+      "available_count": 1697,
+      "booked_rate_avg": 303.9,
+      "available_rate_avg": 220.8,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-09-09",
+      "booked_count": 49,
+      "available_count": 1689,
+      "booked_rate_avg": 327.3,
+      "available_rate_avg": 224.4,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-10",
+      "booked_count": 60,
+      "available_count": 1678,
+      "booked_rate_avg": 300.6,
+      "available_rate_avg": 234.4,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-09-11",
+      "booked_count": 70,
+      "available_count": 1668,
+      "booked_rate_avg": 306.5,
+      "available_rate_avg": 239.5,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-09-12",
+      "booked_count": 75,
+      "available_count": 1663,
+      "booked_rate_avg": 306.1,
+      "available_rate_avg": 232.2,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-09-13",
+      "booked_count": 54,
+      "available_count": 1684,
+      "booked_rate_avg": 329.2,
+      "available_rate_avg": 219.6,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-14",
+      "booked_count": 46,
+      "available_count": 1692,
+      "booked_rate_avg": 334.7,
+      "available_rate_avg": 215.0,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-15",
+      "booked_count": 41,
+      "available_count": 1697,
+      "booked_rate_avg": 298.7,
+      "available_rate_avg": 217.8,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-09-16",
+      "booked_count": 48,
+      "available_count": 1690,
+      "booked_rate_avg": 318.2,
+      "available_rate_avg": 220.4,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-17",
+      "booked_count": 60,
+      "available_count": 1678,
+      "booked_rate_avg": 308.1,
+      "available_rate_avg": 228.4,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-09-18",
+      "booked_count": 73,
+      "available_count": 1665,
+      "booked_rate_avg": 322.2,
+      "available_rate_avg": 234.2,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-09-19",
+      "booked_count": 71,
+      "available_count": 1667,
+      "booked_rate_avg": 338.2,
+      "available_rate_avg": 228.1,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-09-20",
+      "booked_count": 48,
+      "available_count": 1690,
+      "booked_rate_avg": 297.0,
+      "available_rate_avg": 217.0,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-21",
+      "booked_count": 47,
+      "available_count": 1691,
+      "booked_rate_avg": 294.4,
+      "available_rate_avg": 214.4,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-22",
+      "booked_count": 46,
+      "available_count": 1692,
+      "booked_rate_avg": 305.6,
+      "available_rate_avg": 213.8,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-23",
+      "booked_count": 46,
+      "available_count": 1692,
+      "booked_rate_avg": 310.8,
+      "available_rate_avg": 217.6,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-24",
+      "booked_count": 69,
+      "available_count": 1669,
+      "booked_rate_avg": 281.6,
+      "available_rate_avg": 226.3,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-09-25",
+      "booked_count": 101,
+      "available_count": 1637,
+      "booked_rate_avg": 271.1,
+      "available_rate_avg": 233.4,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-09-26",
+      "booked_count": 104,
+      "available_count": 1634,
+      "booked_rate_avg": 261.1,
+      "available_rate_avg": 230.0,
+      "fill_rate": 0.06
+    },
+    {
+      "date": "2026-09-27",
+      "booked_count": 69,
+      "available_count": 1669,
+      "booked_rate_avg": 240.5,
+      "available_rate_avg": 218.5,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-09-28",
+      "booked_count": 46,
+      "available_count": 1692,
+      "booked_rate_avg": 259.3,
+      "available_rate_avg": 215.5,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-29",
+      "booked_count": 46,
+      "available_count": 1692,
+      "booked_rate_avg": 268.2,
+      "available_rate_avg": 212.3,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-09-30",
+      "booked_count": 40,
+      "available_count": 1698,
+      "booked_rate_avg": 264.0,
+      "available_rate_avg": 217.2,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-01",
+      "booked_count": 47,
+      "available_count": 1689,
+      "booked_rate_avg": 297.1,
+      "available_rate_avg": 227.0,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-10-02",
+      "booked_count": 52,
+      "available_count": 1684,
+      "booked_rate_avg": 211.5,
+      "available_rate_avg": 239.8,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-10-03",
+      "booked_count": 53,
+      "available_count": 1683,
+      "booked_rate_avg": 215.3,
+      "available_rate_avg": 232.2,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-10-04",
+      "booked_count": 37,
+      "available_count": 1699,
+      "booked_rate_avg": 164.1,
+      "available_rate_avg": 218.3,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-05",
+      "booked_count": 36,
+      "available_count": 1700,
+      "booked_rate_avg": 202.3,
+      "available_rate_avg": 215.2,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-06",
+      "booked_count": 39,
+      "available_count": 1697,
+      "booked_rate_avg": 199.1,
+      "available_rate_avg": 218.1,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-07",
+      "booked_count": 31,
+      "available_count": 1705,
+      "booked_rate_avg": 194.6,
+      "available_rate_avg": 222.8,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-08",
+      "booked_count": 49,
+      "available_count": 1687,
+      "booked_rate_avg": 252.0,
+      "available_rate_avg": 230.3,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-10-09",
+      "booked_count": 70,
+      "available_count": 1666,
+      "booked_rate_avg": 268.2,
+      "available_rate_avg": 236.5,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-10-10",
+      "booked_count": 78,
+      "available_count": 1658,
+      "booked_rate_avg": 271.5,
+      "available_rate_avg": 230.2,
+      "fill_rate": 0.05
+    },
+    {
+      "date": "2026-10-11",
+      "booked_count": 41,
+      "available_count": 1695,
+      "booked_rate_avg": 181.9,
+      "available_rate_avg": 222.5,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-12",
+      "booked_count": 30,
+      "available_count": 1706,
+      "booked_rate_avg": 197.4,
+      "available_rate_avg": 218.6,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-13",
+      "booked_count": 32,
+      "available_count": 1704,
+      "booked_rate_avg": 192.3,
+      "available_rate_avg": 219.7,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-14",
+      "booked_count": 35,
+      "available_count": 1701,
+      "booked_rate_avg": 220.7,
+      "available_rate_avg": 221.4,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-15",
+      "booked_count": 46,
+      "available_count": 1690,
+      "booked_rate_avg": 255.7,
+      "available_rate_avg": 228.0,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-10-16",
+      "booked_count": 66,
+      "available_count": 1670,
+      "booked_rate_avg": 243.0,
+      "available_rate_avg": 233.9,
+      "fill_rate": 0.04
+    },
+    {
+      "date": "2026-10-17",
+      "booked_count": 56,
+      "available_count": 1680,
+      "booked_rate_avg": 242.6,
+      "available_rate_avg": 228.9,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-10-18",
+      "booked_count": 36,
+      "available_count": 1700,
+      "booked_rate_avg": 225.9,
+      "available_rate_avg": 217.3,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-19",
+      "booked_count": 32,
+      "available_count": 1704,
+      "booked_rate_avg": 198.4,
+      "available_rate_avg": 215.0,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-20",
+      "booked_count": 33,
+      "available_count": 1703,
+      "booked_rate_avg": 215.1,
+      "available_rate_avg": 213.3,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-21",
+      "booked_count": 33,
+      "available_count": 1703,
+      "booked_rate_avg": 225.4,
+      "available_rate_avg": 215.4,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-22",
+      "booked_count": 44,
+      "available_count": 1692,
+      "booked_rate_avg": 256.6,
+      "available_rate_avg": 220.7,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-10-23",
+      "booked_count": 45,
+      "available_count": 1691,
+      "booked_rate_avg": 241.1,
+      "available_rate_avg": 227.9,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-10-24",
+      "booked_count": 44,
+      "available_count": 1692,
+      "booked_rate_avg": 238.5,
+      "available_rate_avg": 221.2,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-10-25",
+      "booked_count": 28,
+      "available_count": 1708,
+      "booked_rate_avg": 208.1,
+      "available_rate_avg": 213.1,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-26",
+      "booked_count": 29,
+      "available_count": 1707,
+      "booked_rate_avg": 199.4,
+      "available_rate_avg": 210.4,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-27",
+      "booked_count": 24,
+      "available_count": 1712,
+      "booked_rate_avg": 216.6,
+      "available_rate_avg": 210.4,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-10-28",
+      "booked_count": 24,
+      "available_count": 1712,
+      "booked_rate_avg": 247.0,
+      "available_rate_avg": 212.3,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-10-29",
+      "booked_count": 29,
+      "available_count": 1707,
+      "booked_rate_avg": 245.6,
+      "available_rate_avg": 220.2,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-30",
+      "booked_count": 32,
+      "available_count": 1704,
+      "booked_rate_avg": 206.8,
+      "available_rate_avg": 231.1,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-10-31",
+      "booked_count": 28,
+      "available_count": 1708,
+      "booked_rate_avg": 205.5,
+      "available_rate_avg": 223.9,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-01",
+      "booked_count": 21,
+      "available_count": 1712,
+      "booked_rate_avg": 177.8,
+      "available_rate_avg": 215.3,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-02",
+      "booked_count": 17,
+      "available_count": 1716,
+      "booked_rate_avg": 198.8,
+      "available_rate_avg": 212.1,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-03",
+      "booked_count": 18,
+      "available_count": 1715,
+      "booked_rate_avg": 206.6,
+      "available_rate_avg": 210.6,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-04",
+      "booked_count": 21,
+      "available_count": 1712,
+      "booked_rate_avg": 210.9,
+      "available_rate_avg": 213.7,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-05",
+      "booked_count": 32,
+      "available_count": 1701,
+      "booked_rate_avg": 230.0,
+      "available_rate_avg": 220.4,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-06",
+      "booked_count": 48,
+      "available_count": 1685,
+      "booked_rate_avg": 257.4,
+      "available_rate_avg": 224.6,
+      "fill_rate": 0.03
+    },
+    {
+      "date": "2026-11-07",
+      "booked_count": 36,
+      "available_count": 1697,
+      "booked_rate_avg": 247.1,
+      "available_rate_avg": 222.7,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-08",
+      "booked_count": 28,
+      "available_count": 1705,
+      "booked_rate_avg": 222.0,
+      "available_rate_avg": 214.8,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-09",
+      "booked_count": 20,
+      "available_count": 1713,
+      "booked_rate_avg": 168.7,
+      "available_rate_avg": 215.1,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-10",
+      "booked_count": 20,
+      "available_count": 1713,
+      "booked_rate_avg": 167.3,
+      "available_rate_avg": 217.4,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-11",
+      "booked_count": 21,
+      "available_count": 1712,
+      "booked_rate_avg": 174.1,
+      "available_rate_avg": 219.7,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-12",
+      "booked_count": 24,
+      "available_count": 1709,
+      "booked_rate_avg": 221.7,
+      "available_rate_avg": 224.0,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-13",
+      "booked_count": 25,
+      "available_count": 1708,
+      "booked_rate_avg": 225.4,
+      "available_rate_avg": 228.9,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-14",
+      "booked_count": 32,
+      "available_count": 1701,
+      "booked_rate_avg": 230.7,
+      "available_rate_avg": 225.2,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-15",
+      "booked_count": 27,
+      "available_count": 1706,
+      "booked_rate_avg": 197.8,
+      "available_rate_avg": 217.2,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-16",
+      "booked_count": 29,
+      "available_count": 1704,
+      "booked_rate_avg": 202.9,
+      "available_rate_avg": 216.3,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-17",
+      "booked_count": 24,
+      "available_count": 1709,
+      "booked_rate_avg": 190.0,
+      "available_rate_avg": 216.9,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-18",
+      "booked_count": 23,
+      "available_count": 1710,
+      "booked_rate_avg": 197.0,
+      "available_rate_avg": 220.7,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-19",
+      "booked_count": 24,
+      "available_count": 1709,
+      "booked_rate_avg": 192.7,
+      "available_rate_avg": 226.3,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-20",
+      "booked_count": 31,
+      "available_count": 1702,
+      "booked_rate_avg": 233.5,
+      "available_rate_avg": 230.9,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-21",
+      "booked_count": 34,
+      "available_count": 1699,
+      "booked_rate_avg": 230.6,
+      "available_rate_avg": 229.1,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-22",
+      "booked_count": 27,
+      "available_count": 1706,
+      "booked_rate_avg": 213.9,
+      "available_rate_avg": 223.4,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-23",
+      "booked_count": 27,
+      "available_count": 1706,
+      "booked_rate_avg": 220.3,
+      "available_rate_avg": 225.6,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-24",
+      "booked_count": 31,
+      "available_count": 1702,
+      "booked_rate_avg": 246.9,
+      "available_rate_avg": 228.5,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-25",
+      "booked_count": 39,
+      "available_count": 1694,
+      "booked_rate_avg": 294.8,
+      "available_rate_avg": 232.4,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-26",
+      "booked_count": 35,
+      "available_count": 1698,
+      "booked_rate_avg": 317.8,
+      "available_rate_avg": 236.2,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-27",
+      "booked_count": 34,
+      "available_count": 1699,
+      "booked_rate_avg": 310.1,
+      "available_rate_avg": 237.1,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-28",
+      "booked_count": 26,
+      "available_count": 1707,
+      "booked_rate_avg": 306.2,
+      "available_rate_avg": 232.1,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-11-29",
+      "booked_count": 19,
+      "available_count": 1714,
+      "booked_rate_avg": 290.2,
+      "available_rate_avg": 220.8,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-11-30",
+      "booked_count": 17,
+      "available_count": 1716,
+      "booked_rate_avg": 230.5,
+      "available_rate_avg": 219.4,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-01",
+      "booked_count": 19,
+      "available_count": 1705,
+      "booked_rate_avg": 213.2,
+      "available_rate_avg": 220.3,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-02",
+      "booked_count": 21,
+      "available_count": 1703,
+      "booked_rate_avg": 221.4,
+      "available_rate_avg": 224.5,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-03",
+      "booked_count": 25,
+      "available_count": 1699,
+      "booked_rate_avg": 243.9,
+      "available_rate_avg": 230.5,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-04",
+      "booked_count": 27,
+      "available_count": 1697,
+      "booked_rate_avg": 243.4,
+      "available_rate_avg": 234.6,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-12-05",
+      "booked_count": 27,
+      "available_count": 1697,
+      "booked_rate_avg": 230.0,
+      "available_rate_avg": 228.4,
+      "fill_rate": 0.02
+    },
+    {
+      "date": "2026-12-06",
+      "booked_count": 19,
+      "available_count": 1705,
+      "booked_rate_avg": 209.5,
+      "available_rate_avg": 220.3,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-07",
+      "booked_count": 16,
+      "available_count": 1708,
+      "booked_rate_avg": 196.7,
+      "available_rate_avg": 218.6,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-08",
+      "booked_count": 17,
+      "available_count": 1707,
+      "booked_rate_avg": 180.2,
+      "available_rate_avg": 219.8,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-09",
+      "booked_count": 17,
+      "available_count": 1707,
+      "booked_rate_avg": 187.3,
+      "available_rate_avg": 221.2,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-10",
+      "booked_count": 20,
+      "available_count": 1704,
+      "booked_rate_avg": 235.7,
+      "available_rate_avg": 225.1,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-11",
+      "booked_count": 23,
+      "available_count": 1701,
+      "booked_rate_avg": 223.3,
+      "available_rate_avg": 228.6,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-12",
+      "booked_count": 24,
+      "available_count": 1700,
+      "booked_rate_avg": 224.5,
+      "available_rate_avg": 225.7,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-13",
+      "booked_count": 22,
+      "available_count": 1702,
+      "booked_rate_avg": 230.9,
+      "available_rate_avg": 220.2,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-14",
+      "booked_count": 17,
+      "available_count": 1707,
+      "booked_rate_avg": 204.2,
+      "available_rate_avg": 221.0,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-15",
+      "booked_count": 16,
+      "available_count": 1708,
+      "booked_rate_avg": 217.7,
+      "available_rate_avg": 221.8,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-16",
+      "booked_count": 15,
+      "available_count": 1709,
+      "booked_rate_avg": 219.3,
+      "available_rate_avg": 224.4,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-17",
+      "booked_count": 14,
+      "available_count": 1710,
+      "booked_rate_avg": 206.6,
+      "available_rate_avg": 227.6,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-18",
+      "booked_count": 17,
+      "available_count": 1707,
+      "booked_rate_avg": 215.5,
+      "available_rate_avg": 231.3,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-19",
+      "booked_count": 18,
+      "available_count": 1706,
+      "booked_rate_avg": 231.8,
+      "available_rate_avg": 230.4,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-20",
+      "booked_count": 19,
+      "available_count": 1705,
+      "booked_rate_avg": 235.7,
+      "available_rate_avg": 226.5,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-21",
+      "booked_count": 21,
+      "available_count": 1703,
+      "booked_rate_avg": 252.9,
+      "available_rate_avg": 225.7,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-22",
+      "booked_count": 24,
+      "available_count": 1700,
+      "booked_rate_avg": 259.2,
+      "available_rate_avg": 226.5,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-23",
+      "booked_count": 23,
+      "available_count": 1701,
+      "booked_rate_avg": 241.4,
+      "available_rate_avg": 230.0,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-24",
+      "booked_count": 24,
+      "available_count": 1700,
+      "booked_rate_avg": 235.4,
+      "available_rate_avg": 230.5,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-25",
+      "booked_count": 25,
+      "available_count": 1699,
+      "booked_rate_avg": 247.3,
+      "available_rate_avg": 232.6,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-26",
+      "booked_count": 24,
+      "available_count": 1700,
+      "booked_rate_avg": 239.3,
+      "available_rate_avg": 230.2,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-27",
+      "booked_count": 20,
+      "available_count": 1704,
+      "booked_rate_avg": 231.8,
+      "available_rate_avg": 226.3,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-28",
+      "booked_count": 17,
+      "available_count": 1707,
+      "booked_rate_avg": 197.9,
+      "available_rate_avg": 222.5,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-29",
+      "booked_count": 17,
+      "available_count": 1707,
+      "booked_rate_avg": 185.0,
+      "available_rate_avg": 223.9,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-30",
+      "booked_count": 18,
+      "available_count": 1706,
+      "booked_rate_avg": 188.7,
+      "available_rate_avg": 225.0,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2026-12-31",
+      "booked_count": 16,
+      "available_count": 1708,
+      "booked_rate_avg": 169.8,
+      "available_rate_avg": 226.8,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-01",
+      "booked_count": 15,
+      "available_count": 1636,
+      "booked_rate_avg": 181.1,
+      "available_rate_avg": 226.9,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-02",
+      "booked_count": 12,
+      "available_count": 1639,
+      "booked_rate_avg": 186.8,
+      "available_rate_avg": 224.4,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-03",
+      "booked_count": 10,
+      "available_count": 1641,
+      "booked_rate_avg": 159.8,
+      "available_rate_avg": 217.1,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-04",
+      "booked_count": 9,
+      "available_count": 1642,
+      "booked_rate_avg": 158.6,
+      "available_rate_avg": 218.7,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-05",
+      "booked_count": 9,
+      "available_count": 1642,
+      "booked_rate_avg": 158.0,
+      "available_rate_avg": 218.7,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-06",
+      "booked_count": 9,
+      "available_count": 1642,
+      "booked_rate_avg": 156.6,
+      "available_rate_avg": 218.6,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-07",
+      "booked_count": 9,
+      "available_count": 1642,
+      "booked_rate_avg": 157.4,
+      "available_rate_avg": 221.6,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-08",
+      "booked_count": 9,
+      "available_count": 1642,
+      "booked_rate_avg": 158.4,
+      "available_rate_avg": 223.0,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-09",
+      "booked_count": 9,
+      "available_count": 1642,
+      "booked_rate_avg": 158.0,
+      "available_rate_avg": 223.2,
+      "fill_rate": 0.01
+    },
+    {
+      "date": "2027-01-10",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 132.6,
+      "available_rate_avg": 219.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-11",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 132.1,
+      "available_rate_avg": 218.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-12",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 132.6,
+      "available_rate_avg": 218.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-13",
+      "booked_count": 8,
+      "available_count": 1643,
+      "booked_rate_avg": 123.0,
+      "available_rate_avg": 219.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-14",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 134.4,
+      "available_rate_avg": 221.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-15",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 135.4,
+      "available_rate_avg": 223.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-16",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 136.4,
+      "available_rate_avg": 223.8,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-17",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 132.0,
+      "available_rate_avg": 219.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-18",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 131.9,
+      "available_rate_avg": 219.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-19",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 132.0,
+      "available_rate_avg": 219.4,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-20",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 132.0,
+      "available_rate_avg": 218.8,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-21",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 130.7,
+      "available_rate_avg": 219.8,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-22",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 131.1,
+      "available_rate_avg": 220.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-23",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 131.6,
+      "available_rate_avg": 220.8,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-24",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 127.7,
+      "available_rate_avg": 216.1,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-25",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 128.1,
+      "available_rate_avg": 216.0,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-26",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 128.4,
+      "available_rate_avg": 215.8,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-27",
+      "booked_count": 7,
+      "available_count": 1644,
+      "booked_rate_avg": 128.6,
+      "available_rate_avg": 215.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-28",
+      "booked_count": 3,
+      "available_count": 1648,
+      "booked_rate_avg": 164.0,
+      "available_rate_avg": 217.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-29",
+      "booked_count": 2,
+      "available_count": 1649,
+      "booked_rate_avg": 111.5,
+      "available_rate_avg": 218.6,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-30",
+      "booked_count": 2,
+      "available_count": 1649,
+      "booked_rate_avg": 110.5,
+      "available_rate_avg": 217.4,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-01-31",
+      "booked_count": 1,
+      "available_count": 1650,
+      "booked_rate_avg": 90.0,
+      "available_rate_avg": 213.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-01",
+      "booked_count": 2,
+      "available_count": 1646,
+      "booked_rate_avg": 108.5,
+      "available_rate_avg": 211.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-02",
+      "booked_count": 2,
+      "available_count": 1646,
+      "booked_rate_avg": 108.5,
+      "available_rate_avg": 213.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-03",
+      "booked_count": 2,
+      "available_count": 1646,
+      "booked_rate_avg": 108.5,
+      "available_rate_avg": 214.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-04",
+      "booked_count": 2,
+      "available_count": 1646,
+      "booked_rate_avg": 109.5,
+      "available_rate_avg": 215.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-05",
+      "booked_count": 2,
+      "available_count": 1646,
+      "booked_rate_avg": 111.0,
+      "available_rate_avg": 217.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-06",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 129.0,
+      "available_rate_avg": 216.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-07",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 126.0,
+      "available_rate_avg": 212.8,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-08",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 132.0,
+      "available_rate_avg": 212.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-09",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 132.0,
+      "available_rate_avg": 213.1,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-10",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 133.0,
+      "available_rate_avg": 213.4,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-11",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 133.0,
+      "available_rate_avg": 212.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-12",
+      "booked_count": 3,
+      "available_count": 1645,
+      "booked_rate_avg": 193.3,
+      "available_rate_avg": 212.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-13",
+      "booked_count": 3,
+      "available_count": 1645,
+      "booked_rate_avg": 193.7,
+      "available_rate_avg": 212.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-14",
+      "booked_count": 3,
+      "available_count": 1645,
+      "booked_rate_avg": 204.0,
+      "available_rate_avg": 208.6,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-15",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 131.0,
+      "available_rate_avg": 207.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-16",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 132.0,
+      "available_rate_avg": 207.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-17",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 132.0,
+      "available_rate_avg": 207.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-18",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 132.0,
+      "available_rate_avg": 207.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-19",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 133.0,
+      "available_rate_avg": 208.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-20",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 133.0,
+      "available_rate_avg": 207.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-21",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 131.0,
+      "available_rate_avg": 205.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-22",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 134.0,
+      "available_rate_avg": 205.4,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-23",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 134.0,
+      "available_rate_avg": 205.4,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-24",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 134.0,
+      "available_rate_avg": 206.4,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-25",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 134.0,
+      "available_rate_avg": 207.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-26",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 135.0,
+      "available_rate_avg": 211.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-27",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 136.0,
+      "available_rate_avg": 208.8,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-02-28",
+      "booked_count": 1,
+      "available_count": 1647,
+      "booked_rate_avg": 133.0,
+      "available_rate_avg": 205.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-01",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 205.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-02",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 205.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-03",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 206.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-04",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 208.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-05",
+      "booked_count": 1,
+      "available_count": 1644,
+      "booked_rate_avg": 564.0,
+      "available_rate_avg": 209.0,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-06",
+      "booked_count": 1,
+      "available_count": 1644,
+      "booked_rate_avg": 562.0,
+      "available_rate_avg": 209.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-07",
+      "booked_count": 1,
+      "available_count": 1644,
+      "booked_rate_avg": 789.0,
+      "available_rate_avg": 208.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-08",
+      "booked_count": 1,
+      "available_count": 1644,
+      "booked_rate_avg": 789.0,
+      "available_rate_avg": 209.1,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-09",
+      "booked_count": 5,
+      "available_count": 1640,
+      "booked_rate_avg": 417.2,
+      "available_rate_avg": 210.0,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-10",
+      "booked_count": 7,
+      "available_count": 1638,
+      "booked_rate_avg": 372.4,
+      "available_rate_avg": 212.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-11",
+      "booked_count": 7,
+      "available_count": 1638,
+      "booked_rate_avg": 375.7,
+      "available_rate_avg": 214.0,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-12",
+      "booked_count": 7,
+      "available_count": 1638,
+      "booked_rate_avg": 379.0,
+      "available_rate_avg": 215.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-13",
+      "booked_count": 7,
+      "available_count": 1638,
+      "booked_rate_avg": 380.4,
+      "available_rate_avg": 217.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-14",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 215.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-15",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 216.1,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-16",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 217.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-17",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 219.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-18",
+      "booked_count": 1,
+      "available_count": 1644,
+      "booked_rate_avg": 958.0,
+      "available_rate_avg": 220.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-19",
+      "booked_count": 1,
+      "available_count": 1644,
+      "booked_rate_avg": 970.0,
+      "available_rate_avg": 223.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-20",
+      "booked_count": 1,
+      "available_count": 1644,
+      "booked_rate_avg": 977.0,
+      "available_rate_avg": 224.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-21",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 222.8,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-22",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 224.3,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-23",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 225.9,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-24",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 228.6,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-25",
+      "booked_count": 2,
+      "available_count": 1643,
+      "booked_rate_avg": 438.5,
+      "available_rate_avg": 232.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-26",
+      "booked_count": 2,
+      "available_count": 1643,
+      "booked_rate_avg": 442.5,
+      "available_rate_avg": 235.1,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-27",
+      "booked_count": 2,
+      "available_count": 1643,
+      "booked_rate_avg": 443.5,
+      "available_rate_avg": 236.2,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-28",
+      "booked_count": 2,
+      "available_count": 1643,
+      "booked_rate_avg": 437.5,
+      "available_rate_avg": 234.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-29",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 233.7,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-30",
+      "booked_count": 0,
+      "available_count": 1645,
+      "booked_rate_avg": 0.0,
+      "available_rate_avg": 234.5,
+      "fill_rate": 0.0
+    },
+    {
+      "date": "2027-03-31",
+      "booked_count": 1,
+      "available_count": 1644,
+      "booked_rate_avg": 224.0,
+      "available_rate_avg": 234.5,
+      "fill_rate": 0.0
+    }
+  ]
+}

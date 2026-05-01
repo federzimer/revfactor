@@ -1,0 +1,16 @@
+{
+  "market": {
+    "country": "United States",
+    "region": "Texas",
+    "locality": "Dallas",
+    "district": null
+  },
+  "occupancy": 0.44,
+  "average_daily_rate": 231.7,
+  "rev_par": 102.3,
+  "revenue": 23335.5,
+  "booking_lead_time": 26.5,
+  "length_of_stay": 5.4,
+  "min_nights": 7.1,
+  "active_listings_count": 4124.3
+}

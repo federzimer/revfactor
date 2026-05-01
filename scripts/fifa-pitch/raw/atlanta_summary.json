@@ -1,0 +1,16 @@
+{
+  "market": {
+    "country": "United States",
+    "region": "Georgia",
+    "locality": "Atlanta",
+    "district": null
+  },
+  "occupancy": 0.42,
+  "average_daily_rate": 232.5,
+  "rev_par": 96.0,
+  "revenue": 21281.5,
+  "booking_lead_time": 33.0,
+  "length_of_stay": 4.4,
+  "min_nights": 5.0,
+  "active_listings_count": 5389.8
+}

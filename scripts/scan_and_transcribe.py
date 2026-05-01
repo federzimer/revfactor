@@ -31,6 +31,11 @@ IG_TRANSCRIPTS = IG_DIR / "transcripts"
 STATE_FILE = REVFACTOR_ROOT / "scripts" / "seen_ids.json"
 LOG_FILE = Path("/tmp/revfactor-scan.log")
 
+# Grace's TikTok pulls land here. We append our audio transcript to her
+# markdown summary if it exists (cross-pollination, append-only — never
+# overwrite Grace's content).
+GRACE_TIKTOK_DIR = Path("/Users/aaronwhittaker/Claude/grace-brains/clients/revfactor/tiktok")
+
 TIKTOK_HANDLE = "federicozimerman"
 INSTAGRAM_HANDLE = "federico.zimerman"
 TIKTOK_URL = f"https://www.tiktok.com/@{TIKTOK_HANDLE}"
@@ -185,6 +190,26 @@ def download_and_transcribe(url, video_id, title, video_dir, transcript_dir, lab
         )
         transcript_path.write_text(header + text)
         log(f"  ✓ Transcribed {len(text)} chars → {transcript_path.name}")
+
+        # Cross-pollinate with Grace: if she's already pulled this TikTok
+        # into grace-brains, append our audio transcript section to her md.
+        # Append-only, never overwrite — Grace owns the structured analysis.
+        if label == "TikTok":
+            grace_md = GRACE_TIKTOK_DIR / f"{video_id}.md"
+            if grace_md.exists():
+                existing = grace_md.read_text()
+                marker = "## Audio Transcription (auto-pulled by RevFactor brain-scan)"
+                if marker not in existing:
+                    addendum = (
+                        f"\n---\n\n{marker}\n"
+                        f"*Transcribed {datetime.now().isoformat()} — Gemini 2.5 Flash. "
+                        f"This is the spoken/sung audio in the video, NOT necessarily Federico narrating "
+                        f"(could be soundtrack lyrics or background audio).*\n\n"
+                        f"{text}\n"
+                    )
+                    grace_md.write_text(existing + addendum)
+                    log(f"  ✓ Appended audio transcription to Grace's md: {grace_md.name}")
+
         video_path.unlink(missing_ok=True)
         audio_path.unlink(missing_ok=True)
         return True
@@ -246,6 +271,45 @@ def scan_instagram(state):
     return processed
 
 
+def auto_commit_new_content(tt_count, ig_count):
+    """If new transcripts were pulled, commit + push so they're never lost."""
+    if tt_count == 0 and ig_count == 0:
+        return
+    try:
+        # Stage the transcript dirs + state file
+        subprocess.run(
+            ["git", "add",
+             "scripts/seen_ids.json",
+             "tiktok_videos/transcripts/",
+             "instagram_videos/transcripts/"],
+            cwd=str(REVFACTOR_ROOT), check=False, capture_output=True,
+        )
+        # Check if anything was actually staged
+        diff = subprocess.run(
+            ["git", "diff", "--cached", "--name-only"],
+            cwd=str(REVFACTOR_ROOT), capture_output=True, text=True,
+        )
+        if not diff.stdout.strip():
+            return  # nothing to commit (state file unchanged, transcripts gitignored, etc.)
+
+        msg = f"brain-scan: auto-commit {tt_count} new TikTok(s), {ig_count} new IG post(s)"
+        subprocess.run(
+            ["git", "commit", "-m", msg, "-m",
+             "Auto-committed by scan_and_transcribe.py to ensure transcripts survive sync churn."],
+            cwd=str(REVFACTOR_ROOT), check=False, capture_output=True,
+        )
+        push = subprocess.run(
+            ["git", "push", "--quiet"],
+            cwd=str(REVFACTOR_ROOT), capture_output=True, text=True,
+        )
+        if push.returncode == 0:
+            log(f"  ✓ Auto-committed + pushed new content")
+        else:
+            log(f"  ⚠ Auto-commit succeeded but push failed: {push.stderr[:200]}")
+    except Exception as e:
+        log(f"  ⚠ Auto-commit error (non-fatal): {e}")
+
+
 def main():
     log("=" * 60)
     log("RevFactor Brain Scan starting")
@@ -255,6 +319,8 @@ def main():
 
     tt = scan_tiktok(state)
     ig = scan_instagram(state)
+
+    auto_commit_new_content(tt, ig)
 
     log(f"DONE. New TikToks: {tt}, New IG: {ig}")
     log("=" * 60)
