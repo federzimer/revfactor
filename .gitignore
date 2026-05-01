@@ -28,6 +28,10 @@ revfactor-home-page.mp4
 # Raw video files (large — transcripts committed separately)
 instagram_videos/*.mp4
 instagram_videos/tmp_audio.mp3
+tiktok_videos/*.mp4
+tiktok_videos/*.mp3
+# .venv (large, machine-specific Python environment)
+.venv/
 
 # Test artifacts
 test-results/
