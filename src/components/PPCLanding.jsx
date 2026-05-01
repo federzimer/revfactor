@@ -370,8 +370,9 @@ export default function PPCLanding({
             </div>
 
             {/* RIGHT — viewport-capped iframe wrapper; iframe handles its own
-                internal scroll on tall steps (form). marginTop:-48 clips the
-                embed page's py-12 top padding so no bone halo. */}
+                internal scroll on tall steps (form). marginTop:-38 clips 38px
+                of the embed page's 48px py-12 top padding, leaving 10px of
+                bone-light padding visible above the dark green header. */}
             <div
               className="rounded-[16px] overflow-hidden"
               style={{ height: 'min(720px, calc(100vh - 200px))' }}
@@ -380,7 +381,7 @@ export default function PPCLanding({
                 src="https://schedule.revfactor.io/embed"
                 title="Schedule a strategy call with RevFactor"
                 className="w-full border-0 block"
-                style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
+                style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}
                 allow="payment"
               />
             </div>
@@ -586,8 +587,9 @@ export default function PPCLanding({
           </p>
           {/* Inline calendar — fixed-cap height so the page never grows
               taller than ~720px for the embed; the iframe handles its own
-              internal scroll on tall steps (form, etc.). marginTop:-48
-              clips the embed page's py-12 top padding. */}
+              internal scroll on tall steps (form, etc.). marginTop:-38
+              clips 38px of the embed page's 48px py-12 padding, leaving
+              10px of bone-light padding above the dark green header. */}
           <div
             className="rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]"
             style={{ height: 'min(720px, calc(100vh - 160px))' }}
@@ -597,7 +599,7 @@ export default function PPCLanding({
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
               className="w-full border-0 block"
-              style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
+              style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}
               allow="payment"
             />
           </div>
