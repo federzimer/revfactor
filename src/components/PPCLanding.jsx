@@ -289,12 +289,33 @@ export default function PPCLanding({
       if (v === 'split' || v === 'stacked') setLayoutOverride(v);
     }
     if (GROWTHBOOK_KEY) {
+      // GA4 forwarding for rollout-type rules. The SDK's trackingCallback
+      // fires only for proper experiment rules; rollout rules deliver a
+      // bucketed value but stay silent. We fire experiment_viewed manually
+      // once per page-load per feature so GA4 can attribute conversions.
+      const fired = new Set();
+      const fireOnce = (feature, value) => {
+        if (fired.has(feature) || !value) return;
+        fired.add(feature);
+        if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+          window.gtag('event', 'experiment_viewed', {
+            experiment_id: feature,
+            variation_value: String(value),
+          });
+        }
+      };
       const tick = () => {
         try {
           const v = gb.getFeatureValue('ppc_hero_layout', '');
-          if (v === 'split' || v === 'stacked') setGbLayout(v);
+          if (v === 'split' || v === 'stacked') {
+            setGbLayout(v);
+            fireOnce('ppc_hero_layout', v);
+          }
           const s = gb.getFeatureValue('ppc_subhead_variant', '');
-          if (s in SUBHEAD_VARIANTS) setGbSubhead(s);
+          if (s in SUBHEAD_VARIANTS) {
+            setGbSubhead(s);
+            fireOnce('ppc_subhead_variant', s);
+          }
         } catch { /* fail open */ }
       };
       tick();
