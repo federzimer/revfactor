@@ -32,6 +32,9 @@ tiktok_videos/*.mp4
 tiktok_videos/*.mp3
 # .venv (large, machine-specific Python environment)
 .venv/
+# Python bytecode
+__pycache__/
+*.pyc
 
 # Test artifacts
 test-results/
