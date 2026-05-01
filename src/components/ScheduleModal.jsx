@@ -162,6 +162,7 @@ export default function ScheduleModal({ onClose }) {
               title="Schedule a strategy call with RevFactor"
               className="w-full rounded-[12px] border-0 block"
               style={{ marginTop: '-48px', height: `${iframeContentHeight}px` }}
+              scrolling="no"
               allow="payment"
             />
           </div>

@@ -590,14 +590,14 @@ export default function PPCLanding({
           {/* Inline calendar with the same clip treatment as split-hero. */}
           <div
             className="rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]"
-            style={{ height: '624px' }}
+            style={{ height: `${Math.max(480, calHeight - 48)}px` }}
           >
             <iframe
               ref={calRef}
               src="https://schedule.revfactor.io/embed"
               title="Schedule a strategy call with RevFactor"
               className="w-full border-0 block"
-              style={{ marginTop: '-48px', height: '720px', overflow: 'hidden' }}
+              style={{ marginTop: '-48px', height: `${calHeight}px`, overflow: 'hidden' }}
               scrolling="no"
               allow="payment"
             />

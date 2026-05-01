@@ -175,6 +175,7 @@ export default function ExitIntent() {
             title="Schedule a strategy call with RevFactor"
             className="w-full border-0 block rounded-[14px]"
             style={{ marginTop: '-48px', height: `${iframeContentHeight}px` }}
+            scrolling="no"
             allow="payment"
           />
         </div>
