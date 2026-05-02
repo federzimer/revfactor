@@ -45,3 +45,7 @@ tests/screenshots/
 _image-gallery/
 .vercel
 .env
+
+# Syncthing scratch files
+*.syncthing.*.tmp
+.syncthing.*.tmp
