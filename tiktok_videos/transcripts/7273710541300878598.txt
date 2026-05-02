@@ -1,0 +1,6 @@
+## TikTok 7273710541300878598
+## Title: What happens when you disconnect a platform form your airbnb account ...
+## URL: https://www.tiktok.com/@federicozimerman/video/7273710541300878598
+## Transcribed: 2026-05-01T23:21:21.618657
+
+Did you know that if you connected any type of platform to your Airbnb account, like any property management system, pricing system and you just stopped using that, discontinue your account on the platform side, there may still be a connection on the Airbnb side. Why is this so important? Because it may still be messing up some features on your Airbnb account. I've seen this happening even with pricing when people discontinued an old PMS and the pricing was all messed up and we couldn't figure out why, but this is what you need to do. Let me show you. You're going to go to your account, and then you're going to go to privacy and sharing. Once you're here, you're going to go to services. And here you're going to see different things that you have connected. In this case, even though we're not using Guesy for Host, and I discontinue Guesy for Host on the Guesy side, I still need to remove the access from here. And there we go. Now it's not messing up anymore on my Airbnb account.
