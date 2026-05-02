@@ -206,9 +206,9 @@ const schema = {
         <ul class="space-y-2.5" id="toc">
           {toc.map((item, i) => (
             <li>
-              <a href={item.href} class="toc-link block text-[13px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
-                <span class="inline-block w-5 text-[#C8C4BC] mr-1" style="font-family:'JetBrains Mono',monospace;">{String(i + 1).padStart(2, '0')}</span>
-                {item.label}
+              <a href={item.href} class="toc-link flex items-baseline gap-2 text-[13px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
+                <span class="flex-shrink-0 text-[#C8C4BC] tabular-nums" style="font-family:'JetBrains Mono',monospace; min-width:22px;">{String(i + 1).padStart(2, '0')}</span>
+                <span class="block">{item.label}</span>
               </a>
             </li>
           ))}
