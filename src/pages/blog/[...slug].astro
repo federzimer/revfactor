@@ -82,13 +82,19 @@ const schema = {
 
   <article>
     <!-- IMMERSIVE FULL-BLEED HERO -->
-    <section class="relative overflow-hidden text-[#E8E6E1]" style="height:100vh; min-height:680px;">
-      <div
+    <section class="relative overflow-hidden text-[#E8E6E1]" style="height:100vh; min-height:680px; background-color:#13342D;">
+      <!-- Image as <img> (more reliable fill than bg-image), object-cover, parallax-ready -->
+      <img
         id="heroBg"
-        class="absolute inset-0 will-change-transform bg-cover bg-center"
-        style={`background-image:url('${heroImage}'); transform:scale(1.08);`}
-      ></div>
-      <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(22,25,16,0.5) 0%, rgba(22,25,16,0.15) 30%, rgba(22,25,16,0.2) 60%, rgba(22,25,16,0.9) 100%);"></div>
+        src={heroImage}
+        alt={heroAlt}
+        class="absolute inset-0 w-full h-full object-cover will-change-transform"
+        style="transform:scale(1.08); z-index:0;"
+      />
+      <!-- Top gradient — for navbar legibility (bright sky needs strong overlay) -->
+      <div class="absolute top-0 left-0 right-0 h-56 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.85) 0%, rgba(22,25,16,0.55) 35%, rgba(22,25,16,0.1) 80%, rgba(22,25,16,0) 100%);"></div>
+      <!-- Bottom gradient — for title + metadata legibility -->
+      <div class="absolute bottom-0 left-0 right-0 h-[55%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.3) 35%, rgba(22,25,16,0.85) 100%);"></div>
 
       <div class="relative z-[2] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-20 pt-36">
         <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-6 inline-block">
