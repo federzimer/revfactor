@@ -7,6 +7,10 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
+import BlogScheduleCTA from '../../components/BlogScheduleCTA.jsx';
+
+// Federico author headshot — used in hero metadata + bottom author card
+const FEDE_PHOTO = '/blog/revenue-management-for-short-term-rentals/federico-author.jpg';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -131,7 +135,11 @@ const schema = {
             <div>{post.data.category}</div>
           </div>
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-[#DDDAD3]/20 backdrop-blur-sm flex items-center justify-center text-[#E8E6E1] font-bold text-[12px]" style="font-family:'Cormorant Garamond',Georgia,serif;">FZ</div>
+            <img
+              src={FEDE_PHOTO}
+              alt="Federico Zimerman"
+              class="w-10 h-10 rounded-full object-cover ring-1 ring-[#DDDAD3]/30"
+            />
             <div>
               <div class="text-[16px] text-[#E8E6E1] lowercase" style="font-family:'Cormorant Garamond',Georgia,serif;">{post.data.author.toLowerCase()}</div>
               <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#DDDAD3]/70">Founder · RevFactor</div>
@@ -161,7 +169,11 @@ const schema = {
         )}
 
         <div class="mt-16 p-8 rounded-[16px] bg-[#E8E6E1] border border-[#C8C4BC] flex gap-6 items-start flex-wrap md:flex-nowrap">
-          <div class="w-16 h-16 rounded-full bg-[#13342D] flex items-center justify-center text-[#E8E6E1] font-bold text-[18px] flex-shrink-0" style="font-family:'Cormorant Garamond',Georgia,serif;">FZ</div>
+          <img
+            src={FEDE_PHOTO}
+            alt="Federico Zimerman"
+            class="w-20 h-20 rounded-full object-cover flex-shrink-0 ring-1 ring-[#C8C4BC]"
+          />
           <div>
             <h4 class="text-[22px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">{post.data.author.toLowerCase()}</h4>
             <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
@@ -194,7 +206,7 @@ const schema = {
         <div class="flex items-end justify-between mb-10 flex-wrap gap-4">
           <div>
             <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-2 block">Keep reading</span>
-            <h2 class="text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,40px);">More <em style="font-style:italic; color:#7A8B76;">from The Curve.</em></h2>
+            <h2 class="text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,40px);">Read more <em style="font-style:italic; color:#7A8B76;">from the Journal.</em></h2>
           </div>
           <a href="/journal" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#3F261F] hover:text-[#13342D] transition-colors">
             All field notes
@@ -227,9 +239,7 @@ const schema = {
         <p class="text-[15px] leading-[1.7] text-[#CCC8BF] mb-8 max-w-md mx-auto">
           Schedule a free 30-minute discovery call to see what expert revenue management could do for your STR portfolio.
         </p>
-        <a href="/review" class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#E8E6E1] text-[#13342D] font-bold uppercase text-[10px] tracking-[2px] rounded-full hover:bg-white transition-colors duration-200">
-          Schedule a strategy call →
-        </a>
+        <BlogScheduleCTA client:load />
       </div>
     </section>
   </article>
@@ -237,11 +247,20 @@ const schema = {
   <Footer client:load />
 
   <style>
-    .prose-rf :global(p) { font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; line-height:1.65; color:#3F261F; margin:0 0 1.5em; }
-    .prose-rf :global(h2) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,40px); line-height:1.15; color:#3F261F; margin:2.5em 0 0.75em; letter-spacing:-0.25px; }
-    .prose-rf :global(h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(22px,2.5vw,28px); line-height:1.2; color:#3F261F; margin:2em 0 0.5em; }
+    /* Body — 20px desktop, 18px mobile, generous line-height for reading */
+    .prose-rf :global(p) { font-family:'Cormorant Garamond',Georgia,serif; font-size:20px; line-height:1.6; color:#3F261F; margin:0 0 1.25em; }
+    @media (max-width: 640px) { .prose-rf :global(p) { font-size:18px; line-height:1.55; } }
+
+    /* H2 — tightened section spacing per Aaron */
+    .prose-rf :global(h2) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(30px,3.6vw,42px); line-height:1.15; color:#3F261F; margin:1.75em 0 0.6em; letter-spacing:-0.25px; }
+    .prose-rf :global(h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(23px,2.6vw,30px); line-height:1.2; color:#3F261F; margin:1.5em 0 0.4em; }
+
     .prose-rf :global(ol),
-    .prose-rf :global(ul) { font-family:'Cormorant Garamond',Georgia,serif; font-size:18px; line-height:1.65; color:#3F261F; padding-left:1.5em; margin:0 0 1.5em; }
+    .prose-rf :global(ul) { font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; line-height:1.6; color:#3F261F; padding-left:1.5em; margin:0 0 1.25em; }
+    @media (max-width: 640px) {
+      .prose-rf :global(ol),
+      .prose-rf :global(ul) { font-size:17px; }
+    }
     .prose-rf :global(ol) { list-style: decimal; }
     .prose-rf :global(ul) { list-style: disc; }
     .prose-rf :global(li) { margin-bottom: 0.6em; }
@@ -252,26 +271,51 @@ const schema = {
     .prose-rf :global(a:hover){ color:#1E4A40; }
     .prose-rf :global(hr)     { border:none; border-top:1px solid #C8C4BC; margin:2.5rem 0; }
 
+    /* Drop cap — sized to span ~3 body lines so the first paragraph wraps cleanly with no whitespace gap */
     .prose-rf > :global(p:first-of-type::first-letter) {
-      float:left; font-family:'Cormorant Garamond',Georgia,serif; font-size:72px; line-height:0.9; margin-right:12px; margin-top:6px; color:#5D6D59;
+      float:left; font-family:'Cormorant Garamond',Georgia,serif; font-size:54px; line-height:0.95; margin-right:10px; margin-top:4px; color:#5D6D59; font-weight:500;
+    }
+    @media (max-width: 640px) {
+      .prose-rf > :global(p:first-of-type::first-letter) { font-size:44px; }
     }
 
-    .prose-rf :global(blockquote) { border-left:4px solid #5D6D59; padding:0.5rem 0 0.5rem 1.5rem; margin:2.5rem 0; background:transparent; }
-    .prose-rf :global(blockquote p) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300; font-size:clamp(22px,2.6vw,30px); line-height:1.25; color:#3F261F; margin:0; }
+    /* Blockquote — text uses cedar dark green per Aaron, easier to read */
+    .prose-rf :global(blockquote) { border-left:4px solid #5D6D59; padding:0.5rem 0 0.5rem 1.5rem; margin:2rem 0; background:transparent; }
+    .prose-rf :global(blockquote p) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400; font-size:clamp(22px,2.6vw,28px); line-height:1.3; color:#13342D; margin:0; }
 
     .prose-rf :global(code) { font-family:'JetBrains Mono',monospace; font-size:14px; background:#C8C4BC; color:#13342D; padding:0.15em 0.45em; border-radius:4px; }
 
-    .prose-rf :global(table) { width:100%; border-collapse:collapse; margin:2rem 0; font-size:14px; }
+    /* Tables — body cells now 16px, mono numerics, with horizontal scroll on narrow viewports */
+    .prose-rf :global(table) { width:100%; border-collapse:collapse; margin:1.75rem 0; font-size:16px; display:block; overflow-x:auto; }
+    @media (min-width: 768px) { .prose-rf :global(table) { display:table; } }
     .prose-rf :global(table thead) { border-bottom:2px solid #3F261F; }
-    .prose-rf :global(table th) { text-align:left; padding:12px 14px; font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#3F261F; }
-    .prose-rf :global(table td) { padding:14px; font-family:'JetBrains Mono',monospace; color:#3F261F; border-bottom:1px solid #C8C4BC; }
-    .prose-rf :global(table td:first-child) { font-family:'Cormorant Garamond',Georgia,serif; }
+    .prose-rf :global(table th) { text-align:left; padding:14px 14px; font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#3F261F; white-space:nowrap; }
+    .prose-rf :global(table td) { padding:16px 14px; font-family:'JetBrains Mono',monospace; font-size:15px; color:#3F261F; border-bottom:1px solid #C8C4BC; vertical-align:top; }
+    .prose-rf :global(table td:first-child) { font-family:'Cormorant Garamond',Georgia,serif; font-size:17px; font-weight:500; color:#13342D; }
     .prose-rf :global(table tr:last-child td) { border-bottom:none; }
     .prose-rf :global(table strong) { color:#13342D; }
 
-    .prose-rf :global(.rf-figure) { margin:2.5rem -1rem; text-align:center; }
+    /* Figures break out of body container so graphics get more breathing room (instead of cramped at 672px) */
+    .prose-rf :global(.rf-figure) {
+      margin:2.5rem 0;
+      text-align:center;
+      /* Negative margins pull the figure wider than the body's max-width */
+      margin-left: clamp(-6rem, -8vw, -1rem);
+      margin-right: clamp(-6rem, -8vw, -1rem);
+    }
+    @media (max-width: 768px) {
+      .prose-rf :global(.rf-figure) { margin-left:0; margin-right:0; }
+    }
     .prose-rf :global(.rf-figure img) { width:100%; height:auto; border-radius:16px; display:block; }
-    .prose-rf :global(.rf-figure figcaption) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:14px; color:#8F6E62; margin-top:0.85rem; padding:0 1.5rem; }
+    .prose-rf :global(.rf-figure figcaption) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-style:italic;
+      font-size:15px;
+      color:#76574C;
+      margin-top:0.9rem;
+      padding:0 1.5rem;
+      line-height:1.4;
+    }
 
     .prose-rf :global(.rf-quick-answer) { background:#13342D; color:#E8E6E1; border-radius:16px; padding:2rem 2.25rem; margin:2.5rem 0; }
     .prose-rf :global(.rf-quick-answer .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:9px; letter-spacing:2.5px; color:#7A8B76; margin:0 0 0.85rem; }
@@ -283,13 +327,99 @@ const schema = {
     .prose-rf :global(.rf-key-stats .number) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(22px,3vw,32px); color:#13342D; margin:0 0 0.25rem; text-align:center; line-height:1; }
     .prose-rf :global(.rf-key-stats .caption) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:13px; color:#76574C; margin:0; text-align:center; }
 
+    /* Key Takeaways — bumped font for readability */
     .prose-rf :global(.rf-takeaways) { background:rgba(93,109,89,0.05); border:1px solid #C8C4BC; border-radius:16px; padding:1.75rem 2rem; margin:2.5rem 0; }
-    .prose-rf :global(.rf-takeaways h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:26px; color:#13342D; margin:0 0 1rem !important; letter-spacing:-0.25px; }
-    .prose-rf :global(.rf-takeaways ul) { margin:0; padding-left:1.25rem; font-size:16px; }
-    .prose-rf :global(.rf-takeaways li) { font-family:'Cormorant Garamond',Georgia,serif; line-height:1.5; color:#3F261F; margin-bottom:0.6rem; }
+    .prose-rf :global(.rf-takeaways h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:28px; color:#13342D; margin:0 0 1rem !important; letter-spacing:-0.25px; }
+    .prose-rf :global(.rf-takeaways ul) { margin:0; padding-left:1.25rem; }
+    .prose-rf :global(.rf-takeaways li) { font-family:'Cormorant Garamond',Georgia,serif; font-size:18px; line-height:1.55; color:#3F261F; margin-bottom:0.7rem; }
+    @media (max-width: 640px) {
+      .prose-rf :global(.rf-takeaways li) { font-size:17px; }
+    }
 
     .prose-rf :global(.rf-author-bio) { display:none; }
     .prose-rf :global(.rf-hero) { display:none; }
+
+    /* ============== HTML GRID COMPONENTS (responsive, scale with text) ============== */
+
+    /* Strategic Philosophy — 3 cards (cedar / moss / tobacco) */
+    .prose-rf :global(.rf-philosophy) {
+      margin:2.5rem 0;
+      margin-left: clamp(-6rem, -8vw, -1rem);
+      margin-right: clamp(-6rem, -8vw, -1rem);
+    }
+    @media (max-width: 768px) { .prose-rf :global(.rf-philosophy) { margin-left:0; margin-right:0; } }
+    .prose-rf :global(.rf-philosophy-header) { text-align:center; margin-bottom:1.75rem; }
+    .prose-rf :global(.rf-philosophy-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
+    .prose-rf :global(.rf-philosophy-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400; font-size:clamp(32px,4vw,48px); color:#13342D; margin:0 0 0.5rem !important; }
+    .prose-rf :global(.rf-philosophy-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-size:18px; color:#76574C; margin:0; line-height:1.4; }
+
+    .prose-rf :global(.rf-philosophy-grid) {
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:1.25rem;
+      margin-top:1.5rem;
+    }
+    @media (max-width: 768px) { .prose-rf :global(.rf-philosophy-grid) { grid-template-columns:1fr; } }
+    .prose-rf :global(.rf-philosophy-card) {
+      border-radius:16px;
+      padding:2rem 1.5rem;
+      text-align:center;
+      color:#DDDAD3;
+      min-height: 320px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+    }
+    .prose-rf :global(.rf-philosophy-card.cedar)   { background:#13342D; }
+    .prose-rf :global(.rf-philosophy-card.moss)    { background:#5D6D59; }
+    .prose-rf :global(.rf-philosophy-card.tobacco) { background:#3F261F; }
+    .prose-rf :global(.rf-philosophy-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:56px; line-height:1; margin:0 0 0.5rem; opacity:0.7; }
+    .prose-rf :global(.rf-philosophy-card.cedar .num)   { color:#7A8B76; }
+    .prose-rf :global(.rf-philosophy-card.moss .num)    { color:#13342D; }
+    .prose-rf :global(.rf-philosophy-card.tobacco .num) { color:#7A8B76; }
+    .prose-rf :global(.rf-philosophy-card .rule) { width:48px; height:1px; background:currentColor; opacity:0.4; margin:0 auto 1rem; }
+    .prose-rf :global(.rf-philosophy-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:12px; letter-spacing:3px; text-transform:uppercase; opacity:0.85; margin:0 0 1.25rem !important; }
+    .prose-rf :global(.rf-philosophy-card .lead) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400; font-size:24px; line-height:1.2; margin:0 0 1.25rem !important; color:#DDDAD3 !important; }
+    .prose-rf :global(.rf-philosophy-card .body) { font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; line-height:1.5; opacity:0.9; margin:0 0 0.75rem !important; }
+    .prose-rf :global(.rf-philosophy-card .pull) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:15px; opacity:0.75; margin:auto 0 0 !important; padding-top:1rem; }
+
+    /* 7 Leaks — 4-up responsive grid */
+    .prose-rf :global(.rf-leaks) {
+      margin:2.5rem 0;
+      margin-left: clamp(-6rem, -8vw, -1rem);
+      margin-right: clamp(-6rem, -8vw, -1rem);
+    }
+    @media (max-width: 768px) { .prose-rf :global(.rf-leaks) { margin-left:0; margin-right:0; } }
+    .prose-rf :global(.rf-leaks-header) { text-align:center; margin-bottom:1.5rem; }
+    .prose-rf :global(.rf-leaks-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
+    .prose-rf :global(.rf-leaks-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(32px,4vw,48px); color:#13342D; margin:0 0 0.5rem !important; }
+    .prose-rf :global(.rf-leaks-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:17px; color:#76574C; margin:0; line-height:1.4; }
+
+    .prose-rf :global(.rf-leaks-grid) {
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:1rem;
+      margin-top:1.5rem;
+    }
+    @media (max-width: 1100px) { .prose-rf :global(.rf-leaks-grid) { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px)  { .prose-rf :global(.rf-leaks-grid) { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px)  { .prose-rf :global(.rf-leaks-grid) { grid-template-columns: 1fr; } }
+
+    .prose-rf :global(.rf-leak-card) {
+      background:#E8E6E1;
+      border-radius:12px;
+      padding:1.5rem 1.25rem;
+      position:relative;
+      border-top:4px solid var(--leak-accent, #13342D);
+    }
+    .prose-rf :global(.rf-leak-card.cedar)   { --leak-accent:#13342D; }
+    .prose-rf :global(.rf-leak-card.moss)    { --leak-accent:#5D6D59; }
+    .prose-rf :global(.rf-leak-card.tobacco) { --leak-accent:#3F261F; }
+    .prose-rf :global(.rf-leak-card.walnut)  { --leak-accent:#76574C; }
+    .prose-rf :global(.rf-leak-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:42px; line-height:1; margin:0 0 0.65rem !important; color:var(--leak-accent); }
+    .prose-rf :global(.rf-leak-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:#5D6D59; margin:0 0 0.6rem !important; }
+    .prose-rf :global(.rf-leak-card .title) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:22px; line-height:1.2; color:#13342D; margin:0 0 0.65rem !important; }
+    .prose-rf :global(.rf-leak-card .body) { font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; line-height:1.5; color:#3F261F; margin:0 !important; }
 
     .toc-link.active { color:#13342D; font-weight:600; }
   </style>
