@@ -271,12 +271,32 @@ const schema = {
     .prose-rf :global(a:hover){ color:#1E4A40; }
     .prose-rf :global(hr)     { border:none; border-top:1px solid #C8C4BC; margin:2.5rem 0; }
 
-    /* Drop cap — sized to span ~3 body lines so the first paragraph wraps cleanly with no whitespace gap */
+    /* Drop cap — uses `initial-letter` so the cap is properly baseline-aligned with body text
+       (fallback below for older browsers — kept small so it doesn't dwarf a short first sentence) */
     .prose-rf > :global(p:first-of-type::first-letter) {
-      float:left; font-family:'Cormorant Garamond',Georgia,serif; font-size:54px; line-height:0.95; margin-right:10px; margin-top:4px; color:#5D6D59; font-weight:500;
+      -webkit-initial-letter: 2 1;
+      initial-letter: 2 1;
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-weight:500;
+      color:#5D6D59;
+      margin-right:10px;
+      /* Fallback for browsers that don't support initial-letter:
+         smaller cap (matches ~1.5 body lines) sitting on the same baseline as text */
+      float:left;
+      font-size:42px;
+      line-height:0.9;
+      margin-top:6px;
+    }
+    @supports ((-webkit-initial-letter: 2) or (initial-letter: 2)) {
+      .prose-rf > :global(p:first-of-type::first-letter) {
+        float:none;
+        font-size:inherit;
+        line-height:inherit;
+        margin-top:0;
+      }
     }
     @media (max-width: 640px) {
-      .prose-rf > :global(p:first-of-type::first-letter) { font-size:44px; }
+      .prose-rf > :global(p:first-of-type::first-letter) { font-size:36px; }
     }
 
     /* Blockquote — text uses cedar dark green per Aaron, easier to read */
@@ -295,16 +315,17 @@ const schema = {
     .prose-rf :global(table tr:last-child td) { border-bottom:none; }
     .prose-rf :global(table strong) { color:#13342D; }
 
-    /* Figures break out of body container so graphics get more breathing room (instead of cramped at 672px) */
+    /* Figures break out of body container so graphics get more breathing room (instead of cramped at 672px).
+       Body is ml-auto inside a 1fr column with a 240px sticky TOC on the right — so we extend LEFT only,
+       not right, otherwise the TOC's border-left runs through the card (Aaron's #4 leak fix). */
     .prose-rf :global(.rf-figure) {
       margin:2.5rem 0;
       text-align:center;
-      /* Negative margins pull the figure wider than the body's max-width */
-      margin-left: clamp(-6rem, -8vw, -1rem);
-      margin-right: clamp(-6rem, -8vw, -1rem);
+      margin-left: clamp(-8rem, -10vw, -2rem);
+      margin-right: 0;
     }
     @media (max-width: 768px) {
-      .prose-rf :global(.rf-figure) { margin-left:0; margin-right:0; }
+      .prose-rf :global(.rf-figure) { margin-left:0; }
     }
     .prose-rf :global(.rf-figure img) { width:100%; height:auto; border-radius:16px; display:block; }
     .prose-rf :global(.rf-figure figcaption) {
@@ -341,13 +362,13 @@ const schema = {
 
     /* ============== HTML GRID COMPONENTS (responsive, scale with text) ============== */
 
-    /* Strategic Philosophy — 3 cards (cedar / moss / tobacco) */
+    /* Strategic Philosophy — 3 cards (cedar / moss / tobacco). Break out LEFT only (TOC is on right). */
     .prose-rf :global(.rf-philosophy) {
       margin:2.5rem 0;
-      margin-left: clamp(-6rem, -8vw, -1rem);
-      margin-right: clamp(-6rem, -8vw, -1rem);
+      margin-left: clamp(-8rem, -10vw, -2rem);
+      margin-right: 0;
     }
-    @media (max-width: 768px) { .prose-rf :global(.rf-philosophy) { margin-left:0; margin-right:0; } }
+    @media (max-width: 768px) { .prose-rf :global(.rf-philosophy) { margin-left:0; } }
     .prose-rf :global(.rf-philosophy-header) { text-align:center; margin-bottom:1.75rem; }
     .prose-rf :global(.rf-philosophy-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
     .prose-rf :global(.rf-philosophy-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400; font-size:clamp(32px,4vw,48px); color:#13342D; margin:0 0 0.5rem !important; }
@@ -383,13 +404,13 @@ const schema = {
     .prose-rf :global(.rf-philosophy-card .body) { font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; line-height:1.5; opacity:0.9; margin:0 0 0.75rem !important; }
     .prose-rf :global(.rf-philosophy-card .pull) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:15px; opacity:0.75; margin:auto 0 0 !important; padding-top:1rem; }
 
-    /* 7 Leaks — 4-up responsive grid */
+    /* 7 Leaks — 4-up responsive grid. Break out LEFT only (TOC is on right). */
     .prose-rf :global(.rf-leaks) {
       margin:2.5rem 0;
-      margin-left: clamp(-6rem, -8vw, -1rem);
-      margin-right: clamp(-6rem, -8vw, -1rem);
+      margin-left: clamp(-8rem, -10vw, -2rem);
+      margin-right: 0;
     }
-    @media (max-width: 768px) { .prose-rf :global(.rf-leaks) { margin-left:0; margin-right:0; } }
+    @media (max-width: 768px) { .prose-rf :global(.rf-leaks) { margin-left:0; } }
     .prose-rf :global(.rf-leaks-header) { text-align:center; margin-bottom:1.5rem; }
     .prose-rf :global(.rf-leaks-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
     .prose-rf :global(.rf-leaks-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(32px,4vw,48px); color:#13342D; margin:0 0 0.5rem !important; }
