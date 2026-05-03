@@ -123,14 +123,28 @@ function useInView(ref, threshold = 0.25) {
   return seen;
 }
 
-// Animated number that ticks from 0 → target over `duration` ms when first
-// scrolled into view. Pass `prefix` (e.g. "+", "$") and `suffix` (e.g. "%").
+// Animated number that ticks from 0 → target when first scrolled into view.
+// Default value = target so SSR / crawlers / social-preview screenshots /
+// fast-scrolling users see the correct number, not 0%. Animation runs only
+// when the user has actually scrolled past initial viewport — prevents the
+// proof strip from flashing 0% on first paint or rendering zeros to bots.
 function CountUp({ to, prefix = '', suffix = '', duration = 1400, decimals = 0 }) {
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState(to);
+  const animatedRef = useRef(false);
+  const initialScrollY = useRef(0);
   const ref = useRef(null);
   const inView = useInView(ref);
+
   useEffect(() => {
-    if (!inView) return;
+    if (typeof window !== 'undefined') initialScrollY.current = window.scrollY;
+  }, []);
+
+  useEffect(() => {
+    if (!inView || animatedRef.current) return;
+    animatedRef.current = true;
+    const scrolled = typeof window !== 'undefined' && window.scrollY > initialScrollY.current + 50;
+    if (!scrolled) return;
+    setVal(0);
     let raf, start;
     const tick = (ts) => {
       if (!start) start = ts;
@@ -142,6 +156,7 @@ function CountUp({ to, prefix = '', suffix = '', duration = 1400, decimals = 0 }
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, to, duration]);
+
   const display = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toLocaleString();
   return <span ref={ref}>{prefix}{display}{suffix}</span>;
 }
