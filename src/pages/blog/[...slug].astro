@@ -96,9 +96,9 @@ const schema = {
         style="transform:scale(1.08); z-index:0;"
       />
       <!-- Top gradient — for navbar legibility (bright sky needs strong overlay) -->
-      <div class="absolute top-0 left-0 right-0 h-56 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.85) 0%, rgba(22,25,16,0.55) 35%, rgba(22,25,16,0.1) 80%, rgba(22,25,16,0) 100%);"></div>
-      <!-- Bottom gradient — for title + metadata legibility -->
-      <div class="absolute bottom-0 left-0 right-0 h-[55%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.3) 35%, rgba(22,25,16,0.85) 100%);"></div>
+      <div class="absolute top-0 left-0 right-0 h-56 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.9) 0%, rgba(22,25,16,0.6) 35%, rgba(22,25,16,0.15) 80%, rgba(22,25,16,0) 100%);"></div>
+      <!-- Bottom gradient — strengthened for body-text legibility over bright skies -->
+      <div class="absolute bottom-0 left-0 right-0 h-[70%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.45) 30%, rgba(22,25,16,0.78) 60%, rgba(22,25,16,0.95) 100%);"></div>
 
       <div class="relative z-[2] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-20 pt-36">
         <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-6 inline-block">
@@ -107,7 +107,7 @@ const schema = {
 
         <h1
           class="text-[#E8E6E1] mb-6"
-          style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(34px,4.5vw,56px); line-height:1.1; letter-spacing:-0.5px; max-width:900px;"
+          style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(38px,5.2vw,72px); line-height:1.05; letter-spacing:0.5px; max-width:1000px;"
         >
           {post.data.title}
         </h1>
@@ -247,56 +247,47 @@ const schema = {
   <Footer client:load />
 
   <style>
-    /* Body — 20px desktop, 18px mobile, generous line-height for reading */
-    .prose-rf :global(p) { font-family:'Cormorant Garamond',Georgia,serif; font-size:20px; line-height:1.6; color:#3F261F; margin:0 0 1.25em; }
-    @media (max-width: 640px) { .prose-rf :global(p) { font-size:18px; line-height:1.55; } }
+    /* Body — sans-serif (Helvetica) per brand spec; serif reserved for headings + quotes */
+    .prose-rf :global(p) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:17px; line-height:1.7; color:#3F261F; margin:0 0 1.25em; }
+    @media (max-width: 640px) { .prose-rf :global(p) { font-size:16px; line-height:1.65; } }
 
-    /* H2 — tightened section spacing per Aaron */
-    .prose-rf :global(h2) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(30px,3.6vw,42px); line-height:1.15; color:#3F261F; margin:1.75em 0 0.6em; letter-spacing:-0.25px; }
-    .prose-rf :global(h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(23px,2.6vw,30px); line-height:1.2; color:#3F261F; margin:1.5em 0 0.4em; }
+    /* H2 / H3 — Cormorant, weight bumped 500 to match homepage hero feel */
+    .prose-rf :global(h2) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(32px,3.8vw,46px); line-height:1.15; color:#3F261F; margin:1.75em 0 0.6em; letter-spacing:0.25px; }
+    .prose-rf :global(h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(24px,2.8vw,32px); line-height:1.2; color:#3F261F; margin:1.5em 0 0.4em; letter-spacing:0.25px; }
 
+    /* Lists — sans-serif body */
     .prose-rf :global(ol),
-    .prose-rf :global(ul) { font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; line-height:1.6; color:#3F261F; padding-left:1.5em; margin:0 0 1.25em; }
+    .prose-rf :global(ul) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:16px; line-height:1.7; color:#3F261F; padding-left:1.5em; margin:0 0 1.25em; }
     @media (max-width: 640px) {
       .prose-rf :global(ol),
-      .prose-rf :global(ul) { font-size:17px; }
+      .prose-rf :global(ul) { font-size:15px; }
     }
     .prose-rf :global(ol) { list-style: decimal; }
     .prose-rf :global(ul) { list-style: disc; }
     .prose-rf :global(li) { margin-bottom: 0.6em; }
     .prose-rf :global(li::marker) { color: #5D6D59; }
-    .prose-rf :global(strong) { color:#13342D; font-weight:600; }
-    .prose-rf :global(em)     { color:#5D6D59; font-style:italic; }
+    .prose-rf :global(strong) { color:#13342D; font-weight:700; }
+    /* Italics — Cormorant serif in cedar (darker green) per Aaron */
+    .prose-rf :global(em)     { font-family:'Cormorant Garamond',Georgia,serif; color:#13342D; font-style:italic; }
     .prose-rf :global(a)      { color:#13342D; text-decoration:underline; text-underline-offset:3px; }
     .prose-rf :global(a:hover){ color:#1E4A40; }
     .prose-rf :global(hr)     { border:none; border-top:1px solid #C8C4BC; margin:2.5rem 0; }
 
-    /* Drop cap — uses `initial-letter` so the cap is properly baseline-aligned with body text
-       (fallback below for older browsers — kept small so it doesn't dwarf a short first sentence) */
+    /* Drop cap — Cormorant serif accent on the first body paragraph; line-height tightened
+       so the second body line doesn't get pushed away from the first */
     .prose-rf > :global(p:first-of-type::first-letter) {
-      -webkit-initial-letter: 2 1;
-      initial-letter: 2 1;
+      float:left;
       font-family:'Cormorant Garamond',Georgia,serif;
       font-weight:500;
-      color:#5D6D59;
+      color:#13342D;
+      font-size:56px;
+      line-height:0.85;
+      padding-top:4px;
       margin-right:10px;
-      /* Fallback for browsers that don't support initial-letter:
-         smaller cap (matches ~1.5 body lines) sitting on the same baseline as text */
-      float:left;
-      font-size:42px;
-      line-height:0.9;
-      margin-top:6px;
-    }
-    @supports ((-webkit-initial-letter: 2) or (initial-letter: 2)) {
-      .prose-rf > :global(p:first-of-type::first-letter) {
-        float:none;
-        font-size:inherit;
-        line-height:inherit;
-        margin-top:0;
-      }
+      margin-top:0;
     }
     @media (max-width: 640px) {
-      .prose-rf > :global(p:first-of-type::first-letter) { font-size:36px; }
+      .prose-rf > :global(p:first-of-type::first-letter) { font-size:42px; }
     }
 
     /* Blockquote — text uses cedar dark green per Aaron, easier to read */
@@ -348,13 +339,13 @@ const schema = {
     .prose-rf :global(.rf-key-stats .number) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(22px,3vw,32px); color:#13342D; margin:0 0 0.25rem; text-align:center; line-height:1; }
     .prose-rf :global(.rf-key-stats .caption) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:13px; color:#76574C; margin:0; text-align:center; }
 
-    /* Key Takeaways — bumped font for readability */
+    /* Key Takeaways — heading serif, body sans-serif per brand spec */
     .prose-rf :global(.rf-takeaways) { background:rgba(93,109,89,0.05); border:1px solid #C8C4BC; border-radius:16px; padding:1.75rem 2rem; margin:2.5rem 0; }
-    .prose-rf :global(.rf-takeaways h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:28px; color:#13342D; margin:0 0 1rem !important; letter-spacing:-0.25px; }
+    .prose-rf :global(.rf-takeaways h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:30px; color:#13342D; margin:0 0 1rem !important; letter-spacing:0.25px; }
     .prose-rf :global(.rf-takeaways ul) { margin:0; padding-left:1.25rem; }
-    .prose-rf :global(.rf-takeaways li) { font-family:'Cormorant Garamond',Georgia,serif; font-size:18px; line-height:1.55; color:#3F261F; margin-bottom:0.7rem; }
+    .prose-rf :global(.rf-takeaways li) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:16px; line-height:1.65; color:#3F261F; margin-bottom:0.7rem; }
     @media (max-width: 640px) {
-      .prose-rf :global(.rf-takeaways li) { font-size:17px; }
+      .prose-rf :global(.rf-takeaways li) { font-size:15px; }
     }
 
     .prose-rf :global(.rf-author-bio) { display:none; }
@@ -394,15 +385,22 @@ const schema = {
     .prose-rf :global(.rf-philosophy-card.cedar)   { background:#13342D; }
     .prose-rf :global(.rf-philosophy-card.moss)    { background:#5D6D59; }
     .prose-rf :global(.rf-philosophy-card.tobacco) { background:#3F261F; }
-    .prose-rf :global(.rf-philosophy-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:56px; line-height:1; margin:0 0 0.5rem; opacity:0.7; }
-    .prose-rf :global(.rf-philosophy-card.cedar .num)   { color:#7A8B76; }
+    .prose-rf :global(.rf-philosophy-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:56px; line-height:1; margin:0 0 0.5rem; opacity:0.85; }
+    .prose-rf :global(.rf-philosophy-card.cedar .num)   { color:#A9BBA3; }
     .prose-rf :global(.rf-philosophy-card.moss .num)    { color:#13342D; }
-    .prose-rf :global(.rf-philosophy-card.tobacco .num) { color:#7A8B76; }
-    .prose-rf :global(.rf-philosophy-card .rule) { width:48px; height:1px; background:currentColor; opacity:0.4; margin:0 auto 1rem; }
-    .prose-rf :global(.rf-philosophy-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:12px; letter-spacing:3px; text-transform:uppercase; opacity:0.85; margin:0 0 1.25rem !important; }
-    .prose-rf :global(.rf-philosophy-card .lead) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400; font-size:24px; line-height:1.2; margin:0 0 1.25rem !important; color:#DDDAD3 !important; }
-    .prose-rf :global(.rf-philosophy-card .body) { font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; line-height:1.5; opacity:0.9; margin:0 0 0.75rem !important; }
-    .prose-rf :global(.rf-philosophy-card .pull) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:15px; opacity:0.75; margin:auto 0 0 !important; padding-top:1rem; }
+    .prose-rf :global(.rf-philosophy-card.tobacco .num) { color:#A9BBA3; }
+    .prose-rf :global(.rf-philosophy-card .rule) { width:48px; height:1px; background:currentColor; opacity:0.5; margin:0 auto 1rem; }
+    .prose-rf :global(.rf-philosophy-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:13px; letter-spacing:3px; text-transform:uppercase; opacity:1; color:#E8E6E1 !important; margin:0 0 1.25rem !important; }
+    .prose-rf :global(.rf-philosophy-card.moss .label) { color:#13342D !important; }
+    .prose-rf :global(.rf-philosophy-card .lead) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:500; font-size:26px; line-height:1.2; margin:0 0 1.25rem !important; color:#E8E6E1 !important; }
+    .prose-rf :global(.rf-philosophy-card.moss .lead) { color:#13342D !important; }
+    .prose-rf :global(.rf-philosophy-card .body) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:16px; line-height:1.55; opacity:1; color:#E8E6E1; margin:0 0 0.75rem !important; }
+    .prose-rf :global(.rf-philosophy-card.moss .body) { color:#13342D; }
+    .prose-rf :global(.rf-philosophy-card .pull) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:15px; opacity:0.85; color:#E8E6E1; margin:auto 0 0 !important; padding-top:1rem; }
+    .prose-rf :global(.rf-philosophy-card.moss .pull) { color:#13342D; }
+    /* Philosophy cards override the global em → cedar rule so italic text inside cards
+       inherits the card's text color (not moss, which goes invisible on moss/cedar bg) */
+    .prose-rf :global(.rf-philosophy-card em) { color:inherit !important; font-family:inherit; }
 
     /* 7 Leaks — 4-up responsive grid. Break out LEFT only (TOC is on right). */
     .prose-rf :global(.rf-leaks) {
@@ -439,8 +437,10 @@ const schema = {
     .prose-rf :global(.rf-leak-card.walnut)  { --leak-accent:#76574C; }
     .prose-rf :global(.rf-leak-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:42px; line-height:1; margin:0 0 0.65rem !important; color:var(--leak-accent); }
     .prose-rf :global(.rf-leak-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:#5D6D59; margin:0 0 0.6rem !important; }
-    .prose-rf :global(.rf-leak-card .title) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:22px; line-height:1.2; color:#13342D; margin:0 0 0.65rem !important; }
-    .prose-rf :global(.rf-leak-card .body) { font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; line-height:1.5; color:#3F261F; margin:0 !important; }
+    .prose-rf :global(.rf-leak-card .title) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:23px; line-height:1.2; color:#13342D; margin:0 0 0.65rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-leak-card .body) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:14px; line-height:1.6; color:#3F261F; margin:0 !important; }
+    /* Override em color inside leak cards so italic doesn't go cedar-on-bone-on-cedar-accent */
+    .prose-rf :global(.rf-leak-card em) { color:#13342D; }
 
     .toc-link.active { color:#13342D; font-weight:600; }
   </style>
