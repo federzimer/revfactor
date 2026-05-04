@@ -1,0 +1,80 @@
+[
+  {
+    "env": "live",
+    "vpName": "desktop",
+    "total": 9,
+    "broken": [
+      {
+        "src": "https://www.revfactor.io/photos/blog/cabin/empty-deck-dusk-2400.webp",
+        "alt": "A single Adirondack chair on the empty deck of a lake cabin at golden hour — an unsold night, gone forever",
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "complete": true,
+        "loading": "auto"
+      },
+      {
+        "src": "https://www.revfactor.io/photos/blog/interior/warm-living-room-2400.webp",
+        "alt": "A luxury short-term rental living room interior at golden hour, stone fireplace lit, mountain view through floor-to-ceiling windows",
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "complete": true,
+        "loading": "auto"
+      },
+      {
+        "src": "https://www.revfactor.io/photos/blog/operations/desk-detail-pen-2400.webp",
+        "alt": "A leather notebook with a brass key, a fountain pen, and a coffee cup on a reclaimed-wood desk in afternoon light — daily attentive revenue management practice",
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "complete": true,
+        "loading": "auto"
+      }
+    ],
+    "failedImages": []
+  },
+  {
+    "env": "live",
+    "vpName": "mobile",
+    "total": 9,
+    "broken": [
+      {
+        "src": "https://www.revfactor.io/photos/blog/cabin/empty-deck-dusk-2400.webp",
+        "alt": "A single Adirondack chair on the empty deck of a lake cabin at golden hour — an unsold night, gone forever",
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "complete": true,
+        "loading": "auto"
+      },
+      {
+        "src": "https://www.revfactor.io/photos/blog/interior/warm-living-room-2400.webp",
+        "alt": "A luxury short-term rental living room interior at golden hour, stone fireplace lit, mountain view through floor-to-ceiling windows",
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "complete": true,
+        "loading": "auto"
+      },
+      {
+        "src": "https://www.revfactor.io/photos/blog/operations/desk-detail-pen-2400.webp",
+        "alt": "A leather notebook with a brass key, a fountain pen, and a coffee cup on a reclaimed-wood desk in afternoon light — daily attentive revenue management practice",
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "complete": true,
+        "loading": "auto"
+      }
+    ],
+    "failedImages": []
+  },
+  {
+    "env": "staging",
+    "vpName": "desktop",
+    "total": 10,
+    "broken": [],
+    "failedImages": []
+  },
+  {
+    "env": "staging",
+    "vpName": "mobile",
+    "total": 10,
+    "broken": [],
+    "failedImages": []
+  }
+]

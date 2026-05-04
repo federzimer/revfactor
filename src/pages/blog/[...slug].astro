@@ -246,19 +246,30 @@ const definedTerms = [
       </div>
     </section>
 
-    <!-- Floating TOC — XL+ only, fixed-position panel that doesn't constrain the body grid -->
-    <aside id="tocFloat" class="hidden xl:block fixed left-6 top-32 w-[200px] max-h-[calc(100vh-180px)] overflow-y-auto z-30 pr-2">
-      <h5 class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#76574C] mb-4">In this essay</h5>
-      <ul class="space-y-2.5" id="toc">
-        {toc.map((item, i) => (
-          <li>
-            <a href={item.href} class="toc-link flex items-baseline gap-2 text-[12.5px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
-              <span class="flex-shrink-0 text-[#3F261F] tabular-nums" style="font-family:'JetBrains Mono',monospace; min-width:22px; opacity:0.75;">{String(i + 1).padStart(2, '0')}</span>
-              <span class="block">{item.label}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+    <!-- Floating TOC — XL+ only. Collapsed pill by default; expands on hover/click into full TOC -->
+    <aside id="tocFloat" class="hidden xl:block fixed left-6 top-32 z-30">
+      <div id="tocPill" class="rf-toc-pill" tabindex="0" aria-expanded="false" aria-controls="tocPanel" aria-label="Table of contents">
+        <span class="rf-toc-progress" aria-hidden="true"><span id="tocProgressFill"></span></span>
+        <span class="rf-toc-num tabular-nums" id="tocCurrentNum">01</span>
+        <span class="rf-toc-divider">/</span>
+        <span class="rf-toc-total tabular-nums">{String(toc.length).padStart(2, '0')}</span>
+        <span class="rf-toc-current" id="tocCurrentLabel">{toc[0]?.label}</span>
+        <svg class="rf-toc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+
+      <div id="tocPanel" class="rf-toc-panel" role="region" aria-label="In this essay">
+        <p class="rf-toc-panel-kicker">In this essay</p>
+        <ol class="rf-toc-panel-list" id="toc">
+          {toc.map((item, i) => (
+            <li>
+              <a href={item.href} class="toc-link" data-toc-idx={i}>
+                <span class="rf-toc-panel-num tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <span class="rf-toc-panel-label">{item.label}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
     </aside>
 
     <!-- Mobile/tablet TOC — collapsible, sits above the body so we keep the grid centered -->
@@ -443,21 +454,159 @@ const definedTerms = [
     /* Floating-TOC behavior: keep panel narrow, tighten line-height,
        active item gets cedar treatment. Hidden until user scrolls past hero.
        Z-index 20 so full-bleed image sections (z-index 30) cover it cleanly. */
+    /* ============== TOC FLOAT — collapsed pill + expand-on-hover panel ==============
+       Default: a compact pill showing current section + position (01/11).
+       On hover or focus, the pill grows into a full panel listing all sections.
+       Active section gets cedar treatment + bumped weight. */
     #tocFloat {
-      transform: translateZ(0);  /* avoid sub-pixel jitter on scroll */
+      transform: translateZ(0);
       opacity: 0;
       pointer-events: none;
       transition: opacity 350ms cubic-bezier(0.25,0.1,0.25,1);
       z-index: 20;
     }
-    #tocFloat.visible {
-      opacity: 1;
-      pointer-events: auto;
+    #tocFloat.visible { opacity: 1; pointer-events: auto; }
+
+    /* Collapsed pill — always visible when #tocFloat.visible is set */
+    .rf-toc-pill {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: 280px;
+      padding: 10px 14px 10px 16px;
+      background: #E8E6E1;
+      border: 1px solid #C8C4BC;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(22,25,16,0.06);
+      transition: box-shadow 200ms cubic-bezier(0.25,0.1,0.25,1), transform 200ms cubic-bezier(0.25,0.1,0.25,1);
+      outline: none;
     }
-    #tocFloat::-webkit-scrollbar { width: 4px; }
-    #tocFloat::-webkit-scrollbar-thumb { background: #C8C4BC; border-radius: 2px; }
-    .toc-link.active { color: #13342D !important; font-weight: 600; }
-    .toc-link.active span:first-child { opacity: 1 !important; color: #13342D !important; }
+    .rf-toc-pill:hover, .rf-toc-pill:focus-visible {
+      box-shadow: 0 4px 14px rgba(22,25,16,0.12);
+      transform: translateY(-1px);
+    }
+    .rf-toc-pill:focus-visible { box-shadow: 0 0 0 2px #13342D, 0 4px 14px rgba(22,25,16,0.12); }
+    .rf-toc-progress {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 2px;
+      background: rgba(93,109,89,0.15);
+      border-radius: 0 0 999px 999px;
+      overflow: hidden;
+    }
+    .rf-toc-progress > span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: #5D6D59;
+      transition: width 75ms linear;
+    }
+    .rf-toc-num,
+    .rf-toc-total,
+    .rf-toc-divider {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      color: #3F261F;
+    }
+    .rf-toc-divider { color: #C8C4BC; margin: 0 -2px; }
+    .rf-toc-total { color: #76574C; opacity: 0.7; }
+    .rf-toc-current {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 14px;
+      color: #13342D;
+      letter-spacing: 0.25px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+    .rf-toc-chevron {
+      width: 12px; height: 12px;
+      color: #76574C;
+      flex-shrink: 0;
+      transition: transform 200ms cubic-bezier(0.25,0.1,0.25,1);
+    }
+    #tocFloat.expanded .rf-toc-chevron { transform: rotate(90deg); }
+
+    /* Expanded panel — appears below pill on hover/focus, scrollable if list is long */
+    .rf-toc-panel {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 280px;
+      max-height: calc(100vh - 220px);
+      overflow-y: auto;
+      padding: 1.25rem 1.25rem 1rem;
+      background: #E8E6E1;
+      border: 1px solid #C8C4BC;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(22,25,16,0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4px);
+      transition: opacity 200ms cubic-bezier(0.25,0.1,0.25,1), transform 200ms cubic-bezier(0.25,0.1,0.25,1), visibility 0s linear 200ms;
+    }
+    #tocFloat.expanded .rf-toc-panel,
+    #tocFloat:hover .rf-toc-panel,
+    #tocFloat:focus-within .rf-toc-panel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity 200ms cubic-bezier(0.25,0.1,0.25,1), transform 200ms cubic-bezier(0.25,0.1,0.25,1), visibility 0s;
+    }
+    .rf-toc-panel-kicker {
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #76574C;
+      margin: 0 0 0.85rem;
+    }
+    .rf-toc-panel-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: none;
+    }
+    .rf-toc-panel-list li { margin-bottom: 0.4rem; }
+    .rf-toc-panel-list li:last-child { margin-bottom: 0; }
+    .rf-toc-panel .toc-link {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      padding: 6px 8px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 150ms cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .rf-toc-panel .toc-link:hover { background: rgba(93,109,89,0.08); }
+    .rf-toc-panel-num {
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #76574C;
+      opacity: 0.7;
+      min-width: 22px;
+    }
+    .rf-toc-panel-label {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.4;
+      color: #3F261F;
+    }
+    .rf-toc-panel .toc-link.active {
+      background: rgba(19,52,45,0.08);
+    }
+    .rf-toc-panel .toc-link.active .rf-toc-panel-num { color: #13342D; opacity: 1; }
+    .rf-toc-panel .toc-link.active .rf-toc-panel-label { color: #13342D; font-weight: 600; }
+    .rf-toc-panel::-webkit-scrollbar { width: 4px; }
+    .rf-toc-panel::-webkit-scrollbar-thumb { background: #C8C4BC; border-radius: 2px; }
+
+    .toc-link.active { color: #13342D; font-weight: 600; }
 
     /* ============== BODY PROSE ==============
        Body — sans-serif (Helvetica) per brand spec; serif reserved for headings + quotes */
@@ -965,6 +1114,58 @@ const definedTerms = [
     }
     .prose-rf :global(.rf-band strong) { color: inherit !important; opacity: 1; }
 
+    /* RF-CTA-BAND — the post-closing CTA that bridges into the author bio.
+       Uses cedar background to draw the eye without competing with the article body. */
+    .prose-rf :global(.rf-cta-band) {
+      margin: 3rem 0 2.5rem;
+      padding: 2.25rem 2rem;
+      background: #13342D;
+      color: #E8E6E1;
+      border-radius: 20px;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .prose-rf :global(.rf-cta-band) { padding: 2.75rem 3rem; }
+    }
+    .prose-rf :global(.rf-cta-band .kicker) {
+      font-family: 'Cormorant Garamond', Georgia, serif !important;
+      font-style: italic;
+      font-weight: 400 !important;
+      font-size: clamp(22px, 2.4vw, 28px) !important;
+      line-height: 1.3 !important;
+      color: #E8E6E1 !important;
+      margin: 0 0 1rem !important;
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+    }
+    .prose-rf :global(.rf-cta-band p) {
+      font-family: Helvetica, Arial, sans-serif !important;
+      font-size: 16px !important;
+      line-height: 1.6 !important;
+      color: rgba(232,230,225,0.9) !important;
+      margin: 0 auto 1.25rem !important;
+      max-width: 580px;
+    }
+    .prose-rf :global(.rf-cta-band p:last-child) { margin-bottom: 0 !important; }
+    .prose-rf :global(.rf-cta-band .rf-cta-link) {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #5D6D59;
+      color: #E8E6E1 !important;
+      font-family: Helvetica, Arial, sans-serif !important;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none !important;
+      border-radius: 999px;
+      transition: background-color 200ms cubic-bezier(0.25,0.1,0.25,1), transform 200ms cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .prose-rf :global(.rf-cta-band .rf-cta-link:hover) {
+      background: #7A8B76;
+      transform: translateY(-1px);
+    }
+
     /* Optional split layout — for stat + paragraph pairs inside a band */
     .prose-rf :global(.rf-band-split) {
       display: grid;
@@ -1068,15 +1269,62 @@ const definedTerms = [
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
+    // Floating TOC pill — track active section, update collapsed-pill label + progress fill
     const tocLinks = document.querySelectorAll('.toc-link');
     const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href')));
+    const tocCurrentNum = document.getElementById('tocCurrentNum');
+    const tocCurrentLabel = document.getElementById('tocCurrentLabel');
+    const tocProgressFill = document.getElementById('tocProgressFill');
     function updateTOC() {
       const y = window.scrollY + 200;
       let activeIdx = 0;
       sections.forEach((sec, i) => { if (sec && sec.offsetTop <= y) activeIdx = i; });
       tocLinks.forEach((l, i) => l.classList.toggle('active', i === activeIdx));
+      if (tocCurrentNum) tocCurrentNum.textContent = String(activeIdx + 1).padStart(2, '0');
+      if (tocCurrentLabel) {
+        const activeLink = tocLinks[activeIdx];
+        const labelEl = activeLink && activeLink.querySelector('.rf-toc-panel-label');
+        if (labelEl) tocCurrentLabel.textContent = labelEl.textContent;
+      }
+      if (tocProgressFill && sections.length > 0) {
+        const pct = ((activeIdx + 1) / sections.length) * 100;
+        tocProgressFill.style.width = pct + '%';
+      }
     }
     window.addEventListener('scroll', updateTOC, { passive: true });
     updateTOC();
+
+    // Floating TOC pill — click-to-toggle on touch / no-hover devices, auto-close on link
+    const tocPill = document.getElementById('tocPill');
+    const tocFloatEl = document.getElementById('tocFloat');
+    if (tocPill && tocFloatEl) {
+      tocPill.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isExpanded = tocFloatEl.classList.toggle('expanded');
+        tocPill.setAttribute('aria-expanded', String(isExpanded));
+      });
+      tocPill.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          tocPill.click();
+        }
+        if (e.key === 'Escape') {
+          tocFloatEl.classList.remove('expanded');
+          tocPill.setAttribute('aria-expanded', 'false');
+        }
+      });
+      tocLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          tocFloatEl.classList.remove('expanded');
+          tocPill.setAttribute('aria-expanded', 'false');
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!tocFloatEl.contains(e.target)) {
+          tocFloatEl.classList.remove('expanded');
+          tocPill.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
   </script>
 </BaseLayout>
