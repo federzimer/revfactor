@@ -229,7 +229,7 @@ export default function Navbar({ lightBg = false }) {
   const navLinks = [
     { label: 'APPROACH', href: '/#approach' },
     { label: 'PROCESS', href: '/#process' },
-    { label: 'CASE STUDIES', href: '/case-studies' },
+    { label: 'RESULTS', href: '/#results' },
     { label: 'FAQ', href: '/#faq' },
     { label: 'JOURNAL', href: '/journal' },
   ];
