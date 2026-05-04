@@ -7,7 +7,7 @@ anomalies, and posts a summary to Slack with 1-3 specific recommendations.
 Designed to run as a Render cron at 9am Chicago daily. Reads creds from env:
 - GOOGLE_ADS_YAML_PATH (default: ./google-ads.yaml)
 - SLACK_WEBHOOK_URL  (Aaron's #revfactor channel)
-- CLICKCEASE_API_KEY (optional, for fraud-blocked count)
+- FRAUDBLOCKER_API_KEY (optional, for fraud-blocked-clicks count)
 - GA4_PROPERTY_ID    (optional)
 - GA4_SERVICE_ACCOUNT_JSON (optional, base64-encoded)
 
@@ -30,8 +30,7 @@ from google.ads.googleads.client import GoogleAdsClient
 
 CID = "5342635272"
 SLACK = os.environ.get("SLACK_WEBHOOK_URL", "")
-CLICKCEASE_KEY = os.environ.get("CLICKCEASE_API_KEY", "")
-CLICKCEASE_DOMAIN = "revfactor.io"
+FRAUDBLOCKER_KEY = os.environ.get("FRAUDBLOCKER_API_KEY", "")
 
 
 def ads_client():
@@ -123,19 +122,37 @@ def low_qs_keywords(client, threshold=4):
     return flagged
 
 
-def clickcease_blocked_count():
-    if not CLICKCEASE_KEY:
+def fraudblocker_blocked_count(start, end):
+    """Pull yesterday's fraud-detection summary from Fraud Blocker.
+
+    Endpoint: GET /api/bigquery/click-report
+    Auth:     api_key header
+    Returns:  count of clicks marked as fraud / invalid in the window,
+              or None if unavailable, or an error string for visibility.
+    """
+    if not FRAUDBLOCKER_KEY:
         return None
     try:
+        url = (
+            "https://backend.fraudblocker.com/api/bigquery/click-report"
+            f"?start_date={start}&end_date={end}"
+        )
         req = urllib.request.Request(
-            f"https://api.clickcease.com/api/domain/get-blocked-ips/{CLICKCEASE_KEY}",
-            data=json.dumps({"domain": CLICKCEASE_DOMAIN}).encode(),
-            headers={"Content-Type": "application/json"},
-            method="POST",
+            url, headers={"api_key": FRAUDBLOCKER_KEY}, method="GET"
         )
         with urllib.request.urlopen(req, timeout=10) as r:
             data = json.loads(r.read())
-            return len(data.get("blockedIps", []))
+            # Response shape varies; try common keys for invalid-click totals.
+            if isinstance(data, dict):
+                if "fraud_clicks" in data:
+                    return data["fraud_clicks"]
+                if "invalid_clicks" in data:
+                    return data["invalid_clicks"]
+                if "rows" in data:
+                    rows = data["rows"]
+                    if isinstance(rows, list):
+                        return sum(int(r.get("fraud_count", 0)) for r in rows)
+            return data
     except Exception as e:
         return f"err: {e}"
 
@@ -172,7 +189,7 @@ def build_digest():
 
     anomalies = search_term_anomalies(client, yesterday, yesterday)
     low_qs = low_qs_keywords(client)
-    blocked = clickcease_blocked_count()
+    blocked = fraudblocker_blocked_count(yesterday, yesterday)
 
     # Build recommendations
     recs = []
@@ -201,7 +218,7 @@ def build_digest():
         f"• ROAS: {roas:.2f}x" if roas is not None else "• ROAS: — (no conversion value)",
     ]
     if blocked is not None:
-        lines.append(f"• ClickCease blocked IPs total: {blocked}")
+        lines.append(f"• Fraud Blocker invalid clicks (yesterday): {blocked}")
     lines.append("")
     lines.append("*Per campaign (yesterday)*")
     for name in sorted(today):
