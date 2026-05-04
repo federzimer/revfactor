@@ -30,6 +30,7 @@
   .green strong { color: #0a4f25; }
   .green .label { color: #0a4f25; }
   .strike { text-decoration: line-through; color: #888; }
+  .green-text { color: #0a7a3c; font-weight: bold; }
   pre.jsonld { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 4px; padding: 12px; font-family: Menlo, Monaco, monospace; font-size: 11px; line-height: 1.45; overflow-x: auto; white-space: pre; color: #24292f; }
 </style>
 </head>
@@ -166,7 +167,7 @@
 </ul>
 </div>
 
-<div class="blue">
+<div class="green">
 <p class="label">Quote-reuse audit — what's already burned in Blog 1 (don't reuse in Blog 2)</p>
 <p>I went through the published <a href="https://revfactor.io/blog/revenue-management-for-short-term-rentals">/blog/revenue-management-for-short-term-rentals</a> and inventoried every Federico quote / case-study / signature stat. <strong>If Blog 2 reuses any of these verbatim, both pages will compete for the same AI-search citation surface and the pillar (with higher authority) will win — meaning Blog 2's effort is wasted.</strong> The goal is one canonical home per quote.</p>
 
@@ -289,7 +290,7 @@ Tables cite better than prose for this kind of pattern.</li>
 </ul>
 </div>
 
-<div class="blue">
+<div class="green">
 <p class="label">Case study integration — fresh data from <code>Aaron-case studies.xlsx</code> (Summer 2026 OTB + Q1 2026 Final)</p>
 
 <p>The pillar already burns Fort Worth + Michigan as in-body case studies. Blog 2 needs different ammunition. The May-2026 portfolio sheet (Aaron's "Aaron-case studies.xlsx") has 31 properties with documented Q1 lifts and 7 properties with summer-2026 OTB pacing. Here are the strongest matches for Blog 2's "what software-only setups missed" thesis:</p>
@@ -315,7 +316,7 @@ A 2-bedroom waterfront in Albion, Michigan booked $22,985 for summer 2026 — vs
 <p><strong>Note for the Erin Warren case-study page itself:</strong> the case-study URL <code>/case-studies/kassidy-erin-warren</code> should add the Q1 2026 + summer 2026 numbers above as a "Latest results" callout. That gives Blog 2's inline link a stronger destination — readers who click see fresh evidence that supports the Blog 2 thesis instead of the original case-study story alone. Side benefit: an updated case-study page is a fresh-content signal to Google + a re-citation opportunity for AI engines that re-crawl monthly.</p>
 </div>
 
-<div class="blue">
+<div class="green">
 <p class="label">AirROI data integration — verdict: SKIP for this article</p>
 <p>Aaron asked whether AirROI data should layer in. <strong>My recommendation is no for Blog 2, with one narrow exception.</strong> Reasoning:</p>
 <ul>
@@ -398,7 +399,7 @@ A 2-bedroom waterfront in Albion, Michigan booked $22,985 for summer 2026 — vs
 
 <h2>6. Full Schema Spec (copy-paste JSON-LD for GetCito + Avinash)</h2>
 
-<div class="blue">
+<div class="green">
 <p class="label">Schema package — complete JSON-LD for the &lt;head&gt; of /blog/dynamic-pricing-vs-revenue-management</p>
 <p>This is the full structured-data block Blog 2 needs at publish time. Six entities total (Article + BreadcrumbList + FAQPage + Person + DefinedTerm × 4 + HowTo × 2). Pattern matches Blog 1's published implementation in <a href="https://revfactor.io/blog/revenue-management-for-short-term-rentals">/blog/revenue-management-for-short-term-rentals</a> — same Person + DefinedTerm payloads can be reused verbatim.</p>
 
@@ -573,10 +574,10 @@ A 2-bedroom waterfront in Albion, Michigan booked $22,985 for summer 2026 — vs
     <li><span class="strike">Michigan vs Fort Worth $20K — same property or different?</span> <span class="resolved">✓ RESOLVED — separate properties with similar numbers; both OK to reference. Quote-reuse audit (above) covers verbatim-reuse rules.</span></li>
   </ul>
 </li>
-<li><strong>Quote-reuse audit (new — see dedicated block above §5.2).</strong> 14 Federico quotes + 3 case studies are now anchored in the published Blog 1; Blog 2 must avoid verbatim reuse to prevent canonical-home conflict.</li>
-<li><strong>Case-study integration from <code>Aaron-case studies.xlsx</code> (new block in §5.6 above).</strong> Maryssa Payne (Albion, MI 2BR) is the recommended in-body proof point. Erin Warren property-level numbers replace generic testimonial copy at the case-study CTA.</li>
-<li><strong>AirROI integration — verdict: skip for Blog 2</strong> (see §5.6 verdict block). Reserve for valuation calculator + future "STR market analysis" article. Optional: one targeted <code>/markets/adr</code> Pigeon Forge variance call if Federico wants the §5.4 Miss #4 evidence layer to be unimpeachable — otherwise skip.</li>
-<li><strong>Full schema spec drafted in §6 above</strong> (Article + BreadcrumbList + Person + DefinedTerm × 4 + HowTo × 2 + FAQPage). Implementation lands later, but GetCito + Avinash now have the complete expected JSON-LD output.</li>
+<li><span class="green-text">[Round 2]</span> <strong>Quote-reuse audit (new — see dedicated block above §5.2).</strong> 14 Federico quotes + 3 case studies are now anchored in the published Blog 1; Blog 2 must avoid verbatim reuse to prevent canonical-home conflict.</li>
+<li><span class="green-text">[Round 2]</span> <strong>Case-study integration from <code>Aaron-case studies.xlsx</code> (new block in §5.6 above).</strong> Maryssa Payne (Albion, MI 2BR) is the recommended in-body proof point. Erin Warren property-level numbers replace generic testimonial copy at the case-study CTA.</li>
+<li><span class="green-text">[Round 2]</span> <strong>AirROI integration — verdict: skip for Blog 2</strong> (see §5.6 verdict block). Reserve for valuation calculator + future "STR market analysis" article. Optional: one targeted <code>/markets/adr</code> Pigeon Forge variance call if Federico wants the §5.4 Miss #4 evidence layer to be unimpeachable — otherwise skip.</li>
+<li><span class="green-text">[Round 2]</span> <strong>Full schema spec drafted in §6 above</strong> (Article + BreadcrumbList + Person + DefinedTerm × 4 + HowTo × 2 + FAQPage). Implementation lands later, but GetCito + Avinash now have the complete expected JSON-LD output.</li>
 <li><strong>POP follow-up.</strong> Post-publish, run POP <em>create-report</em> with target URL set to the live page; expected page score target ≥ 65 given the SERP shallowness. Re-run after 30 days.</li>
 <li><strong>Peec follow-up.</strong> Monitor whether the 8–10 FAQ-targeted prompts move RevFactor visibility on the comparison-intent and "is pricelabs enough" clusters. Listicle (still pending) remains the missing piece for the 60+ vendor-discovery prompts neither this nor the pillar can capture.</li>
 </ol>

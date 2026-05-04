@@ -123,14 +123,17 @@ def add_runs(paragraph, node, ctx, bold=False, italic=False):
             run.add_comment if False else None
     elif name == "span":
         classes = node.get("class", [])
+        # Track how many runs we add so we can re-style only those
+        before_count = len(paragraph.runs)
         for child in node.children:
             add_runs(paragraph, child, ctx, bold=bold, italic=italic)
+        added_runs = paragraph.runs[before_count:]
         if "strike" in classes:
-            for run in paragraph.runs[-len(list(node.children)):]:
+            for run in added_runs:
                 run.font.strike = True
                 run.font.color.rgb = GRAY
-        elif "resolved" in classes:
-            for run in paragraph.runs[-len(list(node.children)):]:
+        elif "resolved" in classes or "green-text" in classes:
+            for run in added_runs:
                 run.font.color.rgb = GREEN
                 run.bold = True
     else:
@@ -284,7 +287,7 @@ def convert(html_path: Path, out_path: Path):
     style.font.name = "Helvetica"
     style.font.size = Pt(11)
 
-    # Add a legend paragraph at the top so reader instantly understands color-coding
+    # Color key legend — explicit so the reader doesn't have to ask what each color means
     legend = doc.add_paragraph()
     legend_run = legend.add_run("COLOR KEY: ")
     legend_run.bold = True
@@ -292,14 +295,18 @@ def convert(html_path: Path, out_path: Path):
     r1 = legend.add_run("Black = original brief  ·  ")
     r1.font.color.rgb = BLACK
     r1.font.size = Pt(9)
-    r2 = legend.add_run("Blue = Aaron/Claude feedback  ·  ")
+    r2 = legend.add_run("Blue = round-1 feedback  ·  ")
     r2.font.color.rgb = BLUE
     r2.font.size = Pt(9)
     r2.bold = True
-    r3 = legend.add_run("Red = critical warning")
-    r3.font.color.rgb = RED
+    r3 = legend.add_run("Green = round-2 feedback (latest)  ·  ")
+    r3.font.color.rgb = GREEN
     r3.font.size = Pt(9)
     r3.bold = True
+    r4 = legend.add_run("Red = critical warning")
+    r4.font.color.rgb = RED
+    r4.font.size = Pt(9)
+    r4.bold = True
 
     for child in body.children:
         if isinstance(child, NavigableString):
