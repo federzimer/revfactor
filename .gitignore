@@ -46,6 +46,10 @@ _image-gallery/
 .vercel
 .env
 
+# Syncthing scratch files
+*.syncthing.*.tmp
+.syncthing.*.tmp
+
 # Google Ads + OAuth secrets — never commit
 scripts/google-ads/google-ads.yaml
 scripts/google-ads/oauth_client.json
