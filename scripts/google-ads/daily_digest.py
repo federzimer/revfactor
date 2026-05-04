@@ -20,6 +20,7 @@ import json
 import os
 import sys
 import urllib.request
+import urllib.parse
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -122,39 +123,46 @@ def low_qs_keywords(client, threshold=4):
     return flagged
 
 
-def fraudblocker_blocked_count(start, end):
+def fraudblocker_blocked_count(domain="revfactor.io", range_="1d"):
     """Pull yesterday's fraud-detection summary from Fraud Blocker.
 
     Endpoint: GET /api/bigquery/click-report
-    Auth:     api_key header
-    Returns:  count of clicks marked as fraud / invalid in the window,
-              or None if unavailable, or an error string for visibility.
+    Required params: range (1d|7d|30d), and one of {domain=..., all=true}
+    Auth: api_key header
+    Returns: count of clicks marked as fraud / invalid, None if no key,
+             or a short error string for digest visibility.
     """
     if not FRAUDBLOCKER_KEY:
         return None
     try:
         url = (
             "https://backend.fraudblocker.com/api/bigquery/click-report"
-            f"?start_date={start}&end_date={end}"
+            f"?range={range_}&domain={urllib.parse.quote(domain)}"
         )
         req = urllib.request.Request(
-            url, headers={"api_key": FRAUDBLOCKER_KEY}, method="GET"
+            url,
+            headers={
+                "api_key": FRAUDBLOCKER_KEY,
+                "User-Agent": "RevFactor-DailyDigest/1.0 (+ops@revfactor.io)",
+                "Accept": "application/json",
+            },
+            method="GET",
         )
         with urllib.request.urlopen(req, timeout=10) as r:
             data = json.loads(r.read())
             # Response shape varies; try common keys for invalid-click totals.
             if isinstance(data, dict):
-                if "fraud_clicks" in data:
-                    return data["fraud_clicks"]
-                if "invalid_clicks" in data:
-                    return data["invalid_clicks"]
-                if "rows" in data:
-                    rows = data["rows"]
-                    if isinstance(rows, list):
-                        return sum(int(r.get("fraud_count", 0)) for r in rows)
+                if data.get("error"):
+                    return None  # No data yet (paused campaigns / new account)
+                for k in ("fraud_clicks", "invalid_clicks", "fraudCount"):
+                    if k in data:
+                        return data[k]
+                rows = data.get("rows")
+                if isinstance(rows, list):
+                    return sum(int(r.get("fraud_count", 0)) for r in rows)
             return data
     except Exception as e:
-        return f"err: {e}"
+        return f"err: {str(e)[:80]}"
 
 
 def fmt_metric(today, base_avg):
@@ -189,7 +197,7 @@ def build_digest():
 
     anomalies = search_term_anomalies(client, yesterday, yesterday)
     low_qs = low_qs_keywords(client)
-    blocked = fraudblocker_blocked_count(yesterday, yesterday)
+    blocked = fraudblocker_blocked_count()
 
     # Build recommendations
     recs = []
