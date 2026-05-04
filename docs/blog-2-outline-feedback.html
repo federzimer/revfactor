@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 2 Outline — Strategic Feedback (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .blue table { font-size: 13px; }
+  .blue th, .blue td { border-color: #b6c8e8; }
+  .blue th { background: #e0eaff; }
+  .blue.banner { background: #1a4fbf; color: #fff; border-left-color: #0a2e80; padding: 14px 18px; }
+  .blue.banner strong { color: #fff; }
+  .red { color: #8b1a1a; background: #fff0f0; border-left: 4px solid #8b1a1a; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .red strong { color: #5a0000; }
+  .original { font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
+  .resolved { color: #0a7a3c; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Blog 2 Brief — Strategic Feedback</h1>
+<p class="original"><strong>Project:</strong> RevFactor.io blog #2<br>
+<strong>Title:</strong> Dynamic Pricing vs. Revenue Management: The Difference Nobody Explains<br>
+<strong>Author Attribution:</strong> Federico Zimerman, Founder, RevFactor<br>
+<strong>Target Length:</strong> 1,650–1,850 words<br>
+<strong>Content Type:</strong> Comparison page (mid-funnel commercial)<br>
+<strong>Brief Source:</strong> Aaron + GetCito consolidation<br>
+<em>Feedback added by: Aaron / Claude — sourced from Ahrefs (US, 2026-05-04), Peec.ai project <code>or_be14dba6-461f-4a09-8926-ebf75b550157</code> (75 prompts, refresh 2026-05-04), live revfactor.io site, FireFlies discovery call (4/22 with Avinash Tripathi), Blog 1 outline-feedback + draft-review docs in this folder, and Federico's persona guide.</em></p>
+
+<div class="red">
+<p class="label-red">Top-line decision (read this first)</p>
+<p>This brief is <strong>structurally strong on AEO design</strong> — BLUF blocks, named framework, FAQ schema, parseable comparison table, definition pairs. The Cruise Control Doctrine is the right kind of ownable language for an AI-citation play.</p>
+<p><strong>Three issues need a decision before GetCito drafts:</strong></p>
+<ol>
+<li><strong>The cannibalization triangle is now active.</strong> In the Blog 1 outline feedback I asked GetCito to <em>merge "Dynamic Pricing vs Revenue Management" into Section 4 of the pillar</em> instead of standing it up alone. That recommendation didn't land — Blog 1 shipped 5/1 at <a href="https://revfactor.io/blog/revenue-management-for-short-term-rentals">/blog/revenue-management-for-short-term-rentals</a> WITH a "Revenue Management vs. Dynamic Pricing" section already inside it, and now this brief proposes a <em>third</em> URL competing for the same head intent. The existing <a href="https://revfactor.io/blog/dynamic-pricing-str-beginners-guide/">/blog/dynamic-pricing-str-beginners-guide</a> (Jul 2025, ~1,800 words) is the third leg of the triangle. Decision required: which URL owns the head term, what do the other two do, and the answer can't be "all three rank for everything."</li>
+<li><strong>Keyword volumes in the brief are inflated 5–50× vs live Ahrefs (US).</strong> Same issue I flagged on Blog 1. The brief claims "airbnb pricing strategy" at 1,500–2,500/mo (actual: 250); "how to increase airbnb revenue" at 1,000–1,500 (actual: 20); "is pricelabs worth it" at 300–500 (actual: 30); "what is revenue management in hospitality" at 500–800 (actual: 0). The article still has a real AEO/GEO purpose, but the SEO planning premise is wrong.</li>
+<li><strong>Brand disambiguation vs Refactor.ai is missing entirely from this brief.</strong> Three pinning locations were added to Blog 1 (definition section + 2 dedicated FAQs + author bio) and that pattern needs to roll forward to every subsequent post. Avinash flagged this on the 4/22 call; Blog 1 handled it; this brief drops it.</li>
+</ol>
+</div>
+
+<div class="blue banner">
+<p class="label" style="color:#cfd9ee">Recommended decision on the cannibalization triangle</p>
+<table>
+<tr><th>URL</th><th>Status</th><th>Recommended role</th></tr>
+<tr><td>/blog/revenue-management-for-short-term-rentals (pillar)</td><td>Live 5/1, ~7,500 words</td><td><strong>Owns "short term rental revenue management" head term</strong> (vol 100, KD 1, <strong>TP 2,900</strong>). Receives links from the other two.</td></tr>
+<tr><td>/blog/dynamic-pricing-str-beginners-guide (existing)</td><td>Live since Jul 2025, ~1,800 words</td><td><strong>Owns "dynamic pricing for airbnb" cluster</strong> (vol 800, KD 11, TP 1,400). Trim/refresh to lean fully into the dynamic-pricing-as-software-tactic angle. Add up-link to pillar. Strip any "revenue management" definitional content.</td></tr>
+<tr><td>/blog/dynamic-pricing-vs-revenue-management (this brief)</td><td>Planned</td><td><strong>Owns the comparison-intent + "is pricelabs enough" gap</strong>. Comparison page positioning (mid-funnel commercial), not a definitional piece. Up-link to pillar; cross-link to dynamic pricing post.</td></tr>
+</table>
+<p style="margin-top:8px"><strong>Why this works:</strong> the three pages stop competing because each owns a distinct intent — definitional (pillar), tactical (dynamic pricing post), comparative (this brief). Internal links flow up to the pillar from both spokes.</p>
+</div>
+
+<h2>1. Strategic Overview</h2>
+
+<table class="original">
+<tr><th>Element</th><th>Brief value</th></tr>
+<tr><td>Primary Keyword</td><td>dynamic pricing vs revenue management</td></tr>
+<tr><td>Secondary Keywords</td><td>revenue management airbnb, short term rental revenue management, is pricelabs worth it, airbnb pricing strategy, dynamic pricing for airbnb, vacation rental revenue management, pricelabs vs beyond pricing, how to increase airbnb revenue, do I need a revenue manager, what is revenue management in hospitality</td></tr>
+<tr><td>Brief's claimed primary KD</td><td>15–25, est. 200–500/mo</td></tr>
+<tr><td>Target Audience</td><td>STR hosts who already own a pricing tool</td></tr>
+<tr><td>Search Intent</td><td>Comparison / commercial</td></tr>
+</table>
+
+<div class="blue">
+<p class="label">Feedback — keyword targeting (live Ahrefs US, 2026-05-04)</p>
+<table>
+<tr><th>Keyword</th><th>Brief claimed</th><th>Actual vol</th><th>KD</th><th>TP</th><th>Verdict</th></tr>
+<tr><td>dynamic pricing vs revenue management <em>(primary)</em></td><td>200–500</td><td><strong>0 / null</strong></td><td>—</td><td>—</td><td>AEO-only target; no Google traffic prize</td></tr>
+<tr><td>revenue management vs dynamic pricing</td><td>—</td><td>null</td><td>—</td><td>—</td><td>AEO-only</td></tr>
+<tr><td>is pricelabs worth it</td><td>300–500</td><td><strong>30</strong></td><td>2</td><td>80</td><td>10× inflated, but KD 2 + Reddit/Facebook-dominated SERP = real AEO opening</td></tr>
+<tr><td>is pricelabs enough</td><td>—</td><td>null</td><td>—</td><td>—</td><td>AEO-only — brief is right that no clean answer ranks</td></tr>
+<tr><td>airbnb revenue management</td><td>400–700</td><td>150</td><td>18</td><td>40</td><td>Real keyword, owned by pillar already</td></tr>
+<tr><td>short term rental revenue management</td><td>250–400</td><td>100</td><td>1</td><td><strong>2,900</strong></td><td>Massive TP — owned by pillar; do NOT compete</td></tr>
+<tr><td>vacation rental revenue management</td><td>200–350</td><td>150</td><td>0</td><td>20</td><td>Real but small</td></tr>
+<tr><td>airbnb pricing strategy</td><td>1,500–2,500</td><td><strong>250</strong></td><td>5</td><td>10</td><td>6–10× inflated</td></tr>
+<tr><td>dynamic pricing for airbnb</td><td>800–1,200</td><td>800</td><td>11</td><td>1,400</td><td>Brief was close — but this is owned by the existing dynamic-pricing post</td></tr>
+<tr><td>how to increase airbnb revenue</td><td>1,000–1,500</td><td><strong>20</strong></td><td>—</td><td>20</td><td>50× inflated</td></tr>
+<tr><td>what is revenue management in hospitality</td><td>500–800</td><td><strong>0</strong></td><td>—</td><td>—</td><td>AEO-only</td></tr>
+<tr><td>pricelabs vs beyond pricing</td><td>400–600</td><td>100</td><td>0</td><td>50</td><td>4–6× inflated</td></tr>
+<tr><td>vacation rental pricing strategy</td><td>—</td><td>150</td><td>4</td><td><strong>1,600</strong></td><td><strong>Add this</strong> — KD 4 + TP 1,600 is the actual SEO traffic prize this URL can win</td></tr>
+<tr><td>wheelhouse vs pricelabs</td><td>—</td><td>150</td><td>0</td><td>80</td><td>Optional secondary — fits the comparison intent</td></tr>
+<tr><td>pricelabs review</td><td>—</td><td>150</td><td>4</td><td>80</td><td>Optional secondary</td></tr>
+</table>
+<p><strong>Recommendation:</strong> Build this page as <strong>AEO-first / SEO-second</strong>. The realistic SEO target this URL can win is "vacation rental pricing strategy" (vol 150, KD 4, TP 1,600). Add it to the H1 region naturally. The "is pricelabs enough" + "do I need a revenue manager" cluster is the AEO play — own those question-intent prompts that current SERP doesn't.</p>
+</div>
+
+<h2>2. Page Metadata</h2>
+
+<table class="original">
+<tr><th>Field</th><th>Brief value</th></tr>
+<tr><td>SEO Title</td><td>Dynamic Pricing vs. Revenue Management: The Real Difference (58 chars)</td></tr>
+<tr><td>Meta Description</td><td>Dynamic pricing is cruise control. Revenue management is the driver. Here's why PriceLabs alone leaves 20%+ on the table — and how to fix it. (149 chars)</td></tr>
+<tr><td>URL Slug</td><td><strong>/dynamic-pricing-vs-revenue-management</strong> (root-level)</td></tr>
+<tr><td>Schema</td><td>Article + FAQPage + BreadcrumbList</td></tr>
+</table>
+
+<div class="blue">
+<p class="label">Feedback — metadata</p>
+<ul>
+<li><strong>URL slug — fix to /blog/dynamic-pricing-vs-revenue-management.</strong> Root-level breaks the existing /blog/ taxonomy and orphans the post from breadcrumb + crawl-depth signals. Both other RevFactor blogs sit at /blog/. Don't break the pattern.</li>
+<li><strong>Meta description — keep as-is.</strong> "Cruise control… driver" is the strongest hook in the brief and survives truncation cleanly. The 20%+ number is verifiable.</li>
+<li><strong>SEO title — fine, but add (2026) for freshness.</strong> "Dynamic Pricing vs. Revenue Management: The Real Difference (2026)" — 65 chars, still within Google's typical pixel cutoff for desktop. Year flag matters more on comparison pages where readers actively distrust stale content.</li>
+<li><strong>Schema package is too thin.</strong> Brief specifies Article + FAQPage + BreadcrumbList. Add:
+  <ul>
+    <li><strong>Person</strong> schema for Federico (with sameAs LinkedIn / TikTok / IG / YouTube + alumniOf American Airlines + jobTitle "Revenue Management Strategist") — same as Blog 1.</li>
+    <li><strong>DefinedTerm</strong> on the two formal definitions in §5.2 (dynamic pricing, revenue management) and on RevPAR / ADR / orphan night / pacing / comp set as they appear inline. Same package as Blog 1; reuse the JSON-LD.</li>
+    <li><strong>HowTo</strong> on the Stay-on-Software / Hire-a-Strategist checklists in §5.5. Each checklist is a clear 5-step decision flow — wraps cleanly as HowTo. AI Overviews extract HowTo verbatim.</li>
+  </ul>
+</li>
+<li><strong>Refactor.ai disambiguation needs to land in this post too.</strong> Same three pinning locations as Blog 1: one in-body sentence at the end of the §5.2 revenue-management definition, a "What is RevFactor?" FAQ at the end of the FAQ block, and the author bio with "RevFactor" linked to https://revfactor.io. The reusable copy already exists in <code>blog-1-draft-review.docx</code> Appendix A — copy verbatim.</li>
+</ul>
+</div>
+
+<h2>3. Section-by-Section Framework</h2>
+
+<h3 class="original">Hook / Opening (150 words)</h3>
+<p class="original"><strong>Goal:</strong> Validate the reader's existing tool, then expose the gap. Strong opener — "you bought PriceLabs… the dashboard is green. So you're doing revenue management — right? Not quite."</p>
+
+<div class="blue">
+<p class="label">Feedback — Hook</p>
+<ul>
+<li><strong>Best section in the brief.</strong> Tool-validation → gap-reveal is exactly the right arc for a comparison page. Don't shorten.</li>
+<li><strong>Federico voice tweak.</strong> Per persona guide, Federico's signature opener is <strong>"Let me show you [specific thing]"</strong>. Currently absent from the entire brief. Drop it into the second paragraph: <em>"Let me show you what's actually missing."</em> Single most identifiable Federico voice marker.</li>
+<li><strong>Tighten the 15–30% claim.</strong> The brief uses "15–30% of their realized revenue" — that range is the strategist-layer lift, which is correct, but a casual reader will conflate it with the static→dynamic 15–36% claim later. Add one anchor: <em>"15–30% of realized revenue — on top of whatever the algorithm is already capturing."</em> Pre-empts the conflation in §5.6.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 5.1: The Perishable Inventory Frame (100 words)</h3>
+
+<div class="blue">
+<p class="label">Feedback — §5.1</p>
+<ul>
+<li><strong>This is already lifted into Blog 1.</strong> Federico's perishable-inventory quote anchors §3 of the pillar. Repeating it verbatim in Blog 2 risks LLMs preferring whichever URL has higher authority (the pillar) and citing only it. Two options:
+  <ul>
+    <li>(a) Cut §5.1 entirely. The hook already implies urgency and 100 words is steep tax for redundant framing on an 1,800-word piece.</li>
+    <li>(b) Keep §5.1 but lead with a <em>different</em> Federico quote — the airline pedigree quote ("American invented revenue management… highly perishable… any night you don't sell, you can never sell again"). Quote Library §3 has it tagged Life of Flow podcast. Avoids verbatim duplication with the pillar.</li>
+  </ul>
+  <strong>Recommendation: option (b)</strong> — keeps the conceptual anchor without competing with the pillar for the same citation.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 5.2: What Dynamic Pricing and Revenue Management Actually Are (250 words)</h3>
+
+<div class="blue">
+<p class="label">Feedback — §5.2 (highest-leverage block)</p>
+<ul>
+<li><strong>This is the section that wins or loses the AEO game.</strong> Definition pairs in clean BLUF format are exactly what ChatGPT and Perplexity lift verbatim. Brief structure is correct.</li>
+<li><strong>Bold the key noun lock-in.</strong> Brief calls for <em>"<strong>Dynamic pricing</strong> is…"</em> and <em>"<strong>Revenue management</strong> is…"</em> — make sure GetCito actually does this. The bold-noun-then-definition pattern is what RAG pipelines pattern-match.</li>
+<li><strong>Comparison table critique.</strong> 9 rows is at the upper limit for clean LLM extraction (8–10 is the sweet spot). Two row-level fixes:
+  <ul>
+    <li><strong>"Misses" row, dynamic pricing column:</strong> Brief says "Hyper-local context, owner goals, soft signals." Add one specific: <em>"Hyper-local context (FIFA draw timing, regulation shifts), owner goals, soft signals."</em> Specific examples cite better than abstract categories.</li>
+    <li><strong>"Misses" row, revenue management column:</strong> Brief says "Nothing — if the strategist is actually good." That phrasing reads as marketing copy, not a citable answer. Replace with: <em>"What the strategist hasn't seen yet — which is why monthly review cycles exist."</em> Honest, more citable, doesn't trigger an AI engine's hype-detection.</li>
+  </ul>
+</li>
+<li><strong>Refactor.ai disambiguation.</strong> Add at the end of the revenue-management definition paragraph: <em>"(RevFactor — revfactor.io — is the managed revenue management service Federico Zimerman founded; not Refactor.ai, an unrelated SaaS product.)"</em> Pinning location 1 of 3 — same pattern as Blog 1.</li>
+<li><strong>Cite Cornell / Kimes & Anderson for the canonical definition.</strong> Inline parenthetical: <em>(Kimes & Anderson, Cornell Hospitality Quarterly)</em>. E-E-A-T lift on a definition page is meaningful.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 5.3: The Cruise Control Doctrine (200 words)</h3>
+
+<div class="blue">
+<p class="label">Feedback — §5.3 (named-framework block)</p>
+<ul>
+<li><strong>Cruise Control framing is good — but check the source.</strong> In the Blog 1 outline-feedback I noted that Federico's <em>actual</em> line on this is: <em>"The algorithm sets the price; revenue management sets the strategy that makes the price work."</em> The cruise-control analogy is a writer's elaboration, not Federico's voice. That's fine for an analogy, but:
+  <ul>
+    <li>Open §5.3 with Federico's actual line as a blockquote.</li>
+    <li>Then introduce "The Cruise Control Doctrine" as the explanatory frame on top.</li>
+    <li>That sequence keeps the named framework ownable while not putting words in Federico's mouth.</li>
+  </ul>
+</li>
+<li><strong>The brief explicitly notes this isn't Federico's signature framework</strong> (Section 1, "framework note") — that's the right call. His signature is Interest + Reliability + Positioning, anchored to the pillar. Cruise Control = explanatory analogy for this article. Don't capitalize it as <em>"The Cruise Control Doctrine™"</em> in the body — just as a section name.</li>
+<li><strong>The 5-bullet "what cruise control doesn't do" list is HowTo-schema-able.</strong> Each item is a clear "the strategist does X that software can't" step. Wrap in HowTo JSON-LD; AI Overviews will lift it as a numbered answer for the "what does a revenue manager do" prompt cluster.</li>
+<li><strong>Engine-light analogy.</strong> "It doesn't notice the engine light (a soft-conversion problem masked by aggressive discounting)" — strong, technically rich, citable. Keep verbatim.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 5.4: 5 Things Algorithms Miss (450 words)</h3>
+
+<div class="blue">
+<p class="label">Feedback — §5.4 (evidence layer)</p>
+<ul>
+<li><strong>Lead with FIFA is a calculated bet on time-sensitive citation surface.</strong> Through July 2026 it's the right move — the prompt "how do I price my Airbnb for FIFA World Cup 2026" has zero current good answers and citation density on event-specific guidance is highest while the event is approaching. After July 19, 2026 the section becomes ballast. <strong>Add a calendar reminder to flip Miss #1 to a generic "major-event nuance" treatment with the FIFA case as a worked-example callout</strong>, around mid-July 2026, so the article doesn't age poorly.</li>
+<li><strong>Source verification on FIFA numbers:</strong>
+  <ul>
+    <li>"6.5M visitors" — multiple sources (Lighthouse, FIFA, Inman) cite a 6M–7M range. Cite as <em>"\~6.5M projected visitors (Lighthouse / FIFA, 2025)"</em> — specific source date.</li>
+    <li>"+29% net reservations / +25% ADR / 197 days out" — Key Data / RSU by PriceLabs Dec 2025 release. ✓ verified.</li>
+    <li>11 US host cities — ✓ correct (Atlanta, Boston, Dallas, Houston, KC, LA, Miami, NY/NJ, Philadelphia, SF Bay, Seattle).</li>
+  </ul>
+</li>
+<li><strong>Miss #2 (Orphan Nights) — strong, but tighten the example.</strong> "A Sunday-arrival orphan is nearly invisible to guests" is the right kind of specific insight. Bump from prose to a 2-row mini-table:
+<table style="font-size:13px">
+<tr><th>Orphan type</th><th>What software does</th><th>What a strategist does</th></tr>
+<tr><td>Sunday-arrival 1-nighter</td><td>Apply default gap-fill discount</td><td>Deeper discount + 1-night minimum + reduce min-stay search filter</td></tr>
+<tr><td>Tuesday 1-nighter</td><td>Apply default gap-fill discount</td><td>Almost nothing — invisible inventory, unprofitable to chase</td></tr>
+</table>
+Tables cite better than prose for this kind of pattern.</li>
+<li><strong>Miss #5 (Ramp-Up / Ramp-Down) — the strongest section.</strong> "7–12% lift on event weeks for clients without touching peak-night rates" is exactly the kind of attributed, specific, mechanism-revealing claim that gets cited. Verify with Federico that the 7–12% number is a documentable range from his client data — if so, keep verbatim; if it's a directional estimate, soften to "single-digit to low-double-digit" so we don't have to defend a specific number.</li>
+<li><strong>Add Miss #6 OR fold one in — comp-set integration with PMS.</strong> Brief currently has 5 misses. Peec prompt #46 (<em>"who can help me manage pricing across different booking platforms"</em>, medium volume, 0% RevFactor visibility) is a real prompt this article should answer. Either add Miss #6 — <em>"PMS-pricing-tool sync gaps"</em> — or fold it into Miss #4 (Comp-Set Errors). Pillar already addresses this; making sure it lands here too keeps the citation surface continuous across the cluster.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 5.5: When Software Is Enough vs. When You Need a Strategist (250 words)</h3>
+
+<div class="blue">
+<p class="label">Feedback — §5.5 (decision framework)</p>
+<ul>
+<li><strong>This is the conversion engine.</strong> Two opposing checklists is a cleaner structural pattern than a single decision tree — easier for the reader to self-qualify, and each list extracts as a separate HowTo block.</li>
+<li><strong>Wrap each checklist as HowTo JSON-LD.</strong> Stay-on-Software = HowTo "How to know if PriceLabs is enough for your portfolio." Hire-a-Strategist = HowTo "How to know when to hire a revenue manager for your STR." Two HowTo entities = two AI Overview citation surfaces.</li>
+<li><strong>Honest Caveat pull-quote — verify before publishing.</strong> The "30 portfolio audits" / "~80% are actually in column 2" line is flagged in the brief as a "written construct approved for use." That's safer than fabrication, but: (a) make sure Federico has actually done at least 30 audits — even rough — so the number is defensible, and (b) phrase as "across the audits I've done" not "after 30 portfolio audits" so the rounding isn't the spotlight. <strong>Recommendation:</strong> rewrite as <em>"Most hosts read this and put themselves in column 1. In my experience auditing STR portfolios, the split is closer to 80/20 the other way."</em> Same insight, defensible, slightly less Federico-quotable but materially safer.</li>
+<li><strong>Add one row to the Hire-a-Strategist checklist:</strong> <em>"☐ You're losing on event weeks even though your tool is configured" </em> — directly maps to Miss #1 + Miss #5 above and to the FIFA prompt cluster. Five items currently; six is fine.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 5.6: The Economic Case for a Strategist (200 words)</h3>
+
+<div class="blue">
+<p class="label">Feedback — §5.6 (economic stack)</p>
+<ul>
+<li><strong>Math hygiene on the stacked-lift claim.</strong> Brief says "Static → dynamic = +15–36% (Your.Rentals, n=541)" then "Dynamic → strategist = +15–30% on top." If both are taken literally and stacked, the implied "static → strategist" upper bound is +77% (1.36 × 1.30), which would invite skeptical pushback. Either:
+  <ul>
+    <li>(a) Frame as <em>"the documented mid-point we observe is 20%+ on top of dynamic-pricing software, not stacked compounding."</em> Keeps the claim honest.</li>
+    <li>(b) Drop the explicit stack diagram. Use only Layer 2 (dynamic → strategist) since that's the actual conversion argument.</li>
+  </ul>
+  <strong>Recommendation: option (a)</strong> — keep the stack but explicitly disclaim multiplicative compounding.</li>
+<li><strong>The $80K → +$16K → 4× ROI math is the hook.</strong> This is the most citable single-number block in the article. Show the math inline (e.g., "$80,000 × 20% = $16,000; $16,000 ÷ $3,840 fee = 4.2× return"). Federico-style worked-example math is what the pillar gets cited for; carry the pattern over.</li>
+<li><strong>Use Nashville, not Fort Worth, as the in-body proof point.</strong> Brief says either works. Fort Worth ($20K lift, 7-night → 1-night minimum) is in Blog 1 §6 already. Nashville ($4,200 → $15,900, finished +25%) isn't yet. Differentiating prevents both pages competing for the same case-study citation.</li>
+<li><strong>Verify the Michigan lake-house figure — flagged in the brief's Section 7 as possible overlap with Fort Worth.</strong> Don't publish the Michigan number unless Federico explicitly confirms it's a separate property. If it's the same as Fort Worth re-told, drop one.</li>
+</ul>
+</div>
+
+<h3 class="original">Section 5.7: FAQ Block (250 words, 5 Q&A)</h3>
+
+<div class="blue">
+<p class="label">Feedback — §5.7 (biggest AEO leverage point)</p>
+<p>Brief proposes 5 FAQs. Same issue as Blog 1's first draft — <strong>the wording matters more than the topic</strong>. Of RevFactor's 75 tracked Peec prompts, here are the ones this URL should target verbatim because they (a) match the comparison-intent of this page, (b) score 0% RevFactor visibility today, and (c) aren't already locked up by the pillar's 13-FAQ block:</p>
+
+<table>
+<tr><th>Brief's question</th><th>Live Peec prompt (verbatim — match wording)</th><th>Volume bucket</th></tr>
+<tr><td>Is PriceLabs enough?</td><td>Not currently in Peec prompt set, but matches "what is the best pricing software for vrbo hosts"</td><td>medium — KEEP, but cross-list with prompt-matching variants</td></tr>
+<tr><td>Do I need a revenue manager for my Airbnb?</td><td>"<strong>how do i hire someone to optimize my airbnb revenue</strong>"</td><td>very high — substitute for verbatim match</td></tr>
+<tr><td>How much can a revenue manager increase my Airbnb income?</td><td>"<strong>how can i increase my airbnb income without lowering rates</strong>"</td><td>very high — substitute</td></tr>
+<tr><td>Can software replace a human revenue manager?</td><td>"<strong>what tools use ai to price vacation rentals</strong>"</td><td>high — adjacent, keep brief's question + add this as Q6</td></tr>
+<tr><td>What's the difference between dynamic pricing and revenue management?</td><td>"<strong>what is dynamic pricing for short term rentals</strong>"</td><td>high — keep, but rephrase H3 to verbatim Peec wording</td></tr>
+</table>
+
+<p><strong>Add (not substitute) — these high-volume prompts have 0% RevFactor visibility today and fit this page's comparison intent:</strong></p>
+<table>
+<tr><th>Verbatim Peec prompt to add as FAQ</th><th>Bucket</th></tr>
+<tr><td>"who can manage my dynamic pricing for vacation rentals"</td><td>high</td></tr>
+<tr><td>"who can help me set pricing rules for my short term rental"</td><td>high</td></tr>
+<tr><td>"what is the best way to optimize pricing for seasonal demand on airbnb"</td><td>high</td></tr>
+<tr><td>"who can help me balance occupancy and nightly rates"</td><td>high</td></tr>
+<tr><td>"how can i stop guessing my airbnb pricing"</td><td>high</td></tr>
+</table>
+
+<p><strong>Recommended FAQ count: 8–10, not 5.</strong> Brief's 5 are the right topics. Add 3–5 more using verbatim Peec wording from the table above. Diminishing returns past ~12, but 5 is materially under the AEO sweet spot.</p>
+
+<p><strong>FAQ #6 must be brand-disambiguation:</strong> "What is RevFactor?" — same exact answer used in Blog 1's FAQ schema. Pinning location 2 of 3 for the Refactor.ai problem. Reusable copy in <code>blog-1-draft-review.docx</code> Appendix A.</p>
+</div>
+
+<h3 class="original">Section 5.8: Closing CTA (100 words)</h3>
+
+<div class="blue">
+<p class="label">Feedback — §5.8</p>
+<ul>
+<li><strong>"PriceLabs, Beyond, and Wheelhouse are excellent tools. Use them."</strong> — strong opener. The non-antagonistic positioning is the right call (these tools dominate Peec SOV — alienating their users would tank the page's own AI citation surface).</li>
+<li><strong>"70% Guest Favorite"</strong> claim — verify the source. Brief Section 7 lists it as ✓ verified, "Long-form interview sourced." Make sure the underlying interview is publicly accessible / linkable so the claim is defensible if challenged.</li>
+<li><strong>Single CTA preferred.</strong> Brief currently has two ("Book a 30-Min Revenue Audit" + "Read the Kassidy & Erin Warren case study"). Per the Blog 1 review, single CTA before the author bio outperforms split CTAs by ~30% on long-form. Keep just <em>"→ Book a 30-Min Revenue Audit"</em> as the primary; the case-study link belongs inline at §5.6, not at the close.</li>
+</ul>
+</div>
+
+<h2>4. Internal Linking</h2>
+
+<div class="blue">
+<p class="label">Feedback — internal linking map</p>
+<p>Brief's internal-link table is good but missing the most important link of all — <strong>up to the pillar.</strong></p>
+<table>
+<tr><th>Anchor text</th><th>Target URL</th><th>Placement</th><th>Status</th></tr>
+<tr><td>revenue management for short-term rentals</td><td>/blog/revenue-management-for-short-term-rentals</td><td>§5.2 (revenue management definition) AND §5.6 (the economic case)</td><td><strong>MISSING from brief — required up-link to pillar</strong></td></tr>
+<tr><td>dynamic pricing for short-term rentals</td><td>/blog/dynamic-pricing-str-beginners-guide</td><td>§5.2 (dynamic pricing definition) — natural cross-link, sends authority to the existing post</td><td><strong>MISSING from brief — completes the cluster topology</strong></td></tr>
+<tr><td>Kassidy & Erin Warren case study</td><td>/case-studies/kassidy-erin-warren</td><td>§5.6 + close</td><td>Brief has it ✓</td></tr>
+<tr><td>how RevFactor works</td><td>/how-it-works</td><td>§5.5 hire-a-strategist checklist</td><td>Brief has it ✓</td></tr>
+<tr><td>RevFactor revenue audit</td><td>/revenue-audit</td><td>FAQ + close</td><td>Brief has it ✓</td></tr>
+<tr><td>2026 FIFA World Cup pricing playbook (future)</td><td>/blog/fifa-world-cup-2026-str-pricing</td><td>§5.4 Miss #1</td><td>Brief flagged as future — fine, but commit to a timeline (recommend mid-May 2026 publish so the link goes live before the World Cup demand cycle peaks in early June)</td></tr>
+</table>
+<p><strong>The cluster topology should look like this after launch:</strong> pillar (top) ← this post ← existing dynamic-pricing post. Both spokes link UP. The pillar is the canonical definitional URL; the spokes own narrower intents (comparative, tactical) and feed link equity up.</p>
+</div>
+
+<h2>5. Voice & Brand Compliance</h2>
+
+<div class="blue">
+<p class="label">Feedback — voice rules</p>
+<ul>
+<li><strong>Banned-phrases list is good.</strong> Brief explicitly rules out "leverage," "unlock," "AI-powered pricing," "circle back," "at the end of the day" — same list as my humanization rules. Federico's "AI-powered" call-out is especially important here because the comparison page is the most likely place for a writer to default into "AI-powered pricing" framing.</li>
+<li><strong>"Let me show you" still missing.</strong> Same gap as Blog 1's first draft. Add to the brief's Section 1 "use these" list and verify it lands at least once in the body.</li>
+<li><strong>"This is a people business, not just real estate"</strong> — Federico's core belief per Onboarding §5.4. Brief doesn't reference it. Strong fit at the close of §5.8: <em>"Software runs the math. People run the business."</em> Keeps Federico's worldview present without explicit quote.</li>
+<li><strong>Check for "revenue optimization" in any GetCito draft.</strong> Federico explicitly bans this phrase. Easy to slip into a comparison page since the SERP rewards it; flag aggressively in the QA pass.</li>
+</ul>
+</div>
+
+<h2 class="blue banner" style="background:#1a4fbf; color:white; padding:8px 12px; border:none;">Things to Add Before GetCito Drafts (consolidated)</h2>
+
+<div class="blue">
+<ol>
+<li><strong>Decision on the cannibalization triangle</strong> (banner above). Without this, Blog 2 + the existing post + the pillar all compete for the same head intent.</li>
+<li><strong>URL slug fix:</strong> /blog/dynamic-pricing-vs-revenue-management (not root-level).</li>
+<li><strong>Schema package additions:</strong> Person (Federico, full sameAs) + DefinedTerm (×4 minimum) + HowTo (×2 — Stay-on-Software, Hire-a-Strategist). Reuse Blog 1's JSON-LD as the base.</li>
+<li><strong>Refactor.ai disambiguation — three pinning locations:</strong> §5.2 in-body sentence + dedicated FAQ ("What is RevFactor?") + author bio with linked anchor "RevFactor."</li>
+<li><strong>Federico's actual cruise-control line</strong> — open §5.3 with: <em>"The algorithm sets the price; revenue management sets the strategy that makes the price work."</em> Then introduce The Cruise Control Doctrine as the explanatory frame.</li>
+<li><strong>FAQ rework:</strong> Expand from 5 to 8–10. Use verbatim Peec wording for at least 5 of them (table in §5.7 above). Add "What is RevFactor?" as the brand-disambiguation FAQ.</li>
+<li><strong>Add "vacation rental pricing strategy"</strong> to the secondary keyword set — KD 4, TP 1,600 is the actual SEO traffic prize this URL can win.</li>
+<li><strong>Internal up-link to the pillar</strong> appears in §5.2 and §5.6. Internal cross-link to the existing dynamic-pricing post in §5.2.</li>
+<li><strong>Voice marker compliance:</strong> "Let me show you" lands at least once. "Revenue optimization" appears zero times. "AI-powered" appears zero times.</li>
+<li><strong>FIFA recency reminder:</strong> calendar reminder for mid-July 2026 to flip Miss #1 from FIFA-led to generic-event-led with the FIFA case as a worked-example callout.</li>
+<li><strong>Verification list for Federico before drafting:</strong>
+  <ul>
+    <li>"30 portfolio audits / 80% in column 2" — defensible? <span class="resolved">(or rewrite to "in my experience auditing STR portfolios, the split is closer to 80/20 the other way" — softer, safer)</span></li>
+    <li>"7–12% lift on event weeks" — documentable range or directional estimate?</li>
+    <li>"70% Guest Favorite status" — public source / linkable interview?</li>
+    <li>Michigan vs Fort Worth $20K — same property or different?</li>
+  </ul>
+</li>
+<li><strong>POP follow-up.</strong> Post-publish, run POP <em>create-report</em> with target URL set to the live page; expected page score target ≥ 65 given the SERP shallowness. Re-run after 30 days.</li>
+<li><strong>Peec follow-up.</strong> Monitor whether the 8–10 FAQ-targeted prompts move RevFactor visibility on the comparison-intent and "is pricelabs enough" clusters. Listicle (still pending) remains the missing piece for the 60+ vendor-discovery prompts neither this nor the pillar can capture.</li>
+</ol>
+</div>
+
+<p style="margin-top:48px; font-size:12px; color:#888; border-top:1px solid #ddd; padding-top:8px;">
+Feedback compiled 2026-05-04 against: Ahrefs Keywords Explorer (US, fresh pull 2026-05-04), Ahrefs SERP overview for "is pricelabs worth it" + "dynamic pricing vs revenue management" (US), Peec.ai project <code>or_be14dba6-461f-4a09-8926-ebf75b550157</code> (75 prompts, fresh pull 2026-05-04), live revfactor.io site (existing /blog/dynamic-pricing-str-beginners-guide and /blog/revenue-management-for-short-term-rentals), Blog 1 outline-feedback + draft-review docs in this folder, Federico's persona guide, Federico's onboarding questionnaire, RevFactor brain + 5/1 addendum.
+</p>
+
+</body>
+</html>

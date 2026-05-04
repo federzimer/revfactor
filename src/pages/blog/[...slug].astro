@@ -1,12 +1,16 @@
 ---
-// Single-post template — Layout 1 (Classic / Field Report)
-// Ported from src/pages/blog-mockups/post-classic.astro into a content-collection-driven template.
-// Source design: feature/journal branch.
+// Single-post template — Layout 2 (Immersive)
+// Ported from src/pages/blog-mockups/post-immersive.astro into a content-collection-driven template.
+// Hero headline reduced from clamp(56px,9vw,140px) to clamp(34px,4.5vw,56px) so it reads at journal scale.
 
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
+import BlogScheduleCTA from '../../components/BlogScheduleCTA.jsx';
+
+// Federico author headshot — used in hero metadata + bottom author card
+const FEDE_PHOTO = '/blog/revenue-management-for-short-term-rentals/federico-author.jpg';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -22,31 +26,54 @@ const { Content, headings } = await render(post);
 const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
   year: 'numeric', month: 'short', day: 'numeric',
 });
-const updatedDate = post.data.updatedDate?.toLocaleDateString('en-US', {
-  year: 'numeric', month: 'short', day: 'numeric',
-});
 
-// TOC: H2 headings only (Astro auto-generates anchor slugs)
 const toc = headings.filter((h) => h.depth === 2).map((h) => ({
   href: `#${h.slug}`,
   label: h.text,
 }));
 
-// Related posts: prefer same category, fall back to recency
 const otherPosts = allPosts.filter((p) => p.id !== post.id);
 const sameCategory = otherPosts.filter((p) => p.data.category === post.data.category);
 const relatedSource = [...sameCategory, ...otherPosts.filter((p) => p.data.category !== post.data.category)];
 const related = relatedSource.slice(0, 3).map((p) => ({
   href: `/blog/${p.id}`,
   cat: p.data.category,
-  date: p.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+  date: p.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
   read: p.data.readingTime ? `${p.data.readingTime} min` : '8 min',
   title: p.data.title,
   img: p.data.image || 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1000&q=80',
 }));
 
-const heroImage = post.data.image || 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=2400&q=85';
+const heroImage = post.data.image || '/heroes/aframe-1920.webp';
 const heroAlt = post.data.imageAlt || post.data.title;
+
+// Federico Person schema — reusable; sameAs locks the entity for AI engines (Refactor.ai disambiguation)
+const federicoPerson = {
+  "@type": "Person",
+  "@id": "https://revfactor.io/#federico",
+  "name": "Federico Zimerman",
+  "givenName": "Federico",
+  "familyName": "Zimerman",
+  "jobTitle": "Founder, RevFactor; Founder, Blackbird Hospitality",
+  "url": "https://revfactor.io/about",
+  "image": `https://revfactor.io${FEDE_PHOTO}`,
+  "sameAs": [
+    "https://www.tiktok.com/@federicozimerman",
+    "https://www.instagram.com/federico.zimerman",
+    "https://www.linkedin.com/in/federico-zimerman-23ab3345/"
+  ],
+  "knowsAbout": [
+    "Revenue management",
+    "Short-term rental pricing",
+    "Airline yield management",
+    "RevPAR optimization",
+    "Dynamic pricing",
+    "PriceLabs"
+  ],
+  "alumniOf": { "@type": "Organization", "name": "American Airlines" },
+  "worksFor": { "@type": "Organization", "name": "RevFactor", "url": "https://revfactor.io" },
+  "description": "Federico Zimerman spent 10 years in airline revenue management at American Airlines before founding Blackbird Hospitality (165+ short-term rental properties across 24 U.S. states and 56 markets) and RevFactor (standalone revenue management service). His strategies deliver +18% RevPAR lift vs. comp set across the portfolio."
+};
 
 const schema = {
   "@context": "https://schema.org",
@@ -56,27 +83,79 @@ const schema = {
   "image": heroImage.startsWith('http') ? heroImage : `https://revfactor.io${heroImage}`,
   "datePublished": post.data.pubDate.toISOString(),
   "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString(),
-  "author": {
-    "@type": "Person",
-    "name": post.data.author,
-    "url": "https://revfactor.io/about"
-  },
+  "author": federicoPerson,
   "publisher": {
     "@type": "Organization",
     "name": "RevFactor",
     "url": "https://revfactor.io",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://revfactor.io/og-image.png"
-    }
+    "logo": { "@type": "ImageObject", "url": "https://revfactor.io/og-image.png" }
   },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": Astro.url.href
-  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
   "keywords": post.data.tags.join(', '),
-  "articleSection": post.data.category
+  "articleSection": post.data.category,
+  "wordCount": post.data.readingTime ? post.data.readingTime * 250 : undefined
 };
+
+// FAQPage schema — only when frontmatter declares faqs (drives both accordion + JSON-LD)
+const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": post.data.faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+} : null;
+
+// BreadcrumbList — site → blog → post
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://revfactor.io" },
+    { "@type": "ListItem", "position": 2, "name": "Journal", "item": "https://revfactor.io/blog" },
+    { "@type": "ListItem", "position": 3, "name": post.data.title, "item": Astro.url.href }
+  ]
+};
+
+// HowTo + DefinedTerm — Blog 1-specific package; only attaches to the pillar post.
+const isPillar = post.id === 'revenue-management-for-short-term-rentals';
+
+const howToMinStay = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to use minimum stays as a competitive weapon for short-term rentals",
+  "description": "A 4-step playbook for setting minimum stays that beat the survivorship-bias trap most hosts fall into.",
+  "totalTime": "PT30M",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Pull average length of stay from your top 5 comp-set listings", "text": "Open each comp-set listing's Reviews tab. Estimate average stay length from review timestamps. Take the median across the 5." },
+    { "@type": "HowToStep", "position": 2, "name": "Beat the market minimum by one night", "text": "If the average is at least 1.5 nights below the market minimum, set your minimum 1 night below the market (market 5 → you offer 3 or 4)." },
+    { "@type": "HowToStep", "position": 3, "name": "Raise base rates 15–20%", "text": "Capture the visibility premium — you'll appear in searches that competitors are filtered out of. Don't leave the rate flat." },
+    { "@type": "HowToStep", "position": 4, "name": "Layer a 10% LOS discount at the market average", "text": "On stays at or above the market average, offer 10% off. Longer-stay guests still see a deal; you still beat the rate of the higher-minimum competitors." }
+  ]
+};
+
+const howToLaunch = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to launch a new short-term rental listing",
+  "description": "The first 30–60 days of a new listing aren't about revenue. They're about reviews, ranking, and algorithm trust.",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Set launch price 15–25% below market", "text": "For the first 30–60 days, price aggressively below comparable listings." },
+    { "@type": "HowToStep", "position": 2, "name": "Fill the calendar", "text": "Optimize for occupancy, not rate. The algorithm rewards bookings." },
+    { "@type": "HowToStep", "position": 3, "name": "Generate reviews fast", "text": "Every booking is a chance for a review. Communicate proactively to maximize review rate." },
+    { "@type": "HowToStep", "position": 4, "name": "Transition into revenue mode", "text": "After ~20 strong reviews and stable booking cadence, raise rates back to market and shift focus from occupancy to RevPAR." }
+  ]
+};
+
+const definedTerms = [
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "RevPAR", "description": "Revenue per Available Night. Total revenue divided by total nights available. The only metric that captures rate and occupancy in one number.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "ADR", "description": "Average Daily Rate. The average price of booked nights. Ignores empty nights, which is why it's a misleading standalone metric.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "NetRevPAR", "description": "RevPAR minus variable costs per night (cleaning, channel commissions, OTA fees). Tells you whether the rate-and-occupancy win is making it to your bank account.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Pacing", "description": "How bookings accumulate week-over-week vs. the same period last year. The single best leading indicator of revenue.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Length-of-stay discount", "description": "A graduated discount that incentivizes longer bookings without giving away the nightly rate. The discount feels like a deal to the guest; the math is a win for the host.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Survivorship bias (in STR pricing)", "description": "The minimum-stay rules you can see across your competitors are the ones that survived their pricing decision. The listings that didn't survive — priced out by their own restrictions — are invisible. Setting minimums by copying visible competitors compounds the bias.", "inDefinedTermSet": "https://revfactor.io/glossary" }
+];
 ---
 
 <BaseLayout
@@ -89,131 +168,169 @@ const schema = {
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    {isPillar && <script type="application/ld+json" set:html={JSON.stringify(howToMinStay)} />}
+    {isPillar && <script type="application/ld+json" set:html={JSON.stringify(howToLaunch)} />}
+    {isPillar && definedTerms.map((t) => (
+      <script type="application/ld+json" set:html={JSON.stringify(t)} />
+    ))}
   </Fragment>
 
-  <Navbar client:load lightBg />
+  <Navbar client:load />
 
-  <!-- Read progress bar -->
-  <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-[#13342D] z-[100] transition-[width] duration-75" style="width:0;"></div>
+  <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-[#A9BBA3] z-[100] transition-[width] duration-75" style="width:0;"></div>
 
   <article>
-    <!-- HERO — centered title above full-width image -->
-    <div class="max-w-5xl mx-auto px-6 md:px-12 pt-36 md:pt-44 pb-12 text-center">
-      <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-8 inline-block">
-        {post.data.category} · Field Report
-      </span>
-      <h1
-        class="text-[#3F261F] mb-6 mx-auto"
-        style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(40px,5.5vw,76px); line-height:1.05; max-width:980px; letter-spacing:-0.5px;"
-      >
-        {post.data.title}
-      </h1>
-      <p
-        class="text-[#76574C] max-w-3xl mx-auto mb-12"
-        style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300; font-size:clamp(19px,2vw,24px); line-height:1.4;"
-      >
-        {post.data.description}
-      </p>
-      <div class="flex items-center justify-center gap-8 flex-wrap py-6 border-y border-[#C8C4BC] max-w-3xl mx-auto mb-12">
-        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#8F6E62; letter-spacing:0.5px; text-transform:uppercase;">
-          <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#3F261F] mb-1" style="font-family:inherit;">Published</div>
-          <div>{formattedDate}</div>
-        </div>
-        {post.data.readingTime && (
-          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#8F6E62; letter-spacing:0.5px; text-transform:uppercase;">
-            <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#3F261F] mb-1" style="font-family:inherit;">Read time</div>
-            <div>{post.data.readingTime} minutes</div>
-          </div>
-        )}
-        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#8F6E62; letter-spacing:0.5px; text-transform:uppercase;">
-          <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#3F261F] mb-1" style="font-family:inherit;">Author</div>
-          <div>{post.data.author}</div>
-        </div>
-        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#8F6E62; letter-spacing:0.5px; text-transform:uppercase;">
-          <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#3F261F] mb-1" style="font-family:inherit;">Category</div>
-          <div>{post.data.category}</div>
-        </div>
-        {updatedDate && (
-          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#8F6E62; letter-spacing:0.5px; text-transform:uppercase;">
-            <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#3F261F] mb-1" style="font-family:inherit;">Updated</div>
-            <div>{updatedDate}</div>
-          </div>
-        )}
-      </div>
-    </div>
+    <!-- IMMERSIVE FULL-BLEED HERO — sized to the image's native ~1.83 wide aspect -->
+    <section class="relative overflow-hidden text-[#E8E6E1]" style="height:78vh; min-height:580px; max-height:820px; background-color:#13342D;">
+      <!-- Image as <img> (more reliable fill than bg-image), object-cover, parallax-ready -->
+      <img
+        id="heroBg"
+        src={heroImage}
+        alt={heroAlt}
+        class="absolute inset-0 w-full h-full object-cover will-change-transform"
+        style="transform:scale(1.08); z-index:0;"
+      />
+      <!-- Top gradient — for navbar legibility (bright sky needs strong overlay) -->
+      <div class="absolute top-0 left-0 right-0 h-56 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.9) 0%, rgba(22,25,16,0.6) 35%, rgba(22,25,16,0.15) 80%, rgba(22,25,16,0) 100%);"></div>
+      <!-- Bottom gradient — strengthened for body-text legibility over bright skies -->
+      <div class="absolute bottom-0 left-0 right-0 h-[70%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.45) 30%, rgba(22,25,16,0.78) 60%, rgba(22,25,16,0.95) 100%);"></div>
 
-    <!-- HERO IMAGE -->
-    <div class="max-w-6xl mx-auto px-6 md:px-12 mb-16">
-      <div class="rounded-[24px] overflow-hidden" style="aspect-ratio:21/9;">
-        <img src={heroImage} alt={heroAlt} class="w-full h-full object-cover" />
-      </div>
-    </div>
+      <div class="relative z-[2] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-20 pt-36">
+        <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-6 inline-block">
+          {post.data.category} · Field Report
+        </span>
 
-    <!-- BODY + TOC -->
-    <div class="max-w-6xl mx-auto px-6 md:px-12 grid md:grid-cols-[1fr_240px] gap-16 md:gap-20 pb-24">
-      <div class="max-w-2xl min-w-0">
+        <h1
+          class="text-[#E8E6E1] mb-6"
+          style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(38px,5.2vw,72px); line-height:1.05; letter-spacing:0.5px; max-width:1000px;"
+        >
+          {post.data.title}
+        </h1>
 
-        <!-- Byline bar -->
-        <div class="flex items-center justify-between gap-6 mb-12 pb-8 border-b border-[#C8C4BC] flex-wrap">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-full bg-[#13342D] flex items-center justify-center text-[#E8E6E1] font-bold text-[13px]" style="font-family:'Cormorant Garamond',Georgia,serif;">FZ</div>
-            <div>
-              <div class="text-[18px] text-[#3F261F] leading-tight" style="font-family:'Cormorant Garamond',Georgia,serif;">{post.data.author.toLowerCase()}</div>
-              <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62]">Founder · RevFactor</div>
-            </div>
-          </div>
-          <div class="flex gap-2">
-            <button id="shareBtn" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Share</button>
-            <button id="saveBtn" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Save</button>
-          </div>
-        </div>
+        <p
+          class="mb-10 max-w-2xl"
+          style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300; font-size:clamp(17px,1.8vw,22px); color:rgba(221,218,211,0.9); line-height:1.4;"
+        >
+          {post.data.description}
+        </p>
 
-        <div class="prose-rf">
-          <Content />
-        </div>
-
-        {post.data.tags.length > 0 && (
-          <div class="mt-16 pt-8 border-t border-[#C8C4BC]">
-            <p class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-3">Topics</p>
-            <div class="flex flex-wrap gap-2">
-              {post.data.tags.map((tag) => (
-                <span class="px-3 py-1 bg-[#E8E6E1] text-[#76574C] text-[12px] rounded-full border border-[#C8C4BC]">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <!-- Author card -->
-        <div class="mt-16 p-8 rounded-[16px] bg-[#E8E6E1] border border-[#C8C4BC] flex gap-6 items-start flex-wrap md:flex-nowrap">
-          <div class="w-16 h-16 rounded-full bg-[#13342D] flex items-center justify-center text-[#E8E6E1] font-bold text-[18px] flex-shrink-0" style="font-family:'Cormorant Garamond',Georgia,serif;">FZ</div>
+        <div class="flex gap-12 flex-wrap pt-7 border-t border-[#DDDAD3]/25" style="font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(221,218,211,0.7); letter-spacing:0.5px; text-transform:uppercase;">
           <div>
-            <h4 class="text-[22px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">{post.data.author.toLowerCase()}</h4>
-            <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
-            <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">Federico spent 10 years in airline revenue management at American Airlines before applying those principles to short-term rentals. RevFactor's pricing strategies are battle-tested across 165+ properties in 24 states. He writes the Thursday dispatch.</p>
-            <div class="flex gap-2 flex-wrap">
-              <a href="https://www.linkedin.com/in/federico-zimerman-23ab3345/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Follow on LinkedIn</a>
-              <a href="/journal" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">More essays</a>
+            <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Published</div>
+            <div>{formattedDate}</div>
+          </div>
+          {post.data.readingTime && (
+            <div>
+              <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Read time</div>
+              <div>{post.data.readingTime} minutes</div>
+            </div>
+          )}
+          <div>
+            <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Category</div>
+            <div>{post.data.category}</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <img
+              src={FEDE_PHOTO}
+              alt="Federico Zimerman"
+              class="w-10 h-10 rounded-full object-cover ring-1 ring-[#DDDAD3]/30"
+            />
+            <div>
+              <div class="text-[16px] text-[#E8E6E1] lowercase" style="font-family:'Cormorant Garamond',Georgia,serif;">{post.data.author.toLowerCase()}</div>
+              <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#DDDAD3]/70">Founder · RevFactor</div>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- TOC (sticky) -->
-      <aside class="md:sticky md:top-24 md:self-start md:pl-6 md:border-l border-[#C8C4BC]">
-        <h5 class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-4">In this essay</h5>
-        <ul class="space-y-2.5" id="toc">
+    <!-- Floating TOC — XL+ only, fixed-position panel that doesn't constrain the body grid -->
+    <aside id="tocFloat" class="hidden xl:block fixed left-6 top-32 w-[200px] max-h-[calc(100vh-180px)] overflow-y-auto z-30 pr-2">
+      <h5 class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#76574C] mb-4">In this essay</h5>
+      <ul class="space-y-2.5" id="toc">
+        {toc.map((item, i) => (
+          <li>
+            <a href={item.href} class="toc-link flex items-baseline gap-2 text-[12.5px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
+              <span class="flex-shrink-0 text-[#3F261F] tabular-nums" style="font-family:'JetBrains Mono',monospace; min-width:22px; opacity:0.75;">{String(i + 1).padStart(2, '0')}</span>
+              <span class="block">{item.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+
+    <!-- Mobile/tablet TOC — collapsible, sits above the body so we keep the grid centered -->
+    <div class="xl:hidden">
+      <details class="rf-mobile-toc max-w-2xl mx-auto px-6 md:px-12 mt-12 pb-2 border-y border-[#C8C4BC]">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer py-4 list-none">
+          <span class="font-bold uppercase text-[10px] tracking-[2.5px] text-[#76574C]">In this essay · {toc.length} sections</span>
+          <svg class="w-3.5 h-3.5 text-[#3F261F] transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <ul class="space-y-2 pb-4">
           {toc.map((item, i) => (
             <li>
-              <a href={item.href} class="toc-link flex items-baseline gap-2 text-[13px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
-                <span class="flex-shrink-0 text-[#C8C4BC] tabular-nums" style="font-family:'JetBrains Mono',monospace; min-width:22px;">{String(i + 1).padStart(2, '0')}</span>
+              <a href={item.href} class="flex items-baseline gap-2 text-[13px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
+                <span class="flex-shrink-0 text-[#3F261F] tabular-nums" style="font-family:'JetBrains Mono',monospace; min-width:22px; opacity:0.7;">{String(i + 1).padStart(2, '0')}</span>
                 <span class="block">{item.label}</span>
               </a>
             </li>
           ))}
         </ul>
-      </aside>
+      </details>
+    </div>
+
+    <!-- BODY — CSS-grid container with width tiers (body / wide / full-bleed) -->
+    <div class="prose-rf pt-10 pb-20 md:pt-12 md:pb-24">
+      <Content />
+      {post.data.faqs && post.data.faqs.length > 0 && (
+        <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+        <div class="rf-faq">
+          {post.data.faqs.map((f) => (
+            <details>
+              <summary>
+                <span class="q">{f.q}</span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              </summary>
+              <div class="a">{f.a}</div>
+            </details>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- Tags + Author card — same grid container so they stay centered with body -->
+    <div class="prose-rf-after pb-20">
+      {post.data.tags.length > 0 && (
+        <div class="rf-tags">
+          <p class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-3">Topics</p>
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <span class="px-3 py-1 bg-[#E8E6E1] text-[#76574C] text-[12px] rounded-full border border-[#C8C4BC]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      <div class="rf-author-card">
+        <img
+          src={FEDE_PHOTO}
+          alt="Federico Zimerman, Founder of RevFactor"
+          class="w-20 h-20 rounded-full object-cover flex-shrink-0 ring-1 ring-[#C8C4BC]"
+        />
+        <div>
+          <h4 class="text-[24px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:500;">{post.data.author.toLowerCase()}</h4>
+          <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
+          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-3">Federico Zimerman is the founder of <a href="https://revfactor.io" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">RevFactor</a>, a managed revenue management service for short-term rental hosts. He spent 10 years in airline revenue management at American Airlines before applying that yield-management playbook to vacation rentals — strategies that run daily across <strong>165+ STR properties in 24 U.S. states and 56 markets</strong> through Blackbird Hospitality, with a documented <strong>+18% RevPAR lift vs. comp set</strong>.</p>
+          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">He's been featured on <em>No Vacancy with Natalie Palmer</em> (Ep. 155), <em>Life of Flow</em>, <em>Catchup with the Carlyles</em>, <em>Craft Stays</em>, and <em>STR Like The Best</em>, and posts daily on TikTok (<a href="https://www.tiktok.com/@federicozimerman" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">@federicozimerman</a>) and Instagram (<a href="https://www.instagram.com/federico.zimerman" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">@federico.zimerman</a>).</p>
+          <div class="flex gap-2 flex-wrap">
+            <a href="https://www.linkedin.com/in/federico-zimerman-23ab3345/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Follow on LinkedIn</a>
+            <a href="/journal" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">More essays</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     {related.length > 0 && (
@@ -221,7 +338,7 @@ const schema = {
         <div class="flex items-end justify-between mb-10 flex-wrap gap-4">
           <div>
             <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-2 block">Keep reading</span>
-            <h2 class="text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,40px);">More <em style="font-style:italic; color:#7A8B76;">from The Curve.</em></h2>
+            <h2 class="text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,40px);">Read more <em style="font-style:italic; color:#7A8B76;">from the Journal.</em></h2>
           </div>
           <a href="/journal" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#3F261F] hover:text-[#13342D] transition-colors">
             All field notes
@@ -245,22 +362,16 @@ const schema = {
       </section>
     )}
 
-    <!-- CTA -->
     <section class="max-w-7xl mx-auto px-6 md:px-12 pb-24">
       <div class="p-10 md:p-16 bg-[#13342D] rounded-[24px] text-center">
         <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-4">Ready to optimize your revenue?</p>
-        <h2
-          class="text-[clamp(28px,4vw,42px)] leading-[1.15] text-[#E8E6E1] mb-5 mx-auto max-w-2xl"
-          style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
-        >
-          Let's talk about your <em style="font-style: italic; color: #7A8B76;">properties.</em>
+        <h2 class="text-[clamp(28px,4vw,42px)] leading-[1.15] text-[#E8E6E1] mb-5 mx-auto max-w-2xl" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">
+          Let's talk about your <em style="font-style:italic; color:#7A8B76;">properties.</em>
         </h2>
         <p class="text-[15px] leading-[1.7] text-[#CCC8BF] mb-8 max-w-md mx-auto">
           Schedule a free 30-minute discovery call to see what expert revenue management could do for your STR portfolio.
         </p>
-        <a href="/review" class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#E8E6E1] text-[#13342D] font-bold uppercase text-[10px] tracking-[2px] rounded-full hover:bg-white transition-colors duration-200">
-          Schedule a strategy call →
-        </a>
+        <BlogScheduleCTA client:load />
       </div>
     </section>
   </article>
@@ -268,292 +379,691 @@ const schema = {
   <Footer client:load />
 
   <style>
-    .prose-rf :global(p) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 19px;
-      line-height: 1.65;
-      color: #3F261F;
-      margin: 0 0 1.5em;
+    /* ============== LAYOUT — CSS-grid driven width tiers ==============
+       prose-rf is a grid container. Body content lives in the center
+       `body` track (max 720px). Wide elements (figures, philosophy, leaks,
+       plays, scoreboard, charts) span the `wide` track. Full-bleed images
+       break out of the page entirely via the `full` track. Grid columns
+       are computed once in CSS so every element is symmetrically centered
+       on the page — no negative-margin breakout hacks. */
+    .prose-rf,
+    .prose-rf-after {
+      display: grid;
+      grid-template-columns:
+        [full-start] minmax(1.25rem, 1fr)
+        [wide-start] minmax(0, 220px)
+        [body-start] minmax(0, 720px) [body-end]
+        minmax(0, 220px) [wide-end]
+        minmax(1.25rem, 1fr) [full-end];
+      column-gap: 0;
+      row-gap: 0;
     }
-    .prose-rf :global(h2) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 400;
-      font-size: clamp(28px, 3.5vw, 40px);
-      line-height: 1.15;
-      color: #3F261F;
-      margin: 2.5em 0 0.75em;
-      letter-spacing: -0.25px;
+    .prose-rf > :global(*),
+    .prose-rf-after > :global(*) {
+      grid-column: body-start / body-end;
+      max-width: 100%;
     }
-    .prose-rf :global(h3) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 400;
-      font-size: clamp(22px, 2.5vw, 28px);
-      line-height: 1.2;
-      color: #3F261F;
-      margin: 2em 0 0.5em;
+    .prose-rf > :global(.rf-figure),
+    .prose-rf > :global(.rf-philosophy),
+    .prose-rf > :global(.rf-leaks),
+    .prose-rf > :global(.rf-plays),
+    .prose-rf > :global(.rf-scoreboard),
+    .prose-rf > :global(.rf-chart) {
+      grid-column: wide-start / wide-end;
     }
+    .prose-rf > :global(.rf-bleed) {
+      grid-column: full-start / full-end;
+      width: 100%;
+      margin: 3rem 0;
+    }
+    .prose-rf-after > :global(.rf-tags),
+    .prose-rf-after > :global(.rf-author-card) {
+      grid-column: body-start / body-end;
+    }
+    .prose-rf-after > :global(.rf-tags) {
+      margin-top: 0.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid #C8C4BC;
+    }
+    .prose-rf-after > :global(.rf-author-card) {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #E8E6E1;
+      border: 1px solid #C8C4BC;
+      border-radius: 16px;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    @media (min-width: 768px) {
+      .prose-rf-after > :global(.rf-author-card) { flex-wrap: nowrap; }
+    }
+
+    /* Floating-TOC behavior: keep panel narrow, tighten line-height,
+       active item gets cedar treatment. Hidden until user scrolls past hero.
+       Z-index 20 so full-bleed image sections (z-index 30) cover it cleanly. */
+    #tocFloat {
+      transform: translateZ(0);  /* avoid sub-pixel jitter on scroll */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 350ms cubic-bezier(0.25,0.1,0.25,1);
+      z-index: 20;
+    }
+    #tocFloat.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #tocFloat::-webkit-scrollbar { width: 4px; }
+    #tocFloat::-webkit-scrollbar-thumb { background: #C8C4BC; border-radius: 2px; }
+    .toc-link.active { color: #13342D !important; font-weight: 600; }
+    .toc-link.active span:first-child { opacity: 1 !important; color: #13342D !important; }
+
+    /* ============== BODY PROSE ==============
+       Body — sans-serif (Helvetica) per brand spec; serif reserved for headings + quotes */
+    .prose-rf :global(p) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:17px; line-height:1.7; color:#3F261F; margin:0 0 1.25em; }
+    @media (max-width: 640px) { .prose-rf :global(p) { font-size:16px; line-height:1.65; } }
+
+    /* H2 / H3 — Cormorant, weight bumped 500 to match homepage hero feel */
+    .prose-rf :global(h2) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(32px,3.8vw,46px); line-height:1.15; color:#3F261F; margin:1.75em 0 0.6em; letter-spacing:0.25px; }
+    .prose-rf :global(h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(24px,2.8vw,32px); line-height:1.2; color:#3F261F; margin:1.5em 0 0.4em; letter-spacing:0.25px; }
+
+    /* Lists — sans-serif body */
     .prose-rf :global(ol),
-    .prose-rf :global(ul) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 18px;
-      line-height: 1.65;
-      color: #3F261F;
-      padding-left: 1.5em;
-      margin: 0 0 1.5em;
+    .prose-rf :global(ul) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:16px; line-height:1.7; color:#3F261F; padding-left:1.5em; margin:0 0 1.25em; }
+    @media (max-width: 640px) {
+      .prose-rf :global(ol),
+      .prose-rf :global(ul) { font-size:15px; }
     }
     .prose-rf :global(ol) { list-style: decimal; }
     .prose-rf :global(ul) { list-style: disc; }
     .prose-rf :global(li) { margin-bottom: 0.6em; }
     .prose-rf :global(li::marker) { color: #5D6D59; }
+    .prose-rf :global(strong) { color:#13342D; font-weight:700; }
+    /* Italics — Cormorant serif in cedar (darker green) per Aaron */
+    .prose-rf :global(em)     { font-family:'Cormorant Garamond',Georgia,serif; color:#13342D; font-style:italic; }
+    .prose-rf :global(a)      { color:#13342D; text-decoration:underline; text-underline-offset:3px; }
+    .prose-rf :global(a:hover){ color:#1E4A40; }
+    .prose-rf :global(hr)     { border:none; border-top:1px solid #C8C4BC; margin:2.5rem 0; }
 
-    .prose-rf :global(strong) { color: #13342D; font-weight: 600; }
-    .prose-rf :global(em)     { color: #5D6D59; font-style: italic; }
-    .prose-rf :global(a)      { color: #13342D; text-decoration: underline; text-underline-offset: 3px; }
-    .prose-rf :global(a:hover){ color: #1E4A40; }
-    .prose-rf :global(hr)     { border: none; border-top: 1px solid #C8C4BC; margin: 2.5rem 0; }
+    /* Blockquote — text uses cedar dark green per Aaron, easier to read */
+    .prose-rf :global(blockquote) { border-left:4px solid #5D6D59; padding:0.5rem 0 0.5rem 1.5rem; margin:2rem 0; background:transparent; }
+    .prose-rf :global(blockquote p) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400; font-size:clamp(22px,2.6vw,28px); line-height:1.3; color:#13342D; margin:0; }
 
-    /* Drop cap on the very first paragraph after the byline bar */
-    .prose-rf > :global(p:first-of-type::first-letter) {
-      float: left;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 72px;
-      line-height: 0.9;
-      margin-right: 12px;
-      margin-top: 6px;
-      color: #13342D;
+    .prose-rf :global(code) { font-family:'JetBrains Mono',monospace; font-size:14px; background:#C8C4BC; color:#13342D; padding:0.15em 0.45em; border-radius:4px; }
+
+    /* Tables — body cells now 16px, mono numerics, with horizontal scroll on narrow viewports */
+    .prose-rf :global(table) { width:100%; border-collapse:collapse; margin:1.75rem 0; font-size:16px; display:block; overflow-x:auto; }
+    @media (min-width: 768px) { .prose-rf :global(table) { display:table; } }
+    .prose-rf :global(table thead) { border-bottom:2px solid #3F261F; }
+    .prose-rf :global(table th) { text-align:left; padding:14px 14px; font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#3F261F; white-space:nowrap; }
+    .prose-rf :global(table td) { padding:16px 14px; font-family:'JetBrains Mono',monospace; font-size:15px; color:#3F261F; border-bottom:1px solid #C8C4BC; vertical-align:top; }
+    .prose-rf :global(table td:first-child) { font-family:'Cormorant Garamond',Georgia,serif; font-size:20px; font-weight:500; color:#13342D; line-height:1.3; }
+    .prose-rf :global(table tr:last-child td) { border-bottom:none; }
+    .prose-rf :global(table strong) { color:#13342D; }
+
+    /* Figures span the WIDE grid track (centered, ~1100px on desktop, full-width on mobile). */
+    .prose-rf :global(.rf-figure) {
+      margin:2.5rem 0;
+      text-align:center;
+    }
+    .prose-rf :global(.rf-figure img) { width:100%; height:auto; border-radius:16px; display:block; }
+    .prose-rf :global(.rf-figure figcaption) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-style:italic;
+      font-size:17px;
+      color:#3F261F;
+      margin-top:0.9rem;
+      padding:0 1.5rem;
+      line-height:1.45;
+    }
+    @media (max-width: 640px) {
+      .prose-rf :global(.rf-figure figcaption) { font-size:15px; }
     }
 
-    .prose-rf :global(blockquote) {
-      border-left: 4px solid #13342D;
-      padding: 0.5rem 0 0.5rem 1.5rem;
-      margin: 2.5rem 0;
-      background: transparent;
+    /* Quote-overlay variant: image with a Federico pull-quote anchored bottom-left over a soft dark gradient. */
+    .prose-rf :global(.rf-figure-quote .rf-figure-frame) {
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      line-height:0;
     }
-    .prose-rf :global(blockquote p) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(22px, 2.6vw, 30px);
-      line-height: 1.25;
-      color: #3F261F;
-      margin: 0;
+    .prose-rf :global(.rf-figure-quote .rf-figure-frame img) { border-radius:0; }
+    .prose-rf :global(.rf-figure-quote .rf-figure-frame::after) {
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:62%;
+      background:linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.35) 45%, rgba(22,25,16,0.82) 100%);
+      pointer-events:none;
+    }
+    .prose-rf :global(.rf-figure-overlay) {
+      position:absolute;
+      left:6%; right:6%; bottom:7%;
+      margin:0;
+      padding:0;
+      border:0;
+      text-align:left;
+      z-index:1;
+      line-height:normal;
+    }
+    .prose-rf :global(.rf-figure-overlay p) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-style:italic;
+      font-weight:400;
+      font-size:clamp(19px, 2.3vw, 28px);
+      line-height:1.4;
+      color:#E8E6E1;
+      margin:0 0 0.85rem;
+      max-width:82%;
+      text-shadow:0 1px 14px rgba(22,25,16,0.45);
+    }
+    .prose-rf :global(.rf-figure-overlay cite) {
+      font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;
+      font-style:normal;
+      font-weight:700;
+      font-size:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#7A8B76;
+    }
+    @media (max-width: 640px) {
+      .prose-rf :global(.rf-figure-overlay) { left:5%; right:5%; bottom:6%; }
+      .prose-rf :global(.rf-figure-overlay p) { max-width:100%; font-size:16px; }
+      .prose-rf :global(.rf-figure-quote .rf-figure-frame::after) { height:70%; }
     }
 
-    .prose-rf :global(code) {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      background: #C8C4BC;
-      color: #13342D;
-      padding: 0.15em 0.45em;
-      border-radius: 4px;
+    .prose-rf :global(.rf-quick-answer) { background:#13342D; color:#E8E6E1; border-radius:16px; padding:2rem 2.25rem; margin:2.5rem 0; }
+    .prose-rf :global(.rf-quick-answer .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:9px; letter-spacing:2.5px; color:#7A8B76; margin:0 0 0.85rem; }
+    .prose-rf :global(.rf-quick-answer p:last-child) { font-family:'Cormorant Garamond',Georgia,serif; color:#E8E6E1; font-size:19px; line-height:1.5; margin:0; }
+
+    .prose-rf :global(.rf-key-stats) { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:1rem 0 1.5rem; padding:1.25rem 1.5rem; background:rgba(93,109,89,0.08); border:1px solid rgba(93,109,89,0.2); border-radius:16px; }
+    @media (max-width: 640px) { .prose-rf :global(.rf-key-stats) { grid-template-columns:1fr; } }
+    .prose-rf :global(.rf-key-stats .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:8.5px; letter-spacing:1.5px; text-transform:uppercase; color:#5D6D59; margin:0 0 0.4rem; text-align:center; }
+    .prose-rf :global(.rf-key-stats .number) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(22px,3vw,32px); color:#13342D; margin:0 0 0.25rem; text-align:center; line-height:1; }
+    .prose-rf :global(.rf-key-stats .caption) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:13px; color:#76574C; margin:0; text-align:center; }
+
+    /* Key Takeaways — heading serif, body sans-serif per brand spec */
+    .prose-rf :global(.rf-takeaways) { background:rgba(93,109,89,0.05); border:1px solid #C8C4BC; border-radius:16px; padding:1.75rem 2rem; margin:2.5rem 0; }
+    .prose-rf :global(.rf-takeaways h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:30px; color:#13342D; margin:0 0 1rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-takeaways ul) { margin:0; padding-left:1.25rem; }
+    .prose-rf :global(.rf-takeaways li) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:16px; line-height:1.65; color:#3F261F; margin-bottom:0.7rem; }
+    @media (max-width: 640px) {
+      .prose-rf :global(.rf-takeaways li) { font-size:15px; }
     }
 
-    .prose-rf :global(table) {
+    .prose-rf :global(.rf-author-bio) { display:none; }
+    .prose-rf :global(.rf-hero) { display:none; }
+
+    /* ============== HTML GRID COMPONENTS (responsive, scale with text) ============== */
+
+    /* Strategic Philosophy — 3 cards (cedar / moss / tobacco) on the WIDE grid track. */
+    .prose-rf :global(.rf-philosophy) { margin:2.5rem 0; }
+    .prose-rf :global(.rf-philosophy-header) { text-align:center; margin-bottom:1.75rem; }
+    .prose-rf :global(.rf-philosophy-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
+    .prose-rf :global(.rf-philosophy-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400; font-size:clamp(32px,4vw,48px); color:#13342D; margin:0 0 0.5rem !important; }
+    .prose-rf :global(.rf-philosophy-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:21px; color:#76574C; margin:0; line-height:1.4; }
+
+    .prose-rf :global(.rf-philosophy-grid) {
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:1.25rem;
+      margin-top:1.5rem;
+    }
+    @media (max-width: 768px) { .prose-rf :global(.rf-philosophy-grid) { grid-template-columns:1fr; } }
+    .prose-rf :global(.rf-philosophy-card) {
+      border-radius:16px;
+      padding:2rem 1.5rem;
+      text-align:center;
+      color:#DDDAD3;
+      min-height: 320px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+    }
+    .prose-rf :global(.rf-philosophy-card.cedar)   { background:#13342D; }
+    .prose-rf :global(.rf-philosophy-card.moss)    { background:#5D6D59; }
+    .prose-rf :global(.rf-philosophy-card.tobacco) { background:#3F261F; }
+    .prose-rf :global(.rf-philosophy-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:56px; line-height:1; margin:0 0 0.5rem; opacity:0.85; }
+    .prose-rf :global(.rf-philosophy-card.cedar .num)   { color:#A9BBA3; }
+    .prose-rf :global(.rf-philosophy-card.moss .num)    { color:#E8E6E1; }
+    .prose-rf :global(.rf-philosophy-card.tobacco .num) { color:#A9BBA3; }
+    .prose-rf :global(.rf-philosophy-card .rule) { width:48px; height:1px; background:currentColor; opacity:0.5; margin:0 auto 1rem; }
+    .prose-rf :global(.rf-philosophy-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:13px; letter-spacing:3px; text-transform:uppercase; opacity:1; color:#E8E6E1 !important; margin:0 0 1.25rem !important; }
+    .prose-rf :global(.rf-philosophy-card.moss .label) { color:#E8E6E1 !important; }
+    .prose-rf :global(.rf-philosophy-card .lead) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:500; font-size:26px; line-height:1.2; margin:0 0 1.25rem !important; color:#E8E6E1 !important; }
+    .prose-rf :global(.rf-philosophy-card.moss .lead) { color:#E8E6E1 !important; }
+    .prose-rf :global(.rf-philosophy-card .body) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:16px; line-height:1.55; opacity:1; color:#E8E6E1; margin:0 0 0.75rem !important; }
+    .prose-rf :global(.rf-philosophy-card.moss .body) { color:#E8E6E1; }
+    .prose-rf :global(.rf-philosophy-card .pull) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:17px; opacity:0.9; color:#E8E6E1; margin:auto 0 0 !important; padding-top:1rem; }
+    .prose-rf :global(.rf-philosophy-card.moss .pull) { color:#E8E6E1; }
+    /* Philosophy cards override the global em → cedar rule so italic text inside cards
+       inherits the card's text color (not moss, which goes invisible on moss/cedar bg) */
+    .prose-rf :global(.rf-philosophy-card em) { color:inherit !important; font-family:inherit; }
+
+    /* 7 Leaks — 4-up responsive grid on the WIDE track. */
+    .prose-rf :global(.rf-leaks) { margin:2.5rem 0; }
+    .prose-rf :global(.rf-leaks-header) { text-align:center; margin-bottom:1.5rem; }
+    .prose-rf :global(.rf-leaks-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
+    .prose-rf :global(.rf-leaks-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(32px,4vw,48px); color:#13342D; margin:0 0 0.5rem !important; }
+    .prose-rf :global(.rf-leaks-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:20px; color:#76574C; margin:0; line-height:1.4; }
+
+    .prose-rf :global(.rf-leaks-grid) {
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:1rem;
+      margin-top:1.5rem;
+    }
+    @media (max-width: 1100px) { .prose-rf :global(.rf-leaks-grid) { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px)  { .prose-rf :global(.rf-leaks-grid) { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px)  { .prose-rf :global(.rf-leaks-grid) { grid-template-columns: 1fr; } }
+
+    .prose-rf :global(.rf-leak-card) {
+      background:#E8E6E1;
+      border-radius:12px;
+      padding:1.5rem 1.25rem;
+      position:relative;
+      border-top:4px solid var(--leak-accent, #13342D);
+    }
+    .prose-rf :global(.rf-leak-card.cedar)   { --leak-accent:#13342D; }
+    .prose-rf :global(.rf-leak-card.moss)    { --leak-accent:#5D6D59; }
+    .prose-rf :global(.rf-leak-card.tobacco) { --leak-accent:#3F261F; }
+    .prose-rf :global(.rf-leak-card.walnut)  { --leak-accent:#76574C; }
+    .prose-rf :global(.rf-leak-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:42px; line-height:1; margin:0 0 0.65rem !important; color:var(--leak-accent); }
+    .prose-rf :global(.rf-leak-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:#5D6D59; margin:0 0 0.6rem !important; }
+    .prose-rf :global(.rf-leak-card .title) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:23px; line-height:1.2; color:#13342D; margin:0 0 0.65rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-leak-card .body) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:14px; line-height:1.6; color:#3F261F; margin:0 !important; }
+    /* Override em color inside leak cards so italic doesn't go cedar-on-bone-on-cedar-accent */
+    .prose-rf :global(.rf-leak-card em) { color:#13342D; }
+
+    /* ============== RF-SCOREBOARD — RevPAR vs ADR comparison cards ============== */
+    .prose-rf :global(.rf-scoreboard) { margin:3rem 0; }
+    .prose-rf :global(.rf-scoreboard-header) { text-align:center; margin-bottom:2rem; }
+    .prose-rf :global(.rf-scoreboard-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
+    .prose-rf :global(.rf-scoreboard-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(34px,4.5vw,52px); color:#13342D; margin:0 0 0.5rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-scoreboard-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:20px; color:#76574C; margin:0; line-height:1.4; }
+
+    .prose-rf :global(.rf-scoreboard-grid) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 768px) { .prose-rf :global(.rf-scoreboard-grid) { grid-template-columns: 1fr; } }
+
+    .prose-rf :global(.rf-score-card) {
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid #C8C4BC;
+    }
+    .prose-rf :global(.rf-score-card.bone)  { background: #E8E6E1; }
+    .prose-rf :global(.rf-score-card.cedar) { background: #13342D; border-color: #13342D; color: #E8E6E1; }
+    .prose-rf :global(.rf-score-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; opacity:0.7; margin:0 0 1rem !important; }
+    .prose-rf :global(.rf-score-card .lede)  { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:22px; line-height:1.3; margin:0 0 1.5rem !important; }
+    .prose-rf :global(.rf-score-card.bone .lede)  { color: #76574C; }
+    .prose-rf :global(.rf-score-card.cedar .lede) { color: #DDDAD3; }
+    .prose-rf :global(.rf-score-row) {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--score-border, #C8C4BC);
+    }
+    .prose-rf :global(.rf-score-card.cedar .rf-score-row) { --score-border: rgba(221,218,211,0.18); }
+    .prose-rf :global(.rf-score-row:last-child) { border-bottom: none; }
+    .prose-rf :global(.rf-score-row .key) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; text-transform:uppercase; opacity:0.7; }
+    .prose-rf :global(.rf-score-row .val) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; }
+    .prose-rf :global(.rf-score-row.hero .key) { opacity: 1; }
+    .prose-rf :global(.rf-score-row.hero .val) { font-size: 32px; }
+    .prose-rf :global(.rf-score-card.cedar .rf-score-row.hero .val) { color: #A9BBA3; }
+    .prose-rf :global(.rf-score-card.bone .rf-score-row.hero .val) { color: #13342D; }
+    .prose-rf :global(.rf-score-delta) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      padding: 0.85rem 1.5rem;
+      background: #3F261F;
+      color: #E8E6E1;
+      border-radius: 999px;
+      flex-wrap: wrap;
+    }
+    .prose-rf :global(.rf-score-delta .lbl) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; text-transform:uppercase; color: #A9BBA3; }
+    .prose-rf :global(.rf-score-delta .copy) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; flex:1 1 auto; min-width:0; }
+    .prose-rf :global(.rf-score-delta .val) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; color: #E8E6E1; }
+
+    /* ============== RF-PLAYS — 6 tactical plays grid ============== */
+    .prose-rf :global(.rf-plays) {
+      margin: 3rem 0;
+      background: #13342D;
+      border-radius: 24px;
+      padding: 3rem 2rem;
+    }
+    .prose-rf :global(.rf-plays-header) { text-align:center; margin-bottom:2.25rem; }
+    .prose-rf :global(.rf-plays-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#7A8B76; margin:0 0 0.75rem; }
+    .prose-rf :global(.rf-plays-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(34px,4.5vw,56px); color:#E8E6E1; margin:0 0 0.5rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-plays-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:20px; color:#A9BBA3; margin:0; line-height:1.4; }
+
+    .prose-rf :global(.rf-plays-grid) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 1024px) { .prose-rf :global(.rf-plays-grid) { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .prose-rf :global(.rf-plays-grid) { grid-template-columns: 1fr; } }
+
+    .prose-rf :global(.rf-play-card) {
+      background: #E8E6E1;
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+    }
+    .prose-rf :global(.rf-play-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:13px; letter-spacing:3px; color:#5D6D59; text-transform:uppercase; margin:0 0 1rem !important; }
+    .prose-rf :global(.rf-play-card .name) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:28px; line-height:1.15; color:#13342D; margin:0 0 1rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-play-card .copy) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:15px; line-height:1.65; color:#3F261F; margin:0 !important; }
+    .prose-rf :global(.rf-play-card em) { color:#13342D; }
+
+    /* ============== RF-BLEED — full-bleed image with quote overlay ============== */
+    .prose-rf :global(.rf-bleed) {
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+      z-index: 30;  /* Above the floating TOC (z-20) so the image always wins on scroll */
+    }
+    .prose-rf :global(.rf-bleed img) {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      border-collapse: collapse;
-      margin: 2rem 0;
-      font-size: 14px;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
     }
-    .prose-rf :global(table thead) { border-bottom: 2px solid #3F261F; }
-    .prose-rf :global(table th) {
-      text-align: left;
-      padding: 12px 14px;
-      font-family: Helvetica, Arial, sans-serif;
+    .prose-rf :global(.rf-bleed::after) {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(22,25,16,0.85) 0%, rgba(22,25,16,0.55) 50%, rgba(22,25,16,0.3) 100%);
+      z-index: 1;
+    }
+    .prose-rf :global(.rf-bleed-inner) {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      padding: 4rem 1.5rem;
+      margin: 0 auto;
+      width: 100%;
+    }
+    @media (min-width: 768px) { .prose-rf :global(.rf-bleed-inner) { padding: 5rem 3rem; } }
+    .prose-rf :global(.rf-bleed blockquote) {
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: transparent !important;
+    }
+    .prose-rf :global(.rf-bleed blockquote p) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(28px, 3.6vw, 44px);
+      line-height: 1.2;
+      color: #E8E6E1 !important;
+      margin: 0 0 1.25rem !important;
+    }
+    .prose-rf :global(.rf-bleed cite) {
+      font-family:Helvetica,Arial,sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #A9BBA3;
+      font-style: normal;
+    }
+
+    /* ============== RF-CHART — pure-CSS horizontal bar chart ============== */
+    .prose-rf :global(.rf-chart) {
+      margin: 3rem 0;
+      padding: 2.25rem;
+      background: #E8E6E1;
+      border-radius: 20px;
+      border: 1px solid #C8C4BC;
+    }
+    .prose-rf :global(.rf-chart-header) { margin-bottom: 1.75rem; }
+    .prose-rf :global(.rf-chart-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#76574C; margin:0 0 0.5rem; }
+    .prose-rf :global(.rf-chart-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(26px,3vw,36px); color:#13342D; margin:0 0 0.4rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-chart-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:17px; color:#76574C; margin:0; line-height:1.4; }
+    .prose-rf :global(.rf-chart-rows) {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-top: 1.5rem;
+    }
+    .prose-rf :global(.rf-chart-row) {
+      display: grid;
+      grid-template-columns: 110px 1fr 90px;
+      align-items: center;
+      gap: 1rem;
+    }
+    @media (max-width: 640px) {
+      .prose-rf :global(.rf-chart-row) { grid-template-columns: 70px 1fr 70px; }
+    }
+    .prose-rf :global(.rf-chart-label) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-weight: 500;
+      font-size: 17px;
+      color: #3F261F;
+      letter-spacing: 0.25px;
+    }
+    .prose-rf :global(.rf-chart-bar) {
+      position: relative;
+      height: 32px;
+      background: rgba(118,87,76,0.12);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .prose-rf :global(.rf-chart-fill) {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: linear-gradient(90deg, #13342D 0%, #1E4A40 100%);
+      border-radius: 6px;
+      transition: width 600ms cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .prose-rf :global(.rf-chart-fill.comp) {
+      background: linear-gradient(90deg, #76574C 0%, #8F6E62 100%);
+    }
+    .prose-rf :global(.rf-chart-value) {
+      font-family:'JetBrains Mono',monospace;
+      font-weight: 500;
+      font-size: 16px;
+      color: #13342D;
+      text-align: right;
+    }
+    .prose-rf :global(.rf-chart-legend) {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #C8C4BC;
+      flex-wrap: wrap;
+    }
+    .prose-rf :global(.rf-chart-legend > span) {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family:Helvetica,Arial,sans-serif;
       font-weight: 700;
       font-size: 10px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #3F261F;
+      color: #76574C;
     }
-    .prose-rf :global(table td) {
-      padding: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      color: #3F261F;
-      border-bottom: 1px solid #C8C4BC;
+    .prose-rf :global(.rf-chart-legend .swatch) {
+      width: 14px; height: 14px; border-radius: 3px; display: inline-block;
     }
-    .prose-rf :global(table td:first-child) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-    }
-    .prose-rf :global(table tr:last-child td) { border-bottom: none; }
-    .prose-rf :global(table strong) { color: #13342D; }
+    .prose-rf :global(.rf-chart-legend .swatch.cedar) { background: #13342D; }
+    .prose-rf :global(.rf-chart-legend .swatch.walnut) { background: #76574C; }
 
-    .prose-rf :global(.rf-figure) {
-      margin: 2.5rem -1rem;
-      text-align: center;
+    /* ============== RF-BAND — colored-section breaks for contrast ==============
+       Full-bleed band on the WIDE grid track (not full viewport — keeps a
+       margin so it reads as a callout, not a hero). Variants: cedar, tobacco, moss.
+       Place inline in MDX wherever a content beat deserves emphasis. */
+    .prose-rf :global(.rf-band) {
+      margin: 3rem 0;
+      padding: 2.5rem 2.25rem;
+      border-radius: 20px;
+      position: relative;
     }
-    .prose-rf :global(.rf-figure img) {
-      width: 100%;
-      height: auto;
-      border-radius: 16px;
-      display: block;
-    }
-    .prose-rf :global(.rf-figure figcaption) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 14px;
-      color: #8F6E62;
-      margin-top: 0.85rem;
-      padding: 0 1.5rem;
-    }
+    @media (min-width: 768px) { .prose-rf :global(.rf-band) { padding: 3rem 3rem; } }
+    .prose-rf :global(.rf-band.cedar)   { background: #13342D; color: #DDDAD3; }
+    .prose-rf :global(.rf-band.tobacco) { background: #3F261F; color: #DDDAD3; }
+    .prose-rf :global(.rf-band.moss)    { background: #5D6D59; color: #E8E6E1; }
+    .prose-rf :global(.rf-band.bone)    { background: #E8E6E1; color: #3F261F; border: 1px solid #C8C4BC; }
 
-    .prose-rf :global(.rf-quick-answer) {
-      background: #13342D;
-      color: #E8E6E1;
-      border-radius: 16px;
-      padding: 2rem 2.25rem;
-      margin: 2.5rem 0;
-    }
-    .prose-rf :global(.rf-quick-answer .kicker) {
+    .prose-rf :global(.rf-band .kicker) {
       font-family: Helvetica, Arial, sans-serif;
       font-weight: 700;
-      font-size: 9px;
-      letter-spacing: 2.5px;
-      color: #7A8B76;
-      margin: 0 0 0.85rem;
-    }
-    .prose-rf :global(.rf-quick-answer p:last-child) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      color: #E8E6E1;
-      font-size: 19px;
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    .prose-rf :global(.rf-key-stats) {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin: 2.5rem 0;
-      padding: 1.5rem;
-      background: rgba(93, 109, 89, 0.08);
-      border: 1px solid rgba(93, 109, 89, 0.2);
-      border-radius: 16px;
-    }
-    @media (max-width: 640px) {
-      .prose-rf :global(.rf-key-stats) { grid-template-columns: 1fr; }
-    }
-    .prose-rf :global(.rf-key-stats .label) {
-      font-family: Helvetica, Arial, sans-serif;
-      font-weight: 700;
-      font-size: 8.5px;
-      letter-spacing: 1.5px;
+      font-size: 11px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: #5D6D59;
-      margin: 0 0 0.4rem;
-      text-align: center;
+      color: #7A8B76;
+      margin: 0 0 1rem !important;
     }
-    .prose-rf :global(.rf-key-stats .number) {
+    .prose-rf :global(.rf-band.tobacco .kicker) { color: #A9BBA3; }
+    .prose-rf :global(.rf-band.moss .kicker)    { color: #13342D; }
+    .prose-rf :global(.rf-band.bone .kicker)    { color: #76574C; }
+
+    .prose-rf :global(.rf-band h3) {
+      font-family: 'Cormorant Garamond', Georgia, serif !important;
+      font-weight: 500 !important;
+      font-size: clamp(28px, 3.4vw, 40px) !important;
+      line-height: 1.15 !important;
+      color: inherit !important;
+      margin: 0 0 1rem !important;
+      letter-spacing: 0.25px !important;
+    }
+    .prose-rf :global(.rf-band p) {
+      font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: 17px !important;
+      line-height: 1.65 !important;
+      color: inherit !important;
+      opacity: 0.92;
+      margin: 0 0 1em !important;
+    }
+    .prose-rf :global(.rf-band p:last-child) { margin-bottom: 0 !important; }
+    .prose-rf :global(.rf-band em) {
+      font-family: 'Cormorant Garamond', Georgia, serif !important;
+      color: inherit !important;
+      font-style: italic;
+      opacity: 1;
+    }
+    .prose-rf :global(.rf-band strong) { color: inherit !important; opacity: 1; }
+
+    /* Optional split layout — for stat + paragraph pairs inside a band */
+    .prose-rf :global(.rf-band-split) {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (min-width: 768px) {
+      .prose-rf :global(.rf-band-split) { grid-template-columns: 1fr 1.4fr; gap: 3rem; }
+    }
+    .prose-rf :global(.rf-band-stat) {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 500;
-      font-size: clamp(22px, 3vw, 32px);
-      color: #13342D;
-      margin: 0 0 0.25rem;
-      text-align: center;
+      font-size: clamp(48px, 7vw, 88px);
       line-height: 1;
+      color: inherit;
+      letter-spacing: -1px;
     }
-    .prose-rf :global(.rf-key-stats .caption) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 13px;
-      color: #76574C;
-      margin: 0;
-      text-align: center;
-    }
-
-    .prose-rf :global(.rf-takeaways) {
-      background: rgba(93, 109, 89, 0.05);
-      border: 1px solid #C8C4BC;
-      border-radius: 16px;
-      padding: 1.75rem 2rem;
-      margin: 2.5rem 0;
-    }
-    .prose-rf :global(.rf-takeaways h3) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 400;
-      font-size: 26px;
-      color: #13342D;
-      margin: 0 0 1rem !important;
-      letter-spacing: -0.25px;
-    }
-    .prose-rf :global(.rf-takeaways ul) {
-      margin: 0;
-      padding-left: 1.25rem;
-      font-size: 16px;
-    }
-    .prose-rf :global(.rf-takeaways li) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      line-height: 1.5;
-      color: #3F261F;
-      margin-bottom: 0.6rem;
-    }
-
-    .prose-rf :global(.rf-author-bio) {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 1.5rem;
-      margin: 3rem 0 1.5rem;
-      padding: 1.75rem;
-      background: #E8E6E1;
-      border-radius: 16px;
-      border: 1px solid #C8C4BC;
-    }
-    @media (max-width: 640px) {
-      .prose-rf :global(.rf-author-bio) {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-    }
-    .prose-rf :global(.rf-author-photo) {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    @media (max-width: 640px) {
-      .prose-rf :global(.rf-author-photo) { margin: 0 auto; }
-    }
-    .prose-rf :global(.rf-author-label) {
+    .prose-rf :global(.rf-band.cedar .rf-band-stat),
+    .prose-rf :global(.rf-band.tobacco .rf-band-stat) { color: #A9BBA3; }
+    .prose-rf :global(.rf-band-stat-label) {
       font-family: Helvetica, Arial, sans-serif;
       font-weight: 700;
-      font-size: 9px;
+      font-size: 10px;
       letter-spacing: 2.5px;
-      color: #8F6E62;
-      margin: 0 0 0.5rem !important;
+      text-transform: uppercase;
+      color: inherit;
+      opacity: 0.7;
+      margin-top: 0.5rem;
     }
-    .prose-rf :global(.rf-author-content h3) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 400;
-      font-size: 28px !important;
+
+    /* ============== RF-FAQ — native <details> accordion ============== */
+    .prose-rf :global(.rf-faq) { margin: 1.5rem 0 0; }
+    .prose-rf :global(.rf-faq details) {
+      border: 1px solid #C8C4BC;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.4);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+    .prose-rf :global(.rf-faq summary) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      list-style: none;
+      padding: 1.1rem 1.5rem;
+      transition: background 200ms;
+    }
+    .prose-rf :global(.rf-faq summary::-webkit-details-marker) { display: none; }
+    .prose-rf :global(.rf-faq summary:hover) { background: rgba(255,255,255,0.7); }
+    .prose-rf :global(.rf-faq summary > .q) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-weight: 500;
+      font-size: 19px;
+      line-height: 1.3;
       color: #13342D;
-      margin: 0 0 0.5rem !important;
+      margin: 0;
+      letter-spacing: 0.25px;
     }
-    .prose-rf :global(.rf-author-content p) {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 16px;
+    .prose-rf :global(.rf-faq summary > .icon) {
+      flex-shrink: 0;
+      width: 14px; height: 14px;
+      transition: transform 250ms cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .prose-rf :global(.rf-faq details[open] summary > .icon) { transform: rotate(45deg); }
+    .prose-rf :global(.rf-faq details > div.a) {
+      padding: 0 1.5rem 1.25rem;
+      font-family:Helvetica,Arial,sans-serif;
+      font-size: 15.5px;
+      line-height: 1.65;
       color: #3F261F;
-      line-height: 1.5;
-      margin-bottom: 0.85rem;
     }
 
-    /* Layout 1 has its own hero block — hide the MDX rf-hero so we don't double up */
-    .prose-rf :global(.rf-hero) { display: none; }
-
-    .toc-link.active {
-      color: #13342D;
-      font-weight: 600;
-    }
+    .toc-link.active { color:#13342D; font-weight:600; }
   </style>
 
   <script is:inline>
     const bar = document.getElementById('progressBar');
     const article = document.querySelector('article');
+    const heroBg = document.getElementById('heroBg');
+    const tocFloat = document.getElementById('tocFloat');
     const onScroll = () => {
-      if (!article || !bar) return;
-      const rect = article.getBoundingClientRect();
-      const total = article.offsetHeight - window.innerHeight;
-      const scrolled = -rect.top;
-      const pct = Math.max(0, Math.min(100, (scrolled / total) * 100));
-      bar.style.width = pct + '%';
+      if (article && bar) {
+        const rect = article.getBoundingClientRect();
+        const total = article.offsetHeight - window.innerHeight;
+        const scrolled = -rect.top;
+        const pct = Math.max(0, Math.min(100, (scrolled / total) * 100));
+        bar.style.width = pct + '%';
+      }
+      if (heroBg) {
+        const y = window.scrollY;
+        if (y < 1000) heroBg.style.transform = `scale(1.08) translateY(${y * 0.25}px)`;
+      }
+      // Hide floating TOC during the hero, fade it in once user scrolls past
+      if (tocFloat) {
+        tocFloat.classList.toggle('visible', window.scrollY > window.innerHeight * 0.7);
+      }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -568,316 +1078,5 @@ const schema = {
     }
     window.addEventListener('scroll', updateTOC, { passive: true });
     updateTOC();
-
-    const shareBtn = document.getElementById('shareBtn');
-    if (shareBtn) {
-      shareBtn.addEventListener('click', async () => {
-        const url = window.location.href;
-        const title = document.title;
-        if (navigator.share) {
-          try { await navigator.share({ title, url }); } catch (_) {}
-        } else if (navigator.clipboard) {
-          await navigator.clipboard.writeText(url);
-          shareBtn.textContent = 'Copied';
-          setTimeout(() => { shareBtn.textContent = 'Share'; }, 1500);
-        }
-      });
-    }
   </script>
 </BaseLayout>
-
-<style>
-  /* Blog prose styles — scoped to this page */
-  .prose-rf :global(h2) {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 400;
-    font-size: clamp(22px, 3vw, 30px);
-    line-height: 1.2;
-    color: #3F261F;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-    letter-spacing: 0.3px;
-  }
-  .prose-rf :global(h3) {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 400;
-    font-size: clamp(18px, 2.5vw, 24px);
-    color: #3F261F;
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
-  }
-  .prose-rf :global(p) {
-    font-size: 15px;
-    line-height: 1.75;
-    color: #76574C;
-    margin-bottom: 1.25rem;
-  }
-  .prose-rf :global(ul),
-  .prose-rf :global(ol) {
-    margin: 1.25rem 0;
-    padding-left: 1.5rem;
-  }
-  .prose-rf :global(li) {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #76574C;
-    margin-bottom: 0.5rem;
-  }
-  .prose-rf :global(strong) {
-    color: #3F261F;
-    font-weight: 600;
-  }
-  .prose-rf :global(a) {
-    color: #13342D;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .prose-rf :global(a:hover) {
-    color: #1E4A40;
-  }
-  .prose-rf :global(blockquote) {
-    border-left: 3px solid #5D6D59;
-    margin: 1.5rem 0;
-    padding: 0.75rem 1.25rem;
-    background: #E8E6E1;
-    border-radius: 0 8px 8px 0;
-  }
-  .prose-rf :global(blockquote p) {
-    margin: 0;
-    font-style: italic;
-    color: #3F261F;
-  }
-  .prose-rf :global(hr) {
-    border: none;
-    border-top: 1px solid #CCC8BF;
-    margin: 2rem 0;
-  }
-  .prose-rf :global(code) {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    background: #E8E6E1;
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
-    color: #13342D;
-  }
-
-  /* ===== Tables (default markdown tables) ===== */
-  .prose-rf :global(table) {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.75rem 0;
-    font-size: 14px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(22,25,16,0.06);
-  }
-  .prose-rf :global(table thead) {
-    background: #E8E6E1;
-  }
-  .prose-rf :global(table th) {
-    text-align: left;
-    padding: 14px 16px;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #76574C;
-    border-bottom: 1px solid #CCC8BF;
-  }
-  .prose-rf :global(table td) {
-    padding: 14px 16px;
-    color: #161910;
-    border-bottom: 1px solid #E8E6E1;
-    background: #FAFAF7;
-  }
-  .prose-rf :global(table tr:last-child td) {
-    border-bottom: none;
-  }
-  .prose-rf :global(table strong) {
-    color: #13342D;
-  }
-
-  /* ===== Hero image at top of post ===== */
-  .prose-rf :global(.rf-hero) {
-    margin: 0 -2rem 2rem;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 12px 32px rgba(22,25,16,0.10);
-  }
-  .prose-rf :global(.rf-hero img) {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* ===== Quick-answer block (AI Overview target) ===== */
-  .prose-rf :global(.rf-quick-answer) {
-    background: #13342D;
-    color: #DDDAD3;
-    border-radius: 12px;
-    padding: 1.75rem 2rem;
-    margin: 2rem 0;
-  }
-  .prose-rf :global(.rf-quick-answer .kicker) {
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    color: #7A8B76;
-    margin: 0 0 0.75rem;
-  }
-  .prose-rf :global(.rf-quick-answer p:last-child) {
-    color: #DDDAD3;
-    font-size: 17px;
-    line-height: 1.65;
-    margin: 0;
-  }
-
-  /* ===== Key stats row ===== */
-  .prose-rf :global(.rf-key-stats) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background: #E8E6E1;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(22,25,16,0.06);
-  }
-  @media (max-width: 640px) {
-    .prose-rf :global(.rf-key-stats) {
-      grid-template-columns: 1fr;
-    }
-  }
-  .prose-rf :global(.rf-key-stats .stat) {
-    text-align: left;
-  }
-  .prose-rf :global(.rf-key-stats .label) {
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #76574C;
-    margin: 0 0 0.4rem;
-  }
-  .prose-rf :global(.rf-key-stats .number) {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: 32px;
-    color: #13342D;
-    margin: 0 0 0.2rem;
-    line-height: 1;
-  }
-  .prose-rf :global(.rf-key-stats .caption) {
-    font-size: 12px;
-    color: #76574C;
-    margin: 0;
-  }
-
-  /* ===== Key Takeaways box ===== */
-  .prose-rf :global(.rf-takeaways) {
-    background: #FAFAF7;
-    border: 1px solid #CCC8BF;
-    border-radius: 12px;
-    padding: 1.5rem 2rem;
-    margin: 2rem 0;
-  }
-  .prose-rf :global(.rf-takeaways h3) {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 400;
-    font-size: 24px;
-    color: #13342D;
-    margin: 0 0 1rem !important;
-  }
-  .prose-rf :global(.rf-takeaways ul) {
-    margin: 0;
-    padding-left: 1.25rem;
-  }
-  .prose-rf :global(.rf-takeaways li) {
-    font-size: 14px;
-    line-height: 1.65;
-    color: #76574C;
-    margin-bottom: 0.6rem;
-  }
-
-  /* ===== Inline figures ===== */
-  .prose-rf :global(.rf-figure) {
-    margin: 2.5rem -2rem;
-    text-align: center;
-  }
-  .prose-rf :global(.rf-figure img) {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(22,25,16,0.08);
-    display: block;
-  }
-  .prose-rf :global(.rf-figure figcaption) {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #76574C;
-    margin-top: 0.85rem;
-    padding: 0 2rem;
-  }
-  @media (max-width: 768px) {
-    .prose-rf :global(.rf-hero),
-    .prose-rf :global(.rf-figure) {
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  /* ===== Author bio block ===== */
-  .prose-rf :global(.rf-author-bio) {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 1.5rem;
-    margin: 3rem 0 2rem;
-    padding: 1.75rem;
-    background: #E8E6E1;
-    border-radius: 12px;
-    border: 1px solid #CCC8BF;
-  }
-  @media (max-width: 640px) {
-    .prose-rf :global(.rf-author-bio) {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-  }
-  .prose-rf :global(.rf-author-photo) {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(22,25,16,0.08);
-  }
-  @media (max-width: 640px) {
-    .prose-rf :global(.rf-author-photo) {
-      margin: 0 auto;
-    }
-  }
-  .prose-rf :global(.rf-author-label) {
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: 9px;
-    letter-spacing: 2.5px;
-    color: #8F6E62;
-    margin: 0 0 0.5rem !important;
-  }
-  .prose-rf :global(.rf-author-content h3) {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 400;
-    font-size: 28px !important;
-    color: #13342D;
-    margin: 0 0 0.75rem !important;
-  }
-  .prose-rf :global(.rf-author-content p) {
-    font-size: 14px;
-    color: #76574C;
-    line-height: 1.65;
-    margin-bottom: 0.85rem;
-  }
-</style>
