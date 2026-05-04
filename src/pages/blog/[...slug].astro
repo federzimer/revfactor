@@ -179,7 +179,7 @@ const definedTerms = [
 
   <Navbar client:load />
 
-  <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-[#A9BBA3] z-[100] transition-[width] duration-75" style="width:0;"></div>
+  <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-cedar z-[100] transition-[width] duration-75" style="width:0;"></div>
 
   <article>
     <!-- IMMERSIVE FULL-BLEED HERO — sized to the image's native ~1.83 wide aspect -->
@@ -193,12 +193,12 @@ const definedTerms = [
         class="absolute inset-0 w-full h-full object-cover will-change-transform"
         style="transform:scale(1.15); transform-origin:center center; z-index:0;"
       />
-      <!-- Base darkening wash — uniform tint across the whole image so text is always legible -->
-      <div class="absolute inset-0 z-[1] pointer-events-none" style="background: rgba(22,25,16,0.35);"></div>
-      <!-- Top gradient — for navbar legibility (bright sky needs strong overlay) -->
-      <div class="absolute top-0 left-0 right-0 h-72 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.95) 0%, rgba(22,25,16,0.7) 40%, rgba(22,25,16,0.25) 80%, rgba(22,25,16,0) 100%);"></div>
-      <!-- Bottom gradient — strengthened for body-text legibility over bright skies -->
-      <div class="absolute bottom-0 left-0 right-0 h-[85%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.55) 25%, rgba(22,25,16,0.82) 55%, rgba(22,25,16,0.95) 80%, rgba(22,25,16,0.98) 100%);"></div>
+      <!-- Base darkening wash — uniform light tint so the image carries through, text still legible -->
+      <div class="absolute inset-0 z-[1] pointer-events-none" style="background: rgba(22,25,16,0.18);"></div>
+      <!-- Top gradient — strong enough for navbar legibility, then fades fast -->
+      <div class="absolute top-0 left-0 right-0 h-64 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.85) 0%, rgba(22,25,16,0.5) 40%, rgba(22,25,16,0.15) 80%, rgba(22,25,16,0) 100%);"></div>
+      <!-- Bottom gradient — preserves text legibility for the title block, lighter than before -->
+      <div class="absolute bottom-0 left-0 right-0 h-[70%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.35) 30%, rgba(22,25,16,0.65) 60%, rgba(22,25,16,0.85) 90%, rgba(22,25,16,0.92) 100%);"></div>
 
       <div class="relative z-[2] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-20 pt-36">
         <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-6 inline-block">
@@ -1174,6 +1174,126 @@ const definedTerms = [
     .prose-rf :global(.rf-cta-band .rf-cta-link:hover) {
       background: #7A8B76;
       transform: translateY(-1px);
+    }
+
+    /* RF-TESTIMONIAL — client quote card with two avatar states:
+         - <div class="avatar"><img src=".." /></div> → real client photo
+         - <div class="avatar">SK</div>              → placeholder (initials in brand circle)
+       Variant: add `.cedar` to the wrapper for an inverted dark-green card. */
+    .prose-rf :global(.rf-testimonial) {
+      position: relative;
+      background: #E8E6E1;
+      border: 1px solid #C8C4BC;
+      border-radius: 16px;
+      padding: 2rem 2rem 1.5rem;
+      margin: 3rem 0;
+    }
+    @media (min-width: 768px) { .prose-rf :global(.rf-testimonial) { padding: 2.5rem 2.75rem 2rem; } }
+    .prose-rf :global(.rf-testimonial.cedar)   { background: #13342D; border-color: #1E4A40; color: #E8E6E1; }
+    .prose-rf :global(.rf-testimonial.tobacco) { background: #3F261F; border-color: #5a3d34; color: #E8E6E1; }
+
+    .prose-rf :global(.rf-testimonial .quote-mark) {
+      position: absolute;
+      top: 0.25rem;
+      left: 1.25rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 96px;
+      line-height: 1;
+      color: #5D6D59;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+    .prose-rf :global(.rf-testimonial.cedar .quote-mark),
+    .prose-rf :global(.rf-testimonial.tobacco .quote-mark) { color: #A9BBA3; opacity: 0.35; }
+
+    .prose-rf :global(.rf-testimonial blockquote) {
+      border: none !important;
+      margin: 0 0 1.5rem !important;
+      padding: 0 !important;
+      background: transparent !important;
+    }
+    .prose-rf :global(.rf-testimonial blockquote p) {
+      font-family: 'Cormorant Garamond', Georgia, serif !important;
+      font-style: italic;
+      font-weight: 400 !important;
+      font-size: clamp(20px, 2.4vw, 26px) !important;
+      line-height: 1.4 !important;
+      color: #13342D !important;
+      margin: 0 !important;
+    }
+    .prose-rf :global(.rf-testimonial.cedar blockquote p),
+    .prose-rf :global(.rf-testimonial.tobacco blockquote p) { color: #E8E6E1 !important; }
+
+    .prose-rf :global(.rf-testimonial .author) {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #C8C4BC;
+    }
+    .prose-rf :global(.rf-testimonial.cedar .author)   { border-top-color: #1E4A40; }
+    .prose-rf :global(.rf-testimonial.tobacco .author) { border-top-color: #5a3d34; }
+
+    .prose-rf :global(.rf-testimonial .avatar) {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: #5D6D59;
+      color: #E8E6E1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+      overflow: hidden;
+    }
+    .prose-rf :global(.rf-testimonial .avatar img) {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .prose-rf :global(.rf-testimonial .author-meta p) {
+      margin: 0 !important;
+      font-size: inherit !important;
+    }
+    .prose-rf :global(.rf-testimonial .name) {
+      font-family: 'Cormorant Garamond', Georgia, serif !important;
+      font-weight: 500;
+      font-size: 17px;
+      color: #13342D !important;
+      line-height: 1.2 !important;
+    }
+    .prose-rf :global(.rf-testimonial.cedar .name),
+    .prose-rf :global(.rf-testimonial.tobacco .name) { color: #E8E6E1 !important; }
+
+    .prose-rf :global(.rf-testimonial .role) {
+      font-family: Helvetica, Arial, sans-serif !important;
+      font-weight: 700 !important;
+      font-size: 9px !important;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #76574C !important;
+      margin: 0.2rem 0 0 !important;
+    }
+    .prose-rf :global(.rf-testimonial.cedar .role),
+    .prose-rf :global(.rf-testimonial.tobacco .role) { color: #A9BBA3 !important; }
+
+    .prose-rf :global(.rf-testimonial .metric) {
+      margin-left: auto;
+      padding: 6px 14px;
+      background: #5D6D59;
+      color: #E8E6E1;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 13px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .prose-rf :global(.rf-testimonial.cedar .metric),
+    .prose-rf :global(.rf-testimonial.tobacco .metric) { background: #A9BBA3; color: #13342D; }
+    @media (max-width: 600px) {
+      .prose-rf :global(.rf-testimonial .metric) { display: none; }
     }
 
     /* Optional split layout — for stat + paragraph pairs inside a band */
