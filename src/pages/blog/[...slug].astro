@@ -182,15 +182,16 @@ const definedTerms = [
   <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-[#A9BBA3] z-[100] transition-[width] duration-75" style="width:0;"></div>
 
   <article>
-    <!-- IMMERSIVE FULL-BLEED HERO — fills the viewport top-to-bottom -->
-    <section class="relative overflow-hidden text-[#E8E6E1]" style="height:100vh; height:100dvh; min-height:680px; background-color:#13342D;">
-      <!-- Image as <img> (more reliable fill than bg-image), object-cover, parallax-ready -->
+    <!-- IMMERSIVE FULL-BLEED HERO — sized to the image's native ~1.83 wide aspect -->
+    <section class="relative overflow-hidden text-[#E8E6E1]" style="height:78vh; min-height:580px; max-height:820px; background-color:#13342D;">
+      <!-- Image as <img> (more reliable fill than bg-image), object-cover, parallax-ready.
+           scale(1.15) gives parallax headroom so translateY never exposes the section background. -->
       <img
         id="heroBg"
         src={heroImage}
         alt={heroAlt}
         class="absolute inset-0 w-full h-full object-cover will-change-transform"
-        style="transform:scale(1.08); z-index:0;"
+        style="transform:scale(1.15); transform-origin:center center; z-index:0;"
       />
       <!-- Base darkening wash — uniform tint across the whole image so text is always legible -->
       <div class="absolute inset-0 z-[1] pointer-events-none" style="background: rgba(22,25,16,0.35);"></div>
