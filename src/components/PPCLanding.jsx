@@ -124,13 +124,10 @@ function useInView(ref, threshold = 0.25) {
 }
 
 // Animated number that ticks from 0 → target when first scrolled into view.
-// Pass `prefix` (e.g. "+", "$") and `suffix` (e.g. "%").
-//
 // Default value = target so SSR / crawlers / social-preview screenshots /
-// fast-scrolling users see the correct number, not 0%. Animation only runs
-// when the user has actually scrolled past initial viewport — fixes the
-// visible-bug where above-fold users saw the strip flash 0% before catching
-// up, AND prevents the proof strip from rendering as zeros to bots.
+// fast-scrolling users see the correct number, not 0%. Animation runs only
+// when the user has actually scrolled past initial viewport — prevents the
+// proof strip from flashing 0% on first paint or rendering zeros to bots.
 function CountUp({ to, prefix = '', suffix = '', duration = 1400, decimals = 0 }) {
   const [val, setVal] = useState(to);
   const animatedRef = useRef(false);
@@ -145,9 +142,6 @@ function CountUp({ to, prefix = '', suffix = '', duration = 1400, decimals = 0 }
   useEffect(() => {
     if (!inView || animatedRef.current) return;
     animatedRef.current = true;
-    // Only animate if the user actually scrolled to reveal this element.
-    // Above-fold elements that were visible from page load already display
-    // the target value — no need to flash to 0 then back up.
     const scrolled = typeof window !== 'undefined' && window.scrollY > initialScrollY.current + 50;
     if (!scrolled) return;
     setVal(0);
@@ -389,6 +383,24 @@ export default function PPCLanding({
     ?? (subheadKey ? SUBHEAD_VARIANTS[subheadKey] : defaultSubhead);
   const ctaText = variant?.ctaText ?? defaultCtaText;
 
+  // Forward UTMs + Google Ads ValueTrack params to the schedule iframe so
+  // bookings carry the campaign attribution into Fede's CRM. Without this,
+  // we know a conversion fired (gtag inside the iframe attributes to GA4 +
+  // Google Ads) but the booking record itself has no campaign metadata.
+  const scheduleUrl = (() => {
+    const base = 'https://schedule.revfactor.io/embed';
+    if (typeof window === 'undefined') return base;
+    const parentParams = new URLSearchParams(window.location.search);
+    const out = new URLSearchParams();
+    for (const [k, v] of parentParams) {
+      if (k.startsWith('utm_') || k.startsWith('gad_') || k === 'gclid' || k === 'msg') {
+        out.set(k, v);
+      }
+    }
+    const query = out.toString();
+    return query ? `${base}?${query}` : base;
+  })();
+
   // Schedule iframe at schedule.revfactor.io is a custom Next.js app —
   // it posts iframe dimensions via postMessage so the parent can resize.
   useEffect(() => {
@@ -516,7 +528,7 @@ export default function PPCLanding({
               style={{ height: 'min(720px, calc(100vh - 200px))' }}
             >
               <iframe
-                src="https://schedule.revfactor.io/embed"
+                src={scheduleUrl}
                 title="Schedule a strategy call with RevFactor"
                 className="w-full border-0 block"
                 style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}
@@ -734,7 +746,7 @@ export default function PPCLanding({
           >
             <iframe
               ref={calRef}
-              src="https://schedule.revfactor.io/embed"
+              src={scheduleUrl}
               title="Schedule a strategy call with RevFactor"
               className="w-full border-0 block"
               style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}

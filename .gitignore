@@ -40,6 +40,7 @@ __pycache__/
 test-results/
 tests/report/
 tests/screenshots/
+tests/_artifacts/
 
 # Image candidate gallery (browseable, gitignored)
 _image-gallery/
@@ -49,3 +50,15 @@ _image-gallery/
 # Syncthing scratch files
 *.syncthing.*.tmp
 .syncthing.*.tmp
+
+# Google Ads + OAuth secrets — never commit
+scripts/google-ads/google-ads.yaml
+scripts/google-ads/oauth_client.json
+scripts/google-ads/__pycache__/
+scripts/google-ads/.venv/
+# Files with hardcoded secrets pending refactor to env vars (security audit)
+scripts/google-ads/keyword_research_ahrefs.py
+scripts/google-ads/mint_refresh_token.py
+
+# Brand mentions report (regenerated each run, timestamps churn)
+scripts/brand_mentions_report.json
