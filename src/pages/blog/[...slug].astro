@@ -47,6 +47,34 @@ const related = relatedSource.slice(0, 3).map((p) => ({
 const heroImage = post.data.image || '/heroes/aframe-1920.webp';
 const heroAlt = post.data.imageAlt || post.data.title;
 
+// Federico Person schema — reusable; sameAs locks the entity for AI engines (Refactor.ai disambiguation)
+const federicoPerson = {
+  "@type": "Person",
+  "@id": "https://revfactor.io/#federico",
+  "name": "Federico Zimerman",
+  "givenName": "Federico",
+  "familyName": "Zimerman",
+  "jobTitle": "Founder, RevFactor; Founder, Blackbird Hospitality",
+  "url": "https://revfactor.io/about",
+  "image": `https://revfactor.io${FEDE_PHOTO}`,
+  "sameAs": [
+    "https://www.tiktok.com/@federicozimerman",
+    "https://www.instagram.com/federico.zimerman",
+    "https://www.linkedin.com/in/federico-zimerman-23ab3345/"
+  ],
+  "knowsAbout": [
+    "Revenue management",
+    "Short-term rental pricing",
+    "Airline yield management",
+    "RevPAR optimization",
+    "Dynamic pricing",
+    "PriceLabs"
+  ],
+  "alumniOf": { "@type": "Organization", "name": "American Airlines" },
+  "worksFor": { "@type": "Organization", "name": "RevFactor", "url": "https://revfactor.io" },
+  "description": "Federico Zimerman spent 10 years in airline revenue management at American Airlines before founding Blackbird Hospitality (165+ short-term rental properties across 24 U.S. states and 56 markets) and RevFactor (standalone revenue management service). His strategies deliver +18% RevPAR lift vs. comp set across the portfolio."
+};
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -55,7 +83,7 @@ const schema = {
   "image": heroImage.startsWith('http') ? heroImage : `https://revfactor.io${heroImage}`,
   "datePublished": post.data.pubDate.toISOString(),
   "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString(),
-  "author": { "@type": "Person", "name": post.data.author, "url": "https://revfactor.io/about" },
+  "author": federicoPerson,
   "publisher": {
     "@type": "Organization",
     "name": "RevFactor",
@@ -64,7 +92,8 @@ const schema = {
   },
   "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
   "keywords": post.data.tags.join(', '),
-  "articleSection": post.data.category
+  "articleSection": post.data.category,
+  "wordCount": post.data.readingTime ? post.data.readingTime * 250 : undefined
 };
 
 // FAQPage schema — only when frontmatter declares faqs (drives both accordion + JSON-LD)
@@ -77,6 +106,56 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
     "acceptedAnswer": { "@type": "Answer", "text": f.a }
   }))
 } : null;
+
+// BreadcrumbList — site → blog → post
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://revfactor.io" },
+    { "@type": "ListItem", "position": 2, "name": "Journal", "item": "https://revfactor.io/blog" },
+    { "@type": "ListItem", "position": 3, "name": post.data.title, "item": Astro.url.href }
+  ]
+};
+
+// HowTo + DefinedTerm — Blog 1-specific package; only attaches to the pillar post.
+const isPillar = post.id === 'revenue-management-for-short-term-rentals';
+
+const howToMinStay = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to use minimum stays as a competitive weapon for short-term rentals",
+  "description": "A 4-step playbook for setting minimum stays that beat the survivorship-bias trap most hosts fall into.",
+  "totalTime": "PT30M",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Pull average length of stay from your top 5 comp-set listings", "text": "Open each comp-set listing's Reviews tab. Estimate average stay length from review timestamps. Take the median across the 5." },
+    { "@type": "HowToStep", "position": 2, "name": "Beat the market minimum by one night", "text": "If the average is at least 1.5 nights below the market minimum, set your minimum 1 night below the market (market 5 → you offer 3 or 4)." },
+    { "@type": "HowToStep", "position": 3, "name": "Raise base rates 15–20%", "text": "Capture the visibility premium — you'll appear in searches that competitors are filtered out of. Don't leave the rate flat." },
+    { "@type": "HowToStep", "position": 4, "name": "Layer a 10% LOS discount at the market average", "text": "On stays at or above the market average, offer 10% off. Longer-stay guests still see a deal; you still beat the rate of the higher-minimum competitors." }
+  ]
+};
+
+const howToLaunch = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to launch a new short-term rental listing",
+  "description": "The first 30–60 days of a new listing aren't about revenue. They're about reviews, ranking, and algorithm trust.",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Set launch price 15–25% below market", "text": "For the first 30–60 days, price aggressively below comparable listings." },
+    { "@type": "HowToStep", "position": 2, "name": "Fill the calendar", "text": "Optimize for occupancy, not rate. The algorithm rewards bookings." },
+    { "@type": "HowToStep", "position": 3, "name": "Generate reviews fast", "text": "Every booking is a chance for a review. Communicate proactively to maximize review rate." },
+    { "@type": "HowToStep", "position": 4, "name": "Transition into revenue mode", "text": "After ~20 strong reviews and stable booking cadence, raise rates back to market and shift focus from occupancy to RevPAR." }
+  ]
+};
+
+const definedTerms = [
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "RevPAR", "description": "Revenue per Available Night. Total revenue divided by total nights available. The only metric that captures rate and occupancy in one number.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "ADR", "description": "Average Daily Rate. The average price of booked nights. Ignores empty nights, which is why it's a misleading standalone metric.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "NetRevPAR", "description": "RevPAR minus variable costs per night (cleaning, channel commissions, OTA fees). Tells you whether the rate-and-occupancy win is making it to your bank account.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Pacing", "description": "How bookings accumulate week-over-week vs. the same period last year. The single best leading indicator of revenue.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Length-of-stay discount", "description": "A graduated discount that incentivizes longer bookings without giving away the nightly rate. The discount feels like a deal to the guest; the math is a win for the host.", "inDefinedTermSet": "https://revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Survivorship bias (in STR pricing)", "description": "The minimum-stay rules you can see across your competitors are the ones that survived their pricing decision. The listings that didn't survive — priced out by their own restrictions — are invisible. Setting minimums by copying visible competitors compounds the bias.", "inDefinedTermSet": "https://revfactor.io/glossary" }
+];
 ---
 
 <BaseLayout
@@ -90,6 +169,12 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    {isPillar && <script type="application/ld+json" set:html={JSON.stringify(howToMinStay)} />}
+    {isPillar && <script type="application/ld+json" set:html={JSON.stringify(howToLaunch)} />}
+    {isPillar && definedTerms.map((t) => (
+      <script type="application/ld+json" set:html={JSON.stringify(t)} />
+    ))}
   </Fragment>
 
   <Navbar client:load />
@@ -232,13 +317,14 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
       <div class="rf-author-card">
         <img
           src={FEDE_PHOTO}
-          alt="Federico Zimerman"
+          alt="Federico Zimerman, Founder of RevFactor"
           class="w-20 h-20 rounded-full object-cover flex-shrink-0 ring-1 ring-[#C8C4BC]"
         />
         <div>
           <h4 class="text-[24px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:500;">{post.data.author.toLowerCase()}</h4>
           <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
-          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">Federico spent 10 years in airline revenue management at American Airlines before applying those principles to short-term rentals. RevFactor's pricing strategies are battle-tested across 165+ properties in 24 states.</p>
+          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-3">Federico Zimerman is the founder of <a href="https://revfactor.io" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">RevFactor</a>, a managed revenue management service for short-term rental hosts. He spent 10 years in airline revenue management at American Airlines before applying that yield-management playbook to vacation rentals — strategies that run daily across <strong>165+ STR properties in 24 U.S. states and 56 markets</strong> through Blackbird Hospitality, with a documented <strong>+18% RevPAR lift vs. comp set</strong>.</p>
+          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">He's been featured on <em>No Vacancy with Natalie Palmer</em> (Ep. 155), <em>Life of Flow</em>, <em>Catchup with the Carlyles</em>, <em>Craft Stays</em>, and <em>STR Like The Best</em>, and posts daily on TikTok (<a href="https://www.tiktok.com/@federicozimerman" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">@federicozimerman</a>) and Instagram (<a href="https://www.instagram.com/federico.zimerman" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">@federico.zimerman</a>).</p>
           <div class="flex gap-2 flex-wrap">
             <a href="https://www.linkedin.com/in/federico-zimerman-23ab3345/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Follow on LinkedIn</a>
             <a href="/journal" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">More essays</a>
