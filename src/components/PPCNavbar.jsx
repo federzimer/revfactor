@@ -34,7 +34,7 @@ export default function PPCNavbar() {
     <nav
       className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-auto px-3 py-2.5 rounded-full flex items-center gap-1 transition-all duration-[350ms] ${
         scrolled
-          ? 'bg-[#DDDAD3]/60 backdrop-blur-[12px] border border-[#C8C4BC]/40 shadow-[0_4px_24px_rgba(22,25,16,0.08)]'
+          ? 'bg-[#DDDAD3]/92 backdrop-blur-[16px] border border-[#C8C4BC]/60 shadow-[0_4px_24px_rgba(22,25,16,0.10)]'
           : 'bg-transparent border border-transparent'
       }`}
       style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}

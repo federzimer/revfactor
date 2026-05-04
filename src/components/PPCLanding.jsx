@@ -161,6 +161,38 @@ function CountUp({ to, prefix = '', suffix = '', duration = 1400, decimals = 0 }
   return <span ref={ref}>{prefix}{display}{suffix}</span>;
 }
 
+// Sticky mobile CTA — visible by default, hidden once the calendar section
+// scrolls into view. Avoids the bar overlapping the booking form on short
+// iPhone viewports (the email field gets covered on iPhone SE / 14 Pro).
+function StickyMobileCTA({ onOpen }) {
+  const [hidden, setHidden] = useState(false);
+  useEffect(() => {
+    const target = document.getElementById('schedule');
+    if (!target) return;
+    const obs = new IntersectionObserver(
+      ([e]) => setHidden(e.isIntersecting),
+      { threshold: 0.2 }
+    );
+    obs.observe(target);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <div
+      className="md:hidden fixed bottom-0 inset-x-0 z-40 px-4 pb-[max(env(safe-area-inset-bottom),12px)] pt-3 bg-gradient-to-t from-[#161910] via-[#161910]/95 to-[#161910]/80 backdrop-blur-sm transition-transform duration-[300ms]"
+      style={{ transform: hidden ? 'translateY(100%)' : 'translateY(0)' }}
+      aria-hidden={hidden}
+    >
+      <button
+        onClick={onOpen}
+        className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full active:scale-[0.98] transition-transform"
+      >
+        <span>Book Free Strategy Call</span>
+        <ArrowRight className="w-4 h-4" />
+      </button>
+    </div>
+  );
+}
+
 // Scroll-reveal wrapper: fades + slides up its children when scrolled into
 // view. Accepts an optional `delay` (ms) for stagger.
 function Reveal({ children, delay = 0, className = '' }) {
@@ -859,18 +891,12 @@ export default function PPCLanding({
         </div>
       </footer>
 
-      {/* ─── Sticky mobile CTA ─── (Always-visible book-call bar at the bottom
-           of the viewport on phones. ClickFunnels-standard for PPC pages so a
-           visitor 8 sections deep is always one tap from the calendar.) */}
-      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 px-4 pb-[max(env(safe-area-inset-bottom),12px)] pt-3 bg-gradient-to-t from-[#161910] via-[#161910]/95 to-[#161910]/80 backdrop-blur-sm">
-        <button
-          onClick={open}
-          className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full active:scale-[0.98] transition-transform"
-        >
-          <span>Book Free Strategy Call</span>
-          <ArrowRight className="w-4 h-4" />
-        </button>
-      </div>
+      {/* ─── Sticky mobile CTA ─── ClickFunnels-standard always-visible CTA
+           so a visitor 8 sections deep is one tap from the calendar. Hidden
+           when #schedule is in viewport — when the user is already at the
+           calendar, the sticky bar would just overlap the booking form
+           (especially on short iPhones where it covers the email field). */}
+      <StickyMobileCTA onOpen={open} />
       {/* Spacer so the sticky bar never covers the final CTA on mobile.
           bg-onyx so when fully scrolled there's no bone-light gap between
           the footer and the sticky bar's translucent top edge. */}
