@@ -25,4 +25,71 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const caseStudies = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/case-studies' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    featured: z.boolean().default(false),
+    /* Property + client */
+    listing: z.string(),
+    bedrooms: z.number(),
+    city: z.string(),
+    state: z.string(),
+    market: z.string().optional(),
+    clientName: z.string(),
+    /* When false, show first name only on the public page (privacy guard
+       until owner sign-off lands). Default to false; flip per owner. */
+    clientNamePublic: z.boolean().default(false),
+    onboardedDate: z.coerce.date().optional(),
+    tenureMonths: z.number().optional(),
+    /* Pacing block — Summer 2026 OTB pacing data */
+    pacing: z.object({
+      period: z.string(),
+      otbRev: z.number(),
+      stlyRev: z.number(),
+      lyRev: z.number().optional(),
+      liftPct: z.number(),
+      vsLyPct: z.number().optional(),
+      mpi: z.number().optional(),
+      otbOcc: z.number().optional(),
+      stlyOcc: z.number().optional(),
+      lyOcc: z.number().optional(),
+      otbAdr: z.number().optional(),
+      stlyAdr: z.number().optional(),
+      lyAdr: z.number().optional(),
+      mktOcc: z.number().optional(),
+      pastLyTotal: z.boolean().optional(),
+    }).optional(),
+    /* Q1 actuals block */
+    q1: z.object({
+      rev: z.number(),
+      lyRev: z.number(),
+      liftPct: z.number(),
+      mpi: z.number().optional(),
+      tier: z.string().optional(),
+    }).optional(),
+    /* Optional monthly breakdown (Jun/Jul/Aug 2026 from sheet) */
+    monthly: z.array(z.object({
+      month: z.string(),
+      otbRev: z.number(),
+      stlyRev: z.number().nullable().optional(),
+      otbOcc: z.number().optional(),
+      otbAdr: z.number().optional(),
+      mpi: z.number().optional(),
+    })).optional(),
+    /* Optional pull-quote from owner */
+    testimonial: z.object({
+      quote: z.string(),
+      author: z.string(),
+      source: z.string().optional(),
+    }).optional(),
+    /* Tactics used — surfaces on the page as a "what changed" callout */
+    tactics: z.array(z.string()).default([]),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { blog, caseStudies };

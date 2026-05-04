@@ -6,6 +6,24 @@ Last updated: 2026-05-04
 
 ---
 
+## ⭐ NEW (2026-05-04) — Case study section live
+
+Seven Summer 2026 properties from the OTB pacing sheet now have canonical home pages at `/case-studies/{slug}`. **Future references to these properties in blog content should link to the case study, not re-litigate the metrics.** See [case-studies-gap-doc.md](case-studies-gap-doc.md) for the full breakdown.
+
+| Property | Canonical home |
+|---|---|
+| Maryssa Payne / Albion MI | `/case-studies/waterfront-albion-mi/` |
+| Grant Currant / Gatlinburg TN | `/case-studies/rabbit-run-gatlinburg/` |
+| Thea Cabanilla (Topaz) / Norton Shores MI | `/case-studies/norton-nook-michigan/` |
+| Elizabeth Carlson / N. Myrtle Beach SC | `/case-studies/pointe-marsh-myrtle-beach/` |
+| Cecilia Sirovina / Hopkins MN | `/case-studies/tonka-house-minneapolis/` |
+| Sarah Pace / San Diego CA | `/case-studies/boho-bungalow-san-diego/` |
+| Alisha Provot / Norfolk VA | `/case-studies/yellow-door-inn-norfolk/` |
+
+Blog posts referencing these properties: link to the case study, with a different metric/angle than what's on the case-study page itself. Same canonical-home conflict rule.
+
+---
+
 ## Properties — primary + secondary anchors
 
 | Property (client) | Primary anchor (post) | Angle / metric | Secondary uses allowed | Off-limits |
