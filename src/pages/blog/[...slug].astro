@@ -630,7 +630,10 @@ const definedTerms = [
     .prose-rf :global(li::marker) { color: #5D6D59; }
     .prose-rf :global(strong) { color:#13342D; font-weight:700; }
     /* Italics — Cormorant serif in cedar (darker green) per Aaron */
-    .prose-rf :global(em)     { font-family:'Cormorant Garamond',Georgia,serif; color:#13342D; font-style:italic; }
+    /* Italic body copy — Cormorant italic optically reads ~10% smaller than the
+       Helvetica it's embedded in. Bump 1.08× so an italicized phrase visually
+       matches the body weight instead of looking shrunk + bold. */
+    .prose-rf :global(em)     { font-family:'Cormorant Garamond',Georgia,serif; color:#13342D; font-style:italic; font-size:1.08em; line-height:inherit; }
     .prose-rf :global(a)      { color:#13342D; text-decoration:underline; text-underline-offset:3px; }
     .prose-rf :global(a:hover){ color:#1E4A40; }
     .prose-rf :global(hr)     { border:none; border-top:1px solid #C8C4BC; margin:2.5rem 0; }
@@ -730,11 +733,11 @@ const definedTerms = [
       .prose-rf :global(.rf-quick-answer p:last-child) { font-size:18px; line-height:1.5; }
     }
 
-    .prose-rf :global(.rf-key-stats) { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:1rem 0 1.5rem; padding:1.25rem 1.5rem; background:rgba(93,109,89,0.08); border:1px solid rgba(93,109,89,0.2); border-radius:16px; }
-    @media (max-width: 640px) { .prose-rf :global(.rf-key-stats) { grid-template-columns:1fr; } }
-    .prose-rf :global(.rf-key-stats .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:8.5px; letter-spacing:1.5px; text-transform:uppercase; color:#5D6D59; margin:0 0 0.4rem; text-align:center; }
-    .prose-rf :global(.rf-key-stats .number) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(22px,3vw,32px); color:#13342D; margin:0 0 0.25rem; text-align:center; line-height:1; }
-    .prose-rf :global(.rf-key-stats .caption) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:13px; color:#76574C; margin:0; text-align:center; }
+    .prose-rf :global(.rf-key-stats) { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:0.5rem 0 1.25rem; padding:1rem 1.5rem; background:rgba(93,109,89,0.08); border:1px solid rgba(93,109,89,0.2); border-radius:16px; }
+    @media (max-width: 640px) { .prose-rf :global(.rf-key-stats) { grid-template-columns:1fr; gap:0.6rem; padding:1rem 1.25rem; } }
+    .prose-rf :global(.rf-key-stats .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#5D6D59; margin:0 0 0.35rem; text-align:center; }
+    .prose-rf :global(.rf-key-stats .number) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(26px,3.4vw,36px); color:#13342D; margin:0 0 0.25rem; text-align:center; line-height:1; }
+    .prose-rf :global(.rf-key-stats .caption) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:15px; color:#76574C; margin:0; text-align:center; line-height:1.3; }
 
     /* Key Takeaways — heading serif, body sans-serif per brand spec */
     .prose-rf :global(.rf-takeaways) { background:rgba(93,109,89,0.05); border:1px solid #C8C4BC; border-radius:16px; padding:1.75rem 2rem; margin:2.5rem 0; }
