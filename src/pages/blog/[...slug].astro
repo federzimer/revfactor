@@ -425,11 +425,66 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
     .prose-rf :global(.rf-figure figcaption) {
       font-family:'Cormorant Garamond',Georgia,serif;
       font-style:italic;
-      font-size:15px;
-      color:#76574C;
+      font-size:17px;
+      color:#3F261F;
       margin-top:0.9rem;
       padding:0 1.5rem;
+      line-height:1.45;
+    }
+    @media (max-width: 640px) {
+      .prose-rf :global(.rf-figure figcaption) { font-size:15px; }
+    }
+
+    /* Quote-overlay variant: image with a Federico pull-quote anchored bottom-left over a soft dark gradient. */
+    .prose-rf :global(.rf-figure-quote .rf-figure-frame) {
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      line-height:0;
+    }
+    .prose-rf :global(.rf-figure-quote .rf-figure-frame img) { border-radius:0; }
+    .prose-rf :global(.rf-figure-quote .rf-figure-frame::after) {
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:62%;
+      background:linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.35) 45%, rgba(22,25,16,0.82) 100%);
+      pointer-events:none;
+    }
+    .prose-rf :global(.rf-figure-overlay) {
+      position:absolute;
+      left:6%; right:6%; bottom:7%;
+      margin:0;
+      padding:0;
+      border:0;
+      text-align:left;
+      z-index:1;
+      line-height:normal;
+    }
+    .prose-rf :global(.rf-figure-overlay p) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-style:italic;
+      font-weight:400;
+      font-size:clamp(19px, 2.3vw, 28px);
       line-height:1.4;
+      color:#E8E6E1;
+      margin:0 0 0.85rem;
+      max-width:82%;
+      text-shadow:0 1px 14px rgba(22,25,16,0.45);
+    }
+    .prose-rf :global(.rf-figure-overlay cite) {
+      font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;
+      font-style:normal;
+      font-weight:700;
+      font-size:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#7A8B76;
+    }
+    @media (max-width: 640px) {
+      .prose-rf :global(.rf-figure-overlay) { left:5%; right:5%; bottom:6%; }
+      .prose-rf :global(.rf-figure-overlay p) { max-width:100%; font-size:16px; }
+      .prose-rf :global(.rf-figure-quote .rf-figure-frame::after) { height:70%; }
     }
 
     .prose-rf :global(.rf-quick-answer) { background:#13342D; color:#E8E6E1; border-radius:16px; padding:2rem 2.25rem; margin:2.5rem 0; }
