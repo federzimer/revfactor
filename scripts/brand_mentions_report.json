@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-05-04T12:22:57.745604+00:00",
+  "summary": {
+    "total": 6,
+    "alive": 6,
+    "down": 0,
+    "error": 0
+  },
+  "entries": [
+    {
+      "date_added": "2026-04-27",
+      "type": "medium",
+      "url": "https://medium.com/@revfactormarketing/the-revfactor-edge-putting-your-short-term-rental-on-autopilot-the-right-way-27cd27b4a15d",
+      "notes": "Pillar article on @revfactormarketing Medium",
+      "status": "alive (anti-bot)",
+      "http_code": 403,
+      "method": "GET",
+      "note": "Platform anti-bot returned 403; URL likely live, manually verify"
+    },
+    {
+      "date_added": "2026-04-27",
+      "type": "google-sites",
+      "url": "https://sites.google.com/view/airbnb-software-reviews/blogs/the-revfactor-edge-putting-your-short-term-rental-on-autopilot-the-right",
+      "notes": "Republish on controlled Google Sites",
+      "status": "alive",
+      "http_code": 200,
+      "method": "HEAD"
+    },
+    {
+      "date_added": "2026-04-27",
+      "type": "weebly",
+      "url": "https://str-revenue-tips.weebly.com/blog/the-revfactor-edge-putting-your-short-term-rental-on-autopilot-the-right-way",
+      "notes": "Republish on controlled Weebly",
+      "status": "alive",
+      "http_code": 200,
+      "method": "HEAD"
+    },
+    {
+      "date_added": "2026-04-27",
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/STRRevenueTips/comments/1t1m16a/i_keep_hearing_about_intelligent_pricing_for/",
+      "notes": "Custom subreddit r/STRRevenueTips",
+      "status": "alive",
+      "http_code": 200,
+      "method": "HEAD"
+    },
+    {
+      "date_added": "2026-04-27",
+      "type": "quora",
+      "url": "https://strrevenuetips.quora.com/I-m-currently-pricing-my-Airbnb-manually-but-I-m-considering-switching-to-intelligent-pricing-tools-Are-they-really-wo",
+      "notes": "Custom Quora space",
+      "status": "alive (anti-bot)",
+      "http_code": 403,
+      "method": "GET",
+      "note": "Platform anti-bot returned 403; URL likely live, manually verify"
+    },
+    {
+      "date_added": "2026-04-27",
+      "type": "facebook",
+      "url": "https://www.facebook.com/share/p/18Dvydymsw/",
+      "notes": "Facebook share",
+      "status": "alive (anti-bot)",
+      "http_code": 400,
+      "method": "GET",
+      "note": "Platform anti-bot returned 400; URL likely live, manually verify"
+    }
+  ]
+}

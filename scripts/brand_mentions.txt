@@ -1,0 +1,12 @@
+# RevFactor brand-mention URLs to monitor.
+# Source of truth: https://docs.google.com/spreadsheets/d/1GxuswDYa1uT5y7XtPIuUGCc3ATO269MEODT4ZrMmzck/edit
+# Format: <date_added>	<type>	<url>	<notes>
+# Lines starting with # are ignored.
+
+# --- Week of 2026-04-27 → 2026-05-02 ---
+2026-04-27	medium	https://medium.com/@revfactormarketing/the-revfactor-edge-putting-your-short-term-rental-on-autopilot-the-right-way-27cd27b4a15d	Pillar article on @revfactormarketing Medium
+2026-04-27	google-sites	https://sites.google.com/view/airbnb-software-reviews/blogs/the-revfactor-edge-putting-your-short-term-rental-on-autopilot-the-right	Republish on controlled Google Sites
+2026-04-27	weebly	https://str-revenue-tips.weebly.com/blog/the-revfactor-edge-putting-your-short-term-rental-on-autopilot-the-right-way	Republish on controlled Weebly
+2026-04-27	reddit	https://www.reddit.com/r/STRRevenueTips/comments/1t1m16a/i_keep_hearing_about_intelligent_pricing_for/	Custom subreddit r/STRRevenueTips
+2026-04-27	quora	https://strrevenuetips.quora.com/I-m-currently-pricing-my-Airbnb-manually-but-I-m-considering-switching-to-intelligent-pricing-tools-Are-they-really-wo	Custom Quora space
+2026-04-27	facebook	https://www.facebook.com/share/p/18Dvydymsw/	Facebook share
