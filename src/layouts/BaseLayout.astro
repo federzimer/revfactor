@@ -32,10 +32,19 @@ const canonicalUrl = Astro.url.href;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ClickCease — bot/click-fraud detection. Loads first so bot signals
-       reach ClickCease before gtag fires conversion attribution. The
-       `class="ct_clicktrue"` is required by ClickCease — don't remove. -->
-  <script is:inline async src="https://ob.buzzfufighter.com/i/f0fb86856c7d34032acf2ce97dfcb53a.js" class="ct_clicktrue"></script>
+  <!-- Fraud Blocker — bot/click-fraud detection. Loads first so bot
+       signals reach Fraud Blocker before gtag fires conversion
+       attribution. SID = our account identifier; tied to API key
+       in keychain. -->
+  <script is:inline>
+    (function () {
+      var h = document.getElementsByTagName('head')[0];
+      var s = document.createElement('script');
+      s.async = 1;
+      s.src = "https://monitor.fraudblocker.com/fbt.js?sid=B4KFu5wKGk8JBQwekqEIu";
+      h.appendChild(s);
+    })();
+  </script>
 
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -146,8 +155,12 @@ const canonicalUrl = Astro.url.href;
   </script>
 </head>
 <body>
-  <!-- ClickCease no-JS fallback (visitors with JS off still get tracked) -->
-  <noscript><iframe src="https://ob.buzzfufighter.com/ns/f0fb86856c7d34032acf2ce97dfcb53a.html?ch=" width="0" height="0" style="display:none"></iframe></noscript>
+  <!-- Fraud Blocker no-JS fallback (visitors with JS off still get tracked) -->
+  <noscript>
+    <a href="https://fraudblocker.com" rel="nofollow">
+      <img src="https://monitor.fraudblocker.com/fbt.gif?sid=B4KFu5wKGk8JBQwekqEIu" alt="Fraud Blocker" />
+    </a>
+  </noscript>
   <slot />
 </body>
 </html>
