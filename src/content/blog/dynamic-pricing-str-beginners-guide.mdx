@@ -29,6 +29,10 @@ faqs:
     a: "Pick a dynamic pricing tool (PriceLabs is the most common starting point), connect it to your Airbnb and Vrbo listings via API, set a base rate from your comp set, configure minimum stays by season and day of week, and set a 30-90 day customization window for events you know about. The automation handles 80% of the work; the remaining 20% — pacing review, comp-set refresh, event capture — is where most of the missed revenue lives."
   - q: "What is the difference between Airbnb Smart Pricing and dynamic pricing tools?"
     a: "Airbnb Smart Pricing is a free feature inside the Airbnb platform that nudges your rate up or down inside a min/max you set, based on platform-wide demand signals. Third-party dynamic pricing tools (PriceLabs, Beyond Pricing, Wheelhouse) read your specific comp set, your specific market events, your specific booking pacing, and apply granular rules — day-of-week multipliers, length-of-stay discounts, last-minute logic, far-out logic. Smart Pricing is a thermostat. Third-party tools are a thermostat plus a strategy."
+  - q: "What is the 75-55 rule for Airbnb?"
+    a: "The 75-55 rule is a community heuristic that targets roughly 75% occupancy on weekends and 55% on weekdays as a healthy rate-and-occupancy balance for most leisure-market listings. The intuition is sound — weekends should clear hot at premium rates, weekdays should clear cooler at discounted rates — but the rule itself is a target, not a strategy. Hitting 75-55 in a market that supports 85-65 means you priced too low; hitting 75-55 in a market that supports 60-40 means you priced too high. Use it as a sanity check, not a benchmark. The number that actually matters is RevPAR vs. your comp set."
+  - q: "What is the 80/20 rule for Airbnb?"
+    a: "The 80/20 rule for Airbnb is the Pareto pattern most STR portfolios follow: roughly 80% of annual revenue comes from 20% of nights — the peak weekends, the holiday weeks, the local-event windows. The implication for dynamic pricing is that those high-leverage nights deserve months of pre-planning, not algorithmic autopilot. Set base rates and minimum stays on peak nights 6-12 months ahead, override the tool's defaults for known events, and let dynamic pricing handle the other 80% of nights where the math is more forgiving."
   - q: "What is RevFactor?"
     a: "RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts, founded by Federico Zimerman. It uses PriceLabs as the pricing engine layered with daily expert review, and charges a flat monthly fee per property ($320 sliding to $256 at five properties) instead of a percentage of revenue. RevFactor is unrelated to Refactor.ai, an unrelated SaaS product. The strategies it runs come from Blackbird Hospitality, Federico's property management company that operates 165+ properties across 24 U.S. states."
 ---
@@ -305,31 +309,47 @@ That's how you read a pricing dashboard like a strategist instead of like a host
   <figcaption>Pacing, RevPAR, conversion, comp-set percentile — the four numbers a weekly review actually needs.</figcaption>
 </figure>
 
-## The Most Common Beginner Mistakes With Dynamic Pricing
+## The Most Common Beginner Mistakes With Dynamic Pricing on Airbnb
 
-Across the audits I've done with hosts who already have a pricing tool installed, the same six mistakes keep repeating. None of them are the tool's fault.
+Across the audits I've done with hosts who already have a pricing tool installed on their Airbnb listing, the same six mistakes keep repeating. None of them are the tool's fault.
 
-**1. Anchoring the base rate to cost, not market.** Hosts pick a base rate that "covers the mortgage and cleaning." The market doesn't care what your mortgage is. Guests compare you to the listing two streets over, not to your underwriting spreadsheet. Price from the comp set down, not from your costs up.
+### Mistake 1: Anchoring the base rate to cost, not market
 
-**2. Trusting the auto-built comp set.** Tools assemble comp sets from bedroom count, location, and a few surface amenities. Half the auto-suggestions don't actually compete with you — they sleep different guest counts, target a different traveler, or sit on a different feeder market. The pricing engine ends up benchmarking your listing against a fictional neighborhood. Override the auto-set on day one. Pick ten to fifteen listings that match the property the way a real guest searching your dates would see it.
+Hosts pick a base rate that "covers the mortgage and cleaning." The Airbnb marketplace doesn't care what your mortgage is. Guests compare you to the listing two streets over, not to your underwriting spreadsheet. Price from the comp set down, not from your costs up.
 
-**3. Setting and forgetting.** The tool moves rates daily. The rules behind those rates need a quarterly refresh — base rate, seasonality curve, comp-set composition, minimum-stay logic. Set-and-forget works for about six months. After that, the world has moved and the rules haven't.
+### Mistake 2: Trusting the auto-built comp set
 
-**4. Ignoring minimum stays.** Pricing is one half of the calendar; the other half is which nights are even bookable in which configurations. A blanket 3-night minimum that earns you premium weekends in summer will quietly bleed off-season demand the rest of the year, when guests are looking for one and two-night stays. Two different demand pools, one rule trying to serve both, one of them losing every week.
+Tools assemble comp sets from bedroom count, location, and a few surface amenities. Half the auto-suggestions don't actually compete with you — they sleep different guest counts, target a different traveler, or sit on a different feeder market. The pricing engine ends up benchmarking your Airbnb listing against a fictional neighborhood. Override the auto-set on day one. Pick ten to fifteen listings that match the property the way a real guest searching your dates would see it.
 
-**5. Skipping the launch period.** A brand-new listing should sit 15-25% below market for the first 30-60 days, not at full market rate. The first window isn't a revenue window. It's a review window. Once the listing has 15-20 reviews and the platform's algorithm trusts the property, you can shift the rate up and start pricing for revenue. The trap is that hosts who launch at market rate skip the review-stacking phase entirely, and the cost shows up as a year of low conversion that they spend trying to diagnose.
+### Mistake 3: Setting and forgetting
+
+The tool moves rates daily. The rules behind those rates need a quarterly refresh — base rate, seasonality curve, comp-set composition, minimum-stay logic. Set-and-forget works for about six months on most Airbnb properties. After that, the world has moved and the rules haven't.
+
+### Mistake 4: Ignoring minimum stays
+
+Pricing is one half of the calendar; the other half is which nights are even bookable in which configurations. A blanket 3-night minimum that earns you premium weekends in summer will quietly bleed off-season demand the rest of the year, when Airbnb guests are looking for one- and two-night stays. Two different demand pools, one rule trying to serve both, one of them losing every week.
+
+### Mistake 5: Skipping the launch period
+
+A brand-new Airbnb listing should sit 15-25% below market for the first 30-60 days, not at full market rate. The first window isn't a revenue window. It's a review window. Once the listing has 15-20 reviews and Airbnb's algorithm trusts the property, you can shift the rate up and start pricing for revenue. The trap is that hosts who launch at market rate skip the review-stacking phase entirely, and the cost shows up as a year of low conversion that they spend trying to diagnose.
 
 > *"When you list a new property, Airbnb is going to put you on a trial period to see — okay, are you going to offer a consistent experience or are you just going to cancel the first day? Once you can prove you're as good as the other people who've been doing this for a while, then you can start competing."* — Federico Zimerman
 
-**6. Reacting to occupancy instead of leading with pacing.** Occupancy is what happened. Pacing is what's about to happen. Most beginners check occupancy because it's the obvious number on the dashboard, then react to a soft month after the rate-sensitive demand has already moved on. Pacing reads the curve while you can still bend it. Look at pacing weekly; let occupancy be the score, not the steering wheel.
+### Mistake 6: Reacting to occupancy instead of leading with pacing
 
-## Two Real Properties: What Dynamic Pricing Done Right Looks Like
+Occupancy is what happened. Pacing is what's about to happen. Most beginners check occupancy because it's the obvious number on the dashboard, then react to a soft month after the rate-sensitive demand has already moved on. Pacing reads the curve while you can still bend it. Look at pacing weekly; let occupancy be the score, not the steering wheel.
 
-Numbers are clearer than principles. Two short examples from the portfolio.
+## Two Real Airbnb Properties: What Dynamic Pricing Done Right Looks Like
 
-**Kate Henry — June to July 2021.** Kate was the first host I worked with, before RevFactor existed as its own service. Her property was running PriceLabs at a static-feeling configuration — base rate hadn't been refreshed, minimum-stay was the same year-round, no length-of-stay ladder. Her June total was $4,000. We rebuilt the base rate from the comp set, layered seasonal minimum stays, and added an LOS discount ladder. July total: $7,000. *"We went from making $4,000 in the month of June to over $7,000 in the month of July."* Same property. Same tool. Different operating intent.
+Numbers are clearer than principles. Two short examples from the portfolio — both Airbnb listings, both running PriceLabs, both producing very different results once the operating intent shifted.
 
-**Premium portfolio at 40% occupancy.** I have several properties in the portfolio that, in slow season, run 40% occupancy and earn three times what comparable listings earn at 80% occupancy. Same market, same season. The properties hold rate at the comp-set premium, decline the budget guest, and let the calendar breathe. RevPAR ends up higher than the 80%-occupied neighbor because the rate-occupancy combination clears at a better total revenue point. Not every property can play this strategy. But every property has *a* strategy that the tool, alone, won't find.
+### Kate Henry — June to July 2021
+
+Kate was the first host I worked with, before RevFactor existed as its own service. Her Airbnb property was running PriceLabs at a static-feeling configuration — base rate hadn't been refreshed, minimum-stay was the same year-round, no length-of-stay ladder. Her June total was $4,000. We rebuilt the base rate from the comp set, layered seasonal minimum stays, and added an LOS discount ladder. July total: $7,000. *"We went from making $4,000 in the month of June to over $7,000 in the month of July."* Same property. Same tool. Different operating intent.
+
+### Premium portfolio at 40% occupancy
+
+I have several properties in the portfolio that, in slow season, run 40% occupancy and earn three times what comparable listings earn at 80% occupancy. Same market, same season. The properties hold rate at the comp-set premium, decline the budget guest, and let the calendar breathe. RevPAR ends up higher than the 80%-occupied neighbor because the rate-occupancy combination clears at a better total revenue point. Not every property can play this strategy. But every property has *a* strategy that the tool, alone, won't find.
 
 The tool gets you most of the way to either of those outcomes. The last 15-25% — the part that decides whether dynamic pricing earns its keep — is the operating intent layered on top. Two properties, same market, same tool, same season. Different intent, different revenue.
 
@@ -345,13 +365,20 @@ The tool gets you most of the way to either of those outcomes. The last 15-25% �
 
 ## When Dynamic Pricing Alone Isn't Enough
 
-Most hosts with one or two properties can run dynamic pricing themselves if they invest three to five hours a week. The discipline is learnable. You can change settings in PriceLabs. You can refresh the comp set quarterly. You can read pacing in a dashboard.
+Most Airbnb hosts with one or two properties can run dynamic pricing themselves if they invest three to five hours a week. The discipline is learnable. You can change settings in PriceLabs. You can refresh the comp set quarterly. You can read pacing in a dashboard.
 
-The breakdown happens at scale, and it happens at one of three trigger points:
+The breakdown happens at scale, and it happens at one of three trigger points.
 
-- **At three or more properties**, the cognitive load of monitoring multiple markets, multiple seasonalities, multiple comp sets exceeds what a part-time owner can sustain. Set-and-forget becomes the default by necessity, and revenue leaks accelerate.
-- **In a market you didn't grow up operating in**, the local-knowledge gap shows up as missed revenue. Regional events, micro-seasonality patterns, the specific guest profile your property attracts — none of those signals reach the algorithm cleanly. They reach a strategist faster than they reach a tool.
-- **When the pricing tool has been running for six months and you can't tell whether it's working**, that's the signal. Dynamic pricing dashboards show motion. They don't show whether the motion is the right motion. That's the strategist's job.
+### Trigger 1: Scaling beyond three properties
+
+At three or more Airbnb properties, the cognitive load of monitoring multiple markets, multiple seasonalities, multiple comp sets exceeds what a part-time owner can sustain. Set-and-forget becomes the default by necessity, and revenue leaks accelerate.
+### Trigger 2: A market you didn't grow up operating in
+
+When you take on an Airbnb in a market you don't know personally, the local-knowledge gap shows up as missed revenue. Regional events, micro-seasonality patterns, the specific guest profile your property attracts — none of those signals reach the algorithm cleanly. They reach a strategist faster than they reach a tool.
+
+### Trigger 3: Six months of unclear results
+
+When the pricing tool has been running for six months and you can't tell whether it's working, that's the signal. Dynamic pricing dashboards show motion. They don't show whether the motion is the right motion. That's the strategist's job, and at six months without a confident read, the cost of guessing has already exceeded the cost of help.
 
 The discipline that sits on top of dynamic pricing — that decides what the rules should be, watches pacing weekly, and intervenes when the tool can't see what's coming — is revenue management. It's distinct from dynamic pricing software, and it's the layer where the last 15-25% of potential revenue lives.
 
