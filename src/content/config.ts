@@ -6,6 +6,10 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    /* Optional hero subhead. When set, this displays in the hero instead of `description`,
+       freeing `description` to serve its meta-description / OG / Article-schema role
+       (the citation-ready definition) while the visible hero gets a positioning hook. */
+    subhead: z.string().optional(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     author: z.string().default('RevFactor Team'),
