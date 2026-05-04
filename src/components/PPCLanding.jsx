@@ -383,6 +383,24 @@ export default function PPCLanding({
     ?? (subheadKey ? SUBHEAD_VARIANTS[subheadKey] : defaultSubhead);
   const ctaText = variant?.ctaText ?? defaultCtaText;
 
+  // Forward UTMs + Google Ads ValueTrack params to the schedule iframe so
+  // bookings carry the campaign attribution into Fede's CRM. Without this,
+  // we know a conversion fired (gtag inside the iframe attributes to GA4 +
+  // Google Ads) but the booking record itself has no campaign metadata.
+  const scheduleUrl = (() => {
+    const base = 'https://schedule.revfactor.io/embed';
+    if (typeof window === 'undefined') return base;
+    const parentParams = new URLSearchParams(window.location.search);
+    const out = new URLSearchParams();
+    for (const [k, v] of parentParams) {
+      if (k.startsWith('utm_') || k.startsWith('gad_') || k === 'gclid' || k === 'msg') {
+        out.set(k, v);
+      }
+    }
+    const query = out.toString();
+    return query ? `${base}?${query}` : base;
+  })();
+
   // Schedule iframe at schedule.revfactor.io is a custom Next.js app —
   // it posts iframe dimensions via postMessage so the parent can resize.
   useEffect(() => {
@@ -510,7 +528,7 @@ export default function PPCLanding({
               style={{ height: 'min(720px, calc(100vh - 200px))' }}
             >
               <iframe
-                src="https://schedule.revfactor.io/embed"
+                src={scheduleUrl}
                 title="Schedule a strategy call with RevFactor"
                 className="w-full border-0 block"
                 style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}
@@ -728,7 +746,7 @@ export default function PPCLanding({
           >
             <iframe
               ref={calRef}
-              src="https://schedule.revfactor.io/embed"
+              src={scheduleUrl}
               title="Schedule a strategy call with RevFactor"
               className="w-full border-0 block"
               style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}

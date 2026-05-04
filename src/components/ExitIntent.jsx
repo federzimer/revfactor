@@ -43,8 +43,18 @@ export default function ExitIntent() {
       }
     };
 
+    // Track cursor Y so we can distinguish "user leaving via the top of the
+    // viewport" from "user moving into the calendar iframe". Iframes fire a
+    // document.mouseleave even when cursor is entering them, so checking
+    // clientY <= 0 alone produces false positives every time the user
+    // interacts with the calendar. Only fire if the cursor was already
+    // near the top of the viewport in the moment before leaving.
+    let lastMoveY = Infinity;
+    const onMouseMove = (e) => { lastMoveY = e.clientY; };
     const onMouseLeave = (e) => {
-      if (e.clientY <= 0) trigger('mouseleave');
+      if (e.clientY > 0) return;
+      if (lastMoveY > 50) return;
+      trigger('mouseleave');
     };
 
     let idleTimer;
@@ -57,9 +67,11 @@ export default function ExitIntent() {
       idleTimer = setTimeout(() => trigger('mobile_idle'), 12000);
     };
 
+    document.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
+      document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
       window.removeEventListener('scroll', onScroll);
       if (idleTimer) clearTimeout(idleTimer);
