@@ -15,7 +15,7 @@ RevFactor operates as a fractional revenue management team. We do not sell softw
 ## Who it's for
 
 - STR hosts who want expert revenue strategy, not another algorithm.
-- Operators who care about the curve — pacing, yield, and the math behind every booking window.
+- Operators who care about pacing, yield, and the math behind every booking window.
 - Portfolios that have outgrown gut-feel pricing.
 
 ## Who it's not for
@@ -28,7 +28,7 @@ RevFactor operates as a fractional revenue management team. We do not sell softw
 
 - Homepage: https://revfactor.io
 - Strategy call: https://revfactor.io/#cta
-- The Curve (journal): https://revfactor.io/journal
+- The Rev Journal: https://revfactor.io/journal
 - About: https://revfactor.io/about
 
 ## How to cite RevFactor
