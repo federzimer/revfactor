@@ -66,6 +66,17 @@ const schema = {
   "keywords": post.data.tags.join(', '),
   "articleSection": post.data.category
 };
+
+// FAQPage schema — only when frontmatter declares faqs (drives both accordion + JSON-LD)
+const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": post.data.faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+} : null;
 ---
 
 <BaseLayout
@@ -78,6 +89,7 @@ const schema = {
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
   </Fragment>
 
   <Navbar client:load />
@@ -149,56 +161,90 @@ const schema = {
       </div>
     </section>
 
-    <div class="max-w-6xl mx-auto px-6 md:px-12 grid md:grid-cols-[1fr_240px] gap-16 md:gap-20 py-20">
-      <div class="max-w-2xl min-w-0 ml-auto">
-        <div class="prose-rf">
-          <Content />
-        </div>
+    <!-- Floating TOC — XL+ only, fixed-position panel that doesn't constrain the body grid -->
+    <aside id="tocFloat" class="hidden xl:block fixed left-6 top-32 w-[200px] max-h-[calc(100vh-180px)] overflow-y-auto z-30 pr-2">
+      <h5 class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#76574C] mb-4">In this essay</h5>
+      <ul class="space-y-2.5" id="toc">
+        {toc.map((item, i) => (
+          <li>
+            <a href={item.href} class="toc-link flex items-baseline gap-2 text-[12.5px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
+              <span class="flex-shrink-0 text-[#3F261F] tabular-nums" style="font-family:'JetBrains Mono',monospace; min-width:22px; opacity:0.75;">{String(i + 1).padStart(2, '0')}</span>
+              <span class="block">{item.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
 
-        {post.data.tags.length > 0 && (
-          <div class="mt-16 pt-8 border-t border-[#C8C4BC]">
-            <p class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-3">Topics</p>
-            <div class="flex flex-wrap gap-2">
-              {post.data.tags.map((tag) => (
-                <span class="px-3 py-1 bg-[#E8E6E1] text-[#76574C] text-[12px] rounded-full border border-[#C8C4BC]">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div class="mt-16 p-8 rounded-[16px] bg-[#E8E6E1] border border-[#C8C4BC] flex gap-6 items-start flex-wrap md:flex-nowrap">
-          <img
-            src={FEDE_PHOTO}
-            alt="Federico Zimerman"
-            class="w-20 h-20 rounded-full object-cover flex-shrink-0 ring-1 ring-[#C8C4BC]"
-          />
-          <div>
-            <h4 class="text-[22px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">{post.data.author.toLowerCase()}</h4>
-            <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
-            <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">Federico spent 10 years in airline revenue management at American Airlines before applying those principles to short-term rentals. RevFactor's pricing strategies are battle-tested across 165+ properties in 24 states.</p>
-            <div class="flex gap-2 flex-wrap">
-              <a href="https://www.linkedin.com/in/federico-zimerman-23ab3345/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Follow on LinkedIn</a>
-              <a href="/journal" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">More essays</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <aside class="md:sticky md:top-24 md:self-start md:pl-6 md:border-l border-[#C8C4BC]">
-        <h5 class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-4">In this essay</h5>
-        <ul class="space-y-2.5" id="toc">
+    <!-- Mobile/tablet TOC — collapsible, sits above the body so we keep the grid centered -->
+    <div class="xl:hidden">
+      <details class="rf-mobile-toc max-w-2xl mx-auto px-6 md:px-12 mt-12 pb-2 border-y border-[#C8C4BC]">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer py-4 list-none">
+          <span class="font-bold uppercase text-[10px] tracking-[2.5px] text-[#76574C]">In this essay · {toc.length} sections</span>
+          <svg class="w-3.5 h-3.5 text-[#3F261F] transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <ul class="space-y-2 pb-4">
           {toc.map((item, i) => (
             <li>
-              <a href={item.href} class="toc-link flex items-baseline gap-2 text-[13px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
-                <span class="flex-shrink-0 text-[#C8C4BC] tabular-nums" style="font-family:'JetBrains Mono',monospace; min-width:22px;">{String(i + 1).padStart(2, '0')}</span>
+              <a href={item.href} class="flex items-baseline gap-2 text-[13px] leading-[1.4] text-[#76574C] hover:text-[#13342D] transition-colors">
+                <span class="flex-shrink-0 text-[#3F261F] tabular-nums" style="font-family:'JetBrains Mono',monospace; min-width:22px; opacity:0.7;">{String(i + 1).padStart(2, '0')}</span>
                 <span class="block">{item.label}</span>
               </a>
             </li>
           ))}
         </ul>
-      </aside>
+      </details>
+    </div>
+
+    <!-- BODY — CSS-grid container with width tiers (body / wide / full-bleed) -->
+    <div class="prose-rf py-20">
+      <Content />
+      {post.data.faqs && post.data.faqs.length > 0 && (
+        <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+        <div class="rf-faq">
+          {post.data.faqs.map((f) => (
+            <details>
+              <summary>
+                <span class="q">{f.q}</span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              </summary>
+              <div class="a">{f.a}</div>
+            </details>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- Tags + Author card — same grid container so they stay centered with body -->
+    <div class="prose-rf-after pb-20">
+      {post.data.tags.length > 0 && (
+        <div class="rf-tags">
+          <p class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-3">Topics</p>
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <span class="px-3 py-1 bg-[#E8E6E1] text-[#76574C] text-[12px] rounded-full border border-[#C8C4BC]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      <div class="rf-author-card">
+        <img
+          src={FEDE_PHOTO}
+          alt="Federico Zimerman"
+          class="w-20 h-20 rounded-full object-cover flex-shrink-0 ring-1 ring-[#C8C4BC]"
+        />
+        <div>
+          <h4 class="text-[24px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:500;">{post.data.author.toLowerCase()}</h4>
+          <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
+          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">Federico spent 10 years in airline revenue management at American Airlines before applying those principles to short-term rentals. RevFactor's pricing strategies are battle-tested across 165+ properties in 24 states.</p>
+          <div class="flex gap-2 flex-wrap">
+            <a href="https://www.linkedin.com/in/federico-zimerman-23ab3345/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Follow on LinkedIn</a>
+            <a href="/journal" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">More essays</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     {related.length > 0 && (
@@ -247,7 +293,86 @@ const schema = {
   <Footer client:load />
 
   <style>
-    /* Body — sans-serif (Helvetica) per brand spec; serif reserved for headings + quotes */
+    /* ============== LAYOUT — CSS-grid driven width tiers ==============
+       prose-rf is a grid container. Body content lives in the center
+       `body` track (max 720px). Wide elements (figures, philosophy, leaks,
+       plays, scoreboard, charts) span the `wide` track. Full-bleed images
+       break out of the page entirely via the `full` track. Grid columns
+       are computed once in CSS so every element is symmetrically centered
+       on the page — no negative-margin breakout hacks. */
+    .prose-rf,
+    .prose-rf-after {
+      display: grid;
+      grid-template-columns:
+        [full-start] minmax(1.25rem, 1fr)
+        [wide-start] minmax(0, 220px)
+        [body-start] minmax(0, 720px) [body-end]
+        minmax(0, 220px) [wide-end]
+        minmax(1.25rem, 1fr) [full-end];
+      column-gap: 0;
+      row-gap: 0;
+    }
+    .prose-rf > :global(*),
+    .prose-rf-after > :global(*) {
+      grid-column: body-start / body-end;
+      max-width: 100%;
+    }
+    .prose-rf > :global(.rf-figure),
+    .prose-rf > :global(.rf-philosophy),
+    .prose-rf > :global(.rf-leaks),
+    .prose-rf > :global(.rf-plays),
+    .prose-rf > :global(.rf-scoreboard),
+    .prose-rf > :global(.rf-chart) {
+      grid-column: wide-start / wide-end;
+    }
+    .prose-rf > :global(.rf-bleed) {
+      grid-column: full-start / full-end;
+      width: 100%;
+      margin: 3rem 0;
+    }
+    .prose-rf-after > :global(.rf-tags),
+    .prose-rf-after > :global(.rf-author-card) {
+      grid-column: body-start / body-end;
+    }
+    .prose-rf-after > :global(.rf-tags) {
+      margin-top: 0.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid #C8C4BC;
+    }
+    .prose-rf-after > :global(.rf-author-card) {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #E8E6E1;
+      border: 1px solid #C8C4BC;
+      border-radius: 16px;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    @media (min-width: 768px) {
+      .prose-rf-after > :global(.rf-author-card) { flex-wrap: nowrap; }
+    }
+
+    /* Floating-TOC behavior: keep panel narrow, tighten line-height,
+       active item gets cedar treatment. Hidden until user scrolls past hero. */
+    #tocFloat {
+      transform: translateZ(0);  /* avoid sub-pixel jitter on scroll */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 350ms cubic-bezier(0.25,0.1,0.25,1);
+    }
+    #tocFloat.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #tocFloat::-webkit-scrollbar { width: 4px; }
+    #tocFloat::-webkit-scrollbar-thumb { background: #C8C4BC; border-radius: 2px; }
+    .toc-link.active { color: #13342D !important; font-weight: 600; }
+    .toc-link.active span:first-child { opacity: 1 !important; color: #13342D !important; }
+
+    /* ============== BODY PROSE ==============
+       Body — sans-serif (Helvetica) per brand spec; serif reserved for headings + quotes */
     .prose-rf :global(p) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:17px; line-height:1.7; color:#3F261F; margin:0 0 1.25em; }
     @media (max-width: 640px) { .prose-rf :global(p) { font-size:16px; line-height:1.65; } }
 
@@ -285,21 +410,14 @@ const schema = {
     .prose-rf :global(table thead) { border-bottom:2px solid #3F261F; }
     .prose-rf :global(table th) { text-align:left; padding:14px 14px; font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#3F261F; white-space:nowrap; }
     .prose-rf :global(table td) { padding:16px 14px; font-family:'JetBrains Mono',monospace; font-size:15px; color:#3F261F; border-bottom:1px solid #C8C4BC; vertical-align:top; }
-    .prose-rf :global(table td:first-child) { font-family:'Cormorant Garamond',Georgia,serif; font-size:17px; font-weight:500; color:#13342D; }
+    .prose-rf :global(table td:first-child) { font-family:'Cormorant Garamond',Georgia,serif; font-size:20px; font-weight:500; color:#13342D; line-height:1.3; }
     .prose-rf :global(table tr:last-child td) { border-bottom:none; }
     .prose-rf :global(table strong) { color:#13342D; }
 
-    /* Figures break out of body container so graphics get more breathing room (instead of cramped at 672px).
-       Body is ml-auto inside a 1fr column with a 240px sticky TOC on the right — so we extend LEFT only,
-       not right, otherwise the TOC's border-left runs through the card (Aaron's #4 leak fix). */
+    /* Figures span the WIDE grid track (centered, ~1100px on desktop, full-width on mobile). */
     .prose-rf :global(.rf-figure) {
       margin:2.5rem 0;
       text-align:center;
-      margin-left: clamp(-8rem, -10vw, -2rem);
-      margin-right: 0;
-    }
-    @media (max-width: 768px) {
-      .prose-rf :global(.rf-figure) { margin-left:0; }
     }
     .prose-rf :global(.rf-figure img) { width:100%; height:auto; border-radius:16px; display:block; }
     .prose-rf :global(.rf-figure figcaption) {
@@ -336,17 +454,12 @@ const schema = {
 
     /* ============== HTML GRID COMPONENTS (responsive, scale with text) ============== */
 
-    /* Strategic Philosophy — 3 cards (cedar / moss / tobacco). Break out LEFT only (TOC is on right). */
-    .prose-rf :global(.rf-philosophy) {
-      margin:2.5rem 0;
-      margin-left: clamp(-8rem, -10vw, -2rem);
-      margin-right: 0;
-    }
-    @media (max-width: 768px) { .prose-rf :global(.rf-philosophy) { margin-left:0; } }
+    /* Strategic Philosophy — 3 cards (cedar / moss / tobacco) on the WIDE grid track. */
+    .prose-rf :global(.rf-philosophy) { margin:2.5rem 0; }
     .prose-rf :global(.rf-philosophy-header) { text-align:center; margin-bottom:1.75rem; }
     .prose-rf :global(.rf-philosophy-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
     .prose-rf :global(.rf-philosophy-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400; font-size:clamp(32px,4vw,48px); color:#13342D; margin:0 0 0.5rem !important; }
-    .prose-rf :global(.rf-philosophy-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-size:18px; color:#76574C; margin:0; line-height:1.4; }
+    .prose-rf :global(.rf-philosophy-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:21px; color:#76574C; margin:0; line-height:1.4; }
 
     .prose-rf :global(.rf-philosophy-grid) {
       display:grid;
@@ -370,32 +483,27 @@ const schema = {
     .prose-rf :global(.rf-philosophy-card.tobacco) { background:#3F261F; }
     .prose-rf :global(.rf-philosophy-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:56px; line-height:1; margin:0 0 0.5rem; opacity:0.85; }
     .prose-rf :global(.rf-philosophy-card.cedar .num)   { color:#A9BBA3; }
-    .prose-rf :global(.rf-philosophy-card.moss .num)    { color:#13342D; }
+    .prose-rf :global(.rf-philosophy-card.moss .num)    { color:#E8E6E1; }
     .prose-rf :global(.rf-philosophy-card.tobacco .num) { color:#A9BBA3; }
     .prose-rf :global(.rf-philosophy-card .rule) { width:48px; height:1px; background:currentColor; opacity:0.5; margin:0 auto 1rem; }
     .prose-rf :global(.rf-philosophy-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:13px; letter-spacing:3px; text-transform:uppercase; opacity:1; color:#E8E6E1 !important; margin:0 0 1.25rem !important; }
-    .prose-rf :global(.rf-philosophy-card.moss .label) { color:#13342D !important; }
+    .prose-rf :global(.rf-philosophy-card.moss .label) { color:#E8E6E1 !important; }
     .prose-rf :global(.rf-philosophy-card .lead) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:500; font-size:26px; line-height:1.2; margin:0 0 1.25rem !important; color:#E8E6E1 !important; }
-    .prose-rf :global(.rf-philosophy-card.moss .lead) { color:#13342D !important; }
+    .prose-rf :global(.rf-philosophy-card.moss .lead) { color:#E8E6E1 !important; }
     .prose-rf :global(.rf-philosophy-card .body) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:16px; line-height:1.55; opacity:1; color:#E8E6E1; margin:0 0 0.75rem !important; }
-    .prose-rf :global(.rf-philosophy-card.moss .body) { color:#13342D; }
-    .prose-rf :global(.rf-philosophy-card .pull) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:15px; opacity:0.85; color:#E8E6E1; margin:auto 0 0 !important; padding-top:1rem; }
-    .prose-rf :global(.rf-philosophy-card.moss .pull) { color:#13342D; }
+    .prose-rf :global(.rf-philosophy-card.moss .body) { color:#E8E6E1; }
+    .prose-rf :global(.rf-philosophy-card .pull) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:17px; opacity:0.9; color:#E8E6E1; margin:auto 0 0 !important; padding-top:1rem; }
+    .prose-rf :global(.rf-philosophy-card.moss .pull) { color:#E8E6E1; }
     /* Philosophy cards override the global em → cedar rule so italic text inside cards
        inherits the card's text color (not moss, which goes invisible on moss/cedar bg) */
     .prose-rf :global(.rf-philosophy-card em) { color:inherit !important; font-family:inherit; }
 
-    /* 7 Leaks — 4-up responsive grid. Break out LEFT only (TOC is on right). */
-    .prose-rf :global(.rf-leaks) {
-      margin:2.5rem 0;
-      margin-left: clamp(-8rem, -10vw, -2rem);
-      margin-right: 0;
-    }
-    @media (max-width: 768px) { .prose-rf :global(.rf-leaks) { margin-left:0; } }
+    /* 7 Leaks — 4-up responsive grid on the WIDE track. */
+    .prose-rf :global(.rf-leaks) { margin:2.5rem 0; }
     .prose-rf :global(.rf-leaks-header) { text-align:center; margin-bottom:1.5rem; }
     .prose-rf :global(.rf-leaks-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
     .prose-rf :global(.rf-leaks-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(32px,4vw,48px); color:#13342D; margin:0 0 0.5rem !important; }
-    .prose-rf :global(.rf-leaks-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:17px; color:#76574C; margin:0; line-height:1.4; }
+    .prose-rf :global(.rf-leaks-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:20px; color:#76574C; margin:0; line-height:1.4; }
 
     .prose-rf :global(.rf-leaks-grid) {
       display:grid;
@@ -425,6 +533,283 @@ const schema = {
     /* Override em color inside leak cards so italic doesn't go cedar-on-bone-on-cedar-accent */
     .prose-rf :global(.rf-leak-card em) { color:#13342D; }
 
+    /* ============== RF-SCOREBOARD — RevPAR vs ADR comparison cards ============== */
+    .prose-rf :global(.rf-scoreboard) { margin:3rem 0; }
+    .prose-rf :global(.rf-scoreboard-header) { text-align:center; margin-bottom:2rem; }
+    .prose-rf :global(.rf-scoreboard-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
+    .prose-rf :global(.rf-scoreboard-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(34px,4.5vw,52px); color:#13342D; margin:0 0 0.5rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-scoreboard-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:20px; color:#76574C; margin:0; line-height:1.4; }
+
+    .prose-rf :global(.rf-scoreboard-grid) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 768px) { .prose-rf :global(.rf-scoreboard-grid) { grid-template-columns: 1fr; } }
+
+    .prose-rf :global(.rf-score-card) {
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid #C8C4BC;
+    }
+    .prose-rf :global(.rf-score-card.bone)  { background: #E8E6E1; }
+    .prose-rf :global(.rf-score-card.cedar) { background: #13342D; border-color: #13342D; color: #E8E6E1; }
+    .prose-rf :global(.rf-score-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; opacity:0.7; margin:0 0 1rem !important; }
+    .prose-rf :global(.rf-score-card .lede)  { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:22px; line-height:1.3; margin:0 0 1.5rem !important; }
+    .prose-rf :global(.rf-score-card.bone .lede)  { color: #76574C; }
+    .prose-rf :global(.rf-score-card.cedar .lede) { color: #DDDAD3; }
+    .prose-rf :global(.rf-score-row) {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--score-border, #C8C4BC);
+    }
+    .prose-rf :global(.rf-score-card.cedar .rf-score-row) { --score-border: rgba(221,218,211,0.18); }
+    .prose-rf :global(.rf-score-row:last-child) { border-bottom: none; }
+    .prose-rf :global(.rf-score-row .key) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; text-transform:uppercase; opacity:0.7; }
+    .prose-rf :global(.rf-score-row .val) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; }
+    .prose-rf :global(.rf-score-row.hero .key) { opacity: 1; }
+    .prose-rf :global(.rf-score-row.hero .val) { font-size: 32px; }
+    .prose-rf :global(.rf-score-card.cedar .rf-score-row.hero .val) { color: #A9BBA3; }
+    .prose-rf :global(.rf-score-card.bone .rf-score-row.hero .val) { color: #13342D; }
+    .prose-rf :global(.rf-score-delta) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      padding: 0.85rem 1.5rem;
+      background: #3F261F;
+      color: #E8E6E1;
+      border-radius: 999px;
+      flex-wrap: wrap;
+    }
+    .prose-rf :global(.rf-score-delta .lbl) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; text-transform:uppercase; color: #A9BBA3; }
+    .prose-rf :global(.rf-score-delta .copy) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; flex:1 1 auto; min-width:0; }
+    .prose-rf :global(.rf-score-delta .val) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; color: #E8E6E1; }
+
+    /* ============== RF-PLAYS — 6 tactical plays grid ============== */
+    .prose-rf :global(.rf-plays) {
+      margin: 3rem 0;
+      background: #13342D;
+      border-radius: 24px;
+      padding: 3rem 2rem;
+    }
+    .prose-rf :global(.rf-plays-header) { text-align:center; margin-bottom:2.25rem; }
+    .prose-rf :global(.rf-plays-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#7A8B76; margin:0 0 0.75rem; }
+    .prose-rf :global(.rf-plays-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(34px,4.5vw,56px); color:#E8E6E1; margin:0 0 0.5rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-plays-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:20px; color:#A9BBA3; margin:0; line-height:1.4; }
+
+    .prose-rf :global(.rf-plays-grid) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 1024px) { .prose-rf :global(.rf-plays-grid) { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .prose-rf :global(.rf-plays-grid) { grid-template-columns: 1fr; } }
+
+    .prose-rf :global(.rf-play-card) {
+      background: #E8E6E1;
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+    }
+    .prose-rf :global(.rf-play-card .num) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:13px; letter-spacing:3px; color:#5D6D59; text-transform:uppercase; margin:0 0 1rem !important; }
+    .prose-rf :global(.rf-play-card .name) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:28px; line-height:1.15; color:#13342D; margin:0 0 1rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-play-card .copy) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:15px; line-height:1.65; color:#3F261F; margin:0 !important; }
+    .prose-rf :global(.rf-play-card em) { color:#13342D; }
+
+    /* ============== RF-BLEED — full-bleed image with quote overlay ============== */
+    .prose-rf :global(.rf-bleed) {
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+    }
+    .prose-rf :global(.rf-bleed img) {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .prose-rf :global(.rf-bleed::after) {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(22,25,16,0.85) 0%, rgba(22,25,16,0.55) 50%, rgba(22,25,16,0.3) 100%);
+      z-index: 1;
+    }
+    .prose-rf :global(.rf-bleed-inner) {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      padding: 4rem 1.5rem;
+      margin: 0 auto;
+      width: 100%;
+    }
+    @media (min-width: 768px) { .prose-rf :global(.rf-bleed-inner) { padding: 5rem 3rem; } }
+    .prose-rf :global(.rf-bleed blockquote) {
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: transparent !important;
+    }
+    .prose-rf :global(.rf-bleed blockquote p) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(28px, 3.6vw, 44px);
+      line-height: 1.2;
+      color: #E8E6E1 !important;
+      margin: 0 0 1.25rem !important;
+    }
+    .prose-rf :global(.rf-bleed cite) {
+      font-family:Helvetica,Arial,sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #A9BBA3;
+      font-style: normal;
+    }
+
+    /* ============== RF-CHART — pure-CSS horizontal bar chart ============== */
+    .prose-rf :global(.rf-chart) {
+      margin: 3rem 0;
+      padding: 2.25rem;
+      background: #E8E6E1;
+      border-radius: 20px;
+      border: 1px solid #C8C4BC;
+    }
+    .prose-rf :global(.rf-chart-header) { margin-bottom: 1.75rem; }
+    .prose-rf :global(.rf-chart-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#76574C; margin:0 0 0.5rem; }
+    .prose-rf :global(.rf-chart-header h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(26px,3vw,36px); color:#13342D; margin:0 0 0.4rem !important; letter-spacing:0.25px; }
+    .prose-rf :global(.rf-chart-header .lede) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:17px; color:#76574C; margin:0; line-height:1.4; }
+    .prose-rf :global(.rf-chart-rows) {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-top: 1.5rem;
+    }
+    .prose-rf :global(.rf-chart-row) {
+      display: grid;
+      grid-template-columns: 110px 1fr 90px;
+      align-items: center;
+      gap: 1rem;
+    }
+    @media (max-width: 640px) {
+      .prose-rf :global(.rf-chart-row) { grid-template-columns: 70px 1fr 70px; }
+    }
+    .prose-rf :global(.rf-chart-label) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-weight: 500;
+      font-size: 17px;
+      color: #3F261F;
+      letter-spacing: 0.25px;
+    }
+    .prose-rf :global(.rf-chart-bar) {
+      position: relative;
+      height: 32px;
+      background: rgba(118,87,76,0.12);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .prose-rf :global(.rf-chart-fill) {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: linear-gradient(90deg, #13342D 0%, #1E4A40 100%);
+      border-radius: 6px;
+      transition: width 600ms cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .prose-rf :global(.rf-chart-fill.comp) {
+      background: linear-gradient(90deg, #76574C 0%, #8F6E62 100%);
+    }
+    .prose-rf :global(.rf-chart-value) {
+      font-family:'JetBrains Mono',monospace;
+      font-weight: 500;
+      font-size: 16px;
+      color: #13342D;
+      text-align: right;
+    }
+    .prose-rf :global(.rf-chart-legend) {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #C8C4BC;
+      flex-wrap: wrap;
+    }
+    .prose-rf :global(.rf-chart-legend > span) {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family:Helvetica,Arial,sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #76574C;
+    }
+    .prose-rf :global(.rf-chart-legend .swatch) {
+      width: 14px; height: 14px; border-radius: 3px; display: inline-block;
+    }
+    .prose-rf :global(.rf-chart-legend .swatch.cedar) { background: #13342D; }
+    .prose-rf :global(.rf-chart-legend .swatch.walnut) { background: #76574C; }
+
+    /* ============== RF-FAQ — native <details> accordion ============== */
+    .prose-rf :global(.rf-faq) { margin: 1.5rem 0 0; }
+    .prose-rf :global(.rf-faq details) {
+      border: 1px solid #C8C4BC;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.4);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+    .prose-rf :global(.rf-faq summary) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      list-style: none;
+      padding: 1.1rem 1.5rem;
+      transition: background 200ms;
+    }
+    .prose-rf :global(.rf-faq summary::-webkit-details-marker) { display: none; }
+    .prose-rf :global(.rf-faq summary:hover) { background: rgba(255,255,255,0.7); }
+    .prose-rf :global(.rf-faq summary > .q) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-weight: 500;
+      font-size: 19px;
+      line-height: 1.3;
+      color: #13342D;
+      margin: 0;
+      letter-spacing: 0.25px;
+    }
+    .prose-rf :global(.rf-faq summary > .icon) {
+      flex-shrink: 0;
+      width: 14px; height: 14px;
+      transition: transform 250ms cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .prose-rf :global(.rf-faq details[open] summary > .icon) { transform: rotate(45deg); }
+    .prose-rf :global(.rf-faq details > div.a) {
+      padding: 0 1.5rem 1.25rem;
+      font-family:Helvetica,Arial,sans-serif;
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: #3F261F;
+    }
+
     .toc-link.active { color:#13342D; font-weight:600; }
   </style>
 
@@ -432,6 +817,7 @@ const schema = {
     const bar = document.getElementById('progressBar');
     const article = document.querySelector('article');
     const heroBg = document.getElementById('heroBg');
+    const tocFloat = document.getElementById('tocFloat');
     const onScroll = () => {
       if (article && bar) {
         const rect = article.getBoundingClientRect();
@@ -443,6 +829,10 @@ const schema = {
       if (heroBg) {
         const y = window.scrollY;
         if (y < 1000) heroBg.style.transform = `scale(1.08) translateY(${y * 0.25}px)`;
+      }
+      // Hide floating TOC during the hero, fade it in once user scrolls past
+      if (tocFloat) {
+        tocFloat.classList.toggle('visible', window.scrollY > window.innerHeight * 0.7);
       }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
