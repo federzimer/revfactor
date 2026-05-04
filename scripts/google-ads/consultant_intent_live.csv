@@ -1,0 +1,81 @@
+keyword,vol_mo,comp,comp_idx,low_bid_usd,high_bid_usd,category
+short term rental property manager,1000,LOW,32,5.79,26.92,DEPLOYED
+airbnb property manager,590,MED,38,3.85,12.68,DEPLOYED
+airbnb consultant,170,MED,52,5.0,14.87,DEPLOYED
+vacation rental revenue management,90,LOW,4,20.94,73.16,DEPLOYED
+short term rental consultant,70,MED,51,4.3,19.91,DEPLOYED
+airbnb revenue management,70,LOW,33,13.16,65.73,DEPLOYED
+vacation rental consultant,30,LOW,10,3.47,10.0,DEPLOYED
+airbnb consultant near me,20,MED,60,5.0,15.61,DEPLOYED
+str revenue management,20,MED,59,8.66,25.0,DEPLOYED
+short term rental revenue management,20,MED,52,17.5,91.59,DEPLOYED
+str consultant,10,MED,51,2.19,8.04,DEPLOYED
+airbnb revenue consultant,0,?,0,0.0,0.0,DEPLOYED
+vacation rental revenue consultant,0,?,0,0.0,0.0,DEPLOYED
+airbnb pricing consultant,0,?,0,0.0,0.0,DEPLOYED
+short term rental portfolio management,0,?,0,0.0,0.0,DEPLOYED
+airbnb portfolio management,0,?,0,0.0,0.0,DEPLOYED
+vacation rental portfolio manager,0,?,0,0.0,0.0,DEPLOYED
+professional airbnb manager,0,?,0,0.0,0.0,DEPLOYED
+str portfolio manager,0,?,0,0.0,0.0,DEPLOYED
+multi property airbnb,0,?,0,0.0,0.0,DEPLOYED
+air b and b property management,3600,LOW,27,4.42,15.26,RELATED
+airbnb management company,2400,MED,52,5.0,22.74,RELATED
+airbnb management business,2400,MED,52,5.0,22.74,RELATED
+airbnb management,1300,MED,42,4.79,16.5,RELATED
+short term rental management,1300,LOW,31,6.24,25.98,RELATED
+air b and b management,1300,MED,42,4.79,16.5,RELATED
+short term rental management companies,1000,MED,39,7.24,29.37,RELATED
+short term let property management,1000,LOW,32,5.79,26.92,RELATED
+short term rentals companies,880,LOW,31,3.37,13.69,RELATED
+airbnb property management companies,720,LOW,24,4.75,15.39,RELATED
+airbnb rental management,590,LOW,14,6.0,40.31,RELATED
+airbnb rental management companies,590,LOW,15,6.0,29.09,RELATED
+airbnb property management services,590,LOW,3,2.62,10.06,RELATED
+vacation rental property management companies,480,LOW,16,3.83,16.97,RELATED
+property management for vacation rentals,480,LOW,16,3.83,16.97,RELATED
+property management for vacation homes,480,LOW,16,3.83,16.97,RELATED
+airbnb management service,390,LOW,16,4.72,18.5,RELATED
+airbnb management company near me,390,MED,36,5.0,26.09,RELATED
+str management,390,MED,34,5.0,17.5,RELATED
+short let property management,390,LOW,0,0.0,0.0,RELATED
+short term property management,320,LOW,30,5.0,26.01,RELATED
+airbnb property management near me,320,LOW,7,4.61,14.68,RELATED
+airbnb management near me,320,LOW,10,5.0,21.69,RELATED
+short term rentals software,320,LOW,25,13.71,52.6,RELATED
+vacation rental property management services,260,LOW,4,6.56,18.64,RELATED
+str property management,210,MED,58,5.0,18.74,RELATED
+short term rental property management near me,210,LOW,10,5.0,23.83,RELATED
+airbnb vacation rental management,210,LOW,3,0.0,0.0,RELATED
+short term rental management near me,170,LOW,8,7.48,23.22,RELATED
+best airbnb management companies,140,LOW,32,6.0,32.35,RELATED
+property management software for short term rentals,140,LOW,26,8.22,81.01,RELATED
+short term rental property management companies,140,LOW,21,7.12,27.04,RELATED
+property management companies for airbnb,140,MED,38,3.45,20.72,RELATED
+short term rental agency,140,LOW,10,5.0,20.0,RELATED
+short term property management companies,110,LOW,31,7.07,30.97,RELATED
+vacation rental management companies near me,110,MED,60,4.11,18.99,RELATED
+pricelabs company,110,LOW,20,4.72,20.84,RELATED
+best short term rental management companies,90,LOW,27,7.67,31.28,RELATED
+best vacation rental management companies,90,MED,53,5.23,23.82,RELATED
+str management company,90,HIGH,71,6.22,23.46,RELATED
+short term rental booking software,90,LOW,21,8.58,70.22,RELATED
+short term property management software,70,MED,41,18.6,87.84,RELATED
+short term rental management companies near me,70,MED,49,6.66,30.65,RELATED
+property management for short term rentals,70,MED,48,5.0,23.24,RELATED
+short term rental management services,70,LOW,8,10.27,54.97,RELATED
+airbnb remote management,70,LOW,15,3.7,11.93,RELATED
+host property management,70,LOW,11,2.9,12.69,RELATED
+short term vacation rental management,50,LOW,6,5.19,24.93,RELATED
+short term property management near me,50,MED,66,6.32,26.17,RELATED
+airbnb administration,50,MED,38,5.97,15.0,RELATED
+airbnb administrator,50,MED,38,5.97,15.0,RELATED
+cost of airbnb management,40,MED,47,5.0,10.43,RELATED
+airbnb management cost,40,MED,47,5.0,10.43,RELATED
+airbnb property management cost,40,LOW,12,2.38,9.11,RELATED
+airbnb management agency,40,LOW,23,4.86,27.8,RELATED
+airbnb host management services,40,LOW,23,4.86,27.8,RELATED
+best airbnb property management companies,30,MED,48,5.0,23.48,RELATED
+full service airbnb management,30,LOW,24,5.0,20.32,RELATED
+air b and b management companies,30,HIGH,69,5.0,37.09,RELATED
+airbnb manager near me,30,MED,46,5.0,18.94,RELATED

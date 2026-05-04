@@ -45,3 +45,9 @@ tests/screenshots/
 _image-gallery/
 .vercel
 .env
+
+# Google Ads + OAuth secrets — never commit
+scripts/google-ads/google-ads.yaml
+scripts/google-ads/oauth_client.json
+scripts/google-ads/__pycache__/
+scripts/google-ads/.venv/
