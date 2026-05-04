@@ -81,10 +81,12 @@ def main():
         + " · Style: cinematic, warm cedar/moss tones, painterly natural light, hospitality magazine quality, no text, no watermarks, no people unless requested, soft grain"
     )
 
-    # Imagen 4 is Google's current top image model (2025). Falls back to imagen-3.0 if needed.
-    for model in ("imagen-4.0-generate-001", "imagen-3.0-generate-002", "imagen-3.0-generate-001"):
+    # Imagen 4 family — standard / fast / ultra. Standard balances quality + cost
+    # for inline blog use. Ultra is reserved for hero/OG.
+    resp = None
+    for model in ("imagen-4.0-generate-001", "imagen-4.0-fast-generate-001", "imagen-4.0-ultra-generate-001"):
         try:
-            resp = client.models.generate_images(
+            r = client.models.generate_images(
                 model=model,
                 prompt=full_prompt,
                 config=types.GenerateImagesConfig(
@@ -93,12 +95,17 @@ def main():
                     person_generation="DONT_ALLOW",
                 ),
             )
-            if resp.generated_images:
+            if r.generated_images:
+                print(f"  model used: {model}")
+                resp = r
                 break
+            else:
+                print(f"  ! {model}: no images returned (likely safety/policy block)")
         except Exception as e:
             print(f"  ! {model} failed: {e}")
             continue
-    else:
+
+    if resp is None or not resp.generated_images:
         print("All Imagen model attempts failed.", file=sys.stderr)
         sys.exit(2)
 
