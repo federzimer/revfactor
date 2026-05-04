@@ -182,8 +182,8 @@ const definedTerms = [
   <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-[#A9BBA3] z-[100] transition-[width] duration-75" style="width:0;"></div>
 
   <article>
-    <!-- IMMERSIVE FULL-BLEED HERO — sized to the image's native ~1.83 wide aspect -->
-    <section class="relative overflow-hidden text-[#E8E6E1]" style="height:78vh; min-height:580px; max-height:820px; background-color:#13342D;">
+    <!-- IMMERSIVE FULL-BLEED HERO — fills the viewport top-to-bottom -->
+    <section class="relative overflow-hidden text-[#E8E6E1]" style="height:100vh; height:100dvh; min-height:680px; background-color:#13342D;">
       <!-- Image as <img> (more reliable fill than bg-image), object-cover, parallax-ready -->
       <img
         id="heroBg"
@@ -192,10 +192,12 @@ const definedTerms = [
         class="absolute inset-0 w-full h-full object-cover will-change-transform"
         style="transform:scale(1.08); z-index:0;"
       />
+      <!-- Base darkening wash — uniform tint across the whole image so text is always legible -->
+      <div class="absolute inset-0 z-[1] pointer-events-none" style="background: rgba(22,25,16,0.35);"></div>
       <!-- Top gradient — for navbar legibility (bright sky needs strong overlay) -->
-      <div class="absolute top-0 left-0 right-0 h-56 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.9) 0%, rgba(22,25,16,0.6) 35%, rgba(22,25,16,0.15) 80%, rgba(22,25,16,0) 100%);"></div>
+      <div class="absolute top-0 left-0 right-0 h-72 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.95) 0%, rgba(22,25,16,0.7) 40%, rgba(22,25,16,0.25) 80%, rgba(22,25,16,0) 100%);"></div>
       <!-- Bottom gradient — strengthened for body-text legibility over bright skies -->
-      <div class="absolute bottom-0 left-0 right-0 h-[70%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.45) 30%, rgba(22,25,16,0.78) 60%, rgba(22,25,16,0.95) 100%);"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-[85%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.55) 25%, rgba(22,25,16,0.82) 55%, rgba(22,25,16,0.95) 80%, rgba(22,25,16,0.98) 100%);"></div>
 
       <div class="relative z-[2] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-20 pt-36">
         <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-6 inline-block">
