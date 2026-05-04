@@ -197,7 +197,7 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
     </div>
 
     <!-- BODY — CSS-grid container with width tiers (body / wide / full-bleed) -->
-    <div class="prose-rf py-20">
+    <div class="prose-rf pt-10 pb-20 md:pt-12 md:pb-24">
       <Content />
       {post.data.faqs && post.data.faqs.length > 0 && (
         <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
@@ -436,7 +436,7 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
     .prose-rf :global(.rf-quick-answer .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:9px; letter-spacing:2.5px; color:#7A8B76; margin:0 0 0.85rem; }
     .prose-rf :global(.rf-quick-answer p:last-child) { font-family:'Cormorant Garamond',Georgia,serif; color:#E8E6E1; font-size:19px; line-height:1.5; margin:0; }
 
-    .prose-rf :global(.rf-key-stats) { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:2.5rem 0; padding:1.5rem; background:rgba(93,109,89,0.08); border:1px solid rgba(93,109,89,0.2); border-radius:16px; }
+    .prose-rf :global(.rf-key-stats) { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:1rem 0 1.5rem; padding:1.25rem 1.5rem; background:rgba(93,109,89,0.08); border:1px solid rgba(93,109,89,0.2); border-radius:16px; }
     @media (max-width: 640px) { .prose-rf :global(.rf-key-stats) { grid-template-columns:1fr; } }
     .prose-rf :global(.rf-key-stats .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:8.5px; letter-spacing:1.5px; text-transform:uppercase; color:#5D6D59; margin:0 0 0.4rem; text-align:center; }
     .prose-rf :global(.rf-key-stats .number) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(22px,3vw,32px); color:#13342D; margin:0 0 0.25rem; text-align:center; line-height:1; }
