@@ -355,12 +355,14 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
     }
 
     /* Floating-TOC behavior: keep panel narrow, tighten line-height,
-       active item gets cedar treatment. Hidden until user scrolls past hero. */
+       active item gets cedar treatment. Hidden until user scrolls past hero.
+       Z-index 20 so full-bleed image sections (z-index 30) cover it cleanly. */
     #tocFloat {
       transform: translateZ(0);  /* avoid sub-pixel jitter on scroll */
       opacity: 0;
       pointer-events: none;
       transition: opacity 350ms cubic-bezier(0.25,0.1,0.25,1);
+      z-index: 20;
     }
     #tocFloat.visible {
       opacity: 1;
@@ -633,6 +635,7 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
       display: flex;
       align-items: center;
       isolation: isolate;
+      z-index: 30;  /* Above the floating TOC (z-20) so the image always wins on scroll */
     }
     .prose-rf :global(.rf-bleed img) {
       position: absolute;
@@ -765,6 +768,92 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
     }
     .prose-rf :global(.rf-chart-legend .swatch.cedar) { background: #13342D; }
     .prose-rf :global(.rf-chart-legend .swatch.walnut) { background: #76574C; }
+
+    /* ============== RF-BAND — colored-section breaks for contrast ==============
+       Full-bleed band on the WIDE grid track (not full viewport — keeps a
+       margin so it reads as a callout, not a hero). Variants: cedar, tobacco, moss.
+       Place inline in MDX wherever a content beat deserves emphasis. */
+    .prose-rf :global(.rf-band) {
+      margin: 3rem 0;
+      padding: 2.5rem 2.25rem;
+      border-radius: 20px;
+      position: relative;
+    }
+    @media (min-width: 768px) { .prose-rf :global(.rf-band) { padding: 3rem 3rem; } }
+    .prose-rf :global(.rf-band.cedar)   { background: #13342D; color: #DDDAD3; }
+    .prose-rf :global(.rf-band.tobacco) { background: #3F261F; color: #DDDAD3; }
+    .prose-rf :global(.rf-band.moss)    { background: #5D6D59; color: #E8E6E1; }
+    .prose-rf :global(.rf-band.bone)    { background: #E8E6E1; color: #3F261F; border: 1px solid #C8C4BC; }
+
+    .prose-rf :global(.rf-band .kicker) {
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #7A8B76;
+      margin: 0 0 1rem !important;
+    }
+    .prose-rf :global(.rf-band.tobacco .kicker) { color: #A9BBA3; }
+    .prose-rf :global(.rf-band.moss .kicker)    { color: #13342D; }
+    .prose-rf :global(.rf-band.bone .kicker)    { color: #76574C; }
+
+    .prose-rf :global(.rf-band h3) {
+      font-family: 'Cormorant Garamond', Georgia, serif !important;
+      font-weight: 500 !important;
+      font-size: clamp(28px, 3.4vw, 40px) !important;
+      line-height: 1.15 !important;
+      color: inherit !important;
+      margin: 0 0 1rem !important;
+      letter-spacing: 0.25px !important;
+    }
+    .prose-rf :global(.rf-band p) {
+      font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: 17px !important;
+      line-height: 1.65 !important;
+      color: inherit !important;
+      opacity: 0.92;
+      margin: 0 0 1em !important;
+    }
+    .prose-rf :global(.rf-band p:last-child) { margin-bottom: 0 !important; }
+    .prose-rf :global(.rf-band em) {
+      font-family: 'Cormorant Garamond', Georgia, serif !important;
+      color: inherit !important;
+      font-style: italic;
+      opacity: 1;
+    }
+    .prose-rf :global(.rf-band strong) { color: inherit !important; opacity: 1; }
+
+    /* Optional split layout — for stat + paragraph pairs inside a band */
+    .prose-rf :global(.rf-band-split) {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (min-width: 768px) {
+      .prose-rf :global(.rf-band-split) { grid-template-columns: 1fr 1.4fr; gap: 3rem; }
+    }
+    .prose-rf :global(.rf-band-stat) {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: 1;
+      color: inherit;
+      letter-spacing: -1px;
+    }
+    .prose-rf :global(.rf-band.cedar .rf-band-stat),
+    .prose-rf :global(.rf-band.tobacco .rf-band-stat) { color: #A9BBA3; }
+    .prose-rf :global(.rf-band-stat-label) {
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: inherit;
+      opacity: 0.7;
+      margin-top: 0.5rem;
+    }
 
     /* ============== RF-FAQ — native <details> accordion ============== */
     .prose-rf :global(.rf-faq) { margin: 1.5rem 0 0; }
