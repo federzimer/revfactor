@@ -295,18 +295,14 @@ def convert(html_path: Path, out_path: Path):
     r1 = legend.add_run("Black = original brief  ·  ")
     r1.font.color.rgb = BLACK
     r1.font.size = Pt(9)
-    r2 = legend.add_run("Blue = round-1 feedback  ·  ")
-    r2.font.color.rgb = BLUE
+    r2 = legend.add_run("Green = feedback  ·  ")
+    r2.font.color.rgb = GREEN
     r2.font.size = Pt(9)
     r2.bold = True
-    r3 = legend.add_run("Green = round-2 feedback (latest)  ·  ")
-    r3.font.color.rgb = GREEN
+    r3 = legend.add_run("Red = critical / blocker")
+    r3.font.color.rgb = RED
     r3.font.size = Pt(9)
     r3.bold = True
-    r4 = legend.add_run("Red = critical warning")
-    r4.font.color.rgb = RED
-    r4.font.size = Pt(9)
-    r4.bold = True
 
     for child in body.children:
         if isinstance(child, NavigableString):
