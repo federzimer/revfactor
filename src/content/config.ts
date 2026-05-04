@@ -85,7 +85,16 @@ const caseStudies = defineCollection({
       quote: z.string(),
       author: z.string(),
       source: z.string().optional(),
+      photo: z.string().optional(),
+      photoAlt: z.string().optional(),
     }).optional(),
+    /* Optional hero image — pulled from the public Airbnb listing or supplied
+       by Aaron. When set, replaces the data-led hero treatment with a
+       half-image hero. */
+    heroImage: z.string().optional(),
+    heroImageAlt: z.string().optional(),
+    /* Optional public listing URL — Airbnb / Vrbo / direct */
+    listingUrl: z.string().optional(),
     /* Tactics used — surfaces on the page as a "what changed" callout */
     tactics: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),

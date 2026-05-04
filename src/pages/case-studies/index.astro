@@ -54,6 +54,7 @@ const breadcrumbSchema = {
 <BaseLayout
   title="Case Studies — RevFactor | Documented STR Revenue Management Results"
   description="Documented +57% to +293% summer-pacing lifts across short-term rental properties under RevFactor management. Real data, real properties, real markets."
+  noindex={true}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -61,6 +62,10 @@ const breadcrumbSchema = {
   </Fragment>
 
   <Navbar client:load />
+
+  <div class="bg-[#8B3A3A] text-[#E8E6E1] py-2 px-6 text-center text-[11px] font-bold uppercase tracking-[2px]">
+    DRAFT — pending owner sign-off + Fede verification. Not public.
+  </div>
 
   <main class="min-h-screen bg-[#DDDAD3]">
     <!-- Header -->

@@ -16,7 +16,6 @@ const { study, allStudies } = Astro.props;
 const { Content } = await render(study);
 
 const p = study.data.pacing;
-const m = study.data.monthly ?? [];
 
 // Privacy guard: show first name only when written sign-off is pending.
 const displayName = study.data.clientNamePublic
@@ -25,7 +24,24 @@ const displayName = study.data.clientNamePublic
 
 const fmt = (n: number) => '$' + n.toLocaleString('en-US');
 const fmtPct = (n: number) => (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
-const fmtOcc = (n: number) => (n * 100).toFixed(1) + '%';
+
+// Build the hero metric tile array up here so the JSX template stays free of
+// generic-type syntax (Astro's JSX parser otherwise mis-reads `<{...}>` as a
+// Fragment opener).
+type Tile = { label: string; value: string; sub?: string; dark?: boolean };
+const tiles: Tile[] = [];
+if (p) {
+  tiles.push({ label: 'vs. STLY', value: fmtPct(p.liftPct), sub: '+' + fmt(p.otbRev - p.stlyRev), dark: true });
+  if (p.mpi !== undefined) tiles.push({ label: 'MPI', value: `${p.mpi.toFixed(2)}×`, sub: p.mktOcc !== undefined ? `vs. ${(p.mktOcc * 100).toFixed(0)}% mkt occ` : undefined });
+  tiles.push({ label: 'OTB Revenue', value: fmt(p.otbRev), sub: `STLY: ${fmt(p.stlyRev)}` });
+  if (p.otbAdr !== undefined) tiles.push({ label: 'ADR', value: fmt(p.otbAdr), sub: p.stlyAdr ? `STLY: ${fmt(p.stlyAdr)} (${fmtPct(((p.otbAdr - p.stlyAdr) / p.stlyAdr) * 100)})` : undefined });
+} else if (study.data.q1) {
+  const q = study.data.q1;
+  tiles.push({ label: 'vs. LY (Q1)', value: fmtPct(q.liftPct), sub: '+' + fmt(q.rev - q.lyRev), dark: true });
+  if (q.mpi !== undefined) tiles.push({ label: 'MPI (Q1)', value: `${q.mpi.toFixed(2)}×` });
+  tiles.push({ label: 'Q1 Revenue', value: fmt(q.rev), sub: `Q1 LY: ${fmt(q.lyRev)}` });
+  if (q.tier) tiles.push({ label: 'Tenure tier', value: q.tier });
+}
 
 // Other studies for the "more case studies" rail
 const otherStudies = allStudies
@@ -84,6 +100,7 @@ const breadcrumbSchema = {
   type="article"
   publishedTime={study.data.pubDate.toISOString()}
   modifiedTime={(study.data.updatedDate ?? study.data.pubDate).toISOString()}
+  noindex={true}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
@@ -91,6 +108,12 @@ const breadcrumbSchema = {
   </Fragment>
 
   <Navbar client:load />
+
+  <!-- Draft banner — pages are noindex'd until owner sign-off + Fede verification.
+       Remove this block + the noindex={true} prop above when Aaron publishes. -->
+  <div class="bg-[#8B3A3A] text-[#E8E6E1] py-2 px-6 text-center text-[11px] font-bold uppercase tracking-[2px]">
+    DRAFT — pending owner sign-off + Fede verification. Not public.
+  </div>
 
   <article>
     <!-- Hero — data-led, no image. The metrics ARE the hero. -->
@@ -160,41 +183,38 @@ const breadcrumbSchema = {
           )}
         </div>
 
-        <!-- Metric grid -->
-        {p && (
+        <!-- Metric grid — falls back to Q1 actuals when summer pacing isn't
+             on file. Tiles render conditionally so partial data doesn't
+             surface empty cells. -->
+        {tiles.length > 0 && (
           <div class="grid grid-cols-2 md:grid-cols-4 gap-px rounded-[16px] overflow-hidden bg-[#C8C4BC]">
-            <div class="bg-[#13342D] p-6">
-              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#A9BBA3] mb-3">vs. STLY</p>
-              <p class="text-[clamp(28px,4vw,40px)] text-[#E8E6E1] leading-none" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">
-                {fmtPct(p.liftPct)}
-              </p>
-              <p class="text-[11px] text-[#A9BBA3]/70 mt-2">+{fmt(p.otbRev - p.stlyRev)}</p>
-            </div>
-            <div class="bg-[#E8E6E1] p-6">
-              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-3">MPI</p>
-              <p class="text-[clamp(28px,4vw,40px)] text-[#3F261F] leading-none" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">
-                {p.mpi?.toFixed(2)}×
-              </p>
-              <p class="text-[11px] text-[#76574C] mt-2">vs. {((p.mktOcc ?? 0) * 100).toFixed(0)}% mkt occ</p>
-            </div>
-            <div class="bg-[#E8E6E1] p-6">
-              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-3">OTB Revenue</p>
-              <p class="text-[clamp(22px,3vw,32px)] text-[#3F261F] leading-none" style="font-family: 'JetBrains Mono', monospace;">
-                {fmt(p.otbRev)}
-              </p>
-              <p class="text-[11px] text-[#76574C] mt-2">STLY: {fmt(p.stlyRev)}</p>
-            </div>
-            <div class="bg-[#E8E6E1] p-6">
-              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-3">ADR</p>
-              <p class="text-[clamp(22px,3vw,32px)] text-[#3F261F] leading-none" style="font-family: 'JetBrains Mono', monospace;">
-                {fmt(p.otbAdr ?? 0)}
-              </p>
-              {p.stlyAdr && (
-                <p class="text-[11px] text-[#76574C] mt-2">
-                  STLY: {fmt(p.stlyAdr)} ({fmtPct(((p.otbAdr! - p.stlyAdr) / p.stlyAdr) * 100)})
+            {tiles.map((t) => (
+              <div class={t.dark ? 'bg-[#13342D] p-6' : 'bg-[#E8E6E1] p-6'}>
+                <p class={`text-[9px] font-bold uppercase tracking-[2px] mb-3 ${t.dark ? 'text-[#A9BBA3]' : 'text-[#8F6E62]'}`}>{t.label}</p>
+                <p class={`text-[clamp(22px,3.5vw,36px)] leading-none ${t.dark ? 'text-[#E8E6E1]' : 'text-[#3F261F]'}`} style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">
+                  {t.value}
                 </p>
-              )}
-            </div>
+                {t.sub && <p class={`text-[11px] mt-2 ${t.dark ? 'text-[#A9BBA3]/70' : 'text-[#76574C]'}`}>{t.sub}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        <!-- Optional listing hero image — pulled from Airbnb og:image when
+             available. Falls under hero metric tiles to anchor the page. -->
+        {study.data.heroImage && (
+          <div class="mt-8 rounded-[16px] overflow-hidden">
+            <img
+              src={study.data.heroImage}
+              alt={study.data.heroImageAlt ?? study.data.listing}
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+            {study.data.listingUrl && (
+              <p class="text-[10px] font-bold uppercase tracking-[2px] text-[#8F6E62] mt-2">
+                Listing: <a href={study.data.listingUrl} class="text-[#13342D] underline" target="_blank" rel="noopener">{new URL(study.data.listingUrl).hostname}</a>
+              </p>
+            )}
           </div>
         )}
       </div>
@@ -208,14 +228,23 @@ const breadcrumbSchema = {
         </div>
 
         {study.data.testimonial && (
-          <blockquote class="mt-12 p-8 bg-[#13342D] text-[#E8E6E1] rounded-[16px]">
-            <p class="text-[20px] leading-[1.5] mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;">
-              "{study.data.testimonial.quote}"
-            </p>
-            <p class="text-[11px] font-bold uppercase tracking-[2px] text-[#A9BBA3]">— {study.data.testimonial.author}</p>
-            {study.data.testimonial.source && (
-              <p class="text-[10px] text-[#A9BBA3]/60 mt-1">{study.data.testimonial.source}</p>
+          <blockquote class="mt-12 p-8 md:p-10 bg-[#13342D] text-[#E8E6E1] rounded-[16px] flex gap-6 items-start">
+            {study.data.testimonial.photo && (
+              <img
+                src={study.data.testimonial.photo}
+                alt={study.data.testimonial.photoAlt ?? study.data.testimonial.author}
+                class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover flex-shrink-0 border-2 border-[#A9BBA3]/40"
+              />
             )}
+            <div>
+              <p class="text-[20px] md:text-[22px] leading-[1.45] mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;">
+                "{study.data.testimonial.quote}"
+              </p>
+              <p class="text-[11px] font-bold uppercase tracking-[2px] text-[#A9BBA3]">— {study.data.testimonial.author}</p>
+              {study.data.testimonial.source && (
+                <p class="text-[10px] text-[#A9BBA3]/60 mt-1">{study.data.testimonial.source}</p>
+              )}
+            </div>
           </blockquote>
         )}
       </div>
