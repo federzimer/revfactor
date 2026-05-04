@@ -224,6 +224,12 @@ const definedTerms = [
             <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Published</div>
             <div>{formattedDate}</div>
           </div>
+          {post.data.updatedDate && post.data.updatedDate.toDateString() !== post.data.pubDate.toDateString() && (
+            <div>
+              <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Last Updated</div>
+              <div>{post.data.updatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</div>
+            </div>
+          )}
           {post.data.readingTime && (
             <div>
               <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Read time</div>
