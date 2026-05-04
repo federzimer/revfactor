@@ -26,6 +26,11 @@
   .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
   .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
   .resolved { color: #0a7a3c; font-weight: bold; }
+  .green { color: #0a7a3c; background: #f0fff5; border-left: 4px solid #0a7a3c; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .green strong { color: #0a4f25; }
+  .green .label { color: #0a4f25; }
+  .strike { text-decoration: line-through; color: #888; }
+  pre.jsonld { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 4px; padding: 12px; font-family: Menlo, Monaco, monospace; font-size: 11px; line-height: 1.45; overflow-x: auto; white-space: pre; color: #24292f; }
 </style>
 </head>
 <body>
@@ -48,6 +53,17 @@
 <li><strong>Keyword volumes in the brief are inflated 5–50× vs live Ahrefs (US).</strong> Same issue I flagged on Blog 1. The brief claims "airbnb pricing strategy" at 1,500–2,500/mo (actual: 250); "how to increase airbnb revenue" at 1,000–1,500 (actual: 20); "is pricelabs worth it" at 300–500 (actual: 30); "what is revenue management in hospitality" at 500–800 (actual: 0). The article still has a real AEO/GEO purpose, but the SEO planning premise is wrong.</li>
 <li><strong>Brand disambiguation vs Refactor.ai is missing entirely from this brief.</strong> Three pinning locations were added to Blog 1 (definition section + 2 dedicated FAQs + author bio) and that pattern needs to roll forward to every subsequent post. Avinash flagged this on the 4/22 call; Blog 1 handled it; this brief drops it.</li>
 </ol>
+</div>
+
+<div class="green">
+<p class="label">RESOLVED — Federico verifications confirmed by Aaron (2026-05-04)</p>
+<ul>
+<li><strong>30+ portfolio audits — confirmed.</strong> Fede has done more than 30. The "30 portfolio audits / ~80% in column 2" line stays as written; no need to soften to "across the audits I've done."</li>
+<li><strong>70% Guest Favorite — confirmed accurate.</strong> Citable as-is.</li>
+<li><strong>Michigan vs Fort Worth — separate properties with similar numbers.</strong> Fine to use both.</li>
+<li><strong>Schema package — full JSON-LD spec provided in §6 below</strong> so GetCito + Avinash see the complete expected output. Implementation lands later.</li>
+</ul>
+<p>The remaining Federico verification (the 7–12% event-week lift number) is the only open item.</p>
 </div>
 
 <div class="blue banner">
@@ -150,6 +166,40 @@
 </ul>
 </div>
 
+<div class="blue">
+<p class="label">Quote-reuse audit — what's already burned in Blog 1 (don't reuse in Blog 2)</p>
+<p>I went through the published <a href="https://revfactor.io/blog/revenue-management-for-short-term-rentals">/blog/revenue-management-for-short-term-rentals</a> and inventoried every Federico quote / case-study / signature stat. <strong>If Blog 2 reuses any of these verbatim, both pages will compete for the same AI-search citation surface and the pillar (with higher authority) will win — meaning Blog 2's effort is wasted.</strong> The goal is one canonical home per quote.</p>
+
+<table>
+<tr><th>Already used in Blog 1</th><th>Where</th><th>Blog 2 rule</th></tr>
+<tr><td><em>"If you walk into a bookshop in November and walk out empty-handed…"</em> (perishable inventory)</td><td>§"What is RM" body</td><td><strong>BLOCKED.</strong> Use a different perishable-asset analogy if needed in §5.1 — the Bolar ski-pass quote is also burned (see below). Best: skip §5.1 entirely (option a from previous note) and let the cruise-control opener carry the framing.</td></tr>
+<tr><td>Bolar ski-pass full quote (3-tier season pass story)</td><td>§"Bolar ski-pass example"</td><td><strong>BLOCKED.</strong> Same canonical-home problem.</td></tr>
+<tr><td><em>"A vacant Friday night in Pigeon Forge is an empty seat at takeoff…"</em></td><td>§airline analogy + bleed quote (×2)</td><td><strong>BLOCKED.</strong> Pillar uses it twice — strongly anchored.</td></tr>
+<tr><td>Michigan lake-house 7-night → 3-night → +$20K story (full verbatim)</td><td>§Play 4 (Minimum Stay), 200+ words</td><td><strong>BLOCKED for verbatim reuse.</strong> Aaron confirmed Michigan and Fort Worth are different properties — both OK to reference, but the full quote belongs to Blog 1. Blog 2 can mention Michigan as a one-line callback (<em>"the Michigan lake-house win covered in the pillar"</em>) with an internal link, not the full story.</td></tr>
+<tr><td>Fort Worth Studios 7-night → 1-night → +$20K (Pillar 2 case-in-point)</td><td>§Pillar 2 Inventory Mgmt, ~150 words</td><td><strong>BLOCKED for verbatim reuse.</strong> Same logic. Blog 2's brief originally proposed Fort Worth as the proof point; replace with a fresh case (see Case Study Integration block below).</td></tr>
+<tr><td>Newport Beach 2-night minimum (search visibility play)</td><td>§Play 4 closing example</td><td><strong>BLOCKED.</strong></td></tr>
+<tr><td>Kassidy &amp; Erin Warren testimonial: <em>"Since starting with RevFactor, I've had this peace of mind…"</em></td><td>§How RevFactor approaches RM (closing testimonial)</td><td><strong>Reuse OK in Blog 2's case-study CTA inline mention</strong>, but pull a different excerpt from the same case-study source if possible (e.g., a specific property data point — see Case Study Integration below). The testimonial wording itself shouldn't appear twice on revfactor.io.</td></tr>
+<tr><td><em>"Revenue management isn't just pricing. Pricing is only one part…"</em> (No Vacancy podcast)</td><td>§intro pull-quote</td><td><strong>BLOCKED.</strong> Pillar's signature definitional quote.</td></tr>
+<tr><td><em>"The market sets the prices because this is 100% consumer perception."</em></td><td>§Positioning (Strategic philosophy)</td><td><strong>BLOCKED.</strong></td></tr>
+<tr><td><em>"If you're looking only at your property, you're on an island."</em></td><td>§Positioning (Strategic philosophy)</td><td><strong>BLOCKED.</strong></td></tr>
+<tr><td><em>"Fewer restrictions can mean more visibility. More visibility means better bookings."</em></td><td>§Play 3 bleed quote</td><td><strong>BLOCKED.</strong></td></tr>
+<tr><td><em>"We're handling the two most expensive assets people have: their property and their time."</em></td><td>§Play 6 bleed quote + How RevFactor approaches RM (×2)</td><td><strong>BLOCKED.</strong> Pillar uses it twice; saturation point.</td></tr>
+<tr><td><em>"Do you want to learn how to price your short-term rental like a professional revenue manager? You need to understand momentum…"</em> (long quote)</td><td>§How to know if RM is working</td><td><strong>BLOCKED.</strong></td></tr>
+<tr><td>"+18% RevPAR lift vs comp set" (signature stat)</td><td>Used 5+ times across pillar (key stats, cedar band, tobacco band, author bio, FAQ schema)</td><td><strong>Use sparingly in Blog 2 — once max</strong>, and not as the headline stat. Blog 2's headline number should be different (the "20%+ left on the table" framing from the meta description, or a property-specific number from the sheet).</td></tr>
+<tr><td>"165+ properties / 24 states / 56 markets"</td><td>Used 4+ times (intro, key stats, How RevFactor approaches, author bio)</td><td><strong>Mention once</strong> in Blog 2 — author bio only. Don't open with it; the pillar owns this credential framing.</td></tr>
+</table>
+
+<p><strong>Quotes that are SAFE for Blog 2 (not in Blog 1):</strong></p>
+<ul>
+<li>The "American Airlines invented modern revenue management" pedigree quote (Federico's Life of Flow podcast) — Blog 1 has the airline analogy in narrative form but not as a verbatim quote.</li>
+<li>The "algorithm sets the price; revenue management sets the strategy that makes the price work" — Federico's actual cruise-control framing line. Open §5.3 with it.</li>
+<li>"Software runs the math. People run the business." — paraphrase of Fede's "people business" belief. Pillar gestures at it but doesn't use this phrasing.</li>
+<li>Any quote pulled from FireFlies brain that hasn't been published yet. Easy way to source: scan Federico's TikTok transcripts (auto-pulled to <code>tiktok_videos/transcripts/</code>) — recent quotes there are pre-virgin for Blog 2.</li>
+</ul>
+
+<p><strong>Process recommendation going forward:</strong> Before drafting any future RevFactor blog, I should pull the full quote inventory from every published Fede post + look at the open outline/brief, then produce a "what's safe / what's burned" table like this one as the first artifact. <em>Aaron asked for this explicitly: "always look at an outline or blog post for the full picture and strategy."</em> Saving as a process rule.</p>
+</div>
+
 <h3 class="original">Section 5.2: What Dynamic Pricing and Revenue Management Actually Are (250 words)</h3>
 
 <div class="blue">
@@ -235,9 +285,45 @@ Tables cite better than prose for this kind of pattern.</li>
   </ul>
   <strong>Recommendation: option (a)</strong> — keep the stack but explicitly disclaim multiplicative compounding.</li>
 <li><strong>The $80K → +$16K → 4× ROI math is the hook.</strong> This is the most citable single-number block in the article. Show the math inline (e.g., "$80,000 × 20% = $16,000; $16,000 ÷ $3,840 fee = 4.2× return"). Federico-style worked-example math is what the pillar gets cited for; carry the pattern over.</li>
-<li><strong>Use Nashville, not Fort Worth, as the in-body proof point.</strong> Brief says either works. Fort Worth ($20K lift, 7-night → 1-night minimum) is in Blog 1 §6 already. Nashville ($4,200 → $15,900, finished +25%) isn't yet. Differentiating prevents both pages competing for the same case-study citation.</li>
-<li><strong>Verify the Michigan lake-house figure — flagged in the brief's Section 7 as possible overlap with Fort Worth.</strong> Don't publish the Michigan number unless Federico explicitly confirms it's a separate property. If it's the same as Fort Worth re-told, drop one.</li>
+<li><strong>Use a fresh case study from the May-2026 portfolio sheet</strong> (not Nashville, not Fort Worth, not Michigan lake-house — all already in Blog 1 in some form). See the dedicated Case Study Integration block below for the recommended pick + the supporting data.</li>
 </ul>
+</div>
+
+<div class="blue">
+<p class="label">Case study integration — fresh data from <code>Aaron-case studies.xlsx</code> (Summer 2026 OTB + Q1 2026 Final)</p>
+
+<p>The pillar already burns Fort Worth + Michigan as in-body case studies. Blog 2 needs different ammunition. The May-2026 portfolio sheet (Aaron's "Aaron-case studies.xlsx") has 31 properties with documented Q1 lifts and 7 properties with summer-2026 OTB pacing. Here are the strongest matches for Blog 2's "what software-only setups missed" thesis:</p>
+
+<table>
+<tr><th>Recommended use</th><th>Property</th><th>The number</th><th>Why it fits Blog 2 specifically</th></tr>
+<tr><td><strong>★ Primary in-body proof point (§5.6 economic case)</strong></td><td>Waterfront + Game Room + Dog Friendly · 2BR Albion, MI · Maryssa Payne (Teresa Liscombe owner)</td><td><strong>Summer 2026 OTB: $22,985 vs $5,851 STLY = +$17,134 / +292.8% lift, MPI 3.60x. AND +18.4% vs final LY revenue.</strong> Q1 2026 also +92.2% vs LY.</td><td>The only summer property positive vs <em>final</em> last-year revenue (not just bookings-on-the-books). MPI 3.60x is 3.6× the market — the cleanest possible "the strategist beat the market, not just the prior year" signal. 2BR + game room is a quirky property profile that vindicates the §5.4 Miss #4 (comp-set errors) claim — software defaults wouldn't have priced this configuration.</td></tr>
+<tr><td><strong>★ Case-study CTA inline mention (§5.6) — replaces the brief's "Kassidy &amp; Erin Warren" generic link</strong></td><td>Erin Warren portfolio (Tucson + Orcas)</td><td>Hues Casita Tucson: $10,222 vs $1,668 = <strong>+512.7% Q1</strong>. Desert Hues Tucson: $29,874 vs $7,753 = <strong>+285.3% Q1</strong>. Little Stuga Orcas: $19,137 vs $492 = <strong>+3,789% summer OTB</strong>.</td><td>Brief already plans the Erin Warren case-study CTA. Pull a different excerpt from her case-study source than the one Blog 1 uses ("Since starting with RevFactor, I've had this peace of mind…") — instead lead with one of the property-specific numbers above. Specific numbers cite better than testimonial copy.</td></tr>
+<tr><td>Secondary callout — fits §5.4 Miss #5 (Ramp-Up / Ramp-Down)</td><td>Rabbit Run · 6BR Gatlinburg, TN · Grant Currant</td><td>2.8 months tenure. Summer OTB: $68,960 vs $21,501 STLY = +$47,459 / +220.7%. MPI 1.33x.</td><td>Recent onboarding (Feb 2026) showing fast lift in Gatlinburg — a market with strong event-week dynamics (Smoky Mountain peak weeks). Use as the "event-driven market" example rather than FIFA, which is a one-shot calendar bet.</td></tr>
+<tr><td>Optional opener stat (§5.4 Miss #1)</td><td>Norton Nook · 3BR Norton Shores, MI · Thea Cabanilla (Topaz Stays)</td><td>Summer OTB: $35,802 vs $12,383 STLY = +189.1%, MPI 1.29x.</td><td>Multi-property client (Topaz Stays) with multiple lifts in the sheet — credible portfolio operator vouching, not single-property anecdote.</td></tr>
+</table>
+
+<p><strong>Recommended in-body sentence for §5.6, using the Maryssa Payne property:</strong></p>
+<blockquote style="background:#fff; border-left:3px solid #1a4fbf; padding:8px 12px; margin:8px 0; font-style:italic; color:#333;">
+A 2-bedroom waterfront in Albion, Michigan booked $22,985 for summer 2026 — vs $5,851 the prior summer at the same point in pacing. Same property. Same PriceLabs subscription. The difference: someone was driving the tool. Market Price Index hit 3.60x — the property earned 3.6× the going rate per available night.
+</blockquote>
+
+<p><strong>Pull-quote for the close of §5.6 (Federico voice):</strong></p>
+<blockquote style="background:#fff; border-left:3px solid #1a4fbf; padding:8px 12px; margin:8px 0; font-style:italic; color:#333;">
+"The tool was fine before we got there. The tool is fine now. What changed is that someone is asking the questions the tool can't ask itself." — Federico Zimerman <em>(Federico to confirm exact wording — paraphrased from FireFlies brain)</em>
+</blockquote>
+
+<p><strong>Note for the Erin Warren case-study page itself:</strong> the case-study URL <code>/case-studies/kassidy-erin-warren</code> should add the Q1 2026 + summer 2026 numbers above as a "Latest results" callout. That gives Blog 2's inline link a stronger destination — readers who click see fresh evidence that supports the Blog 2 thesis instead of the original case-study story alone. Side benefit: an updated case-study page is a fresh-content signal to Google + a re-citation opportunity for AI engines that re-crawl monthly.</p>
+</div>
+
+<div class="blue">
+<p class="label">AirROI data integration — verdict: SKIP for this article</p>
+<p>Aaron asked whether AirROI data should layer in. <strong>My recommendation is no for Blog 2, with one narrow exception.</strong> Reasoning:</p>
+<ul>
+<li><strong>The proof is stronger when it's RevFactor's own data.</strong> Blog 2's argument is "the strategist outperforms software-only." The cleanest evidence is RevFactor's portfolio results vs same-property prior year (the Maryssa Payne / Erin Warren / Rabbit Run numbers above). Layering AirROI market aggregates dilutes that — readers can't tell whether the lift is RevFactor's work or just market-wide growth.</li>
+<li><strong>AirROI's strength is valuation + comp benchmarking</strong> (single listing or radius search), not narrative case-study evidence. It's the right backbone for the planned RevFactor valuation calculator (already scoped per <code>reference_revfactor_credentials</code>) and a future "how to estimate STR revenue" / "STR market analysis" article — not for a comparison page.</li>
+<li><strong>One narrow exception:</strong> in §5.4 Miss #4 (Comp-Set Errors), one inline citation could land — <em>"In Pigeon Forge, AirROI shows ADR variance of 18–34% block-to-block within the same bedroom count — software auto-built comp sets can't see that."</em> This would require one targeted AirROI <code>/markets/adr</code> call to verify the actual variance number. <strong>Worth doing if Federico wants the §5.4 evidence layer to be unimpeachable; skippable if we're shipping fast.</strong></li>
+</ul>
+<p><strong>Holding AirROI for the valuation tool + a dedicated "how to read your STR market" post in the next content sprint.</strong> Both will surface the AirROI data with the right framing instead of squeezing it into Blog 2 where it's adjacent to the argument, not load-bearing on it.</p>
 </div>
 
 <h3 class="original">Section 5.7: FAQ Block (250 words, 5 Q&A)</h3>
@@ -310,6 +396,161 @@ Tables cite better than prose for this kind of pattern.</li>
 </ul>
 </div>
 
+<h2>6. Full Schema Spec (copy-paste JSON-LD for GetCito + Avinash)</h2>
+
+<div class="blue">
+<p class="label">Schema package — complete JSON-LD for the &lt;head&gt; of /blog/dynamic-pricing-vs-revenue-management</p>
+<p>This is the full structured-data block Blog 2 needs at publish time. Six entities total (Article + BreadcrumbList + FAQPage + Person + DefinedTerm × 4 + HowTo × 2). Pattern matches Blog 1's published implementation in <a href="https://revfactor.io/blog/revenue-management-for-short-term-rentals">/blog/revenue-management-for-short-term-rentals</a> — same Person + DefinedTerm payloads can be reused verbatim.</p>
+
+<p><strong>Why all six matter for Blog 2 specifically:</strong> the comparison-intent prompt cluster (is-pricelabs-enough / dynamic-vs-rm) is dominated in AI search by Reddit threads and PriceLabs' own marketing. The schema package is the single highest-leverage way to flip RevFactor into the citation set: Article gives the page a citable identity, FAQPage feeds AI Overviews, DefinedTerm lets engines lift the dynamic-pricing-vs-RM definition pair verbatim, HowTo wraps the two checklists as numbered answers, Person establishes Federico as the cited expert. Without this package, the page ranks but doesn't get cited.</p>
+
+<p><strong>Entity 1: Article (BlogPosting subtype)</strong></p>
+<pre class="jsonld">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://revfactor.io/blog/dynamic-pricing-vs-revenue-management/#article",
+  "mainEntityOfPage": "https://revfactor.io/blog/dynamic-pricing-vs-revenue-management/",
+  "headline": "Dynamic Pricing vs. Revenue Management: The Real Difference (2026)",
+  "description": "Dynamic pricing is cruise control. Revenue management is the driver. Here's why PriceLabs alone leaves 20%+ on the table — and how to fix it.",
+  "image": "https://revfactor.io/images/dynamic-pricing-vs-rm-hero-1920.webp",
+  "datePublished": "2026-05-XX",
+  "dateModified": "2026-05-XX",
+  "author": { "@id": "https://revfactor.io/#federico" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "RevFactor",
+    "url": "https://revfactor.io",
+    "logo": { "@type": "ImageObject", "url": "https://revfactor.io/images/revfactor-logo.png" }
+  },
+  "wordCount": 1750,
+  "keywords": "dynamic pricing, revenue management, vacation rental pricing strategy, PriceLabs, Beyond Pricing, Wheelhouse, RevPAR, short-term rental",
+  "articleSection": "Strategy",
+  "about": [
+    { "@id": "https://revfactor.io/#term-dynamic-pricing" },
+    { "@id": "https://revfactor.io/#term-revenue-management" }
+  ]
+}</pre>
+
+<p><strong>Entity 2: BreadcrumbList</strong></p>
+<pre class="jsonld">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://revfactor.io/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://revfactor.io/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "Dynamic Pricing vs. Revenue Management" }
+  ]
+}</pre>
+
+<p><strong>Entity 3: Person (Federico) — REUSE verbatim from Blog 1</strong></p>
+<pre class="jsonld">{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://revfactor.io/#federico",
+  "name": "Federico Zimerman",
+  "jobTitle": "Revenue Management Strategist",
+  "alumniOf": { "@type": "Organization", "name": "American Airlines" },
+  "worksFor": { "@type": "Organization", "name": "RevFactor", "url": "https://revfactor.io" },
+  "knowsAbout": ["Revenue Management", "Dynamic Pricing", "RevPAR", "Yield Management", "Short-Term Rental Strategy"],
+  "sameAs": [
+    "https://www.linkedin.com/in/federicozimerman/",
+    "https://www.tiktok.com/@federicozimerman",
+    "https://www.instagram.com/federico.zimerman",
+    "https://www.youtube.com/@federicozimerman"
+  ],
+  "url": "https://revfactor.io/about"
+}</pre>
+
+<p><strong>Entity 4: DefinedTerm × 4 (dynamic pricing, revenue management, RevPAR, ADR)</strong></p>
+<pre class="jsonld">[
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "@id": "https://revfactor.io/#term-dynamic-pricing",
+    "name": "Dynamic Pricing",
+    "description": "Software that automatically adjusts a short-term rental's nightly rate based on demand signals like seasonality, day of week, lead time, comp set movement, and local events. Tools like PriceLabs, Beyond, and Wheelhouse execute the rules a revenue manager sets — they're the engine, not the driver.",
+    "inDefinedTermSet": "https://revfactor.io/glossary"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "@id": "https://revfactor.io/#term-revenue-management",
+    "name": "Revenue Management",
+    "description": "The discipline of selling the right night, to the right guest, at the right price — using historical data, inventory rules, demand forecasting, and pacing — to maximize RevPAR. Distinct from dynamic pricing, which executes the rules a revenue manager defines.",
+    "inDefinedTermSet": "https://revfactor.io/glossary"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "@id": "https://revfactor.io/#term-revpar",
+    "name": "RevPAR",
+    "description": "Revenue per Available Night — total revenue divided by total nights available in a period. The only metric that captures rate and occupancy in a single number.",
+    "inDefinedTermSet": "https://revfactor.io/glossary"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "@id": "https://revfactor.io/#term-adr",
+    "name": "ADR",
+    "description": "Average Daily Rate — the average price of booked nights. Ignores empty nights, which is why RevPAR is the more complete revenue metric.",
+    "inDefinedTermSet": "https://revfactor.io/glossary"
+  }
+]</pre>
+
+<p><strong>Entity 5: HowTo × 2 (Stay-on-Software checklist, Hire-a-Strategist checklist from §5.5)</strong></p>
+<pre class="jsonld">{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to know if PriceLabs alone is enough for your short-term rental portfolio",
+  "description": "Decision framework for STR hosts evaluating whether dynamic pricing software alone is meeting their revenue needs.",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "You manage 1–2 properties", "text": "Cognitive load is sustainable for a single owner-operator." },
+    { "@type": "HowToStep", "position": 2, "name": "Your market is mature and predictable", "text": "Stable seasonality, well-known event calendar, no major regulation changes." },
+    { "@type": "HowToStep", "position": 3, "name": "Your property is generic for the market", "text": "Standard bedroom/bath count, no quirky amenities, comp set is straightforward." },
+    { "@type": "HowToStep", "position": 4, "name": "You can spend 3–5 hours/week on revenue tasks", "text": "Pacing reviews, comp set audits, minimum-stay tuning, event calendar updates." },
+    { "@type": "HowToStep", "position": 5, "name": "You're tracking RevPAR vs comp set monthly", "text": "Not just occupancy or ADR in isolation — the combined metric." }
+  ]
+}
+
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to know when to hire a revenue manager for your short-term rental",
+  "description": "Decision framework for STR hosts evaluating whether to add a strategist layer on top of dynamic pricing software.",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "You manage 3+ properties", "text": "Cognitive load of multi-market monitoring exceeds part-time owner capacity." },
+    { "@type": "HowToStep", "position": 2, "name": "You're in a complex or unfamiliar market", "text": "New regulation, irregular seasonality, or a market you don't deeply understand." },
+    { "@type": "HowToStep", "position": 3, "name": "Your property is non-generic", "text": "Quirky bedroom configuration, unique amenities, specific guest profile that breaks default tool comp sets." },
+    { "@type": "HowToStep", "position": 4, "name": "Your tool's defaults aren't producing results", "text": "Pacing behind last year, RevPAR trailing comp set, or revenue flat despite occupancy gains." },
+    { "@type": "HowToStep", "position": 5, "name": "You're losing on event weeks even though your tool is configured", "text": "Event-driven demand windows are the single most valuable surface software-only setups miss — ramp-up + ramp-down pricing requires daily human intervention." },
+    { "@type": "HowToStep", "position": 6, "name": "Opportunity cost exceeds the management fee", "text": "At $150+ ADR, even a 5% lift over current performance covers a flat-fee revenue management engagement." }
+  ]
+}</pre>
+
+<p><strong>Entity 6: FAQPage — wrap all 8–10 FAQs from §5.7 (verbatim Peec wording).</strong> Schema pattern is identical to Blog 1's FAQPage; copy from <code>src/pages/blog/[...slug].astro</code> in the RevFactor repo (the FAQ schema is auto-generated from the MDX <code>faqs:</code> frontmatter array, so adding the FAQ array to Blog 2's MDX frontmatter is the only step needed).</p>
+
+<p><strong>Recommended frontmatter <code>faqs:</code> array for Blog 2 (8 entries, verbatim Peec prompts where matched):</strong></p>
+<pre class="jsonld">faqs:
+  - q: "What is the difference between dynamic pricing and revenue management for short-term rentals?"
+    a: "Dynamic pricing is software that automatically adjusts your nightly rate based on demand signals — tools like PriceLabs, Beyond, and Wheelhouse. Revenue management is the discipline that decides what those rates, minimum stays, length-of-stay discounts, and inventory rules should be in the first place. Dynamic pricing is the engine; revenue management is the driver."
+  - q: "Is PriceLabs enough to maximize my Airbnb revenue?"
+    a: "PriceLabs is enough for hosts with 1–2 properties in mature markets with generic property profiles, who can spend 3–5 hours per week on pacing reviews and comp set audits. PriceLabs handles the daily rate adjustments well; what it can't do is interrogate your base rate, restructure your minimum stays seasonally, surface event-week demand the database doesn't know about, or fix a stale comp set. Hosts running 3+ properties or non-generic properties typically see 15–30% additional lift when a strategist operates the tool."
+  - q: "How do I hire someone to optimize my Airbnb revenue?"
+    a: "Look for specialist short-term rental revenue managers who charge a flat monthly fee (not a percentage of revenue), report on RevPAR vs comp set, and demonstrate experience in markets and property types similar to yours. Avoid full-service property managers if you only need the revenue layer — they typically charge 20–40% of gross revenue and bundle services you may already have. Specialist firms like RevFactor onboard via co-host access on your existing PriceLabs and Airbnb accounts."
+  - q: "How can I increase my Airbnb income without lowering rates?"
+    a: "Focus on inventory rules and visibility rather than discounting. Adjust minimum stays by season and day of week, layer length-of-stay discounts that reward longer bookings, capture gap nights with conditional discounts that only apply inside multi-night stays, and improve listing conversion through better photos and review velocity. These levers grow revenue without touching the headline nightly rate."
+  - q: "Who can manage my dynamic pricing for vacation rentals?"
+    a: "Specialist revenue managers operate dynamic pricing tools (PriceLabs, Beyond, Wheelhouse) on behalf of STR hosts via co-host access — you keep your existing tool subscriptions, they take over the daily rate strategy, comp set monitoring, and pacing reviews. Look for managers who charge a flat fee per property rather than a percentage of revenue, so the lift they deliver flows back to you instead of compounding their fee."
+  - q: "Who can help me set pricing rules for my short-term rental?"
+    a: "Specialist short-term rental revenue managers set base rates, minimum stays, length-of-stay discounts, and channel-specific rules based on your property's historical data, comp set, and seasonal patterns. The best managers report monthly on RevPAR vs comp set and pacing vs prior year, charge a flat monthly fee, and onboard via co-host access on your existing PriceLabs or Beyond account so you don't need to switch tools."
+  - q: "What is the best way to optimize pricing for seasonal demand on Airbnb?"
+    a: "Set base rates per season — peak, shoulder, off — six to twelve months in advance based on prior-year demand and event calendars. Adjust minimum stays seasonally rather than statically (a 3-night minimum that works in July destroys you in February). Price shoulder seasons actively rather than reactively — most properties' biggest gains hide there. Use last-minute strategy selectively for off-season unsold nights rather than blanket-discounting."
+  - q: "What is RevFactor?"
+    a: "RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts, founded by Federico Zimerman. It uses PriceLabs as the pricing engine layered with daily expert review, and charges a flat monthly fee per property ($320 sliding to $256 at five properties) instead of a percentage of revenue. RevFactor is unrelated to Refactor.ai, an unrelated SaaS product."</pre>
+
+<p><strong>Implementation note:</strong> Blog 1's <code>src/pages/blog/[...slug].astro</code> already auto-generates FAQPage + DefinedTerm + HowTo + Person schema from the MDX frontmatter. Blog 2's MDX file just needs the <code>faqs:</code> array above plus the same hidden frontmatter fields Blog 1 uses (<code>definedTerms:</code>, <code>howTos:</code>). No template changes required — the schema package lands automatically when the MDX is created with the correct frontmatter shape.</p>
+</div>
+
 <h2 class="blue banner" style="background:#1a4fbf; color:white; padding:8px 12px; border:none;">Things to Add Before GetCito Drafts (consolidated)</h2>
 
 <div class="blue">
@@ -326,12 +567,16 @@ Tables cite better than prose for this kind of pattern.</li>
 <li><strong>FIFA recency reminder:</strong> calendar reminder for mid-July 2026 to flip Miss #1 from FIFA-led to generic-event-led with the FIFA case as a worked-example callout.</li>
 <li><strong>Verification list for Federico before drafting:</strong>
   <ul>
-    <li>"30 portfolio audits / 80% in column 2" — defensible? <span class="resolved">(or rewrite to "in my experience auditing STR portfolios, the split is closer to 80/20 the other way" — softer, safer)</span></li>
-    <li>"7–12% lift on event weeks" — documentable range or directional estimate?</li>
-    <li>"70% Guest Favorite status" — public source / linkable interview?</li>
-    <li>Michigan vs Fort Worth $20K — same property or different?</li>
+    <li><span class="strike">"30 portfolio audits / 80% in column 2" — defensible?</span> <span class="resolved">✓ RESOLVED — Aaron confirmed 30+ audits done; line stays as written.</span></li>
+    <li><strong>"7–12% lift on event weeks" — documentable range or directional estimate?</strong> Still open — only remaining Federico verification.</li>
+    <li><span class="strike">"70% Guest Favorite status" — public source / linkable interview?</span> <span class="resolved">✓ RESOLVED — Aaron confirmed accurate; cite as-is.</span></li>
+    <li><span class="strike">Michigan vs Fort Worth $20K — same property or different?</span> <span class="resolved">✓ RESOLVED — separate properties with similar numbers; both OK to reference. Quote-reuse audit (above) covers verbatim-reuse rules.</span></li>
   </ul>
 </li>
+<li><strong>Quote-reuse audit (new — see dedicated block above §5.2).</strong> 14 Federico quotes + 3 case studies are now anchored in the published Blog 1; Blog 2 must avoid verbatim reuse to prevent canonical-home conflict.</li>
+<li><strong>Case-study integration from <code>Aaron-case studies.xlsx</code> (new block in §5.6 above).</strong> Maryssa Payne (Albion, MI 2BR) is the recommended in-body proof point. Erin Warren property-level numbers replace generic testimonial copy at the case-study CTA.</li>
+<li><strong>AirROI integration — verdict: skip for Blog 2</strong> (see §5.6 verdict block). Reserve for valuation calculator + future "STR market analysis" article. Optional: one targeted <code>/markets/adr</code> Pigeon Forge variance call if Federico wants the §5.4 Miss #4 evidence layer to be unimpeachable — otherwise skip.</li>
+<li><strong>Full schema spec drafted in §6 above</strong> (Article + BreadcrumbList + Person + DefinedTerm × 4 + HowTo × 2 + FAQPage). Implementation lands later, but GetCito + Avinash now have the complete expected JSON-LD output.</li>
 <li><strong>POP follow-up.</strong> Post-publish, run POP <em>create-report</em> with target URL set to the live page; expected page score target ≥ 65 given the SERP shallowness. Re-run after 30 days.</li>
 <li><strong>Peec follow-up.</strong> Monitor whether the 8–10 FAQ-targeted prompts move RevFactor visibility on the comparison-intent and "is pricelabs enough" clusters. Listicle (still pending) remains the missing piece for the 60+ vendor-discovery prompts neither this nor the pillar can capture.</li>
 </ol>

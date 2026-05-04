@@ -24,9 +24,18 @@ RED = RGBColor(0x8B, 0x1A, 0x1A)
 RED_DARK = RGBColor(0x5A, 0x00, 0x00)
 BLACK = RGBColor(0x22, 0x22, 0x22)
 GREEN = RGBColor(0x0A, 0x7A, 0x3C)
+GREEN_DARK = RGBColor(0x0A, 0x4F, 0x25)
+GRAY = RGBColor(0x88, 0x88, 0x88)
 
 BLUE_BG_HEX = "F0F5FF"
 RED_BG_HEX = "FFF0F0"
+GREEN_BG_HEX = "F0FFF5"
+CODE_BG_HEX = "F6F8FA"
+
+CTX_TO_COLOR = {"blue": BLUE, "red": RED, "green": GREEN, "black": BLACK}
+CTX_TO_BG = {"blue": BLUE_BG_HEX, "red": RED_BG_HEX, "green": GREEN_BG_HEX}
+CTX_TO_BORDER = {"blue": "1A4FBF", "red": "8B1A1A", "green": "0A7A3C"}
+CTX_TO_LABEL_COLOR = {"blue": BLUE_DARK, "red": RED_DARK, "green": GREEN_DARK}
 
 
 def shade_cell(cell, hex_color):
@@ -60,11 +69,7 @@ def add_left_border(paragraph, hex_color):
 
 
 def context_color(ctx):
-    if ctx == "blue":
-        return BLUE
-    if ctx == "red":
-        return RED
-    return BLACK
+    return CTX_TO_COLOR.get(ctx, BLACK)
 
 
 def add_runs(paragraph, node, ctx, bold=False, italic=False):
@@ -116,6 +121,18 @@ def add_runs(paragraph, node, ctx, bold=False, italic=False):
             run.italic = True
         if href:
             run.add_comment if False else None
+    elif name == "span":
+        classes = node.get("class", [])
+        for child in node.children:
+            add_runs(paragraph, child, ctx, bold=bold, italic=italic)
+        if "strike" in classes:
+            for run in paragraph.runs[-len(list(node.children)):]:
+                run.font.strike = True
+                run.font.color.rgb = GRAY
+        elif "resolved" in classes:
+            for run in paragraph.runs[-len(list(node.children)):]:
+                run.font.color.rgb = GREEN
+                run.bold = True
     else:
         for child in node.children:
             add_runs(paragraph, child, ctx, bold=bold, italic=italic)
@@ -181,16 +198,18 @@ def render_table(doc, table_tag, ctx):
 
 
 def render_callout_block(doc, div, ctx):
-    """Render a div with class .blue or .red as a sequence of shaded paragraphs."""
-    # Insert label paragraphs from .label / .label-red children naturally
+    """Render a div with class .blue / .red / .green as a sequence of shaded paragraphs."""
+    bg = CTX_TO_BG.get(ctx, BLUE_BG_HEX)
+    border = CTX_TO_BORDER.get(ctx, "1A4FBF")
+    label_color = CTX_TO_LABEL_COLOR.get(ctx, BLUE_DARK)
     for child in div.children:
         if isinstance(child, NavigableString):
             txt = str(child).strip()
             if not txt:
                 continue
             p = doc.add_paragraph()
-            shade_paragraph(p, BLUE_BG_HEX if ctx == "blue" else RED_BG_HEX)
-            add_left_border(p, "1A4FBF" if ctx == "blue" else "8B1A1A")
+            shade_paragraph(p, bg)
+            add_left_border(p, border)
             run = p.add_run(txt)
             run.font.color.rgb = context_color(ctx)
             run.font.size = Pt(11)
@@ -202,27 +221,48 @@ def render_callout_block(doc, div, ctx):
         if name == "p":
             is_label = "label" in classes or "label-red" in classes
             p = doc.add_paragraph()
-            shade_paragraph(p, BLUE_BG_HEX if ctx == "blue" else RED_BG_HEX)
-            add_left_border(p, "1A4FBF" if ctx == "blue" else "8B1A1A")
+            shade_paragraph(p, bg)
+            add_left_border(p, border)
             for inline in child.children:
                 add_runs(p, inline, ctx, bold=is_label)
             if is_label:
-                # uppercase + smaller
                 for run in p.runs:
                     run.text = run.text.upper()
                     run.font.size = Pt(9)
-                    run.font.color.rgb = BLUE_DARK if ctx == "blue" else RED_DARK
+                    run.font.color.rgb = label_color
         elif name in ("ul", "ol"):
             render_list(doc, child, ctx, ordered=(name == "ol"))
         elif name == "table":
             render_table(doc, child, ctx)
-        elif name == "div":
-            # Nested div — recurse with same context
-            render_callout_block(doc, child, ctx)
-        else:
-            # Fallback: plain paragraph
+        elif name == "blockquote":
             p = doc.add_paragraph()
-            shade_paragraph(p, BLUE_BG_HEX if ctx == "blue" else RED_BG_HEX)
+            shade_paragraph(p, "FFFFFF")
+            add_left_border(p, border)
+            for inline in child.children:
+                add_runs(p, inline, ctx, italic=True)
+        elif name == "pre":
+            # Code block — render as monospace, light gray bg, smaller font
+            text = child.get_text()
+            for line in text.split("\n"):
+                p = doc.add_paragraph()
+                shade_paragraph(p, CODE_BG_HEX)
+                run = p.add_run(line if line.strip() else " ")
+                run.font.name = "Menlo"
+                run.font.size = Pt(9)
+                run.font.color.rgb = BLACK
+        elif name == "div":
+            sub_classes = child.get("class", [])
+            if "blue" in sub_classes:
+                render_callout_block(doc, child, "blue")
+            elif "red" in sub_classes:
+                render_callout_block(doc, child, "red")
+            elif "green" in sub_classes:
+                render_callout_block(doc, child, "green")
+            else:
+                render_callout_block(doc, child, ctx)
+        else:
+            p = doc.add_paragraph()
+            shade_paragraph(p, bg)
             for inline in child.children:
                 add_runs(p, inline, ctx)
 
@@ -305,18 +345,19 @@ def convert(html_path: Path, out_path: Path):
         elif name == "div":
             if "blue" in classes:
                 render_callout_block(doc, child, "blue")
-                doc.add_paragraph()  # spacer
+                doc.add_paragraph()
             elif "red" in classes:
                 render_callout_block(doc, child, "red")
                 doc.add_paragraph()
+            elif "green" in classes:
+                render_callout_block(doc, child, "green")
+                doc.add_paragraph()
             else:
-                # Plain wrapper, recurse into children at top level
                 for sub in child.children:
                     if isinstance(sub, Tag):
-                        # Lazy: synthesize the same logic as a recursive top-level call
                         if sub.name == "p":
                             sub_classes = sub.get("class", [])
-                            sub_ctx = "blue" if "blue" in sub_classes else "red" if "red" in sub_classes else "black"
+                            sub_ctx = "blue" if "blue" in sub_classes else "red" if "red" in sub_classes else "green" if "green" in sub_classes else "black"
                             render_paragraph(doc, sub, sub_ctx)
         elif name == "table":
             ctx = "blue" if "blue" in classes else "red" if "red" in classes else "black"
