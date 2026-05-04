@@ -15,6 +15,9 @@ const blog = defineCollection({
     imageAlt: z.string().optional(),
     featured: z.boolean().default(false),
     readingTime: z.number().optional(),
+    /* Optional FAQ block — drives both the on-page accordion AND the FAQPage JSON-LD.
+       Single source of truth so the visible content and schema can never drift. */
+    faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
   }),
 });
 

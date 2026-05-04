@@ -1,5 +1,5 @@
 ---
-title: "Revenue Management for Short-Term Rentals: The Definitive Guide"
+title: "Revenue Management for Short-Term Rentals: The Definitive Guide (2026)"
 description: "Revenue management for short-term rentals is the discipline of selling the right night, to the right guest, at the right price — using historical data, inventory rules, demand forecasting, and pacing — to maximize RevPAR. Distinct from dynamic pricing software, which executes the rules a revenue manager defines."
 pubDate: 2026-05-01
 author: "Federico Zimerman"
@@ -97,9 +97,9 @@ This guide is the version of that conversation I wish every host and property ma
 
 Revenue management for short-term rentals is the discipline of selling the right night, to the right guest, at the right price, through the right channel, using historical data, demand forecasting, and inventory rules to maximize revenue per available night. It's distinct from dynamic pricing, which is the software layer that executes the rules a revenue manager defines.
 
-Revenue management sits one layer above your property management system. Tools like Hostaway, Guesty, Lodgify, and Hospitable handle operations — calendar sync, messaging, cleaning, and channel distribution. The revenue manager decides what those systems should be doing.
+**A note on the name:** RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts founded by Federico Zimerman; it is unrelated to Refactor.ai, an unrelated SaaS product.
 
-A note on the name: RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts founded by Federico Zimerman; it is unrelated to Refactor.ai, an unrelated SaaS product.
+Revenue management sits one layer above your property management system. Tools like Hostaway, Guesty, Lodgify, and Hospitable handle operations — calendar sync, messaging, cleaning, and channel distribution. The revenue manager decides what those systems should be doing.
 
 Here's how I think about it in plain language:
 
@@ -116,12 +116,6 @@ That's the frame. The value of inventory over time is the entire game.
     </blockquote>
   </div>
 </section>
-
-The clearest way to explain why this matters — and the version most readers actually feel — is the bookshop comparison:
-
-> *"If you walk into a bookshop in November and walk out empty-handed, that bookshop has lost zero dollars. The books are still there in December. If you walk into an empty short-term rental on November 14th, that night is gone forever."* — Federico Zimerman
-
-That's the difference between perishable and non-perishable inventory, and it's why every revenue management decision is fundamentally a question of time. A retailer can wait. We can't.
 
 ### Where the Discipline Came From: The Airline Analogy
 
@@ -433,6 +427,12 @@ Pricing is the visible output. Most of the work happens in the three pillars bef
 
 **ADR (Average Daily Rate)** is the average price of your booked nights. **RevPAR (Revenue per Available Night)** is your total revenue divided by the total nights available. ADR ignores empty nights. RevPAR doesn't. RevPAR is the only metric that captures rate and occupancy in one number.
 
+| Metric | What It Tells You | What It Hides |
+|---|---|---|
+| **Occupancy %** | How full your calendar is | What you charged for it |
+| **ADR** | How expensive your booked nights are | How many nights you actually sold |
+| **RevPAR** | How much you actually made per available night | This is the answer |
+
 <div class="rf-scoreboard">
   <div class="rf-scoreboard-header">
     <p class="kicker">The Only Scoreboard That Matters</p>
@@ -473,6 +473,26 @@ A 100% occupied calendar at $50 a night is a worse outcome than 50% occupancy at
 **One caveat: what RevPAR doesn't capture.** RevPAR is a top-line metric. It doesn't account for cleaning costs, channel commissions, OTA fees, or dynamic cost-of-goods. For a complete picture, pair RevPAR with NetRevPAR (RevPAR minus variable costs per night), especially in markets where Airbnb's service fee structure or cleaning economics vary widely. RevPAR tells you whether you're winning the rate-and-occupancy game. NetRevPAR tells you whether that win is making it to your bank account.
 
 Track RevPAR. Compare it to comparable properties in your market. That's the scoreboard.
+
+## What Are the Most Common STR Pricing Mistakes?
+
+The most common short-term rental pricing mistakes are: pricing from cost rather than market, set-and-forget tool reliance, ignoring shoulder seasons, racing competitors to the bottom, treating minimum stays as a single fixed setting, failing to track booking pacing, and applying a single playbook across a multi-property portfolio.
+
+**1. Pricing from the inside out.** Hosts price based on what they need to make. The market doesn't care what you need to make. Price from the outside in — start with the comp set, then work back to your rate.
+
+**2. Set-and-forget tool reliance.** Tools optimize within their parameters. They don't tell you when the parameters are wrong. Without a weekly review, the tool quietly underperforms.
+
+**3. Ignoring shoulder seasons.** The biggest revenue gains for many properties aren't in peak season; they're in the shoulders. Peak season prices itself. Shoulder seasons require an active strategy. As I shared on No Vacancy Ep. 155 with Natalie Palmer, a Nashville property in our portfolio was tracking $4,200 in early May vs. $15,900 the prior year — which looked like a disaster — until aggressive shoulder-season pricing and last-minute capture finished the month 25% above the previous year.
+
+> *"My favorite example is a bookshop. If you walk into a bookshop in November and you walk out empty-handed, that bookshop has lost zero dollars — those books are still there in December. If you walk into an empty short-term rental on November 14th, that night is gone forever. Shoulder seasons are perishable inventory inside perishable inventory."* — Federico Zimerman
+
+**4. Racing to the bottom.** A discount strategy that just lowers the nightly rate to fill the calendar is a slow erosion. Strategic discounting — gap fills, LOS discounts, and last-minute capture — protects the rate while filling demand at the margins.
+
+**5. Treating minimum stays as a single setting.** Minimum stays should vary by season, day of week, lead time, and event window. "3 nights minimum, always" leaves demand on the table.
+
+**6. Not understanding pacing.** Pacing is the leading indicator. By the time occupancy is below target, you've already lost the month. Pacing tells you 30–60 days in advance.
+
+**7. Treating every property identically across the portfolio.** A 4-bedroom lake house and a downtown studio are different businesses. Same pricing rules, same minimum stays, and same comp-set construction across a multi-property portfolio is one of the fastest-compounding revenue leaks in scaled operations. Each property needs its own demand profile, its own competitive set, and its own strategy.
 
 ## The Tactical Playbook: 6 Plays That Move Revenue
 
@@ -547,13 +567,13 @@ Airlines have done this for decades — Saturday-night-stay fares, advance-purch
 
 ### Play 4: Minimum Stay as a Competitive Weapon
 
-Minimum stays are usually treated as defense. They can be offensive — and the diagnostic that flips the lens is **survivorship bias**.
-
-The classic illustration is the WWII bomber problem. Engineers studied returning bombers, mapped where they had been hit, and proposed armoring those spots. Statistician Abraham Wald flipped the question — the planes that did *not* return were hit somewhere else. Armor the parts of the surviving planes that have no holes. Those are the locations that are fatal when struck.
-
-The STR version: the listings you can see are the ones that survived their minimum-stay choice. The listings that didn't survive — the ones priced out by their own restrictions — are invisible to you. Setting minimums by copying visible competitors compounds the bias. Federico's Michigan lake-house example shows what happens when you flip it:
+Minimum stays are usually treated as defense. They can be offensive — and the move that flips the lens is to look at the market through Federico's Michigan lake-house lens:
 
 > *"A lot of hosts are using what every other host in the market is using as a minimum stay. For example, a lake house in Michigan, everybody around me is doing seven nights minimum, I'll do the same. The problem is you're falling into survivorship bias, you're looking only at the available data and missing a lot of data that didn't survive a filter, which is no listings available offering shorter stays. When I took over a property in Michigan, the owner was doing seven nights because that's what everybody was doing. I told her, 'Let's go with something lower.' Because we were the only property offering a three-night minimum in the summer, we were able to charge more, and we made an extra $20,000 for that summer."* — Federico Zimerman
+
+The diagnostic underneath that move is **survivorship bias**. The classic illustration is the WWII bomber problem. Engineers studied returning bombers, mapped where they had been hit, and proposed armoring those spots. Statistician Abraham Wald flipped the question — the planes that did *not* return were hit somewhere else. Armor the parts of the surviving planes that have no holes. Those are the locations that are fatal when struck.
+
+The STR version: the listings you can see are the ones that survived their minimum-stay choice. The listings that didn't survive — the ones priced out by their own restrictions — are invisible to you. Setting minimums by copying visible competitors compounds the bias.
 
 A practical formula:
 
@@ -678,6 +698,12 @@ A night that is not sold can never be sold again. That's the constraint. Everyth
 
 If you take one thing from this guide, take this: stop tracking ADR and occupancy as separate numbers. Start tracking RevPAR. Compare it to your comp set. Watch your pacing. Then ask yourself, every week, whether the tool you trust is actually doing the job — or whether somebody needs to be driving.
 
+<div class="rf-cta-band">
+  <p class="kicker">Ready to have a revenue manager driving your strategy?</p>
+  <p>If you'd rather have a revenue manager driving across PriceLabs, your PMS, and your comp set — book a 30-minute strategy call. Flat $320/mo per property, no percentage of revenue, no PriceLabs paid twice.</p>
+  <p><a class="rf-cta-link" href="https://revfactor.io/schedule">Schedule a Strategy Call →</a></p>
+</div>
+
 <div class="rf-author-bio">
   <img src="/blog/revenue-management-for-short-term-rentals/federico-author.jpg" alt="Federico Zimerman, Founder of RevFactor" class="rf-author-photo" />
   <div class="rf-author-content">
@@ -685,6 +711,7 @@ If you take one thing from this guide, take this: stop tracking ADR and occupanc
     <h3>Federico Zimerman</h3>
     <p>Federico writes a daily revenue management practice into the public record on TikTok ([@federicozimerman](https://www.tiktok.com/@federicozimerman)) and Instagram ([@federico.zimerman](https://www.instagram.com/federico.zimerman)) and is the only short-term rental revenue manager who has appeared on *No Vacancy with Natalie Palmer* (Ep. 155), *Life of Flow*, *Catchup with the Carlyles*, *Craft Stays*, and *STR Like The Best*.</p>
     <p>Federico Zimerman is the founder of [RevFactor](https://revfactor.io), a managed revenue management service for short-term rental hosts. He spent 10 years in airline revenue management at American Airlines before applying that yield-management playbook to vacation rentals. Today, his strategies run daily across **165+ short-term rental properties in 24 U.S. states and 56 markets**, delivering a documented **+18% RevPAR lift vs. the comp set** across the portfolio.</p>
+    <p>Federico has been featured on *No Vacancy with Natalie Palmer*, *STR Like The Best*, *Life of Flow*, and six other STR industry podcasts, and was a speaker at Airbnb's first-ever Property Manager Summit. He writes and teaches on TikTok at [@federicozimerman](https://www.tiktok.com/@federicozimerman) and on Instagram at [@federico.zimerman](https://www.instagram.com/federico.zimerman).</p>
   </div>
 </div>
 
