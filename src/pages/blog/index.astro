@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -30,24 +32,7 @@ const schema = {
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </Fragment>
 
-  <!-- Minimal nav for blog -->
-  <nav
-    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 bg-[#DDDAD3]/60 backdrop-blur-[12px] border border-[#CCC8BF]/40 shadow-[0_4px_12px_rgba(22,25,16,0.08)]"
-  >
-    <a
-      href="/"
-      class="text-[22px] font-normal tracking-[0.5px] px-3 text-[#3F261F]"
-      style="font-family: 'Cormorant Garamond', Georgia, serif;"
-    >
-      revfactor
-    </a>
-    <a
-      href="/"
-      class="hidden md:inline-flex items-center gap-2 ml-2 px-5 py-2 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full"
-    >
-      ← home
-    </a>
-  </nav>
+  <Navbar client:load lightBg />
 
   <main class="min-h-screen bg-[#DDDAD3]">
     <!-- Header -->
@@ -143,15 +128,7 @@ const schema = {
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-[#161910] py-8">
-    <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-3">
-      <p class="text-[11px] text-[#8F6E62]/50">
-        &copy; 2025 RevFactor. Past performance is not indicative of future results.
-      </p>
-      <p class="text-[11px] text-[#8F6E62]/30">Precision revenue craft.</p>
-    </div>
-  </footer>
+  <Footer client:visible />
 </BaseLayout>
 
 <style>
