@@ -4,138 +4,539 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
 
+// Source: feature/journal — adapted for launch with the 2 real posts.
+// Branding: "The Rev Journal — Field notes on the cabin economy."
+
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const categories = ['All', 'Strategy', 'Pricing', 'Markets', 'Tools', 'Case Study'];
+// FEATURED: Revenue Management Definitive Guide (per Aaron — bigger pillar piece)
+const featuredPost =
+  posts.find((p) => p.id === 'revenue-management-for-short-term-rentals') || posts[0];
+const otherPosts = posts.filter((p) => p.id !== featuredPost?.id);
+
+const fmtShort = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const fmtLong = (d: Date) =>
+  d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+const fmtMonthDay = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+const featured = featuredPost
+  ? {
+      href: `/blog/${featuredPost.id}`,
+      cat: featuredPost.data.category,
+      img: featuredPost.data.image,
+      imgAlt: featuredPost.data.imageAlt || featuredPost.data.title,
+      date: fmtShort(featuredPost.data.pubDate),
+      read: featuredPost.data.readingTime ? `${featuredPost.data.readingTime} min read` : '',
+      title: featuredPost.data.title,
+      excerpt: featuredPost.data.subhead || featuredPost.data.description,
+    }
+  : null;
+
+const latestDispatch = posts[0]
+  ? fmtLong(posts[0].data.updatedDate || posts[0].data.pubDate)
+  : '—';
+
+// Categories — real counts only
+const categoryCounts = posts.reduce<Record<string, number>>((acc, p) => {
+  const c = p.data.category;
+  acc[c] = (acc[c] || 0) + 1;
+  return acc;
+}, {});
+const categories = [
+  { name: 'All', count: posts.length, desc: 'The full archive.' },
+  ...Object.entries(categoryCounts).map(([name, count]) => ({
+    name,
+    count,
+    desc:
+      name === 'Pricing'
+        ? 'Dynamic pricing, seasonality, event-aware rates.'
+        : name === 'Strategy'
+        ? 'Frameworks, yield management, and the discipline behind every booking.'
+        : `Field notes on ${name.toLowerCase()}.`,
+  })),
+];
+
+// "Our host's revenue returns" — real RevFactor stats (Aaron-confirmed)
+const thisWeekStats: [string, string, string][] = [
+  ['+18%', 'Revenue vs. comp set', 'RevFactor clients, Q1 2026'],
+  ['72%', 'Avg. occupancy', '165 properties, last 30d'],
+  ['$312', 'Smokies avg ADR', '+4.2% WoW'],
+  ['$184K', 'Lift captured', 'Blueridge, 11 months'],
+];
+
+// Masonry posts — real posts (everything except the featured)
+type MasonryPost = {
+  href: string;
+  cat: string;
+  variant: 'overlay' | 'text' | 'cedar' | 'moss';
+  ar?: string;
+  img?: string;
+  imgAlt?: string;
+  date: string;
+  read: string;
+  title: string;
+  excerpt?: string;
+  quote?: string;
+};
+
+const masonryPosts: MasonryPost[] = otherPosts.map((p) => ({
+  href: `/blog/${p.id}`,
+  cat: p.data.category,
+  variant: 'overlay',
+  ar: '4/3',
+  img: p.data.image,
+  imgAlt: p.data.imageAlt || p.data.title,
+  date: fmtMonthDay(p.data.pubDate),
+  read: p.data.readingTime ? `${p.data.readingTime} min` : '',
+  title: p.data.title,
+}));
 
 const schema = {
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "RevFactor Journal",
-  "description": "Expert insights on short-term rental revenue management, dynamic pricing strategy, and STR market analysis.",
-  "url": "https://revfactor.io/blog",
-  "publisher": {
-    "@type": "Organization",
-    "name": "RevFactor",
-    "url": "https://revfactor.io"
-  }
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'The Rev Journal',
+  description:
+    "Field notes on short-term rental pricing, pacing, and yield — from Federico Zimerman and the RevFactor team.",
+  url: 'https://revfactor.io/blog',
+  publisher: {
+    '@type': 'Organization',
+    name: 'RevFactor',
+    url: 'https://revfactor.io',
+  },
 };
 ---
 
 <BaseLayout
-  title="Journal — RevFactor | STR Revenue Management Insights"
-  description="Expert insights on short-term rental pricing strategy, dynamic revenue management, and market analysis. Written by the RevFactor team."
+  title="The Rev Journal — RevFactor's Field Notes on the Cabin Economy"
+  description="Field notes on short-term rental pricing, pacing, and yield — from Federico Zimerman and the RevFactor team."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </Fragment>
 
-  <Navbar client:load lightBg />
+  <Navbar client:load />
 
-  <main class="min-h-screen bg-[#DDDAD3]">
-    <!-- Header -->
-    <section class="pt-32 md:pt-40 pb-16 md:pb-20">
-      <div class="max-w-7xl mx-auto px-6 md:px-12">
-        <!-- Breadcrumb -->
-        <nav aria-label="Breadcrumb" class="mb-8">
-          <ol class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#8F6E62]">
-            <li><a href="/" class="hover:text-[#3F261F] transition-colors">Home</a></li>
-            <li aria-hidden="true" class="opacity-40">/</li>
-            <li aria-current="page" class="text-[#3F261F]">Journal</li>
-          </ol>
-        </nav>
+  <!-- HERO -->
+  <section class="blog-hero relative overflow-hidden text-[#E8E6E1]" style="min-height:92vh;">
+    <div
+      id="heroBg"
+      class="absolute inset-0 will-change-transform"
+      style="background-image: url('https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=2400&q=85'); background-size:cover; background-position:center; transform:scale(1.04);"
+    ></div>
+    <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.35) 40%, rgba(22,25,16,0.85) 100%);"></div>
+    <div class="absolute top-0 inset-x-0 z-[2] h-40 pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.15) 60%, transparent 100%);"></div>
 
-        <div class="max-w-2xl">
-          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-5">
-            EXPERT INSIGHTS
-          </p>
-          <h1
-            class="text-[clamp(36px,7vw,64px)] leading-[1.05] text-[#3F261F] mb-5"
-            style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; letter-spacing: 0.5px;"
+    <div class="relative z-[3] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-16 md:pb-24 pt-40" style="min-height:92vh;">
+      <div class="max-w-2xl">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-6">
+          THE REVFACTOR JOURNAL
+        </p>
+        <h1 class="mb-6">
+          <span
+            class="block text-[#E8E6E1]"
+            style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(40px,7vw,64px); line-height:1.05; letter-spacing:0.5px;"
           >
-            The Revenue<br />
-            <em style="font-style: italic; color: #7A8B76;">Journal</em>
-          </h1>
-          <p class="text-[15px] leading-[1.7] text-[#76574C] max-w-lg">
-            Strategy, market analysis, and pricing insights from the RevFactor team — written for serious STR operators.
-          </p>
+            The price of
+          </span>
+          <span
+            class="block text-[#7A8B76]"
+            style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-style:italic; font-size:clamp(48px,9vw,80px); line-height:1.0; letter-spacing:0.5px;"
+          >
+            a good stay.
+          </span>
+        </h1>
+        <p class="text-[15px] leading-[1.7] text-[#C8C4BC] max-w-[520px] mb-8">
+          A working journal on pricing, pacing, and yield — across 165 short-term rentals, one night at a time.
+        </p>
+        <div class="flex flex-wrap gap-6 md:gap-10">
+          <div class="flex flex-col gap-0.5">
+            <span class="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase">Properties</span>
+            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">165</span>
+          </div>
+          <div class="flex flex-col gap-0.5">
+            <span class="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase">Coverage</span>
+            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">56 Markets</span>
+          </div>
+          <div class="flex flex-col gap-0.5">
+            <span class="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase">Latest dispatch</span>
+            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">{latestDispatch}</span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Posts Grid -->
-    <section class="pb-24">
-      <div class="max-w-7xl mx-auto px-6 md:px-12">
-        {posts.length === 0 ? (
-          <p class="text-[15px] text-[#76574C]">No posts yet — check back soon.</p>
-        ) : (
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post) => {
-              const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              });
-              return (
-                <article
-                  class="group bg-[#E8E6E1] rounded-[12px] overflow-hidden transition-all duration-[350ms]"
-                  style="box-shadow: 0 1px 3px rgba(22,25,16,0.06); transition-timing-function: cubic-bezier(0.25,0.1,0.25,1);"
-                  onmouseenter="this.style.transform='translateY(-2px) scale(1.01)';this.style.boxShadow='0 12px 32px rgba(22,25,16,0.10)'"
-                  onmouseleave="this.style.transform='';this.style.boxShadow='0 1px 3px rgba(22,25,16,0.06)'"
-                >
-                  <a href={`/blog/${post.id}`} class="block p-7">
-                    <!-- Category badge -->
-                    <span class="inline-block px-2.5 py-1 rounded-full bg-[#5D6D59]/10 text-[#5D6D59] font-bold uppercase text-[8px] tracking-[2px] mb-4">
-                      {post.data.category}
-                    </span>
+  <!-- LIVE TICKER — held back until AirROI is wired (placeholder values would lie) -->
 
-                    <h2
-                      class="text-[clamp(20px,2.5vw,26px)] leading-[1.2] text-[#3F261F] mb-3 group-hover:text-[#13342D] transition-colors"
-                      style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
-                    >
-                      {post.data.title}
-                    </h2>
+  <main class="bg-[#DDDAD3]">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
 
-                    <p class="text-[13px] leading-[1.6] text-[#76574C] mb-5 line-clamp-3">
-                      {post.data.description}
-                    </p>
+      {featured && (
+        <!-- FEATURED — full-column with text-on-image overlay -->
+        <section class="pt-16 pb-4" data-cards>
+          <a class="post-card group block relative overflow-hidden rounded-[20px] text-[#E8E6E1]" data-cat={featured.cat} href={featured.href} style="aspect-ratio:21/9;">
+            <img src={featured.img} alt={featured.imgAlt} class="absolute inset-0 w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-[1.04]" style="transition-timing-function:cubic-bezier(0.25,0.1,0.25,1);"/>
+            <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(22,25,16,0.35) 0%, rgba(22,25,16,0.15) 35%, rgba(22,25,16,0.95) 100%);"></div>
+            <div class="absolute inset-0 z-[1]" style="background: linear-gradient(90deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.15) 55%, transparent 80%);"></div>
+            <span class="absolute top-6 left-6 z-[2] px-3 py-1.5 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">Featured · {featured.cat}</span>
+            <span class="absolute top-6 right-6 z-[2] px-3 py-1.5 rounded-full bg-[#13342D]/92 text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#7A8B76]" style="animation:pulse-dot 2s ease-in-out infinite;"></span>
+              New this week
+            </span>
+            <div class="absolute left-0 right-0 bottom-0 p-8 md:p-12 z-[2] max-w-4xl">
+              <div class="flex items-center gap-3 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/80 mb-4" style="font-family:'JetBrains Mono',monospace;">
+                <span>{featured.date}</span>{featured.read && <><span>·</span><span>{featured.read}</span></>}
+              </div>
+              <h2 class="text-[#E8E6E1] leading-[1] mb-5" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(36px,5vw,72px); letter-spacing:-0.5px; text-wrap:balance;">{featured.title}</h2>
+              <p class="text-[15px] md:text-[17px] leading-[1.5] text-[#DDDAD3]/85 max-w-2xl mb-6">{featured.excerpt}</p>
+              <div class="flex items-center gap-3">
+                <img src="/team/federico.jpg" alt="Federico Zimerman" class="w-11 h-11 rounded-full object-cover ring-2 ring-[#E8E6E1]/25" />
+                <div>
+                  <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#E8E6E1]">federico zimerman</div>
+                  <div class="text-[12px] text-[#DDDAD3]/70">Founder · RevFactor</div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </section>
+      )}
 
-                    <!-- Meta row -->
-                    <div class="flex items-center justify-between">
-                      <div class="flex items-center gap-3">
-                        <time
-                          datetime={post.data.pubDate.toISOString()}
-                          class="text-[11px] font-bold uppercase tracking-[1.5px] text-[#8F6E62]"
-                        >
-                          {formattedDate}
-                        </time>
-                      </div>
-                      {post.data.readingTime && (
-                        <span class="text-[11px] text-[#8F6E62]">
-                          {post.data.readingTime} min read
-                        </span>
-                      )}
-                    </div>
-                  </a>
-                </article>
-              );
-            })}
+      <!-- Our host's revenue returns — real RevFactor stats -->
+      <section class="pt-8 pb-4">
+        <div class="rounded-[20px] bg-[#13342D] text-[#E8E6E1] p-8 md:p-14">
+          <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+            <div>
+              <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#A9BBA3] mb-2 inline-block">Properties Managed</span>
+              <h3 class="leading-[1.1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">Our host's <em style="font-style:italic; color:#A9BBA3; font-weight:300;">revenue returns.</em></h3>
+            </div>
+            <span class="font-bold uppercase text-[9px] tracking-[2px] text-[#A9BBA3] flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#7A8B76]" style="animation:pulse-dot 2s ease-in-out infinite;"></span>
+              Updated {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+            </span>
           </div>
-        )}
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {thisWeekStats.map(([num, label, sub]) => (
+              <div class="bg-[#E8E6E1]/5 rounded-[14px] p-6 border border-[#E8E6E1]/10">
+                <div class="text-[#E8E6E1] leading-none mb-3" style="font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(28px,3.5vw,40px);">{num}</div>
+                <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#A9BBA3] mb-1">{label}</div>
+                <div class="text-[15px] text-[#DDDAD3]/85" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400;">{sub}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION HEAD -->
+      <div class="pt-10 pb-6">
+        <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-3 block">The archive</span>
+        <h2 class="text-[#3F261F] leading-[1.05]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(32px,4vw,52px);">Essays, field notes,<br/><em style="font-style:italic; color:#7A8B76;">and market reports.</em></h2>
       </div>
-    </section>
+
+      <!-- CATEGORY DROPDOWN + SEARCH -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 items-center pb-10">
+        <div class="relative w-full md:col-start-1">
+          <button
+            id="cbBtn"
+            class="group flex items-center gap-3 pl-3 pr-4 rounded-full bg-white/60 hover:bg-white border border-[#C8C4BC] hover:border-[#3F261F]/40 transition-all duration-200 w-full"
+            style="transition-timing-function:cubic-bezier(0.25,0.1,0.25,1); height:64px;"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
+            <span class="w-10 h-10 rounded-full bg-[#13342D] flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-[#E8E6E1]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+            </span>
+            <div class="flex-1 text-left">
+              <div class="font-bold uppercase text-[8.5px] tracking-[2px] text-[#8F6E62] leading-none mb-0.5">Currently viewing</div>
+              <div id="cbActive" class="text-[16px] text-[#3F261F] leading-tight" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">All Entries</div>
+            </div>
+            <span id="cbCount" class="text-[13px] text-[#76574C] flex-shrink-0" style="font-family:'JetBrains Mono',monospace; font-weight:500;">{posts.length}</span>
+            <svg class="w-3 h-3 text-[#3F261F] transition-transform duration-200 ml-1" id="cbChev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+
+          <div id="cbPanel" class="hidden absolute left-0 right-0 top-[calc(100%+6px)] z-50 rounded-[16px] bg-[#E8E6E1] border border-[#C8C4BC] shadow-[0_20px_48px_rgba(22,25,16,0.18)] overflow-hidden">
+            <div class="px-4 py-3 border-b border-[#C8C4BC] flex items-center gap-2 bg-white/50">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#76574C" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input id="cbFilter" type="text" placeholder="Filter desks…" class="bg-transparent text-[13px] text-[#3F261F] placeholder:text-[#8F6E62] outline-none flex-1" />
+              <kbd class="font-mono text-[10px] text-[#8F6E62] border border-[#C8C4BC] rounded px-1.5 py-0.5">ESC</kbd>
+            </div>
+            <div id="cbList" class="max-h-[380px] overflow-y-auto py-2">
+              {categories.map((c, i) => (
+                <button
+                  class="cb-item w-full px-4 py-3 flex items-center gap-3 text-left hover:bg-[#DDDAD3] transition-colors group"
+                  data-cat={c.name}
+                  data-count={c.count}
+                >
+                  <span class:list={['cb-dot w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors', i === 0 ? 'bg-[#13342D]' : 'bg-[#C8C4BC] group-hover:bg-[#5D6D59]']}></span>
+                  <span class="flex-1 min-w-0">
+                    <span class="block text-[22px] leading-[1.15] mb-0.5 text-[#3F261F]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">{c.name}</span>
+                    <span class="block text-[13px] text-[#8F6E62] truncate">{c.desc}</span>
+                  </span>
+                  <span class="font-bold uppercase text-[13px] tracking-[1px] text-[#76574C] tabular-nums flex-shrink-0" style="font-family:'JetBrains Mono',monospace;">{c.count}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <label class="flex items-center gap-3 pl-3 pr-5 rounded-full border border-[#C8C4BC] bg-white/60 hover:bg-white transition-colors w-full md:col-start-3" style="height:64px;">
+          <span class="w-10 h-10 rounded-full bg-[#13342D] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-[#E8E6E1]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          </span>
+          <input id="search" type="search" placeholder="Search field notes…" class="bg-transparent text-[15px] text-[#3F261F] placeholder:text-[#8F6E62] outline-none flex-1" />
+        </label>
+      </div>
+
+      <!-- MASONRY GRID -->
+      <section class="masonry-grid" data-cards>
+        {masonryPosts.map((p) => (
+          <a
+            href={p.href}
+            data-cat={p.cat}
+            class="post-card block mb-6 rounded-[16px] overflow-hidden transition-all duration-[350ms] group relative text-[#E8E6E1]"
+            style="break-inside:avoid;"
+          >
+            <div class="relative overflow-hidden rounded-[16px]" style={`aspect-ratio:${p.ar};`}>
+              <img src={p.img} alt={p.imgAlt} class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]" />
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 40%, rgba(22,25,16,0.85));"></div>
+              <span class="absolute top-4 left-4 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
+              <div class="absolute left-0 right-0 bottom-0 p-6 z-[2]">
+                <div class="flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/80 mb-2" style="font-family:'JetBrains Mono',monospace;">
+                  <span>{p.date}</span>{p.read && <><span>·</span><span>{p.read}</span></>}
+                </div>
+                <h3 class="text-[#E8E6E1] leading-[1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(22px,2.5vw,30px); text-wrap:balance;">{p.title}</h3>
+              </div>
+            </div>
+          </a>
+        ))}
+
+        <!-- FILLER CARD — "more dispatches coming" -->
+        <div
+          class="block mb-6 rounded-[16px] bg-[#13342D] text-[#E8E6E1] p-8"
+          data-filler
+          style="break-inside:avoid;"
+        >
+          <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#A9BBA3] mb-4 inline-block">The journal · just getting started</span>
+          <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:30px;">
+            More dispatches,<br/><em style="font-style:italic; color:#A9BBA3; font-weight:300;">on the way.</em>
+          </h3>
+          <p class="text-[14px] leading-[1.6] text-[#DDDAD3]/80 mb-5">
+            New essays on pricing, pacing, yield, and the markets RevFactor watches — published as the data warrants.
+          </p>
+          <a href="#newsletter" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#E8E6E1] hover:text-[#A9BBA3] transition-colors">
+            Get them in your inbox
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- COVER STORY MIRROR — text card pointing at the featured -->
+        {featured && (
+          <a
+            href={featured.href}
+            data-cat={featured.cat}
+            class="post-card block mb-6 rounded-[16px] overflow-hidden bg-[#5D6D59] text-[#E8E6E1] p-8 hover:bg-[#7A8B76] hover:-translate-y-1 transition-all duration-[350ms] group"
+            style="break-inside:avoid;"
+          >
+            <div class="flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/75 mb-4" style="font-family:'JetBrains Mono',monospace;">
+              <span>Cover story</span><span>·</span><span>{featured.cat}</span><span>·</span><span>{featured.date}</span>
+            </div>
+            <h3 class="leading-[1.1] mb-4 text-[#E8E6E1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:30px;">
+              {featured.title}
+            </h3>
+            <p class="text-[14px] leading-[1.6] text-[#DDDAD3]/85">{featured.excerpt}</p>
+            <span class="inline-flex items-center gap-2 mt-5 text-[11px] font-bold uppercase tracking-[2px] text-[#E8E6E1]">
+              Read essay
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </a>
+        )}
+      </section>
+
+      <!-- Newsletter -->
+      <section id="newsletter" class="mt-8 mb-24 rounded-[20px] bg-[#5E2824] text-[#E8E6E1] px-8 md:px-16 py-16 md:py-20 text-center">
+        <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#E8C7C1]/85 mb-5 inline-block">RevFactor Journal</span>
+        <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">
+          Outprice the market.<br/><em style="font-style:italic; color:#F0C9C2; font-weight:300;">Direct to your inbox.</em>
+        </h3>
+        <p class="text-[15px] leading-[1.6] text-[#F0DAD5]/75 max-w-xl mx-auto mb-8">
+          Pricing strategy, market moves, and operator field notes from inside 165 listings. Written for people who actually read the calendar view.
+        </p>
+        <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto" novalidate>
+          <input id="newsletter-email" type="email" name="email" placeholder="you@cabin.co" required autocomplete="email" class="flex-1 px-5 py-3 rounded-full bg-[#E8E6E1]/10 border border-[#E8E6E1]/25 text-[14px] text-[#E8E6E1] placeholder:text-[#E8C7C1]/55 outline-none" />
+          <button id="newsletter-submit" type="submit" class="px-6 py-3 rounded-full bg-[#E8E6E1] text-[#5E2824] font-bold uppercase text-[10px] tracking-[2px] hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed">Subscribe</button>
+        </form>
+        <div id="newsletter-status" class="text-[11px] text-[#F0DAD5]/55 mt-5" role="status" aria-live="polite">No spam · unsubscribe anytime</div>
+      </section>
+    </div>
   </main>
 
-  <Footer client:visible />
-</BaseLayout>
+  <Footer client:load />
 
-<style>
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>
+  <style>
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 24px;
+      padding: 0 0 64px;
+    }
+    @media (max-width: 900px) { .masonry-grid { column-count: 2; } }
+    @media (max-width: 600px) { .masonry-grid { column-count: 1; } }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+  </style>
+
+  <script is:inline>
+    // Parallax hero
+    (function() {
+      const heroBg = document.getElementById('heroBg');
+      if (heroBg) {
+        window.addEventListener('scroll', () => {
+          const y = window.scrollY;
+          if (y < 900) heroBg.style.transform = `scale(1.04) translateY(${y * 0.25}px)`;
+        }, { passive: true });
+      }
+
+      const cbBtn = document.getElementById('cbBtn');
+      const cbPanel = document.getElementById('cbPanel');
+      const cbChev = document.getElementById('cbChev');
+      const cbFilter = document.getElementById('cbFilter');
+      const cbActive = document.getElementById('cbActive');
+      const cbCount = document.getElementById('cbCount');
+      const cbItems = document.querySelectorAll('.cb-item');
+      const searchEl = document.getElementById('search');
+      let activeCat = 'All';
+      let query = '';
+
+      function openPanel() {
+        if (cbPanel) cbPanel.classList.remove('hidden');
+        if (cbChev) cbChev.style.transform = 'rotate(180deg)';
+        if (cbBtn) cbBtn.setAttribute('aria-expanded', 'true');
+        if (cbFilter) cbFilter.focus();
+      }
+      function closePanel() {
+        if (cbPanel) cbPanel.classList.add('hidden');
+        if (cbChev) cbChev.style.transform = '';
+        if (cbBtn) cbBtn.setAttribute('aria-expanded', 'false');
+        if (cbFilter) cbFilter.value = '';
+        cbItems.forEach(i => { i.style.display = ''; });
+      }
+      if (cbBtn) cbBtn.addEventListener('click', function(ev) {
+        ev.stopPropagation();
+        if (cbPanel && cbPanel.classList.contains('hidden')) openPanel();
+        else closePanel();
+      });
+      document.addEventListener('click', function(ev) {
+        const target = ev.target;
+        if (cbPanel && cbBtn && target instanceof Node) {
+          if (!cbPanel.contains(target) && !cbBtn.contains(target)) closePanel();
+        }
+      });
+      document.addEventListener('keydown', function(ev) {
+        if (ev.key === 'Escape') closePanel();
+      });
+
+      if (cbFilter) cbFilter.addEventListener('input', function() {
+        const q = cbFilter.value.toLowerCase();
+        cbItems.forEach(item => {
+          const cat = (item.getAttribute('data-cat') || '').toLowerCase();
+          item.style.display = cat.includes(q) ? '' : 'none';
+        });
+      });
+
+      cbItems.forEach(item => {
+        item.addEventListener('click', function() {
+          activeCat = item.getAttribute('data-cat') || 'All';
+          const count = item.getAttribute('data-count') || '0';
+          if (cbActive) cbActive.textContent = activeCat === 'All' ? 'All Entries' : activeCat;
+          if (cbCount) cbCount.textContent = count;
+          cbItems.forEach(i => {
+            const dot = i.querySelector('.cb-dot');
+            if (dot) {
+              dot.classList.remove('bg-[#13342D]');
+              dot.classList.add('bg-[#C8C4BC]');
+            }
+          });
+          const dot = item.querySelector('.cb-dot');
+          if (dot) {
+            dot.classList.remove('bg-[#C8C4BC]');
+            dot.classList.add('bg-[#13342D]');
+          }
+          closePanel();
+          filter();
+        });
+      });
+
+      function filter() {
+        document.querySelectorAll('[data-cards] .post-card').forEach(card => {
+          const cat = card.getAttribute('data-cat') || '';
+          const text = (card.textContent || '').toLowerCase();
+          const catMatch = activeCat === 'All' || cat === activeCat;
+          const searchMatch = !query || text.includes(query);
+          card.style.display = (catMatch && searchMatch) ? '' : 'none';
+        });
+      }
+      if (searchEl) searchEl.addEventListener('input', function() {
+        query = searchEl.value.toLowerCase();
+        filter();
+      });
+    })();
+
+    // Newsletter signup → /api/subscribe (Supabase-backed) — gracefully fails if API not deployed yet
+    (function () {
+      var form = document.getElementById('newsletter-form');
+      var emailEl = document.getElementById('newsletter-email');
+      var btn = document.getElementById('newsletter-submit');
+      var statusEl = document.getElementById('newsletter-status');
+      if (!form || !emailEl || !btn || !statusEl) return;
+
+      var EMAIL_RX = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+      var defaultStatus = statusEl.textContent;
+
+      function applySuccessStyle() {
+        statusEl.style.fontSize = '18px';
+        statusEl.style.fontFamily = "'Cormorant Garamond', Georgia, serif";
+        statusEl.style.fontStyle = 'italic';
+        statusEl.style.color = '#F0DAD5';
+        statusEl.style.opacity = '1';
+        statusEl.style.marginTop = '20px';
+      }
+      function resetStatusStyle() { statusEl.style.cssText = ''; }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var email = (emailEl.value || '').trim();
+        if (!EMAIL_RX.test(email)) {
+          resetStatusStyle();
+          statusEl.textContent = 'Please enter a valid email.';
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = 'Subscribing…';
+        resetStatusStyle();
+        statusEl.textContent = defaultStatus;
+
+        try {
+          var res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email: email, source: 'journal' }),
+          });
+          if (!res.ok) throw new Error('http ' + res.status);
+          btn.textContent = 'Subscribed ✓';
+          applySuccessStyle();
+          statusEl.textContent = 'You’re on the list. First dispatch arrives soon.';
+          emailEl.value = '';
+        } catch (err) {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+          resetStatusStyle();
+          statusEl.textContent = 'Something went wrong. Try again in a moment.';
+        }
+      });
+    })();
+  </script>
+</BaseLayout>
