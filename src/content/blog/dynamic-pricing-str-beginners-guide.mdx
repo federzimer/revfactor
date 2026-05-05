@@ -6,8 +6,8 @@ pubDate: 2026-05-04
 author: "Federico Zimerman"
 category: "Pricing"
 tags: ["dynamic pricing", "airbnb pricing", "vacation rental pricing strategy", "PriceLabs", "Beyond Pricing", "Wheelhouse", "STR pricing"]
-image: "/heroes/cliffside-1920.webp"
-imageAlt: "A modern cantilevered short-term rental cabin perched on a forested cliff at golden hour, mountains and morning mist in the distance — the kind of property where dynamic pricing earns its keep every night of the year."
+image: "/heroes/aframe-1920.webp"
+imageAlt: "A modern A-frame short-term rental cabin in a sunlit mountain meadow at golden hour, valley sun behind, the path leading to the deck — the kind of property whose nightly rate moves on real demand, not a fixed guess."
 featured: true
 readingTime: 18
 faqs:
@@ -248,17 +248,17 @@ That's the single most common reason hosts say their pricing tool "stopped worki
 
 ### How the seven signals combine into one rate
 
-The seven signals don't operate independently. Every modern dynamic pricing engine reads them simultaneously, weights each one, and combines the result into a single nightly rate. Here's the flow.
+The seven signals don't operate independently. Every modern dynamic pricing engine reads them simultaneously, weights each one, and combines the result into a single nightly rate. *Six of seven signals shift weekly — the seventh, your booking pace, shifts daily.* Here's the flow:
 
 <figure class="rf-diagram rf-diagram-full" aria-label="Diagram showing seven dynamic pricing signals converging through an algorithm into tonight's rate">
-  <svg viewBox="0 0 1280 560" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid meet" style="width:100%; height:auto; max-width:1280px; display:block; margin:0 auto;">
+  <svg viewBox="0 0 1280 480" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid meet" style="width:100%; height:auto; max-width:1280px; display:block; margin:0 auto;">
     <defs>
       <marker id="arrowOut" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
         <path d="M0,0 L10,5 L0,10 z" fill="#13342D"/>
       </marker>
     </defs>
     {/* Background */}
-    <rect width="1280" height="560" fill="#DDDAD3"/>
+    <rect width="1280" height="480" fill="#DDDAD3"/>
     {/* Column headers */}
     <text x="60"   y="36" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2.5" fill="#3F261F">SIGNALS IN</text>
     <text x="640"  y="36" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2.5" fill="#3F261F">ALGORITHM</text>
@@ -304,12 +304,8 @@ The seven signals don't operate independently. Every modern dynamic pricing engi
       <text x="1088" y="284" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="26" font-weight="500" fill="#E8E6E1">$XXX</text>
       <text x="1088" y="312" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="14" font-style="italic" fill="#E8E6E1">/ night</text>
     </g>
-    {/* Footer annotations — placed in the dedicated bottom band, below all
-       connectors and boxes (signal #07 ends at y=458). */}
-    <text x="640" y="498" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="16" font-style="italic" fill="#3F261F">Six of seven signals shift weekly. The seventh — your pacing — shifts daily.</text>
-    <text x="640" y="524" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="16" font-style="italic" fill="#76574C">The same property has 365 different correct rates per year.</text>
   </svg>
-  <figcaption>Seven signals → one engine → one rate. Every night, every property, every dynamic pricing tool runs this loop hundreds of times.</figcaption>
+  <figcaption>The same property has 365 different correct rates per year — every night, every property, every dynamic pricing tool runs this loop hundreds of times.</figcaption>
 </figure>
 
 The first six signals are the algorithm's job. The seventh — your own booking pace — is the signal *you* feed back into the engine. Most tools surface pacing somewhere on the dashboard. Most hosts never look at it, because occupancy is the number that *feels* like the answer. By the time occupancy is the answer, the booking window has already closed.
