@@ -1,0 +1,78 @@
+{
+  "url": "http://localhost:4321/blog/dynamic-pricing-str-beginners-guide",
+  "label": "blog dynamic-pricing — feedback round verifying 7 fixes",
+  "browsers": ["chromium", "webkit", "firefox"],
+  "viewports": [
+    {"name": "mobile-iphone14",   "w": 390,  "h": 844},
+    {"name": "mobile-iphone-se",  "w": 375,  "h": 667},
+    {"name": "tablet",            "w": 768,  "h": 1024},
+    {"name": "desktop-1440",      "w": 1440, "h": 900},
+    {"name": "desktop-1920",      "w": 1920, "h": 1080}
+  ],
+  "checks": [
+    {"name": "image-1-diagram-width-desktop",
+      "selector": ".rf-diagram:nth(1)",
+      "expect": "width >= 900",
+      "viewports": ["desktop-1440", "desktop-1920"],
+      "complaint": "Image 1: Seven-signals diagram should be wider on desktop"},
+
+    {"name": "image-1-diagram-renders-mobile",
+      "selector": ".rf-diagram:nth(1)",
+      "expect": "width >= 320",
+      "viewports": ["mobile-iphone14", "mobile-iphone-se"],
+      "complaint": "Image 1: Seven-signals diagram renders on mobile"},
+
+    {"name": "image-3-leadtime-chart-width-desktop",
+      "selector": ".rf-diagram:nth(2)",
+      "expect": "width >= 900",
+      "viewports": ["desktop-1440", "desktop-1920"],
+      "complaint": "Image 3: Lead-time chart should be wider on desktop"},
+
+    {"name": "image-4-score-delta-line-height",
+      "selector": ".rf-score-delta",
+      "expect": "lineHeight <= 24",
+      "complaint": "Image 4: PLUS TWO scoreboard lines should be tighter"},
+
+    {"name": "image-5-italic-font-size",
+      "selector": "article p em",
+      "expect": "fontSize >= 19",
+      "complaint": "Image 5: italic Cormorant text was too small (asked multiple times)"},
+
+    {"name": "image-6-strategist-chart-width-desktop",
+      "selector": ".rf-diagram:nth(3)",
+      "expect": "width >= 900",
+      "viewports": ["desktop-1440", "desktop-1920"],
+      "complaint": "Image 6: Strategist chart should be wider on desktop"},
+
+    {"name": "image-6-strategist-chart-renders-mobile",
+      "selector": ".rf-diagram:nth(3)",
+      "expect": "width >= 320",
+      "viewports": ["mobile-iphone14", "mobile-iphone-se"],
+      "complaint": "Image 6: Strategist chart renders on mobile"}
+  ],
+  "screenshots": [
+    {"name": "image-1-seven-signals-diagram",
+      "selector": ".rf-diagram:nth(1)",
+      "complaint": "Image 1: seven-signals diagram"},
+
+    {"name": "image-3-leadtime-chart",
+      "selector": ".rf-diagram:nth(2)",
+      "complaint": "Image 3: lead-time chart"},
+
+    {"name": "image-4-score-delta",
+      "selector": ".rf-score-delta",
+      "complaint": "Image 4: PLUS TWO scoreboard delta"},
+
+    {"name": "image-5-case-study-italic",
+      "selector": "text:we went from making",
+      "complaint": "Image 5: italic case-study quote"},
+
+    {"name": "image-6-strategist-chart",
+      "selector": ".rf-diagram:nth(3)",
+      "complaint": "Image 6: strategist chart"},
+
+    {"name": "image-7-autumn-cabin-quote",
+      "selector": "alt:Smoky Mountain short-term rental cabin in October",
+      "complaint": "Image 7: autumn cabin quote direction"}
+  ]
+}
