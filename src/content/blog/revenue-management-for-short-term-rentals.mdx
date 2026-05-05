@@ -91,7 +91,16 @@ The tool was running. Nobody was driving.
 
 That conversation captures the gap I see in revenue management for short-term rentals every single day. Dynamic pricing for short-term rentals is powerful, but it isn't revenue management. Revenue management is the discipline behind the tool: the historical data, the inventory rules, the forecasting, and the strategy that decides what the tool should actually do.
 
-This guide is the version of that conversation I wish every host and property manager could have. It's built on a decade of airline yield management and another decade applying that playbook across 165+ short-term rental properties in 24 U.S. states. If you're a host, a property manager, or an STR investor trying to understand what revenue management for short-term rentals actually is and what it can do for your portfolio, start here.
+This guide is the version of that conversation I wish every host and property manager could have. It's built on a decade of airline yield management and another decade applying that playbook across 165+ short-term rental properties in 24 U.S. states.
+
+**Who this guide is for:**
+
+- **Hosts** running 1–10 properties who want a working revenue management practice, not another tool subscription
+- **Property managers** running multi-property portfolios who need a strategy that scales beyond per-property tinkering
+- **Revenue managers** new to the short-term rental category coming from hotels or airline yield management
+- **STR investors** evaluating whether properties they own are actually being run with intent, or just running on defaults
+
+If any of those is you, start here.
 
 > *"Revenue management isn't just pricing. Pricing is only one part of revenue management."* — Federico Zimerman, on No Vacancy with Natalie Palmer (Ep. 155)
 
@@ -252,6 +261,16 @@ The leak underneath all of these: most tools don't think about how pricing decis
   </div>
 </section>
 
+## Building a Revenue Management Strategy: The Foundation
+
+A revenue management strategy is the layer of judgment that decides how every other system in your stack actually behaves. The pricing tool is the engine. The PMS is the operational backbone. The strategy is the foundation underneath both, the discipline that names what you're actually trying to do with each property and translates that intent into rules the systems can execute.
+
+Three things sit at the foundation of a good revenue management strategy. The first is a clear statement of what the property is trying to be in the market: peak-rate hero, occupancy-fill, family-leisure specialist, urban-business workhorse. Properties without a stated identity get whatever the algorithm decides they are, which usually means underpriced and overbooked. The second is a stated approach to risk: how aggressive on rate during shoulder season, how much occupancy to trade for ADR, how willing to leave nights unsold to protect average rate. The third is a practical accountability cadence: who reviews pacing weekly, who decides on event pricing, who owns the comp-set decisions.
+
+This is a business discipline, not a software setting. The frameworks below — the strategic philosophy, the four operational pillars, the distribution layer — all assume that strategic foundation is in place. If a property doesn't have stated intent on identity, risk, and accountability, no pricing tool or revenue manager can rescue it from the resulting drift.
+
+For revenue managers and property managers running portfolios of multiple properties, the foundation step is even more critical: the strategy must scale across properties with different identities, different market demand profiles, and different seasonality, without collapsing into a single set of rules applied to all.
+
 ## The Strategic Philosophy: Interest + Reliability + Positioning
 
 <div class="rf-philosophy">
@@ -375,6 +394,17 @@ This is where airline-style yield management really translates. Airlines don't w
 #### Using AirDNA for Market Data
 
 A useful piece of the forecasting stack is **AirDNA**, the market-data provider most short-term and vacation rental operators rely on for comp sets, future occupancy curves, and market score signals. AirDNA's MarketMinder pulls active-listing-level data, then aggregates to comp set, submarket, and market level. Three views matter most for a revenue manager: future occupancy by lead time (so you can see if the market is pacing ahead of last year), market score (a composite of demand, revenue growth, regulation, and seasonality), and comp set RevPAR distribution (the spread between top-decile and bottom-decile properties at the same star tier). AirDNA isn't a pricing tool. It's the lens that tells you whether the market itself is accelerating or stalling underneath you. Pair it with PriceLabs for execution and your own reservation system for actuals, and the forecasting layer is real.
+
+#### Reading Market Demand, Trends, and Shifts
+
+The forecasting layer also has to read the market in motion, not just the market as a snapshot. Three signals matter most:
+
+- **Market demand** — the total number of searched and booked nights for your submarket on any given future date. A useful proxy: comp-set occupancy at the same lead time last year vs. this year. A 5-point YoY swing in market demand at 60 days out is the difference between a normal pricing window and an event-grade pricing window.
+- **Market trends** — the medium-horizon direction of rate and occupancy. Are 2026 booking windows shorter than 2025's? Is mid-week ADR climbing while weekend ADR holds flat? Trends move slower than the daily noise but tell you what to bake into next quarter's base rates.
+- **Market shifts** — discontinuous changes that break trend lines. A new STR regulation, a competitor portfolio coming online, an airline route opening. Market shifts are the cases where forecast models trained on the past will be most wrong.
+- **Market conditions** — the short-window context any pricing decision sits inside (this weekend's weather, this week's pacing relative to last week, whether comp-set listings are holding rates or capitulating). A weekly review reads market conditions; a monthly review reads trends; a quarterly review reads shifts.
+
+Most pricing tools surface market demand directly. Trends and shifts require human judgment layered on top of the data. That layered judgment is what turns a forecasting system into a forecasting strategy.
 
 ### Pillar 4: Pricing Strategy
 
@@ -637,6 +667,8 @@ The first 30–60 days of a new listing aren't about revenue. They're about revi
 ### Play 6: PMS-Aligned Strategy
 
 The pricing tool and the property management system should be talking to each other in real time. Set up your PMS — Hostaway, Guesty, Hospitable, Lodgify, OwnerRez — to feed calendar gaps, last-minute cancellations, and lead-time signals directly into your pricing tool, so an unfilled Tuesday automatically triggers an LOS discount for any 4-night booking that includes it. This is the play most hosts don't run because it's a stack problem. It's also the play with the lowest marginal cost — you've already paid for both tools; make them collaborate.
+
+The right level of automation is a per-decision question, not a global setting. Automate the rules that don't require judgment (gap-night LOS discounts, base-rate floors by season, pacing-flag alerts). Keep manual the decisions that do require judgment (event-week pricing, comp-set redesign, when to break a parity rule). Hosts who automate everything end up with a tool that's tracking its own tail; hosts who automate nothing burn out by month four.
 
 <section class="rf-bleed">
   <img src="/photos/blog/operations/desk-detail-pen-2400.webp" alt="A leather notebook with a brass key, a fountain pen, and a coffee cup on a reclaimed-wood desk in afternoon light — daily attentive revenue management practice" />
