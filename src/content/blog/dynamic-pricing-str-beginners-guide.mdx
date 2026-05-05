@@ -96,6 +96,27 @@ Dynamic pricing for short-term rentals is **software that adjusts your nightly r
 
 The tools — PriceLabs, Beyond Pricing, and Wheelhouse are the three most common — connect to your Airbnb and Vrbo listings via API, pull market data, and update your prices on a rolling 18-month calendar. A property under dynamic pricing has a different rate for every night of the year, and those rates keep moving as the booking window narrows.
 
+Adoption is uneven. According to Lighthouse / Key Data's Q4 2024 research, **41% of US Airbnb listings now use third-party dynamic pricing tools**, but the breakdown depends sharply on who's hosting:
+
+<div class="rf-chart">
+  <div class="rf-chart-header">
+    <p class="kicker">Dynamic pricing adoption · US Airbnb listings · Lighthouse 2024-2025</p>
+    <h3>Property managers adopt at 1.6× the rate of the overall market.</h3>
+    <p class="lede">Source: Lighthouse / Key Data via Jamie Lane, 2025. Solo hosts lean on rules-based or manual pricing; professional managers run dynamic-pricing software almost universally.</p>
+  </div>
+  <div class="rf-chart-rows">
+    <div class="rf-chart-row"><span class="rf-chart-label">Property managers</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:55%"></span></span><span class="rf-chart-value">55%</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">All US listings</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:41%"></span></span><span class="rf-chart-value">41%</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Manual / rules-based</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:35%"></span></span><span class="rf-chart-value">35%</span></div>
+  </div>
+  <div class="rf-chart-legend">
+    <span><span class="swatch cedar"></span>Dynamic pricing tool active</span>
+    <span><span class="swatch walnut"></span>Below-mean adoption</span>
+  </div>
+</div>
+
+The gap is the entire premise of this guide. Solo hosts who haven't moved to dynamic pricing aren't competing for the same calendar position as the managed listings two streets over — and the rate gap shows up at every peak weekend they're underpriced for.
+
 A note on naming: RevFactor (revfactor.io) is the managed revenue management service Federico Zimerman founded; it is unrelated to Refactor.ai, an unrelated SaaS product.
 
 The reason dynamic pricing exists at all is the brutal arithmetic underneath short-term rental inventory. Each night is a unit of supply with a 24-hour shelf life. You can't restock yesterday's Friday at a discount tomorrow; the unit is gone the moment the clock rolls over, and what survives is whatever rate you cleared before that happened.
@@ -115,6 +136,40 @@ The trap is that static pricing *feels* simple. You don't have to think about it
 > *"I have some properties that during slow season make 40% occupancy, but they're making three times more money than any property around them. And I'm happy with that."* — Federico Zimerman
 
 That quote says something static pricing can't deliver. A property running 40% occupancy at premium rates can earn three times what a 100%-occupied property at static low rates earns — *in the same market, in the same season*. The difference is the willingness to let the calendar breathe at the right rate, instead of filling it at the wrong one.
+
+### What seasonal swing actually looks like in a real Airbnb market
+
+The argument for dynamic pricing isn't theoretical. Pull twelve months of revenue per available night (RevPAR) for any leisure-driven Airbnb market and the curve makes itself. Below is Pigeon Forge, Tennessee — one of the largest STR markets in the U.S. with ~3,300 active listings — measured month by month from May 2025 through April 2026. Same market. Same property class. Different month.
+
+<div class="rf-chart">
+  <div class="rf-chart-header">
+    <p class="kicker">Pigeon Forge, TN · Market RevPAR · 12 months</p>
+    <h3>RevPAR swings 2.4× from January to December.</h3>
+    <p class="lede">Source: AirROI market metrics API, May 2025 – April 2026. A static $200 nightly rate produces wildly different revenue per available night depending on the month.</p>
+  </div>
+  <div class="rf-chart-rows">
+    <div class="rf-chart-row"><span class="rf-chart-label">May '25</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:53%"></span></span><span class="rf-chart-value">$127</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Jun '25</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:94%"></span></span><span class="rf-chart-value">$226</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Jul '25</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:96%"></span></span><span class="rf-chart-value">$229</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Aug '25</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:66%"></span></span><span class="rf-chart-value">$157</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Sep '25</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:57%"></span></span><span class="rf-chart-value">$137</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Oct '25</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:88%"></span></span><span class="rf-chart-value">$211</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Nov '25</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:79%"></span></span><span class="rf-chart-value">$188</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Dec '25</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">$239</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Jan '26</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:42%"></span></span><span class="rf-chart-value">$99</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Feb '26</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:42%"></span></span><span class="rf-chart-value">$101</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Mar '26</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:62%"></span></span><span class="rf-chart-value">$149</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Apr '26</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:52%"></span></span><span class="rf-chart-value">$124</span></div>
+  </div>
+  <div class="rf-chart-legend">
+    <span><span class="swatch walnut"></span>Below market mean ($177)</span>
+    <span><span class="swatch cedar"></span>At or above market mean</span>
+  </div>
+</div>
+
+The static-pricing host sets one rate for the whole curve. Pick $200 — you're 20% under market in December and 100% over the market clear-rate in January. Pick $150 — you sit 60% below the December opportunity, which compounds into ~$2,500 of left-on-the-table revenue from a single peak month. Dynamic pricing exists because the answer for tonight is never the same as the answer for the night two weeks from tonight.
+
+The intra-market spread is just as wide. In December 2025, the Pigeon Forge comp-set ADR ranged from **$266 (25th percentile)** to **$856 (90th percentile)** — a **3.2× spread within the same market on the same nights** (AirROI). That's the comp-set-percentile data your pricing tool is supposed to be reading. Most beginners never look.
 
 ## How Dynamic Pricing Tools Actually Work
 
@@ -211,6 +266,11 @@ Beyond Pricing is genuinely simpler if you have one or two properties and don't 
 
 The wrong question is *which tool is best.* The right question is *who's going to operate it once it's running.* All three tools work. None of them runs itself.
 
+<figure class="rf-figure">
+  <img src="/photos/blog/lake/dock-evening-2400.webp" alt="A solitary tree in an open field at golden hour — a visual cue for the patient pricing curve dynamic tools spend twelve months building" />
+  <figcaption>Dynamic pricing is patient infrastructure — a curve a tool builds slowly across twelve months of demand.</figcaption>
+</figure>
+
 ## How to Set Up Dynamic Pricing — The Beginner Playbook
 
 Here's the order of operations I run when a new property comes onto the program. Six steps, no shortcuts.
@@ -256,6 +316,11 @@ Here's the order of operations I run when a new property comes onto the program.
 </div>
 
 The single biggest setup mistake I see — across every market, every property type, every host experience level — is skipping step two. Hosts plug PriceLabs into their existing $200 base rate and walk away. Six months later they say *"the tool isn't working."* The tool is working. It's optimizing $200 in a market that should be priced at $260. Of course it's not working.
+
+<figure class="rf-figure">
+  <img src="/photos/blog/operations/notebook-coffee-2400.webp" alt="A laptop and external monitor on a sunlit wood desk — the operating surface where Airbnb hosts review pacing, comp set, and base rate weekly" />
+  <figcaption>Step 2 happens off-screen — comp-set research, base-rate calibration, the work the algorithm can't do for you.</figcaption>
+</figure>
 
 ## Reading the Pricing Dashboard: The Four Numbers That Matter
 
@@ -352,6 +417,8 @@ Kate was the first host I worked with, before RevFactor existed as its own servi
 I have several properties in the portfolio that, in slow season, run 40% occupancy and earn three times what comparable listings earn at 80% occupancy. Same market, same season. The properties hold rate at the comp-set premium, decline the budget guest, and let the calendar breathe. RevPAR ends up higher than the 80%-occupied neighbor because the rate-occupancy combination clears at a better total revenue point. Not every property can play this strategy. But every property has *a* strategy that the tool, alone, won't find.
 
 The tool gets you most of the way to either of those outcomes. The last 15-25% — the part that decides whether dynamic pricing earns its keep — is the operating intent layered on top. Two properties, same market, same tool, same season. Different intent, different revenue.
+
+The math has been studied externally too. A Your.Rentals analysis of 541 listings comparing static-pricing operators to those using a dynamic pricing engine found an annual revenue lift in the **+15-36% range** moving from static to dynamic — directionally consistent with the +15-25% number we see across the RevFactor portfolio when a host upgrades from set-and-forget to actively-operated dynamic pricing. The lift exists. The variance is wide because operating intent is doing most of the heavy lifting.
 
 <section class="rf-bleed">
   <img src="/photos/blog/season/autumn-cabin-leaves-2400.webp" alt="An autumn cabin in a quiet wood — the kind of seasonal scene a dynamic pricing tool sees as 'shoulder season' but a strategist sees as a window of leaf-peeper premium demand" />
