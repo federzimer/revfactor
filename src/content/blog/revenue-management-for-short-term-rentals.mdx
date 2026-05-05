@@ -156,6 +156,16 @@ Revenue management is the discipline that decides, every single day, what your c
   <p>Airline yield management. Ski-pass tiering. Concert pricing. Short-term rentals. The unifying constraint is that the asset expires. <em>A night that is not sold can never be sold again</em> — and that single fact reshapes how you price, when you price, and which levers you pull.</p>
 </div>
 
+<section class="rf-bleed">
+  <img src="/photos/blog/generated/str-host-care-foyer-2400.webp" alt="A wide editorial shot of a wood-paneled short-term rental foyer at golden hour — leather chair, gallery wall of botanical prints, ceramic vase with eucalyptus, light streaming through a tall picture window framing a forest. Suggests the host's careful stewardship of the property and the guest's stay." />
+  <div class="rf-bleed-inner">
+    <blockquote>
+      <p>“We're handling the two most expensive assets people have: their property and their time.”</p>
+      <cite>— Federico Zimerman</cite>
+    </blockquote>
+  </div>
+</section>
+
 ## Revenue Management vs. Dynamic Pricing for Airbnb
 
 This is the distinction most hosts miss, and it's the most expensive misunderstanding in the industry.
@@ -542,6 +552,16 @@ Track RevPAR. Compare it to comparable properties in your market. That's the sco
   <p>If RevPAR is the scoreboard, the next question is what's holding the number down. Across hundreds of portfolio audits, the same seven mistakes account for almost every gap between what a property earns and what it could earn. Most hosts are running at least three of them at any given time.</p>
 </div>
 
+<section class="rf-bleed">
+  <img src="/photos/blog/generated/str-bedroom-mountain-view-2400.webp" alt="A wide editorial shot of a designed short-term rental bedroom in a modern timber-frame cabin — king bed with white linen and navy throw, navy v-groove paneled headboard wall, framed botanical art, wide window with mountain forest view at sunrise. Hospitality magazine quality." />
+  <div class="rf-bleed-inner">
+    <blockquote>
+      <p>“The market sets the prices because this is 100% consumer perception.”</p>
+      <cite>— Federico Zimerman</cite>
+    </blockquote>
+  </div>
+</section>
+
 ## What Are the Most Common STR Pricing Mistakes?
 
 The most common short-term rental pricing mistakes are: pricing from cost rather than market, set-and-forget tool reliance, ignoring shoulder seasons, racing competitors to the bottom, treating minimum stays as a single fixed setting, failing to track booking pacing, and applying a single playbook across a multi-property portfolio.
@@ -610,6 +630,97 @@ The most common short-term rental pricing mistakes are: pricing from cost rather
   </div>
 </div>
 
+### Why the LOS-discount play matters: real market data
+
+Pull a year of actual booked length-of-stay from a leisure-driven STR market and the picture below is what shows up. This is Pigeon Forge, Tennessee — twelve months of average length of stay across the active listings (AirROI markets API). The shape is the leverage: when most guests already book 3–4 nights, a 10% discount on stays of 5+ nights captures the long-tail booking without giving up the rate on every short stay.
+
+<figure class="rf-diagram" aria-label="Bar chart of average booked length of stay by month for Pigeon Forge, TN STR market">
+  <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:880px; display:block; margin:0 auto;">
+    <rect width="880" height="380" fill="#DDDAD3"/>
+    <text x="40" y="28" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#3F261F">AVG BOOKED LENGTH OF STAY · PIGEON FORGE, TN · 12 MONTHS · AIRROI</text>
+    {/* Y-axis grid */}
+    <g stroke="#C8C4BC" stroke-width="0.5">
+      <line x1="60" y1="320" x2="820" y2="320"/>
+      <line x1="60" y1="262" x2="820" y2="262"/>
+      <line x1="60" y1="204" x2="820" y2="204"/>
+      <line x1="60" y1="146" x2="820" y2="146"/>
+      <line x1="60" y1="88"  x2="820" y2="88"/>
+      <line x1="60" y1="30"  x2="820" y2="30"/>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="11" fill="#76574C" text-anchor="end">
+      <text x="55" y="324">0</text>
+      <text x="55" y="266">1.0</text>
+      <text x="55" y="208">2.0</text>
+      <text x="55" y="150">3.0</text>
+      <text x="55" y="92">4.0</text>
+      <text x="55" y="34">5.0 nights</text>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="10" fill="#76574C" text-anchor="middle">
+      <text x="91"  y="342">May</text><text x="155" y="342">Jun</text><text x="219" y="342">Jul</text><text x="283" y="342">Aug</text>
+      <text x="347" y="342">Sep</text><text x="411" y="342">Oct</text><text x="475" y="342">Nov</text><text x="539" y="342">Dec</text>
+      <text x="603" y="342">Jan</text><text x="667" y="342">Feb</text><text x="731" y="342">Mar</text><text x="795" y="342">Apr</text>
+    </g>
+    {/* Bars — width 36, gap 28; y = 320 - (val/5)*290; height = 320 - y */}
+    {/* 3.5 → y=117 h=203 */}
+    {/* 4.0 → y=88  h=232 */}
+    {/* 3.8 → y=99.6 ≈ 100 h=220 */}
+    {/* 3.4 → y=122.8 ≈ 123 h=197 */}
+    {/* 3.4 → 123 h=197 */}
+    {/* 3.2 → y=134.4 ≈ 134 h=186 */}
+    {/* 3.2 → 134 h=186 */}
+    {/* 3.4 → 123 h=197 */}
+    {/* 3.0 → y=146 h=174 */}
+    {/* 2.8 → y=157.6 ≈ 158 h=162 */}
+    {/* 3.4 → 123 h=197 */}
+    {/* 3.2 → 134 h=186 */}
+    <g>
+      <rect x="73"  y="117" width="36" height="203" fill="#76574C" rx="3"/>
+      <rect x="137" y="88"  width="36" height="232" fill="#13342D" rx="3"/>
+      <rect x="201" y="100" width="36" height="220" fill="#13342D" rx="3"/>
+      <rect x="265" y="123" width="36" height="197" fill="#76574C" rx="3"/>
+      <rect x="329" y="123" width="36" height="197" fill="#76574C" rx="3"/>
+      <rect x="393" y="134" width="36" height="186" fill="#76574C" rx="3"/>
+      <rect x="457" y="134" width="36" height="186" fill="#76574C" rx="3"/>
+      <rect x="521" y="123" width="36" height="197" fill="#76574C" rx="3"/>
+      <rect x="585" y="146" width="36" height="174" fill="#8F6E62" rx="3"/>
+      <rect x="649" y="158" width="36" height="162" fill="#8F6E62" rx="3"/>
+      <rect x="713" y="123" width="36" height="197" fill="#76574C" rx="3"/>
+      <rect x="777" y="134" width="36" height="186" fill="#76574C" rx="3"/>
+    </g>
+    {/* Value labels above bars */}
+    <g font-family="JetBrains Mono, monospace" font-size="10" fill="#3F261F" text-anchor="middle">
+      <text x="91" y="111">3.5</text>
+      <text x="155" y="82" font-weight="600">4.0</text>
+      <text x="219" y="94" font-weight="600">3.8</text>
+      <text x="283" y="117">3.4</text>
+      <text x="347" y="117">3.4</text>
+      <text x="411" y="128">3.2</text>
+      <text x="475" y="128">3.2</text>
+      <text x="539" y="117">3.4</text>
+      <text x="603" y="140">3.0</text>
+      <text x="667" y="152">2.8</text>
+      <text x="731" y="117">3.4</text>
+      <text x="795" y="128">3.2</text>
+    </g>
+    {/* Annotation: peak season */}
+    <text x="178" y="60" font-family="Cormorant Garamond, Georgia, serif" font-size="14" font-style="italic" fill="#13342D">June–July: longer stays — design the LOS ladder for 5+</text>
+    {/* Annotation: trough */}
+    <text x="603" y="180" font-family="Cormorant Garamond, Georgia, serif" font-size="13" font-style="italic" fill="#76574C">Jan–Feb: shorter — drop minimum stay to 1–2 nights</text>
+    {/* Legend */}
+    <g font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#3F261F">
+      <rect x="60" y="358" width="14" height="10" fill="#13342D"/>
+      <text x="80" y="368">Peak (≥3.5 nights)</text>
+      <rect x="220" y="358" width="14" height="10" fill="#76574C"/>
+      <text x="240" y="368">Standard (3.0–3.4)</text>
+      <rect x="380" y="358" width="14" height="10" fill="#8F6E62"/>
+      <text x="400" y="368">Trough (&lt;3.0)</text>
+    </g>
+  </svg>
+  <figcaption>Source: AirROI markets API, May 2025–April 2026. Average booked length of stay by month, Pigeon Forge TN. Three behavioral seasons → three different LOS-ladder configurations.</figcaption>
+</figure>
+
+The implication: a single static LOS rule across the year is wrong by ~30% in either direction depending on the month. Peak summer wants a 4-night-or-more discount ladder; the January–February trough wants a 1-night minimum to capture the shorter weekend stays the market is actually booking.
+
 ### Play 1: The Long Weekend Strategy
 
 For weekend-heavy demand markets, raise weekend rates above weekday rates aggressively, then offer tiered LOS discounts to incentivize longer stays.
@@ -671,10 +782,10 @@ The pricing tool and the property management system should be talking to each ot
 The right level of automation is a per-decision question, not a global setting. Automate the rules that don't require judgment (gap-night LOS discounts, base-rate floors by season, pacing-flag alerts). Keep manual the decisions that do require judgment (event-week pricing, comp-set redesign, when to break a parity rule). Hosts who automate everything end up with a tool that's tracking its own tail; hosts who automate nothing burn out by month four.
 
 <section class="rf-bleed">
-  <img src="/photos/blog/operations/desk-detail-pen-2400.webp" alt="A leather notebook with a brass key, a fountain pen, and a coffee cup on a reclaimed-wood desk in afternoon light — daily attentive revenue management practice" />
+  <img src="/photos/blog/generated/str-hot-tub-deck-twilight-2400.webp" alt="A wide editorial shot of a designed short-term rental's hot tub deck at twilight — cedar deck overlooking a forest valley, hot tub steam rising, two empty Adirondack chairs facing the view, soft string lights overhead, warm cabin windows glowing behind, blue hour sky." />
   <div class="rf-bleed-inner">
     <blockquote>
-      <p>"We're handling the two most expensive assets people have: their property and their time."</p>
+      <p>“If you have an empty calendar, that's an immense number of opportunities.”</p>
       <cite>— Federico Zimerman</cite>
     </blockquote>
   </div>
@@ -740,7 +851,7 @@ These aren't industry-standard metrics. They're internal frameworks. But the cat
     <div class="avatar">SG</div>
     <div class="author-meta">
       <p class="name">Sarah Glidewell</p>
-      <p class="role">RevFactor client · multi-property portfolio</p>
+      <p class="role">StudioHost.co · multi-property portfolio · RevFactor client</p>
     </div>
     <span class="metric">Higher rate + higher occupancy</span>
   </div>
