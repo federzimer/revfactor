@@ -32,6 +32,8 @@ from google.ads.googleads.client import GoogleAdsClient
 CID = "5342635272"
 SLACK = os.environ.get("SLACK_WEBHOOK_URL", "")
 FRAUDBLOCKER_KEY = os.environ.get("FRAUDBLOCKER_API_KEY", "")
+TG_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+TG_CHAT = os.environ.get("TELEGRAM_CHAT_ID", "7701444125")
 
 
 def ads_client():
@@ -294,9 +296,7 @@ def build_digest():
 
 def post_to_slack(text):
     if not SLACK:
-        print("(SLACK_WEBHOOK_URL not set; printing to stdout)")
-        print(text)
-        return
+        return False
     req = urllib.request.Request(
         SLACK,
         data=json.dumps({"text": text}).encode(),
@@ -304,12 +304,53 @@ def post_to_slack(text):
         method="POST",
     )
     urllib.request.urlopen(req, timeout=10).read()
+    return True
+
+
+def post_to_telegram(text):
+    """Post the digest to Aaron's Telegram via the existing bot.
+
+    Telegram has a 4096-char body cap; chunk if needed. Markdown
+    asterisks in the digest become bold via parse_mode=Markdown.
+    """
+    if not TG_TOKEN or not TG_CHAT:
+        return False
+    chunks = []
+    while text:
+        if len(text) <= 4000:
+            chunks.append(text)
+            break
+        cut = text.rfind("\n", 0, 4000)
+        if cut < 1000:
+            cut = 4000
+        chunks.append(text[:cut])
+        text = text[cut:]
+    for chunk in chunks:
+        req = urllib.request.Request(
+            f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
+            data=urllib.parse.urlencode({
+                "chat_id": TG_CHAT,
+                "text": chunk,
+                "parse_mode": "Markdown",
+                "disable_web_page_preview": "true",
+            }).encode(),
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            method="POST",
+        )
+        urllib.request.urlopen(req, timeout=10).read()
+    return True
 
 
 if __name__ == "__main__":
     digest = build_digest()
     if "--post" in sys.argv:
-        post_to_slack(digest)
-        print("Posted.")
+        sent_to = []
+        if post_to_telegram(digest): sent_to.append("Telegram")
+        if post_to_slack(digest):    sent_to.append("Slack")
+        if sent_to:
+            print(f"Posted to: {', '.join(sent_to)}")
+        else:
+            print("(no delivery channels configured; printing instead)")
+            print(digest)
     else:
         print(digest)
