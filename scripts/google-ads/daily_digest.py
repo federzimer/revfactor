@@ -123,6 +123,41 @@ def low_qs_keywords(client, threshold=4):
     return flagged
 
 
+def impression_share(client, start, end):
+    """Per-campaign impression share + lost-to-budget / lost-to-rank.
+
+    These are the right metrics to watch instead of "average position" (which
+    Google retired in 2019). Lost-to-budget > 30% means raise the budget;
+    lost-to-rank > 50% means fix Quality Score (ad copy / landing page),
+    NOT raise the bid.
+    """
+    ga = client.get_service("GoogleAdsService")
+    rows = []
+    for r in ga.search(
+        customer_id=CID,
+        query=f"""
+            SELECT campaign.name, campaign.status,
+                   metrics.search_impression_share,
+                   metrics.search_budget_lost_impression_share,
+                   metrics.search_rank_lost_impression_share,
+                   metrics.search_top_impression_share
+            FROM campaign
+            WHERE segments.date BETWEEN '{start}' AND '{end}'
+              AND campaign.name LIKE 'RF%'
+        """,
+    ):
+        if r.campaign.status.name == "REMOVED":
+            continue
+        rows.append({
+            "campaign": r.campaign.name,
+            "is": round(r.metrics.search_impression_share * 100, 1),
+            "lost_budget": round(r.metrics.search_budget_lost_impression_share * 100, 1),
+            "lost_rank": round(r.metrics.search_rank_lost_impression_share * 100, 1),
+            "top_is": round(r.metrics.search_top_impression_share * 100, 1),
+        })
+    return rows
+
+
 def fraudblocker_blocked_count(domain="revfactor.io", range_="1d"):
     """Pull yesterday's fraud-detection summary from Fraud Blocker.
 
@@ -198,6 +233,7 @@ def build_digest():
     anomalies = search_term_anomalies(client, yesterday, yesterday)
     low_qs = low_qs_keywords(client)
     blocked = fraudblocker_blocked_count()
+    is_rows = impression_share(client, yesterday, yesterday)
 
     # Build recommendations
     recs = []
@@ -211,6 +247,11 @@ def build_digest():
         recs.append(f"📈 Yesterday CPA ${cpa:.0f} is above $200 target. Don't change bids yet (need ≥30 conv to learn) but flag for review at week 1.")
     if total_spend < base_total_spend * 0.5 and base_total_spend > 0:
         recs.append(f"⚠️ Spend yesterday (${total_spend:.0f}) is <50% of baseline (${base_total_spend:.0f}). Possible delivery issue: check disapprovals or budget caps.")
+    for row in is_rows:
+        if row["lost_budget"] > 30:
+            recs.append(f"💰 {row['campaign'][-22:]} lost {row['lost_budget']}% of impressions to budget. Raise daily cap, don't raise CPC.")
+        if row["lost_rank"] > 50:
+            recs.append(f"📉 {row['campaign'][-22:]} lost {row['lost_rank']}% of impressions to rank. Quality Score / landing-page issue — investigate, don't raise CPC.")
     if not recs:
         recs.append("✅ No anomalies. Let it cook. (Smart Bidding needs 30+ conversions before tuning.)")
 
@@ -234,6 +275,15 @@ def build_digest():
         cpa_c = m["spend"] / m["conversions"] if m["conversions"] > 0 else None
         cpa_str = f"${cpa_c:.0f}" if cpa_c else "—"
         lines.append(f"• {name[-22:]}: ${m['spend']:.0f} / {m['clicks']}c / {m['conversions']:.1f}conv (CPA {cpa_str})")
+    if is_rows:
+        lines.append("")
+        lines.append("*Impression share*")
+        for row in is_rows:
+            lines.append(
+                f"• {row['campaign'][-22:]}: {row['is']}% IS | "
+                f"{row['top_is']}% top | "
+                f"lost-budget {row['lost_budget']}% | lost-rank {row['lost_rank']}%"
+            )
     lines.append("")
     lines.append("*Recommendations*")
     for r in recs:
