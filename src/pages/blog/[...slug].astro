@@ -434,7 +434,9 @@ const definedTerms = [
     }
     /* Full-bleed modifier — diagram extends past wide-track to the edge of the
        page. Used when an SVG needs more horizontal room than the wide track
-       (e.g., 7+ input nodes converging into a hub + output rate box). */
+       (e.g., 7+ input nodes converging into a hub + output rate box).
+       Hidden on mobile where the SVG would compress to unreadable text — the
+       paired rf-leaks grid above already enumerates the same content. */
     .prose-rf > :global(.rf-diagram-full) {
       grid-column: full-start / full-end;
       padding-left: 1.25rem;
@@ -444,6 +446,11 @@ const definedTerms = [
       .prose-rf > :global(.rf-diagram-full) {
         padding-left: 2rem;
         padding-right: 2rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .prose-rf > :global(.rf-diagram-full) {
+        display: none;
       }
     }
     /* rf-diagram (custom inline SVGs — flow charts, line charts) */
