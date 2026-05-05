@@ -432,6 +432,20 @@ const definedTerms = [
     .prose-rf > :global(.rf-diagram) {
       grid-column: wide-start / wide-end;
     }
+    /* Full-bleed modifier — diagram extends past wide-track to the edge of the
+       page. Used when an SVG needs more horizontal room than the wide track
+       (e.g., 7+ input nodes converging into a hub + output rate box). */
+    .prose-rf > :global(.rf-diagram-full) {
+      grid-column: full-start / full-end;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    @media (min-width: 1280px) {
+      .prose-rf > :global(.rf-diagram-full) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
     /* rf-diagram (custom inline SVGs — flow charts, line charts) */
     .prose-rf :global(.rf-diagram) {
       margin: 3rem 0 4rem;
