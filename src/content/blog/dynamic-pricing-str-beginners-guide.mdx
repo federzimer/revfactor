@@ -321,7 +321,7 @@ Signal #3 deserves a separate look. **Lead time** — how many days out a guest 
 <figure class="rf-diagram" aria-label="Line chart of average booking lead time in days across 12 months for three short-term rental markets">
   <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:880px; display:block; margin:0 auto;">
     <rect width="880" height="380" fill="#DDDAD3"/>
-    <text x="40" y="28" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#3F261F">AVG BOOKING LEAD TIME · DAYS · 12 MONTHS · AIRROI</text>
+    <text x="40" y="20" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#3F261F">AVG BOOKING LEAD TIME · DAYS · 12 MONTHS · AIRROI</text>
     {/* Y-axis grid lines */}
     <g stroke="#C8C4BC" stroke-width="0.5">
       <line x1="60" y1="290" x2="820" y2="290"/>
@@ -330,13 +330,13 @@ Signal #3 deserves a separate look. **Lead time** — how many days out a guest 
       <line x1="60" y1="95"  x2="820" y2="95"/>
       <line x1="60" y1="30"  x2="820" y2="30"/>
     </g>
-    {/* Y-axis labels */}
+    {/* Y-axis labels — unit ('days') moved into kicker above to prevent overlap */}
     <g font-family="JetBrains Mono, monospace" font-size="11" fill="#76574C" text-anchor="end">
       <text x="55" y="294">0</text>
       <text x="55" y="229">30</text>
       <text x="55" y="164">60</text>
       <text x="55" y="99">90</text>
-      <text x="55" y="34">120 days</text>
+      <text x="55" y="34">120</text>
     </g>
     {/* X-axis month labels */}
     <g font-family="JetBrains Mono, monospace" font-size="10" fill="#76574C" text-anchor="middle">
@@ -577,7 +577,7 @@ Stack the three modes against the same twelve months of Pigeon Forge market data
 <figure class="rf-diagram" aria-label="Line chart comparing three pricing modes — static, dynamic, and strategist-layered — across 12 months of Pigeon Forge market data">
   <svg viewBox="0 0 880 400" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:880px; display:block; margin:0 auto;">
     <rect width="880" height="400" fill="#DDDAD3"/>
-    <text x="40" y="28" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#3F261F">REVPAR · PIGEON FORGE · STATIC vs DYNAMIC vs STRATEGIST</text>
+    <text x="40" y="20" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#3F261F">REVPAR · $/NIGHT · PIGEON FORGE · STATIC vs DYNAMIC vs STRATEGIST</text>
     {/* Y-axis grid */}
     <g stroke="#C8C4BC" stroke-width="0.5">
       <line x1="60" y1="320" x2="820" y2="320"/>
@@ -594,7 +594,7 @@ Stack the three modes against the same twelve months of Pigeon Forge market data
       <text x="55" y="208">$120</text>
       <text x="55" y="150">$180</text>
       <text x="55" y="92">$240</text>
-      <text x="55" y="34">$300/night</text>
+      <text x="55" y="34">$300</text>
     </g>
     {/* X-axis month labels */}
     <g font-family="JetBrains Mono, monospace" font-size="10" fill="#76574C" text-anchor="middle">

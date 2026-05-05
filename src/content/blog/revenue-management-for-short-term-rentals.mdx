@@ -637,7 +637,7 @@ Pull a year of actual booked length-of-stay from a leisure-driven STR market and
 <figure class="rf-diagram" aria-label="Bar chart of average booked length of stay by month for Pigeon Forge, TN STR market">
   <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:880px; display:block; margin:0 auto;">
     <rect width="880" height="380" fill="#DDDAD3"/>
-    <text x="40" y="28" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#3F261F">AVG BOOKED LENGTH OF STAY · PIGEON FORGE, TN · 12 MONTHS · AIRROI</text>
+    <text x="40" y="20" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#3F261F">AVG BOOKED LENGTH OF STAY · NIGHTS · PIGEON FORGE, TN · 12 MONTHS · AIRROI</text>
     {/* Y-axis grid */}
     <g stroke="#C8C4BC" stroke-width="0.5">
       <line x1="60" y1="320" x2="820" y2="320"/>
@@ -647,13 +647,14 @@ Pull a year of actual booked length-of-stay from a leisure-driven STR market and
       <line x1="60" y1="88"  x2="820" y2="88"/>
       <line x1="60" y1="30"  x2="820" y2="30"/>
     </g>
+    {/* Y-axis labels — unit ('nights') moved into kicker above */}
     <g font-family="JetBrains Mono, monospace" font-size="11" fill="#76574C" text-anchor="end">
       <text x="55" y="324">0</text>
       <text x="55" y="266">1.0</text>
       <text x="55" y="208">2.0</text>
       <text x="55" y="150">3.0</text>
       <text x="55" y="92">4.0</text>
-      <text x="55" y="34">5.0 nights</text>
+      <text x="55" y="34">5.0</text>
     </g>
     <g font-family="JetBrains Mono, monospace" font-size="10" fill="#76574C" text-anchor="middle">
       <text x="91"  y="342">May</text><text x="155" y="342">Jun</text><text x="219" y="342">Jul</text><text x="283" y="342">Aug</text>
@@ -661,18 +662,6 @@ Pull a year of actual booked length-of-stay from a leisure-driven STR market and
       <text x="603" y="342">Jan</text><text x="667" y="342">Feb</text><text x="731" y="342">Mar</text><text x="795" y="342">Apr</text>
     </g>
     {/* Bars — width 36, gap 28; y = 320 - (val/5)*290; height = 320 - y */}
-    {/* 3.5 → y=117 h=203 */}
-    {/* 4.0 → y=88  h=232 */}
-    {/* 3.8 → y=99.6 ≈ 100 h=220 */}
-    {/* 3.4 → y=122.8 ≈ 123 h=197 */}
-    {/* 3.4 → 123 h=197 */}
-    {/* 3.2 → y=134.4 ≈ 134 h=186 */}
-    {/* 3.2 → 134 h=186 */}
-    {/* 3.4 → 123 h=197 */}
-    {/* 3.0 → y=146 h=174 */}
-    {/* 2.8 → y=157.6 ≈ 158 h=162 */}
-    {/* 3.4 → 123 h=197 */}
-    {/* 3.2 → 134 h=186 */}
     <g>
       <rect x="73"  y="117" width="36" height="203" fill="#76574C" rx="3"/>
       <rect x="137" y="88"  width="36" height="232" fill="#13342D" rx="3"/>
@@ -702,8 +691,8 @@ Pull a year of actual booked length-of-stay from a leisure-driven STR market and
       <text x="731" y="117">3.4</text>
       <text x="795" y="128">3.2</text>
     </g>
-    {/* Annotation: peak season */}
-    <text x="178" y="60" font-family="Cormorant Garamond, Georgia, serif" font-size="14" font-style="italic" fill="#13342D">June–July: longer stays — design the LOS ladder for 5+</text>
+    {/* Annotation: peak season — placed mid-chart upper area to avoid kicker collision */}
+    <text x="178" y="56" font-family="Cormorant Garamond, Georgia, serif" font-size="14" font-style="italic" fill="#13342D">June–July: longer stays — design the LOS ladder for 5+</text>
     {/* Annotation: trough */}
     <text x="603" y="180" font-family="Cormorant Garamond, Georgia, serif" font-size="13" font-style="italic" fill="#76574C">Jan–Feb: shorter — drop minimum stay to 1–2 nights</text>
     {/* Legend */}
@@ -877,7 +866,7 @@ The average lift across the RevFactor portfolio is **+18% vs. the comp set**. Ev
   <img src="/photos/blog/lake/reflective-lake-cabin-2400.webp" alt="A short-term rental cabin reflected in a still mountain lake at first light, signaling premium nightly rates over volume" />
   <div class="rf-bleed-inner">
     <blockquote>
-      <p>"I don't want to see a full calendar at $50 a night. I want to see money in my client's pocket."</p>
+      <p>“I don't want to see a full calendar at $50 a night. I want to see money in my client's pocket.”</p>
       <cite>— Federico Zimerman, Patryk Real Estate Show</cite>
     </blockquote>
   </div>
@@ -905,9 +894,7 @@ Plus a one-time $125 onboarding setup. Hosts keep 100% of what they earn.
 
 **RevPAR-first reporting.** Monthly reports focus on the metrics that matter: RevPAR, pacing, position vs. comp set — not vanity metrics like occupancy or ADR in isolation.
 
-> *"Since starting with RevFactor, I've had this peace of mind that my pricing strategy is on point, competitive, and I don't have to be watching the calendar. I don't have to be in PriceLabs. Most months, I've seen a 20% increase in revenue."* — Kassidy & Erin Warren, RevFactor clients
-
-> *"We're handling the two most expensive assets people have: their property and their time."* — Federico Zimerman
+> *“Since starting with RevFactor, I've had this peace of mind that my pricing strategy is on point, competitive, and I don't have to be watching the calendar. I don't have to be in PriceLabs. Most months, I've seen a 20% increase in revenue.”* — Kassidy & Erin Warren, RevFactor clients
 
 This is a people business, not just real estate. The tools are the medium. The work is the strategy, the judgment, and the daily attention.
 
