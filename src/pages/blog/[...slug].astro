@@ -428,8 +428,26 @@ const definedTerms = [
     .prose-rf > :global(.rf-leaks),
     .prose-rf > :global(.rf-plays),
     .prose-rf > :global(.rf-scoreboard),
-    .prose-rf > :global(.rf-chart) {
+    .prose-rf > :global(.rf-chart),
+    .prose-rf > :global(.rf-diagram) {
       grid-column: wide-start / wide-end;
+    }
+    /* rf-diagram (custom inline SVGs — flow charts, line charts) */
+    .prose-rf :global(.rf-diagram) {
+      margin: 3rem 0 4rem;
+      padding: 1.5rem 0;
+    }
+    .prose-rf :global(.rf-diagram > svg) { display: block; width: 100%; height: auto; max-width: 100%; }
+    .prose-rf :global(.rf-diagram figcaption) {
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-style:italic; font-size: 16px; line-height: 1.5;
+      color: #76574C; text-align: center;
+      margin: 1.25rem auto 0; max-width: 720px;
+      padding: 0 1.25rem;
+    }
+    @media (max-width: 768px) {
+      .prose-rf :global(.rf-diagram) { margin: 2rem -1rem 3rem; }
+      .prose-rf :global(.rf-diagram figcaption) { font-size: 14px; padding: 0 0.75rem; }
     }
     .prose-rf > :global(.rf-bleed) {
       grid-column: full-start / full-end;
@@ -642,7 +660,10 @@ const definedTerms = [
     /* Italic body copy — Cormorant italic optically reads ~10% smaller than the
        Helvetica it's embedded in. Bump 1.08× so an italicized phrase visually
        matches the body weight instead of looking shrunk + bold. */
-    .prose-rf :global(em)     { font-family:'Cormorant Garamond',Georgia,serif; color:#13342D; font-style:italic; font-size:1.08em; line-height:inherit; }
+    /* Cormorant italic reads visually ~15% smaller than Helvetica at the same em.
+       Bump to 1.22× (was 1.08×) so inline italicized quotes inside body
+       paragraphs match the surrounding text weight instead of looking shrunk. */
+    .prose-rf :global(em)     { font-family:'Cormorant Garamond',Georgia,serif; color:#13342D; font-style:italic; font-size:1.22em; line-height:1.4; }
     .prose-rf :global(a)      { color:#13342D; text-decoration:underline; text-underline-offset:3px; }
     .prose-rf :global(a:hover){ color:#1E4A40; }
     .prose-rf :global(hr)     { border:none; border-top:1px solid #C8C4BC; margin:2.5rem 0; }
@@ -887,17 +908,19 @@ const definedTerms = [
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
+      gap: 1.25rem;
       margin-top: 1.25rem;
-      padding: 0.85rem 1.5rem;
+      padding: 1.1rem 1.75rem;
       background: #3F261F;
       color: #E8E6E1;
       border-radius: 999px;
       flex-wrap: wrap;
+      row-gap: 0.4rem;
+      line-height: 1.25;
     }
-    .prose-rf :global(.rf-score-delta .lbl) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; text-transform:uppercase; color: #A9BBA3; }
-    .prose-rf :global(.rf-score-delta .copy) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; flex:1 1 auto; min-width:0; }
-    .prose-rf :global(.rf-score-delta .val) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; color: #E8E6E1; }
+    .prose-rf :global(.rf-score-delta .lbl) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; text-transform:uppercase; color: #A9BBA3; line-height:1; }
+    .prose-rf :global(.rf-score-delta .copy) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; flex:1 1 auto; min-width:0; line-height:1.25; }
+    .prose-rf :global(.rf-score-delta .val) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; color: #E8E6E1; line-height:1; }
 
     /* ============== RF-PLAYS — 6 tactical plays grid ============== */
     .prose-rf :global(.rf-plays) {
