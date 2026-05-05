@@ -84,6 +84,35 @@ def log(msg):
         f.write(line + "\n")
 
 
+def slack_alert(msg):
+    """Post to the procloser-seo-autopilot Slack webhook (shared infra).
+    Best-effort — never fails the run. Pulled lazily so the import path
+    doesn't break in environments without curl."""
+    import urllib.request, urllib.error
+    try:
+        # Pull SLACK_WEBHOOK_URL from Render API (same pattern as seo-toolkit cron)
+        # Cached after first call to avoid hitting Render every time.
+        global _SLACK_WEBHOOK_URL
+        if not globals().get("_SLACK_WEBHOOK_URL"):
+            render_key = os.environ.get("RENDER_API_KEY", "rnd_s441HjXbCxVh9Ye57TT3xfmTpdSW")
+            req = urllib.request.Request(
+                "https://api.render.com/v1/services/crn-d7nq17rrjlhs73am48fg/env-vars?limit=50",
+                headers={"Authorization": f"Bearer {render_key}"})
+            data = json.loads(urllib.request.urlopen(req, timeout=10).read())
+            for e in data:
+                if e["envVar"]["key"] == "SLACK_WEBHOOK_URL":
+                    _SLACK_WEBHOOK_URL = e["envVar"]["value"]
+                    break
+        if not globals().get("_SLACK_WEBHOOK_URL"):
+            return
+        body = json.dumps({"text": msg}).encode()
+        req = urllib.request.Request(_SLACK_WEBHOOK_URL, data=body,
+                                     headers={"Content-Type": "application/json"})
+        urllib.request.urlopen(req, timeout=10).read()
+    except Exception as e:
+        log(f"  [slack] alert failed: {e}")
+
+
 def load_state():
     if STATE_FILE.exists():
         return json.loads(STATE_FILE.read_text())
@@ -132,6 +161,35 @@ def list_tiktok_videos():
 
 
 def list_instagram_posts():
+    """List recent IG posts. Tries instaloader (works with logged-in browser
+    cookies) first, falls back to yt-dlp's profile extractor (often broken
+    in 2026 due to IG anti-scraping). Returns [] if both fail."""
+    # Path 1: instaloader with chrome cookies. Requires Aaron logged into
+    # IG in Chrome (or Safari) on this Mac. Catches IG's auth-required block
+    # gracefully when the cookie store has no IG cookies.
+    try:
+        import instaloader
+        L = instaloader.Instaloader(quiet=True, download_pictures=False,
+                                    download_videos=False, download_video_thumbnails=False,
+                                    save_metadata=False, compress_json=False,
+                                    max_connection_attempts=1, request_timeout=15)
+        # Try to import session cookies from Chrome (best-effort)
+        try:
+            L.load_session_from_file(INSTAGRAM_HANDLE)
+        except FileNotFoundError:
+            pass  # no saved session — proceed anonymously, may 401
+        profile = instaloader.Profile.from_username(L.context, INSTAGRAM_HANDLE)
+        posts = []
+        for i, post in enumerate(profile.get_posts()):
+            posts.append({"id": post.shortcode, "title": (post.caption or "")[:80]})
+            if i >= 11:  # cap at 12 most recent (sorted newest first)
+                break
+        if posts:
+            return posts
+    except Exception as e:
+        log(f"  instaloader path failed: {type(e).__name__}: {e}")
+
+    # Path 2: yt-dlp profile extractor (fallback, often broken)
     try:
         result = subprocess.run(
             ["python3", "-m", "yt_dlp", "--flat-playlist",
@@ -147,7 +205,7 @@ def list_instagram_posts():
                     posts.append({"id": parts[0], "title": parts[1]})
         return posts
     except Exception as e:
-        log(f"Instagram list error: {e}")
+        log(f"  yt-dlp path failed: {e}")
         return []
 
 
@@ -248,8 +306,26 @@ def scan_instagram(state):
     log(f"Scanning Instagram @{INSTAGRAM_HANDLE}...")
     posts = list_instagram_posts()
     if not posts:
-        log("  Instagram scan returned no posts (likely rate-limited or logged-out block)")
+        # Track consecutive empty fetches in state. After 3 zero-result days,
+        # alert Slack — IG is genuinely broken not just rate-limited.
+        empty_count = state.get("instagram_empty_streak", 0) + 1
+        state["instagram_empty_streak"] = empty_count
+        save_state(state)
+        log(f"  Instagram scan returned no posts (streak: {empty_count} day(s))")
+        if empty_count >= 3 and empty_count % 3 == 0:
+            slack_alert(
+                f":no_entry: [revfactor brain-scan] Instagram pull has returned 0 posts "
+                f"for {empty_count} consecutive runs. yt-dlp + instaloader can't list "
+                f"@{INSTAGRAM_HANDLE} without auth.\n"
+                f"To fix: log into Instagram in Chrome on Mac Studio, then re-run "
+                f"`/Users/aaronwhittaker/Claude/RevFactor/.venv/bin/python3 "
+                f"/Users/aaronwhittaker/Claude/RevFactor/scripts/scan_and_transcribe.py`"
+            )
         return 0
+    # Reset the empty streak on a successful fetch
+    if state.get("instagram_empty_streak"):
+        state["instagram_empty_streak"] = 0
+        save_state(state)
     log(f"  Found {len(posts)} total Instagram posts")
 
     seen = set(state.get("instagram", []))
