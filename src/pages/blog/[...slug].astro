@@ -578,6 +578,16 @@ const definedTerms = [
       transition: transform 200ms cubic-bezier(0.25,0.1,0.25,1);
     }
     #tocFloat.expanded .rf-toc-chevron { transform: rotate(90deg); }
+    /* Below 1768px the TOC pill (left:24, max-width:280) overlaps the
+       1160px-wide content track (chart/diagram) which centers at chart-left=
+       (vw-1160)/2. At 1440 the chart starts at x=140 and the pill ends at
+       x=304 — 127px of occluded title. Hide the section-name label in that
+       range so the pill collapses to ~80px (number + chevron). The full label
+       stays visible in the expanded panel. Above 1768 there's natural
+       clearance, so we restore the label. */
+    @media (max-width: 1767px) {
+      .rf-toc-current { display: none; }
+    }
 
     /* Expanded panel — appears below pill on hover/focus, scrollable if list is long */
     .rf-toc-panel {
