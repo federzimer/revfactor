@@ -6,11 +6,7 @@
     {
       "source": "/(.*)",
       "has": [
-        {
-          "type": "header",
-          "key": "x-vercel-deployment-url",
-          "value": "(?!revfactor\\.io).*"
-        }
+        { "type": "host", "value": ".*\\.vercel\\.app" }
       ],
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
