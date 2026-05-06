@@ -35,14 +35,35 @@ const toc = headings.filter((h) => h.depth === 2).map((h) => ({
 const otherPosts = allPosts.filter((p) => p.id !== post.id);
 const sameCategory = otherPosts.filter((p) => p.data.category === post.data.category);
 const relatedSource = [...sameCategory, ...otherPosts.filter((p) => p.data.category !== post.data.category)];
-const related = relatedSource.slice(0, 3).map((p) => ({
-  href: `/blog/${p.id}`,
-  cat: p.data.category,
-  date: p.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-  read: p.data.readingTime ? `${p.data.readingTime} min` : '8 min',
-  title: p.data.title,
-  img: p.data.image || 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1000&q=80',
-}));
+// Derive responsive srcset from the post hero image. Photo factory generates
+// {basename}-{1200,1920,2400}.webp; if the hero matches that pattern we
+// emit srcset + sizes. Falls back to the single src for off-pattern URLs
+// (e.g. external Unsplash placeholders).
+function deriveSrcset(img: string): { src: string; srcset?: string; sizes?: string } {
+  const m = img.match(/^(.*)-(?:1200|1920|2400)(\.webp|\.jpg|\.png)$/i);
+  if (!m) return { src: img };
+  const [, base, ext] = m;
+  return {
+    src: `${base}-1920${ext}`,
+    srcset: `${base}-1200${ext} 1200w, ${base}-1920${ext} 1920w, ${base}-2400${ext} 2400w`,
+    sizes: '(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw',
+  };
+}
+
+const related = relatedSource.slice(0, 3).map((p) => {
+  const heroImg = p.data.image || 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1000&q=80';
+  const r = deriveSrcset(heroImg);
+  return {
+    href: `/blog/${p.id}`,
+    cat: p.data.category,
+    date: p.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    read: p.data.readingTime ? `${p.data.readingTime} min` : '8 min',
+    title: p.data.title,
+    img: r.src,
+    srcset: r.srcset,
+    sizes: r.sizes,
+  };
+});
 
 const heroImage = post.data.image || '/heroes/aframe-1920.webp';
 const heroAlt = post.data.imageAlt || post.data.title;
@@ -370,7 +391,7 @@ const definedTerms = [
             <a href={p.href} class="group block">
               <div class="relative overflow-hidden rounded-[12px] mb-4" style="aspect-ratio:4/3;">
                 <span class="absolute top-3 left-3 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
-                <img src={p.img} alt="" loading="lazy" decoding="async" width="1920" height="1080" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"/>
+                <img src={p.img} srcset={p.srcset} sizes={p.sizes} alt="" loading="lazy" decoding="async" width="1920" height="1080" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"/>
               </div>
               <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[1.5px] text-[#8F6E62] mb-2">
                 <span>{p.date}</span><span>·</span><span>{p.read}</span>
