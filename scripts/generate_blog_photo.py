@@ -109,22 +109,54 @@ def main():
         print("All Imagen model attempts failed.", file=sys.stderr)
         sys.exit(2)
 
-    # Save raw PNG
+    # Save raw PNG (Imagen 4 produces 1408x768 nominal at 16:9)
     raw = out_dir / f"{slug}-raw.png"
     resp.generated_images[0].image.save(str(raw))
     print(f"  saved raw: {raw.name}")
 
-    # cwebp → 2400 + 1200 webp
-    for w in (2400, 1200):
+    # Upscale via Upscayl (Real-ESRGAN). 4x produces ~5632x3072 from 1408x768
+    # source — comfortably enough for crisp 2400px hero downsampling.
+    # Default model is 'ultrasharp-4x' which is tuned for photographic detail
+    # (landscape/architectural). Falls back to direct webp encoding if Upscayl
+    # isn't installed (still works, just no super-resolution).
+    upscaled = out_dir / f"{slug}-upscaled.png"
+    upscayl_bin = "/Applications/Upscayl.app/Contents/Resources/bin/upscayl-bin"
+    upscayl_models = "/Applications/Upscayl.app/Contents/Resources/models"
+    upscayl_model = os.environ.get("UPSCAYL_MODEL", "ultrasharp-4x")
+
+    if Path(upscayl_bin).exists():
+        print(f"  upscaling 4x via Upscayl ({upscayl_model})...")
+        try:
+            subprocess.run(
+                [upscayl_bin, "-i", str(raw), "-o", str(upscaled),
+                 "-n", upscayl_model, "-m", upscayl_models, "-s", "4"],
+                check=True,
+                capture_output=True,
+                timeout=180,
+            )
+            source_for_webp = upscaled
+            print(f"  upscaled: {upscaled.name}")
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            print(f"  ! Upscayl failed: {e}. Falling back to raw source.")
+            source_for_webp = raw
+    else:
+        print(f"  ! Upscayl not installed ({upscayl_bin}). Falling back to raw source.")
+        print(f"    Install: brew install --cask upscayl")
+        source_for_webp = raw
+
+    # cwebp → 2400 + 1920 + 1200 webp from upscaled source
+    for w in (2400, 1920, 1200):
         out = out_dir / f"{slug}-{w}.webp"
         subprocess.run(
-            ["cwebp", "-q", "82", "-resize", str(w), "0", str(raw), "-o", str(out)],
+            ["cwebp", "-q", "85", "-resize", str(w), "0", str(source_for_webp), "-o", str(out)],
             check=True,
             capture_output=True,
         )
         print(f"  saved webp: {out.name}")
 
-    raw.unlink()  # drop the intermediate PNG
+    raw.unlink()  # drop the intermediate raw PNG
+    if upscaled.exists():
+        upscaled.unlink()  # drop the intermediate upscaled PNG
     print(f"\nDone. Use in MDX: <img src=\"/photos/blog/{rel}-2400.webp\" />")
 
 
