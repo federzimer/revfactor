@@ -1,0 +1,85 @@
+{
+  "url": "https://www.revfactor.io/blog/dynamic-pricing-str-beginners-guide",
+  "viewport": "mobile-iphone14",
+  "sections": [
+    {
+      "tag": "DIV",
+      "cls": "rf-chart",
+      "y": 14073,
+      "h": 655,
+      "alt": ""
+    },
+    {
+      "tag": "DIV",
+      "cls": "rf-chart",
+      "y": 23588,
+      "h": 935,
+      "alt": ""
+    },
+    {
+      "tag": "SECTION",
+      "cls": "rf-bleed",
+      "y": 25442,
+      "h": 480,
+      "alt": "A wide editorial shot of a luxury beachfront short-term rent"
+    },
+    {
+      "tag": "FIGURE",
+      "cls": "rf-diagram rf-diagram-full",
+      "y": 0,
+      "h": 0,
+      "alt": ""
+    },
+    {
+      "tag": "FIGURE",
+      "cls": "rf-diagram",
+      "y": 35191,
+      "h": 293,
+      "alt": ""
+    },
+    {
+      "tag": "SECTION",
+      "cls": "rf-bleed",
+      "y": 37082,
+      "h": 480,
+      "alt": "A wide editorial shot of a modern short-term rental's open d"
+    },
+    {
+      "tag": "FIGURE",
+      "cls": "rf-figure rf-figure-quote",
+      "y": 40604,
+      "h": 274,
+      "alt": "A wood-and-stone short-term rental cabin in late autumn — ce"
+    },
+    {
+      "tag": "FIGURE",
+      "cls": "rf-figure rf-figure-quote",
+      "y": 44784,
+      "h": 274,
+      "alt": "A wide editorial shot of a host's wood-cabin home office — a"
+    },
+    {
+      "tag": "FIGURE",
+      "cls": "rf-figure rf-figure-quote",
+      "y": 50494,
+      "h": 274,
+      "alt": "A wide editorial shot of a designed short-term rental living"
+    },
+    {
+      "tag": "FIGURE",
+      "cls": "rf-diagram",
+      "y": 64580,
+      "h": 326,
+      "alt": ""
+    },
+    {
+      "tag": "SECTION",
+      "cls": "rf-bleed",
+      "y": 66167,
+      "h": 480,
+      "alt": "A wide editorial shot of a luxury Smoky Mountain short-term "
+    }
+  ],
+  "consoleErrors": [],
+  "brokenImgs": []
+}

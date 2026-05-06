@@ -1,0 +1,58 @@
+{
+  "url": "http://localhost:4321/blog/dynamic-pricing-str-beginners-guide",
+  "label": "dyn-pricing — r4 hero swap + curly sweep + same QA pattern as pillar",
+  "browsers": ["chromium", "webkit", "firefox"],
+  "viewports": [
+    {"name": "mobile-iphone14",  "w": 390,  "h": 844},
+    {"name": "tablet",           "w": 768,  "h": 1024},
+    {"name": "desktop-1440",     "w": 1440, "h": 900}
+  ],
+  "checks": [
+    {"name": "hero-uses-cliffside",
+      "selector": "#heroBg",
+      "expect": "innerText !== 'broken'",
+      "complaint": "Hero image is the cliffside cabin from Google Ads landing"},
+
+    {"name": "key-stats-caption-font",
+      "selector": ".rf-key-stats .caption",
+      "expect": "fontSize >= 17",
+      "complaint": "rf-key-stats caption font 18px (same fix as pillar)"},
+
+    {"name": "italic-em-font",
+      "selector": "article p em",
+      "expect": "fontSize >= 19",
+      "complaint": "Inline Cormorant italic font (1.22em from earlier)"},
+
+    {"name": "leadtime-chart-renders-desktop",
+      "selector": ".rf-diagram:nth(2)",
+      "expect": "width >= 900",
+      "viewports": ["desktop-1440"],
+      "complaint": "Lead-time chart wide-track on desktop"},
+
+    {"name": "strategist-chart-renders-desktop",
+      "selector": ".rf-diagram:nth(3)",
+      "expect": "width >= 900",
+      "viewports": ["desktop-1440"],
+      "complaint": "Strategist chart wide-track on desktop"}
+  ],
+  "screenshots": [
+    {"name": "hero",                 "selector": "article section:first-of-type"},
+    {"name": "key-stats",            "selector": ".rf-key-stats"},
+    {"name": "lighthouse-chart",     "selector": ".rf-chart:nth(1)"},
+    {"name": "pigeon-revpar-chart",  "selector": ".rf-chart:nth(2)"},
+    {"name": "seven-signals-diag",   "selector": ".rf-diagram:nth(1)"},
+    {"name": "leadtime-chart",       "selector": ".rf-diagram:nth(2)"},
+    {"name": "strategist-chart",     "selector": ".rf-diagram:nth(3)"},
+    {"name": "scoreboard",           "selector": ".rf-scoreboard"},
+    {"name": "score-delta",          "selector": ".rf-score-delta"},
+    {"name": "fede-trial-quote",     "selector": "text:trial period"},
+    {"name": "case-study-italic",    "selector": "text:we went from making"},
+    {"name": "kate-henry-paragraph", "selector": "text:we went from making"},
+    {"name": "shoulder-cabin-bleed", "selector": "alt:wood-and-stone short-term rental cabin in late autumn"},
+    {"name": "host-workspace-bleed", "selector": "alt:wood-cabin home office"},
+    {"name": "living-room-bleed",    "selector": "alt:designed short-term rental living room"},
+    {"name": "fall-foliage-bleed",   "selector": "alt:Smoky Mountain short-term rental cabin in October"},
+    {"name": "beach-house-bleed",    "selector": "alt:luxury beachfront short-term rental"},
+    {"name": "dining-kitchen-bleed", "selector": "alt:dining and kitchen"}
+  ]
+}

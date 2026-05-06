@@ -1,0 +1,38 @@
+{
+  "url": "http://localhost:4321/blog/revenue-management-for-short-term-rentals",
+  "label": "pillar — round 3 fixes (curly quotes, LOS overlap, key-stats caption)",
+  "browsers": ["chromium", "webkit", "firefox"],
+  "viewports": [
+    {"name": "mobile-iphone14",  "w": 390,  "h": 844},
+    {"name": "tablet",           "w": 768,  "h": 1024},
+    {"name": "desktop-1440",     "w": 1440, "h": 900}
+  ],
+  "checks": [
+    {"name": "R3-1-key-stats-caption-font",
+      "selector": ".rf-key-stats .caption",
+      "expect": "fontSize >= 17",
+      "complaint": "R3-3: rf-key-stats caption font was too small (15px), bumped to 18px"},
+
+    {"name": "R3-2-LOS-chart-renders",
+      "selector": ".rf-diagram:nth(1)",
+      "expect": "width >= 320",
+      "complaint": "R3-2: LOS chart renders cleanly; trough annotation moved to upper margin (no bar collision)"}
+  ],
+  "screenshots": [
+    {"name": "R3-1-key-stats-block",
+      "selector": ".rf-key-stats",
+      "complaint": "R3-3: key-stats caption font visibly larger"},
+
+    {"name": "R3-2-LOS-chart",
+      "selector": ".rf-diagram:nth(1)",
+      "complaint": "R3-2: LOS chart annotation no longer overlaps bars"},
+
+    {"name": "R3-3-vacant-friday-bleed",
+      "selector": "alt:cabin reflected in a still mountain lake",
+      "complaint": "R3-1: 'A vacant Friday night' quote facing correct direction"},
+
+    {"name": "R3-3-host-care-foyer-bleed",
+      "selector": "alt:wood-paneled short-term rental foyer",
+      "complaint": "R3-1: 'two most expensive assets' quote correct direction"}
+  ]
+}

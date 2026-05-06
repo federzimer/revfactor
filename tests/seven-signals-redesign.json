@@ -1,0 +1,30 @@
+{
+  "url": "http://localhost:4321/blog/dynamic-pricing-str-beginners-guide",
+  "label": "seven-signals diagram redesign verification",
+  "browsers": ["chromium", "webkit", "firefox"],
+  "viewports": [
+    {"name": "mobile-iphone14",  "w": 390,  "h": 844},
+    {"name": "mobile-iphone-se", "w": 375,  "h": 667},
+    {"name": "tablet",           "w": 768,  "h": 1024},
+    {"name": "desktop-1440",     "w": 1440, "h": 900},
+    {"name": "desktop-1920",     "w": 1920, "h": 1080}
+  ],
+  "checks": [
+    {"name": "diagram-uses-full-bleed-desktop",
+      "selector": ".rf-diagram-full",
+      "expect": "width >= 1100",
+      "viewports": ["desktop-1440", "desktop-1920"],
+      "complaint": "Diagram should extend past wide-track on desktop"},
+
+    {"name": "diagram-renders-mobile",
+      "selector": ".rf-diagram-full",
+      "expect": "width >= 320",
+      "viewports": ["mobile-iphone14", "mobile-iphone-se"],
+      "complaint": "Diagram still readable on mobile"}
+  ],
+  "screenshots": [
+    {"name": "seven-signals-diagram",
+      "selector": ".rf-diagram-full",
+      "complaint": "Seven-signals diagram redesigned — no overlapping text"}
+  ]
+}

@@ -10,7 +10,7 @@ import Footer from '../../components/Footer.jsx';
 import BlogScheduleCTA from '../../components/BlogScheduleCTA.jsx';
 
 // Federico author headshot — used in hero metadata + bottom author card
-const FEDE_PHOTO = '/blog/revenue-management-for-short-term-rentals/federico-author.jpg';
+const FEDE_PHOTO = '/blog/revenue-management-for-short-term-rentals/federico-author.webp';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -50,13 +50,13 @@ const heroAlt = post.data.imageAlt || post.data.title;
 // Federico Person schema — reusable; sameAs locks the entity for AI engines (Refactor.ai disambiguation)
 const federicoPerson = {
   "@type": "Person",
-  "@id": "https://revfactor.io/#federico",
+  "@id": "https://www.revfactor.io/#federico",
   "name": "Federico Zimerman",
   "givenName": "Federico",
   "familyName": "Zimerman",
   "jobTitle": "Founder, RevFactor; Founder, Blackbird Hospitality",
-  "url": "https://revfactor.io/about",
-  "image": `https://revfactor.io${FEDE_PHOTO}`,
+  "url": "https://www.revfactor.io/about",
+  "image": `https://www.revfactor.io${FEDE_PHOTO}`,
   "sameAs": [
     "https://www.tiktok.com/@federicozimerman",
     "https://www.instagram.com/federico.zimerman",
@@ -71,7 +71,7 @@ const federicoPerson = {
     "PriceLabs"
   ],
   "alumniOf": { "@type": "Organization", "name": "American Airlines" },
-  "worksFor": { "@type": "Organization", "name": "RevFactor", "url": "https://revfactor.io" },
+  "worksFor": { "@type": "Organization", "name": "RevFactor", "url": "https://www.revfactor.io" },
   "description": "Federico Zimerman spent 10 years in airline revenue management at American Airlines before founding Blackbird Hospitality (165+ short-term rental properties across 24 U.S. states and 56 markets) and RevFactor (standalone revenue management service). His strategies deliver +18% RevPAR lift vs. comp set across the portfolio."
 };
 
@@ -80,15 +80,15 @@ const schema = {
   "@type": "Article",
   "headline": post.data.title,
   "description": post.data.description,
-  "image": heroImage.startsWith('http') ? heroImage : `https://revfactor.io${heroImage}`,
+  "image": heroImage.startsWith('http') ? heroImage : `https://www.revfactor.io${heroImage}`,
   "datePublished": post.data.pubDate.toISOString(),
   "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString(),
   "author": federicoPerson,
   "publisher": {
     "@type": "Organization",
     "name": "RevFactor",
-    "url": "https://revfactor.io",
-    "logo": { "@type": "ImageObject", "url": "https://revfactor.io/og-image.png" }
+    "url": "https://www.revfactor.io",
+    "logo": { "@type": "ImageObject", "url": "https://www.revfactor.io/og-image.png" }
   },
   "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
   "keywords": post.data.tags.join(', '),
@@ -112,8 +112,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://revfactor.io" },
-    { "@type": "ListItem", "position": 2, "name": "Journal", "item": "https://revfactor.io/blog" },
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.revfactor.io" },
+    { "@type": "ListItem", "position": 2, "name": "Journal", "item": "https://www.revfactor.io/blog" },
     { "@type": "ListItem", "position": 3, "name": post.data.title, "item": Astro.url.href }
   ]
 };
@@ -149,12 +149,12 @@ const howToLaunch = {
 };
 
 const definedTerms = [
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "RevPAR", "description": "Revenue per Available Night. Total revenue divided by total nights available. The only metric that captures rate and occupancy in one number.", "inDefinedTermSet": "https://revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "ADR", "description": "Average Daily Rate. The average price of booked nights. Ignores empty nights, which is why it's a misleading standalone metric.", "inDefinedTermSet": "https://revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "NetRevPAR", "description": "RevPAR minus variable costs per night (cleaning, channel commissions, OTA fees). Tells you whether the rate-and-occupancy win is making it to your bank account.", "inDefinedTermSet": "https://revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Pacing", "description": "How bookings accumulate week-over-week vs. the same period last year. The single best leading indicator of revenue.", "inDefinedTermSet": "https://revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Length-of-stay discount", "description": "A graduated discount that incentivizes longer bookings without giving away the nightly rate. The discount feels like a deal to the guest; the math is a win for the host.", "inDefinedTermSet": "https://revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Survivorship bias (in STR pricing)", "description": "The minimum-stay rules you can see across your competitors are the ones that survived their pricing decision. The listings that didn't survive — priced out by their own restrictions — are invisible. Setting minimums by copying visible competitors compounds the bias.", "inDefinedTermSet": "https://revfactor.io/glossary" }
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "RevPAR", "description": "Revenue per Available Night. Total revenue divided by total nights available. The only metric that captures rate and occupancy in one number.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "ADR", "description": "Average Daily Rate. The average price of booked nights. Ignores empty nights, which is why it's a misleading standalone metric.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "NetRevPAR", "description": "RevPAR minus variable costs per night (cleaning, channel commissions, OTA fees). Tells you whether the rate-and-occupancy win is making it to your bank account.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Pacing", "description": "How bookings accumulate week-over-week vs. the same period last year. The single best leading indicator of revenue.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Length-of-stay discount", "description": "A graduated discount that incentivizes longer bookings without giving away the nightly rate. The discount feels like a deal to the guest; the math is a win for the host.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Survivorship bias (in STR pricing)", "description": "The minimum-stay rules you can see across your competitors are the ones that survived their pricing decision. The listings that didn't survive — priced out by their own restrictions — are invisible. Setting minimums by copying visible competitors compounds the bias.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
 ];
 ---
 
@@ -341,9 +341,9 @@ const definedTerms = [
           class="w-20 h-20 rounded-full object-cover flex-shrink-0 ring-1 ring-[#C8C4BC]"
         />
         <div>
-          <h4 class="text-[24px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:500;">{post.data.author.toLowerCase()}</h4>
+          <h3 class="text-[24px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:500;">{post.data.author.toLowerCase()}</h3>
           <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
-          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-3">Federico Zimerman is the founder of <a href="https://revfactor.io" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">RevFactor</a>, a managed revenue management service for short-term rental hosts. He spent 10 years in airline revenue management at American Airlines before applying that yield-management playbook to vacation rentals — strategies that run daily across <strong>165+ STR properties in 24 U.S. states and 56 markets</strong> through Blackbird Hospitality, with a documented <strong>+18% RevPAR lift vs. comp set</strong>.</p>
+          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-3">Federico Zimerman is the founder of <a href="https://www.revfactor.io" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">RevFactor</a>, a managed revenue management service for short-term rental hosts. He spent 10 years in airline revenue management at American Airlines before applying that yield-management playbook to vacation rentals — strategies that run daily across <strong>165+ STR properties in 24 U.S. states and 56 markets</strong> through Blackbird Hospitality, with a documented <strong>+18% RevPAR lift vs. comp set</strong>.</p>
           <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">He's been featured on <em>No Vacancy with Natalie Palmer</em> (Ep. 155), <em>Life of Flow</em>, <em>Catchup with the Carlyles</em>, <em>Craft Stays</em>, and <em>STR Like The Best</em>, and posts daily on TikTok (<a href="https://www.tiktok.com/@federicozimerman" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">@federicozimerman</a>) and Instagram (<a href="https://www.instagram.com/federico.zimerman" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">@federico.zimerman</a>).</p>
           <div class="flex gap-2 flex-wrap">
             <a href="https://www.linkedin.com/in/federico-zimerman-23ab3345/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Follow on LinkedIn</a>
@@ -370,7 +370,7 @@ const definedTerms = [
             <a href={p.href} class="group block">
               <div class="relative overflow-hidden rounded-[12px] mb-4" style="aspect-ratio:4/3;">
                 <span class="absolute top-3 left-3 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
-                <img src={p.img} alt="" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"/>
+                <img src={p.img} alt="" loading="lazy" decoding="async" width="1920" height="1080" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"/>
               </div>
               <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[1.5px] text-[#8F6E62] mb-2">
                 <span>{p.date}</span><span>·</span><span>{p.read}</span>
@@ -831,12 +831,16 @@ const definedTerms = [
 
     .prose-rf :global(.rf-key-stats) { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:0.5rem 0 1.25rem; padding:1rem 1.5rem; background:rgba(93,109,89,0.08); border:1px solid rgba(93,109,89,0.2); border-radius:16px; }
     @media (max-width: 640px) { .prose-rf :global(.rf-key-stats) { grid-template-columns:1fr; gap:0.6rem; padding:1rem 1.25rem; } }
-    .prose-rf :global(.rf-key-stats .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#5D6D59; margin:0 0 0.35rem; text-align:center; }
+    /* WCAG AA: .label was #5D6D59 on bone-tinted bg (3.61 ratio, fails). .caption
+       was #76574C (4.24, fails the 18px italic threshold). Darkened both to
+       brand cedar/tobacco tokens which clear AA at all weights/sizes. */
+    .prose-rf :global(.rf-key-stats .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#13342D; margin:0 0 0.35rem; text-align:center; }
     .prose-rf :global(.rf-key-stats .number) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(26px,3.4vw,36px); color:#13342D; margin:0 0 0.25rem; text-align:center; line-height:1; }
-    .prose-rf :global(.rf-key-stats .caption) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; color:#76574C; margin:0; text-align:center; line-height:1.35; }
+    .prose-rf :global(.rf-key-stats .caption) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; color:#3F261F; margin:0; text-align:center; line-height:1.35; }
 
     /* Key Takeaways — heading serif, body sans-serif per brand spec */
     .prose-rf :global(.rf-takeaways) { background:rgba(93,109,89,0.05); border:1px solid #C8C4BC; border-radius:16px; padding:1.75rem 2rem; margin:2rem 0 1.5rem; }
+    .prose-rf :global(.rf-takeaways h2),
     .prose-rf :global(.rf-takeaways h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:30px; color:#13342D; margin:0 0 1rem !important; letter-spacing:0.25px; }
     .prose-rf :global(.rf-takeaways ul) { margin:0; padding-left:1.25rem; }
     .prose-rf :global(.rf-takeaways li) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:16px; line-height:1.65; color:#3F261F; margin-bottom:0.7rem; }

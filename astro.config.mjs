@@ -5,7 +5,10 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://revfactor.io',
+  // Production serves on www.revfactor.io (revfactor.io 307s to www).
+  // Canonical + sitemap + OG URLs must match the served host or Google
+  // sees a self-referential redirect loop on canonicalization.
+  site: 'https://www.revfactor.io',
   integrations: [react(), mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

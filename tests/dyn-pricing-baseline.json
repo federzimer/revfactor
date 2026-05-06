@@ -1,0 +1,21 @@
+{
+  "url": "http://localhost:4321/blog/dynamic-pricing-str-beginners-guide",
+  "label": "dynamic-pricing post — baseline before fixes",
+  "browsers": ["chromium"],
+  "viewports": [
+    {"name": "mobile-iphone14", "w": 390,  "h": 844},
+    {"name": "desktop-1440",    "w": 1440, "h": 900}
+  ],
+  "checks": [],
+  "screenshots": [
+    {"name": "hero-fold",          "selector": "article section:first-of-type"},
+    {"name": "key-stats",          "selector": ".rf-key-stats"},
+    {"name": "lighthouse-chart",   "selector": ".rf-chart:nth(1)"},
+    {"name": "pigeon-revpar-chart","selector": ".rf-chart:nth(2)"},
+    {"name": "seven-signals-diag", "selector": ".rf-diagram:nth(1)"},
+    {"name": "leadtime-chart",     "selector": ".rf-diagram:nth(2)"},
+    {"name": "strategist-chart",   "selector": ".rf-diagram:nth(3)"},
+    {"name": "scoreboard",         "selector": ".rf-scoreboard"},
+    {"name": "score-delta",        "selector": ".rf-score-delta"}
+  ]
+}
