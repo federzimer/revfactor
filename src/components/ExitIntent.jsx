@@ -41,6 +41,7 @@ export default function ExitIntent() {
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'exit_intent_shown', { reason });
       }
+      window.posthog?.capture('exit_intent_shown', { trigger_reason: reason });
     };
 
     // Track cursor Y so we can distinguish "user leaving via the top of the
@@ -111,6 +112,7 @@ export default function ExitIntent() {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'exit_intent_dismissed');
     }
+    window.posthog?.capture('exit_intent_dismissed');
   };
 
   const handleOverlayClick = (e) => {

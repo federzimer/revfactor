@@ -52,7 +52,7 @@ export default function CTA() {
         </p>
         <div className="cta-animate opacity-0">
           <button
-            onClick={() => setScheduleOpen(true)}
+            onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'cta_section' }); setScheduleOpen(true); }}
             className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(93,109,89,0.35)]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >

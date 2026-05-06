@@ -55,6 +55,7 @@ export default function ScheduleModal({ onClose }) {
   const handleClose = useCallback(() => {
     if (isClosingRef.current) return;
     isClosingRef.current = true;
+    window.posthog?.capture('schedule_modal_dismissed');
 
     if (!overlayRef.current || !panelRef.current) {
       onClose();

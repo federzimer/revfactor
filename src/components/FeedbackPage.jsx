@@ -119,6 +119,7 @@ export default function FeedbackPage() {
               href="https://www.trustpilot.com/review/revfactor.io"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => window.posthog?.capture('trustpilot_review_clicked')}
               className="inline-flex items-center gap-3 px-6 py-3 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
               style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
             >

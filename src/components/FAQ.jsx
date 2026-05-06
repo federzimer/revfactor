@@ -125,7 +125,11 @@ export default function FAQ() {
               key={i}
               item={item}
               isOpen={openIndex === i}
-              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+              onToggle={() => {
+              const opening = openIndex !== i;
+              setOpenIndex(openIndex === i ? null : i);
+              if (opening) window.posthog?.capture('faq_item_expanded', { question: item.q });
+            }}
             />
           ))}
         </div>

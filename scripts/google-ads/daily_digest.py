@@ -8,6 +8,9 @@ Designed to run as a Render cron at 9am Chicago daily. Reads creds from env:
 - GOOGLE_ADS_YAML_PATH (default: ./google-ads.yaml)
 - SLACK_WEBHOOK_URL  (Aaron's #revfactor channel)
 - FRAUDBLOCKER_API_KEY (optional, for fraud-blocked-clicks count)
+- POSTHOG_API_KEY    (optional, Personal API key for friction queries)
+- POSTHOG_PROJECT_ID (optional, numeric project ID — required if POSTHOG_API_KEY set)
+- POSTHOG_HOST       (optional, defaults to https://us.posthog.com)
 - GA4_PROPERTY_ID    (optional)
 - GA4_SERVICE_ACCOUNT_JSON (optional, base64-encoded)
 
@@ -32,7 +35,9 @@ from google.ads.googleads.client import GoogleAdsClient
 CID = "5342635272"
 SLACK = os.environ.get("SLACK_WEBHOOK_URL", "")
 FRAUDBLOCKER_KEY = os.environ.get("FRAUDBLOCKER_API_KEY", "")
-CLARITY_TOKEN = os.environ.get("CLARITY_API_TOKEN", "")
+POSTHOG_KEY = os.environ.get("POSTHOG_API_KEY", "")
+POSTHOG_PROJECT = os.environ.get("POSTHOG_PROJECT_ID", "")
+POSTHOG_HOST = os.environ.get("POSTHOG_HOST", "https://us.posthog.com")
 TG_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TG_CHAT = os.environ.get("TELEGRAM_CHAT_ID", "7701444125")
 
@@ -161,61 +166,93 @@ def impression_share(client, start, end):
     return rows
 
 
-def clarity_friction(num_days=1):
-    """Pull Clarity Live Insights — surfaces dead clicks, rage clicks, JS
-    errors, quick-back clicks. Aggregate-only (no individual recordings).
-    Returns a dict: {metric_name: [{url, sessions, pct, total}, ...]} only
-    for URLs/metrics with non-zero hits, capped to top 5 per metric.
-    """
-    if not CLARITY_TOKEN:
+def _posthog_query(hogql):
+    """Run a HogQL query via PostHog's Query API. Returns rows or None."""
+    if not POSTHOG_KEY or not POSTHOG_PROJECT:
         return None
-    try:
-        url = (
-            "https://www.clarity.ms/export-data/api/v1/project-live-insights"
-            f"?numOfDays={num_days}&dimension1=URL"
-        )
-        req = urllib.request.Request(
-            url,
-            headers={
-                "Authorization": f"Bearer {CLARITY_TOKEN}",
-                "User-Agent": "RevFactor-DailyDigest/1.0",
-                "Accept": "application/json",
-            },
-        )
-        with urllib.request.urlopen(req, timeout=15) as r:
-            data = json.loads(r.read())
-    except Exception as e:
-        return f"err: {str(e)[:80]}"
+    url = f"{POSTHOG_HOST}/api/projects/{POSTHOG_PROJECT}/query/"
+    body = json.dumps({"query": {"kind": "HogQLQuery", "query": hogql}}).encode()
+    req = urllib.request.Request(
+        url,
+        data=body,
+        headers={
+            "Authorization": f"Bearer {POSTHOG_KEY}",
+            "Content-Type": "application/json",
+            "User-Agent": "RevFactor-DailyDigest/1.0",
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=20) as r:
+        data = json.loads(r.read())
+    return data.get("results", [])
+
+
+def posthog_friction(num_days=1):
+    """Pull friction events from PostHog — rage clicks, dead clicks, JS
+    exceptions. Returns the same shape as the old clarity_friction so the
+    rest of the digest formatting doesn't change.
+
+    PostHog auto-captures `$rageclick` out of the box. `$dead_click` and
+    `$exception` require Heatmaps + Error Tracking enabled in PH settings.
+    """
+    if not POSTHOG_KEY or not POSTHOG_PROJECT:
+        return None
+
+    paths = ("/short-term-rental-consultant", "/airbnb-pricing-strategy", "/vs/pricelabs")
+    path_filter = " OR ".join([f"properties.$pathname LIKE '{p}%'" for p in paths])
+
+    queries = {
+        "RageClickCount": (
+            "SELECT properties.$current_url AS url, "
+            "       COUNT() AS hits, "
+            "       COUNT(DISTINCT properties.$session_id) AS sessions "
+            "FROM events "
+            f"WHERE event = '$rageclick' AND timestamp >= now() - INTERVAL {num_days} DAY "
+            f"  AND ({path_filter}) "
+            "GROUP BY url ORDER BY hits DESC LIMIT 5"
+        ),
+        "DeadClickCount": (
+            "SELECT properties.$current_url AS url, "
+            "       COUNT() AS hits, "
+            "       COUNT(DISTINCT properties.$session_id) AS sessions "
+            "FROM events "
+            f"WHERE event = '$dead_click' AND timestamp >= now() - INTERVAL {num_days} DAY "
+            f"  AND ({path_filter}) "
+            "GROUP BY url ORDER BY hits DESC LIMIT 5"
+        ),
+        "ScriptErrorCount": (
+            "SELECT properties.$current_url AS url, "
+            "       COUNT() AS hits, "
+            "       COUNT(DISTINCT properties.$session_id) AS sessions "
+            "FROM events "
+            f"WHERE event = '$exception' AND timestamp >= now() - INTERVAL {num_days} DAY "
+            f"  AND ({path_filter}) "
+            "GROUP BY url ORDER BY hits DESC LIMIT 5"
+        ),
+    }
 
     out = {}
-    interesting = ("DeadClickCount", "RageClickCount", "ScriptErrorCount", "QuickbackClick", "ErrorClickCount")
-    for metric in data:
-        name = metric.get("metricName")
-        if name not in interesting:
-            continue
-        rows = []
-        for row in metric.get("information", []):
-            sub = row.get("subTotal", 0)
+    for metric, q in queries.items():
+        try:
+            rows = _posthog_query(q) or []
+        except Exception as e:
+            return f"err: {str(e)[:80]}"
+        formatted = []
+        for row in rows:
             try:
-                if int(sub) <= 0:
-                    continue
-            except (TypeError, ValueError):
+                url, hits, sessions = row[0], int(row[1]), int(row[2])
+            except (IndexError, TypeError, ValueError):
                 continue
-            page_url = row.get("Url", row.get("URL", ""))
-            # Only flag PPC pages (or production blog posts) — skip blog/about/staging
-            if not any(x in page_url for x in [
-                "/short-term-rental-consultant", "/airbnb-pricing-strategy", "/vs/pricelabs"
-            ]):
+            if hits <= 0:
                 continue
-            rows.append({
-                "url": page_url,
-                "sessions": row.get("sessionsCount", "?"),
-                "pct": row.get("sessionsWithMetricPercentage", 0),
-                "total": sub,
+            formatted.append({
+                "url": url or "",
+                "sessions": sessions,
+                "pct": "?",  # PostHog doesn't return % of sessions; show count instead
+                "total": hits,
             })
-        rows.sort(key=lambda x: float(x["pct"] or 0), reverse=True)
-        if rows:
-            out[name] = rows[:3]
+        if formatted:
+            out[metric] = formatted[:3]
     return out
 
 
@@ -295,7 +332,7 @@ def build_digest():
     low_qs = low_qs_keywords(client)
     blocked = fraudblocker_blocked_count()
     is_rows = impression_share(client, yesterday, yesterday)
-    friction = clarity_friction(num_days=1)
+    friction = posthog_friction(num_days=1)
 
     # Build recommendations
     recs = []
@@ -347,30 +384,28 @@ def build_digest():
                 f"lost-budget {row['lost_budget']}% | lost-rank {row['lost_rank']}%"
             )
 
-    # Clarity friction summary
+    # PostHog friction summary
     if isinstance(friction, dict) and friction:
         lines.append("")
-        lines.append("*Clarity friction (yesterday)*")
+        lines.append("*PostHog friction (yesterday)*")
         labels = {
             "DeadClickCount": "Dead clicks",
             "RageClickCount": "Rage clicks",
             "ScriptErrorCount": "JS errors",
-            "QuickbackClick": "Quick-backs",
-            "ErrorClickCount": "Error clicks",
         }
-        for name in ("ScriptErrorCount", "RageClickCount", "DeadClickCount", "QuickbackClick", "ErrorClickCount"):
+        for name in ("ScriptErrorCount", "RageClickCount", "DeadClickCount"):
             if name not in friction:
                 continue
             lbl = labels.get(name, name)
             for row in friction[name][:2]:
                 short_url = row["url"].split("?")[0].replace("https://www.revfactor.io", "")
-                lines.append(f"• {lbl}: {row['pct']}% of {row['sessions']} sessions ({row['total']} hits) — {short_url}")
+                lines.append(f"• {lbl}: {row['total']} hits across {row['sessions']} sessions — {short_url}")
                 # Auto-recommend on high-impact friction
                 try:
                     if name == "ScriptErrorCount" and int(row['total']) > 0:
                         recs.append(f"🚨 JS errors firing on {short_url} — investigate console + push fix")
-                    elif name == "DeadClickCount" and float(row['pct']) >= 20:
-                        recs.append(f"⚠️ {row['pct']}% dead-click rate on {short_url} — watch a recording in Clarity to ID the element")
+                    elif name == "DeadClickCount" and int(row['total']) >= 5:
+                        recs.append(f"⚠️ {row['total']} dead clicks on {short_url} — watch a PostHog replay to ID the element")
                     elif name == "RageClickCount" and int(row['total']) > 0:
                         recs.append(f"🚨 Rage clicks on {short_url} — visitors slamming a broken UI element")
                 except (TypeError, ValueError):
@@ -379,7 +414,7 @@ def build_digest():
         pass  # No token configured; silent
     elif isinstance(friction, str):
         lines.append("")
-        lines.append(f"*Clarity friction*: {friction}")
+        lines.append(f"*PostHog friction*: {friction}")
 
     lines.append("")
     lines.append("*Recommendations*")

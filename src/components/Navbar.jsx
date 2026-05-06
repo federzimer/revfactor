@@ -90,6 +90,7 @@ function SubscribeModal({ onClose }) {
 
   const handleCheckout = () => {
     if (selectedCount) {
+      window.posthog?.capture('subscribe_checkout_started', { property_count: selectedCount });
       window.open(STRIPE_URLS[selectedCount], '_blank');
     }
   };
@@ -276,6 +277,7 @@ export default function Navbar({ lightBg = false }) {
             href="https://owner.revfactor.io"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => window.posthog?.capture('owner_portal_clicked')}
             className={`inline-flex items-center gap-1.5 px-4 py-2 border font-bold uppercase text-[9px] tracking-[2px] rounded-full transition-all duration-[200ms] hover:scale-[1.02] ${scrolled
                 ? 'border-[#3F261F]/30 text-[#3F261F] hover:bg-[#3F261F] hover:text-[#DDDAD3] hover:border-[#3F261F]'
                 : 'border-[#E8E6E1]/30 text-[#E8E6E1] hover:bg-[#3F261F] hover:text-[#DDDAD3] hover:border-[#3F261F]'
@@ -288,7 +290,7 @@ export default function Navbar({ lightBg = false }) {
 
           {/* Subscribe — moss to match hero "Schedule a Strategy Call" CTA. Transparent border keeps box-model height matched to Owner Portal's 1px border. */}
           <button
-            onClick={() => setModalOpen(true)}
+            onClick={() => { window.posthog?.capture('subscribe_modal_opened', { source: 'navbar_desktop' }); setModalOpen(true); }}
             className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
@@ -363,6 +365,7 @@ export default function Navbar({ lightBg = false }) {
             <button
               onClick={() => {
                 setMenuOpen(false);
+                window.posthog?.capture('subscribe_modal_opened', { source: 'navbar_mobile' });
                 setModalOpen(true);
               }}
               className="block mt-2 w-full text-center py-3 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full"
