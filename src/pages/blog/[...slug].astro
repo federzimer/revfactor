@@ -207,6 +207,53 @@ const howToDynamicPricingSetup = {
   ]
 };
 
+// WebPage entity with about + mentions arrays.
+// Disambiguates the page's subject + referenced entities for AI search engines
+// (Perplexity, ChatGPT Search, Google Knowledge Graph) by linking to canonical
+// Wikipedia / vendor URLs. Per-post — only the pillar and dynamic-pricing
+// spoke have entity packages today; other posts skip this block.
+const webPageEntities = isPillar ? {
+  about: [
+    { "@type": "Thing", "name": "Revenue management", "sameAs": "https://en.wikipedia.org/wiki/Revenue_management" },
+    { "@type": "Thing", "name": "Short-term rental", "sameAs": "https://en.wikipedia.org/wiki/Short-term_rental" }
+  ],
+  mentions: [
+    { "@type": "Thing", "name": "RevPAR", "sameAs": "https://en.wikipedia.org/wiki/RevPAR" },
+    { "@type": "Thing", "name": "Yield management", "sameAs": "https://en.wikipedia.org/wiki/Yield_management" },
+    { "@type": "Organization", "name": "PriceLabs", "sameAs": "https://pricelabs.co" },
+    { "@type": "Organization", "name": "Beyond", "sameAs": "https://www.beyondpricing.com" },
+    { "@type": "Organization", "name": "Wheelhouse", "sameAs": "https://www.usewheelhouse.com" },
+    { "@type": "Organization", "name": "Airbnb", "sameAs": "https://en.wikipedia.org/wiki/Airbnb" },
+    { "@type": "Organization", "name": "American Airlines", "sameAs": "https://en.wikipedia.org/wiki/American_Airlines" }
+  ]
+} : isDynamicPricing ? {
+  about: [
+    { "@type": "Thing", "name": "Dynamic pricing", "sameAs": "https://en.wikipedia.org/wiki/Dynamic_pricing" },
+    { "@type": "Thing", "name": "Short-term rental", "sameAs": "https://en.wikipedia.org/wiki/Short-term_rental" }
+  ],
+  mentions: [
+    { "@type": "Organization", "name": "PriceLabs", "sameAs": "https://pricelabs.co" },
+    { "@type": "Organization", "name": "Beyond", "sameAs": "https://www.beyondpricing.com" },
+    { "@type": "Organization", "name": "Wheelhouse", "sameAs": "https://www.usewheelhouse.com" },
+    { "@type": "Organization", "name": "Airbnb", "sameAs": "https://en.wikipedia.org/wiki/Airbnb" },
+    { "@type": "Thing", "name": "RevPAR", "sameAs": "https://en.wikipedia.org/wiki/RevPAR" }
+  ]
+} : null;
+
+const webPageSchema = webPageEntities ? {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${Astro.url.href}#webpage`,
+  "url": Astro.url.href,
+  "name": post.data.title,
+  "description": post.data.description,
+  "isPartOf": { "@id": "https://www.revfactor.io/#website" },
+  "primaryImageOfPage": heroImage.startsWith('http') ? heroImage : `https://www.revfactor.io${heroImage}`,
+  "breadcrumb": { "@id": `${Astro.url.href}#breadcrumb` },
+  "about": webPageEntities.about,
+  "mentions": webPageEntities.mentions
+} : null;
+
 const dynamicPricingDefinedTerms = [
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Lead time (STR booking)", "description": "How far ahead of the stay date a guest books. Lead-time curves vary sharply by market — beach markets book 6+ months out, urban markets often book inside 14 days. Dynamic pricing tools weight lead time differently per market.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Comp set", "description": "The 10-15 short-term rental listings in the same submarket, bedroom count, and amenity tier that a dynamic pricing tool benchmarks against to set rate and pacing signals. Auto-built comp sets are wrong about half the time and need manual override.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
@@ -227,6 +274,7 @@ const dynamicPricingDefinedTerms = [
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    {webPageSchema && <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />}
     {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
     {isPillar && <script type="application/ld+json" set:html={JSON.stringify(howToMinStay)} />}
