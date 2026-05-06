@@ -740,6 +740,9 @@ export default function PPCLanding({
               internal scroll on tall steps (form, etc.). marginTop:-38
               clips 38px of the embed page's 48px py-12 padding, leaving
               10px of bone-light padding above the dark green header. */}
+          {/* Reserved space for the iframe to prevent CLS while it lazy-loads.
+              Same height as the iframe wrapper itself, so swapping <div→iframe>
+              doesn't push surrounding content. */}
           <div
             className="rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]"
             style={{ height: 'min(720px, calc(100vh - 160px))' }}
@@ -750,6 +753,7 @@ export default function PPCLanding({
               title="Schedule a strategy call with RevFactor"
               className="w-full border-0 block"
               style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}
+              loading="lazy"
               allow="payment"
             />
           </div>

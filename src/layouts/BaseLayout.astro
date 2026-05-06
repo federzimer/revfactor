@@ -32,17 +32,19 @@ const canonicalUrl = Astro.url.href;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Fraud Blocker — bot/click-fraud detection. Loads first so bot
-       signals reach Fraud Blocker before gtag fires conversion
-       attribution. SID = our account identifier; tied to API key
-       in keychain. -->
+  <!-- Fraud Blocker — bot/click-fraud detection. Deferred until window.load
+       so it doesn't block first paint. Bot signals still reach Fraud
+       Blocker for any user actually engaging with the page. -->
   <script is:inline>
     (function () {
-      var h = document.getElementsByTagName('head')[0];
-      var s = document.createElement('script');
-      s.async = 1;
-      s.src = "https://monitor.fraudblocker.com/fbt.js?sid=B4KFu5wKGk8JBQwekqEIu";
-      h.appendChild(s);
+      function loadFB() {
+        var s = document.createElement('script');
+        s.async = 1;
+        s.src = "https://monitor.fraudblocker.com/fbt.js?sid=B4KFu5wKGk8JBQwekqEIu";
+        document.head.appendChild(s);
+      }
+      if (document.readyState === 'complete') loadFB();
+      else window.addEventListener('load', loadFB);
     })();
   </script>
 
@@ -93,23 +95,29 @@ const canonicalUrl = Astro.url.href;
     data-website-id="fd5982fb-76c6-4a8c-bf65-2ad69c72c306"
   ></script>
 
-  <!-- Microsoft Clarity — session recording + heatmaps (free).
-       Project ID env-overridable via PUBLIC_CLARITY_ID; default placeholder
-       must be replaced with the real ID from https://clarity.microsoft.com
-       (create a project for revfactor.io). The script self-skips if the ID
-       is still the placeholder so we don't ship broken telemetry. -->
+  <!-- Microsoft Clarity — session recording + heatmaps. Deferred until
+       window.load so the heavy clarity.ms tag doesn't block first paint.
+       Visitor sessions still record once the page is interactive. -->
   <script is:inline define:vars={{ clarityId: import.meta.env.PUBLIC_CLARITY_ID || 'REPLACE_WITH_CLARITY_ID' }}>
     if (clarityId && clarityId !== 'REPLACE_WITH_CLARITY_ID') {
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        var y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", clarityId);
+      function loadClarity(){
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          var y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", clarityId);
+      }
+      if (document.readyState === 'complete') loadClarity();
+      else window.addEventListener('load', loadClarity);
     }
   </script>
 
-  <!-- Google Analytics + Google Ads (one gtag.js load handles both IDs) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CTGBJ9RLK"></script>
+  <!-- Google Analytics + Google Ads (one gtag.js load handles both IDs).
+       defer (not async) so the script downloads in parallel but runs after
+       DOMContentLoaded — keeps gtag.js out of the LCP critical path. The
+       inline script below queues events into dataLayer; gtag.js processes
+       the queue when it eventually executes. -->
+  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-1CTGBJ9RLK"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
