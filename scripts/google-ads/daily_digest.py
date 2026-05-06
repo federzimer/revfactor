@@ -32,6 +32,7 @@ from google.ads.googleads.client import GoogleAdsClient
 CID = "5342635272"
 SLACK = os.environ.get("SLACK_WEBHOOK_URL", "")
 FRAUDBLOCKER_KEY = os.environ.get("FRAUDBLOCKER_API_KEY", "")
+CLARITY_TOKEN = os.environ.get("CLARITY_API_TOKEN", "")
 TG_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TG_CHAT = os.environ.get("TELEGRAM_CHAT_ID", "7701444125")
 
@@ -160,6 +161,64 @@ def impression_share(client, start, end):
     return rows
 
 
+def clarity_friction(num_days=1):
+    """Pull Clarity Live Insights — surfaces dead clicks, rage clicks, JS
+    errors, quick-back clicks. Aggregate-only (no individual recordings).
+    Returns a dict: {metric_name: [{url, sessions, pct, total}, ...]} only
+    for URLs/metrics with non-zero hits, capped to top 5 per metric.
+    """
+    if not CLARITY_TOKEN:
+        return None
+    try:
+        url = (
+            "https://www.clarity.ms/export-data/api/v1/project-live-insights"
+            f"?numOfDays={num_days}&dimension1=URL"
+        )
+        req = urllib.request.Request(
+            url,
+            headers={
+                "Authorization": f"Bearer {CLARITY_TOKEN}",
+                "User-Agent": "RevFactor-DailyDigest/1.0",
+                "Accept": "application/json",
+            },
+        )
+        with urllib.request.urlopen(req, timeout=15) as r:
+            data = json.loads(r.read())
+    except Exception as e:
+        return f"err: {str(e)[:80]}"
+
+    out = {}
+    interesting = ("DeadClickCount", "RageClickCount", "ScriptErrorCount", "QuickbackClick", "ErrorClickCount")
+    for metric in data:
+        name = metric.get("metricName")
+        if name not in interesting:
+            continue
+        rows = []
+        for row in metric.get("information", []):
+            sub = row.get("subTotal", 0)
+            try:
+                if int(sub) <= 0:
+                    continue
+            except (TypeError, ValueError):
+                continue
+            page_url = row.get("Url", row.get("URL", ""))
+            # Only flag PPC pages (or production blog posts) — skip blog/about/staging
+            if not any(x in page_url for x in [
+                "/short-term-rental-consultant", "/airbnb-pricing-strategy", "/vs/pricelabs"
+            ]):
+                continue
+            rows.append({
+                "url": page_url,
+                "sessions": row.get("sessionsCount", "?"),
+                "pct": row.get("sessionsWithMetricPercentage", 0),
+                "total": sub,
+            })
+        rows.sort(key=lambda x: float(x["pct"] or 0), reverse=True)
+        if rows:
+            out[name] = rows[:3]
+    return out
+
+
 def fraudblocker_blocked_count(domain="revfactor.io", range_="1d"):
     """Pull yesterday's fraud-detection summary from Fraud Blocker.
 
@@ -236,6 +295,7 @@ def build_digest():
     low_qs = low_qs_keywords(client)
     blocked = fraudblocker_blocked_count()
     is_rows = impression_share(client, yesterday, yesterday)
+    friction = clarity_friction(num_days=1)
 
     # Build recommendations
     recs = []
@@ -286,6 +346,41 @@ def build_digest():
                 f"{row['top_is']}% top | "
                 f"lost-budget {row['lost_budget']}% | lost-rank {row['lost_rank']}%"
             )
+
+    # Clarity friction summary
+    if isinstance(friction, dict) and friction:
+        lines.append("")
+        lines.append("*Clarity friction (yesterday)*")
+        labels = {
+            "DeadClickCount": "Dead clicks",
+            "RageClickCount": "Rage clicks",
+            "ScriptErrorCount": "JS errors",
+            "QuickbackClick": "Quick-backs",
+            "ErrorClickCount": "Error clicks",
+        }
+        for name in ("ScriptErrorCount", "RageClickCount", "DeadClickCount", "QuickbackClick", "ErrorClickCount"):
+            if name not in friction:
+                continue
+            lbl = labels.get(name, name)
+            for row in friction[name][:2]:
+                short_url = row["url"].split("?")[0].replace("https://www.revfactor.io", "")
+                lines.append(f"• {lbl}: {row['pct']}% of {row['sessions']} sessions ({row['total']} hits) — {short_url}")
+                # Auto-recommend on high-impact friction
+                try:
+                    if name == "ScriptErrorCount" and int(row['total']) > 0:
+                        recs.append(f"🚨 JS errors firing on {short_url} — investigate console + push fix")
+                    elif name == "DeadClickCount" and float(row['pct']) >= 20:
+                        recs.append(f"⚠️ {row['pct']}% dead-click rate on {short_url} — watch a recording in Clarity to ID the element")
+                    elif name == "RageClickCount" and int(row['total']) > 0:
+                        recs.append(f"🚨 Rage clicks on {short_url} — visitors slamming a broken UI element")
+                except (TypeError, ValueError):
+                    pass
+    elif friction is None:
+        pass  # No token configured; silent
+    elif isinstance(friction, str):
+        lines.append("")
+        lines.append(f"*Clarity friction*: {friction}")
+
     lines.append("")
     lines.append("*Recommendations*")
     for r in recs:
