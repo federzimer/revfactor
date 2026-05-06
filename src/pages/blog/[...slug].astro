@@ -62,6 +62,10 @@ const related = relatedSource.slice(0, 3).map((p) => {
     img: r.src,
     srcset: r.srcset,
     sizes: r.sizes,
+    // Use the hero's imageAlt for SEO (Google Images crawl) instead of empty alt.
+    // Surrounding link text already names the post for screen readers, so SEO
+    // is the load-bearing reason to populate alt here.
+    alt: p.data.imageAlt || p.data.title,
   };
 });
 
@@ -429,7 +433,7 @@ const dynamicPricingDefinedTerms = [
             <a href={p.href} class="group block">
               <div class="relative overflow-hidden rounded-[12px] mb-4" style="aspect-ratio:4/3;">
                 <span class="absolute top-3 left-3 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
-                <img src={p.img} srcset={p.srcset} sizes={p.sizes} alt="" loading="lazy" decoding="async" width="1920" height="1080" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"/>
+                <img src={p.img} srcset={p.srcset} sizes={p.sizes} alt={p.alt} loading="lazy" decoding="async" width="1920" height="1080" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"/>
               </div>
               <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[1.5px] text-[#8F6E62] mb-2">
                 <span>{p.date}</span><span>·</span><span>{p.read}</span>
