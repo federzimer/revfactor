@@ -594,6 +594,33 @@ const dynamicPricingDefinedTerms = [
       padding: 1.5rem 0;
     }
     .prose-rf :global(.rf-diagram > svg) { display: block; width: 100%; height: auto; max-width: 100%; }
+
+    /* Mobile/tablet chart legibility — SVG line/bar diagrams compress to ~41%
+       of native at iPhone width, making 11px text labels render at ~4.5px
+       (unreadable). Below 768px, scroll the SVG horizontally at near-native
+       size; pin the figcaption to the left so it stays in view while the
+       chart scrolls. Adds a subtle right-edge gradient so users see there's
+       more content to scroll to. */
+    @media (max-width: 768px) {
+      .prose-rf :global(.rf-diagram) {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        background-image: linear-gradient(to right, transparent calc(100% - 36px), rgba(19,52,45,0.10));
+        background-repeat: no-repeat;
+        background-attachment: local;
+        padding: 1.5rem 0 1.75rem;
+      }
+      .prose-rf :global(.rf-diagram > svg) {
+        min-width: 720px;
+        max-width: 720px;
+      }
+      .prose-rf :global(.rf-diagram figcaption) {
+        position: sticky;
+        left: 0;
+        max-width: calc(100vw - 2.5rem);
+        padding-top: 0.5rem;
+      }
+    }
     .prose-rf :global(.rf-diagram figcaption) {
       font-family:'Cormorant Garamond',Georgia,serif;
       font-style:italic; font-size: 20px; line-height: 1.45;
@@ -1109,6 +1136,20 @@ const dynamicPricingDefinedTerms = [
     .prose-rf :global(.rf-score-row.hero .val) { font-size: 32px; }
     .prose-rf :global(.rf-score-card.cedar .rf-score-row.hero .val) { color: #A9BBA3; }
     .prose-rf :global(.rf-score-card.bone .rf-score-row.hero .val) { color: #13342D; }
+    /* Below 480px the flex row's space-between layout pushes a long val
+       (e.g. "hold or push rates" at 22px monospace) flush to the right
+       edge of the card, leaving the key cramped. Stack vertically so the
+       val claims its own line with breathing room. */
+    @media (max-width: 480px) {
+      .prose-rf :global(.rf-score-card) { padding: 1.5rem 1.25rem; }
+      .prose-rf :global(.rf-score-row) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+      }
+      .prose-rf :global(.rf-score-row .val) { font-size: 18px; }
+      .prose-rf :global(.rf-score-row.hero .val) { font-size: 24px; }
+    }
     .prose-rf :global(.rf-score-delta) {
       display: flex;
       justify-content: space-between;
