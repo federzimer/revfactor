@@ -65,7 +65,7 @@ GOOGLE_ADS_YAML_PATH=~/.config/google-ads.yaml python3 daily_digest.py
 ## Deploying daily_digest as a Render cron
 
 ```bash
-RENDER_API_KEY=rnd_s441HjXbCxVh9Ye57TT3xfmTpdSW
+RENDER_API_KEY=$(security find-generic-password -a "$USER" -s render-api-key -w)  # macOS Keychain
 curl -X POST https://api.render.com/v1/services \
   -H "Authorization: Bearer $RENDER_API_KEY" \
   -H "Content-Type: application/json" \

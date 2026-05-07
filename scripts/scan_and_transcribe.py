@@ -49,20 +49,25 @@ for d in (TIKTOK_DIR, TIKTOK_TRANSCRIPTS, IG_DIR, IG_TRANSCRIPTS, STATE_FILE.par
     d.mkdir(parents=True, exist_ok=True)
 
 
-def load_gemini_key() -> str:
-    """Read Gemini API key from macOS Keychain (preferred) or env var (fallback)."""
+def _keychain(service: str) -> str:
+    """Pull a secret from macOS Keychain by service name. Returns '' if not found."""
     try:
         result = subprocess.run(
             ["security", "find-generic-password",
              "-a", os.environ.get("USER", ""),
-             "-s", "gemini-revfactor", "-w"],
+             "-s", service, "-w"],
             capture_output=True, text=True, check=True,
         )
-        key = result.stdout.strip()
-        if key:
-            return key
+        return result.stdout.strip()
     except (subprocess.CalledProcessError, FileNotFoundError):
-        pass
+        return ""
+
+
+def load_gemini_key() -> str:
+    """Read Gemini API key from macOS Keychain (preferred) or env var (fallback)."""
+    key = _keychain("gemini-revfactor")
+    if key:
+        return key
     env_key = os.environ.get("GEMINI_API_KEY")
     if env_key:
         return env_key
@@ -94,7 +99,10 @@ def slack_alert(msg):
         # Cached after first call to avoid hitting Render every time.
         global _SLACK_WEBHOOK_URL
         if not globals().get("_SLACK_WEBHOOK_URL"):
-            render_key = os.environ.get("RENDER_API_KEY", "rnd_s441HjXbCxVh9Ye57TT3xfmTpdSW")
+            render_key = os.environ.get("RENDER_API_KEY") or _keychain("render-api-key")
+            if not render_key:
+                return  # no key, skip Slack notify
+
             req = urllib.request.Request(
                 "https://api.render.com/v1/services/crn-d7nq17rrjlhs73am48fg/env-vars?limit=50",
                 headers={"Authorization": f"Bearer {render_key}"})
