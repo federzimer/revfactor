@@ -293,8 +293,13 @@ const dynamicPricingDefinedTerms = [
   <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-cedar z-[100] transition-[width] duration-75" style="width:0;"></div>
 
   <article>
-    <!-- IMMERSIVE FULL-BLEED HERO — sized to the image's native ~1.83 wide aspect -->
-    <section class="relative overflow-hidden text-[#E8E6E1]" style="height:78vh; min-height:580px; max-height:820px; background-color:#13342D;">
+    <!-- IMMERSIVE FULL-BLEED HERO — min-height so section can grow to fit
+         the title + metadata stack at very narrow viewports. Was
+         `height:78vh; min-height:580px` — locked the section to 580px on a
+         667px-tall iPhone SE, but content needed ~600px so the H1 overflowed
+         behind the navbar. min-height grows; max-height capped by media
+         query below for desktop. -->
+    <section class="rf-blog-hero relative overflow-hidden text-[#E8E6E1]" style="min-height:max(78vh, 580px); background-color:#13342D;">
       <!-- Image as <img> (more reliable fill than bg-image), object-cover, parallax-ready.
            scale(1.15) gives parallax headroom so translateY never exposes the section background. -->
       <img
@@ -311,7 +316,7 @@ const dynamicPricingDefinedTerms = [
       <!-- Bottom gradient — preserves text legibility for the title block, lighter than before -->
       <div class="absolute bottom-0 left-0 right-0 h-[70%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.35) 30%, rgba(22,25,16,0.65) 60%, rgba(22,25,16,0.85) 90%, rgba(22,25,16,0.92) 100%);"></div>
 
-      <div class="relative z-[2] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-20 pt-36">
+      <div class="rf-blog-hero-inner relative z-[2] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-20 pt-36">
         <span class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-6 inline-block">
           {post.data.category} · Field Report
         </span>
@@ -517,6 +522,24 @@ const dynamicPricingDefinedTerms = [
        break out of the page entirely via the `full` track. Grid columns
        are computed once in CSS so every element is symmetrically centered
        on the page — no negative-margin breakout hacks. */
+    /* Hero — preserve the desktop max-height cap (was inline `max-height:820px`,
+       moved here so we can scope it to wide screens only). At narrow viewports
+       the hero grows freely via min-height so the H1 + metadata stack never
+       collides with the navbar. */
+    @media (min-width: 1024px) {
+      .rf-blog-hero { max-height: 820px; }
+    }
+    /* Mobile padding — pt-36 / pb-20 (144 / 80px) is appropriate for desktop
+       but crushes the content area on iPhone SE (375x667). Reduce to clear
+       the navbar (56px tall + 16px top offset = clears at pt-24 / 96px) while
+       leaving more room for the title block + metadata. */
+    @media (max-width: 640px) {
+      .rf-blog-hero-inner {
+        padding-top: 6rem;     /* 96px — was 144px */
+        padding-bottom: 3rem;  /* 48px  — was 80px */
+      }
+    }
+
     .prose-rf,
     .prose-rf-after {
       display: grid;
