@@ -529,6 +529,30 @@ const dynamicPricingDefinedTerms = [
       column-gap: 0;
       row-gap: 0;
     }
+    /* Below desktop the wide-track sidebars compete with the body column
+       for space and shrink it to a sliver (was 116px on a 390px viewport).
+       Collapse the sidebar tracks so the body claims the full available
+       width up to its 720px max. Wide-track elements (rf-figure, rf-leaks,
+       rf-chart, etc.) still span the same start/end lines — they just
+       become coterminous with the body track at narrower widths. */
+    @media (max-width: 1199px) {
+      .prose-rf,
+      .prose-rf-after {
+        grid-template-columns:
+          [full-start] minmax(1.25rem, 1fr)
+          [wide-start body-start] min(100%, 720px) [body-end wide-end]
+          minmax(1.25rem, 1fr) [full-end];
+      }
+    }
+    @media (max-width: 640px) {
+      .prose-rf,
+      .prose-rf-after {
+        grid-template-columns:
+          [full-start] minmax(1rem, 1fr)
+          [wide-start body-start] minmax(0, 100%) [body-end wide-end]
+          minmax(1rem, 1fr) [full-end];
+      }
+    }
     .prose-rf > :global(*),
     .prose-rf-after > :global(*) {
       grid-column: body-start / body-end;
