@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
-import { Building2, X, ArrowRight, Check, Calendar } from 'lucide-react';
+import { Building2, X, ArrowRight, Check, Phone } from 'lucide-react';
 import ScheduleModal from './ScheduleModal';
 
 /* ─── Stripe Checkout URLs (keyed by property count) ─── */
@@ -219,7 +219,7 @@ function SubscribeModal({ onClose, onOpenSchedule }) {
             className="mt-3 w-full flex items-center justify-center gap-2 py-3 font-bold uppercase text-[10px] tracking-[2px] rounded-full text-[#8B3A3A] hover:bg-[#8B3A3A]/5 transition-colors duration-[200ms] cursor-pointer"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
-            <Calendar className="w-3.5 h-3.5" />
+            <Phone className="w-3.5 h-3.5" />
             <span>schedule free strategy call</span>
           </button>
         </div>
@@ -274,8 +274,9 @@ export default function Navbar({ lightBg = false }) {
           revfactor
         </a>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-1">
+        {/* Desktop Links — lg breakpoint (1024px) keeps tablets on the
+            hamburger menu where the 3 buttons can stack without cutoff. */}
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -288,8 +289,10 @@ export default function Navbar({ lightBg = false }) {
           ))}
         </div>
 
-        {/* Desktop Buttons */}
-        <div className="hidden md:flex items-center gap-2 ml-2">
+        {/* Desktop Buttons — order: Owners → Subscribe → Free Strategy Call.
+            Free Strategy Call sits on the right (visually heaviest) so it
+            anchors the eye as the primary conversion path. */}
+        <div className="hidden lg:flex items-center gap-2 ml-2">
           {/* Owners — outline (renamed from "owner portal" for compactness) */}
           <a
             href="https://owner.revfactor.io"
@@ -306,28 +309,10 @@ export default function Navbar({ lightBg = false }) {
             owners
           </a>
 
-          {/* Free Strategy Call — primary conversion CTA. Brownish-red
-              (error token #8B3A3A) intentionally distinct from the moss
-              Subscribe button so the two paths read as separate offers. */}
-          <button
-            onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'navbar_desktop' }); setScheduleOpen(true); }}
-            className="inline-flex items-center gap-1.5 px-5 py-2 border border-transparent bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
-            style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
-          >
-            <span
-              className="absolute inset-0 bg-[#6F2F2F] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]"
-              style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
-            />
-            <span className="relative z-10 flex items-center gap-1.5 whitespace-nowrap">
-              <Calendar className="w-3 h-3" />
-              free strategy call
-            </span>
-          </button>
-
-          {/* Subscribe — moss. Transparent border keeps box-model height matched to Owners outline. */}
+          {/* Subscribe — moss. Sits between Owners and Free Strategy Call. */}
           <button
             onClick={() => { window.posthog?.capture('subscribe_modal_opened', { source: 'navbar_desktop' }); setModalOpen(true); }}
-            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <span
@@ -336,12 +321,30 @@ export default function Navbar({ lightBg = false }) {
             />
             <span className="relative z-10">subscribe</span>
           </button>
+
+          {/* Free Strategy Call — brownish-red (#8B3A3A) primary CTA on the
+              right edge. Text-only (no icon) keeps the pill compact so the
+              full nav fits at 1024px. */}
+          <button
+            onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'navbar_desktop' }); setScheduleOpen(true); }}
+            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+            style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
+          >
+            <span
+              className="absolute inset-0 bg-[#6F2F2F] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]"
+              style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
+            />
+            <span className="relative z-10 flex items-center gap-1.5 whitespace-nowrap">
+              <Phone className="w-3 h-3" />
+              free strategy call
+            </span>
+          </button>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile / tablet menu button — visible <1024px */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`md:hidden ml-auto p-2 transition-colors duration-200 ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
+          className={`lg:hidden ml-auto p-2 transition-colors duration-200 ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
             }`}
           aria-label="Toggle menu"
         >
@@ -404,23 +407,23 @@ export default function Navbar({ lightBg = false }) {
             <button
               onClick={() => {
                 setMenuOpen(false);
-                window.posthog?.capture('schedule_modal_opened', { source: 'navbar_mobile' });
-                setScheduleOpen(true);
-              }}
-              className="flex items-center justify-center gap-2 mt-2 w-full py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full"
-            >
-              <Calendar className="w-3.5 h-3.5" />
-              free strategy call
-            </button>
-            <button
-              onClick={() => {
-                setMenuOpen(false);
                 window.posthog?.capture('subscribe_modal_opened', { source: 'navbar_mobile' });
                 setModalOpen(true);
               }}
               className="block mt-2 w-full text-center py-3 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full"
             >
               subscribe
+            </button>
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                window.posthog?.capture('schedule_modal_opened', { source: 'navbar_mobile' });
+                setScheduleOpen(true);
+              }}
+              className="flex items-center justify-center gap-2 mt-2 w-full py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              free strategy call
             </button>
           </div>
         )}
