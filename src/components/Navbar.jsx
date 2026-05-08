@@ -380,7 +380,7 @@ export default function Navbar({ lightBg = false }) {
 
         {/* Mobile Dropdown */}
         {menuOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-[#DDDAD3]/95 backdrop-blur-[16px] rounded-[20px] border border-[#C8C4BC]/40 p-4 md:hidden shadow-[0_8px_32px_rgba(22,25,16,0.12)]">
+          <div className="absolute top-full left-0 right-0 mt-2 bg-[#DDDAD3]/95 backdrop-blur-[16px] rounded-[20px] border border-[#C8C4BC]/40 p-4 lg:hidden shadow-[0_8px_32px_rgba(22,25,16,0.12)] min-w-[280px]">
             {navLinks.map((link) => (
               <a
                 key={link.label}
