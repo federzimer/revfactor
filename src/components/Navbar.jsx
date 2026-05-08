@@ -312,7 +312,7 @@ export default function Navbar({ lightBg = false }) {
           {/* Subscribe — moss. Sits between Owners and Free Strategy Call. */}
           <button
             onClick={() => { window.posthog?.capture('subscribe_modal_opened', { source: 'navbar_desktop' }); setModalOpen(true); }}
-            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <span
@@ -323,11 +323,10 @@ export default function Navbar({ lightBg = false }) {
           </button>
 
           {/* Free Strategy Call — brownish-red (#8B3A3A) primary CTA on the
-              right edge. Text-only (no icon) keeps the pill compact so the
-              full nav fits at 1024px. */}
+              right edge. */}
           <button
             onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'navbar_desktop' }); setScheduleOpen(true); }}
-            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <span
@@ -344,7 +343,7 @@ export default function Navbar({ lightBg = false }) {
         {/* Mobile / tablet menu button — visible <1024px */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`lg:hidden ml-auto p-2 transition-colors duration-200 ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
+          className={`lg:hidden ml-auto p-2 cursor-pointer transition-colors duration-200 ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
             }`}
           aria-label="Toggle menu"
         >
@@ -410,7 +409,7 @@ export default function Navbar({ lightBg = false }) {
                 window.posthog?.capture('subscribe_modal_opened', { source: 'navbar_mobile' });
                 setModalOpen(true);
               }}
-              className="block mt-2 w-full text-center py-3 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full"
+              className="block mt-2 w-full text-center py-3 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full cursor-pointer"
             >
               subscribe
             </button>
@@ -420,7 +419,7 @@ export default function Navbar({ lightBg = false }) {
                 window.posthog?.capture('schedule_modal_opened', { source: 'navbar_mobile' });
                 setScheduleOpen(true);
               }}
-              className="flex items-center justify-center gap-2 mt-2 w-full py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full"
+              className="flex items-center justify-center gap-2 mt-2 w-full py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full cursor-pointer"
             >
               <Phone className="w-3.5 h-3.5" />
               free strategy call
