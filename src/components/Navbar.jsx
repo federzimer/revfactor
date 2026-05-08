@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
-import { Building2, X, ArrowRight, Check } from 'lucide-react';
+import { Building2, X, ArrowRight, Check, Calendar } from 'lucide-react';
+import ScheduleModal from './ScheduleModal';
 
 /* ─── Stripe Checkout URLs (keyed by property count) ─── */
 const STRIPE_URLS = {
@@ -23,7 +24,7 @@ const propertyOptions = [
 /* ─── Subscribe Modal ───
    Mounted/unmounted by parent via conditional rendering.
    Handles its own exit animation before calling onClose. */
-function SubscribeModal({ onClose }) {
+function SubscribeModal({ onClose, onOpenSchedule }) {
   const [selectedCount, setSelectedCount] = useState(null);
   const isClosingRef = useRef(false);
   const overlayRef = useRef(null);
@@ -205,6 +206,22 @@ function SubscribeModal({ onClose }) {
             <span className="relative z-10">continue to checkout</span>
             <ArrowRight className="relative z-10 w-4 h-4" />
           </button>
+
+          {/* Schedule Free Strategy Call — secondary path. Lets visitors who
+              want human guidance before committing to a tier book a call
+              instead of bouncing. PostHog data showed one buyer cycled
+              through 4 tiers in 2 minutes without checking out. */}
+          <button
+            onClick={() => {
+              window.posthog?.capture('schedule_modal_opened', { source: 'subscribe_modal' });
+              onOpenSchedule();
+            }}
+            className="mt-3 w-full flex items-center justify-center gap-2 py-3 font-bold uppercase text-[10px] tracking-[2px] rounded-full text-[#8B3A3A] hover:bg-[#8B3A3A]/5 transition-colors duration-[200ms] cursor-pointer"
+            style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
+          >
+            <Calendar className="w-3.5 h-3.5" />
+            <span>schedule free strategy call</span>
+          </button>
         </div>
       </div>
     </div>,
@@ -217,6 +234,7 @@ export default function Navbar({ lightBg = false }) {
   const [scrolled, setScrolled] = useState(lightBg);
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [scheduleOpen, setScheduleOpen] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -272,7 +290,7 @@ export default function Navbar({ lightBg = false }) {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center gap-2 ml-2">
-          {/* Owner Portal — outline */}
+          {/* Owners — outline (renamed from "owner portal" for compactness) */}
           <a
             href="https://owner.revfactor.io"
             target="_blank"
@@ -285,10 +303,28 @@ export default function Navbar({ lightBg = false }) {
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <Building2 className="w-3 h-3" />
-            owner portal
+            owners
           </a>
 
-          {/* Subscribe — moss to match hero "Schedule a Strategy Call" CTA. Transparent border keeps box-model height matched to Owner Portal's 1px border. */}
+          {/* Free Strategy Call — primary conversion CTA. Brownish-red
+              (error token #8B3A3A) intentionally distinct from the moss
+              Subscribe button so the two paths read as separate offers. */}
+          <button
+            onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'navbar_desktop' }); setScheduleOpen(true); }}
+            className="inline-flex items-center gap-1.5 px-5 py-2 border border-transparent bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+            style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
+          >
+            <span
+              className="absolute inset-0 bg-[#6F2F2F] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]"
+              style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
+            />
+            <span className="relative z-10 flex items-center gap-1.5 whitespace-nowrap">
+              <Calendar className="w-3 h-3" />
+              free strategy call
+            </span>
+          </button>
+
+          {/* Subscribe — moss. Transparent border keeps box-model height matched to Owners outline. */}
           <button
             onClick={() => { window.posthog?.capture('subscribe_modal_opened', { source: 'navbar_desktop' }); setModalOpen(true); }}
             className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
@@ -356,12 +392,26 @@ export default function Navbar({ lightBg = false }) {
               href="https://owner.revfactor.io"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                window.posthog?.capture('owner_portal_clicked');
+              }}
               className="flex items-center justify-center gap-2 mt-2 py-3 border border-[#3F261F]/20 text-[#3F261F] font-bold uppercase text-[10px] tracking-[2px] rounded-full"
             >
               <Building2 className="w-3.5 h-3.5" />
-              owner portal
+              owners
             </a>
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                window.posthog?.capture('schedule_modal_opened', { source: 'navbar_mobile' });
+                setScheduleOpen(true);
+              }}
+              className="flex items-center justify-center gap-2 mt-2 w-full py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full"
+            >
+              <Calendar className="w-3.5 h-3.5" />
+              free strategy call
+            </button>
             <button
               onClick={() => {
                 setMenuOpen(false);
@@ -376,8 +426,21 @@ export default function Navbar({ lightBg = false }) {
         )}
       </nav>
 
-      {/* Subscribe Modal — conditionally mounted */}
-      {modalOpen && <SubscribeModal onClose={() => setModalOpen(false)} />}
+      {/* Subscribe Modal — passes onOpenSchedule so the modal's secondary
+          CTA can hand off to the strategy-call flow without bouncing. */}
+      {modalOpen && (
+        <SubscribeModal
+          onClose={() => setModalOpen(false)}
+          onOpenSchedule={() => {
+            setModalOpen(false);
+            setScheduleOpen(true);
+          }}
+        />
+      )}
+
+      {/* Schedule Modal — direct from "Free Strategy Call" button or
+          handed off from SubscribeModal. */}
+      {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>
   );
 }
