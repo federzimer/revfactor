@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.jsx';
 import AboutPage from '../components/AboutPage.jsx';
 
 const schema = {
@@ -26,5 +27,6 @@ const schema = {
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </Fragment>
+  <Navbar client:load />
   <AboutPage client:only="react" />
 </BaseLayout>

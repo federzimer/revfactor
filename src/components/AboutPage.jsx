@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
-import { ArrowLeft, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import us from 'us-atlas/states-10m.json';
@@ -281,31 +281,9 @@ export default function AboutPage() {
 
   return (
     <div ref={pageRef} className="min-h-screen bg-[#161910] flex flex-col">
-      {/* Minimal Nav */}
-      <nav
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-3 py-2.5 rounded-full flex items-center gap-1 bg-[#161910]/60 backdrop-blur-[12px] border border-[#E8E6E1]/10 shadow-[0_4px_24px_rgba(22,25,16,0.2)]"
-        style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
-      >
-        <a
-          href="/"
-          className="text-[22px] font-normal tracking-[0.5px] px-3 text-[#E8E6E1] transition-colors duration-[350ms]"
-          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-        >
-          revfactor
-        </a>
-        <a
-          href="/"
-          className="hidden md:inline-flex items-center gap-2 ml-2 px-5 py-2 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
-          style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
-        >
-          <span
-            className="absolute inset-0 bg-[#1E4A40] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]"
-            style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
-          />
-          <ArrowLeft className="relative z-10 w-3 h-3" />
-          <span className="relative z-10">back to home</span>
-        </a>
-      </nav>
+      {/* Nav now rendered via about.astro using the main <Navbar /> component
+          so the about page has the same Owners / Subscribe / Free Strategy
+          Call buttons as every other page. */}
 
       {/* Main Content */}
       <main className="flex-1">
