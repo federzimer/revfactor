@@ -424,7 +424,7 @@ const dynamicPricingDefinedTerms = [
         <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
         <div class="rf-faq">
           {post.data.faqs.map((f) => (
-            <details>
+            <details name={`rf-faq-${post.id}`}>
               <summary>
                 <span class="q">{f.q}</span>
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
@@ -1175,7 +1175,7 @@ const dynamicPricingDefinedTerms = [
     }
     .prose-rf :global(.rf-score-delta) {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       gap: 1.25rem;
       margin-top: 1.25rem;
@@ -1186,10 +1186,11 @@ const dynamicPricingDefinedTerms = [
       flex-wrap: wrap;
       row-gap: 0.4rem;
       line-height: 1.25;
+      text-align: center;
     }
-    .prose-rf :global(.rf-score-delta .lbl) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; text-transform:uppercase; color: #A9BBA3; line-height:1; }
-    .prose-rf :global(.rf-score-delta .copy) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; flex:1 1 auto; min-width:0; line-height:1.25; }
-    .prose-rf :global(.rf-score-delta .val) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; color: #E8E6E1; line-height:1; }
+    .prose-rf :global(.rf-score-delta .lbl) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; text-transform:uppercase; color: #A9BBA3; line-height:1; flex:0 0 100%; text-align:center; }
+    .prose-rf :global(.rf-score-delta .copy) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; flex:1 1 auto; min-width:0; line-height:1.25; text-align:center; }
+    .prose-rf :global(.rf-score-delta .val) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; color: #E8E6E1; line-height:1; flex:0 0 100%; text-align:center; }
 
     /* ============== RF-PLAYS — 6 tactical plays grid ============== */
     .prose-rf :global(.rf-plays) {

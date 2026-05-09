@@ -38,6 +38,12 @@ const canonicalUrl = Astro.url.href;
        Blocker for any user actually engaging with the page. -->
   <script is:inline>
     (function () {
+      // Silence Fraud Blocker's bundled FingerprintJS debug log in production.
+      var _origLog = console.log;
+      console.log = function () {
+        if (arguments.length && typeof arguments[0] === 'string' && arguments[0].indexOf('FingerprintJS') === 0) return;
+        return _origLog.apply(console, arguments);
+      };
       function loadFB() {
         var s = document.createElement('script');
         s.async = 1;
