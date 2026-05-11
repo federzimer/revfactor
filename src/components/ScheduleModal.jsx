@@ -122,7 +122,7 @@ export default function ScheduleModal({ onClose }) {
           aria-modal="true"
           aria-labelledby="schedule-modal-title"
           tabIndex={-1}
-          className="relative bg-white rounded-[20px] w-full max-w-[760px] max-h-[92dvh] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.2)] outline-none flex flex-col"
+          className="relative bg-white rounded-[20px] w-full max-w-[760px] max-h-[92dvh] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.2)] outline-none flex flex-col pt-4"
           style={{ opacity: 0 }}
         >
           {/* Visually-hidden accessibility title — preserves aria-labelledby
@@ -151,8 +151,14 @@ export default function ScheduleModal({ onClose }) {
               the embed page's py-12 top padding so the iframe's header
               starts right at the top of the panel. */}
           <div
-            className="sm-iframe-wrap min-h-0 p-4 overflow-hidden"
-            style={{ height: 'min(720px, calc(92dvh - 32px))' }}
+            className="sm-iframe-wrap min-h-0 px-4 pb-4 overflow-hidden"
+            style={{
+              // Wrap grows to fit posted iframe content height (auto-resize
+              // via postMessage), capped at 92dvh - top padding so small
+              // viewports still scroll the iframe internally. The -48px
+              // accounts for the embed's clipped py-12 padding.
+              height: `min(${Math.max(480, iframeContentHeight - 48)}px, calc(92dvh - 48px))`,
+            }}
           >
             <iframe
               src="https://schedule.revfactor.io/embed"
