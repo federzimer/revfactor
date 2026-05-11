@@ -13,7 +13,11 @@ export default function ScheduleModal({ onClose }) {
   const isClosingRef = useRef(false);
   const overlayRef = useRef(null);
   const panelRef = useRef(null);
-  const [iframeContentHeight, setIframeContentHeight] = useState(720);
+  // Default to 900px so the modal opens large enough to fit the calendar
+  // (~720-800px content) even before the scheduler posts an iframeHeight
+  // message. Adjusts down via postMessage when the scheduler reports its
+  // actual content height per step.
+  const [iframeContentHeight, setIframeContentHeight] = useState(900);
 
   // Listen for postMessage from the scheduler iframe to auto-resize.
   useEffect(() => {
@@ -153,11 +157,15 @@ export default function ScheduleModal({ onClose }) {
           <div
             className="sm-iframe-wrap min-h-0 px-4 pb-4 overflow-hidden"
             style={{
-              // Wrap grows to fit posted iframe content height (auto-resize
-              // via postMessage), capped at 92dvh - top padding so small
-              // viewports still scroll the iframe internally. The -48px
-              // accounts for the embed's clipped py-12 padding.
-              height: `min(${Math.max(480, iframeContentHeight - 48)}px, calc(92dvh - 48px))`,
+              // Wrap height matches the scheduler's posted content height
+              // (Fede's scheduler posts iframeHeight = its rendered content
+              // height per step). The iframe element itself extends 48px
+              // taller via height:calc(100% + 48) which gives an internal
+              // buffer that prevents iframe scrollbars from appearing for
+              // 1-2px content-vs-viewport discrepancies. Capped at 92dvh-48
+              // so short viewports scroll the iframe internally instead of
+              // overflowing the panel.
+              height: `min(${Math.max(480, iframeContentHeight)}px, calc(92dvh - 48px))`,
             }}
           >
             <iframe
