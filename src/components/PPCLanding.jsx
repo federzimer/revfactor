@@ -722,19 +722,11 @@ export default function PPCLanding({
            immediately, not scroll past 200px of dead space first.) */}
       <section id="schedule" className="bg-[#DDDAD3] pt-4 pb-12 md:pt-6 md:pb-16">
         <div className="max-w-3xl mx-auto px-6 md:px-12">
-          <p className="font-bold uppercase text-[9px] tracking-[3px] text-[#76574C] mb-3 text-center">
-            BOOK A CALL
-          </p>
-          <h2
-            className="text-[clamp(26px,4vw,38px)] leading-[1.15] text-[#3F261F] mb-3 text-center"
-            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
-          >
-            Pick a time to{' '}
-            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>talk strategy</span>
-          </h2>
-          <p className="text-[16px] leading-[1.55] text-[#76574C] max-w-lg mx-auto mb-6 text-center">
-            30-minute call with a seasoned RevFactor pricing strategist. We'll review your portfolio, comp set, and where the revenue opportunity is.
-          </p>
+          {/* Section header removed — the embedded calendar's own header
+              ("rf. DISCOVERY — Book a 30 minute discovery call") carries
+              the same context, so the duplicate was costing ~120px of
+              vertical room visitors had to scroll past before reaching
+              date slots. */}
           {/* Inline calendar — fixed-cap height so the page never grows
               taller than ~720px for the embed; the iframe handles its own
               internal scroll on tall steps (form, etc.). marginTop:-38

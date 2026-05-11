@@ -125,39 +125,34 @@ export default function ScheduleModal({ onClose }) {
           className="relative bg-white rounded-[20px] w-full max-w-[760px] max-h-[92dvh] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.2)] outline-none flex flex-col"
           style={{ opacity: 0 }}
         >
-          {/* Header */}
-          <div className="flex items-center justify-between px-7 pt-6 pb-4">
-            <div>
-              <span className="inline-block px-3 py-1.5 rounded-full bg-[#5D6D59]/10 text-[#5D6D59] font-bold uppercase text-[9px] tracking-[2.5px] mb-2">
-                BOOK A CALL
-              </span>
-              <h2
-                id="schedule-modal-title"
-                className="text-[clamp(24px,3.5vw,32px)] leading-[1.1] text-[#3F261F]"
-                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontStyle: 'italic' }}
-                data-umami-event="CTA-2"
-              >
-                Schedule your strategy call
-              </h2>
-            </div>
+          {/* Visually-hidden accessibility title — preserves aria-labelledby
+              while removing the visible "BOOK A CALL" / "Schedule your
+              strategy call" header that duplicated the iframe's own header
+              ("rf. DISCOVERY — Book a 30 minute discovery call"). Removal
+              gives the calendar ~80px more vertical room. */}
+          <h2 id="schedule-modal-title" className="sr-only">
+            Schedule your strategy call
+          </h2>
 
-            <button
-              onClick={handleClose}
-              aria-label="Close schedule dialog"
-              className="w-8 h-8 flex items-center justify-center rounded-full text-[#76574C] hover:bg-[#C8C4BC]/20 transition-colors duration-200 flex-shrink-0"
-            >
-              <X className="w-4.5 h-4.5" />
-            </button>
-          </div>
+          {/* Floating close button — was inside the header before; now
+              absolute-positioned in the top-right with a frosted background
+              so it stays legible over the iframe's own header. */}
+          <button
+            onClick={handleClose}
+            aria-label="Close schedule dialog"
+            data-umami-event="CTA-2"
+            className="absolute top-3 right-3 z-20 w-9 h-9 flex items-center justify-center rounded-full bg-white/85 backdrop-blur-sm text-[#76574C] hover:bg-[#C8C4BC]/60 shadow-[0_2px_8px_rgba(22,25,16,0.12)] transition-colors duration-200 cursor-pointer"
+          >
+            <X className="w-4.5 h-4.5" />
+          </button>
 
-          {/* Iframe wrapper — flex-1 fills remaining panel space (capped by
-              panel max-h:92dvh). overflow:hidden so no outer scrollbar; the
-              iframe handles its own scroll when content overflows. iframe
-              height = wrapper + 48 to compensate for the marginTop:-48 clip
-              that hides the embed page's py-12 top padding. */}
+          {/* Iframe wrapper — fills the panel (capped by max-h:92dvh). The
+              iframe-internal scroll handles long forms. marginTop:-48 clips
+              the embed page's py-12 top padding so the iframe's header
+              starts right at the top of the panel. */}
           <div
-            className="sm-iframe-wrap min-h-0 px-4 pb-4 overflow-hidden"
-            style={{ height: 'min(720px, calc(92dvh - 100px))' }}
+            className="sm-iframe-wrap min-h-0 p-4 overflow-hidden"
+            style={{ height: 'min(720px, calc(92dvh - 32px))' }}
           >
             <iframe
               src="https://schedule.revfactor.io/embed"
