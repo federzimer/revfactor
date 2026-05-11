@@ -519,13 +519,14 @@ export default function PPCLanding({
               </div>
             </div>
 
-            {/* RIGHT — viewport-capped iframe wrapper; iframe handles its own
-                internal scroll on tall steps (form). marginTop:-38 clips 38px
-                of the embed page's 48px py-12 top padding, leaving 10px of
-                bone-light padding visible above the dark green header. */}
+            {/* RIGHT — dynamically-sized iframe wrapper. Height tracks the
+                scheduler's posted iframeHeight (auto-grows per step:
+                date → time → form → confirmed). Capped at viewport - 200px
+                so short viewports scroll the iframe internally. marginTop:-38
+                clips 38px of the embed's 48px py-12 padding. */}
             <div
               className="rounded-[16px] overflow-hidden"
-              style={{ height: 'min(720px, calc(100vh - 200px))' }}
+              style={{ height: `min(${Math.max(480, calHeight)}px, calc(100vh - 200px))` }}
             >
               <iframe
                 src={scheduleUrl}
@@ -727,17 +728,16 @@ export default function PPCLanding({
               the same context, so the duplicate was costing ~120px of
               vertical room visitors had to scroll past before reaching
               date slots. */}
-          {/* Inline calendar — fixed-cap height so the page never grows
-              taller than ~720px for the embed; the iframe handles its own
-              internal scroll on tall steps (form, etc.). marginTop:-38
-              clips 38px of the embed page's 48px py-12 padding, leaving
-              10px of bone-light padding above the dark green header. */}
-          {/* Reserved space for the iframe to prevent CLS while it lazy-loads.
-              Same height as the iframe wrapper itself, so swapping <div→iframe>
-              doesn't push surrounding content. */}
+          {/* Inline calendar — dynamically-sized via calHeight state (set
+              by the postMessage listener up top). Tracks the scheduler's
+              posted iframeHeight per step. Default 820px (state initial)
+              so the form step (~720-800px) fits without scrollbar before
+              any postMessage fires. Capped at viewport - 160px so short
+              viewports scroll the iframe internally. marginTop:-38 clips
+              38px of the embed's 48px py-12 padding. */}
           <div
             className="rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]"
-            style={{ height: 'min(720px, calc(100vh - 160px))' }}
+            style={{ height: `min(${Math.max(480, calHeight)}px, calc(100vh - 160px))` }}
           >
             <iframe
               ref={calRef}
