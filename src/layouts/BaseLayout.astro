@@ -118,15 +118,35 @@ const canonicalUrl = Astro.url.href;
     gtag('config', 'G-1CTGBJ9RLK');
     gtag('config', 'AW-18106897053');
 
-    // Cal.com booking listener — fires Google Ads "Strategy Call Booked" conversion
-    // and GA4 event when any embedded Cal.com iframe completes a booking.
-    // Cal.com sends `{ type: 'bookingSuccessful', data: {...} }` via postMessage.
+    // Booking listener — fires Google Ads + GA4 + PostHog conversion events
+    // when ANY embedded scheduler iframe signals a successful booking.
+    //
+    // Accepts multiple message shapes so both Cal.com (legacy) and Fede's
+    // custom Next.js scheduler at schedule.revfactor.io can fire conversions:
+    //   Cal.com:           { type: 'bookingSuccessful', data: {...} }
+    //   Cal.com v2:        { type: 'bookingSuccessfulV2', ... }
+    //   Fede's scheduler:  { type: 'scheduler_booking_confirmed', value, currency }
+    //   Generic fallback:  any object with { booked: true } or { confirmed: true }
+    //
+    // CRITICAL: as of 2026-05-13 audit, schedule.revfactor.io was posting
+    // ZERO messages on booking — meaning every booking since launch was
+    // invisible to Ads/GA4. Listener is forgiving so the moment Fede ships
+    // postMessage on confirm step, conversions start flowing without
+    // another deploy on our side.
     (function () {
       var bookedThisSession = false;
       window.addEventListener('message', function (e) {
         if (!e.data || typeof e.data !== 'object') return;
-        var type = e.data.type || (e.data.data && e.data.data.type);
-        if (type !== 'bookingSuccessful' && type !== 'bookingSuccessfulV2') return;
+        var d = e.data;
+        var type = d.type || (d.data && d.data.type) || d.event;
+        var isBooking =
+          type === 'bookingSuccessful' ||
+          type === 'bookingSuccessfulV2' ||
+          type === 'scheduler_booking_confirmed' ||
+          type === 'booking_confirmed' ||
+          d.booked === true ||
+          d.confirmed === true;
+        if (!isBooking) return;
         if (bookedThisSession) return;
         bookedThisSession = true;
 
