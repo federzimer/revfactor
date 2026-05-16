@@ -33,6 +33,12 @@ const canonicalUrl = Astro.url.href;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Preconnect to Google Fonts CDN to remove the connection-handshake delay
+       on the @import url(fonts.googleapis.com/...) call in index.css. Saves
+       ~150-300ms on first font request, helps FCP + LCP. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <!-- Fraud Blocker — bot/click-fraud detection. Deferred until window.load
        so it doesn't block first paint. Bot signals still reach Fraud
        Blocker for any user actually engaging with the page. -->
@@ -168,5 +174,28 @@ const canonicalUrl = Astro.url.href;
     </a>
   </noscript>
   <slot />
+
+  {/* Global schedule-modal interceptor. Any link or button matching the
+      selector below dispatches revfactor:open-schedule, which Navbar.jsx
+      listens for to open the ScheduleModal. Covers every consultation
+      CTA pattern across the site. */}
+  <script is:inline>
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest(
+        'a[href*="/short-term-rental-consultant"], ' +
+        'a[href*="schedule.revfactor.io"], ' +
+        'a[href$="#schedule"], ' +
+        'a[href$="/schedule"], ' +
+        'a[href$="/schedule/"], ' +
+        'a[href="/review"], ' +
+        '[data-modal="schedule"]'
+      );
+      if (!target) return;
+      // Only intercept primary-button clicks (not new-tab / cmd-click)
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('revfactor:open-schedule'));
+    });
+  </script>
 </body>
 </html>
