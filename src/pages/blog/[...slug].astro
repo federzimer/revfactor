@@ -71,6 +71,18 @@ const related = relatedSource.slice(0, 3).map((p) => {
 
 const heroImage = post.data.image || '/heroes/aframe-1920.webp';
 const heroAlt = post.data.imageAlt || post.data.title;
+// LCP optimization: derive srcset so mobile (<1200w) doesn't download the 2400 file.
+// Layout fills full viewport, so sizes is 100vw (NOT the related-posts thumbnail sizes).
+const heroSrcset = (() => {
+  const m = heroImage.match(/^(.*)-(?:1200|1920|2400)(\.webp|\.jpg|\.png)$/i);
+  if (!m) return null;
+  const [, base, ext] = m;
+  return {
+    src: `${base}-1920${ext}`,
+    srcset: `${base}-1200${ext} 1200w, ${base}-1920${ext} 1920w, ${base}-2400${ext} 2400w`,
+    sizes: '(min-width: 1920px) 2400px, (min-width: 1200px) 1920px, 100vw',
+  };
+})();
 
 // Federico Person schema — reusable; sameAs locks the entity for AI engines (Refactor.ai disambiguation)
 const federicoPerson = {
@@ -315,6 +327,21 @@ const methodItemList = {
   author={post.data.author}
 >
   <Fragment slot="head">
+    {/* LCP optimization: preload the hero image with srcset hints so the browser
+        kicks off the download in parallel with HTML parsing. fetchpriority="high"
+        on the <img> tag pairs with this. */}
+    {heroSrcset ? (
+      <link
+        rel="preload"
+        as="image"
+        href={heroSrcset.src}
+        imagesrcset={heroSrcset.srcset}
+        imagesizes={heroSrcset.sizes}
+        fetchpriority="high"
+      />
+    ) : (
+      <link rel="preload" as="image" href={heroImage} fetchpriority="high" />
+    )}
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     {webPageSchema && <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />}
     {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
@@ -351,8 +378,15 @@ const methodItemList = {
            scale(1.15) gives parallax headroom so translateY never exposes the section background. -->
       <img
         id="heroBg"
-        src={heroImage}
+        src={heroSrcset?.src || heroImage}
+        srcset={heroSrcset?.srcset}
+        sizes={heroSrcset?.sizes}
         alt={heroAlt}
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+        width="1920"
+        height="1080"
         class="absolute inset-0 w-full h-full object-cover will-change-transform"
         style="transform:scale(1.15); transform-origin:center center; z-index:0;"
       />
