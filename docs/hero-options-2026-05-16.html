@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hero options — cluster builds 2026-05-16</title>
+<style>
+  body { font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; max-width: 1200px; margin: 40px auto; padding: 0 24px; color: #161910; background: #DDDAD3; }
+  h1 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 40px; font-weight: 400; margin: 0 0 8px; }
+  h2 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 28px; font-weight: 400; margin: 40px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #C8C4BC; }
+  .kicker { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #76574C; font-weight: 700; }
+  .post { background: #fff; border-radius: 16px; padding: 24px; margin: 24px 0; }
+  .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+  .opt { position: relative; }
+  .opt img { width: 100%; height: 240px; object-fit: cover; border-radius: 8px; display: block; }
+  .opt .label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; margin: 8px 0 4px; color: #161910; }
+  .opt .pick { display: inline-block; background: #13342D; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-left: 6px; }
+  .opt .desc { font-size: 13px; color: #76574C; line-height: 1.45; }
+  .opt .filename { font-family: "JetBrains Mono", monospace; font-size: 11px; color: #76574C; }
+  .ad-note { background: #ecf2eb; border-left: 4px solid #5D6D59; padding: 14px 18px; margin: 12px 0; font-size: 14px; }
+  .ad-note .ad-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: #5D6D59; }
+</style>
+</head>
+<body>
+
+<p class="kicker">Art-direction + QA brief · 2026-05-16</p>
+<h1>Hero image options for the 5 new cluster posts</h1>
+<p style="font-size: 15px; color: #3F261F;">Generated 10 fresh AI heroes (2 per post) via the photo factory. Each post now has 3 options to choose from: the original AI hero shipped 2026-05-15 + 2 new alternates with varied style and left-side text space. <strong>The AD pick is what's currently wired on staging</strong> — override any with a one-line edit to the post's frontmatter <code>image:</code> field and I'll swap.</p>
+
+<div class="ad-note">
+<p class="ad-label">Selection criteria (RM pillar bar)</p>
+<p style="margin: 0;"><strong>Composition:</strong> subject right or center-right; left side open atmospheric space for the title overlay (the layout's gradient handles legibility either way, but compositional space lets text breathe). <strong>Mood:</strong> hospitality-magazine cinematography, dawn/dusk/twilight, warm light, no people, no on-image text. <strong>Variety:</strong> not all modern architecture; mix interior, exterior, landscape, traditional, mid-century, A-frame, coastal, snow.</p>
+</div>
+
+<!-- CLUSTER 3 -->
+<div class="post">
+<h2>Cluster 3 · ADR vs RevPAR</h2>
+<div class="options">
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes/adr-revpar-cabin-dawn-1200.webp" />
+    <div class="label">Original <small style="font-weight:400;color:#76574C;">(2026-05-15)</small></div>
+    <div class="filename">cluster-heroes/adr-revpar-cabin-dawn</div>
+    <div class="desc">Modern stone-and-glass cabin on forested ridge at dawn. Cinematic but reads "modern" — same vibe as Cluster 4's villa.</div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/adr-revpar-interior-dawn-1200.webp" />
+    <div class="label">Option A — Interior dawn <span class="pick">AD PICK</span></div>
+    <div class="filename">cluster-heroes-v2/adr-revpar-interior-dawn</div>
+    <div class="desc">Rustic log-cabin interior, farmhouse table with steaming coffee, warm light from window on right. <strong>Deep shadow on LEFT — perfect text space.</strong> Breaks the all-exterior pattern. Theme: the quiet moment before you do the math.</div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/adr-revpar-mountain-autumn-1200.webp" />
+    <div class="label">Option B — Mountain autumn</div>
+    <div class="filename">cluster-heroes-v2/adr-revpar-mountain-autumn</div>
+    <div class="desc">Traditional cedar-shingle cabin on Smoky Mountain ridge in fall, layered mountains receding on left. Strong seasonal mood but cabin is smaller in frame.</div>
+  </div>
+</div>
+</div>
+
+<!-- CLUSTER 4 -->
+<div class="post">
+<h2>Cluster 4 · The RevFactor Method</h2>
+<div class="options">
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes/method-villa-twilight-1200.webp" />
+    <div class="label">Original <small style="font-weight:400;color:#76574C;">(2026-05-15)</small></div>
+    <div class="filename">cluster-heroes/method-villa-twilight</div>
+    <div class="desc">Concrete-and-timber villa at twilight, glowing windows. Strong but reads as another modern.</div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/method-aframe-forest-1200.webp" />
+    <div class="label">Option A — A-frame forest <span class="pick">AD PICK</span></div>
+    <div class="filename">cluster-heroes-v2/method-aframe-forest</div>
+    <div class="desc">Black A-frame cabin in misty Pacific Northwest pine forest at twilight, warm light glowing through triangular window. <strong>Most atmospheric of the set</strong> — evokes "disciplined craft."</div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/method-midcentury-interior-1200.webp" />
+    <div class="label">Option B — Mid-century interior</div>
+    <div class="filename">cluster-heroes-v2/method-midcentury-interior</div>
+    <div class="desc">Walnut-paneled mid-century modern interior with mountain view through window on right. Architectural-digest aesthetic, but still reads "modern."</div>
+  </div>
+</div>
+</div>
+
+<!-- CLUSTER 5 -->
+<div class="post">
+<h2>Cluster 5 · Best STR Revenue Management Companies 2026</h2>
+<div class="options">
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes/listicle-mountain-road-dusk-1200.webp" />
+    <div class="label">Original <small style="font-weight:400;color:#76574C;">(2026-05-15)</small></div>
+    <div class="filename">cluster-heroes/listicle-mountain-road-dusk</div>
+    <div class="desc">Winding mountain road at golden hour. Beautiful but no architecture visible — doesn't show the "comparison" theme literally.</div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/listicle-three-cabins-lake-1200.webp" />
+    <div class="label">Option A — Three cabins on lake <span class="pick">AD PICK</span></div>
+    <div class="filename">cluster-heroes-v2/listicle-three-cabins-lake</div>
+    <div class="desc">Aerial of three architecturally distinct cabins along a quiet wooded lakeshore at dawn. <strong>Literally shows the "comparison" theme.</strong> Lake on left = text space.</div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/listicle-coastal-cliffside-1200.webp" />
+    <div class="label">Option B — Coastal cliffside dusk</div>
+    <div class="filename">cluster-heroes-v2/listicle-coastal-cliffside</div>
+    <div class="desc">Two distinct coastal homes on a clifftop at dramatic dusk, open ocean and clouds filling the left half. Very cinematic.</div>
+  </div>
+</div>
+</div>
+
+<!-- CLUSTER 6 -->
+<div class="post">
+<h2>Cluster 6 · How to Build an STR Comp Set</h2>
+<div class="options">
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes/comp-set-lakeshore-aerial-1200.webp" />
+    <div class="label">Original <small style="font-weight:400;color:#76574C;">(2026-05-15)</small></div>
+    <div class="filename">cluster-heroes/comp-set-lakeshore-aerial</div>
+    <div class="desc">Aerial of wooded lakeshore with cabins. Pretty but the cabins are small and undifferentiated.</div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/comp-set-ridge-cabins-1200.webp" />
+    <div class="label">Option A — Ridge cabins at sunrise <span class="pick">AD PICK</span></div>
+    <div class="filename">cluster-heroes-v2/comp-set-ridge-cabins</div>
+    <div class="desc">Aerial of five architecturally distinct cabins along a wooded mountain ridge at golden sunrise, mist filling valley on left. <strong>Best literal demo of the "substitution lens" theme.</strong></div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/comp-set-snow-village-1200.webp" />
+    <div class="label">Option B — Winter mountain village</div>
+    <div class="filename">cluster-heroes-v2/comp-set-snow-village</div>
+    <div class="desc">Snowy mountain village at first light, smoke from chimneys, evergreen forest on left. Seasonal variety; chalet/A-frame styles visible.</div>
+  </div>
+</div>
+</div>
+
+<!-- PM LISTICLE -->
+<div class="post">
+<h2>PM Listicle · Best Property Managers With Dynamic Pricing</h2>
+<div class="options">
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cabin/cliffside-glass-home-1200.webp" />
+    <div class="label">Original <small style="font-weight:400;color:#76574C;">(stock library)</small></div>
+    <div class="filename">cabin/cliffside-glass-home</div>
+    <div class="desc">Modern clifftop glass-walled vacation rental. From the photo library — not generated for this post.</div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/pm-listicle-coastal-pool-1200.webp" />
+    <div class="label">Option B — Coastal pool at golden hour <span class="pick">AD PICK</span></div>
+    <div class="filename">cluster-heroes-v2/pm-listicle-coastal-pool</div>
+    <div class="desc">Luxury coastal villa with infinity pool reflecting dramatic golden-hour clouds, open beach on left. <strong>Strong text space + premium amenity theme.</strong></div>
+  </div>
+  <div class="opt">
+    <img src="/Users/aaronwhittaker/Claude/RevFactor/public/photos/blog/cluster-heroes-v2/pm-listicle-hot-tub-deck-1200.webp" />
+    <div class="label">Option A — Hot tub deck at twilight</div>
+    <div class="filename">cluster-heroes-v2/pm-listicle-hot-tub-deck</div>
+    <div class="desc">Cedar deck with hot tub, candlelit Adirondack chairs, Smoky Mountain blue-hour view. Evokes the full amenity stack a PM bundles.</div>
+  </div>
+</div>
+</div>
+
+<h2 style="margin-top: 56px;">How to override</h2>
+<p style="font-size: 14px; color: #3F261F;">Tell me "use Option B on Cluster 3" or similar and I'll swap the <code>image:</code> + <code>imageAlt:</code> frontmatter in the relevant <code>.mdx</code> and push. All 14 image files remain on disk so we can A/B test if you want.</p>
+
+</body>
+</html>
