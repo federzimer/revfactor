@@ -1,0 +1,385 @@
+{
+  "target": {
+    "url": "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/blog/dynamic-pricing-str-beginners-guide/",
+    "title": "Dynamic Pricing for Short-Term Rentals: How It Works and How to Use It (2026)",
+    "title_len": 77,
+    "meta_description": "Dynamic pricing for short-term rentals is software that adjusts your nightly rate every day based on demand. Here's how the tools work, what signals they read, and how to set them up \u2014 without leaving 15-25% of revenue on the table.",
+    "meta_desc_len": 232,
+    "canonical": "https://www.revfactor.io/blog/dynamic-pricing-str-beginners-guide/",
+    "has_og_tags": true,
+    "has_twitter_card": true,
+    "word_count": 5875,
+    "h1_count": 1,
+    "h2_count": 14,
+    "h3_count": 27,
+    "schema_types": [
+      "Answer",
+      "Article",
+      "BreadcrumbList",
+      "DefinedTerm",
+      "FAQPage",
+      "HowTo",
+      "HowToStep",
+      "ImageObject",
+      "ListItem",
+      "Organization",
+      "Person",
+      "Question",
+      "Thing",
+      "WebPage"
+    ],
+    "images_total": 14,
+    "images_with_alt": 14
+  },
+  "serp_avg": {
+    "competitors_used": 7,
+    "competitor_urls": [
+      "https://www.lodgify.com/blog/dynamic-pricing/",
+      "https://hello.pricelabs.co/",
+      "https://chekin.com/en/blog/dynamic-pricing-for-short-term-rentals/",
+      "https://rentalsunited.com/blog/a-guide-to-dynamic-pricing-for-short-term-rentals/",
+      "https://www.hostaway.com/blog/dynamic-pricing-vacation-rentals/",
+      "https://www.redawning.com/pm/post/guide-to-dynamic-pricing",
+      "https://www.guesty.com/blog/dynamic-pricing-strategies-maximize-revenue/"
+    ],
+    "word_count": 1349,
+    "h2_count": 11.0,
+    "h3_count": 12.1,
+    "title_len": 80,
+    "meta_desc_len": 143
+  },
+  "lsa_top": [
+    {
+      "term": "rates",
+      "avg_per_competitor": 16.1,
+      "doc_freq": 7,
+      "target_count": 16,
+      "target_vs_avg_ratio": 0.99
+    },
+    {
+      "term": "revenue",
+      "avg_per_competitor": 14.3,
+      "doc_freq": 7,
+      "target_count": 43,
+      "target_vs_avg_ratio": 3.01
+    },
+    {
+      "term": "demand",
+      "avg_per_competitor": 13.9,
+      "doc_freq": 7,
+      "target_count": 13,
+      "target_vs_avg_ratio": 0.94
+    },
+    {
+      "term": "rental",
+      "avg_per_competitor": 11.9,
+      "doc_freq": 7,
+      "target_count": 9,
+      "target_vs_avg_ratio": 0.76
+    },
+    {
+      "term": "tools",
+      "avg_per_competitor": 10.0,
+      "doc_freq": 6,
+      "target_count": 25,
+      "target_vs_avg_ratio": 2.5
+    },
+    {
+      "term": "vacation",
+      "avg_per_competitor": 9.3,
+      "doc_freq": 7,
+      "target_count": 4,
+      "target_vs_avg_ratio": 0.43
+    },
+    {
+      "term": "market",
+      "avg_per_competitor": 8.9,
+      "doc_freq": 7,
+      "target_count": 51,
+      "target_vs_avg_ratio": 5.76
+    },
+    {
+      "term": "prices",
+      "avg_per_competitor": 8.9,
+      "doc_freq": 7,
+      "target_count": 3,
+      "target_vs_avg_ratio": 0.34
+    },
+    {
+      "term": "property",
+      "avg_per_competitor": 7.7,
+      "doc_freq": 7,
+      "target_count": 37,
+      "target_vs_avg_ratio": 4.8
+    },
+    {
+      "term": "time",
+      "avg_per_competitor": 7.3,
+      "doc_freq": 7,
+      "target_count": 19,
+      "target_vs_avg_ratio": 2.61
+    },
+    {
+      "term": "occupancy",
+      "avg_per_competitor": 7.3,
+      "doc_freq": 7,
+      "target_count": 14,
+      "target_vs_avg_ratio": 1.92
+    },
+    {
+      "term": "price",
+      "avg_per_competitor": 7.3,
+      "doc_freq": 7,
+      "target_count": 10,
+      "target_vs_avg_ratio": 1.37
+    },
+    {
+      "term": "data",
+      "avg_per_competitor": 5.9,
+      "doc_freq": 7,
+      "target_count": 11,
+      "target_vs_avg_ratio": 1.88
+    },
+    {
+      "term": "management",
+      "avg_per_competitor": 5.9,
+      "doc_freq": 7,
+      "target_count": 16,
+      "target_vs_avg_ratio": 2.73
+    },
+    {
+      "term": "bookings",
+      "avg_per_competitor": 5.9,
+      "doc_freq": 7,
+      "target_count": 5,
+      "target_vs_avg_ratio": 0.85
+    },
+    {
+      "term": "tool",
+      "avg_per_competitor": 6.4,
+      "doc_freq": 5,
+      "target_count": 54,
+      "target_vs_avg_ratio": 8.44
+    },
+    {
+      "term": "managers",
+      "avg_per_competitor": 5.4,
+      "doc_freq": 7,
+      "target_count": 3,
+      "target_vs_avg_ratio": 0.55
+    },
+    {
+      "term": "strategy",
+      "avg_per_competitor": 5.7,
+      "doc_freq": 6,
+      "target_count": 15,
+      "target_vs_avg_ratio": 2.65
+    },
+    {
+      "term": "guest",
+      "avg_per_competitor": 5.5,
+      "doc_freq": 6,
+      "target_count": 11,
+      "target_vs_avg_ratio": 2.0
+    },
+    {
+      "term": "local",
+      "avg_per_competitor": 5.5,
+      "doc_freq": 6,
+      "target_count": 9,
+      "target_vs_avg_ratio": 1.64
+    },
+    {
+      "term": "competitive",
+      "avg_per_competitor": 5.0,
+      "doc_freq": 7,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "based",
+      "avg_per_competitor": 5.3,
+      "doc_freq": 6,
+      "target_count": 5,
+      "target_vs_avg_ratio": 0.94
+    },
+    {
+      "term": "booking",
+      "avg_per_competitor": 4.9,
+      "doc_freq": 7,
+      "target_count": 24,
+      "target_vs_avg_ratio": 4.94
+    },
+    {
+      "term": "algorithms",
+      "avg_per_competitor": 6.2,
+      "doc_freq": 4,
+      "target_count": 1,
+      "target_vs_avg_ratio": 0.16
+    },
+    {
+      "term": "hosts",
+      "avg_per_competitor": 5.2,
+      "doc_freq": 6,
+      "target_count": 26,
+      "target_vs_avg_ratio": 5.03
+    }
+  ],
+  "schema_audit": {
+    "gaps": [],
+    "strengths": [
+      "answer",
+      "breadcrumblist",
+      "definedterm",
+      "faqpage",
+      "howto",
+      "howtostep",
+      "question",
+      "thing"
+    ],
+    "competitor_coverage": {
+      "person": 14,
+      "organization": 14,
+      "imageobject": 14,
+      "article": 14
+    },
+    "target_types": [
+      "answer",
+      "article",
+      "breadcrumblist",
+      "definedterm",
+      "faqpage",
+      "howto",
+      "howtostep",
+      "imageobject",
+      "listitem",
+      "organization",
+      "person",
+      "question",
+      "thing",
+      "webpage"
+    ]
+  },
+  "keyword_density": {
+    "target_count": 8,
+    "competitor_avg": 1.9,
+    "target_density_pct": 0.14
+  },
+  "faq_gap": [],
+  "paa_questions": [
+    "What is dynamic pricing for short-term rentals?",
+    "What is the 75-55 rule for Airbnb?",
+    "How does dynamic pricing work for Airbnb?",
+    "What is the best dynamic pricing tool for Airbnb?"
+  ],
+  "related_searches": [
+    "dynamic pricing for short-term rentals near california",
+    "dynamic pricing for short-term rentals near texas",
+    "Dynamic pricing for short term rentals reddit",
+    "Dynamic pricing for short term rentals pdf",
+    "Dynamic pricing for short term rentals airbnb",
+    "Best dynamic pricing for short term rentals",
+    "PriceLabs",
+    "Dynamic pricing Airbnb"
+  ],
+  "page_score": {
+    "total": 88.2,
+    "grade": "B",
+    "breakdown": {
+      "schema": {
+        "score": 15,
+        "note": "14 types, 0 gaps"
+      },
+      "lsa": {
+        "score": 20.5,
+        "note": "avg coverage 82%"
+      },
+      "word_count": {
+        "score": 15,
+        "note": "5,875 vs avg 1,349 (4.4\u00d7)"
+      },
+      "headings": {
+        "score": 10,
+        "note": "14 h2 / 27 h3 vs avg 11.0"
+      },
+      "keyword_density": {
+        "score": 4.7,
+        "note": "0.14% density"
+      },
+      "meta": {
+        "score": 8,
+        "note": "title long (77); desc \u2713; canonical \u2713"
+      },
+      "social": {
+        "score": 5,
+        "note": "og \u2713; twitter \u2713"
+      },
+      "image_alts": {
+        "score": 5.0,
+        "note": "14/14 alts (100%)"
+      },
+      "paa_coverage": {
+        "score": 5,
+        "note": "no PAA gaps"
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "critical",
+      "title": "Add explicit 'competitive' / competitor-set language",
+      "data_anchor": "'competitive' appears 0 times in target but averages 5.0 across all 7 competitors (doc_freq 7/7, ratio 0.0)",
+      "where": "In the 'What signals dynamic pricing tools read' section (or equivalent signals/inputs H2), and again in the setup/configuration section",
+      "action": "Add a subsection on 'competitive set' or 'comp set' pricing \u2014 explain how tools track competitor listings, what makes a good comp set (3-5 similar properties, same bedroom count, same submarket), and how to override the auto-selected comps. Use the word 'competitive' / 'competitor' naturally 5-8 times."
+    },
+    {
+      "priority": "critical",
+      "title": "Cover pricing algorithms explicitly",
+      "data_anchor": "'algorithms' target_count=1 vs competitor avg 6.2 (ratio 0.16); 4 of 7 competitors discuss it",
+      "where": "New H3 inside the 'How dynamic pricing works' H2, before the signals/inputs breakdown",
+      "action": "Add a 200-300 word explainer: 'How the pricing algorithm actually decides your rate' \u2014 describe base price + demand multiplier + occupancy curve + competitor adjustment. This also directly answers the PAA 'How does dynamic pricing work for Airbnb?' at the algorithm level."
+    },
+    {
+      "priority": "important",
+      "title": "Answer 'What is the 75-55 rule for Airbnb?' directly",
+      "data_anchor": "PAA list includes the 75-55 rule; faq_gap=[] suggests it may be referenced but not necessarily answered in a snippet-friendly way",
+      "where": "Inside the existing FAQPage block AND as a short callout in the strategy/setup section",
+      "action": "Add a 40-60 word direct answer defining the 75-55 rule (raise prices when occupancy >75% for upcoming window; lower when <55%) and how dynamic pricing tools automate it. Wrap in Question/Answer schema so it qualifies for AI Overviews."
+    },
+    {
+      "priority": "important",
+      "title": "Rebalance 'tool/tools' overuse \u2014 risk of keyword stuffing signal",
+      "data_anchor": "'tool' target_count=54 vs avg 6.4 (ratio 8.44x); 'tools' 25 vs 10 (2.5x); 'market' 51 vs 8.9 (5.76x); 'hosts' 26 vs 5.2 (5.03x)",
+      "where": "Scan all 14 H2 sections, especially any 'Best tools' or comparison sections",
+      "action": "Cut ~30-40% of 'tool/tools' mentions and replace with varied terms: 'pricing software', 'platform', 'system', 'PriceLabs/Wheelhouse/Beyond' (named entities). Same for 'market' \u2014 swap in 'submarket', 'destination', 'area', 'neighborhood'. This improves entity diversity for GEO and reduces repetition penalties."
+    },
+    {
+      "priority": "important",
+      "title": "Strengthen 'property managers' coverage",
+      "data_anchor": "'managers' target_count=3 vs avg 5.4 (ratio 0.55); doc_freq 7/7",
+      "where": "Either a new H2 'Dynamic pricing for property managers vs. individual hosts' or expand existing audience section",
+      "action": "Add 250-400 words on how multi-unit property managers use dynamic pricing differently (portfolio-wide base prices, PMS integration via Guesty/Hostaway, team approval workflows). Captures a different searcher persona currently underserved on the page."
+    },
+    {
+      "priority": "important",
+      "title": "Trim title tag to under 60 chars",
+      "data_anchor": "title_len=77 (flagged 'long' in meta score); competitor avg 80 but Google truncates around 60",
+      "where": "<title> tag and og:title",
+      "action": "Shorten to e.g. 'Dynamic Pricing for Short-Term Rentals: Beginner's Guide (2026)' (~62 chars) or 'Dynamic Pricing for Short-Term Rentals: How It Works (2026)' (~60). Keep the long H1 as-is."
+    },
+    {
+      "priority": "optional",
+      "title": "Add a 'PriceLabs / Wheelhouse / Beyond' named comparison",
+      "data_anchor": "Related searches include 'PriceLabs' as a standalone query; competitor SERP includes hello.pricelabs.co directly",
+      "where": "New H2 near the bottom: 'Top dynamic pricing tools compared' (also answers PAA 'What is the best dynamic pricing tool for Airbnb?')",
+      "action": "Add a comparison table (Tool | Pricing model | Best for | Min. listings) covering PriceLabs, Wheelhouse, Beyond, AirDNA Smart Rates. Mark up the comparison with a Product or ItemList where appropriate. This captures branded comparison intent currently going to competitors."
+    },
+    {
+      "priority": "optional",
+      "title": "Add geographic angle for state-level long-tail",
+      "data_anchor": "Related searches include 'near california' and 'near texas' variants",
+      "where": "Inside the existing 'local market' / 'market signals' section",
+      "action": "Add 1-2 short examples comparing how dynamic pricing behaves in distinct regulatory/demand markets (e.g., 'Austin TX event-driven spikes vs. coastal California seasonal curves'). Doesn't need to be long \u2014 150 words captures the long-tail without diluting focus."
+    }
+  ]
+}

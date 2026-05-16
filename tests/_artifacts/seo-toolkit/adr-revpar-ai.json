@@ -1,0 +1,63 @@
+{
+  "url": "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/blog/adr-vs-revpar-airbnb-hosts/",
+  "title": "ADR vs RevPAR: The Metrics That Run Airbnb Revenue",
+  "overall_score": 81,
+  "surfaces": [
+    {
+      "name": "fanout_coverage",
+      "score": 88,
+      "passed": true,
+      "findings": [
+        "9/12 sub-queries fully answered, 3 partial, 0 missing. Coverage 88%."
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "facet_depth",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "12 H2 / 24 H3 \u2014 covers facets: ['definition', 'how', 'examples', 'comparison', 'cost', 'faq', 'tools']"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "subscription_link",
+      "score": 0,
+      "passed": false,
+      "findings": [
+        "No isAccessibleForFree flag found."
+      ],
+      "recommendations": [
+        "If this is subscription content, add CreativeWork.isAccessibleForFree=false and hasPart cssSelector blocks to qualify for the AI subscription-link badge."
+      ]
+    },
+    {
+      "name": "perspectives_byline",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "Author 'Federico Zimerman' with 3 sameAs link(s) and visible byline."
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "hover_preview",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "title='ADR vs RevPAR: The Metrics That Run Airbnb Revenue' og:site_name='RevFactor' org='RevFactor'"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "inline_citability",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "27 atomic claims across 3227 words (8.4 per 1k words)."
+      ],
+      "recommendations": []
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "url": "https://revfactor.io/blog/revenue-management-for-short-term-rentals/",
+  "title": "Revenue Management for Short-Term Rentals (2026): Definitive Guide",
+  "overall_score": 79,
+  "surfaces": [
+    {
+      "name": "fanout_coverage",
+      "score": 96,
+      "passed": true,
+      "findings": [
+        "11/12 sub-queries fully answered, 1 partial, 0 missing. Coverage 96%."
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "facet_depth",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "17 H2 / 31 H3 \u2014 covers facets: ['definition', 'how', 'examples', 'comparison', 'cost', 'mistakes', 'faq', 'tools']"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "subscription_link",
+      "score": 0,
+      "passed": false,
+      "findings": [
+        "No isAccessibleForFree flag found."
+      ],
+      "recommendations": [
+        "If this is subscription content, add CreativeWork.isAccessibleForFree=false and hasPart cssSelector blocks to qualify for the AI subscription-link badge."
+      ]
+    },
+    {
+      "name": "perspectives_byline",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "Author 'Federico Zimerman' with 3 sameAs link(s) and visible byline."
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "hover_preview",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "title='Revenue Management for Short-Term Rentals (2026): Definitive Guide' og:site_name='RevFactor' org='American Airlines'"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "inline_citability",
+      "score": 80,
+      "passed": true,
+      "findings": [
+        "59 atomic claims across 8064 words (7.3 per 1k words)."
+      ],
+      "recommendations": []
+    }
+  ]
+}

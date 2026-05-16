@@ -1,0 +1,321 @@
+{
+  "target": {
+    "url": "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/blog/best-airbnb-property-managers-with-dynamic-pricing-2026/",
+    "title": "Best Property Managers With Dynamic Pricing 2026",
+    "title_len": 48,
+    "meta_description": "Seven full-service Airbnb property managers that bundle dynamic pricing with cleaning, guest comms, and maintenance \u2014 compared on fee structure, pricing methodology, and operator fit. Full-service PMs own operations and pricing for the owner, typically at 15\u201335% of gross revenue.",
+    "meta_desc_len": 280,
+    "canonical": "https://www.revfactor.io/blog/best-airbnb-property-managers-with-dynamic-pricing-2026/",
+    "has_og_tags": true,
+    "has_twitter_card": true,
+    "word_count": 6613,
+    "h1_count": 1,
+    "h2_count": 15,
+    "h3_count": 20,
+    "schema_types": [
+      "Answer",
+      "Article",
+      "BreadcrumbList",
+      "FAQPage",
+      "ImageObject",
+      "ItemList",
+      "ListItem",
+      "Organization",
+      "Person",
+      "Question",
+      "Rating",
+      "Review",
+      "WebPage"
+    ],
+    "images_total": 11,
+    "images_with_alt": 11
+  },
+  "serp_avg": {
+    "competitors_used": 6,
+    "competitor_urls": [
+      "https://www.redawning.com/pm/post/the-best-airbnb-property-management-companies-for-hosts-in-2026",
+      "https://www.airbnb.com/host/co-hosts",
+      "https://airbtics.com/top-airbnb-management-companies-in-united-states",
+      "https://awning.com/airbnb-management",
+      "https://avantstay.com/texas/best-airbnb-management",
+      "https://luxurylodgingpm.com/airbnb-property-management-in-chicago/"
+    ],
+    "word_count": 2360,
+    "h2_count": 9.5,
+    "h3_count": 13.7,
+    "title_len": 40,
+    "meta_desc_len": 118
+  },
+  "lsa_top": [
+    {
+      "term": "rentals",
+      "avg_per_competitor": 137.0,
+      "doc_freq": 4,
+      "target_count": 11,
+      "target_vs_avg_ratio": 0.08
+    },
+    {
+      "term": "vacation",
+      "avg_per_competitor": 110.4,
+      "doc_freq": 5,
+      "target_count": 23,
+      "target_vs_avg_ratio": 0.21
+    },
+    {
+      "term": "management",
+      "avg_per_competitor": 48.8,
+      "doc_freq": 5,
+      "target_count": 73,
+      "target_vs_avg_ratio": 1.5
+    },
+    {
+      "term": "properties",
+      "avg_per_competitor": 44.2,
+      "doc_freq": 4,
+      "target_count": 21,
+      "target_vs_avg_ratio": 0.47
+    },
+    {
+      "term": "hosts",
+      "avg_per_competitor": 44.0,
+      "doc_freq": 4,
+      "target_count": 2,
+      "target_vs_avg_ratio": 0.05
+    },
+    {
+      "term": "beach",
+      "avg_per_competitor": 49.7,
+      "doc_freq": 3,
+      "target_count": 2,
+      "target_vs_avg_ratio": 0.04
+    },
+    {
+      "term": "rental",
+      "avg_per_competitor": 28.8,
+      "doc_freq": 5,
+      "target_count": 13,
+      "target_vs_avg_ratio": 0.45
+    },
+    {
+      "term": "stay",
+      "avg_per_competitor": 23.8,
+      "doc_freq": 4,
+      "target_count": 1,
+      "target_vs_avg_ratio": 0.04
+    },
+    {
+      "term": "luxury",
+      "avg_per_competitor": 23.7,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "home",
+      "avg_per_competitor": 16.2,
+      "doc_freq": 5,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "vacasa",
+      "avg_per_competitor": 19.3,
+      "doc_freq": 3,
+      "target_count": 32,
+      "target_vs_avg_ratio": 1.66
+    },
+    {
+      "term": "island",
+      "avg_per_competitor": 17.0,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "mountain",
+      "avg_per_competitor": 14.0,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "real",
+      "avg_per_competitor": 14.0,
+      "doc_freq": 3,
+      "target_count": 7,
+      "target_vs_avg_ratio": 0.5
+    },
+    {
+      "term": "estate",
+      "avg_per_competitor": 13.3,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "host",
+      "avg_per_competitor": 10.0,
+      "doc_freq": 5,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "guest",
+      "avg_per_competitor": 9.8,
+      "doc_freq": 5,
+      "target_count": 14,
+      "target_vs_avg_ratio": 1.43
+    },
+    {
+      "term": "city",
+      "avg_per_competitor": 8.3,
+      "doc_freq": 6,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "pricing",
+      "avg_per_competitor": 10.0,
+      "doc_freq": 4,
+      "target_count": 118,
+      "target_vs_avg_ratio": 11.8
+    },
+    {
+      "term": "chicago",
+      "avg_per_competitor": 11.3,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "redawning",
+      "avg_per_competitor": 11.3,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "lake",
+      "avg_per_competitor": 11.3,
+      "doc_freq": 3,
+      "target_count": 1,
+      "target_vs_avg_ratio": 0.09
+    },
+    {
+      "term": "inc",
+      "avg_per_competitor": 9.8,
+      "doc_freq": 4,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "revenue",
+      "avg_per_competitor": 9.0,
+      "doc_freq": 4,
+      "target_count": 68,
+      "target_vs_avg_ratio": 7.56
+    },
+    {
+      "term": "north",
+      "avg_per_competitor": 10.3,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    }
+  ],
+  "schema_audit": {
+    "gaps": [],
+    "strengths": [
+      "article",
+      "breadcrumblist",
+      "itemlist",
+      "person",
+      "rating",
+      "review"
+    ],
+    "competitor_coverage": {
+      "question": 17,
+      "faqpage": 17,
+      "answer": 17
+    },
+    "target_types": [
+      "answer",
+      "article",
+      "breadcrumblist",
+      "faqpage",
+      "imageobject",
+      "itemlist",
+      "listitem",
+      "organization",
+      "person",
+      "question",
+      "rating",
+      "review",
+      "webpage"
+    ]
+  },
+  "keyword_density": {
+    "target_count": 2,
+    "competitor_avg": 0.0,
+    "target_density_pct": 0.03
+  },
+  "faq_gap": [],
+  "paa_questions": [
+    "Who is the best Airbnb management company?",
+    "What is the 75-55 rule for Airbnb?",
+    "How much to pay an Airbnb property manager?",
+    "What is the 80/20 rule for Airbnb?"
+  ],
+  "related_searches": [],
+  "page_score": {
+    "total": 69.5,
+    "grade": "D",
+    "breakdown": {
+      "schema": {
+        "score": 15,
+        "note": "13 types, 0 gaps"
+      },
+      "lsa": {
+        "score": 6.5,
+        "note": "avg coverage 26%"
+      },
+      "word_count": {
+        "score": 15,
+        "note": "6,613 vs avg 2,360 (2.8\u00d7)"
+      },
+      "headings": {
+        "score": 7,
+        "note": "15 h2 / 20 h3 vs avg 9.5"
+      },
+      "keyword_density": {
+        "score": 1.0,
+        "note": "0.03% density"
+      },
+      "meta": {
+        "score": 10,
+        "note": "title \u2713; desc \u2713; canonical \u2713"
+      },
+      "social": {
+        "score": 5,
+        "note": "og \u2713; twitter \u2713"
+      },
+      "image_alts": {
+        "score": 5.0,
+        "note": "11/11 alts (100%)"
+      },
+      "paa_coverage": {
+        "score": 5,
+        "note": "no PAA gaps"
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "info",
+      "title": "LLM returned non-JSON",
+      "data_anchor": "",
+      "where": "",
+      "action": "{\"recommendations\": [\n  {\n    \"priority\": \"critical\",\n    \"title\": \"Add primary keyword phrase to title, H1, and intro\",\n    \"data_anchor\": \"Keyword density is 0.03% (target_count=2) vs. a page about 'Airbnb property managers with dynamic pricing' \u2014 the exact phrase appears only twice in 6,613 words.\",\n    \"where\": \"H1, opening 100 words, and at least 3 H2s\",\n    \"action\": \"Work the exact phrase 'Airbnb property manager' (singular, with 'Airbnb') into the H1 (currently 'Best Property Managers Wi"
+    }
+  ]
+}

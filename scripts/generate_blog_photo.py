@@ -75,10 +75,16 @@ def main():
     print(f"→ Generating: {prompt[:80]}...")
     print(f"→ Output:     {out_dir / slug}-2400.webp / -1200.webp")
 
-    # Brand-leaning prompt suffix — matches RevFactor aesthetic ("Precision Revenue Craft")
+    # Brand-leaning prompt suffix — matches RevFactor aesthetic ("Precision Revenue Craft").
+    # Photo-realism mode: avoid "painterly / cinematic / dreamy" tells that read as AI.
+    # Lean on camera-language cues so Imagen leans into DSLR landscape photography.
     full_prompt = (
         prompt
-        + " · Style: cinematic, warm cedar/moss tones, painterly natural light, hospitality magazine quality, no text, no watermarks, no people unless requested, soft grain"
+        + " · Style: photo-realistic real-world architectural landscape photography,"
+        + " shot on Sony A7R V with 35mm prime at f/4, natural unfiltered light, slight"
+        + " atmospheric haze, real-world surface texture and material imperfections, warm cedar"
+        + " and moss palette, no text, no watermarks, no people unless requested, no painterly"
+        + " or illustrative rendering, no AI artifacts, no oversaturation, no symmetric lighting"
     )
 
     # Imagen 4 family — standard / fast / ultra. Standard balances quality + cost

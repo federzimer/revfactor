@@ -1,0 +1,68 @@
+{
+  "url": "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/blog/dynamic-pricing-str-beginners-guide/",
+  "title": "Dynamic Pricing for Short-Term Rentals: How It Works and How to Use It (2026)",
+  "overall_score": 73,
+  "surfaces": [
+    {
+      "name": "fanout_coverage",
+      "score": 75,
+      "passed": true,
+      "findings": [
+        "7/12 sub-queries fully answered, 4 partial, 1 missing. Coverage 75%.",
+        "Missing sub-queries:",
+        "  - How much does dynamic pricing software cost? [costs]"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "facet_depth",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "14 H2 / 27 H3 \u2014 covers facets: ['definition', 'how', 'comparison', 'cost', 'mistakes', 'faq', 'tools']"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "subscription_link",
+      "score": 0,
+      "passed": false,
+      "findings": [
+        "No isAccessibleForFree flag found."
+      ],
+      "recommendations": [
+        "If this is subscription content, add CreativeWork.isAccessibleForFree=false and hasPart cssSelector blocks to qualify for the AI subscription-link badge."
+      ]
+    },
+    {
+      "name": "perspectives_byline",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "Author 'Federico Zimerman' with 3 sameAs link(s) and visible byline."
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "hover_preview",
+      "score": 85,
+      "passed": true,
+      "findings": [
+        "title='Dynamic Pricing for Short-Term Rentals: How It Works and How to Use It (2026)' og:site_name='RevFactor' org='Airbnb'",
+        "<title> is 77 chars; hover preview may truncate >60-65."
+      ],
+      "recommendations": [
+        "Tighten <title> to 40-60 chars, ensure og:site_name + Organization schema name are present for the desktop hover-preview surface."
+      ]
+    },
+    {
+      "name": "inline_citability",
+      "score": 80,
+      "passed": true,
+      "findings": [
+        "41 atomic claims across 5875 words (7.0 per 1k words)."
+      ],
+      "recommendations": []
+    }
+  ]
+}

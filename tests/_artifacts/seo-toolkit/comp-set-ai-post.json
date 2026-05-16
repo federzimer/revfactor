@@ -1,0 +1,70 @@
+{
+  "url": "http://localhost:4399/blog/how-to-build-comp-set-str/",
+  "title": "How to Build an STR Comp Set: A Revenue Manager's Guide",
+  "overall_score": 65,
+  "surfaces": [
+    {
+      "name": "fanout_coverage",
+      "score": 83,
+      "passed": true,
+      "findings": [
+        "10/12 sub-queries fully answered, 0 partial, 2 missing. Coverage 83%.",
+        "Missing sub-queries:",
+        "  - What tools or software help build an STR comp set? [tools/alternatives]",
+        "  - How much does building or maintaining a comp set cost? [costs]"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "facet_depth",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "13 H2 / 43 H3 \u2014 covers facets: ['definition', 'how', 'examples', 'comparison', 'cost', 'mistakes', 'faq']"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "subscription_link",
+      "score": 0,
+      "passed": false,
+      "findings": [
+        "No isAccessibleForFree flag found."
+      ],
+      "recommendations": [
+        "If this is subscription content, add CreativeWork.isAccessibleForFree=false and hasPart cssSelector blocks to qualify for the AI subscription-link badge."
+      ]
+    },
+    {
+      "name": "perspectives_byline",
+      "score": 50,
+      "passed": false,
+      "findings": [
+        "Visible byline, but no author schema."
+      ],
+      "recommendations": [
+        "Add Person schema for the author with name + sameAs."
+      ]
+    },
+    {
+      "name": "hover_preview",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "title='How to Build an STR Comp Set: A Revenue Manager's Guide' og:site_name='RevFactor' org=''"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "inline_citability",
+      "score": 55,
+      "passed": false,
+      "findings": [
+        "17 atomic claims across 4462 words (3.8 per 1k words)."
+      ],
+      "recommendations": [
+        "Increase atomic-claim density: add stats, dated specifics, named studies, or 'according to X' citations targeting \u22655 per 1k words."
+      ]
+    }
+  ]
+}

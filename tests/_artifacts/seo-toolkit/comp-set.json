@@ -1,0 +1,342 @@
+{
+  "target": {
+    "url": "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/blog/how-to-build-comp-set-str/",
+    "title": "How to Build an STR Comp Set: A Revenue Manager's Guide",
+    "title_len": 55,
+    "meta_description": "A revenue manager's framework for building an STR comp set that actually informs pricing \u2014 the criteria, the data points, the mistakes, the cadence. A comp set is the curated group of 8\u201315 properties a host benchmarks against, chosen by guest decision behavior rather than amenity matching.",
+    "meta_desc_len": 290,
+    "canonical": "https://www.revfactor.io/blog/how-to-build-comp-set-str/",
+    "has_og_tags": true,
+    "has_twitter_card": true,
+    "word_count": 4127,
+    "h1_count": 1,
+    "h2_count": 13,
+    "h3_count": 43,
+    "schema_types": [
+      "Answer",
+      "Article",
+      "BreadcrumbList",
+      "FAQPage",
+      "ImageObject",
+      "ListItem",
+      "Organization",
+      "Person",
+      "Question",
+      "WebPage"
+    ],
+    "images_total": 12,
+    "images_with_alt": 12
+  },
+  "serp_avg": {
+    "competitors_used": 5,
+    "competitor_urls": [
+      "https://yieldhorizonhospitality.net/article-comp-set-analysis.html",
+      "https://www.prostay.com/blog/hotel-compset-guide-building-competitive-set/",
+      "https://www.mylighthouse.com/resources/blog/hotel-competitive-set-find-yours",
+      "https://hladvisors.com/why-you-may-need-to-change-your-competitive-set-now-str-adopts-new-guidelines/",
+      "https://blog.hotelogix.com/hotel-compset/"
+    ],
+    "word_count": 1771,
+    "h2_count": 8.2,
+    "h3_count": 9.8,
+    "title_len": 77,
+    "meta_desc_len": 124
+  },
+  "lsa_top": [
+    {
+      "term": "compset",
+      "avg_per_competitor": 50.0,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "hotel",
+      "avg_per_competitor": 30.8,
+      "doc_freq": 5,
+      "target_count": 5,
+      "target_vs_avg_ratio": 0.16
+    },
+    {
+      "term": "hotels",
+      "avg_per_competitor": 22.4,
+      "doc_freq": 5,
+      "target_count": 1,
+      "target_vs_avg_ratio": 0.04
+    },
+    {
+      "term": "competitive",
+      "avg_per_competitor": 17.8,
+      "doc_freq": 5,
+      "target_count": 12,
+      "target_vs_avg_ratio": 0.67
+    },
+    {
+      "term": "market",
+      "avg_per_competitor": 19.8,
+      "doc_freq": 4,
+      "target_count": 22,
+      "target_vs_avg_ratio": 1.11
+    },
+    {
+      "term": "rate",
+      "avg_per_competitor": 18.2,
+      "doc_freq": 4,
+      "target_count": 9,
+      "target_vs_avg_ratio": 0.49
+    },
+    {
+      "term": "competitors",
+      "avg_per_competitor": 17.8,
+      "doc_freq": 4,
+      "target_count": 1,
+      "target_vs_avg_ratio": 0.06
+    },
+    {
+      "term": "pricing",
+      "avg_per_competitor": 16.0,
+      "doc_freq": 4,
+      "target_count": 35,
+      "target_vs_avg_ratio": 2.19
+    },
+    {
+      "term": "guest",
+      "avg_per_competitor": 15.8,
+      "doc_freq": 4,
+      "target_count": 36,
+      "target_vs_avg_ratio": 2.29
+    },
+    {
+      "term": "revenue",
+      "avg_per_competitor": 12.2,
+      "doc_freq": 5,
+      "target_count": 22,
+      "target_vs_avg_ratio": 1.8
+    },
+    {
+      "term": "properties",
+      "avg_per_competitor": 10.8,
+      "doc_freq": 5,
+      "target_count": 46,
+      "target_vs_avg_ratio": 4.26
+    },
+    {
+      "term": "data",
+      "avg_per_competitor": 10.6,
+      "doc_freq": 5,
+      "target_count": 20,
+      "target_vs_avg_ratio": 1.89
+    },
+    {
+      "term": "guests",
+      "avg_per_competitor": 11.8,
+      "doc_freq": 4,
+      "target_count": 16,
+      "target_vs_avg_ratio": 1.36
+    },
+    {
+      "term": "performance",
+      "avg_per_competitor": 10.2,
+      "doc_freq": 5,
+      "target_count": 4,
+      "target_vs_avg_ratio": 0.39
+    },
+    {
+      "term": "competitor",
+      "avg_per_competitor": 11.0,
+      "doc_freq": 4,
+      "target_count": 2,
+      "target_vs_avg_ratio": 0.18
+    },
+    {
+      "term": "compsets",
+      "avg_per_competitor": 11.0,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "property",
+      "avg_per_competitor": 8.4,
+      "doc_freq": 5,
+      "target_count": 42,
+      "target_vs_avg_ratio": 5.0
+    },
+    {
+      "term": "benchmarking",
+      "avg_per_competitor": 8.5,
+      "doc_freq": 4,
+      "target_count": 2,
+      "target_vs_avg_ratio": 0.24
+    },
+    {
+      "term": "demand",
+      "avg_per_competitor": 7.4,
+      "doc_freq": 5,
+      "target_count": 6,
+      "target_vs_avg_ratio": 0.81
+    },
+    {
+      "term": "business",
+      "avg_per_competitor": 9.3,
+      "doc_freq": 3,
+      "target_count": 1,
+      "target_vs_avg_ratio": 0.11
+    },
+    {
+      "term": "similar",
+      "avg_per_competitor": 8.0,
+      "doc_freq": 4,
+      "target_count": 4,
+      "target_vs_avg_ratio": 0.5
+    },
+    {
+      "term": "booking",
+      "avg_per_competitor": 7.8,
+      "doc_freq": 4,
+      "target_count": 9,
+      "target_vs_avg_ratio": 1.16
+    },
+    {
+      "term": "analysis",
+      "avg_per_competitor": 7.8,
+      "doc_freq": 4,
+      "target_count": 3,
+      "target_vs_avg_ratio": 0.39
+    },
+    {
+      "term": "occupancy",
+      "avg_per_competitor": 6.8,
+      "doc_freq": 4,
+      "target_count": 10,
+      "target_vs_avg_ratio": 1.48
+    },
+    {
+      "term": "management",
+      "avg_per_competitor": 6.0,
+      "doc_freq": 5,
+      "target_count": 16,
+      "target_vs_avg_ratio": 2.67
+    }
+  ],
+  "schema_audit": {
+    "gaps": [
+      {
+        "type": "blogposting",
+        "in_competitors_pct": 40
+      }
+    ],
+    "strengths": [],
+    "competitor_coverage": {
+      "webpage": 40,
+      "article": 40,
+      "answer": 40,
+      "website": 40,
+      "person": 40,
+      "question": 40,
+      "organization": 40,
+      "imageobject": 40,
+      "faqpage": 40,
+      "blogposting": 40,
+      "searchaction": 20,
+      "contactpoint": 20,
+      "breadcrumblist": 20,
+      "listitem": 20,
+      "": 20
+    },
+    "target_types": [
+      "answer",
+      "article",
+      "breadcrumblist",
+      "faqpage",
+      "imageobject",
+      "listitem",
+      "organization",
+      "person",
+      "question",
+      "webpage"
+    ]
+  },
+  "keyword_density": {
+    "target_count": 7,
+    "competitor_avg": 0.0,
+    "target_density_pct": 0.17
+  },
+  "faq_gap": [
+    {
+      "question": "What is STR compset?",
+      "coverage_pct": 50
+    },
+    {
+      "question": "What is compset in a hotel?",
+      "coverage_pct": 50
+    }
+  ],
+  "paa_questions": [
+    "What is STR compset?",
+    "How much does a STR report cost?",
+    "What is compset in a hotel?",
+    "What is included in a STR report?"
+  ],
+  "related_searches": [
+    "Str comp set costar",
+    "Str comp set price",
+    "STR Benchmark",
+    "STR hotel login",
+    "STR com login",
+    "STR CoStar",
+    "STR central login",
+    "STR report hotel"
+  ],
+  "page_score": {
+    "total": 76.2,
+    "grade": "C",
+    "breakdown": {
+      "schema": {
+        "score": 12,
+        "note": "10 types, 1 gaps"
+      },
+      "lsa": {
+        "score": 13.5,
+        "note": "avg coverage 54%"
+      },
+      "word_count": {
+        "score": 15,
+        "note": "4,127 vs avg 1,771 (2.3\u00d7)"
+      },
+      "headings": {
+        "score": 7,
+        "note": "13 h2 / 43 h3 vs avg 8.2"
+      },
+      "keyword_density": {
+        "score": 5.7,
+        "note": "0.17% density"
+      },
+      "meta": {
+        "score": 10,
+        "note": "title \u2713; desc \u2713; canonical \u2713"
+      },
+      "social": {
+        "score": 5,
+        "note": "og \u2713; twitter \u2713"
+      },
+      "image_alts": {
+        "score": 5.0,
+        "note": "12/12 alts (100%)"
+      },
+      "paa_coverage": {
+        "score": 3,
+        "note": "2 PAA gaps"
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "info",
+      "title": "LLM returned non-JSON",
+      "data_anchor": "",
+      "where": "",
+      "action": "{\"recommendations\": [\n  {\n    \"priority\": \"critical\",\n    \"title\": \"Add 'compset' as a primary term variant alongside 'comp set'\",\n    \"data_anchor\": \"Competitors use 'compset' 50x on average (doc_freq 3/5) and 'compsets' 11x; target uses both 0 times. Ratio 0.0.\",\n    \"where\": \"Intro paragraph, H1 subtitle, and at least 3 H2 headings. Also add to meta description and one FAQ question.\",\n    \"action\": \"Introduce 'compset' (one word) as a synonym in the opening definition: 'A comp set (also writt"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "url": "http://localhost:4399/blog/best-str-revenue-management-companies-2026/",
+  "title": "Best STR Revenue Management Companies 2026",
+  "overall_score": 74,
+  "surfaces": [
+    {
+      "name": "fanout_coverage",
+      "score": 92,
+      "passed": true,
+      "findings": [
+        "10/12 sub-queries fully answered, 2 partial, 0 missing. Coverage 92%."
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "facet_depth",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "15 H2 / 29 H3 \u2014 covers facets: ['definition', 'how', 'cost', 'best', 'mistakes', 'faq', 'tools']"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "subscription_link",
+      "score": 0,
+      "passed": false,
+      "findings": [
+        "No isAccessibleForFree flag found."
+      ],
+      "recommendations": [
+        "If this is subscription content, add CreativeWork.isAccessibleForFree=false and hasPart cssSelector blocks to qualify for the AI subscription-link badge."
+      ]
+    },
+    {
+      "name": "perspectives_byline",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "Author 'Federico Zimerman' with 4 sameAs link(s) and visible byline."
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "hover_preview",
+      "score": 100,
+      "passed": true,
+      "findings": [
+        "title='Best STR Revenue Management Companies 2026' og:site_name='RevFactor' org='RevFactor'"
+      ],
+      "recommendations": []
+    },
+    {
+      "name": "inline_citability",
+      "score": 55,
+      "passed": false,
+      "findings": [
+        "28 atomic claims across 8667 words (3.2 per 1k words)."
+      ],
+      "recommendations": [
+        "Increase atomic-claim density: add stats, dated specifics, named studies, or 'according to X' citations targeting \u22655 per 1k words."
+      ]
+    }
+  ]
+}

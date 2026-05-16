@@ -84,7 +84,28 @@ const heroSrcset = (() => {
   };
 })();
 
-// Federico Person schema — reusable; sameAs locks the entity for AI engines (Refactor.ai disambiguation)
+// Organization entity — referenced by both Person.worksFor and BlogPosting.publisher
+// via @id so the entity graph is explicitly connected (top-10 AI-citation factor).
+const revfactorOrg = {
+  "@type": "Organization",
+  "@id": "https://www.revfactor.io/#organization",
+  "name": "RevFactor",
+  "url": "https://www.revfactor.io",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.revfactor.io/og-image.png",
+    "width": 1200,
+    "height": 630
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/revfactor-rm/",
+    "https://www.instagram.com/revfactor.io/"
+  ],
+  "description": "Standalone short-term rental revenue management service. Flat-fee dynamic pricing across 165+ properties, 24 states, 56 markets. +18% RevPAR vs. comp set over a 24-month rolling average."
+};
+
+// Federico Person schema — references the Organization above via @id so the
+// entity graph is connected (vs. inline duplicate Organization nodes).
 const federicoPerson = {
   "@type": "Person",
   "@id": "https://www.revfactor.io/#federico",
@@ -108,29 +129,37 @@ const federicoPerson = {
     "PriceLabs"
   ],
   "alumniOf": { "@type": "Organization", "name": "American Airlines" },
-  "worksFor": { "@type": "Organization", "name": "RevFactor", "url": "https://www.revfactor.io" },
+  "worksFor": { "@id": "https://www.revfactor.io/#organization" },
   "description": "Federico Zimerman spent 10 years in airline revenue management at American Airlines before founding Blackbird Hospitality (165+ short-term rental properties across 24 U.S. states and 56 markets) and RevFactor (standalone revenue management service). His strategies deliver +18% RevPAR lift vs. comp set across the portfolio."
 };
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
+const articleSchema = {
+  "@type": "BlogPosting",
+  "@id": `${Astro.url.href}#blogposting`,
   "headline": post.data.title,
   "description": post.data.description,
   "image": heroImage.startsWith('http') ? heroImage : `https://www.revfactor.io${heroImage}`,
   "datePublished": post.data.pubDate.toISOString(),
   "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString(),
-  "author": federicoPerson,
-  "publisher": {
-    "@type": "Organization",
-    "name": "RevFactor",
-    "url": "https://www.revfactor.io",
-    "logo": { "@type": "ImageObject", "url": "https://www.revfactor.io/og-image.png" }
-  },
+  "author": { "@id": "https://www.revfactor.io/#federico" },
+  "publisher": { "@id": "https://www.revfactor.io/#organization" },
   "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
+  "isPartOf": {
+    "@type": "Blog",
+    "@id": "https://www.revfactor.io/blog#blog",
+    "name": "The Rev Journal",
+    "publisher": { "@id": "https://www.revfactor.io/#organization" }
+  },
   "keywords": post.data.tags.join(', '),
   "articleSection": post.data.category,
   "wordCount": post.data.readingTime ? post.data.readingTime * 250 : undefined
+};
+
+// @graph wraps Person + Organization + BlogPosting so LLMs and Google parse them
+// as one connected entity cluster rather than three loose nodes.
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [revfactorOrg, federicoPerson, articleSchema]
 };
 
 // FAQPage schema — only when frontmatter declares faqs (drives both accordion + JSON-LD)

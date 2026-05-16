@@ -1,0 +1,387 @@
+{
+  "target": {
+    "url": "https://revfactor.io/blog/revenue-management-for-short-term-rentals/",
+    "title": "Revenue Management for Short-Term Rentals (2026): Definitive Guide",
+    "title_len": 66,
+    "meta_description": "Revenue management for short-term rentals goes beyond dynamic pricing. The frameworks Federico Zimerman uses to run 165+ STR properties daily. The discipline of selling the right night, to the right guest, at the right price, using historical data, inventory rules, forecasting, and pacing to maximize RevPAR.",
+    "meta_desc_len": 309,
+    "canonical": "https://www.revfactor.io/blog/revenue-management-for-short-term-rentals/",
+    "has_og_tags": true,
+    "has_twitter_card": true,
+    "word_count": 8064,
+    "h1_count": 1,
+    "h2_count": 17,
+    "h3_count": 31,
+    "schema_types": [
+      "Answer",
+      "Article",
+      "BreadcrumbList",
+      "DefinedTerm",
+      "FAQPage",
+      "HowTo",
+      "HowToStep",
+      "ImageObject",
+      "ListItem",
+      "Organization",
+      "Person",
+      "Question",
+      "Thing",
+      "WebPage"
+    ],
+    "images_total": 14,
+    "images_with_alt": 14
+  },
+  "serp_avg": {
+    "competitors_used": 7,
+    "competitor_urls": [
+      "https://www.beyondpricing.com/",
+      "https://www.guesty.com/blog/revenue-management-for-beginners/",
+      "https://www.stepbystepbnb.com/revenue-management",
+      "https://rentalsunited.com/blog/vacation-rental-revenue-management/",
+      "https://quibblerm.com/the-6-revenue-management-hacks-for-vacation-rentals/",
+      "https://www.hostaway.com/blog/revenue-management-best-practices/",
+      "https://freewyldfoundry.com/blog/revenue-management-strategies/"
+    ],
+    "word_count": 1280,
+    "h2_count": 9.9,
+    "h3_count": 14.3,
+    "title_len": 68,
+    "meta_desc_len": 156
+  },
+  "lsa_top": [
+    {
+      "term": "pricing",
+      "avg_per_competitor": 14.4,
+      "doc_freq": 7,
+      "target_count": 91,
+      "target_vs_avg_ratio": 6.31
+    },
+    {
+      "term": "property",
+      "avg_per_competitor": 10.1,
+      "doc_freq": 7,
+      "target_count": 57,
+      "target_vs_avg_ratio": 5.62
+    },
+    {
+      "term": "market",
+      "avg_per_competitor": 9.9,
+      "doc_freq": 7,
+      "target_count": 67,
+      "target_vs_avg_ratio": 6.8
+    },
+    {
+      "term": "rental",
+      "avg_per_competitor": 9.0,
+      "doc_freq": 6,
+      "target_count": 28,
+      "target_vs_avg_ratio": 3.11
+    },
+    {
+      "term": "booking",
+      "avg_per_competitor": 7.8,
+      "doc_freq": 6,
+      "target_count": 23,
+      "target_vs_avg_ratio": 2.94
+    },
+    {
+      "term": "properties",
+      "avg_per_competitor": 7.0,
+      "doc_freq": 6,
+      "target_count": 40,
+      "target_vs_avg_ratio": 5.71
+    },
+    {
+      "term": "dynamic",
+      "avg_per_competitor": 6.3,
+      "doc_freq": 7,
+      "target_count": 21,
+      "target_vs_avg_ratio": 3.34
+    },
+    {
+      "term": "bookings",
+      "avg_per_competitor": 6.8,
+      "doc_freq": 5,
+      "target_count": 14,
+      "target_vs_avg_ratio": 2.06
+    },
+    {
+      "term": "data",
+      "avg_per_competitor": 5.7,
+      "doc_freq": 7,
+      "target_count": 19,
+      "target_vs_avg_ratio": 3.32
+    },
+    {
+      "term": "rate",
+      "avg_per_competitor": 5.7,
+      "doc_freq": 7,
+      "target_count": 63,
+      "target_vs_avg_ratio": 11.03
+    },
+    {
+      "term": "demand",
+      "avg_per_competitor": 5.6,
+      "doc_freq": 7,
+      "target_count": 30,
+      "target_vs_avg_ratio": 5.38
+    },
+    {
+      "term": "beyond",
+      "avg_per_competitor": 7.0,
+      "doc_freq": 4,
+      "target_count": 7,
+      "target_vs_avg_ratio": 1.0
+    },
+    {
+      "term": "distribution",
+      "avg_per_competitor": 7.0,
+      "doc_freq": 4,
+      "target_count": 10,
+      "target_vs_avg_ratio": 1.43
+    },
+    {
+      "term": "listing",
+      "avg_per_competitor": 5.5,
+      "doc_freq": 6,
+      "target_count": 19,
+      "target_vs_avg_ratio": 3.45
+    },
+    {
+      "term": "strategies",
+      "avg_per_competitor": 6.5,
+      "doc_freq": 4,
+      "target_count": 4,
+      "target_vs_avg_ratio": 0.62
+    },
+    {
+      "term": "vacation",
+      "avg_per_competitor": 5.3,
+      "doc_freq": 6,
+      "target_count": 13,
+      "target_vs_avg_ratio": 2.44
+    },
+    {
+      "term": "time",
+      "avg_per_competitor": 5.3,
+      "doc_freq": 6,
+      "target_count": 29,
+      "target_vs_avg_ratio": 5.44
+    },
+    {
+      "term": "strategy",
+      "avg_per_competitor": 5.2,
+      "doc_freq": 6,
+      "target_count": 45,
+      "target_vs_avg_ratio": 8.71
+    },
+    {
+      "term": "channel",
+      "avg_per_competitor": 6.7,
+      "doc_freq": 3,
+      "target_count": 17,
+      "target_vs_avg_ratio": 2.55
+    },
+    {
+      "term": "occupancy",
+      "avg_per_competitor": 4.7,
+      "doc_freq": 6,
+      "target_count": 33,
+      "target_vs_avg_ratio": 7.07
+    },
+    {
+      "term": "manager",
+      "avg_per_competitor": 5.0,
+      "doc_freq": 5,
+      "target_count": 18,
+      "target_vs_avg_ratio": 3.6
+    },
+    {
+      "term": "calendar",
+      "avg_per_competitor": 5.0,
+      "doc_freq": 5,
+      "target_count": 27,
+      "target_vs_avg_ratio": 5.4
+    },
+    {
+      "term": "increase",
+      "avg_per_competitor": 5.5,
+      "doc_freq": 4,
+      "target_count": 6,
+      "target_vs_avg_ratio": 1.09
+    },
+    {
+      "term": "days",
+      "avg_per_competitor": 6.3,
+      "doc_freq": 3,
+      "target_count": 16,
+      "target_vs_avg_ratio": 2.53
+    },
+    {
+      "term": "managers",
+      "avg_per_competitor": 4.0,
+      "doc_freq": 7,
+      "target_count": 9,
+      "target_vs_avg_ratio": 2.25
+    }
+  ],
+  "schema_audit": {
+    "gaps": [],
+    "strengths": [
+      "answer",
+      "definedterm",
+      "faqpage",
+      "howto",
+      "howtostep",
+      "question",
+      "thing"
+    ],
+    "competitor_coverage": {
+      "person": 43,
+      "organization": 43,
+      "imageobject": 29,
+      "contactpoint": 14,
+      "review": 14,
+      "offer": 14,
+      "service": 14,
+      "offercatalog": 14,
+      "unitpricespecification": 14,
+      "breadcrumblist": 14,
+      "article": 14,
+      "listitem": 14,
+      "webpage": 14
+    },
+    "target_types": [
+      "answer",
+      "article",
+      "breadcrumblist",
+      "definedterm",
+      "faqpage",
+      "howto",
+      "howtostep",
+      "imageobject",
+      "listitem",
+      "organization",
+      "person",
+      "question",
+      "thing",
+      "webpage"
+    ]
+  },
+  "keyword_density": {
+    "target_count": 7,
+    "competitor_avg": 2.4,
+    "target_density_pct": 0.09
+  },
+  "faq_gap": [],
+  "paa_questions": [],
+  "related_searches": [
+    "revenue management for short-term rentals near california",
+    "revenue management for short-term rentals near texas",
+    "Revenue management for short term rentals reviews",
+    "Best revenue management for short term rentals",
+    "Revenue management for short term rentals airbnb",
+    "Beyond Pricing",
+    "Dynamic pricing short-term rental",
+    "Short-term rental analysis"
+  ],
+  "page_score": {
+    "total": 84.9,
+    "grade": "B",
+    "breakdown": {
+      "schema": {
+        "score": 15,
+        "note": "14 types, 0 gaps"
+      },
+      "lsa": {
+        "score": 24.5,
+        "note": "avg coverage 98%"
+      },
+      "word_count": {
+        "score": 12.4,
+        "note": "8,064 vs avg 1,280 (6.3\u00d7)"
+      },
+      "headings": {
+        "score": 7,
+        "note": "17 h2 / 31 h3 vs avg 9.9"
+      },
+      "keyword_density": {
+        "score": 3.0,
+        "note": "0.09% density"
+      },
+      "meta": {
+        "score": 8,
+        "note": "title long (66); desc \u2713; canonical \u2713"
+      },
+      "social": {
+        "score": 5,
+        "note": "og \u2713; twitter \u2713"
+      },
+      "image_alts": {
+        "score": 5.0,
+        "note": "14/14 alts (100%)"
+      },
+      "paa_coverage": {
+        "score": 5,
+        "note": "no PAA gaps"
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "critical",
+      "title": "Shorten meta description to under 160 characters",
+      "data_anchor": "meta_desc_len = 309 vs SERP avg 156 (2\u00d7 too long); Google will truncate around char 155",
+      "where": "<head> meta description tag",
+      "action": "Rewrite to ~150 chars, lead with the primary keyword and a concrete value prop. Example: 'Revenue management for short-term rentals: the frameworks Federico Zimerman uses across 165+ STR properties to maximize RevPAR with pacing, pricing, and forecasting.'"
+    },
+    {
+      "priority": "critical",
+      "title": "Raise primary keyword density from 0.09% to ~0.5\u20131%",
+      "data_anchor": "keyword_density: target_count = 7, density = 0.09% vs competitor avg 2.4%; lsa term 'rental' ratio only 3.11 and 'bookings' 2.06 \u2014 surprisingly weak given 8,064 words",
+      "action": "Across H2s and body \u2014 work the exact phrase 'revenue management for short-term rentals' (or 'short-term rental revenue management') into ~30\u201350 more placements: the first 100 words, at least 4\u20135 H2s, the conclusion, and image alt text. Currently the page is so long the exact phrase is diluted."
+    },
+    {
+      "priority": "important",
+      "title": "Strengthen coverage of 'strategies' and 'beyond pricing' angles",
+      "data_anchor": "lsa_top: 'strategies' ratio 0.62 (target 4 vs competitor avg 6.5); 'beyond' ratio 1.0; 'distribution' ratio 1.43 \u2014 all under-indexed despite being core competitor themes",
+      "where": "Add or expand a dedicated H2 section titled something like 'Revenue Management Strategies Beyond Dynamic Pricing'",
+      "action": "Write 400\u2013600 words enumerating 5\u20137 named strategies (length-of-stay strategy, gap-night strategy, distribution mix strategy, channel strategy, minimum-stay strategy, orphan-night strategy). Use the word 'strategies' / 'strategy' explicitly in each subheading and reference 'going beyond dynamic pricing'."
+    },
+    {
+      "priority": "important",
+      "title": "Add Person/Organization schema linking author to Federico Zimerman",
+      "data_anchor": "schema_audit.competitor_coverage shows Person 43% and Organization 43% \u2014 and the meta description already cites Federico Zimerman + 165 properties as the E-E-A-T hook, but the report's schema list does not confirm sameAs/jobTitle linkage",
+      "where": "JSON-LD block in <head>; author byline at top of article",
+      "action": "Verify the Person schema includes jobTitle, sameAs (LinkedIn, Twitter/X, company), and is referenced as the Article.author. Add a visible byline 'By Federico Zimerman \u2014 operates 165+ STR properties' near the H1 to reinforce EEAT for AI Overviews."
+    },
+    {
+      "priority": "important",
+      "title": "Add Review/Offer or Service schema if monetizing",
+      "data_anchor": "competitor_coverage: review 14%, offer 14%, service 14%, offercatalog 14% \u2014 competitors that convert use commercial schema; target has 0",
+      "where": "Bottom CTA section, plus JSON-LD",
+      "action": "If RevFactor offers a revenue-management service, add Service schema (name, provider, areaServed, serviceType: 'Short-term rental revenue management') and an Offer node. This unlocks rich results for commercial intent variants like 'best revenue management for short-term rentals'."
+    },
+    {
+      "priority": "important",
+      "title": "Capture geo + commercial-intent related searches",
+      "data_anchor": "related_searches includes 'near california', 'near texas', 'reviews', 'best ... airbnb', 'Beyond Pricing' (competitor brand)",
+      "where": "New H2 'Revenue Management for Short-Term Rentals: Tools, Markets & Comparisons' near the end of the article",
+      "action": "Add three short subsections: (1) a comparison paragraph mentioning Beyond Pricing, PriceLabs, Wheelhouse with neutral pros/cons; (2) a 'Market examples' subsection citing California and Texas STR dynamics; (3) an 'Airbnb-specific revenue management' callout. Each ~150 words \u2014 targets long-tail and brand-modifier queries."
+    },
+    {
+      "priority": "optional",
+      "title": "Trim H3 sprawl or consolidate sections",
+      "data_anchor": "h3_count = 31 vs SERP avg 14.3 (2.2\u00d7); h2_count = 17 vs 9.9",
+      "where": "Across the article \u2014 review the table of contents",
+      "action": "Audit H3s for ones that are single-paragraph fragments. Either merge them into parent H2 prose or promote 2\u20133 of them into proper H2s that carry stronger keyword variants ('Dynamic Pricing vs Revenue Management', 'RevPAR for Short-Term Rentals'). Goal: tighter heading hierarchy that's easier for AI extractors to parse."
+    },
+    {
+      "priority": "optional",
+      "title": "Tighten title tag and align canonical host",
+      "data_anchor": "title_len 66 (borderline truncation around 60); canonical points to www.revfactor.io while URL is revfactor.io \u2014 host mismatch",
+      "where": "<title> tag and <link rel='canonical'>",
+      "action": "Shorten title to ~58 chars, e.g. 'Revenue Management for Short-Term Rentals (2026 Guide)'. Also verify the canonical host matches the served domain (either consistently www or apex) to avoid signal dilution."
+    }
+  ]
+}

@@ -1,0 +1,336 @@
+{
+  "target": {
+    "url": "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/blog/adr-vs-revpar-airbnb-hosts/",
+    "title": "ADR vs RevPAR: The Metrics That Run Airbnb Revenue",
+    "title_len": 50,
+    "meta_description": "ADR vs RevPAR for Airbnb hosts: most hosts brag about ADR; RevPAR is the number that actually grows revenue. ADR (Average Daily Rate) is total revenue divided by booked nights. RevPAR (Revenue Per Available Room, adopted from hotels) is revenue divided by every available night, booked or empty.",
+    "meta_desc_len": 295,
+    "canonical": "https://www.revfactor.io/blog/adr-vs-revpar-airbnb-hosts/",
+    "has_og_tags": true,
+    "has_twitter_card": true,
+    "word_count": 3227,
+    "h1_count": 1,
+    "h2_count": 12,
+    "h3_count": 24,
+    "schema_types": [
+      "Answer",
+      "Article",
+      "BreadcrumbList",
+      "FAQPage",
+      "ImageObject",
+      "ListItem",
+      "Organization",
+      "Person",
+      "Question",
+      "WebPage"
+    ],
+    "images_total": 12,
+    "images_with_alt": 12
+  },
+  "serp_avg": {
+    "competitors_used": 7,
+    "competitor_urls": [
+      "https://www.canarytechnologies.com/post/adr-vs-revpar",
+      "https://www.mews.com/en/blog/revpar-vs-adr",
+      "https://www.keydatadashboard.com/blog/the-big-three-occupancy-adr-and-revpar",
+      "https://mbe.cpa/what-adr-and-revpar-really-mean/",
+      "https://www.altexsoft.com/blog/revpar-occupancy-rate-adr-hotel-metrics/",
+      "https://www.prostay.com/blog/revpar-vs-adr/",
+      "https://frontlinepg.com/blog/revpar-meaning-how-it-compares-to-adr-and-why-it-matters"
+    ],
+    "word_count": 1580,
+    "h2_count": 6.1,
+    "h3_count": 12.4,
+    "title_len": 49,
+    "meta_desc_len": 144
+  },
+  "lsa_top": [
+    {
+      "term": "revenue",
+      "avg_per_competitor": 37.0,
+      "doc_freq": 7,
+      "target_count": 57,
+      "target_vs_avg_ratio": 1.54
+    },
+    {
+      "term": "room",
+      "avg_per_competitor": 22.5,
+      "doc_freq": 6,
+      "target_count": 5,
+      "target_vs_avg_ratio": 0.22
+    },
+    {
+      "term": "hotel",
+      "avg_per_competitor": 21.7,
+      "doc_freq": 6,
+      "target_count": 3,
+      "target_vs_avg_ratio": 0.14
+    },
+    {
+      "term": "rooms",
+      "avg_per_competitor": 19.2,
+      "doc_freq": 6,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "occupancy",
+      "avg_per_competitor": 17.6,
+      "doc_freq": 7,
+      "target_count": 34,
+      "target_vs_avg_ratio": 1.93
+    },
+    {
+      "term": "rate",
+      "avg_per_competitor": 14.1,
+      "doc_freq": 7,
+      "target_count": 20,
+      "target_vs_avg_ratio": 1.41
+    },
+    {
+      "term": "total",
+      "avg_per_competitor": 11.3,
+      "doc_freq": 6,
+      "target_count": 13,
+      "target_vs_avg_ratio": 1.15
+    },
+    {
+      "term": "available",
+      "avg_per_competitor": 10.4,
+      "doc_freq": 7,
+      "target_count": 18,
+      "target_vs_avg_ratio": 1.73
+    },
+    {
+      "term": "per",
+      "avg_per_competitor": 10.0,
+      "doc_freq": 7,
+      "target_count": 13,
+      "target_vs_avg_ratio": 1.3
+    },
+    {
+      "term": "metrics",
+      "avg_per_competitor": 8.1,
+      "doc_freq": 7,
+      "target_count": 5,
+      "target_vs_avg_ratio": 0.61
+    },
+    {
+      "term": "performance",
+      "avg_per_competitor": 7.9,
+      "doc_freq": 7,
+      "target_count": 9,
+      "target_vs_avg_ratio": 1.15
+    },
+    {
+      "term": "average",
+      "avg_per_competitor": 7.7,
+      "doc_freq": 7,
+      "target_count": 8,
+      "target_vs_avg_ratio": 1.04
+    },
+    {
+      "term": "costs",
+      "avg_per_competitor": 9.5,
+      "doc_freq": 4,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "pricing",
+      "avg_per_competitor": 7.7,
+      "doc_freq": 6,
+      "target_count": 34,
+      "target_vs_avg_ratio": 4.43
+    },
+    {
+      "term": "important",
+      "avg_per_competitor": 8.2,
+      "doc_freq": 5,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "formula",
+      "avg_per_competitor": 9.7,
+      "doc_freq": 3,
+      "target_count": 3,
+      "target_vs_avg_ratio": 0.31
+    },
+    {
+      "term": "rates",
+      "avg_per_competitor": 6.4,
+      "doc_freq": 7,
+      "target_count": 13,
+      "target_vs_avg_ratio": 2.02
+    },
+    {
+      "term": "sold",
+      "avg_per_competitor": 7.4,
+      "doc_freq": 5,
+      "target_count": 1,
+      "target_vs_avg_ratio": 0.14
+    },
+    {
+      "term": "example",
+      "avg_per_competitor": 7.2,
+      "doc_freq": 5,
+      "target_count": 4,
+      "target_vs_avg_ratio": 0.56
+    },
+    {
+      "term": "understand",
+      "avg_per_competitor": 7.0,
+      "doc_freq": 5,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "management",
+      "avg_per_competitor": 6.3,
+      "doc_freq": 6,
+      "target_count": 18,
+      "target_vs_avg_ratio": 2.84
+    },
+    {
+      "term": "guest",
+      "avg_per_competitor": 6.6,
+      "doc_freq": 5,
+      "target_count": 1,
+      "target_vs_avg_ratio": 0.15
+    },
+    {
+      "term": "metric",
+      "avg_per_competitor": 6.0,
+      "doc_freq": 6,
+      "target_count": 15,
+      "target_vs_avg_ratio": 2.5
+    },
+    {
+      "term": "goppar",
+      "avg_per_competitor": 8.3,
+      "doc_freq": 3,
+      "target_count": 0,
+      "target_vs_avg_ratio": 0.0
+    },
+    {
+      "term": "high",
+      "avg_per_competitor": 5.4,
+      "doc_freq": 7,
+      "target_count": 4,
+      "target_vs_avg_ratio": 0.74
+    }
+  ],
+  "schema_audit": {
+    "gaps": [
+      {
+        "type": "blogposting",
+        "in_competitors_pct": 57
+      }
+    ],
+    "strengths": [],
+    "competitor_coverage": {
+      "person": 57,
+      "blogposting": 57,
+      "imageobject": 57,
+      "organization": 57,
+      "webpage": 43,
+      "listitem": 29,
+      "breadcrumblist": 29,
+      "answer": 29,
+      "question": 29,
+      "faqpage": 29,
+      "quantitativevalue": 14,
+      "videoobject": 14,
+      "searchaction": 14,
+      "article": 14,
+      "website": 14,
+      "contactpoint": 14
+    },
+    "target_types": [
+      "answer",
+      "article",
+      "breadcrumblist",
+      "faqpage",
+      "imageobject",
+      "listitem",
+      "organization",
+      "person",
+      "question",
+      "webpage"
+    ]
+  },
+  "keyword_density": {
+    "target_count": 1,
+    "competitor_avg": 3.9,
+    "target_density_pct": 0.03
+  },
+  "faq_gap": [],
+  "paa_questions": [
+    "Is RevPAR the same as ADR?",
+    "How do you calculate RevPAR and ADR?",
+    "Which is better, RevPAR or ADR?",
+    "What is a good ADR for hotels?"
+  ],
+  "related_searches": [
+    "RevPAR formula",
+    "ADR and RevPAR formula",
+    "ADR vs ARR",
+    "RevPAR hotel",
+    "RevPAR Calculator",
+    "ADR hotel",
+    "RevPAR ADR",
+    "RevPAR vs RevPOR"
+  ],
+  "page_score": {
+    "total": 73.5,
+    "grade": "C",
+    "breakdown": {
+      "schema": {
+        "score": 12,
+        "note": "10 types, 1 gaps"
+      },
+      "lsa": {
+        "score": 13.5,
+        "note": "avg coverage 54%"
+      },
+      "word_count": {
+        "score": 15,
+        "note": "3,227 vs avg 1,580 (2.0\u00d7)"
+      },
+      "headings": {
+        "score": 7,
+        "note": "12 h2 / 24 h3 vs avg 6.1"
+      },
+      "keyword_density": {
+        "score": 1.0,
+        "note": "0.03% density"
+      },
+      "meta": {
+        "score": 10,
+        "note": "title \u2713; desc \u2713; canonical \u2713"
+      },
+      "social": {
+        "score": 5,
+        "note": "og \u2713; twitter \u2713"
+      },
+      "image_alts": {
+        "score": 5.0,
+        "note": "12/12 alts (100%)"
+      },
+      "paa_coverage": {
+        "score": 5,
+        "note": "no PAA gaps"
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "info",
+      "title": "LLM returned non-JSON",
+      "data_anchor": "",
+      "where": "",
+      "action": "{\"recommendations\": [\n  {\n    \"priority\": \"critical\",\n    \"title\": \"Fix near-zero primary keyword density\",\n    \"data_anchor\": \"Target keyword density 0.03% (1 mention in 3,227 words) vs competitor avg 3.9%; keyword_density score 1/15.\",\n    \"where\": \"Intro (first 100 words), H1, at least 3 H2s, and conclusion.\",\n    \"action\": \"Use the exact phrase 'ADR vs RevPAR' naturally 15-25 times across the article. Ensure it appears in the opening sentence, in section headings like 'ADR vs RevPAR Formula "
+    }
+  ]
+}

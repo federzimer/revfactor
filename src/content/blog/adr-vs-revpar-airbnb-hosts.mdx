@@ -30,6 +30,14 @@ faqs:
     a: "There is no universal benchmark. A good RevPAR beats your direct comp set and is trending upward year-over-year. RevPAR varies enormously by market, property type, and seasonality. A $120 RevPAR can be excellent in one market and underperforming in another. As a directional benchmark: in most stable U.S. STR markets, beating your comp set's median RevPAR by 10–15% year-over-year is a strong signal."
   - q: "Can RevPAR be more than ADR?"
     a: "No. RevPAR can never exceed ADR mathematically. RevPAR equals ADR multiplied by occupancy rate, and occupancy rate is always between 0% and 100%. The two numbers are equal only at 100% occupancy; every empty night pulls RevPAR below ADR. The gap between them tells you how much revenue your empty nights are costing you, expressed in per-night terms."
+  - q: "Is RevPAR the same as ADR?"
+    a: "No. ADR measures the average rate on nights you actually booked. RevPAR measures the average revenue per available night, booked or empty. A property with a $400 ADR at 50% occupancy has a $200 RevPAR. A property with a $300 ADR at 75% occupancy has a $225 RevPAR — different ADR ceilings, but the second property earns more across the calendar. ADR rewards pricing power; RevPAR rewards total performance."
+  - q: "How do you calculate RevPAR and ADR?"
+    a: "ADR = total revenue ÷ booked nights. RevPAR = total revenue ÷ total available nights. RevPAR also equals ADR × occupancy rate. Example: a property earning $36,000 over 90 days with 60 booked nights has an ADR of $600 and a RevPAR of $400 (60 of 90 nights = 67% occupancy, and $600 × 0.67 = $400). Run the math monthly, not annually — seasonality distorts the picture if you only look at it once a year."
+  - q: "Which is better, RevPAR or ADR?"
+    a: "RevPAR is the better single number to optimize. ADR alone hides the cost of empty nights — a $500 ADR at 30% occupancy looks great on a screenshot and leaks revenue every week. RevPAR forces you to value every available night, which is what the listing actually has to sell. Use ADR to diagnose pricing power and minimum-stay friction; use RevPAR to judge whether your calendar is working."
+  - q: "What is GOPPAR and how does it differ from RevPAR?"
+    a: "GOPPAR (Gross Operating Profit Per Available Room) is RevPAR minus the operating costs of running the unit on that night — cleaning, supplies, channel commissions, dynamic-pricing fees. RevPAR optimizes for top-line; GOPPAR optimizes for the cash that actually reaches the owner. Hotel revenue managers report both. STR hosts rarely do, which is why a property with a strong RevPAR can still be a poor investment once cleaning and channel fees are subtracted. RevPAR for benchmarking; GOPPAR for the owner's actual return."
 ---
 
 <div class="rf-quick-answer">
@@ -234,6 +242,25 @@ Take a 90-day window. You booked 60 nights at an average of $300 each.
 | RevPAR | $18,000 ÷ 90 = **$200** |
 
 ADR was $300. RevPAR was $200. The $100 gap is what the empty nights cost you, expressed in honest per-night terms.
+
+### Try it on your own numbers
+
+<div class="rf-callout rf-callout-tool" style="margin: 1.5rem 0; padding: 1.5rem 1.75rem; border-radius: 16px; border: 1px solid #C8C4BC; background: #E8E6E1;">
+  <p class="kicker" style="font-family: Helvetica, Arial, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #5D6D59; margin: 0 0 8px;">RevPAR + ADR Calculator</p>
+  <p style="margin: 0 0 12px; font-size: 16px; line-height: 1.55; color: #3F261F;">Plug your revenue, booked nights, and available nights into the standalone revenue calculator and it returns ADR, RevPAR, occupancy, and the comp-set delta in one read. No login, no email gate.</p>
+  <p style="margin: 0; font-size: 14px;"><a href="https://revfactor-calculator.vercel.app" target="_blank" rel="noopener" style="color: #13342D; font-weight: 700; text-decoration: underline;">Open the RevFactor revenue calculator →</a></p>
+</div>
+
+If you would rather run the numbers in a spreadsheet, the three formulas you need are:
+
+| Metric | Formula |
+|---|---|
+| **ADR** | `= total_revenue / booked_nights` |
+| **Occupancy** | `= booked_nights / available_nights` |
+| **RevPAR** | `= total_revenue / available_nights` (or `ADR × Occupancy`) |
+| **GOPPAR** | `= (total_revenue − operating_costs) / available_nights` |
+
+GOPPAR (Gross Operating Profit Per Available Room) subtracts cleaning, channel commissions, dynamic-pricing fees, and supplies. It is the cleanest one-number view of what actually reaches the owner. RevPAR is the right metric for benchmarking against a comp set; GOPPAR is the right metric for judging an investment.
 
 ### How to pull the numbers from your platforms
 

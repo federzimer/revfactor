@@ -1,0 +1,388 @@
+{
+  "target": {
+    "url": "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/blog/best-str-revenue-management-companies-2026/",
+    "title": "Best STR Revenue Management Companies 2026",
+    "title_len": 42,
+    "meta_description": "10 STR revenue management companies compared on pricing and service model. The Three Models framework \u2014 Specialist, Bundled-PM, Independent-Consultant \u2014 sorts the market so 3\u201315 property operators pick the right model first, then the right vendor inside it.",
+    "meta_desc_len": 257,
+    "canonical": "https://www.revfactor.io/blog/best-str-revenue-management-companies-2026/",
+    "has_og_tags": true,
+    "has_twitter_card": true,
+    "word_count": 8331,
+    "h1_count": 1,
+    "h2_count": 14,
+    "h3_count": 29,
+    "schema_types": [
+      "Answer",
+      "Article",
+      "BreadcrumbList",
+      "FAQPage",
+      "ImageObject",
+      "ItemList",
+      "ListItem",
+      "Organization",
+      "Person",
+      "Question",
+      "Rating",
+      "Review",
+      "WebPage"
+    ],
+    "images_total": 10,
+    "images_with_alt": 10
+  },
+  "serp_avg": {
+    "competitors_used": 8,
+    "competitor_urls": [
+      "https://www.pacerrev.com/",
+      "https://www.maverickstr.co/str-revenue-management",
+      "https://www.synchronest.com/",
+      "https://www.stepbystepbnb.com/revenue-management",
+      "https://www.hyatus.com/vacation-rental-property-management/revenue-management/",
+      "https://www.littlehotelier.com/blog/increase-your-revenue/revenue-management-consulting/",
+      "https://freewyldfoundry.com/blog/revenue-management/",
+      "https://truvi.com/blog/vacation-rental-revenue-management/"
+    ],
+    "word_count": 1302,
+    "h2_count": 10.4,
+    "h3_count": 12.4,
+    "title_len": 53,
+    "meta_desc_len": 149
+  },
+  "lsa_top": [
+    {
+      "term": "pricing",
+      "avg_per_competitor": 19.2,
+      "doc_freq": 8,
+      "target_count": 158,
+      "target_vs_avg_ratio": 8.21
+    },
+    {
+      "term": "market",
+      "avg_per_competitor": 9.9,
+      "doc_freq": 8,
+      "target_count": 35,
+      "target_vs_avg_ratio": 3.54
+    },
+    {
+      "term": "booking",
+      "avg_per_competitor": 9.7,
+      "doc_freq": 7,
+      "target_count": 11,
+      "target_vs_avg_ratio": 1.13
+    },
+    {
+      "term": "rental",
+      "avg_per_competitor": 10.3,
+      "doc_freq": 6,
+      "target_count": 13,
+      "target_vs_avg_ratio": 1.26
+    },
+    {
+      "term": "strategy",
+      "avg_per_competitor": 8.6,
+      "doc_freq": 8,
+      "target_count": 35,
+      "target_vs_avg_ratio": 4.06
+    },
+    {
+      "term": "property",
+      "avg_per_competitor": 7.8,
+      "doc_freq": 8,
+      "target_count": 59,
+      "target_vs_avg_ratio": 7.61
+    },
+    {
+      "term": "occupancy",
+      "avg_per_competitor": 7.4,
+      "doc_freq": 8,
+      "target_count": 7,
+      "target_vs_avg_ratio": 0.95
+    },
+    {
+      "term": "rates",
+      "avg_per_competitor": 6.8,
+      "doc_freq": 8,
+      "target_count": 9,
+      "target_vs_avg_ratio": 1.33
+    },
+    {
+      "term": "tools",
+      "avg_per_competitor": 7.4,
+      "doc_freq": 5,
+      "target_count": 19,
+      "target_vs_avg_ratio": 2.57
+    },
+    {
+      "term": "properties",
+      "avg_per_competitor": 6.5,
+      "doc_freq": 6,
+      "target_count": 27,
+      "target_vs_avg_ratio": 4.15
+    },
+    {
+      "term": "performance",
+      "avg_per_competitor": 5.2,
+      "doc_freq": 8,
+      "target_count": 11,
+      "target_vs_avg_ratio": 2.1
+    },
+    {
+      "term": "tool",
+      "avg_per_competitor": 6.4,
+      "doc_freq": 5,
+      "target_count": 40,
+      "target_vs_avg_ratio": 6.25
+    },
+    {
+      "term": "short-term",
+      "avg_per_competitor": 5.4,
+      "doc_freq": 7,
+      "target_count": 16,
+      "target_vs_avg_ratio": 2.95
+    },
+    {
+      "term": "manager",
+      "avg_per_competitor": 5.8,
+      "doc_freq": 5,
+      "target_count": 19,
+      "target_vs_avg_ratio": 3.28
+    },
+    {
+      "term": "data",
+      "avg_per_competitor": 4.9,
+      "doc_freq": 7,
+      "target_count": 29,
+      "target_vs_avg_ratio": 5.97
+    },
+    {
+      "term": "bookings",
+      "avg_per_competitor": 4.5,
+      "doc_freq": 8,
+      "target_count": 5,
+      "target_vs_avg_ratio": 1.11
+    },
+    {
+      "term": "strategies",
+      "avg_per_competitor": 4.8,
+      "doc_freq": 6,
+      "target_count": 1,
+      "target_vs_avg_ratio": 0.21
+    },
+    {
+      "term": "stay",
+      "avg_per_competitor": 4.8,
+      "doc_freq": 6,
+      "target_count": 3,
+      "target_vs_avg_ratio": 0.62
+    },
+    {
+      "term": "based",
+      "avg_per_competitor": 4.8,
+      "doc_freq": 6,
+      "target_count": 5,
+      "target_vs_avg_ratio": 1.03
+    },
+    {
+      "term": "rate",
+      "avg_per_competitor": 4.2,
+      "doc_freq": 8,
+      "target_count": 8,
+      "target_vs_avg_ratio": 1.88
+    },
+    {
+      "term": "demand",
+      "avg_per_competitor": 4.4,
+      "doc_freq": 7,
+      "target_count": 17,
+      "target_vs_avg_ratio": 3.84
+    },
+    {
+      "term": "airbnb",
+      "avg_per_competitor": 5.0,
+      "doc_freq": 5,
+      "target_count": 10,
+      "target_vs_avg_ratio": 2.0
+    },
+    {
+      "term": "vacation",
+      "avg_per_competitor": 4.5,
+      "doc_freq": 6,
+      "target_count": 8,
+      "target_vs_avg_ratio": 1.78
+    },
+    {
+      "term": "dynamic",
+      "avg_per_competitor": 4.1,
+      "doc_freq": 7,
+      "target_count": 17,
+      "target_vs_avg_ratio": 4.1
+    },
+    {
+      "term": "average",
+      "avg_per_competitor": 5.0,
+      "doc_freq": 4,
+      "target_count": 2,
+      "target_vs_avg_ratio": 0.4
+    }
+  ],
+  "schema_audit": {
+    "gaps": [],
+    "strengths": [
+      "answer",
+      "faqpage",
+      "itemlist",
+      "question",
+      "rating"
+    ],
+    "competitor_coverage": {
+      "website": 25,
+      "person": 25,
+      "organization": 25,
+      "imageobject": 25,
+      "localbusiness": 12,
+      "entrypoint": 12,
+      "searchaction": 12,
+      "unitpricespecification": 12,
+      "offer": 12,
+      "review": 12,
+      "service": 12,
+      "offercatalog": 12,
+      "article": 12,
+      "webpage": 12,
+      "breadcrumblist": 12,
+      "listitem": 12
+    },
+    "target_types": [
+      "answer",
+      "article",
+      "breadcrumblist",
+      "faqpage",
+      "imageobject",
+      "itemlist",
+      "listitem",
+      "organization",
+      "person",
+      "question",
+      "rating",
+      "review",
+      "webpage"
+    ]
+  },
+  "keyword_density": {
+    "target_count": 8,
+    "competitor_avg": 0.0,
+    "target_density_pct": 0.1
+  },
+  "faq_gap": [],
+  "paa_questions": [],
+  "related_searches": [
+    "str revenue management companies near california",
+    "str revenue management companies near texas",
+    "Str revenue management companies list",
+    "Str revenue management companies airbnb",
+    "Str revenue management companies reviews",
+    "Pacer revenue management",
+    "Beyond Pricing",
+    "STR property management software"
+  ],
+  "page_score": {
+    "total": 88.5,
+    "grade": "B",
+    "breakdown": {
+      "schema": {
+        "score": 15,
+        "note": "13 types, 0 gaps"
+      },
+      "lsa": {
+        "score": 23.0,
+        "note": "avg coverage 92%"
+      },
+      "word_count": {
+        "score": 12.2,
+        "note": "8,331 vs avg 1,302 (6.4\u00d7)"
+      },
+      "headings": {
+        "score": 10,
+        "note": "14 h2 / 29 h3 vs avg 10.4"
+      },
+      "keyword_density": {
+        "score": 3.3,
+        "note": "0.1% density"
+      },
+      "meta": {
+        "score": 10,
+        "note": "title \u2713; desc \u2713; canonical \u2713"
+      },
+      "social": {
+        "score": 5,
+        "note": "og \u2713; twitter \u2713"
+      },
+      "image_alts": {
+        "score": 5.0,
+        "note": "10/10 alts (100%)"
+      },
+      "paa_coverage": {
+        "score": 5,
+        "note": "no PAA gaps"
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "critical",
+      "title": "Add 'strategies' coverage \u2014 currently 5\u00d7 under competitor usage",
+      "data_anchor": "target_count=1 vs avg 4.8 (ratio 0.21), doc_freq 6/8",
+      "where": "Inside each of the Three Models sections (Specialist, Bundled-PM, Independent-Consultant) and a new H3 'Common revenue strategies by model'",
+      "action": "Replace generic 'approach/method' phrasing with the plural 'strategies' and enumerate 3\u20135 named strategies per model (e.g., gap-night fills, MLOS laddering, compression-event surge, base-rate resets, length-of-stay discounting). Aim for ~12\u201315 uses of 'strategies' across the article."
+    },
+    {
+      "priority": "critical",
+      "title": "Tighten the meta description \u2014 257 chars will be truncated",
+      "data_anchor": "meta_desc_len=257 vs SERP avg 149",
+      "action": "Rewrite to 150\u2013160 chars leading with the primary query ('Best STR revenue management companies 2026') + the Three Models hook + a CTA verb.",
+      "where": "<meta name=\"description\"> in <head>"
+    },
+    {
+      "priority": "critical",
+      "title": "Shorten the title tag",
+      "data_anchor": "title_len=42 vs SERP avg 53; missing modifier real estate",
+      "where": "<title> and H1",
+      "action": "Expand to ~55\u201360 chars to add a qualifying modifier the SERP rewards, e.g., 'Best STR Revenue Management Companies 2026: Compared & Ranked' \u2014 keeps primary keyword first and adds 'compared/ranked' which the related-search cluster ('list', 'reviews') signals."
+    },
+    {
+      "priority": "important",
+      "title": "Increase coverage of 'occupancy', 'stay', 'bookings', 'average' \u2014 core RM vocabulary you're under-indexed on",
+      "data_anchor": "occupancy ratio 0.95, stay 0.62, bookings 1.11, average 0.40 (all doc_freq 6\u20138 = universal competitor terms)",
+      "where": "New H2 'How STR revenue managers actually move the numbers' before the vendor comparison, plus the methodology section",
+      "action": "Write 200\u2013300 words explicitly walking through the KPI stack: occupancy %, ADR, RevPAR, average length of stay, booking pace, booking window. Use each term 4\u20137 times naturally. These are table-stakes RM terms search engines expect on this query."
+    },
+    {
+      "priority": "important",
+      "title": "Cover the 'near California' / 'near Texas' geo-intent in related searches",
+      "data_anchor": "related_searches includes 'near california' and 'near texas'; no current geo section",
+      "where": "New H2 'STR revenue management companies by region' near the end of the article",
+      "action": "Add a short subsection per major STR region (California/Coastal, Texas/Hill Country, Florida/Gulf, Mountain West, Smokies) noting which of the 10 listed vendors serve each market or are HQ'd there. Captures the geo long-tail without creating thin location pages."
+    },
+    {
+      "priority": "important",
+      "title": "Add a direct 'STR revenue management companies vs Beyond Pricing / Pacer' comparison block",
+      "data_anchor": "related_searches: 'Pacer revenue management', 'Beyond Pricing', 'STR property management software'",
+      "where": "New H3 under the existing vendor comparison: 'How these companies differ from pricing software (Beyond, PriceLabs, Wheelhouse)'",
+      "action": "Write 250\u2013400 words explicitly contrasting a managed service vs. a SaaS pricing tool, naming Beyond Pricing, PriceLabs, Wheelhouse, and Pacer. This intercepts navigational + comparison queries the SERP is signaling."
+    },
+    {
+      "priority": "optional",
+      "title": "Trim 'pricing' / 'property' / 'tool' over-optimization to reduce keyword-stuffing risk",
+      "data_anchor": "pricing target_count=158 (8.2\u00d7 avg), property 7.6\u00d7, tool 6.25\u00d7",
+      "where": "The Three Models intro and each vendor profile",
+      "action": "Do a find-and-replace pass to swap ~30% of 'pricing' instances for 'rate-setting', 'rate strategy', or 'fee structure' (depending on context \u2014 pricing-of-service vs pricing-of-nights), and vary 'property' with 'listing', 'unit', 'home'. Keeps semantic richness while reducing repetition flags."
+    },
+    {
+      "priority": "optional",
+      "title": "Add a visible FAQ section that mirrors the FAQPage schema",
+      "data_anchor": "FAQPage schema present but PAA list is empty \u2014 opportunity to seed your own AEO questions",
+      "where": "New H2 'FAQ: Choosing an STR revenue management company' at the bottom",
+      "action": "Surface 6\u20138 question-format H3s on-page (not just in JSON-LD) targeting: cost of RM services, % of revenue fees vs flat, when 3\u201315 unit operators should hire RM, RM vs PM with RM included, RM vs pricing software. Improves AI Overviews/AEO extraction since LLMs prefer on-page Q&A blocks."
+    }
+  ]
+}
