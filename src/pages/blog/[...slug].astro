@@ -364,6 +364,20 @@ const methodItemList = {
 
   <Navbar client:load />
 
+  <!-- Intercept clicks on schedule-call CTAs anywhere in the post body and open
+       the ScheduleModal via the custom event Navbar.jsx listens for. Covers:
+         - <a href="/short-term-rental-consultant/">  (default in MDX prose)
+         - any element with data-modal="schedule"
+       Falls through to default navigation if the modal can't open (graceful). -->
+  <script is:inline>
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href$="/short-term-rental-consultant/"], a[href$="/short-term-rental-consultant"], [data-modal="schedule"]');
+      if (!a) return;
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('revfactor:open-schedule'));
+    });
+  </script>
+
   <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-cedar z-[100] transition-[width] duration-75" style="width:0;"></div>
 
   <article>

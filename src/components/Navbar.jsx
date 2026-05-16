@@ -245,6 +245,17 @@ export default function Navbar({ lightBg = false }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lightBg]);
 
+  // Open the ScheduleModal from anywhere on the page via custom event.
+  // Use it from MDX / inline scripts: window.dispatchEvent(new CustomEvent('revfactor:open-schedule'))
+  useEffect(() => {
+    const open = () => {
+      window.posthog?.capture('schedule_modal_opened', { source: 'event' });
+      setScheduleOpen(true);
+    };
+    window.addEventListener('revfactor:open-schedule', open);
+    return () => window.removeEventListener('revfactor:open-schedule', open);
+  }, []);
+
   const navLinks = [
     { label: 'APPROACH', href: '/#approach' },
     { label: 'PROCESS', href: '/#process' },

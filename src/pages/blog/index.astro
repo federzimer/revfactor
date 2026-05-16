@@ -104,13 +104,48 @@ type MasonryPost = {
   quote?: string;
 };
 
+// Per-post masonry assignment: image cards at varying aspect ratios, plus 2 colored
+// text cards (cedar / moss) that carry a quote or proprietary stat from that post.
+// Goal: mix card kinds + heights across columns instead of a uniform 4/3 grid.
+const MASONRY_OVERRIDES: Record<string, Partial<MasonryPost> & { variant: MasonryPost['variant'] }> = {
+  // Cluster 4 RevFactor Method → cedar stat card (no image, breaks the grid early)
+  'the-revfactor-method': {
+    variant: 'cedar',
+    excerpt: 'Discover · Strategise · Optimise — the operating rhythm.',
+    quote: '+18% RevPAR vs. comp set · 165 properties · 24 states',
+  },
+  // Cluster 6 Comp Set → moss text card with subhead-as-quote
+  'how-to-build-comp-set-str': {
+    variant: 'moss',
+    excerpt: '8–15 properties a guest actually compares yours against. Not your neighbourhood. Not your ZIP code.',
+    quote: 'Stop building the comp set from your property outward. Build it from the guest inward.',
+  },
+  // Cluster 3 ADR vs RevPAR → image, shorter wider (16/9)
+  'adr-vs-revpar-airbnb-hosts': {
+    variant: 'overlay', ar: '16/9',
+  },
+  // Cluster 5 Specialist listicle → image, taller (3/4)
+  'best-str-revenue-management-companies-2026': {
+    variant: 'overlay', ar: '3/4',
+  },
+  // Cluster 1+2 Dynamic Pricing primer → image, classic 4/3
+  'dynamic-pricing-str-beginners-guide': {
+    variant: 'overlay', ar: '4/3',
+  },
+  // PM listicle → image, taller (3/4)
+  'best-airbnb-property-managers-with-dynamic-pricing-2026': {
+    variant: 'overlay', ar: '3/4',
+  },
+};
+
 const masonryPosts: MasonryPost[] = otherPosts.map((p) => {
+  const override = MASONRY_OVERRIDES[p.id] || { variant: 'overlay', ar: '4/3' };
   const imgSet = deriveImgSrcset(p.data.image, '(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw');
   return {
     href: `/blog/${p.id}`,
     cat: p.data.category,
-    variant: 'overlay',
-    ar: '4/3',
+    variant: override.variant ?? 'overlay',
+    ar: override.ar ?? '4/3',
     img: imgSet?.src || p.data.image,
     imgSrcset: imgSet?.srcset,
     imgSizes: imgSet?.sizes,
@@ -118,6 +153,8 @@ const masonryPosts: MasonryPost[] = otherPosts.map((p) => {
     date: fmtMonthDay(p.data.pubDate),
     read: p.data.readingTime ? `${p.data.readingTime} min` : '',
     title: p.data.title,
+    excerpt: override.excerpt ?? (p.data.subhead || ''),
+    quote: override.quote,
   };
 });
 
@@ -141,6 +178,17 @@ const schema = {
   description="Field notes on short-term rental pricing, pacing, and yield — from Federico Zimerman and the RevFactor team."
 >
   <Fragment slot="head">
+    {/* LCP: preload journal hero with srcset so the browser kicks off the
+        download in parallel with HTML parsing. Matches the fetchpriority=high
+        on the <img> tag below. */}
+    <link
+      rel="preload"
+      as="image"
+      href="/photos/blog/journal-heroes/fjord-cliff-dawn-1920.webp"
+      imagesrcset="/photos/blog/journal-heroes/fjord-cliff-dawn-1200.webp 1200w, /photos/blog/journal-heroes/fjord-cliff-dawn-1920.webp 1920w, /photos/blog/journal-heroes/fjord-cliff-dawn-2400.webp 2400w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </Fragment>
 
@@ -148,11 +196,20 @@ const schema = {
 
   <!-- HERO -->
   <section class="blog-hero relative overflow-hidden text-[#E8E6E1]" style="min-height:92vh;">
-    <div
+    <img
       id="heroBg"
-      class="absolute inset-0 will-change-transform"
-      style="background-image: url('https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=2400&q=85'); background-size:cover; background-position:center; transform:scale(1.04);"
-    ></div>
+      src="/photos/blog/journal-heroes/fjord-cliff-dawn-1920.webp"
+      srcset="/photos/blog/journal-heroes/fjord-cliff-dawn-1200.webp 1200w, /photos/blog/journal-heroes/fjord-cliff-dawn-1920.webp 1920w, /photos/blog/journal-heroes/fjord-cliff-dawn-2400.webp 2400w"
+      sizes="100vw"
+      alt="A modern short-term rental cabin perched on a granite cliffside above a vast Pacific fjord at dawn, golden mist rising from the still water below — the breathtaking horizon of the cabin economy."
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      width="1920"
+      height="1048"
+      class="absolute inset-0 w-full h-full object-cover will-change-transform"
+      style="transform:scale(1.04); transform-origin:center center;"
+    />
     <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.35) 40%, rgba(22,25,16,0.85) 100%);"></div>
     <div class="absolute top-0 inset-x-0 z-[2] h-40 pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.15) 60%, transparent 100%);"></div>
 
@@ -318,26 +375,63 @@ const schema = {
 
       <!-- MASONRY GRID -->
       <section class="masonry-grid" data-cards>
-        {masonryPosts.map((p) => (
-          <a
-            href={p.href}
-            data-cat={p.cat}
-            class="post-card block mb-6 rounded-[16px] overflow-hidden transition-all duration-[350ms] group relative text-[#E8E6E1]"
-            style="break-inside:avoid;"
-          >
-            <div class="relative overflow-hidden rounded-[16px]" style={`aspect-ratio:${p.ar};`}>
-              <img src={p.img} srcset={p.imgSrcset} sizes={p.imgSizes} alt={p.imgAlt} loading="lazy" decoding="async" width="1200" height="800" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]" />
-              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 40%, rgba(22,25,16,0.85));"></div>
-              <span class="absolute top-4 left-4 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
-              <div class="absolute left-0 right-0 bottom-0 p-6 z-[2]">
-                <div class="flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/80 mb-2" style="font-family:'JetBrains Mono',monospace;">
-                  <span>{p.date}</span>{p.read && <><span>·</span><span>{p.read}</span></>}
+        {masonryPosts.map((p) => {
+          // Cedar / moss text card variants — carry a quote or stat from the post
+          if (p.variant === 'cedar' || p.variant === 'moss') {
+            const bg = p.variant === 'cedar' ? '#13342D' : '#5D6D59';
+            const hoverBg = p.variant === 'cedar' ? '#1E4A40' : '#7A8B76';
+            const accent = p.variant === 'cedar' ? '#A9BBA3' : '#DDDAD3';
+            return (
+              <a
+                href={p.href}
+                data-cat={p.cat}
+                class={`post-card block mb-6 rounded-[16px] overflow-hidden text-[#E8E6E1] p-8 hover:-translate-y-1 transition-all duration-[350ms] group`}
+                style={`break-inside:avoid; background-color:${bg};`}
+                onmouseover={`this.style.backgroundColor='${hoverBg}'`}
+                onmouseout={`this.style.backgroundColor='${bg}'`}
+              >
+                <span class="font-bold uppercase text-[9px] tracking-[2.5px] mb-4 inline-block" style={`color:${accent};`}>{p.cat} · field note</span>
+                <h3 class="leading-[1.05] mb-4 text-[#E8E6E1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:30px; text-wrap:balance;">{p.title}</h3>
+                {p.quote && (
+                  <blockquote class="text-[15px] leading-[1.45] mb-5 text-[#E8E6E1]/95" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300;">
+                    "{p.quote}"
+                  </blockquote>
+                )}
+                {p.excerpt && !p.quote && (
+                  <p class="text-[14px] leading-[1.6] text-[#DDDAD3]/85 mb-5">{p.excerpt}</p>
+                )}
+                <div class="flex items-center justify-between text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/70" style="font-family:'JetBrains Mono',monospace;">
+                  <span>{p.date}{p.read && ` · ${p.read}`}</span>
+                  <span class="inline-flex items-center gap-1.5 font-bold tracking-[2px] text-[#E8E6E1]">
+                    Read
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </span>
                 </div>
-                <h3 class="text-[#E8E6E1] leading-[1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(22px,2.5vw,30px); text-wrap:balance;">{p.title}</h3>
+              </a>
+            );
+          }
+          // Default — image-overlay card (varying aspect ratios drive masonry height variety)
+          return (
+            <a
+              href={p.href}
+              data-cat={p.cat}
+              class="post-card block mb-6 rounded-[16px] overflow-hidden transition-all duration-[350ms] group relative text-[#E8E6E1]"
+              style="break-inside:avoid;"
+            >
+              <div class="relative overflow-hidden rounded-[16px]" style={`aspect-ratio:${p.ar};`}>
+                <img src={p.img} srcset={p.imgSrcset} sizes={p.imgSizes} alt={p.imgAlt} loading="lazy" decoding="async" width="1200" height="800" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]" />
+                <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 40%, rgba(22,25,16,0.85));"></div>
+                <span class="absolute top-4 left-4 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
+                <div class="absolute left-0 right-0 bottom-0 p-6 z-[2]">
+                  <div class="flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/80 mb-2" style="font-family:'JetBrains Mono',monospace;">
+                    <span>{p.date}</span>{p.read && <><span>·</span><span>{p.read}</span></>}
+                  </div>
+                  <h3 class="text-[#E8E6E1] leading-[1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(22px,2.5vw,30px); text-wrap:balance;">{p.title}</h3>
+                </div>
               </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          );
+        })}
 
         <!-- FILLER CARD — "more dispatches coming" -->
         <div
@@ -358,27 +452,6 @@ const schema = {
           </a>
         </div>
 
-        <!-- COVER STORY MIRROR — text card pointing at the featured -->
-        {featured && (
-          <a
-            href={featured.href}
-            data-cat={featured.cat}
-            class="post-card block mb-6 rounded-[16px] overflow-hidden bg-[#5D6D59] text-[#E8E6E1] p-8 hover:bg-[#7A8B76] hover:-translate-y-1 transition-all duration-[350ms] group"
-            style="break-inside:avoid;"
-          >
-            <div class="flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/75 mb-4" style="font-family:'JetBrains Mono',monospace;">
-              <span>Cover story</span><span>·</span><span>{featured.cat}</span><span>·</span><span>{featured.date}</span>
-            </div>
-            <h3 class="leading-[1.1] mb-4 text-[#E8E6E1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:30px;">
-              {featured.title}
-            </h3>
-            <p class="text-[14px] leading-[1.6] text-[#DDDAD3]/85">{featured.excerpt}</p>
-            <span class="inline-flex items-center gap-2 mt-5 text-[11px] font-bold uppercase tracking-[2px] text-[#E8E6E1]">
-              Read essay
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </span>
-          </a>
-        )}
       </section>
 
       <!-- Newsletter -->
