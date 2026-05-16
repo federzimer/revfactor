@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
+import MasonryCard from '../../components/blog/MasonryCard.astro';
 
 // Source: feature/journal — adapted for launch with the 2 real posts.
 // Branding: "The Rev Journal — Field notes on the cabin economy."
@@ -87,6 +88,22 @@ const thisWeekStats: [string, string, string][] = [
   ['$184K', 'Lift captured', 'Blueridge property, 11-month case'],
 ];
 
+// Markets-at-a-glance ticker. Sourced from AirROI /markets/summary
+// (TTM rolling, pulled 2026-05-16). Picked 8 markets that span the cabin-
+// economy archetypes RevFactor actually operates in + adjacent benchmarks.
+// Each chip: market · ADR · occ% · active-listings count (rounded to 100s).
+type MarketTick = { market: string; state: string; adr: number; occ: number; listings: string };
+const marketsTicker: MarketTick[] = [
+  { market: 'Gatlinburg',     state: 'TN', adr: 377, occ: 47, listings: '3.6K' },
+  { market: 'Broken Bow',     state: 'OK', adr: 467, occ: 38, listings: '2.9K' },
+  { market: 'Pigeon Forge',   state: 'TN', adr: 363, occ: 46, listings: '3.0K' },
+  { market: 'Blue Ridge',     state: 'GA', adr: 373, occ: 43, listings: '1.4K' },
+  { market: 'Big Bear Lake',  state: 'CA', adr: 474, occ: 31, listings: '2.9K' },
+  { market: 'Destin',         state: 'FL', adr: 477, occ: 42, listings: '3.9K' },
+  { market: 'Park City',      state: 'UT', adr: 682, occ: 33, listings: '4.0K' },
+  { market: 'Joshua Tree',    state: 'CA', adr: 329, occ: 48, listings: '1.2K' },
+];
+
 // Masonry posts — real posts (everything except the featured)
 type MasonryPost = {
   href: string;
@@ -104,38 +121,45 @@ type MasonryPost = {
   quote?: string;
 };
 
-// Per-post masonry assignment: every post uses its hero image with a varied
-// aspect ratio so the masonry grid genuinely staggers card heights across
-// columns. No colored text-only blocks — image cards only.
-const MASONRY_OVERRIDES: Record<string, Partial<MasonryPost> & { variant: MasonryPost['variant'] }> = {
-  // Cluster 4 RevFactor Method → tall (3/4) image card with quote overlay
-  'the-revfactor-method': {
-    variant: 'overlay', ar: '3/4',
-  },
-  // Cluster 6 Comp Set → classic 4/3
-  'how-to-build-comp-set-str': {
-    variant: 'overlay', ar: '4/3',
-  },
-  // Cluster 3 ADR vs RevPAR → cinematic wide (16/9)
-  'adr-vs-revpar-airbnb-hosts': {
-    variant: 'overlay', ar: '16/9',
-  },
-  // Cluster 5 Specialist listicle → tall (3/4)
-  'best-str-revenue-management-companies-2026': {
-    variant: 'overlay', ar: '3/4',
-  },
-  // Cluster 1+2 Dynamic Pricing primer → classic 4/3
-  'dynamic-pricing-str-beginners-guide': {
-    variant: 'overlay', ar: '4/3',
-  },
-  // PM listicle → cinematic wide (16/9)
+// Per-post masonry assignment + explicit column placement.
+// 4 distinct aspect ratios drive height variety across the grid:
+//   2/3   = very-tall (anchor)
+//   3/4   = tall
+//   4/5   = portrait
+//   4/3   = classic
+//   16/9  = wide
+// Each desktop column receives at least one tall/anchor card so the
+// silhouette staggers cleanly even when same-height cards stack.
+const MASONRY_OVERRIDES: Record<string, Partial<MasonryPost> & { variant: MasonryPost['variant']; col?: 'a' | 'b' | 'c' }> = {
+  // Col A — anchor: 4/5 portrait of the PM listicle (newest)
   'best-airbnb-property-managers-with-dynamic-pricing-2026': {
-    variant: 'overlay', ar: '16/9',
+    variant: 'overlay', ar: '4/5', col: 'a',
+  },
+  'how-to-build-comp-set-str': {
+    variant: 'overlay', ar: '16/9', col: 'a',
+  },
+
+  // Col B — anchor: 3/4 tall of the STR RM listicle
+  'best-str-revenue-management-companies-2026': {
+    variant: 'overlay', ar: '3/4', col: 'b',
+  },
+  'adr-vs-revpar-airbnb-hosts': {
+    variant: 'overlay', ar: '4/3', col: 'b',
+  },
+
+  // Col C — anchor: 2/3 very-tall of the RevFactor Method (signature)
+  'the-revfactor-method': {
+    variant: 'overlay', ar: '2/3', col: 'c',
+  },
+  'dynamic-pricing-str-beginners-guide': {
+    variant: 'overlay', ar: '4/3', col: 'c',
   },
 };
 
-const masonryPosts: MasonryPost[] = otherPosts.map((p) => {
-  const override = MASONRY_OVERRIDES[p.id] || { variant: 'overlay', ar: '4/3' };
+type MasonryPostWithCol = MasonryPost & { col: 'a' | 'b' | 'c' };
+
+const masonryPosts: MasonryPostWithCol[] = otherPosts.map((p) => {
+  const override = MASONRY_OVERRIDES[p.id] || { variant: 'overlay', ar: '4/3', col: 'a' as const };
   const imgSet = deriveImgSrcset(p.data.image, '(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw');
   return {
     href: `/blog/${p.id}`,
@@ -151,8 +175,13 @@ const masonryPosts: MasonryPost[] = otherPosts.map((p) => {
     title: p.data.title,
     excerpt: override.excerpt ?? (p.data.subhead || ''),
     quote: override.quote,
+    col: (override.col ?? 'a') as 'a' | 'b' | 'c',
   };
 });
+
+const colA = masonryPosts.filter((p) => p.col === 'a');
+const colB = masonryPosts.filter((p) => p.col === 'b');
+const colC = masonryPosts.filter((p) => p.col === 'c');
 
 const schema = {
   '@context': 'https://schema.org',
@@ -249,64 +278,31 @@ const schema = {
     </div>
   </section>
 
-  <!-- LIVE TICKER — held back until AirROI is wired (placeholder values would lie) -->
-
   <main class="bg-[#DDDAD3]">
-    {/* Stats ticker — full-bleed scrolling marquee of RevFactor portfolio metrics.
-        Lives between hero + featured. Animates left infinitely; pause on hover.
-        Duplicates the chip set so the loop is seamless. */}
-    <section class="rf-stats-ticker bg-[#13342D] text-[#E8E6E1] py-5 overflow-hidden relative" aria-label="RevFactor portfolio at a glance">
-      <div class="rf-ticker-track flex gap-12 whitespace-nowrap" style="animation: rf-ticker-scroll 60s linear infinite;">
-        {/* Duplicate the chip set so the loop reads seamless. */}
+    {/* Markets-at-a-glance ticker. Compact strip showing live AirROI summary
+        data for the cabin-economy archetypes RevFactor actually operates in.
+        Per-chip: MARKET, STATE · $ADR · occ% · listings count.
+        Animates left infinitely; pause on hover; chip set duplicated so the
+        loop reads seamless. */}
+    <section class="rf-stats-ticker bg-[#13342D] text-[#E8E6E1] py-2.5 overflow-hidden relative border-y border-[#1E4A40]" aria-label="US short-term rental markets at a glance">
+      <div class="rf-ticker-track flex gap-8 whitespace-nowrap" style="animation: rf-ticker-scroll 80s linear infinite;">
         {[1, 2].map(() => (
-          <div class="flex items-center gap-12 shrink-0">
-            <span class="flex items-center gap-3 text-[14px]" style="font-family:'JetBrains Mono',monospace;">
+          <div class="flex items-center gap-8 shrink-0">
+            <span class="flex items-center gap-2 text-[11px] pl-1" style="font-family:'JetBrains Mono',monospace;">
               <span class="w-1.5 h-1.5 rounded-full bg-[#7A8B76]" style="animation: pulse-dot 2s ease-in-out infinite;"></span>
-              <span class="font-bold text-[#A9BBA3] tracking-[1.5px] uppercase text-[10px]">RevPAR lift</span>
-              <span class="text-[#E8E6E1] font-medium">+18%</span>
-              <span class="text-[#DDDAD3]/60">vs. comp set · 24-mo avg</span>
+              <span class="font-bold text-[#A9BBA3] tracking-[2px] uppercase text-[9px]">US Markets · AirROI · TTM</span>
             </span>
             <span class="text-[#A9BBA3]/40">·</span>
-            <span class="flex items-center gap-3 text-[14px]" style="font-family:'JetBrains Mono',monospace;">
-              <span class="font-bold text-[#A9BBA3] tracking-[1.5px] uppercase text-[10px]">Portfolio</span>
-              <span class="text-[#E8E6E1] font-medium">165+</span>
-              <span class="text-[#DDDAD3]/60">properties under active management</span>
-            </span>
-            <span class="text-[#A9BBA3]/40">·</span>
-            <span class="flex items-center gap-3 text-[14px]" style="font-family:'JetBrains Mono',monospace;">
-              <span class="font-bold text-[#A9BBA3] tracking-[1.5px] uppercase text-[10px]">Coverage</span>
-              <span class="text-[#E8E6E1] font-medium">24 states · 56 markets</span>
-            </span>
-            <span class="text-[#A9BBA3]/40">·</span>
-            <span class="flex items-center gap-3 text-[14px]" style="font-family:'JetBrains Mono',monospace;">
-              <span class="font-bold text-[#A9BBA3] tracking-[1.5px] uppercase text-[10px]">Fee</span>
-              <span class="text-[#E8E6E1] font-medium">$320/mo flat</span>
-              <span class="text-[#DDDAD3]/60">sliding to $256 at 5+ properties</span>
-            </span>
-            <span class="text-[#A9BBA3]/40">·</span>
-            <span class="flex items-center gap-3 text-[14px]" style="font-family:'JetBrains Mono',monospace;">
-              <span class="font-bold text-[#A9BBA3] tracking-[1.5px] uppercase text-[10px]">No revenue share</span>
-              <span class="text-[#E8E6E1] font-medium">100%</span>
-              <span class="text-[#DDDAD3]/60">of the lift stays with the host</span>
-            </span>
-            <span class="text-[#A9BBA3]/40">·</span>
-            <span class="flex items-center gap-3 text-[14px]" style="font-family:'JetBrains Mono',monospace;">
-              <span class="font-bold text-[#A9BBA3] tracking-[1.5px] uppercase text-[10px]">Top performer</span>
-              <span class="text-[#E8E6E1] font-medium">+75% YoY</span>
-              <span class="text-[#DDDAD3]/60">Kate Henry · earliest RevFactor client</span>
-            </span>
-            <span class="text-[#A9BBA3]/40">·</span>
-            <span class="flex items-center gap-3 text-[14px]" style="font-family:'JetBrains Mono',monospace;">
-              <span class="font-bold text-[#A9BBA3] tracking-[1.5px] uppercase text-[10px]">Tool stack</span>
-              <span class="text-[#E8E6E1] font-medium">PriceLabs + daily expert review</span>
-            </span>
-            <span class="text-[#A9BBA3]/40">·</span>
-            <span class="flex items-center gap-3 text-[14px]" style="font-family:'JetBrains Mono',monospace;">
-              <span class="font-bold text-[#A9BBA3] tracking-[1.5px] uppercase text-[10px]">Founder</span>
-              <span class="text-[#E8E6E1] font-medium">Federico Zimerman</span>
-              <span class="text-[#DDDAD3]/60">10 yrs airline yield management</span>
-            </span>
-            <span class="text-[#A9BBA3]/40">·</span>
+            {marketsTicker.map((m) => (
+              <>
+                <span class="flex items-center gap-2 text-[11px]" style="font-family:'JetBrains Mono',monospace;">
+                  <span class="font-bold text-[#A9BBA3] tracking-[1.5px] uppercase text-[9px]">{m.market}, {m.state}</span>
+                  <span class="text-[#E8E6E1] font-medium">${m.adr}</span>
+                  <span class="text-[#DDDAD3]/55">{m.occ}% occ · {m.listings} listings</span>
+                </span>
+                <span class="text-[#A9BBA3]/40">·</span>
+              </>
+            ))}
           </div>
         ))}
       </div>
@@ -443,85 +439,35 @@ const schema = {
         </label>
       </div>
 
-      <!-- MASONRY GRID -->
+      <!-- MASONRY GRID — 3 columns w/ explicit per-card placement so every
+           column carries at least one tall/anchor card and heights stagger
+           across the silhouette. Columns collapse 3→2→1 at standard
+           breakpoints; mobile flow is colA → colB → colC (newest first). -->
       <section class="masonry-grid" data-cards>
-        {masonryPosts.map((p) => {
-          // Cedar / moss text card variants — carry a quote or stat from the post
-          if (p.variant === 'cedar' || p.variant === 'moss') {
-            const bg = p.variant === 'cedar' ? '#13342D' : '#5D6D59';
-            const hoverBg = p.variant === 'cedar' ? '#1E4A40' : '#7A8B76';
-            const accent = p.variant === 'cedar' ? '#A9BBA3' : '#DDDAD3';
-            return (
-              <a
-                href={p.href}
-                data-cat={p.cat}
-                class={`post-card block mb-6 rounded-[16px] overflow-hidden text-[#E8E6E1] p-8 hover:-translate-y-1 transition-all duration-[350ms] group`}
-                style={`break-inside:avoid; background-color:${bg};`}
-                onmouseover={`this.style.backgroundColor='${hoverBg}'`}
-                onmouseout={`this.style.backgroundColor='${bg}'`}
-              >
-                <span class="font-bold uppercase text-[9px] tracking-[2.5px] mb-4 inline-block" style={`color:${accent};`}>{p.cat} · field note</span>
-                <h3 class="leading-[1.05] mb-4 text-[#E8E6E1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:30px; text-wrap:balance;">{p.title}</h3>
-                {p.quote && (
-                  <blockquote class="text-[15px] leading-[1.45] mb-5 text-[#E8E6E1]/95" style="font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:300;">
-                    "{p.quote}"
-                  </blockquote>
-                )}
-                {p.excerpt && !p.quote && (
-                  <p class="text-[14px] leading-[1.6] text-[#DDDAD3]/85 mb-5">{p.excerpt}</p>
-                )}
-                <div class="flex items-center justify-between text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/70" style="font-family:'JetBrains Mono',monospace;">
-                  <span>{p.date}{p.read && ` · ${p.read}`}</span>
-                  <span class="inline-flex items-center gap-1.5 font-bold tracking-[2px] text-[#E8E6E1]">
-                    Read
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  </span>
-                </div>
-              </a>
-            );
-          }
-          // Default — image-overlay card (varying aspect ratios drive masonry height variety)
-          return (
-            <a
-              href={p.href}
-              data-cat={p.cat}
-              class="post-card block mb-6 rounded-[16px] overflow-hidden transition-all duration-[350ms] group relative text-[#E8E6E1]"
-              style="break-inside:avoid;"
-            >
-              <div class="relative overflow-hidden rounded-[16px]" style={`aspect-ratio:${p.ar};`}>
-                <img src={p.img} srcset={p.imgSrcset} sizes={p.imgSizes} alt={p.imgAlt} loading="lazy" decoding="async" width="1200" height="800" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]" />
-                <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 40%, rgba(22,25,16,0.85));"></div>
-                <span class="absolute top-4 left-4 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
-                <div class="absolute left-0 right-0 bottom-0 p-6 z-[2]">
-                  <div class="flex items-center gap-2.5 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/80 mb-2" style="font-family:'JetBrains Mono',monospace;">
-                    <span>{p.date}</span>{p.read && <><span>·</span><span>{p.read}</span></>}
-                  </div>
-                  <h3 class="text-[#E8E6E1] leading-[1]" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(22px,2.5vw,30px); text-wrap:balance;">{p.title}</h3>
-                </div>
-              </div>
+        <div class="masonry-col">
+          {colA.map((p) => <MasonryCard {...p} />)}
+          <!-- Filler card lives in column A so the lightest column carries
+               the newsletter prompt and the three columns end roughly even. -->
+          <div class="block rounded-[16px] bg-[#13342D] text-[#E8E6E1] p-8" data-filler>
+            <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#A9BBA3] mb-4 inline-block">The journal · just getting started</span>
+            <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:30px;">
+              More dispatches,<br/><em style="font-style:italic; color:#A9BBA3; font-weight:300;">on the way.</em>
+            </h3>
+            <p class="text-[14px] leading-[1.6] text-[#DDDAD3]/80 mb-5">
+              New essays on pricing, pacing, yield, and the markets RevFactor watches — published as the data warrants.
+            </p>
+            <a href="#newsletter" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#E8E6E1] hover:text-[#A9BBA3] transition-colors">
+              Get them in your inbox
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
-          );
-        })}
-
-        <!-- FILLER CARD — "more dispatches coming" -->
-        <div
-          class="block mb-6 rounded-[16px] bg-[#13342D] text-[#E8E6E1] p-8"
-          data-filler
-          style="break-inside:avoid;"
-        >
-          <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#A9BBA3] mb-4 inline-block">The journal · just getting started</span>
-          <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:30px;">
-            More dispatches,<br/><em style="font-style:italic; color:#A9BBA3; font-weight:300;">on the way.</em>
-          </h3>
-          <p class="text-[14px] leading-[1.6] text-[#DDDAD3]/80 mb-5">
-            New essays on pricing, pacing, yield, and the markets RevFactor watches — published as the data warrants.
-          </p>
-          <a href="#newsletter" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#E8E6E1] hover:text-[#A9BBA3] transition-colors">
-            Get them in your inbox
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
+          </div>
         </div>
-
+        <div class="masonry-col">
+          {colB.map((p) => <MasonryCard {...p} />)}
+        </div>
+        <div class="masonry-col">
+          {colC.map((p) => <MasonryCard {...p} />)}
+        </div>
       </section>
 
       <!-- Newsletter -->
@@ -545,13 +491,44 @@ const schema = {
   <Footer client:load />
 
   <style>
+    /* Desktop: manual 3-column masonry — each column is a vertical flex
+       stack so the browser never tries to balance heights across columns.
+       The frontmatter assigns one tall/anchor card to each column, so the
+       silhouette staggers regardless of card count.
+
+       Tablet/mobile (≤900px): collapse to native CSS columns + display:contents
+       so cards flow flat and the browser balances heights across the
+       narrower 2-col or 1-col layout. Keeps the source DOM order
+       (newest → oldest) on mobile. */
     .masonry-grid {
-      column-count: 3;
-      column-gap: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
       padding: 0 0 64px;
+      align-items: start;
     }
-    @media (max-width: 900px) { .masonry-grid { column-count: 2; } }
-    @media (max-width: 600px) { .masonry-grid { column-count: 1; } }
+    .masonry-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 0;
+    }
+    @media (max-width: 900px) {
+      .masonry-grid {
+        display: block;
+        column-count: 2;
+        column-gap: 24px;
+      }
+      .masonry-col { display: contents; }
+      .masonry-grid > .masonry-col > *,
+      .masonry-grid > .masonry-col > [data-filler] {
+        break-inside: avoid;
+        margin-bottom: 24px;
+      }
+    }
+    @media (max-width: 600px) {
+      .masonry-grid { column-count: 1; }
+    }
     @keyframes pulse-dot {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.4; }
