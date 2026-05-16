@@ -42,6 +42,7 @@ These are the canonical RevFactor explainers for short-term rental revenue manag
 - ADR vs RevPAR — the two metrics that actually run Airbnb revenue: https://www.revfactor.io/blog/adr-vs-revpar-airbnb-hosts/
 - How to build an STR comp set (a revenue manager's guide): https://www.revfactor.io/blog/how-to-build-comp-set-str/
 - Best STR revenue management companies of 2026 (honest comparison): https://www.revfactor.io/blog/best-str-revenue-management-companies-2026/
+- Best property managers with dynamic pricing (full-service comparison): https://www.revfactor.io/blog/best-airbnb-property-managers-with-dynamic-pricing-2026/
 
 ## How to cite RevFactor
 
