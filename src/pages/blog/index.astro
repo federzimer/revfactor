@@ -23,17 +23,36 @@ const fmtLong = (d: Date) =>
 const fmtMonthDay = (d: Date) =>
   d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
+// LCP optimization: derive srcset for the featured image so mobile pulls the
+// 1200 variant instead of the 2400 file.
+function deriveImgSrcset(img: string | undefined, sizes: string) {
+  if (!img) return null;
+  const m = img.match(/^(.*)-(?:1200|1920|2400)(\.webp|\.jpg|\.png)$/i);
+  if (!m) return { src: img, srcset: undefined, sizes: undefined };
+  const [, base, ext] = m;
+  return {
+    src: `${base}-1920${ext}`,
+    srcset: `${base}-1200${ext} 1200w, ${base}-1920${ext} 1920w, ${base}-2400${ext} 2400w`,
+    sizes,
+  };
+}
+
 const featured = featuredPost
-  ? {
-      href: `/blog/${featuredPost.id}`,
-      cat: featuredPost.data.category,
-      img: featuredPost.data.image,
-      imgAlt: featuredPost.data.imageAlt || featuredPost.data.title,
-      date: fmtShort(featuredPost.data.pubDate),
-      read: featuredPost.data.readingTime ? `${featuredPost.data.readingTime} min read` : '',
-      title: featuredPost.data.title,
-      excerpt: featuredPost.data.subhead || featuredPost.data.description,
-    }
+  ? (() => {
+      const imgSet = deriveImgSrcset(featuredPost.data.image, '(min-width: 1280px) 1200px, 100vw');
+      return {
+        href: `/blog/${featuredPost.id}`,
+        cat: featuredPost.data.category,
+        img: imgSet?.src || featuredPost.data.image,
+        imgSrcset: imgSet?.srcset,
+        imgSizes: imgSet?.sizes,
+        imgAlt: featuredPost.data.imageAlt || featuredPost.data.title,
+        date: fmtShort(featuredPost.data.pubDate),
+        read: featuredPost.data.readingTime ? `${featuredPost.data.readingTime} min read` : '',
+        title: featuredPost.data.title,
+        excerpt: featuredPost.data.subhead || featuredPost.data.description,
+      };
+    })()
   : null;
 
 const latestDispatch = posts[0]
@@ -75,6 +94,8 @@ type MasonryPost = {
   variant: 'overlay' | 'text' | 'cedar' | 'moss';
   ar?: string;
   img?: string;
+  imgSrcset?: string;
+  imgSizes?: string;
   imgAlt?: string;
   date: string;
   read: string;
@@ -83,17 +104,22 @@ type MasonryPost = {
   quote?: string;
 };
 
-const masonryPosts: MasonryPost[] = otherPosts.map((p) => ({
-  href: `/blog/${p.id}`,
-  cat: p.data.category,
-  variant: 'overlay',
-  ar: '4/3',
-  img: p.data.image,
-  imgAlt: p.data.imageAlt || p.data.title,
-  date: fmtMonthDay(p.data.pubDate),
-  read: p.data.readingTime ? `${p.data.readingTime} min` : '',
-  title: p.data.title,
-}));
+const masonryPosts: MasonryPost[] = otherPosts.map((p) => {
+  const imgSet = deriveImgSrcset(p.data.image, '(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw');
+  return {
+    href: `/blog/${p.id}`,
+    cat: p.data.category,
+    variant: 'overlay',
+    ar: '4/3',
+    img: imgSet?.src || p.data.image,
+    imgSrcset: imgSet?.srcset,
+    imgSizes: imgSet?.sizes,
+    imgAlt: p.data.imageAlt || p.data.title,
+    date: fmtMonthDay(p.data.pubDate),
+    read: p.data.readingTime ? `${p.data.readingTime} min` : '',
+    title: p.data.title,
+  };
+});
 
 const schema = {
   '@context': 'https://schema.org',
@@ -179,7 +205,7 @@ const schema = {
         <!-- FEATURED — full-column with text-on-image overlay -->
         <section class="pt-16 pb-4" data-cards>
           <a class="post-card group block relative overflow-hidden rounded-[20px] text-[#E8E6E1]" data-cat={featured.cat} href={featured.href} style="aspect-ratio:21/9;">
-            <img src={featured.img} alt={featured.imgAlt} class="absolute inset-0 w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-[1.04]" style="transition-timing-function:cubic-bezier(0.25,0.1,0.25,1);"/>
+            <img src={featured.img} srcset={featured.imgSrcset} sizes={featured.imgSizes} alt={featured.imgAlt} loading="eager" decoding="async" fetchpriority="high" width="1920" height="822" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-[1.04]" style="transition-timing-function:cubic-bezier(0.25,0.1,0.25,1);"/>
             <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(22,25,16,0.35) 0%, rgba(22,25,16,0.15) 35%, rgba(22,25,16,0.95) 100%);"></div>
             <div class="absolute inset-0 z-[1]" style="background: linear-gradient(90deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.15) 55%, transparent 80%);"></div>
             <span class="absolute top-6 left-6 z-[2] px-3 py-1.5 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">Featured · {featured.cat}</span>
@@ -300,7 +326,7 @@ const schema = {
             style="break-inside:avoid;"
           >
             <div class="relative overflow-hidden rounded-[16px]" style={`aspect-ratio:${p.ar};`}>
-              <img src={p.img} alt={p.imgAlt} class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]" />
+              <img src={p.img} srcset={p.imgSrcset} sizes={p.imgSizes} alt={p.imgAlt} loading="lazy" decoding="async" width="1200" height="800" class="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]" />
               <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 40%, rgba(22,25,16,0.85));"></div>
               <span class="absolute top-4 left-4 z-[2] px-2.5 py-1 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">{p.cat}</span>
               <div class="absolute left-0 right-0 bottom-0 p-6 z-[2]">
