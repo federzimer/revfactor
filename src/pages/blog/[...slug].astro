@@ -150,6 +150,7 @@ const breadcrumbSchema = {
 // describes its own content.
 const isPillar = post.id === 'revenue-management-for-short-term-rentals';
 const isDynamicPricing = post.id === 'dynamic-pricing-str-beginners-guide';
+const isMethod = post.id === 'the-revfactor-method';
 
 const howToMinStay = {
   "@context": "https://schema.org",
@@ -262,6 +263,47 @@ const dynamicPricingDefinedTerms = [
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "80/20 rule (Airbnb)", "description": "The Pareto pattern most STR portfolios follow: roughly 80% of annual revenue comes from 20% of nights — peak weekends, holiday weeks, local-event windows. Implies high-leverage nights deserve months of pre-planning, not algorithmic autopilot.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Base rate (dynamic pricing)", "description": "The anchor nightly rate — set seasonally and refreshed quarterly — that every other dynamic-pricing rule multiplies. Tools optimize from the floor; they don't interrogate it. A floor anchored to last year's comfort costs revenue all year.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
 ];
+
+// The RevFactor Method (Blog 4) — HowTo for the 4 daily optimisation
+// mechanics, plus DefinedTerm packages for the three branded phase names
+// (Discover, Strategise, Optimise) and the "Every Night Is Worth" mental
+// model. ItemList ties the three phases into an ordered sequence.
+const howToRevFactorMethod = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to run the RevFactor Method on a short-term rental",
+  "description": "A four-mechanic daily optimisation routine that distinguishes a daily-managed STR from a tool-only setup: comp-set monitoring, event integration, minimum-stay flexes, and pacing-driven rate shifts.",
+  "totalTime": "PT30M",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Read the comp set every morning", "text": "Re-read the comp set daily. A pricing tool configures it once at setup; the Method re-reads it every morning. Flag new entrants, overnight rate moves, and minimum-stay shifts within 24 hours." },
+    { "@type": "HowToStep", "position": 2, "name": "Integrate event and demand signals 60-90 days out", "text": "Conventions, festivals, school calendars, concert tours. Inject these into the rate plan before the booking window closes — historical-curve pricing tools will not surface them in time." },
+    { "@type": "HowToStep", "position": 3, "name": "Apply surgical minimum-stay flexes", "text": "Minimum-stay is a date-specific lever, not a property-wide setting. Two nights on Memorial Day weekend, no minimum on midweek shoulder dates, three nights during major local events. Different per market, per booking window." },
+    { "@type": "HowToStep", "position": 4, "name": "Run pacing-driven rate shifts weekly", "text": "Pacing is the difference between bookings on the books for a future date this year vs. the same lead time last year. Pacing ahead → lift the rate. Pacing behind → adjust via rate, LOS discount, or minimum-stay reduction." }
+  ]
+};
+
+const methodDefinedTerms = [
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Discover (RevFactor Method)", "description": "Phase 1 of the RevFactor Method. The diagnostic audit of where a short-term rental property stands today against four inputs: historical market performance, current RevPAR vs. comp set, the Pricing Health Index and Market Position Score, and local demand signals. Discover surfaces the gap between current performance and what the market will pay.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Strategise (RevFactor Method)", "description": "Phase 2 of the RevFactor Method. The market-calibrated plan built from the Discover audit, expressed as a set of rules: when to push baseline rates up, when to flex minimum stays, when to open length-of-stay discounts, and when to hold the line. The strategy lives in the rules, not in a one-page recommendation.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Optimise (RevFactor Method)", "description": "Phase 3 of the RevFactor Method. The daily, weekly, and monthly execution work that adjusts the strategy against reality — comp-set monitoring, event and demand-signal integration, surgical minimum-stay flexes, pacing-driven rate shifts, and channel-mix calibration. Optimise feeds new data back into the next Discover cycle, making the Method a continuous loop.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Every Night Is Worth", "description": "The perishable-inventory mental model behind the RevFactor Method. Every calendar night carries a specific revenue value tied to that night's comp set, demand signals, and pacing curve. Once the night passes, the value drops to zero. The pricing question is never 'what should I charge tonight' in the abstract — it is 'what is this specific night worth, given the booking window?'", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Pricing Health Index", "description": "A proprietary RevFactor diagnostic that grades how well a short-term rental's current rate strategy is aligned with market signals — baseline rate, minimum-stay structure, length-of-stay discount ladder, and pacing posture. Used inside the Discover phase of the RevFactor Method.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Market Position Score", "description": "A proprietary RevFactor 0–100 measurement of where a short-term rental listing sits within its comp set on quality, price, and conversion. Used alongside the Pricing Health Index inside the Discover phase of the RevFactor Method.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
+];
+
+const methodItemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "The RevFactor Method — three-phase revenue management process",
+  "description": "The three sequential phases of the RevFactor Method, run as a continuous operating rhythm.",
+  "numberOfItems": 3,
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Discover", "description": "Audit where the property stands today — comp set, RevPAR baseline, Pricing Health Index, Market Position Score, local demand signals." },
+    { "@type": "ListItem", "position": 2, "name": "Strategise", "description": "Build a market-calibrated plan — baseline rate, minimum-stay rules, length-of-stay discount ladder, pacing-aware floors, channel mix." },
+    { "@type": "ListItem", "position": 3, "name": "Optimise", "description": "Execute daily and feed new data back into the next Discover cycle — comp-set reads, event integration, surgical minimum-stay flexes, pacing-driven rate shifts, channel-mix calibration." }
+  ]
+};
 ---
 
 <BaseLayout
@@ -284,6 +326,11 @@ const dynamicPricingDefinedTerms = [
     ))}
     {isDynamicPricing && <script type="application/ld+json" set:html={JSON.stringify(howToDynamicPricingSetup)} />}
     {isDynamicPricing && dynamicPricingDefinedTerms.map((t) => (
+      <script type="application/ld+json" set:html={JSON.stringify(t)} />
+    ))}
+    {isMethod && <script type="application/ld+json" set:html={JSON.stringify(howToRevFactorMethod)} />}
+    {isMethod && <script type="application/ld+json" set:html={JSON.stringify(methodItemList)} />}
+    {isMethod && methodDefinedTerms.map((t) => (
       <script type="application/ld+json" set:html={JSON.stringify(t)} />
     ))}
   </Fragment>
