@@ -247,9 +247,16 @@ export default function Navbar({ lightBg = false }) {
 
   // Open the ScheduleModal from anywhere on the page via custom event.
   // Use it from MDX / inline scripts: window.dispatchEvent(new CustomEvent('revfactor:open-schedule'))
+  // Defensive try/catch because posthog can exist as a stub before its
+  // capture function is wired — uncaught throws here would prevent
+  // setScheduleOpen() from running.
   useEffect(() => {
     const open = () => {
-      window.posthog?.capture('schedule_modal_opened', { source: 'event' });
+      try {
+        if (typeof window.posthog?.capture === 'function') {
+          window.posthog.capture('schedule_modal_opened', { source: 'event' });
+        }
+      } catch (_) { /* swallow analytics errors */ }
       setScheduleOpen(true);
     };
     window.addEventListener('revfactor:open-schedule', open);

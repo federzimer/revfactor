@@ -39,6 +39,23 @@ const canonicalUrl = Astro.url.href;
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+  {/* PostHog safety stub: ensure window.posthog.capture is always callable
+      so React components that call `window.posthog?.capture(...)` never
+      crash with "is not a function" before the real loader wires in. */}
+  <script is:inline>
+    (function () {
+      var p = window.posthog;
+      if (!p || typeof p.capture !== 'function') {
+        window.posthog = window.posthog || {};
+        var noop = function () {};
+        var keys = ['capture','identify','alias','register','register_once','unregister','reset','isFeatureEnabled','onFeatureFlags','getFeatureFlag'];
+        for (var i = 0; i < keys.length; i++) {
+          if (typeof window.posthog[keys[i]] !== 'function') window.posthog[keys[i]] = noop;
+        }
+      }
+    })();
+  </script>
+
   <!-- Fraud Blocker — bot/click-fraud detection. Deferred until window.load
        so it doesn't block first paint. Bot signals still reach Fraud
        Blocker for any user actually engaging with the page. -->
