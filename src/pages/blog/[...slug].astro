@@ -1066,6 +1066,61 @@ const methodItemList = {
       .prose-rf :global(.rf-figure figcaption) { font-size:17px; }
     }
 
+    /* Vendor card: small frame around a homepage screenshot in the listicles.
+       Lower visual weight than .rf-figure so vendor screenshots read as
+       reference material, not editorial photography. The optional
+       .rf-vendor-logo-strip sits above the screenshot with a 32px favicon
+       and the domain. */
+    .prose-rf :global(.rf-vendor-figure) {
+      margin:1.25rem 0 1.5rem;
+      padding:8px;
+      border:1px solid #C8C4BC;
+      background:#E8E6E1;
+      border-radius:12px;
+    }
+    .prose-rf :global(.rf-vendor-figure img.rf-vendor-shot) {
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:6px;
+    }
+    .prose-rf :global(.rf-vendor-figure figcaption) {
+      font-family:'JetBrains Mono',monospace;
+      font-size:10.5px;
+      letter-spacing:0.5px;
+      text-transform:uppercase;
+      color:#76574C;
+      margin-top:8px;
+      text-align:center;
+    }
+    .prose-rf :global(.rf-vendor-logo-strip) {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:0 4px 8px;
+    }
+    .prose-rf :global(.rf-vendor-logo-strip img) {
+      width:32px;
+      height:32px;
+      border-radius:6px;
+      flex-shrink:0;
+      background:#DDDAD3;
+      object-fit:contain;
+      padding:2px;
+    }
+    .prose-rf :global(.rf-vendor-logo-strip a) {
+      font-family:'JetBrains Mono',monospace;
+      font-size:11px;
+      letter-spacing:0.5px;
+      color:#3F261F;
+      text-decoration:none;
+      border-bottom:1px dotted #76574C;
+    }
+    .prose-rf :global(.rf-vendor-logo-strip a:hover) {
+      color:#13342D;
+      border-bottom-color:#13342D;
+    }
+
     /* Quote-overlay variant: image with a Federico pull-quote anchored bottom-left over a soft dark gradient. */
     .prose-rf :global(.rf-figure-quote .rf-figure-frame) {
       position:relative;
