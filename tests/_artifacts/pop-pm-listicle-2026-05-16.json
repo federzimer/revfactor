@@ -1,0 +1,6043 @@
+{
+  "date_done": "2026-05-17 02:08:25",
+  "report": {
+    "aiGenSchemaTypes": [],
+    "cleanedContentBrief": {
+      "approach": "",
+      "dashboardType": "contentBrief",
+      "p": [
+        {
+          "contentBrief": {
+            "current": 0,
+            "target": 0
+          },
+          "term": {
+            "phrase": "best airbnb property managers",
+            "type": "keyword",
+            "weight": 1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "best airbnb management companies",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 1,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "full-service airbnb management",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "airbnb co-host",
+            "type": "lsi",
+            "weight": 1.9996065105217498
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 5,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "airbnb management companies",
+            "type": "variation",
+            "weight": 0.11365587093272345
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "co-host network",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "urban airbnb markets",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "rental management company",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "airbnb management company",
+            "type": "lsi",
+            "weight": 0.0798614927993228
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 3,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "guest communication",
+            "type": "lsi",
+            "weight": 1.999510678315986
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 1,
+            "targetMax": 3,
+            "targetMin": 2
+          },
+          "term": {
+            "phrase": "airbnb management",
+            "type": "lsi",
+            "weight": 1.9991114539380863
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "commission rate",
+            "type": "lsi",
+            "weight": 1.9988244457021378
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 2,
+            "targetMax": 3,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "management company",
+            "type": "lsi",
+            "weight": 1.998443928077529
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "management fees",
+            "type": "lsi",
+            "weight": 1.9977715746497544
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "airbnb managers",
+            "type": "lsi",
+            "weight": 1.9948649890793602
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 2,
+            "targetMax": 3,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "vacation rentals",
+            "type": "lsi",
+            "weight": 0.21727617415968645
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 16,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "property manager",
+            "type": "lsi",
+            "weight": 0.10027998059162503
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 12,
+            "targetMax": 26,
+            "targetMin": 3
+          },
+          "term": {
+            "phrase": "property management",
+            "type": "lsi",
+            "weight": 0.09871892507034166
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 1,
+            "targetMax": 8,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "airbnb property",
+            "type": "lsi",
+            "weight": 0.08159956992420436
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "rental income",
+            "type": "lsi",
+            "weight": 0.036568083884197106
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 74,
+            "targetMax": 47,
+            "targetMin": 5
+          },
+          "term": {
+            "phrase": "property",
+            "type": "lsi",
+            "weight": 1.997578741661513
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 4,
+            "targetMax": 23,
+            "targetMin": 11
+          },
+          "term": {
+            "phrase": "airbnb",
+            "type": "lsi",
+            "weight": 1.9973142736308989
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 55,
+            "targetMax": 82,
+            "targetMin": 8
+          },
+          "term": {
+            "phrase": "management",
+            "type": "lsi",
+            "weight": 1.996248333609694
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 1,
+            "targetMax": 0,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "lodgify",
+            "type": "lsi",
+            "weight": 0.15393235691466178
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 21,
+            "targetMax": 6,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "avantstay",
+            "type": "lsi",
+            "weight": 0.13284436221363857
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 48,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "manager",
+            "type": "lsi",
+            "weight": 0.10612041984115743
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 19,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "str",
+            "type": "lsi",
+            "weight": 0.09365323169796048
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 6,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "fees",
+            "type": "lsi",
+            "weight": 0.0931015660160331
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 6,
+            "targetMax": 8,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "rentals",
+            "type": "lsi",
+            "weight": 0.08404386821153739
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 104,
+            "targetMax": 6,
+            "targetMin": 2
+          },
+          "term": {
+            "phrase": "pricing",
+            "type": "lsi",
+            "weight": 0.07431073499604952
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 56,
+            "targetMax": 11,
+            "targetMin": 3
+          },
+          "term": {
+            "phrase": "revenue",
+            "type": "lsi",
+            "weight": 0.07335206105187628
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 16,
+            "targetMax": 8,
+            "targetMin": 3
+          },
+          "term": {
+            "phrase": "services",
+            "type": "lsi",
+            "weight": 0.07210079939877939
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 9,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "guests",
+            "type": "lsi",
+            "weight": 0.06932054765459521
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 10,
+            "targetMax": 8,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "maintenance",
+            "type": "lsi",
+            "weight": 0.04976507423309841
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 3,
+            "targetMax": 8,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "occupancy",
+            "type": "lsi",
+            "weight": 0.04593647276200076
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 5,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "income",
+            "type": "lsi",
+            "weight": 0.0430733151719641
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 9,
+            "targetMax": 8,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "cleaning",
+            "type": "lsi",
+            "weight": 0.042934509812169105
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "commission",
+            "type": "lsi",
+            "weight": 0.02462853269025105
+          }
+        }
+      ],
+      "pTotal": {
+        "current": 191,
+        "max": 311,
+        "min": 187
+      },
+      "pageScore": {
+        "pageScore": 46.57,
+        "pageScoreValue": ""
+      },
+      "pageTitle": [
+        {
+          "contentBrief": {
+            "current": 0,
+            "target": 1
+          },
+          "term": {
+            "phrase": "best airbnb property managers",
+            "type": "keyword",
+            "weight": 1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 1,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "best airbnb management companies",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 1,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "airbnb management companies",
+            "type": "variation",
+            "weight": 0.11365587093272345
+          }
+        }
+      ],
+      "pageTitleTotal": {
+        "current": 0,
+        "max": 3,
+        "min": 2
+      },
+      "strategy": "",
+      "subHeadings": [
+        {
+          "contentBrief": {
+            "current": 0,
+            "target": 0
+          },
+          "term": {
+            "phrase": "best airbnb property managers",
+            "type": "keyword",
+            "weight": 1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "best airbnb management companies",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "airbnb management companies",
+            "type": "variation",
+            "weight": 0.11365587093272345
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "co-host network",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "urban airbnb markets",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "guest communication",
+            "type": "lsi",
+            "weight": 1.999510678315986
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 3,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "airbnb management",
+            "type": "lsi",
+            "weight": 1.9991114539380863
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "commission rate",
+            "type": "lsi",
+            "weight": 1.9988244457021378
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "management company",
+            "type": "lsi",
+            "weight": 1.998443928077529
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 2,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "management fees",
+            "type": "lsi",
+            "weight": 1.9977715746497544
+          }
+        }
+      ],
+      "subHeadingsTotal": {
+        "current": 0,
+        "max": 19,
+        "min": 10
+      },
+      "title": [
+        {
+          "contentBrief": {
+            "current": 0,
+            "target": 1
+          },
+          "term": {
+            "phrase": "best airbnb property managers",
+            "type": "keyword",
+            "weight": 1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 1,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "best airbnb management companies",
+            "type": "variation",
+            "weight": 0.1
+          }
+        },
+        {
+          "contentBrief": {
+            "current": 0,
+            "targetMax": 1,
+            "targetMin": 0
+          },
+          "term": {
+            "phrase": "airbnb management companies",
+            "type": "variation",
+            "weight": 0.11365587093272345
+          }
+        }
+      ],
+      "titleTotal": {
+        "current": 0,
+        "max": 3,
+        "min": 2
+      }
+    },
+    "competitors": [
+      {
+        "createdAt": "2026-05-17 02:07:10",
+        "eatSchemaTypes": {},
+        "h2Texts": [
+          "Key Takeaways:",
+          "The Top 10 Airbnb Property Management Companies in the U.S.",
+          "How to Find the Best Airbnb Management Companies in Your Market",
+          "Don't see yourself on the list? Find out where you rank!",
+          "What Sets the Best Airbnb Management Companies Apart"
+        ],
+        "h3Texts": [
+          "1. Cleanings that don’t miss a beat",
+          "2. Fast, effective guest communication",
+          "3. Operational tools that scale with them",
+          "4. Consistency across every property",
+          "ARTICLE SUMMARY",
+          "QUICK NAVIGATION"
+        ],
+        "headingsTree": [
+          {
+            "children": [
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Key Takeaways:"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "The Top 10 Airbnb Property Management Companies in the U.S."
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "How to Find the Best Airbnb Management Companies in Your Market"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Don't see yourself on the list? Find out where you rank!"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "1. Cleanings that don’t miss a beat"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "2. Fast, effective guest communication"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "3. Operational tools that scale with them"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "4. Consistency across every property"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "ARTICLE SUMMARY"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "QUICK NAVIGATION"
+                  }
+                ],
+                "tag": "h2",
+                "text": "What Sets the Best Airbnb Management Companies Apart"
+              }
+            ],
+            "tag": "h1",
+            "text": "Best Airbnb Management Companies in the U.S."
+          }
+        ],
+        "id": 16601888,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1409
+        },
+        "rawLsiCounts": {
+          "a": 55,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 3,
+          "h2": 11,
+          "h2_h3": 13,
+          "h2_h6": 13,
+          "h3": 2,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 1609,
+          "i": 0,
+          "image_file_names": 6,
+          "img_alt": 7,
+          "json_ld_schema_format": 13,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 62,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 3,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1409
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            5,
+            5,
+            5,
+            5,
+            0,
+            5
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            16,
+            16,
+            16,
+            16,
+            0,
+            16
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            55,
+            55,
+            55,
+            55,
+            0,
+            55
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            140,
+            140,
+            140,
+            140,
+            0,
+            140
+          ],
+          [
+            "Image File total",
+            "img",
+            46,
+            46,
+            46,
+            46,
+            0,
+            46
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            46,
+            46,
+            46,
+            46,
+            0,
+            46
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            7,
+            1,
+            2,
+            7,
+            0,
+            7
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            10,
+            10,
+            10,
+            10,
+            0,
+            10
+          ],
+          [
+            "Table Total",
+            "table",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Table Items Total",
+            "td",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Form Total",
+            "form",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            5,
+            5,
+            5,
+            5,
+            0,
+            5
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            "Table of content",
+            "table of content",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 2,
+          "h2": 4,
+          "h2_h3": 4,
+          "h2_h6": 4,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 140,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 7,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 10,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 2,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1409
+        },
+        "runId": 1878495,
+        "schemaTypes": [
+          {
+            "count": 1,
+            "type": "Article"
+          }
+        ],
+        "sourceType": "organic",
+        "title": "Best Airbnb Management Companies in the U.S.",
+        "url": "https://www.airdna.co/blog/the-best-airbnb-property-management-services",
+        "urlSourceCode": ""
+      },
+      {
+        "createdAt": "2026-05-17 02:07:11",
+        "eatSchemaTypes": {},
+        "h2Texts": [
+          "Our Selection Methodology: How We Ranked These Companies",
+          "Detailed Company Analysis",
+          "#1. RedAwning – Best Overall Property Management Solution",
+          "2. Awning – Best for Urban Airbnb Markets",
+          "3. Evolve – Best for DIY Hosts Seeking Flexibility",
+          "4. AvantStay – Best for Luxury Vacation Rentals",
+          "4. Vacasa – Best for Large Property Portfolios",
+          "5. Air Concierge – Best for Mid-Term Rentals",
+          "6. Casago – Best for Budget-Conscious Hosts",
+          "Commission Rate Comparison Table",
+          "Frequently Asked Questions",
+          "Final Recommendation: Which Company Should You Choose?",
+          "Conclusion: Maximize Your Airbnb Success in 2026",
+          "Key Takeaways:",
+          "Ready to Get Started?",
+          "Additional Resources:",
+          "Related Articles",
+          "Trusted by Travelers Worldwide"
+        ],
+        "h3Texts": [
+          "Table of Contents",
+          "Introduction: Finding the Best Airbnb Property Management Company in 2026",
+          "Evaluation Criteria (Weighted Scoring)",
+          "Why RedAwning Ranks #1",
+          "Service Breakdown",
+          "Why Awning Excels in Cities",
+          "Service Breakdown",
+          "Pricing Structure (2026)",
+          "2025-2026 Performance Metrics",
+          "Pros & Cons",
+          "Best For:",
+          "Service Comparison Chart",
+          "What does an Airbnb property management company do?",
+          "How much do Airbnb management companies charge?",
+          "Is Airbnb property management worth it?",
+          "Can I use my property while it's professionally managed?",
+          "How do I switch property management companies?",
+          "🥇 Choose RedAwning If:",
+          "🥈 Choose Awning If:",
+          "Alternative Recommendations:",
+          "Airbnb Management Reviews: Expert Opinions on Top Companies",
+          "Vacation Rental Furnishing Strategy for Property Managers: A Portfolio-Level Playbook",
+          "Tennessee Airbnb and Short-Term Rental Regulations (2026 Update)"
+        ],
+        "headingsTree": [
+          {
+            "children": [
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Table of Contents"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Introduction: Finding the Best Airbnb Property Management Company in 2026"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Evaluation Criteria (Weighted Scoring)"
+                  }
+                ],
+                "tag": "h2",
+                "text": "Our Selection Methodology: How We Ranked These Companies"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Detailed Company Analysis"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "WhyRedAwningRanks #1"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Service Breakdown"
+                  }
+                ],
+                "tag": "h2",
+                "text": "#1.RedAwning– Best Overall Property Management Solution"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Why Awning Excels in Cities"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Service Breakdown"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Pricing Structure (2026)"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "2025-2026 Performance Metrics"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Pros & Cons"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Best For:"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Service Comparison Chart"
+                  }
+                ],
+                "tag": "h2",
+                "text": "2.Awning– Best for Urban Airbnb Markets"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "3.Evolve– Best for DIY Hosts Seeking Flexibility"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "4.AvantStay– Best for Luxury Vacation Rentals"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "4.Vacasa– Best for Large Property Portfolios"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "5.Air Concierge– Best for Mid-Term Rentals"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "6.Casago– Best for Budget-Conscious Hosts"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Commission Rate Comparison Table"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "What does an Airbnb property management company do?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "How much do Airbnb management companies charge?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Is Airbnb property management worth it?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Can I use my property while it's professionally managed?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "How do I switch property management companies?"
+                  }
+                ],
+                "tag": "h2",
+                "text": "Frequently Asked Questions"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "🥇 ChooseRedAwningIf:"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "🥈 ChooseAwningIf:"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Alternative Recommendations:"
+                  }
+                ],
+                "tag": "h2",
+                "text": "Final Recommendation: Which Company Should You Choose?"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Conclusion: Maximize Your Airbnb Success in 2026"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Key Takeaways:"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Ready to Get Started?"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Additional Resources:"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Airbnb Management Reviews: Expert Opinions on Top Companies"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Vacation Rental Furnishing Strategy for Property Managers: A Portfolio-Level Playbook"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Tennessee Airbnb and Short-Term Rental Regulations (2026 Update)"
+                  }
+                ],
+                "tag": "h2",
+                "text": "Related Articles"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Trusted by Travelers Worldwide"
+              }
+            ],
+            "tag": "h1",
+            "text": "2026 Ultimate Guide: Top 7 Airbnb Property Management Companies Ranked"
+          }
+        ],
+        "id": 16601889,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 2817
+        },
+        "rawLsiCounts": {
+          "a": 60,
+          "b": 0,
+          "bold": 46,
+          "figure_caption": 0,
+          "h1": 5,
+          "h2": 12,
+          "h2_h3": 42,
+          "h2_h6": 47,
+          "h3": 30,
+          "h4": 5,
+          "h4_h6": 5,
+          "h5": 0,
+          "h6": 0,
+          "html": 480,
+          "i": 5,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 25,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 230,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 46,
+          "title": 3,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 2817
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            18,
+            18,
+            18,
+            18,
+            0,
+            18
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            23,
+            23,
+            23,
+            23,
+            0,
+            23
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            9,
+            9,
+            9,
+            9,
+            0,
+            9
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            106,
+            106,
+            106,
+            106,
+            0,
+            106
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            192,
+            192,
+            192,
+            192,
+            0,
+            192
+          ],
+          [
+            "Image File total",
+            "img",
+            14,
+            14,
+            14,
+            14,
+            0,
+            14
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            14,
+            14,
+            14,
+            14,
+            0,
+            14
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            103,
+            103,
+            103,
+            103,
+            0,
+            103
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            2,
+            0,
+            0,
+            2,
+            0,
+            2
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            52,
+            52,
+            52,
+            52,
+            0,
+            52
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            24,
+            1,
+            2,
+            24,
+            0,
+            24
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            112,
+            112,
+            112,
+            112,
+            0,
+            112
+          ],
+          [
+            "Table Total",
+            "table",
+            4,
+            4,
+            4,
+            4,
+            0,
+            4
+          ],
+          [
+            "Table Items Total",
+            "td",
+            164,
+            164,
+            164,
+            164,
+            0,
+            164
+          ],
+          [
+            "Form Total",
+            "form",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            "Table of content",
+            "table of content",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 2,
+          "b": 0,
+          "bold": 2,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 1,
+          "h2_h3": 2,
+          "h2_h6": 2,
+          "h3": 1,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 11,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 6,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 2,
+          "title": 1,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 2817
+        },
+        "runId": 1878495,
+        "schemaTypes": [
+          {
+            "count": 1,
+            "type": "Organization"
+          },
+          {
+            "count": 1,
+            "type": "Website"
+          },
+          {
+            "count": 1,
+            "type": "Webpage"
+          },
+          {
+            "count": 1,
+            "type": "Breadcrumblist"
+          }
+        ],
+        "sourceType": "organic",
+        "title": "Top 7 Airbnb Management Companies (2026)",
+        "url": "https://www.redawning.com/pm/post/the-best-airbnb-property-management-companies-for-hosts-in-2026",
+        "urlSourceCode": ""
+      },
+      {
+        "createdAt": "2026-05-17 02:07:11",
+        "eatSchemaTypes": {},
+        "h2Texts": [
+          "Not sure where to start?",
+          "Co-hosts take care of your home and guests",
+          "Local co‑hosts do it best",
+          "It’s easy to get started",
+          "Frequently asked questions",
+          "Find co‑hosts in your areas"
+        ],
+        "h3Texts": [
+          "Listing setup",
+          "Pricing and availability",
+          "Reservations",
+          "Guest messaging",
+          "Onsite support",
+          "Cleaning",
+          "Photography",
+          "Interior design",
+          "Licensing and permits",
+          "Additional services",
+          "Zein",
+          "Sara",
+          "Chad",
+          "Enter your home’s location",
+          "Get to know some co‑hosts",
+          "Collaborate with ease",
+          "How do I get started with a co-host?",
+          "Where can I find out more information about the Co-Host Network?",
+          "How much do co-hosts charge?",
+          "How do I share payouts with my co-host?",
+          "What sets co-hosts apart?",
+          "How can a co‑host help my property’s visibility and reviews?",
+          "How much could I make by hosting my home on Airbnb?"
+        ],
+        "headingsTree": [
+          {
+            "children": [
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Not sure where to start?"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Listing setup"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Pricing and availability"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Reservations"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Guest messaging"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Onsite support"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Cleaning"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Photography"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Interior design"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Licensing and permits"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Additional services"
+                  }
+                ],
+                "tag": "h2",
+                "text": "Co-hosts take care of your home and guests"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Zein"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Sara"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Chad"
+                  }
+                ],
+                "tag": "h2",
+                "text": "Local co‑hosts do it best"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Enter your home’s location"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Get to know some co‑hosts"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Collaborate with ease"
+                  }
+                ],
+                "tag": "h2",
+                "text": "It’s easy to get started"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "How do I get started with a co-host?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Where can I find out more information about the Co-Host Network?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "How much do co-hosts charge?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "How do I share payouts with my co-host?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "What sets co-hosts apart?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "How can a co‑host help my property’s visibility and reviews?"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "How much could I make by hosting my home on Airbnb?"
+                  }
+                ],
+                "tag": "h2",
+                "text": "Frequently asked questions"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Find co‑hosts in your areas"
+              }
+            ],
+            "tag": "h1",
+            "text": "Manage your home on Airbnb with help from a co-host"
+          }
+        ],
+        "id": 16601890,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 729
+        },
+        "rawLsiCounts": {
+          "a": 1,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 1,
+          "h2": 1,
+          "h2_h3": 6,
+          "h2_h6": 6,
+          "h3": 5,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 391,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 22,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 3,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 2,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 2,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 729
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            23,
+            23,
+            23,
+            23,
+            0,
+            23
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            3,
+            3,
+            3,
+            3,
+            0,
+            3
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            173,
+            173,
+            173,
+            173,
+            0,
+            173
+          ],
+          [
+            "Image File total",
+            "img",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            2,
+            0,
+            0,
+            2,
+            0,
+            2
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            5,
+            5,
+            5,
+            5,
+            0,
+            5
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            5,
+            1,
+            2,
+            5,
+            0,
+            5
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            161,
+            161,
+            161,
+            161,
+            0,
+            161
+          ],
+          [
+            "Table Total",
+            "table",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Table Items Total",
+            "td",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Form Total",
+            "form",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            "Table of content",
+            "table of content",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 1,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 1,
+          "h2_h6": 1,
+          "h3": 1,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 14,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 3,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 1,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 729
+        },
+        "runId": 1878495,
+        "schemaTypes": [
+          {
+            "count": 1,
+            "type": "Breadcrumblist"
+          },
+          {
+            "count": 2,
+            "type": "Listitem"
+          },
+          {
+            "count": 2,
+            "type": "Thing"
+          },
+          {
+            "count": 1,
+            "type": "Faqpage"
+          }
+        ],
+        "sourceType": "organic",
+        "title": "Find an Airbnb co-host to help manage your home",
+        "url": "https://www.airbnb.com/host/co-hosts",
+        "urlSourceCode": ""
+      },
+      {
+        "createdAt": "2026-05-17 02:07:11",
+        "eatSchemaTypes": {},
+        "h2Texts": [
+          "What is Airbnb property management?",
+          "What does an Airbnb property manager actually do?",
+          "Does Airbnb do property management?",
+          "So, do you need a property manager for Airbnb?",
+          "What are the pros and cons of hiring an Airbnb property manager?",
+          "How much do Airbnb management companies charge?",
+          "What to keep in mind when considering Airbnb management companies",
+          "10 of the best Airbnb management companies in North America and Europe",
+          "And what if I decide against it?",
+          "About the author",
+          "Comments (2)",
+          "Related posts",
+          "Join our newsletter!"
+        ],
+        "h3Texts": [
+          "Create and optimize your listing",
+          "Marketing and social media",
+          "Pricing strategy",
+          "Guest communication and turnovers",
+          "Cleaning and maintenance",
+          "Customer support",
+          "Local laws and regulations",
+          "Pros of hiring an Airbnb management company",
+          "Cons of hiring an Airbnb property management company",
+          "Look for companies with experience in your area",
+          "Compare services and fees",
+          "Read reviews and testimonials",
+          "Ask for referrals",
+          "Check credentials and licenses",
+          "Schedule a consultation",
+          "Air Concierge",
+          "AvantStay",
+          "Casago",
+          "Evolve",
+          "GuestReady",
+          "Home Team Luxury Rentals",
+          "Portoro",
+          "RedAwning",
+          "SkyRun Vacation Rentals",
+          "Wander",
+          "Click here to cancel reply."
+        ],
+        "headingsTree": [
+          {
+            "children": [
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "What is Airbnb property management?"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Create and optimize your listing"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Marketing and social media"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Pricing strategy"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Guest communication and turnovers"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Cleaning and maintenance"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Customer support"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Local laws and regulations"
+                  }
+                ],
+                "tag": "h2",
+                "text": "What does an Airbnb property manager actually do?"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Does Airbnb do property management?"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "So, do you need a property manager for Airbnb?"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Pros of hiring an Airbnb management company"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Cons of hiring an Airbnb property management company"
+                  }
+                ],
+                "tag": "h2",
+                "text": "What are the pros and cons of hiring an Airbnb property manager?"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "How much do Airbnb management companies charge?"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Look for companies with experience in your area"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Compare services and fees"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Read reviews and testimonials"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Ask for referrals"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Check credentials and licenses"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Schedule a consultation"
+                  }
+                ],
+                "tag": "h2",
+                "text": "What to keep in mind when considering Airbnb management companies"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Air Concierge"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "AvantStay"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Casago"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Evolve"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "GuestReady"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Home Team Luxury Rentals"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Portoro"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "RedAwning"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "SkyRun Vacation Rentals"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Wander"
+                  }
+                ],
+                "tag": "h2",
+                "text": "10 of the best Airbnb management companies in North America and Europe"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "And what if I decide against it?"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "About the author"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Click here to cancel reply."
+                  }
+                ],
+                "tag": "h2",
+                "text": "Comments(2)"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Related posts"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Join our newsletter!"
+              }
+            ],
+            "tag": "h1",
+            "text": "The 10 Best Airbnb Management Companies in 2026"
+          }
+        ],
+        "id": 16601891,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 3187
+        },
+        "rawLsiCounts": {
+          "a": 44,
+          "b": 0,
+          "bold": 7,
+          "figure_caption": 0,
+          "h1": 3,
+          "h2": 32,
+          "h2_h3": 53,
+          "h2_h6": 58,
+          "h3": 21,
+          "h4": 5,
+          "h4_h6": 5,
+          "h5": 0,
+          "h6": 0,
+          "html": 1901,
+          "i": 0,
+          "image_file_names": 51,
+          "img_alt": 60,
+          "json_ld_schema_format": 470,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 415,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 7,
+          "title": 3,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 3187
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            13,
+            13,
+            13,
+            13,
+            0,
+            13
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            26,
+            26,
+            26,
+            26,
+            0,
+            26
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            12,
+            12,
+            12,
+            12,
+            0,
+            12
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            92,
+            92,
+            92,
+            92,
+            0,
+            92
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            137,
+            137,
+            137,
+            137,
+            0,
+            137
+          ],
+          [
+            "Image File total",
+            "img",
+            37,
+            37,
+            37,
+            37,
+            0,
+            37
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            37,
+            37,
+            37,
+            37,
+            0,
+            37
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            4,
+            4,
+            4,
+            4,
+            0,
+            4
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            8,
+            1,
+            2,
+            8,
+            0,
+            8
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            41,
+            41,
+            41,
+            41,
+            0,
+            41
+          ],
+          [
+            "Table Total",
+            "table",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Table Items Total",
+            "td",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Form Total",
+            "form",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Table of content",
+            "table of content",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 2,
+          "figure_caption": 0,
+          "h1": 2,
+          "h2": 4,
+          "h2_h3": 4,
+          "h2_h6": 4,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 34,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 13,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 5,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 2,
+          "title": 2,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 3187
+        },
+        "runId": 1878495,
+        "schemaTypes": [
+          {
+            "count": 1,
+            "type": "Article"
+          }
+        ],
+        "sourceType": "organic",
+        "title": "The 10 Best Airbnb Management Companies in 2026",
+        "url": "https://www.lodgify.com/blog/airbnb-management-companies/",
+        "urlSourceCode": ""
+      },
+      {
+        "createdAt": "2026-05-17 02:07:12",
+        "eatSchemaTypes": {},
+        "h2Texts": [],
+        "h3Texts": [
+          "Earn more from your vacation rental",
+          "Inspiration for your next trip",
+          "This site uses cookies to provide you with a personalized experience"
+        ],
+        "headingsTree": [
+          {
+            "children": [],
+            "tag": "h3",
+            "text": "Earn more from your vacation rental"
+          },
+          {
+            "children": [
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Inspiration for your next trip"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "This site uses cookies to provide you with a personalized experience"
+              }
+            ],
+            "tag": "h1",
+            "text": "Best Airbnb Management Companies in Texas"
+          }
+        ],
+        "id": 16601892,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 638
+        },
+        "rawLsiCounts": {
+          "a": 90,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 3,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 315,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 26,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 3,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 638
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            3,
+            3,
+            3,
+            3,
+            0,
+            3
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            7,
+            7,
+            7,
+            7,
+            0,
+            7
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            102,
+            102,
+            102,
+            102,
+            0,
+            102
+          ],
+          [
+            "Image File total",
+            "img",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            2,
+            2,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            1,
+            1,
+            2,
+            1,
+            0,
+            1
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            3,
+            3,
+            3,
+            3,
+            0,
+            3
+          ],
+          [
+            "Table Total",
+            "table",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Table Items Total",
+            "td",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Form Total",
+            "form",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            "Table of content",
+            "table of content",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 2,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 2,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 13,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 2,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 638
+        },
+        "runId": 1878495,
+        "schemaTypes": [],
+        "sourceType": "organic",
+        "title": "Best Airbnb Management Companies in Texas",
+        "url": "https://avantstay.com/texas/best-airbnb-management",
+        "urlSourceCode": ""
+      },
+      {
+        "createdAt": "2026-05-17 02:07:12",
+        "eatSchemaTypes": {},
+        "h2Texts": [
+          "Full-service Vacation Rental Management in Phoenix, Arizona",
+          "Helping Arizona Airbnb Investors Create Truly Passive Income",
+          "4 Steps to High ROI Vacation Rentals",
+          "Meet Chris and Cameron, your Phoenix Airbnb Managers",
+          "Phoenix Airbnb FAQ's",
+          "Our Vacation Rental Management Office in Phoenix, Arizona",
+          "The CT Brothers - Phoenix Airbnb Management Office Location"
+        ],
+        "h3Texts": [
+          "Airbnb Listing Management",
+          "Pricing and Booking",
+          "Guest Communication",
+          "Cleaning and Maintenance",
+          "Reduce the Time and Stress of your Rental Investment by Partnering with the CT Brothers, Trusted Airbnb Management Company in Phoenix, AZ"
+        ],
+        "headingsTree": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Airbnb Listing Management"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Pricing and Booking"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Guest Communication"
+                  },
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Cleaning and Maintenance"
+                  }
+                ],
+                "tag": "h2",
+                "text": "Full-service Vacation Rental Management in Phoenix, Arizona"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Helping Arizona Airbnb Investors CreateTrulyPassive Income"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "4 Steps to High ROI Vacation Rentals"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Meet Chris and Cameron, your Phoenix Airbnb Managers"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Phoenix AirbnbFAQ's"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Our Vacation Rental Management Office in Phoenix, Arizona"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": "Reduce the Time and Stress of your Rental Investment by Partnering with the CT Brothers, Trusted Airbnb Management Company in Phoenix, AZ"
+                  }
+                ],
+                "tag": "h2",
+                "text": "The CT Brothers - Phoenix Airbnb Management Office Location"
+              }
+            ],
+            "tag": "h1",
+            "text": "Airbnb Property Management in Phoenix, AZ"
+          },
+          {
+            "children": [],
+            "tag": "h1",
+            "text": "www.google.comis blocked"
+          }
+        ],
+        "id": 16601893,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1231
+        },
+        "rawLsiCounts": {
+          "a": 35,
+          "b": 0,
+          "bold": 25,
+          "figure_caption": 0,
+          "h1": 5,
+          "h2": 12,
+          "h2_h3": 23,
+          "h2_h6": 23,
+          "h3": 11,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 289,
+          "i": 0,
+          "image_file_names": 5,
+          "img_alt": 12,
+          "json_ld_schema_format": 22,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 63,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 25,
+          "title": 5,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1231
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            2,
+            2,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            7,
+            7,
+            7,
+            7,
+            0,
+            7
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            5,
+            5,
+            5,
+            5,
+            0,
+            5
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            19,
+            19,
+            19,
+            19,
+            0,
+            19
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            47,
+            47,
+            47,
+            47,
+            0,
+            47
+          ],
+          [
+            "Image File total",
+            "img",
+            26,
+            26,
+            26,
+            26,
+            0,
+            26
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            24,
+            24,
+            24,
+            24,
+            0,
+            24
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            14,
+            14,
+            14,
+            14,
+            0,
+            14
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            1,
+            1,
+            2,
+            1,
+            0,
+            1
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Table Total",
+            "table",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Table Items Total",
+            "td",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Form Total",
+            "form",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            "Table of content",
+            "table of content",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 4,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 1,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1231
+        },
+        "runId": 1878495,
+        "schemaTypes": [
+          {
+            "count": 1,
+            "type": "Localbusiness"
+          }
+        ],
+        "sourceType": "organic",
+        "title": "Airbnb Property Management in Phoenix, AZ",
+        "url": "https://www.thectbrothers.com/airbnb-property-management-phoenix",
+        "urlSourceCode": ""
+      },
+      {
+        "createdAt": "2026-05-17 02:07:27",
+        "eatSchemaTypes": {},
+        "h2Texts": [],
+        "h3Texts": [
+          "Airbnb Data At Your Fingertips!",
+          "Get Started",
+          "Support",
+          "Solutions",
+          "About Airbtics",
+          "Resources"
+        ],
+        "headingsTree": [
+          {
+            "children": [
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Airbnb Data At Your Fingertips!"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Get Started"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Support"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Solutions"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "About Airbtics"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Resources"
+              }
+            ],
+            "tag": "h1",
+            "text": "Top Airbnb Management Companies in The United States"
+          }
+        ],
+        "id": 16601896,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 31457
+        },
+        "rawLsiCounts": {
+          "a": 1154,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 3,
+          "h2": 0,
+          "h2_h3": 2,
+          "h2_h6": 8,
+          "h3": 2,
+          "h4": 6,
+          "h4_h6": 6,
+          "h5": 0,
+          "h6": 0,
+          "html": 11759,
+          "i": 0,
+          "image_file_names": 2,
+          "img_alt": 2,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 1167,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 3,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 31457
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            2851,
+            2851,
+            2851,
+            2851,
+            0,
+            2851
+          ],
+          [
+            "Image File total",
+            "img",
+            2,
+            2,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            2,
+            2,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            19,
+            19,
+            19,
+            19,
+            0,
+            19
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            5,
+            1,
+            2,
+            5,
+            0,
+            5
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            23,
+            23,
+            23,
+            23,
+            0,
+            23
+          ],
+          [
+            "Table Total",
+            "table",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Table Items Total",
+            "td",
+            22352,
+            22352,
+            22352,
+            22352,
+            0,
+            22352
+          ],
+          [
+            "Form Total",
+            "form",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            "Table of content",
+            "table of content",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 1,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 1,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 1,
+          "h3": 0,
+          "h4": 1,
+          "h4_h6": 1,
+          "h5": 0,
+          "h6": 0,
+          "html": 4,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 1,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 1,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 31457
+        },
+        "runId": 1878495,
+        "schemaTypes": [],
+        "sourceType": "organic",
+        "title": "Top Airbnb Management Companies in The United States",
+        "url": "https://airbtics.com/top-airbnb-management-companies-in-united-states",
+        "urlSourceCode": ""
+      },
+      {
+        "createdAt": "2026-05-17 02:07:32",
+        "eatSchemaTypes": {},
+        "h2Texts": [
+          "Luxury Lodging Host",
+          "Turn Your Airbnb Rental Management in Chicago into a Cash Box",
+          "Our Exceptional Services for Your Airbnb in Chicago",
+          "Guest communication",
+          "Maintenance and cleaning",
+          "Property inspections",
+          "Marketing and visibility",
+          "Dynamic pricing",
+          "Guest communication",
+          "Maintenance and cleaning",
+          "Property inspections",
+          "Marketing and visibility",
+          "Dynamic pricing",
+          "How We Boost Your Rental Income with 24/7 Superhost Support and Easy Upkeep?",
+          "Some Of The Properties We Manage",
+          "Entire rental unit in Chicago, Illinois, United States",
+          "Entire Rental Unit in Chicago, Illinois, United States",
+          "FAQs",
+          "Still Have Questions?",
+          "Elevating Luxury, Maximizing Revenue - Effortlessly.",
+          "Follow us on:",
+          "Company",
+          "Resources",
+          "City",
+          "Follow Us on"
+        ],
+        "h3Texts": [],
+        "headingsTree": [
+          {
+            "children": [],
+            "tag": "h2",
+            "text": "Luxury Lodging Host"
+          },
+          {
+            "children": [
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Turn Your Airbnb Rental Management in Chicago into a Cash Box"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Our Exceptional Services for Your Airbnb in Chicago"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Guest communication"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Maintenance and cleaning"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Property inspections"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Marketing and visibility"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Dynamic pricing"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Guest communication"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Maintenance and cleaning"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Property inspections"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Marketing and visibility"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Dynamic pricing"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "How We Boost Your Rental Income with 24/7 Superhost Support and Easy Upkeep?"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Some Of The Properties We Manage"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Entire rental unit in Chicago, Illinois, United States"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Entire Rental Unit in Chicago, Illinois, United States"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "FAQs"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Still HaveQuestions?"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Elevating Luxury,Maximizing Revenue - Effortlessly."
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Follow us on:"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Company"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Resources"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "City"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Follow Us on"
+              },
+              {
+                "children": [],
+                "tag": "h2",
+                "text": ""
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "tag": "h3",
+                    "text": ""
+                  }
+                ],
+                "tag": "h2",
+                "text": ""
+              }
+            ],
+            "tag": "h1",
+            "text": "Welcome to The Best Airbnb Property Management Company  In Chicago"
+          }
+        ],
+        "id": 16601898,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1648
+        },
+        "rawLsiCounts": {
+          "a": 10,
+          "b": 0,
+          "bold": 3,
+          "figure_caption": 0,
+          "h1": 6,
+          "h2": 17,
+          "h2_h3": 17,
+          "h2_h6": 17,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 327,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 38,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 118,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 3,
+          "title": 6,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1648
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            27,
+            27,
+            27,
+            27,
+            0,
+            27
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            42,
+            42,
+            42,
+            42,
+            0,
+            42
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            65,
+            65,
+            65,
+            65,
+            0,
+            65
+          ],
+          [
+            "Image File total",
+            "img",
+            56,
+            56,
+            56,
+            56,
+            0,
+            56
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            56,
+            56,
+            56,
+            56,
+            0,
+            56
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            5,
+            5,
+            5,
+            5,
+            0,
+            5
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            14,
+            14,
+            14,
+            14,
+            0,
+            14
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            5,
+            1,
+            2,
+            5,
+            0,
+            5
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            8,
+            8,
+            8,
+            8,
+            0,
+            8
+          ],
+          [
+            "Table Total",
+            "table",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Table Items Total",
+            "td",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Form Total",
+            "form",
+            2,
+            2,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            "Table of content",
+            "table of content",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 3,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 2,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1648
+        },
+        "runId": 1878495,
+        "schemaTypes": [
+          {
+            "count": 1,
+            "type": "Wpheader"
+          },
+          {
+            "count": 1,
+            "type": "Imagegallery"
+          },
+          {
+            "count": 1,
+            "type": "Webpage"
+          },
+          {
+            "count": 1,
+            "type": "Imageobject"
+          },
+          {
+            "count": 1,
+            "type": "Breadcrumblist"
+          },
+          {
+            "count": 1,
+            "type": "Website"
+          },
+          {
+            "count": 1,
+            "type": "Organization"
+          }
+        ],
+        "sourceType": "organic",
+        "title": "Airbnb Property Management Services in Chicago",
+        "url": "https://luxurylodgingpm.com/airbnb-property-management-in-chicago/",
+        "urlSourceCode": ""
+      },
+      {
+        "createdAt": "2026-05-17 02:07:33",
+        "eatSchemaTypes": {},
+        "h2Texts": [
+          "Hosty Co"
+        ],
+        "h3Texts": [],
+        "headingsTree": [
+          {
+            "children": [
+              {
+                "children": [],
+                "tag": "h2",
+                "text": "Hosty Co"
+              }
+            ],
+            "tag": "h1",
+            "text": "Airbnb & Short Term Rental Property Management"
+          }
+        ],
+        "id": 16601899,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 555
+        },
+        "rawLsiCounts": {
+          "a": 2,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 4,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 137,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 18,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 5,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 555
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            29,
+            29,
+            29,
+            29,
+            0,
+            29
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            40,
+            40,
+            40,
+            40,
+            0,
+            40
+          ],
+          [
+            "Image File total",
+            "img",
+            18,
+            18,
+            18,
+            18,
+            0,
+            18
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            18,
+            18,
+            18,
+            18,
+            0,
+            18
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            13,
+            1,
+            2,
+            13,
+            0,
+            13
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            22,
+            22,
+            22,
+            22,
+            0,
+            22
+          ],
+          [
+            "Table Total",
+            "table",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Table Items Total",
+            "td",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Form Total",
+            "form",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Table of content",
+            "table of content",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 1,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 1,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 555
+        },
+        "runId": 1878495,
+        "schemaTypes": [],
+        "sourceType": "organic",
+        "title": "Airbnb Property Management Chicago\t| Hosty Co",
+        "url": "https://www.hostyco.com/",
+        "urlSourceCode": ""
+      },
+      {
+        "createdAt": "2026-05-17 02:07:35",
+        "eatSchemaTypes": {},
+        "h2Texts": [],
+        "h3Texts": [
+          "Airbnb Data At Your Fingertips!",
+          "Get Started",
+          "Support",
+          "Solutions",
+          "About Airbtics",
+          "Resources"
+        ],
+        "headingsTree": [
+          {
+            "children": [
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Airbnb Data At Your Fingertips!"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Get Started"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Support"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Solutions"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "About Airbtics"
+              },
+              {
+                "children": [],
+                "tag": "h3",
+                "text": "Resources"
+              }
+            ],
+            "tag": "h1",
+            "text": "Top Airbnb Management Companies in Los Angeles"
+          }
+        ],
+        "id": 16601901,
+        "isFirst": 0,
+        "isFocus": 0,
+        "isValid": 1,
+        "name": null,
+        "nlpSchemaData": {},
+        "pageScore": null,
+        "rawKeywordCounts": {
+          "a": 0,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 0,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 0,
+          "h3": 0,
+          "h4": 0,
+          "h4_h6": 0,
+          "h5": 0,
+          "h6": 0,
+          "html": 0,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 0,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1979
+        },
+        "rawLsiCounts": {
+          "a": 32,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 3,
+          "h2": 0,
+          "h2_h3": 2,
+          "h2_h6": 8,
+          "h3": 2,
+          "h4": 6,
+          "h4_h6": 6,
+          "h5": 0,
+          "h6": 0,
+          "html": 1721,
+          "i": 0,
+          "image_file_names": 2,
+          "img_alt": 2,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 45,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 3,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1979
+        },
+        "rawTagCounts": [
+          [
+            "H1 Tag Total",
+            "h1",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "H2 Tag Total",
+            "h2",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H3 Tag Total",
+            "h3",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "H4 Tag Total",
+            "h4",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "H5 Tag Total",
+            "h5",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "H6 Tag Total",
+            "h6",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Paragraph Text Tag Total",
+            "p",
+            6,
+            6,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            "Anchor Text Tag Total",
+            "a",
+            131,
+            131,
+            131,
+            131,
+            0,
+            131
+          ],
+          [
+            "Image File total",
+            "img",
+            2,
+            2,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            "Image Alt Tag Total",
+            "img_alt",
+            2,
+            2,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            "Bold Tag Total",
+            "bold",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Italic Tag Total",
+            "i",
+            19,
+            19,
+            19,
+            19,
+            0,
+            19
+          ],
+          [
+            "Video File Total",
+            "video",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Total",
+            "ol",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ordered List Items Total",
+            "oli",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Unordered List Total",
+            "ul",
+            5,
+            1,
+            2,
+            5,
+            0,
+            5
+          ],
+          [
+            "Unordered List Items Total",
+            "uli",
+            23,
+            23,
+            23,
+            23,
+            0,
+            23
+          ],
+          [
+            "Table Total",
+            "table",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            "Table Items Total",
+            "td",
+            576,
+            576,
+            576,
+            576,
+            0,
+            576
+          ],
+          [
+            "Form Total",
+            "form",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "iFrame Total",
+            "iframe",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Frequently Asked Questions",
+            "faq",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            "Table of content",
+            "table of content",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "rawVariationsCounts": {
+          "a": 1,
+          "b": 0,
+          "bold": 0,
+          "figure_caption": 0,
+          "h1": 1,
+          "h2": 0,
+          "h2_h3": 0,
+          "h2_h6": 1,
+          "h3": 0,
+          "h4": 1,
+          "h4_h6": 1,
+          "h5": 0,
+          "h6": 0,
+          "html": 4,
+          "i": 0,
+          "image_file_names": 0,
+          "img_alt": 0,
+          "json_ld_schema_format": 0,
+          "meta_description": 0,
+          "meta_keywords": 0,
+          "microdata_schema_format": 0,
+          "open_graph_description": 0,
+          "open_graph_title": 0,
+          "p": 1,
+          "plain_text": 0,
+          "rdf_schema_format": 0,
+          "source_code_urls": 0,
+          "strong": 0,
+          "title": 1,
+          "twitter_card_description": 0,
+          "twitter_card_title": 0,
+          "word_count": 1979
+        },
+        "runId": 1878495,
+        "schemaTypes": [],
+        "sourceType": "organic",
+        "title": "Top Airbnb Management Companies in Los Angeles",
+        "url": "https://airbtics.com/top-airbnb-management-companies-in-los-angeles-united-states",
+        "urlSourceCode": ""
+      }
+    ],
+    "contentBriefDataFile": {},
+    "createdAt": "2026-05-17 02:06:54",
+    "gCompetitors": [
+      {
+        "competitorSourceType": "organic",
+        "description": "AirDNA ranks the best Airbnb management companies in the U.S. for 2025, covering performance, geographic reach, and what makes each one stand out.",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Best Airbnb Management Companies in the U.S.",
+        "url": "https://www.airdna.co/blog/the-best-airbnb-property-management-services",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "2. Awning – Best for Urban Airbnb Markets · 3. Evolve – Best for DIY Hosts Seeking Flexibility · 4. AvantStay – Best for Luxury Vacation Rentals.",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Top 7 Airbnb Management Companies (2026)",
+        "url": "https://www.redawning.com/pm/post/the-best-airbnb-property-management-companies-for-hosts-in-2026",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Co-Host Network makes it easy to find and work with a high-quality, local co-host to help manage your place.",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Find an Airbnb co-host to help manage your home",
+        "url": "https://www.airbnb.com/host/co-hosts",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Browsing Airbnb management companies for your vacation rental business? Check out these tips and insights on how to hire the best one!",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "The 10 Best Airbnb Management Companies in 2026",
+        "url": "https://www.lodgify.com/blog/airbnb-management-companies/",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "AvantStay is the largest and highest-rated luxury vacation rental management company in the United States. Are you a current homeowner? Log in to Lighthouse.",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Best Airbnb Management Companies in Texas",
+        "url": "https://avantstay.com/texas/best-airbnb-management",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Full-service Airbnb management for short term rentals in Phoenix, AZ. We handle the details so you can sit back, relax, and collect passive income.",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Airbnb Property Management in Phoenix, AZ",
+        "url": "https://www.thectbrothers.com/airbnb-property-management-phoenix",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Top Airbnb Management Companies in The United States ; Aaron & Kelly, 4.2 ⭐, 70% ; Above & Beyond, 4.2 ⭐, 70% ; Erikson Management, 4.2 ⭐, 70% ...",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Top Airbnb Management Companies in The United States",
+        "url": "https://airbtics.com/top-airbnb-management-companies-in-united-states",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Luxury Lodging Host offers elite home rental property management Chicago owners can trust to maximize their profits. We specialize in Airbnb rental management, ...",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Airbnb Property Management Services in Chicago",
+        "url": "https://luxurylodgingpm.com/airbnb-property-management-in-chicago/",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Hosty is a short rental management company offering a full service model for your rental property. We use proprietary software to maximize your revenue.",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Hosty Co: Airbnb Property Management Chicago",
+        "url": "https://www.hostyco.com/",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Top Airbnb Management Companies in Los Angeles ; The Maimon Group, 4.2 ⭐, 70% ; Travel Oasis, 4.2 ⭐, 70% ; James-Smith, 4.2 ⭐, 70% ...",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Top Airbnb Management Companies in Los Angeles",
+        "url": "https://airbtics.com/top-airbnb-management-companies-in-los-angeles-united-states",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Here's a look at the top Airbnb management companies for 2024, plus tips to help you find the perfect fit.",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "The 10 Biggest Airbnb Management Companies in the US",
+        "url": "https://www.hostaway.com/blog/the-10-biggest-airbnb-management-companies-in-the-us/",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Many property owners call Guestable the best Airbnb management company because we use smart tools to help you earn more. We use a revenue management plan that ...",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Airbnb Property Management Los Angeles",
+        "url": "https://www.guestable.com/los-angeles-vacation-rental-property-management/",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "Here are the top 10 local companies that have established themselves as reliable partners for Airbnb hosts in the Minneapolis area.",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Best Airbnb Property Management Companies in ...",
+        "url": "https://www.bnbcalc.com/blog/property-management/pmc-minneapolis-minnesota",
+        "validated": false
+      },
+      {
+        "competitorSourceType": "organic",
+        "description": "If you're looking for the best Airbnb / VRBO / STR Management company in Pittsburgh, look no further! Top rated hosts, contact us today!",
+        "source": "",
+        "sourceLabel": "Google Search",
+        "summary": {},
+        "title": "Airbnb Management Company Pittsburgh",
+        "url": "https://www.hostwise.co/whyus-pittsburgh",
+        "validated": false
+      }
+    ],
+    "googleLocation": "United States",
+    "id": 1878495,
+    "ipAddress": "132.147.144.121",
+    "keyword": "best airbnb property managers",
+    "lsaVariations": [
+      {
+        "averageCount": 3,
+        "isSecondaryKeyword": false,
+        "phrase": "airbnb management companies",
+        "targetCount": 0,
+        "weight": 0.11365587093272345
+      },
+      {
+        "averageCount": 1,
+        "isSecondaryKeyword": false,
+        "phrase": "best airbnb management companies",
+        "targetCount": 0,
+        "weight": 0.1
+      },
+      {
+        "averageCount": 0,
+        "isSecondaryKeyword": false,
+        "phrase": "co-host network",
+        "targetCount": 0,
+        "weight": 0.1
+      },
+      {
+        "averageCount": 0,
+        "isSecondaryKeyword": false,
+        "phrase": "full-service airbnb management",
+        "targetCount": 1,
+        "weight": 0.1
+      },
+      {
+        "averageCount": 0,
+        "isSecondaryKeyword": false,
+        "phrase": "urban airbnb markets",
+        "targetCount": 0,
+        "weight": 0.1
+      },
+      {
+        "averageCount": 0,
+        "isSecondaryKeyword": false,
+        "phrase": "casa haven properties",
+        "targetCount": 0,
+        "weight": 0.1
+      },
+      {
+        "averageCount": 1,
+        "isSecondaryKeyword": false,
+        "phrase": "rental management company",
+        "targetCount": 0,
+        "weight": 0.1
+      },
+      {
+        "averageCount": 0,
+        "isSecondaryKeyword": false,
+        "phrase": "airdna ranks",
+        "targetCount": 0,
+        "weight": 0.1
+      }
+    ],
+    "relatedQuestions": [
+      {
+        "displayed_link": "https://www.redawning.com › post › the-best-airbnb-pr...",
+        "formatted": [
+          {
+            "company": "RedAwning",
+            "rank": "#1",
+            "score": "9.6/10"
+          },
+          {
+            "company": "Awning",
+            "rank": "#2",
+            "score": "9.4/10"
+          },
+          {
+            "company": "Evolve",
+            "rank": "#3",
+            "score": "8.8/10"
+          },
+          {
+            "company": "AvantStay",
+            "rank": "#4",
+            "score": "8.5/10"
+          }
+        ],
+        "link": "https://www.redawning.com/pm/post/the-best-airbnb-property-management-companies-for-hosts-in-2026",
+        "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsVVdFUXhUM016VXpoMFdWaHVaMHRaVEcxd2NESmxZbTFOUlZkNVZrZHVaazlsTkVaa05YUldTbEkzY2xFNGJHNXZlRkJaU25Wa1l6UmFSek01VDBOQ1kwcDBZVFJTYmtaTmRtNUdiVmRVZVRsR2RqSlhaazFSZUhkamR4SVhhRk5KU21GMFRIbElabmwyY0hSUlVHOHRYMlF0VVZrYUlrRktTMHhHYlVrMGFtSkpaSFpPWm1Sd0xUZFJjbTEyVlcxdFRGZHJVbVpSVldjIiwiZmN2IjoiMyIsImVpIjoiaFNJSmF0THlIZnl2cHRRUG8tX2QtUVkiLCJxYyI6IkNoMWlaWE4wSUdGcGNtSnVZaUJ3Y205d1pYSjBlU0J0WVc1aFoyVnljeEFBZlpQREZqOCIsInF1ZXN0aW9uIjoiV2hvIGlzIHRoZSBiZXN0IEFpcmJuYiBtYW5hZ2VtZW50IGNvbXBhbnk/IiwibGsiOiJHaWwzYUc4Z2FYTWdkR2hsSUdKbGMzUWdZV2x5WW01aUlHMWhibUZuWlcxbGJuUWdZMjl0Y0dGdWVRIiwiYnMiOiJjLU9LNGRJS3o4aFh5Q3hXS01sSVZVaEtMUzVSY013c1NzcExVc2hOekV0TVQ4MU56U3RSU003UExVak1xN1NYbUZsdHBDMmxXWTZtSVJHWEJpNVhMcVh3ak1RU21HcHpVMTFUVTRXaTBweFVoYlQ4SXFoRjlrYnlVckxsS0tvVVlLb2dKbk5GYzJsNzVKY3I1SlltWnlpVTVDc1VKRllxSk9iQjNGbFFsRi1RV2xSU0NiV195RjVpWDZXUnBwUjZCcm9PN01xNWZGRGRhR0dnYjJTQTRVYUpIazRqWlNuRmNoU0ZDc2dLSWNZTE1BSUEiLCJpZCI6ImZjX2hTSUphdEx5SGZ5dnB0UVBvLV9kLVFZXzIifQ==",
+        "question": "Who is the best Airbnb management company?",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsVVdFUXhUM016VXpoMFdWaHVaMHRaVEcxd2NESmxZbTFOUlZkNVZrZHVaazlsTkVaa05YUldTbEkzY2xFNGJHNXZlRkJaU25Wa1l6UmFSek01VDBOQ1kwcDBZVFJTYmtaTmRtNUdiVmRVZVRsR2RqSlhaazFSZUhkamR4SVhhRk5KU21GMFRIbElabmwyY0hSUlVHOHRYMlF0VVZrYUlrRktTMHhHYlVrMGFtSkpaSFpPWm1Sd0xUZFJjbTEyVlcxdFRGZHJVbVpSVldjIiwiZmN2IjoiMyIsImVpIjoiaFNJSmF0THlIZnl2cHRRUG8tX2QtUVkiLCJxYyI6IkNoMWlaWE4wSUdGcGNtSnVZaUJ3Y205d1pYSjBlU0J0WVc1aFoyVnljeEFBZlpQREZqOCIsInF1ZXN0aW9uIjoiV2hvIGlzIHRoZSBiZXN0IEFpcmJuYiBtYW5hZ2VtZW50IGNvbXBhbnk%2FIiwibGsiOiJHaWwzYUc4Z2FYTWdkR2hsSUdKbGMzUWdZV2x5WW01aUlHMWhibUZuWlcxbGJuUWdZMjl0Y0dGdWVRIiwiYnMiOiJjLU9LNGRJS3o4aFh5Q3hXS01sSVZVaEtMUzVSY013c1NzcExVc2hOekV0TVQ4MU56U3RSU003UExVak1xN1NYbUZsdHBDMmxXWTZtSVJHWEJpNVhMcVh3ak1RU21HcHpVMTFUVTRXaTBweFVoYlQ4SXFoRjlrYnlVckxsS0tvVVlLb2dKbk5GYzJsNzVKY3I1SlltWnlpVTVDc1VKRllxSk9iQjNGbFFsRi1RV2xSU0NiV195RjVpWDZXUnBwUjZCcm9PN01xNWZGRGRhR0dnYjJTQTRVYUpIazRqWlNuRmNoU0ZDc2dLSWNZTE1BSUEiLCJpZCI6ImZjX2hTSUphdEx5SGZ5dnB0UVBvLV9kLVFZXzIifQ%3D%3D",
+        "snippet": "Introduction: Finding the Best Airbnb Property Management Company in 2026",
+        "table": [
+          [
+            "Rank",
+            "Company",
+            "Score"
+          ],
+          [
+            "#1",
+            "RedAwning",
+            "9.6/10"
+          ],
+          [
+            "#2",
+            "Awning",
+            "9.4/10"
+          ],
+          [
+            "#3",
+            "Evolve",
+            "8.8/10"
+          ],
+          [
+            "#4",
+            "AvantStay",
+            "8.5/10"
+          ]
+        ],
+        "title": "Top 7 Airbnb Management Companies (2026) - RedAwning",
+        "type": "featured_snippet"
+      },
+      {
+        "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsVVdFUXhUM016VXpoMFdWaHVaMHRaVEcxd2NESmxZbTFOUlZkNVZrZHVaazlsTkVaa05YUldTbEkzY2xFNGJHNXZlRkJaU25Wa1l6UmFSek01VDBOQ1kwcDBZVFJTYmtaTmRtNUdiVmRVZVRsR2RqSlhaazFSZUhkamR4SVhhRk5KU21GMFRIbElabmwyY0hSUlVHOHRYMlF0VVZrYUlrRktTMHhHYlVrMGFtSkpaSFpPWm1Sd0xUZFJjbTEyVlcxdFRGZHJVbVpSVldjIiwiZmN2IjoiMyIsImVpIjoiaFNJSmF0THlIZnl2cHRRUG8tX2QtUVkiLCJxYyI6IkNoMWlaWE4wSUdGcGNtSnVZaUJ3Y205d1pYSjBlU0J0WVc1aFoyVnljeEFBZlpQREZqOCIsInF1ZXN0aW9uIjoiV2hhdCBpcyB0aGUgNzUtNTUgcnVsZSBmb3IgQWlyYm5iPyIsImxrIjoiR2gxM2FHRjBJR2x6SUhSb1pTQTNOU0ExTlNCeWRXeGxJR0ZwY21KdVlnIiwiYnMiOiJjLU9LNGRJS3o4aFh5Q3hXS01sSVZVaEtMUzVSY013c1NzcExVc2hOekV0TVQ4MU56U3RSU003UExVak1xN1NYbUZsdHBDMmxXWTZtSVJHWEJpNVhMcVh3ak1RU21HcHpVMTFUVTRXaTBweFVoYlQ4SXFoRjlrYnlVckxsS0tvVVlLb2dKbk5GYzJsNzVKY3I1SlltWnlpVTVDc1VKRllxSk9iQjNGbFFsRi1RV2xSU0NiV195RjVpWDZXUnBwUjZCcm9PN01xNWZGRGRhR0dnYjJTQTRVYUpIazRqWlNuRmNoU0ZDc2dLSWNZTE1BSUEiLCJpZCI6ImZjX2hTSUphdEx5SGZ5dnB0UVBvLV9kLVFZXzIifQ==",
+        "page_token": "_tVt2nicHdBdToMwAADgeJk9jr8wsyWLCUKZDlAKLdgX07WMjpaCggJ78y6eytNoPMGXfF_f6qLlz00pxrEfdoYxTdO67rpaVWvWtQYdFs0MRpU6USZ3m9uNdXdm-2CYvPtu8lJkfcSL5WKwveY-6TLATSy5y0Pl5hI-lLbyc0As1oAyxV6Mze1b0QifFvPzk-8FsFGEtm7D7PjKMGyJhg1VOEaaTS8lOOaSl6cDjKDV40oKxTHsKCYlCl2TqXThpbr8OQs3kV2FsyQ4GaqDOiaaO1kgJqqAA6VFWCBHjESSWx6KAzxQO86ALfIM9YIHs5uFxOXaMxH2PiO8lREGJLw8epkcY9haEVREpwqg3AwcLvu-0sI-FTArDrUZFbNDdAJXZ_a5d1b_Y_vXczvu-veu_gXa6XmC",
+        "question": "What is the 75-55 rule for Airbnb?",
+        "serpapi_ai_overview_link": "https://serpapi.com/search.json?engine=google_ai_overview&page_token=_tVt2nicHdBdToMwAADgeJk9jr8wsyWLCUKZDlAKLdgX07WMjpaCggJ78y6eytNoPMGXfF_f6qLlz00pxrEfdoYxTdO67rpaVWvWtQYdFs0MRpU6USZ3m9uNdXdm-2CYvPtu8lJkfcSL5WKwveY-6TLATSy5y0Pl5hI-lLbyc0As1oAyxV6Mze1b0QifFvPzk-8FsFGEtm7D7PjKMGyJhg1VOEaaTS8lOOaSl6cDjKDV40oKxTHsKCYlCl2TqXThpbr8OQs3kV2FsyQ4GaqDOiaaO1kgJqqAA6VFWCBHjESSWx6KAzxQO86ALfIM9YIHs5uFxOXaMxH2PiO8lREGJLw8epkcY9haEVREpwqg3AwcLvu-0sI-FTArDrUZFbNDdAJXZ_a5d1b_Y_vXczvu-veu_gXa6XmC",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsVVdFUXhUM016VXpoMFdWaHVaMHRaVEcxd2NESmxZbTFOUlZkNVZrZHVaazlsTkVaa05YUldTbEkzY2xFNGJHNXZlRkJaU25Wa1l6UmFSek01VDBOQ1kwcDBZVFJTYmtaTmRtNUdiVmRVZVRsR2RqSlhaazFSZUhkamR4SVhhRk5KU21GMFRIbElabmwyY0hSUlVHOHRYMlF0VVZrYUlrRktTMHhHYlVrMGFtSkpaSFpPWm1Sd0xUZFJjbTEyVlcxdFRGZHJVbVpSVldjIiwiZmN2IjoiMyIsImVpIjoiaFNJSmF0THlIZnl2cHRRUG8tX2QtUVkiLCJxYyI6IkNoMWlaWE4wSUdGcGNtSnVZaUJ3Y205d1pYSjBlU0J0WVc1aFoyVnljeEFBZlpQREZqOCIsInF1ZXN0aW9uIjoiV2hhdCBpcyB0aGUgNzUtNTUgcnVsZSBmb3IgQWlyYm5iPyIsImxrIjoiR2gxM2FHRjBJR2x6SUhSb1pTQTNOU0ExTlNCeWRXeGxJR0ZwY21KdVlnIiwiYnMiOiJjLU9LNGRJS3o4aFh5Q3hXS01sSVZVaEtMUzVSY013c1NzcExVc2hOekV0TVQ4MU56U3RSU003UExVak1xN1NYbUZsdHBDMmxXWTZtSVJHWEJpNVhMcVh3ak1RU21HcHpVMTFUVTRXaTBweFVoYlQ4SXFoRjlrYnlVckxsS0tvVVlLb2dKbk5GYzJsNzVKY3I1SlltWnlpVTVDc1VKRllxSk9iQjNGbFFsRi1RV2xSU0NiV195RjVpWDZXUnBwUjZCcm9PN01xNWZGRGRhR0dnYjJTQTRVYUpIazRqWlNuRmNoU0ZDc2dLSWNZTE1BSUEiLCJpZCI6ImZjX2hTSUphdEx5SGZ5dnB0UVBvLV9kLVFZXzIifQ%3D%3D",
+        "type": "ai_overview"
+      },
+      {
+        "date": "Aug 14, 2025",
+        "displayed_link": "https://awning.com › post › airbnb-management-fees",
+        "link": "https://awning.com/post/airbnb-management-fees#:~:text=A%3A%20A%20typical%20Airbnb%20management,)%20runs%2018%E2%80%9340%25.",
+        "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsVVdFUXhUM016VXpoMFdWaHVaMHRaVEcxd2NESmxZbTFOUlZkNVZrZHVaazlsTkVaa05YUldTbEkzY2xFNGJHNXZlRkJaU25Wa1l6UmFSek01VDBOQ1kwcDBZVFJTYmtaTmRtNUdiVmRVZVRsR2RqSlhaazFSZUhkamR4SVhhRk5KU21GMFRIbElabmwyY0hSUlVHOHRYMlF0VVZrYUlrRktTMHhHYlVrMGFtSkpaSFpPWm1Sd0xUZFJjbTEyVlcxdFRGZHJVbVpSVldjIiwiZmN2IjoiMyIsImVpIjoiaFNJSmF0THlIZnl2cHRRUG8tX2QtUVkiLCJxYyI6IkNoMWlaWE4wSUdGcGNtSnVZaUJ3Y205d1pYSjBlU0J0WVc1aFoyVnljeEFBZlpQREZqOCIsInF1ZXN0aW9uIjoiSG93IG11Y2ggdG8gcGF5IGFuIEFpcmJuYiBwcm9wZXJ0eSBtYW5hZ2VyPyIsImxrIjoiR2lkb2IzY2diWFZqYUNCMGJ5QndZWGtnWVdseVltNWlJSEJ5YjNCbGNuUjVJRzFoYm1GblpYSSIsImJzIjoiYy1PSzRkSUt6OGhYeUN4V0tNbElWVWhLTFM1UmNNd3NTc3BMVXNoTnpFdE1UODFOelN0UlNNN1BMVWpNcTdTWG1GbHRwQzJsV1k2bUlSR1hCaTVYTHFYd2pNUVNtR3B6VTExVFU0V2kwcHhVaGJUOElxaEY5a2J5VXJMbEtLb1VZS29nSm5ORmMybDc1SmNyNUpZbVp5aVU1Q3NVSkZZcUpPYkIzRmxRbEYtUVdsUlNDYldfeUY1aVg2V1JwcFI2QnJvTzdNcTVmRkRkYUdHZ2IyU0E0VWFKSGs0alpTbkZjaFNGQ3NnS0ljWUxNQUlBIiwiaWQiOiJmY19oU0lKYXRMeUhmeXZwdFFQby1fZC1RWV8yIn0=",
+        "question": "How much to pay an Airbnb property manager?",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsVVdFUXhUM016VXpoMFdWaHVaMHRaVEcxd2NESmxZbTFOUlZkNVZrZHVaazlsTkVaa05YUldTbEkzY2xFNGJHNXZlRkJaU25Wa1l6UmFSek01VDBOQ1kwcDBZVFJTYmtaTmRtNUdiVmRVZVRsR2RqSlhaazFSZUhkamR4SVhhRk5KU21GMFRIbElabmwyY0hSUlVHOHRYMlF0VVZrYUlrRktTMHhHYlVrMGFtSkpaSFpPWm1Sd0xUZFJjbTEyVlcxdFRGZHJVbVpSVldjIiwiZmN2IjoiMyIsImVpIjoiaFNJSmF0THlIZnl2cHRRUG8tX2QtUVkiLCJxYyI6IkNoMWlaWE4wSUdGcGNtSnVZaUJ3Y205d1pYSjBlU0J0WVc1aFoyVnljeEFBZlpQREZqOCIsInF1ZXN0aW9uIjoiSG93IG11Y2ggdG8gcGF5IGFuIEFpcmJuYiBwcm9wZXJ0eSBtYW5hZ2VyPyIsImxrIjoiR2lkb2IzY2diWFZqYUNCMGJ5QndZWGtnWVdseVltNWlJSEJ5YjNCbGNuUjVJRzFoYm1GblpYSSIsImJzIjoiYy1PSzRkSUt6OGhYeUN4V0tNbElWVWhLTFM1UmNNd3NTc3BMVXNoTnpFdE1UODFOelN0UlNNN1BMVWpNcTdTWG1GbHRwQzJsV1k2bUlSR1hCaTVYTHFYd2pNUVNtR3B6VTExVFU0V2kwcHhVaGJUOElxaEY5a2J5VXJMbEtLb1VZS29nSm5ORmMybDc1SmNyNUpZbVp5aVU1Q3NVSkZZcUpPYkIzRmxRbEYtUVdsUlNDYldfeUY1aVg2V1JwcFI2QnJvTzdNcTVmRkRkYUdHZ2IyU0E0VWFKSGs0alpTbkZjaFNGQ3NnS0ljWUxNQUlBIiwiaWQiOiJmY19oU0lKYXRMeUhmeXZwdFFQby1fZC1RWV8yIn0%3D",
+        "snippet": "A: A typical Airbnb management fee ranges from 10% to 40% of gross rental revenue. Half-service management (listing optimization, pricing, guest communication) runs 10–15%. Full-service management (everything including cleaning, maintenance, and property care) runs 18–40%.",
+        "source_logo": "https://serpapi.com/searches/6a09228414537b3524aa3a3d/images/qfTPv9QdmrKgt93_I2p22H1NvXA5q0zYrcN5zD-6zjU.png",
+        "title": "Airbnb Management Fees: Complete Cost Breakdown (2026) | Awning",
+        "type": "featured_snippet"
+      },
+      {
+        "date": "Feb 18, 2025",
+        "displayed_link": "https://www.facebook.com › SimplifiedREIs › posts › th...",
+        "link": "https://www.facebook.com/SimplifiedREIs/posts/the-8020-rule-also-known-as-the-pareto-principle-tells-us-that-20-of-our-efforts/932304612413380/#:~:text=Airbnb%20property%20managers%3F%20.-,%F0%9F%93%8A%20For%20Airbnb%20Hosts%3A%20.,80%25%20of%20your%20bookings.%20.",
+        "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsVVdFUXhUM016VXpoMFdWaHVaMHRaVEcxd2NESmxZbTFOUlZkNVZrZHVaazlsTkVaa05YUldTbEkzY2xFNGJHNXZlRkJaU25Wa1l6UmFSek01VDBOQ1kwcDBZVFJTYmtaTmRtNUdiVmRVZVRsR2RqSlhaazFSZUhkamR4SVhhRk5KU21GMFRIbElabmwyY0hSUlVHOHRYMlF0VVZrYUlrRktTMHhHYlVrMGFtSkpaSFpPWm1Sd0xUZFJjbTEyVlcxdFRGZHJVbVpSVldjIiwiZmN2IjoiMyIsImVpIjoiaFNJSmF0THlIZnl2cHRRUG8tX2QtUVkiLCJxYyI6IkNoMWlaWE4wSUdGcGNtSnVZaUJ3Y205d1pYSjBlU0J0WVc1aFoyVnljeEFBZlpQREZqOCIsInF1ZXN0aW9uIjoiV2hhdCBpcyB0aGUgODAvMjAgcnVsZSBmb3IgQWlyYm5iPyIsImxrIjoiR2lGM2FHRjBJR2x6SUhSb1pTQTRNQ0F5TUNCeWRXeGxJR1p2Y2lCaGFYSmlibUkiLCJicyI6ImMtT0s0ZElLejhoWHlDeFdLTWxJVlVoS0xTNVJjTXdzU3NwTFVzaE56RXRNVDgxTnpTdFJTTTdQTFVqTXE3U1htRmx0cEMybFdZNm1JUkdYQmk1WExxWHdqTVFTbUdwelUxMVRVNFdpMHB4VWhiVDhJcWhGOWtieVVyTGxLS29VWUtvZ0puTkZjMmw3NUpjcjVKWW1aeWlVNUNzVUpGWXFKT2JCM0ZsUWxGLVFXbFJTQ2JXX3lGNWlYNldScHBSNkJyb083TXE1ZkZEZGFHR2diMlNBNFVhSkhrNGpaU25GY2hTRkNzZ0tJY1lMTUFJQSIsImlkIjoiZmNfaFNJSmF0THlIZnl2cHRRUG8tX2QtUVlfMiJ9",
+        "question": "What is the 80/20 rule for Airbnb?",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsVVdFUXhUM016VXpoMFdWaHVaMHRaVEcxd2NESmxZbTFOUlZkNVZrZHVaazlsTkVaa05YUldTbEkzY2xFNGJHNXZlRkJaU25Wa1l6UmFSek01VDBOQ1kwcDBZVFJTYmtaTmRtNUdiVmRVZVRsR2RqSlhaazFSZUhkamR4SVhhRk5KU21GMFRIbElabmwyY0hSUlVHOHRYMlF0VVZrYUlrRktTMHhHYlVrMGFtSkpaSFpPWm1Sd0xUZFJjbTEyVlcxdFRGZHJVbVpSVldjIiwiZmN2IjoiMyIsImVpIjoiaFNJSmF0THlIZnl2cHRRUG8tX2QtUVkiLCJxYyI6IkNoMWlaWE4wSUdGcGNtSnVZaUJ3Y205d1pYSjBlU0J0WVc1aFoyVnljeEFBZlpQREZqOCIsInF1ZXN0aW9uIjoiV2hhdCBpcyB0aGUgODAvMjAgcnVsZSBmb3IgQWlyYm5iPyIsImxrIjoiR2lGM2FHRjBJR2x6SUhSb1pTQTRNQ0F5TUNCeWRXeGxJR1p2Y2lCaGFYSmlibUkiLCJicyI6ImMtT0s0ZElLejhoWHlDeFdLTWxJVlVoS0xTNVJjTXdzU3NwTFVzaE56RXRNVDgxTnpTdFJTTTdQTFVqTXE3U1htRmx0cEMybFdZNm1JUkdYQmk1WExxWHdqTVFTbUdwelUxMVRVNFdpMHB4VWhiVDhJcWhGOWtieVVyTGxLS29VWUtvZ0puTkZjMmw3NUpjcjVKWW1aeWlVNUNzVUpGWXFKT2JCM0ZsUWxGLVFXbFJTQ2JXX3lGNWlYNldScHBSNkJyb083TXE1ZkZEZGFHR2diMlNBNFVhSkhrNGpaU25GY2hTRkNzZ0tJY1lMTUFJQSIsImlkIjoiZmNfaFNJSmF0THlIZnl2cHRRUG8tX2QtUVlfMiJ9",
+        "snippet": "📊 For Airbnb Hosts: . ✅ 20% of your listings bring in 80% of your income. ✅ 20% of your guests leave 80% of your glowing reviews. ✅ 20% of your marketing efforts drive 80% of your bookings. .",
+        "source_logo": "https://serpapi.com/searches/6a09228414537b3524aa3a3d/images/qfTPv9QdmrKgt93_I2p22Acw2h5ZlR1461uClIq_wQI.png",
+        "title": "The 80/20 Rule (also known as the Pareto Principle) tells ... - Facebook",
+        "type": "featured_snippet"
+      }
+    ],
+    "relatedSearches": [
+      {
+        "block_position": 1,
+        "link": "https://www.google.com/search?sca_esv=370af11418dd4ebc&gl=us&q=best+airbnb+property+managers+near+california&sa=X&ved=2ahUKEwiSyYWYnr-UAxX8l4kEHaN3N28Q1QJ6BAguEAE",
+        "query": "best airbnb property managers near california",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&location=United+States&q=best+airbnb+property+managers+near+california"
+      },
+      {
+        "block_position": 1,
+        "link": "https://www.google.com/search?sca_esv=370af11418dd4ebc&gl=us&q=best+airbnb+property+managers+near+texas&sa=X&ved=2ahUKEwiSyYWYnr-UAxX8l4kEHaN3N28Q1QJ6BAhHEAE",
+        "query": "best airbnb property managers near texas",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&location=United+States&q=best+airbnb+property+managers+near+texas"
+      },
+      {
+        "block_position": 1,
+        "link": "https://www.google.com/search?sca_esv=370af11418dd4ebc&gl=us&q=Best+airbnb+property+managers+reddit&sa=X&ved=2ahUKEwiSyYWYnr-UAxX8l4kEHaN3N28Q1QJ6BAhFEAE",
+        "query": "Best airbnb property managers reddit",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&location=United+States&q=Best+airbnb+property+managers+reddit"
+      },
+      {
+        "block_position": 1,
+        "link": "https://www.google.com/search?sca_esv=370af11418dd4ebc&gl=us&q=Best+airbnb+property+managers+in+usa&sa=X&ved=2ahUKEwiSyYWYnr-UAxX8l4kEHaN3N28Q1QJ6BAhAEAE",
+        "query": "Best airbnb property managers in usa",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&location=United+States&q=Best+airbnb+property+managers+in+usa"
+      },
+      {
+        "block_position": 1,
+        "link": "https://www.google.com/search?sca_esv=370af11418dd4ebc&gl=us&q=Best+airbnb+property+managers+in+the+world&sa=X&ved=2ahUKEwiSyYWYnr-UAxX8l4kEHaN3N28Q1QJ6BAg5EAE",
+        "query": "Best airbnb property managers in the world",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&location=United+States&q=Best+airbnb+property+managers+in+the+world"
+      },
+      {
+        "block_position": 1,
+        "link": "https://www.google.com/search?sca_esv=370af11418dd4ebc&gl=us&q=Airbnb+property+management+companies&sa=X&ved=2ahUKEwiSyYWYnr-UAxX8l4kEHaN3N28Q1QJ6BAg4EAE",
+        "query": "Airbnb property management companies",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&location=United+States&q=Airbnb+property+management+companies"
+      },
+      {
+        "block_position": 1,
+        "link": "https://www.google.com/search?sca_esv=370af11418dd4ebc&gl=us&q=Airbnb+management+company+reddit&sa=X&ved=2ahUKEwiSyYWYnr-UAxX8l4kEHaN3N28Q1QJ6BAg0EAE",
+        "query": "Airbnb management company reddit",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&location=United+States&q=Airbnb+management+company+reddit"
+      },
+      {
+        "block_position": 1,
+        "link": "https://www.google.com/search?sca_esv=370af11418dd4ebc&gl=us&q=Airbnb+management+company+near+me&sa=X&ved=2ahUKEwiSyYWYnr-UAxX8l4kEHaN3N28Q1QJ6BAgvEAE",
+        "query": "Airbnb management company near me",
+        "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&location=United+States&q=Airbnb+management+company+near+me"
+      }
+    ],
+    "schemaTypes": [
+      {
+        "count": 1,
+        "type": "Organization"
+      },
+      {
+        "count": 1,
+        "type": "Person"
+      },
+      {
+        "count": 1,
+        "type": "Blogposting"
+      },
+      {
+        "count": 1,
+        "type": "Faqpage"
+      },
+      {
+        "count": 1,
+        "type": "Breadcrumblist"
+      },
+      {
+        "count": 1,
+        "type": "Itemlist"
+      },
+      {
+        "count": 1,
+        "type": "Review"
+      }
+    ],
+    "secondaryKeywords": [],
+    "status": "SUCCESS",
+    "subHeadingsCount": 6,
+    "tagCounts": [
+      {
+        "comment": "Leave As Is",
+        "max": 2,
+        "mean": 1.09,
+        "min": 1,
+        "signalCnt": 1,
+        "tagLabel": "H1 Tag Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 5",
+        "max": 27,
+        "mean": 11.38,
+        "min": 1,
+        "signalCnt": 16,
+        "tagLabel": "H2 Tag Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 6",
+        "max": 26,
+        "mean": 13.57,
+        "min": 5,
+        "signalCnt": 20,
+        "tagLabel": "H3 Tag Total"
+      },
+      {
+        "comment": "Increase the total number on your page by 3",
+        "max": 6,
+        "mean": 2.6,
+        "min": 0,
+        "signalCnt": 0,
+        "tagLabel": "H4 Tag Total"
+      },
+      {
+        "comment": "Leave As Is",
+        "max": 1,
+        "mean": 0.09,
+        "min": 0,
+        "signalCnt": 0,
+        "tagLabel": "H5 Tag Total"
+      },
+      {
+        "comment": "Leave As Is",
+        "max": 1,
+        "mean": 0.3,
+        "min": 0,
+        "signalCnt": 0,
+        "tagLabel": "H6 Tag Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 72",
+        "max": 118,
+        "mean": 58.5,
+        "min": 7,
+        "signalCnt": 131,
+        "tagLabel": "Paragraph Text Tag Total"
+      },
+      {
+        "comment": "Increase the total number on your page by 57",
+        "max": 192,
+        "mean": 125.88,
+        "min": 65,
+        "signalCnt": 69,
+        "tagLabel": "Anchor Text Tag Total"
+      },
+      {
+        "comment": "Increase the total number on your page by 3",
+        "max": 9,
+        "mean": 26,
+        "min": 0,
+        "signalCnt": 23,
+        "tagLabel": "Image File total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 5",
+        "max": 56,
+        "mean": 18.18,
+        "min": 0,
+        "signalCnt": 23,
+        "tagLabel": "Image Alt Tag Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 71",
+        "max": 5,
+        "mean": 2.4,
+        "min": 1,
+        "signalCnt": 73,
+        "tagLabel": "Bold Tag Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 10",
+        "max": 6,
+        "mean": 3.2,
+        "min": 1,
+        "signalCnt": 13,
+        "tagLabel": "Italic Tag Total"
+      },
+      {
+        "comment": "Leave As Is",
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "signalCnt": 0,
+        "tagLabel": "Video File Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 2",
+        "max": 0,
+        "mean": 0.12,
+        "min": 0,
+        "signalCnt": 2,
+        "tagLabel": "Ordered List Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 21",
+        "max": 2,
+        "mean": 0.25,
+        "min": 0,
+        "signalCnt": 21,
+        "tagLabel": "Ordered List Items Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 8",
+        "max": 2,
+        "mean": 6.12,
+        "min": 1,
+        "signalCnt": 14,
+        "tagLabel": "Unordered List Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 32",
+        "max": 112,
+        "mean": 42.5,
+        "min": 8,
+        "signalCnt": 75,
+        "tagLabel": "Unordered List Items Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 3",
+        "max": 1,
+        "mean": 0.2,
+        "min": 0,
+        "signalCnt": 3,
+        "tagLabel": "Table Total"
+      },
+      {
+        "comment": "Reduce the total number on your page by 98",
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "signalCnt": 98,
+        "tagLabel": "Table Items Total"
+      },
+      {
+        "comment": "Leave As Is",
+        "max": 1,
+        "mean": 0.11,
+        "min": 0,
+        "signalCnt": 0,
+        "tagLabel": "Form Total"
+      },
+      {
+        "comment": "Leave As Is",
+        "max": 1,
+        "mean": 0.3,
+        "min": 0,
+        "signalCnt": 0,
+        "tagLabel": "iFrame Total"
+      },
+      {
+        "comment": "Leave As Is",
+        "max": 1,
+        "mean": 1,
+        "min": 1,
+        "signalCnt": 1,
+        "tagLabel": "Frequently Asked Questions"
+      },
+      {
+        "comment": "Leave As Is",
+        "max": 1,
+        "mean": 1,
+        "min": 1,
+        "signalCnt": 1,
+        "tagLabel": "Table of content"
+      }
+    ],
+    "url": "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/blog/best-airbnb-property-managers-with-dynamic-pricing-2026/",
+    "variations": [
+      "best airbnb management companies",
+      "co-host network",
+      "full-service airbnb management",
+      "urban airbnb markets",
+      "casa haven properties",
+      "airbnb management companies",
+      "rental management company",
+      "airdna ranks"
+    ],
+    "wordCount": {
+      "current": 8920,
+      "target": 2129
+    }
+  },
+  "status": "SUCCESS"
+}

@@ -245,11 +245,9 @@ ADR was $300. RevPAR was $200. The $100 gap is what the empty nights cost you, e
 
 ### Try it on your own numbers
 
-<div class="rf-callout rf-callout-tool" style="margin: 1.5rem 0; padding: 1.5rem 1.75rem; border-radius: 16px; border: 1px solid #C8C4BC; background: #E8E6E1;">
-  <p class="kicker" style="font-family: Helvetica, Arial, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #5D6D59; margin: 0 0 8px;">RevPAR + ADR Calculator</p>
-  <p style="margin: 0 0 12px; font-size: 16px; line-height: 1.55; color: #3F261F;">Plug your revenue, booked nights, and available nights into the standalone revenue calculator and it returns ADR, RevPAR, occupancy, and the comp-set delta in one read. No login, no email gate.</p>
-  <p style="margin: 0; font-size: 14px;"><a href="https://revfactor-calculator.vercel.app" target="_blank" rel="noopener" style="color: #13342D; font-weight: 700; text-decoration: underline;">Open the RevFactor revenue calculator →</a></p>
-</div>
+import RevPARCalculator from '../../components/RevPARCalculator.jsx';
+
+<RevPARCalculator client:load />
 
 If you would rather run the numbers in a spreadsheet, the three formulas you need are:
 
