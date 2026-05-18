@@ -124,32 +124,44 @@ const canonicalUrl = Astro.url.href;
     gtag('config', 'G-1CTGBJ9RLK');
     gtag('config', 'AW-18106897053');
 
-    // Cal.com booking listener — fires Google Ads "Strategy Call Booked" conversion
-    // and GA4 event when any embedded Cal.com iframe completes a booking.
-    // Cal.com sends `{ type: 'bookingSuccessful', data: {...} }` via postMessage.
+    // Scheduler booking listener — fires Google Ads "Strategy Call Booked
+    // (Parent Attributed)" conversion + GA4 event when the embedded scheduler
+    // (schedule.revfactor.io) or a Cal.com iframe confirms a booking.
+    // Firing from THIS origin (revfactor.io) carries the gclid into the
+    // conversion ping, which the iframe-origin gtag can't do. This is the
+    // single primary action for Smart Bidding (7614208046); the iframe's
+    // own gtag still fires but its actions (7591215586 + 7604128782) are
+    // demoted to observation-only so they don't pollute bidding.
     (function () {
       var bookedThisSession = false;
       window.addEventListener('message', function (e) {
         if (!e.data || typeof e.data !== 'object') return;
-        var type = e.data.type || (e.data.data && e.data.data.type);
-        if (type !== 'bookingSuccessful' && type !== 'bookingSuccessfulV2') return;
+        var d = e.data;
+        var type = d.type || (d.data && d.data.type);
+        var isBooking = type === 'scheduler_booking_confirmed' ||
+                        type === 'booking_confirmed' ||
+                        type === 'bookingSuccessful' ||
+                        type === 'bookingSuccessfulV2' ||
+                        d.booked === true ||
+                        d.confirmed === true;
+        if (!isBooking) return;
         if (bookedThisSession) return;
         bookedThisSession = true;
 
         gtag('event', 'conversion', {
-          send_to: 'AW-18106897053/WkHxCOKD46McEJ2lhbpD',
+          send_to: 'AW-18106897053/l1rvCK6w3q4cEJ2lhbpD',
           value: 1500.00,
           currency: 'USD'
         });
         gtag('event', 'strategy_call_booked', {
           value: 1500,
           currency: 'USD',
-          source: 'cal_com_embed'
+          source: 'scheduler_embed'
         });
         window.posthog?.capture('strategy_call_booked', {
           value: 1500,
           currency: 'USD',
-          source: 'cal_com_embed'
+          source: 'scheduler_embed'
         });
       });
     })();
