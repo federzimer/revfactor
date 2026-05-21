@@ -122,34 +122,36 @@ type MasonryPost = {
 };
 
 // Per-post masonry assignment + explicit column placement.
-// 4 distinct aspect ratios drive height variety across the grid:
+// 5 distinct aspect ratios drive height variety across the grid:
 //   2/3   = very-tall (anchor)
 //   3/4   = tall
 //   4/5   = portrait
-//   4/3   = classic
+//   4/3   = classic landscape
 //   16/9  = wide
-// Each desktop column receives at least one tall/anchor card so the
-// silhouette staggers cleanly even when same-height cards stack.
+// Layout intent — every desktop column carries at least one tall/anchor
+// card (3/4 or 2/3) but in a DIFFERENT vertical slot so column silhouettes
+// don't echo each other. Bottom cards are intentionally varied (wide,
+// portrait, classic) so the lower edge staggers heavily across columns.
 const MASONRY_OVERRIDES: Record<string, Partial<MasonryPost> & { variant: MasonryPost['variant']; col?: 'a' | 'b' | 'c' }> = {
-  // Col A — anchor: 4/5 portrait of the PM listicle (newest)
+  // Col A — TALL top, WIDE bottom (descending). Newest post anchors the col.
   'best-airbnb-property-managers-with-dynamic-pricing-2026': {
-    variant: 'overlay', ar: '4/5', col: 'a',
+    variant: 'overlay', ar: '3/4', col: 'a',
   },
   'how-to-build-comp-set-str': {
     variant: 'overlay', ar: '16/9', col: 'a',
   },
 
-  // Col B — anchor: 3/4 tall of the STR RM listicle
+  // Col B — VERY-TALL top, PORTRAIT bottom (tallest total column).
   'best-str-revenue-management-companies-2026': {
-    variant: 'overlay', ar: '3/4', col: 'b',
+    variant: 'overlay', ar: '2/3', col: 'b',
   },
   'adr-vs-revpar-airbnb-hosts': {
-    variant: 'overlay', ar: '4/3', col: 'b',
+    variant: 'overlay', ar: '4/5', col: 'b',
   },
 
-  // Col C — anchor: 2/3 very-tall of the RevFactor Method (signature)
+  // Col C — TALL top, CLASSIC bottom (medium total, distinct from A & B).
   'the-revfactor-method': {
-    variant: 'overlay', ar: '2/3', col: 'c',
+    variant: 'overlay', ar: '3/4', col: 'c',
   },
   'dynamic-pricing-str-beginners-guide': {
     variant: 'overlay', ar: '4/3', col: 'c',
