@@ -47,7 +47,7 @@ export default function CTA() {
           <span style={{ fontStyle: 'italic' }}>your revenue?</span>
         </h2>
         <p className="cta-animate opacity-0 text-[15px] leading-[1.7] text-[#8F6E62] max-w-lg mx-auto mb-10">
-          Book a free strategy call. We'll analyze your market, review your current
+          Book a discovery call. We'll analyze your market, review your current
           pricing, and show you exactly where the revenue opportunity lies.
         </p>
         <div className="cta-animate opacity-0">
@@ -57,7 +57,7 @@ export default function CTA() {
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
-            <span className="relative z-10">schedule a strategy call</span>
+            <span className="relative z-10">schedule a Discovery Call</span>
             <ArrowRight className="relative z-10 w-4 h-4" />
           </button>
         </div>

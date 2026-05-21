@@ -155,7 +155,7 @@ export default function ExitIntent() {
       >
         {/* Header — just the 2-line headline, forced break.
             Line 1: "Don't leave revenue on the table."
-            Line 2: italic "Book your free strategy call." */}
+            Line 2: italic "Book your discovery call." */}
         <div className="px-6 md:px-8 pt-6 md:pt-7 pb-4 flex items-start justify-between">
           <h2
             id="exit-intent-title"
@@ -164,7 +164,7 @@ export default function ExitIntent() {
           >
             Don't leave revenue on the table.
             <br />
-            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>Book your free strategy call.</span>
+            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>Book your discovery call.</span>
           </h2>
           <button
             onClick={close}
@@ -186,7 +186,7 @@ export default function ExitIntent() {
         >
           <iframe
             src="https://schedule.revfactor.io/embed"
-            title="Schedule a strategy call with RevFactor"
+            title="Schedule a Discovery Call with RevFactor"
             className="w-full border-0 block rounded-[14px]"
             style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
             allow="payment"

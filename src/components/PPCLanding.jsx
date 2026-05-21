@@ -58,7 +58,7 @@ const MESSAGE_VARIANTS = {
     headlinePart1: 'Most STRs lose 18% in revenue.',
     headlinePart2Italic: 'We get it back.',
     subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account. Monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +18% lift. Flat $320/mo.',
-    ctaText: 'Book Free Strategy Call',
+    ctaText: 'Book a Discovery Call',
   },
   // Tool Intent campaign — searcher is shopping a pricing tool, reframe the category
   tool: {
@@ -66,7 +66,7 @@ const MESSAGE_VARIANTS = {
     headlinePart1: 'Pricing tools set numbers.',
     headlinePart2Italic: 'We set strategy.',
     subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work and pull back the 18% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist plus 24/7 dashboard messaging. Flat $320/mo.',
-    ctaText: 'Book Free Strategy Call',
+    ctaText: 'Book a Discovery Call',
   },
   // Conquest campaign — searcher is on PriceLabs / Wheelhouse / Beyond
   conquest: {
@@ -74,7 +74,7 @@ const MESSAGE_VARIANTS = {
     headlinePart1: 'Already on PriceLabs?',
     headlinePart2Italic: 'You’re probably 18% short.',
     subhead: 'Algorithms set the numbers. They can’t set the strategy that makes the numbers actually work. Comp positioning, length-of-stay rules, channel mix, listing audit. A seasoned pricing strategist does. Documented +18% lift across our portfolio. Plus 24/7 dashboard messaging.',
-    ctaText: 'Book Free Strategy Call',
+    ctaText: 'Book a Discovery Call',
   },
 };
 
@@ -186,7 +186,7 @@ function StickyMobileCTA({ onOpen }) {
         onClick={onOpen}
         className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full active:scale-[0.98] transition-transform"
       >
-        <span>Book Free Strategy Call</span>
+        <span>Book a Discovery Call</span>
         <ArrowRight className="w-4 h-4" />
       </button>
     </div>
@@ -258,7 +258,7 @@ const TESTIMONIALS = [
 const PROCESS_STEPS = [
   {
     n: "01",
-    title: "Strategy Call",
+    title: "Discovery Call",
     body: "30 minutes with a seasoned pricing strategist. We review your portfolio, market, and current pricing. You leave with concrete revenue recommendations whether you work with us or not.",
   },
   {
@@ -269,7 +269,7 @@ const PROCESS_STEPS = [
   {
     n: "03",
     title: "Ongoing Strategy",
-    body: "Monthly strategy calls with your dedicated strategist, dynamic pricing calibration, calendar optimization, and comp tracking. Always-on dashboard messaging between calls. Flat $320/mo per property.",
+    body: "Monthly Discovery Calls with your dedicated strategist, dynamic pricing calibration, calendar optimization, and comp tracking. Always-on dashboard messaging between calls. Flat $320/mo per property.",
   },
 ];
 
@@ -278,7 +278,7 @@ export default function PPCLanding({
   headlinePart1: defaultHeadlinePart1,
   headlinePart2Italic: defaultHeadlinePart2Italic,
   subhead: defaultSubhead,
-  ctaText: defaultCtaText = "Schedule a free strategy call",
+  ctaText: defaultCtaText = "Schedule a discovery call",
   comparisonRows,
   faqs,
   finalCtaPretext = "Ready to talk strategy?",
@@ -530,7 +530,7 @@ export default function PPCLanding({
             >
               <iframe
                 src={scheduleUrl}
-                title="Schedule a strategy call with RevFactor"
+                title="Schedule a Discovery Call with RevFactor"
                 className="w-full border-0 block"
                 style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}
                 allow="payment"
@@ -628,7 +628,7 @@ export default function PPCLanding({
             { to: 18,  prefix: '+', suffix: '%',     label: 'Avg revenue lift' },
             { to: 165, prefix: '',  suffix: '+',     label: 'Properties managed' },
             { to: 320, prefix: '$', suffix: '',      label: '/mo flat per property' },
-            { to: 30,  prefix: '',  suffix: ' min',  label: 'Free strategy call' },
+            { to: 30,  prefix: '',  suffix: ' min',  label: 'Free Discovery Call' },
           ].map((s, i) => (
             <Reveal key={i} delay={i * 100}>
               <div
@@ -742,7 +742,7 @@ export default function PPCLanding({
             <iframe
               ref={calRef}
               src={scheduleUrl}
-              title="Schedule a strategy call with RevFactor"
+              title="Schedule a Discovery Call with RevFactor"
               className="w-full border-0 block"
               style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}
               loading="lazy"
@@ -805,7 +805,7 @@ export default function PPCLanding({
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
             From{' '}
-            <span style={{ fontStyle: 'italic', color: '#A8BBA3' }}>strategy call</span>{' '}
+            <span style={{ fontStyle: 'italic', color: '#A8BBA3' }}>Discovery Call</span>{' '}
             to monthly partner
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -875,7 +875,7 @@ export default function PPCLanding({
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
             Book a free 30-minute{' '}
-            <span style={{ fontStyle: 'italic' }}>strategy call</span>
+            <span style={{ fontStyle: 'italic' }}>Discovery Call</span>
           </h2>
           <p className="text-[16px] leading-[1.7] text-[#8F6E62] max-w-lg mx-auto mb-10">
             We'll review your market, current pricing, and where the revenue opportunity is.

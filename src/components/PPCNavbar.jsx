@@ -65,7 +65,7 @@ export default function PPCNavbar() {
       </div>
 
       {/* Desktop CTA — brownish-red (#8B3A3A) to match the main navbar's
-          Free Strategy Call button so the conversion CTA reads the same
+          Discovery Call button so the conversion CTA reads the same
           across the brand site and paid landing pages. */}
       <div className="hidden md:flex items-center gap-2 ml-2">
         <a
@@ -78,7 +78,7 @@ export default function PPCNavbar() {
             className="absolute inset-0 bg-[#6F2F2F] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           />
-          <span className="relative z-10">Book Free Strategy Call</span>
+          <span className="relative z-10">Book a Discovery Call</span>
         </a>
       </div>
 
@@ -135,7 +135,7 @@ export default function PPCNavbar() {
             onClick={scrollTo('#schedule')}
             className="block mt-2 w-full text-center py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full cursor-pointer"
           >
-            Book Free Strategy Call
+            Book a Discovery Call
           </a>
         </div>
       )}

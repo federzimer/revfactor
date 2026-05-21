@@ -207,7 +207,7 @@ function SubscribeModal({ onClose, onOpenSchedule }) {
             <ArrowRight className="relative z-10 w-4 h-4" />
           </button>
 
-          {/* Schedule Free Strategy Call — secondary path. Lets visitors who
+          {/* Schedule a Discovery Call — secondary path. Lets visitors who
               want human guidance before committing to a tier book a call
               instead of bouncing. PostHog data showed one buyer cycled
               through 4 tiers in 2 minutes without checking out. */}
@@ -220,7 +220,7 @@ function SubscribeModal({ onClose, onOpenSchedule }) {
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <Phone className="w-3.5 h-3.5" />
-            <span>schedule free strategy call</span>
+            <span>schedule a discovery call</span>
           </button>
         </div>
       </div>
@@ -307,8 +307,8 @@ export default function Navbar({ lightBg = false }) {
           ))}
         </div>
 
-        {/* Desktop Buttons — order: Owners → Subscribe → Free Strategy Call.
-            Free Strategy Call sits on the right (visually heaviest) so it
+        {/* Desktop Buttons — order: Owners → Subscribe → Discovery Call.
+            Discovery Call sits on the right (visually heaviest) so it
             anchors the eye as the primary conversion path. */}
         <div className="hidden lg:flex items-center gap-2 ml-2">
           {/* Owners — outline (renamed from "owner portal" for compactness) */}
@@ -327,7 +327,7 @@ export default function Navbar({ lightBg = false }) {
             owners
           </a>
 
-          {/* Subscribe — moss. Sits between Owners and Free Strategy Call. */}
+          {/* Subscribe — moss. Sits between Owners and Discovery Call. */}
           <button
             onClick={() => { window.posthog?.capture('subscribe_modal_opened', { source: 'navbar_desktop' }); setModalOpen(true); }}
             className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
@@ -340,7 +340,7 @@ export default function Navbar({ lightBg = false }) {
             <span className="relative z-10">subscribe</span>
           </button>
 
-          {/* Free Strategy Call — brownish-red (#8B3A3A) primary CTA on the
+          {/* Discovery Call — brownish-red (#8B3A3A) primary CTA on the
               right edge. */}
           <button
             onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'navbar_desktop' }); setScheduleOpen(true); }}
@@ -353,7 +353,7 @@ export default function Navbar({ lightBg = false }) {
             />
             <span className="relative z-10 flex items-center gap-1.5 whitespace-nowrap">
               <Phone className="w-3 h-3" />
-              free strategy call
+              discovery call
             </span>
           </button>
         </div>
@@ -440,7 +440,7 @@ export default function Navbar({ lightBg = false }) {
               className="flex items-center justify-center gap-2 mt-2 w-full py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full cursor-pointer"
             >
               <Phone className="w-3.5 h-3.5" />
-              free strategy call
+              discovery call
             </button>
           </div>
         )}
@@ -458,7 +458,7 @@ export default function Navbar({ lightBg = false }) {
         />
       )}
 
-      {/* Schedule Modal — direct from "Free Strategy Call" button or
+      {/* Schedule Modal — direct from "Discovery Call" button or
           handed off from SubscribeModal. */}
       {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>

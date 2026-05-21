@@ -3,7 +3,7 @@ import ScheduleModal from './ScheduleModal';
 
 /* Tiny client island for blog post bottom CTA — opens the schedule modal
    instead of routing to /review. */
-export default function BlogScheduleCTA({ label = 'schedule a strategy call →' }) {
+export default function BlogScheduleCTA({ label = 'schedule a Discovery Call →' }) {
   const [open, setOpen] = useState(false);
   return (
     <>

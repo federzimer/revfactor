@@ -132,7 +132,7 @@ export default function Hero() {
                 style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
               >
                 <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
-                <span className="relative z-10">schedule a strategy call</span>
+                <span className="relative z-10">schedule a Discovery Call</span>
                 <ArrowRight className="relative z-10 w-4 h-4" />
               </button>
             </div>

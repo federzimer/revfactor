@@ -2,17 +2,22 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { X } from 'lucide-react';
+import QualifierGate from './QualifierGate.jsx';
 
 /* ─── Schedule Modal ───
-   Renders an iframe with the RevFactor scheduling embed.
-   Auto-sizes panel height to the iframe's posted content height
-   (scheduler app sends iframeHeight via postMessage as the user moves
-   through date → time → form → confirmed). Falls back to 720px default
-   with a max-h:92dvh safety cap. */
+   Two-stage modal:
+     1. QualifierGate — 2-question pre-booking qualifier.
+        Q1 No / Q2 PM paths capture email + close (server saves + notifies).
+        Q1 Yes + Q2 Self-host → renders the Cal.com embed below.
+     2. Cal.com iframe — auto-sizes to the embed's posted iframeHeight,
+        max-h:92dvh safety cap. */
 export default function ScheduleModal({ onClose }) {
   const isClosingRef = useRef(false);
   const overlayRef = useRef(null);
   const panelRef = useRef(null);
+  // Gate stays mounted until visitor self-identifies as a self-host.
+  // null = still qualifying; { hasProperty: true, isPM: false } = unlocked.
+  const [qualified, setQualified] = useState(null);
   // Default to 900px so the modal opens large enough to fit the calendar
   // (~720-800px content) even before the scheduler posts an iframeHeight
   // message. Adjusts down via postMessage when the scheduler reports its
@@ -126,21 +131,14 @@ export default function ScheduleModal({ onClose }) {
           aria-modal="true"
           aria-labelledby="schedule-modal-title"
           tabIndex={-1}
-          className="relative bg-white rounded-[20px] w-full max-w-[760px] max-h-[92dvh] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.2)] outline-none flex flex-col pt-4"
+          className={`relative bg-white rounded-[20px] w-full ${qualified ? 'max-w-[760px]' : 'max-w-[520px]'} max-h-[92dvh] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.2)] outline-none flex flex-col pt-4`}
           style={{ opacity: 0 }}
         >
-          {/* Visually-hidden accessibility title — preserves aria-labelledby
-              while removing the visible "BOOK A CALL" / "Schedule your
-              strategy call" header that duplicated the iframe's own header
-              ("rf. DISCOVERY — Book a 30 minute discovery call"). Removal
-              gives the calendar ~80px more vertical room. */}
           <h2 id="schedule-modal-title" className="sr-only">
-            Schedule your strategy call
+            {qualified ? 'Book your Discovery Call' : 'Discovery qualifier'}
           </h2>
 
-          {/* Floating close button — was inside the header before; now
-              absolute-positioned in the top-right with a frosted background
-              so it stays legible over the iframe's own header. */}
+          {/* Floating close button */}
           <button
             onClick={handleClose}
             aria-label="Close schedule dialog"
@@ -150,32 +148,29 @@ export default function ScheduleModal({ onClose }) {
             <X className="w-4.5 h-4.5" />
           </button>
 
-          {/* Iframe wrapper — fills the panel (capped by max-h:92dvh). The
-              iframe-internal scroll handles long forms. marginTop:-48 clips
-              the embed page's py-12 top padding so the iframe's header
-              starts right at the top of the panel. */}
-          <div
-            className="sm-iframe-wrap min-h-0 px-4 pb-4 overflow-hidden"
-            style={{
-              // Wrap height matches the scheduler's posted content height
-              // (Fede's scheduler posts iframeHeight = its rendered content
-              // height per step). The iframe element itself extends 48px
-              // taller via height:calc(100% + 48) which gives an internal
-              // buffer that prevents iframe scrollbars from appearing for
-              // 1-2px content-vs-viewport discrepancies. Capped at 92dvh-48
-              // so short viewports scroll the iframe internally instead of
-              // overflowing the panel.
-              height: `min(${Math.max(480, iframeContentHeight)}px, calc(92dvh - 48px))`,
-            }}
-          >
-            <iframe
-              src="https://schedule.revfactor.io/embed"
-              title="Schedule a strategy call with RevFactor"
-              className="w-full rounded-[12px] border-0 block"
-              style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
-              allow="payment"
+          {qualified ? (
+            // Self-host path → Cal.com embed
+            <div
+              className="sm-iframe-wrap min-h-0 px-4 pb-4 overflow-hidden"
+              style={{
+                height: `min(${Math.max(480, iframeContentHeight)}px, calc(92dvh - 48px))`,
+              }}
+            >
+              <iframe
+                src="https://schedule.revfactor.io/embed"
+                title="Book a Discovery Call with RevFactor"
+                className="w-full rounded-[12px] border-0 block"
+                style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
+                allow="payment"
+              />
+            </div>
+          ) : (
+            // Pre-booking qualifier — Q1 then Q2 (or email capture on no/PM paths)
+            <QualifierGate
+              onQualified={(data) => setQualified(data)}
+              onClose={handleClose}
             />
-          </div>
+          )}
         </div>
       </div>
     </div>,
