@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+
+const effective = 'May 21, 2026';
+---
+
+<BaseLayout
+  title="Cookies Policy — RevFactor"
+  description="The cookies and similar technologies RevFactor uses on revfactor.io, what they do, and how you can control them."
+  noindex={false}
+>
+  <Navbar client:load />
+
+  <main class="bg-[#DDDAD3] pt-32 pb-24">
+    <div class="max-w-3xl mx-auto px-6 md:px-10">
+      <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-4">Legal</p>
+      <h1 class="text-[#3F261F] mb-3" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(36px,5vw,56px); line-height:1.05; letter-spacing:0.5px;">Cookies Policy</h1>
+      <p class="text-[14px] text-[#76574C] mb-12" style="font-family:'JetBrains Mono',monospace; letter-spacing:0.5px;">Effective {effective}</p>
+
+      <div class="legal-prose text-[#3F261F]">
+        <p>This Cookies Policy explains how RevFactor uses cookies and similar technologies on <a href="https://www.revfactor.io">revfactor.io</a>. Read it alongside our <a href="/privacy/">Privacy Policy</a>.</p>
+
+        <h2>What Cookies Are</h2>
+        <p>A cookie is a small text file stored on your device when you visit a website. Cookies help sites remember your preferences, measure traffic, and detect invalid activity. The same idea covers other browser-storage mechanisms such as local storage and pixel tags, which we group under &ldquo;cookies&rdquo; for this policy.</p>
+
+        <h2>How We Use Cookies</h2>
+        <p>RevFactor uses four categories of cookies:</p>
+
+        <h3>1. Strictly necessary</h3>
+        <p>These keep the Site functional. They cannot be disabled while you use the Site. Examples include session-state cookies that remember whether you've already opened the Schedule modal in this session.</p>
+
+        <h3>2. Analytics</h3>
+        <p>These help us understand which articles, frameworks, and tools are useful. The Site uses:</p>
+        <ul>
+          <li><strong>PostHog</strong> — product analytics, event tracking, feature-flag delivery.</li>
+          <li><strong>Google Analytics 4</strong> (gtag.js) — site analytics, traffic source measurement.</li>
+          <li><strong>Umami</strong> — privacy-respecting page-view counts.</li>
+        </ul>
+
+        <h3>3. Advertising and conversion measurement</h3>
+        <ul>
+          <li><strong>Google Ads</strong> — measures conversions (strategy call booked, phone click) from paid ad campaigns.</li>
+          <li><strong>Fraud Blocker</strong> — detects invalid clicks and bot traffic on paid ads.</li>
+        </ul>
+
+        <h3>4. Embedded service</h3>
+        <ul>
+          <li><strong>Cal.com</strong> — when you open the embedded scheduling widget, Cal.com may set cookies to manage the booking experience.</li>
+        </ul>
+
+        <h2>How to Control Cookies</h2>
+        <p>You have several options:</p>
+        <ul>
+          <li><strong>Browser settings.</strong> Most browsers let you block or delete cookies. Look for &ldquo;Privacy,&rdquo; &ldquo;Tracking,&rdquo; or &ldquo;Cookies&rdquo; in your browser settings. Blocking strictly-necessary cookies may break parts of the Site.</li>
+          <li><strong>Do Not Track / Global Privacy Control.</strong> RevFactor honors the Global Privacy Control (GPC) signal where applicable.</li>
+          <li><strong>Opt out of analytics directly.</strong> You can opt out of Google Analytics using the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out add-on</a>.</li>
+          <li><strong>Newsletter.</strong> Every email includes a one-click unsubscribe link.</li>
+        </ul>
+
+        <h2>Third-Party Cookies</h2>
+        <p>The third-party services listed above (Google, PostHog, Umami, Cal.com, Fraud Blocker) may set their own cookies governed by their privacy and cookies policies. RevFactor does not control those policies and recommends you review them on the respective vendors' sites.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Cookies Policy as we add or remove tools. Changes are effective when posted. Material changes will be flagged at the top of the page.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about this Cookies Policy? Email <a href="mailto:hello@revfactor.io">hello@revfactor.io</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <Footer client:load />
+
+  <style>
+    .legal-prose { font-size: 15px; line-height: 1.7; color: #3F261F; }
+    .legal-prose h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: 26px;
+      letter-spacing: 0.5px;
+      color: #3F261F;
+      margin: 36px 0 12px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(118,87,76,0.15);
+    }
+    .legal-prose h2:first-of-type { border-top: none; padding-top: 0; }
+    .legal-prose h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: 19px;
+      letter-spacing: 0.3px;
+      color: #3F261F;
+      margin: 22px 0 8px;
+    }
+    .legal-prose p { margin: 0 0 14px; color: #3F261F; }
+    .legal-prose ul { padding-left: 22px; margin: 0 0 16px; }
+    .legal-prose li { margin-bottom: 8px; }
+    .legal-prose a { color: #13342D; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(19,52,45,0.4); }
+    .legal-prose a:hover { text-decoration-color: #13342D; }
+    .legal-prose strong { color: #3F261F; font-weight: 600; }
+  </style>
+</BaseLayout>

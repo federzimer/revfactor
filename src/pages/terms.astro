@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+
+const effective = 'May 21, 2026';
+---
+
+<BaseLayout
+  title="Terms of Service — RevFactor"
+  description="Terms governing your use of revfactor.io and the RevFactor managed revenue management service for short-term rental hosts."
+  noindex={false}
+>
+  <Navbar client:load />
+
+  <main class="bg-[#DDDAD3] pt-32 pb-24">
+    <div class="max-w-3xl mx-auto px-6 md:px-10">
+      <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-4">Legal</p>
+      <h1 class="text-[#3F261F] mb-3" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(36px,5vw,56px); line-height:1.05; letter-spacing:0.5px;">Terms of Service</h1>
+      <p class="text-[14px] text-[#76574C] mb-12" style="font-family:'JetBrains Mono',monospace; letter-spacing:0.5px;">Effective {effective}</p>
+
+      <div class="legal-prose text-[#3F261F]">
+        <p>These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the website at <a href="https://www.revfactor.io">revfactor.io</a> (the &ldquo;Site&rdquo;) and any informational content, lead-gen forms, newsletters, and consultation-booking tools we make available through it. RevFactor (&ldquo;RevFactor,&rdquo; &ldquo;we,&rdquo; &ldquo;us&rdquo;) provides this Site to short-term rental operators researching managed revenue management.</p>
+        <p>Engagement with our managed revenue management service itself (pricing, calendar, minimum-stay, and pacing management for STR portfolios) is governed by a separate written services agreement executed by both parties. These Terms cover the public Site only.</p>
+
+        <h2>Acceptance of Terms</h2>
+        <p>By accessing or using the Site, you agree to these Terms. If you do not agree, do not use the Site.</p>
+
+        <h2>Eligibility</h2>
+        <p>You must be at least 18 years old to use the Site. The Site is a business-to-business resource directed at short-term rental hosts and operators.</p>
+
+        <h2>Content and Editorial</h2>
+        <p>Articles, guides, charts, calculators, and data references published on the Site are intended for informational purposes. We make a good-faith effort to ensure accuracy at the time of publication, but the short-term rental market changes continuously. Nothing on the Site is financial, legal, tax, or accounting advice. Decisions made on the basis of Site content are your own.</p>
+        <p>Vendor write-ups in our listicles reflect our editorial judgment using publicly available information at the time of publication. We disclose every commercial relationship and our own conflict of interest where RevFactor is included.</p>
+
+        <h2>The Rev Journal Newsletter</h2>
+        <p>The Rev Journal is an opt-in email list. By subscribing, you consent to receive editorial dispatches at the email address you provide. You can unsubscribe at any time using the link at the bottom of every email; we honor unsubscribes within one business day.</p>
+
+        <h2>Strategy Calls</h2>
+        <p>Booking a strategy call through our Cal.com embed does not create a client relationship. A strategy call is an introductory consultation. A working engagement begins only when both parties execute a separate services agreement.</p>
+
+        <h2>Intellectual Property</h2>
+        <p>The RevFactor name, the RevFactor Method (Discover · Strategise · Optimise), the Three Pillars and Four Pillars frameworks, all photography, design, code, and editorial content on the Site are the property of RevFactor or its licensors. You may quote short excerpts for commentary or research with attribution; you may not reproduce articles in full, train models on Site content, or republish proprietary frameworks without prior written permission.</p>
+
+        <h2>Acceptable Use</h2>
+        <p>You agree not to: (a) scrape the Site for systematic data extraction or AI training without permission; (b) interfere with the Site's operation or security; (c) submit false or misleading information through forms; (d) use the Site to violate any law or third-party right; or (e) bypass any access restrictions we place on the Site.</p>
+
+        <h2>Third-Party Links</h2>
+        <p>The Site links to third-party tools (PriceLabs, AirDNA, Cal.com, vendor websites, podcast platforms, and others). We don't control those third parties, and we are not responsible for their content, terms, or privacy practices.</p>
+
+        <h2>Disclaimers</h2>
+        <p>The Site is provided &ldquo;as is&rdquo; and &ldquo;as available.&rdquo; To the maximum extent permitted by law, RevFactor disclaims all warranties — express, implied, statutory, or otherwise — including warranties of merchantability, fitness for a particular purpose, accuracy, and non-infringement. Statistics, pacing data, comparative figures, and revenue lifts cited on the Site reflect the portfolios RevFactor manages and are not promises about your own outcomes.</p>
+
+        <h2>Limitation of Liability</h2>
+        <p>To the maximum extent permitted by law, RevFactor will not be liable for any indirect, incidental, consequential, special, or exemplary damages, or for lost profits, revenue, data, or goodwill arising from your use of the Site, even if we have been advised of the possibility of such damages. RevFactor's total aggregate liability for any claim arising out of or relating to these Terms or the Site is limited to one hundred U.S. dollars (US$100).</p>
+
+        <h2>Indemnification</h2>
+        <p>You agree to indemnify and hold RevFactor harmless from any claim, demand, or damage arising out of your misuse of the Site or violation of these Terms.</p>
+
+        <h2>Governing Law</h2>
+        <p>These Terms are governed by the laws of the State of Florida, United States, without regard to its conflict-of-laws principles. Any dispute arising from these Terms or the Site will be resolved in the state or federal courts located in Miami-Dade County, Florida, and you consent to personal jurisdiction there.</p>
+
+        <h2>Changes to These Terms</h2>
+        <p>We may update these Terms from time to time. Changes are effective when posted. Material changes will be flagged at the top of the page. Continued use of the Site after changes constitutes acceptance of the updated Terms.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about these Terms? Email <a href="mailto:hello@revfactor.io">hello@revfactor.io</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <Footer client:load />
+
+  <style>
+    .legal-prose { font-size: 15px; line-height: 1.7; color: #3F261F; }
+    .legal-prose h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: 26px;
+      letter-spacing: 0.5px;
+      color: #3F261F;
+      margin: 36px 0 12px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(118,87,76,0.15);
+    }
+    .legal-prose h2:first-of-type { border-top: none; padding-top: 0; }
+    .legal-prose p { margin: 0 0 14px; color: #3F261F; }
+    .legal-prose ul { padding-left: 22px; margin: 0 0 16px; }
+    .legal-prose li { margin-bottom: 8px; }
+    .legal-prose a { color: #13342D; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(19,52,45,0.4); }
+    .legal-prose a:hover { text-decoration-color: #13342D; }
+    .legal-prose strong { color: #3F261F; font-weight: 600; }
+  </style>
+</BaseLayout>

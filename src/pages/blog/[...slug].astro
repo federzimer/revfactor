@@ -694,6 +694,16 @@ const methodItemList = {
       grid-column: body-start / body-end;
       max-width: 100%;
     }
+    /* Astro's React-island wrapper is a custom element that defaults to
+       display:inline. Inside the grid that collapses its width to ~content,
+       which on the ADR-vs-RevPAR post squeezed the embedded RevPARCalculator
+       to ~58px on mobile (Muskan QA 2026-05-19). Force block layout so the
+       island fills its grid track. */
+    .prose-rf > :global(astro-island),
+    .prose-rf-after > :global(astro-island) {
+      display: block;
+      width: 100%;
+    }
     .prose-rf > :global(.rf-figure),
     .prose-rf > :global(.rf-philosophy),
     .prose-rf > :global(.rf-leaks),

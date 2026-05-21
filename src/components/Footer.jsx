@@ -53,13 +53,17 @@ export default function Footer() {
                 LEGAL
               </p>
               <div className="space-y-2.5">
-                {['Terms', 'Privacy', 'Cookies'].map((link) => (
+                {[
+                  { label: 'Terms', href: '/terms/' },
+                  { label: 'Privacy', href: '/privacy/' },
+                  { label: 'Cookies', href: '/cookies/' },
+                ].map((link) => (
                   <a
-                    key={link}
-                    href="#"
+                    key={link.label}
+                    href={link.href}
                     className="block text-[13px] text-[#8F6E62] hover:text-[#E8E6E1] transition-colors duration-200"
                   >
-                    {link}
+                    {link.label}
                   </a>
                 ))}
               </div>
