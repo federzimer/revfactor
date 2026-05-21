@@ -25,10 +25,10 @@ CID = "5342635272"
 
 TOOL_V2 = {
     "headlines": [
-        "+18% Average Lift",
+        "+24% Average Lift",
         "Top Performers: +20-75%",
         "$320 a Door, Flat Fee",
-        "Recover 18% in 60 Days",
+        "Recover 24% in 60 Days",
         "Beat Comp Set Monthly",
         "Calendar + Strategy",
         "Senior Strategist Onboard",
@@ -42,7 +42,7 @@ TOOL_V2 = {
         "Less Per Door at Scale",
     ],
     "descriptions": [
-        "Documented +18% lift across our portfolio. Top performers see +20% to +75% YoY.",
+        "Documented +24% lift across our portfolio. Top performers see +20% to +75% YoY.",
         "Free 30-min strategy review — walk away with 3 specific moves you can run today.",
         "Comp tracking, LOS rules, calendar moves — strategy your pricing tool can't ship.",
         "$320 per door per month, less at scale. Flat fee, no revenue share. Cancel anytime.",
@@ -69,18 +69,18 @@ TOOL_V3 = {
     "descriptions": [
         "Federico Zimerman, founder + lead strategist. 10+ years in STR revenue. Free 30-min.",
         "Calendar moves a tool can't time. LOS rules a tool won't write. We do that work.",
-        "50+ operators on platform. +18% portfolio average. Pairs with any pricing tool.",
+        "50+ operators on platform. +24% portfolio average. Pairs with any pricing tool.",
         "Same-day responses, business hours. Senior strategist on every account, every month.",
     ],
 }
 
 CONSULTANT_V2 = {
     "headlines": [
-        "+18% Average Revenue Lift",
+        "+24% Average Revenue Lift",
         "Top STR Hosts: +20-75%",
         "$320 a Door, Volume Discount",
         "Less Per Door at Scale",
-        "Recover 18% in 60 Days",
+        "Recover 24% in 60 Days",
         "Beat the Comp Set Monthly",
         "Strategist Stays on Account",
         "Monthly Strategy Calls",
@@ -93,7 +93,7 @@ CONSULTANT_V2 = {
         "No Revenue-Share Gotchas",
     ],
     "descriptions": [
-        "+18% lift documented across our portfolio. Top performers earn +20% to +75% YoY.",
+        "+24% lift documented across our portfolio. Top performers earn +20% to +75% YoY.",
         "Monthly strategy + weekly comp tracking. Calendar, LOS, channel mix — full stack.",
         "Free 30-min strategy review — walk away with 3 specific revenue moves to run today.",
         "$320 per door, flat. Volume pricing past 5 properties. No revenue-share surprises.",
@@ -129,14 +129,14 @@ CONQUEST_V2 = {
     "headlines": [
         "Layer Strategy on Your Tool",
         "Tools + Strategist = Lift",
-        "+18% Above Your Tool",
+        "+24% Above Your Tool",
         "Works With Any Pricing Tool",
         "Strategy a Tool Can't Ship",
         "Comp Tracking Done Right",
         "Length-of-Stay Strategy",
         "Calendar Move Timing",
         "Channel Mix Strategy",
-        "Documented +18% Lift",
+        "Documented +24% Lift",
         "Top Performers +20-75%",
         "Senior Strategist on Account",
         "Same-Day Real Human Replies",
@@ -144,7 +144,7 @@ CONQUEST_V2 = {
         "Free 30-Min Strategy Review",
     ],
     "descriptions": [
-        "Keep your pricing tool. Add a strategist on top. +18% average lift across portfolio.",
+        "Keep your pricing tool. Add a strategist on top. +24% average lift across portfolio.",
         "Comp positioning, calendar moves, length-of-stay — the work an algorithm can't do.",
         "Free 30-min strategy review — walk away with 3 specific revenue moves to run today.",
         "$320 per door, flat fee, no revenue share. Volume pricing past 5 properties.",
@@ -170,7 +170,7 @@ CONQUEST_V3 = {
     ],
     "descriptions": [
         "Federico Zimerman, founder + lead strategist — 10+ years in STR revenue management.",
-        "50+ operators on platform. +18% portfolio lift. Pairs with PriceLabs, Wheelhouse, Beyond.",
+        "50+ operators on platform. +24% portfolio lift. Pairs with PriceLabs, Wheelhouse, Beyond.",
         "Free 30-min strategy review — walk away with 3 specific revenue moves to run today.",
         "Senior strategist on every account. $320/mo per door, flat. No revenue-share gotchas.",
     ],

@@ -160,7 +160,7 @@ function USMap({ onMarkerHover, onMarkerLeave, onMarkerTap, isMobile }) {
       ref={mapRef}
       viewBox="0 0 960 600"
       role="img"
-      aria-label="Interactive map of the United States showing RevFactor market coverage across 24 states and 56 markets"
+      aria-label="Interactive map of the United States showing RevFactor market coverage across 24 states and 67 markets"
       className="w-full h-auto"
       style={{ maxWidth: '1200px', margin: '0 auto', display: 'block' }}
     >
@@ -308,7 +308,7 @@ export default function AboutPage() {
             </h1>
 
             <p className="about-animate opacity-0 text-[15px] leading-[1.7] text-[#8F6E62] max-w-xl mx-auto mb-12 md:mb-16">
-              We optimize pricing for 165+ properties across 24 states — from mountain
+              We optimize pricing for 198 listings across 24 states — from mountain
               cabins in the Smokies to beachfront condos on the Carolina coast.
             </p>
 

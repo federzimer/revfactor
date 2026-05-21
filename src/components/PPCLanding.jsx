@@ -55,9 +55,9 @@ const MESSAGE_VARIANTS = {
   // Consultant Intent campaign — searcher already knows they want a consultant
   consultant: {
     eyebrow: 'STR REVENUE STRATEGY',
-    headlinePart1: 'Most STRs lose 18% in revenue.',
+    headlinePart1: 'Most STRs lose 24% in revenue.',
     headlinePart2Italic: 'We get it back.',
-    subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account. Monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +18% lift. Flat $320/mo.',
+    subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account. Monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +24% lift. Flat $320/mo.',
     ctaText: 'Book a Discovery Call',
   },
   // Tool Intent campaign — searcher is shopping a pricing tool, reframe the category
@@ -72,8 +72,8 @@ const MESSAGE_VARIANTS = {
   conquest: {
     eyebrow: 'STRATEGY YOUR TOOL CAN’T SHIP',
     headlinePart1: 'Already on PriceLabs?',
-    headlinePart2Italic: 'You’re probably 18% short.',
-    subhead: 'Algorithms set the numbers. They can’t set the strategy that makes the numbers actually work. Comp positioning, length-of-stay rules, channel mix, listing audit. A seasoned pricing strategist does. Documented +18% lift across our portfolio. Plus 24/7 dashboard messaging.',
+    headlinePart2Italic: 'You’re probably 24% short.',
+    subhead: 'Algorithms set the numbers. They can’t set the strategy that makes the numbers actually work. Comp positioning, length-of-stay rules, channel mix, listing audit. A seasoned pricing strategist does. Documented +24% lift across our portfolio. Plus 24/7 dashboard messaging.',
     ctaText: 'Book a Discovery Call',
   },
 };
@@ -217,7 +217,7 @@ function Reveal({ children, delay = 0, className = '' }) {
    Single-purpose conversion-optimized page for paid search traffic.
    Brand-matched (bone/moss/cedar/walnut/tobacco design tokens).
    Single CTA: opens ScheduleModal everywhere.
-   Sections: Hero → +18% claim → Tools-vs-Strategy table → Testimonials →
+   Sections: Hero → +24% claim → Tools-vs-Strategy table → Testimonials →
              How it works → FAQ → Final CTA. */
 
 // Testimonials sourced from RevFactor_Digital_PR_Onboarding_COMPLETED.docx
@@ -646,7 +646,7 @@ export default function PPCLanding({
       </section>
 
       {/* ─── TESTIMONIALS ─── (Moved up: social proof before objections.
-           Hero → +18% strip → testimonials → schedule lets PPC visitors hit a
+           Hero → +24% strip → testimonials → schedule lets PPC visitors hit a
            booking surface within 2 scrolls instead of 5.) */}
       <section id="results" className="bg-[#DDDAD3] py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-6 md:px-12">

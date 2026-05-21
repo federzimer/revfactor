@@ -117,11 +117,14 @@ The calculator is the funnel's center of gravity. Today it's a static RevPAR wid
 - [ ] Each post gets the new interactive design treatment (charts, graphs, AI-generated imagery).
 - [ ] AI post summaries (Claude-generated TL;DR cards on each post).
 
-### AI training data archive (Claude persona)
+### AI training data archive (Claude / Codex persona)
 
-- [ ] Pull podcasts, TikToks, IG content into shared git repo.
-- [ ] Train Claude assistant on the archive so it can produce consistent messaging + post summaries.
-- [ ] Long-term: AI persona for the business owner / "what would Fede say" routing.
+- [ ] Pull podcasts, TikToks, IG content into shared git repo (model: `axw4319/cynthia-shared` private-repo sync pattern → `axw4319/revfactor-brain`).
+- [ ] **Set up the AI Persona ("Federico-brain") so Fede can access it in Claude or Codex on his own machine** — auto-sync the corpus from Aaron's box, point Fede's Claude Code / Codex at the folder.
+  - Alternative path: upload corpus into a Claude Project and share with Fede's `@blackbirdhm.com` account.
+  - Probably do both: repo for code-use, Project for conversational-use.
+- [ ] Train the persona on RevFactor body of work — podcasts, TikToks, IG transcripts, brand docs, case-study source data, the Federico-voice memory guide.
+- [ ] Long-term: AI persona for the business owner / "what would Fede say" routing in marketing automations.
 
 ### PR opportunities
 

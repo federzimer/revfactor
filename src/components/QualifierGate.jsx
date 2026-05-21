@@ -152,16 +152,18 @@ export default function QualifierGate({ onQualified, onClose }) {
     const isNoProperty = !hasProperty;
     return (
       <div ref={cardRef} className="qg-card">
-        <p className="qg-kicker">DISCOVERY · LEAVE YOUR EMAIL</p>
+        <p className="qg-kicker">
+          {isNoProperty ? 'DISCOVERY · STAY CLOSE' : 'DISCOVERY · PARTNERSHIP'}
+        </p>
         <h3 className="qg-title">
           {isNoProperty
-            ? 'Tell us where to reach you'
-            : 'Let\'s talk partnership'}
+            ? 'We\'re building something for hosts before they own.'
+            : 'Let\'s talk partnership.'}
         </h3>
         <p className="qg-sub">
           {isNoProperty
-            ? 'When you do have a property, you\'ll be first on the list for The Rev Journal — pricing strategy, market reads, operator field notes from inside 165+ listings.'
-            : 'Federico will reach out to talk through how RevFactor can plug into your portfolio.'}
+            ? 'Short courses, market reads, getting-started playbooks for the pre-property stretch. Drop your email and we\'ll let you know when it ships — or come back when your first property is live. The Rev Journal lands in your inbox in the meantime.'
+            : 'Federico will reach out to walk through how RevFactor\'s revenue layer plugs into a PM portfolio — pricing strategy, calendar, length-of-stay, channel mix. We work alongside the operations team you already run.'}
         </p>
         <form
           className="qg-form"
@@ -215,8 +217,8 @@ export default function QualifierGate({ onQualified, onClose }) {
       <h3 className="qg-title">You're in.</h3>
       <p className="qg-sub">
         {!hasProperty
-          ? 'When you do have a property, we\'ll be in touch. Meanwhile, The Rev Journal lands in your inbox when something interesting drops.'
-          : 'Federico will reach out within one business day to talk through partnership options.'}
+          ? 'We\'ll let you know when the pre-property offering ships. Until then, The Rev Journal lands in your inbox when something interesting drops.'
+          : 'Federico will reach out within one business day. Talk soon.'}
       </p>
       <button
         type="button"

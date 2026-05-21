@@ -100,7 +100,7 @@ CAMPAIGNS = [
                 # Loss framing (highest CTR for cold traffic)
                 "Your Tool's Leaving 18%",
                 "Pricing Tool Missing Money?",
-                "Algorithm Alone = 18% Lost",
+                "Algorithm Alone = 24% Lost",
                 # Question hook
                 "Is Your Airbnb Underpriced?",
                 "Tool Set Wrong? Talk Now.",
@@ -120,9 +120,9 @@ CAMPAIGNS = [
                 "Outperform the Comp Set",
             ],
             "descriptions": [
-                "Your pricing tool sets numbers. We build the strategy that makes them work. +18% lift.",
+                "Your pricing tool sets numbers. We build the strategy that makes them work. +24% lift.",
                 "Algorithms execute. We strategize. Pair your tool with a real human. Free 30-min call.",
-                "Hosts on PriceLabs / Wheelhouse / Beyond see +18% lift after adding strategy. $320/mo.",
+                "Hosts on PriceLabs / Wheelhouse / Beyond see +24% lift after adding strategy. $320/mo.",
                 "Talk to Federico — a real STR revenue manager — free for 30 min. Walk away with 3 wins.",
             ],
             "path1": "strategy",
@@ -213,7 +213,7 @@ CAMPAIGNS = [
                 "Most Consultants Disappear",
             ],
             "descriptions": [
-                "Work 1:1 with an STR revenue consultant. +18% lift vs comp set. $320/mo per property.",
+                "Work 1:1 with an STR revenue consultant. +24% lift vs comp set. $320/mo per property.",
                 "Most consultants audit and disappear. RevFactor partners ongoing — strategy + tracking.",
                 "Founder-led STR consulting. Hosts see +20-75% revenue lift. Free 30-min strategy call.",
                 "1 property or 50, we build strategy for each. $320/mo flat — no revenue-share gotchas.",
@@ -285,7 +285,7 @@ CAMPAIGNS = [
                 "Is Your Tool Enough?",
                 "Pricing Tool Missing Money?",
                 # Specific lift / direct-address
-                "Add 18% Above Your Tool",
+                "Add 24% Above Your Tool",
                 "Hosts See +20% to +75%",
                 "STR Hosts: Earn 18% More",
                 # Differentiator (compliance-safe)
@@ -299,8 +299,8 @@ CAMPAIGNS = [
                 "Founder-Led Revenue Strategy",
             ],
             "descriptions": [
-                "Already on a pricing tool? You're 18% short. We extract what your algorithm misses.",
-                "Tools set prices. We build the strategy that makes them work. +18% lift across portfolio.",
+                "Already on a pricing tool? You're 24% short. We extract what your algorithm misses.",
+                "Tools set prices. We build the strategy that makes them work. +24% lift across portfolio.",
                 "Talk to Federico — real STR revenue strategist. Free 30 min. Works alongside any tool.",
                 "Pair your pricing tool with a real strategist. Comp tracking + calendar. $320/mo flat.",
             ],
@@ -331,7 +331,7 @@ SITELINKS = [
         "description2": "Talk to a strategist",
     },
     {
-        "text": "The +18% Story",
+        "text": "The +24% Story",
         "final_url": "https://www.revfactor.io/blog/dynamic-pricing-str-beginners-guide",
         "description1": "Why strategy beats algorithm",
         "description2": "Documented revenue lift",
@@ -339,7 +339,7 @@ SITELINKS = [
 ]
 
 CALLOUTS = [
-    "+18% vs comp set",
+    "+24% vs comp set",
     "$320/mo per property",
     "Free 30-min call",
     "Founder-led service",
