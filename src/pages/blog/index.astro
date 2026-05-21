@@ -52,6 +52,7 @@ const featured = featuredPost
         read: featuredPost.data.readingTime ? `${featuredPost.data.readingTime} min read` : '',
         title: featuredPost.data.title,
         excerpt: featuredPost.data.subhead || featuredPost.data.description,
+        isNewThisWeek: (Date.now() - featuredPost.data.pubDate.getTime()) < 7 * 24 * 60 * 60 * 1000,
       };
     })()
   : null;
@@ -334,10 +335,12 @@ const schema = {
             <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(22,25,16,0.35) 0%, rgba(22,25,16,0.15) 35%, rgba(22,25,16,0.95) 100%);"></div>
             <div class="absolute inset-0 z-[1]" style="background: linear-gradient(90deg, rgba(22,25,16,0.55) 0%, rgba(22,25,16,0.15) 55%, transparent 80%);"></div>
             <span class="absolute top-6 left-6 z-[2] px-3 py-1.5 rounded-full bg-[#E8E6E1]/92 text-[#3F261F] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm">Featured · {featured.cat}</span>
-            <span class="absolute top-6 right-6 z-[2] px-3 py-1.5 rounded-full bg-[#13342D]/92 text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#7A8B76]" style="animation:pulse-dot 2s ease-in-out infinite;"></span>
-              New this week
-            </span>
+            {featured.isNewThisWeek && (
+              <span class="absolute top-6 right-6 z-[2] px-3 py-1.5 rounded-full bg-[#13342D]/92 text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] backdrop-blur-sm flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#7A8B76]" style="animation:pulse-dot 2s ease-in-out infinite;"></span>
+                New this week
+              </span>
+            )}
             <div class="absolute left-0 right-0 bottom-0 p-8 md:p-12 z-[2] max-w-4xl">
               <div class="flex items-center gap-3 text-[10.5px] tracking-[0.5px] uppercase text-[#DDDAD3]/80 mb-4" style="font-family:'JetBrains Mono',monospace;">
                 <span>{featured.date}</span>{featured.read && <><span>·</span><span>{featured.read}</span></>}
@@ -472,9 +475,37 @@ const schema = {
         </div>
       </section>
 
+      <!-- Strategy-call CTA — sits between archive grid and newsletter so
+           journal-index visitors have a primary conversion path before the
+           email opt-in. Routes through the site-wide schedule-modal
+           interceptor in BaseLayout (matches /short-term-rental-consultant). -->
+      <section class="mt-8 rounded-[20px] bg-[#13342D] text-[#E8E6E1] px-8 md:px-16 py-14 md:py-16 relative overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-[0.07]" style="background-image: radial-gradient(circle at 20% 20%, #A9BBA3 1px, transparent 1px), radial-gradient(circle at 80% 70%, #A9BBA3 1px, transparent 1px); background-size: 32px 32px, 48px 48px;"></div>
+        <div class="relative z-[1] grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 items-center">
+          <div>
+            <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#A9BBA3] mb-4 inline-block">Run your own portfolio</span>
+            <h3 class="leading-[1.1] mb-5" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">
+              Get a revenue manager <em style="font-style:italic; color:#A9BBA3; font-weight:300;">on your calendar.</em>
+            </h3>
+            <p class="text-[15px] leading-[1.6] text-[#DDDAD3]/85 max-w-xl mb-0">
+              Free 30-minute strategy call with Federico. Bring your AirDNA dashboard or PriceLabs comp set; we'll walk it together and tell you where the lift is hiding.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row md:flex-col gap-3 md:items-stretch">
+            <a href="/short-term-rental-consultant/" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-[#E8E6E1] text-[#13342D] font-bold uppercase text-[11px] tracking-[2px] hover:scale-[1.02] transition-transform">
+              Schedule Strategy Call
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href="/short-term-rental-consultant/" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-[#E8E6E1]/40 text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] hover:border-[#E8E6E1] transition-colors">
+              How RevFactor works
+            </a>
+          </div>
+        </div>
+      </section>
+
       <!-- Newsletter -->
       <section id="newsletter" class="mt-8 mb-24 rounded-[20px] bg-[#5E2824] text-[#E8E6E1] px-8 md:px-16 py-16 md:py-20 text-center">
-        <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#E8C7C1]/85 mb-5 inline-block">RevFactor Journal</span>
+        <span class="font-bold uppercase text-[9px] tracking-[2.5px] text-[#E8C7C1]/85 mb-5 inline-block">The Rev Journal</span>
         <h3 class="leading-[1.1] mb-4" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(28px,3.5vw,44px);">
           Outprice the market.<br/><em style="font-style:italic; color:#F0C9C2; font-weight:300;">Direct to your inbox.</em>
         </h3>

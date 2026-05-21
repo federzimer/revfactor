@@ -350,6 +350,7 @@ const methodItemList = {
 <BaseLayout
   title={post.data.title}
   description={post.data.description}
+  ogImage={heroImage}
   type="article"
   publishedTime={post.data.pubDate.toISOString()}
   modifiedTime={(post.data.updatedDate ?? post.data.pubDate).toISOString()}
