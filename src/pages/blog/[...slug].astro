@@ -71,8 +71,41 @@ const related = relatedSource.slice(0, 3).map((p) => {
 
 const heroImage = post.data.image || '/heroes/aframe-1920.webp';
 const heroAlt = post.data.imageAlt || post.data.title;
+// LCP optimization: derive srcset so mobile (<1200w) doesn't download the 2400 file.
+// Layout fills full viewport, so sizes is 100vw (NOT the related-posts thumbnail sizes).
+const heroSrcset = (() => {
+  const m = heroImage.match(/^(.*)-(?:1200|1920|2400)(\.webp|\.jpg|\.png)$/i);
+  if (!m) return null;
+  const [, base, ext] = m;
+  return {
+    src: `${base}-1920${ext}`,
+    srcset: `${base}-1200${ext} 1200w, ${base}-1920${ext} 1920w, ${base}-2400${ext} 2400w`,
+    sizes: '(min-width: 1920px) 2400px, (min-width: 1200px) 1920px, 100vw',
+  };
+})();
 
-// Federico Person schema — reusable; sameAs locks the entity for AI engines (Refactor.ai disambiguation)
+// Organization entity — referenced by both Person.worksFor and BlogPosting.publisher
+// via @id so the entity graph is explicitly connected (top-10 AI-citation factor).
+const revfactorOrg = {
+  "@type": "Organization",
+  "@id": "https://www.revfactor.io/#organization",
+  "name": "RevFactor",
+  "url": "https://www.revfactor.io",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.revfactor.io/og-image.png",
+    "width": 1200,
+    "height": 630
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/revfactor-rm/",
+    "https://www.instagram.com/revfactor.io/"
+  ],
+  "description": "Standalone short-term rental revenue management service. Flat-fee dynamic pricing across 165+ properties, 24 states, 56 markets. +18% RevPAR vs. comp set over a 24-month rolling average."
+};
+
+// Federico Person schema — references the Organization above via @id so the
+// entity graph is connected (vs. inline duplicate Organization nodes).
 const federicoPerson = {
   "@type": "Person",
   "@id": "https://www.revfactor.io/#federico",
@@ -96,29 +129,37 @@ const federicoPerson = {
     "PriceLabs"
   ],
   "alumniOf": { "@type": "Organization", "name": "American Airlines" },
-  "worksFor": { "@type": "Organization", "name": "RevFactor", "url": "https://www.revfactor.io" },
+  "worksFor": { "@id": "https://www.revfactor.io/#organization" },
   "description": "Federico Zimerman spent 10 years in airline revenue management at American Airlines before founding Blackbird Hospitality (165+ short-term rental properties across 24 U.S. states and 56 markets) and RevFactor (standalone revenue management service). His strategies deliver +18% RevPAR lift vs. comp set across the portfolio."
 };
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
+const articleSchema = {
+  "@type": "BlogPosting",
+  "@id": `${Astro.url.href}#blogposting`,
   "headline": post.data.title,
   "description": post.data.description,
   "image": heroImage.startsWith('http') ? heroImage : `https://www.revfactor.io${heroImage}`,
   "datePublished": post.data.pubDate.toISOString(),
   "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString(),
-  "author": federicoPerson,
-  "publisher": {
-    "@type": "Organization",
-    "name": "RevFactor",
-    "url": "https://www.revfactor.io",
-    "logo": { "@type": "ImageObject", "url": "https://www.revfactor.io/og-image.png" }
-  },
+  "author": { "@id": "https://www.revfactor.io/#federico" },
+  "publisher": { "@id": "https://www.revfactor.io/#organization" },
   "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
+  "isPartOf": {
+    "@type": "Blog",
+    "@id": "https://www.revfactor.io/blog#blog",
+    "name": "The Rev Journal",
+    "publisher": { "@id": "https://www.revfactor.io/#organization" }
+  },
   "keywords": post.data.tags.join(', '),
   "articleSection": post.data.category,
   "wordCount": post.data.readingTime ? post.data.readingTime * 250 : undefined
+};
+
+// @graph wraps Person + Organization + BlogPosting so LLMs and Google parse them
+// as one connected entity cluster rather than three loose nodes.
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [revfactorOrg, federicoPerson, articleSchema]
 };
 
 // FAQPage schema — only when frontmatter declares faqs (drives both accordion + JSON-LD)
@@ -150,6 +191,7 @@ const breadcrumbSchema = {
 // describes its own content.
 const isPillar = post.id === 'revenue-management-for-short-term-rentals';
 const isDynamicPricing = post.id === 'dynamic-pricing-str-beginners-guide';
+const isMethod = post.id === 'the-revfactor-method';
 
 const howToMinStay = {
   "@context": "https://schema.org",
@@ -262,17 +304,74 @@ const dynamicPricingDefinedTerms = [
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "80/20 rule (Airbnb)", "description": "The Pareto pattern most STR portfolios follow: roughly 80% of annual revenue comes from 20% of nights — peak weekends, holiday weeks, local-event windows. Implies high-leverage nights deserve months of pre-planning, not algorithmic autopilot.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Base rate (dynamic pricing)", "description": "The anchor nightly rate — set seasonally and refreshed quarterly — that every other dynamic-pricing rule multiplies. Tools optimize from the floor; they don't interrogate it. A floor anchored to last year's comfort costs revenue all year.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
 ];
+
+// The RevFactor Method (Blog 4) — HowTo for the 4 daily optimisation
+// mechanics, plus DefinedTerm packages for the three branded phase names
+// (Discover, Strategise, Optimise) and the "Every Night Is Worth" mental
+// model. ItemList ties the three phases into an ordered sequence.
+const howToRevFactorMethod = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to run the RevFactor Method on a short-term rental",
+  "description": "A four-mechanic daily optimisation routine that distinguishes a daily-managed STR from a tool-only setup: comp-set monitoring, event integration, minimum-stay flexes, and pacing-driven rate shifts.",
+  "totalTime": "PT30M",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Read the comp set every morning", "text": "Re-read the comp set daily. A pricing tool configures it once at setup; the Method re-reads it every morning. Flag new entrants, overnight rate moves, and minimum-stay shifts within 24 hours." },
+    { "@type": "HowToStep", "position": 2, "name": "Integrate event and demand signals 60-90 days out", "text": "Conventions, festivals, school calendars, concert tours. Inject these into the rate plan before the booking window closes — historical-curve pricing tools will not surface them in time." },
+    { "@type": "HowToStep", "position": 3, "name": "Apply surgical minimum-stay flexes", "text": "Minimum-stay is a date-specific lever, not a property-wide setting. Two nights on Memorial Day weekend, no minimum on midweek shoulder dates, three nights during major local events. Different per market, per booking window." },
+    { "@type": "HowToStep", "position": 4, "name": "Run pacing-driven rate shifts weekly", "text": "Pacing is the difference between bookings on the books for a future date this year vs. the same lead time last year. Pacing ahead → lift the rate. Pacing behind → adjust via rate, LOS discount, or minimum-stay reduction." }
+  ]
+};
+
+const methodDefinedTerms = [
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Discover (RevFactor Method)", "description": "Phase 1 of the RevFactor Method. The diagnostic audit of where a short-term rental property stands today against four inputs: historical market performance, current RevPAR vs. comp set, the Pricing Health Index and Market Position Score, and local demand signals. Discover surfaces the gap between current performance and what the market will pay.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Strategise (RevFactor Method)", "description": "Phase 2 of the RevFactor Method. The market-calibrated plan built from the Discover audit, expressed as a set of rules: when to push baseline rates up, when to flex minimum stays, when to open length-of-stay discounts, and when to hold the line. The strategy lives in the rules, not in a one-page recommendation.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Optimise (RevFactor Method)", "description": "Phase 3 of the RevFactor Method. The daily, weekly, and monthly execution work that adjusts the strategy against reality — comp-set monitoring, event and demand-signal integration, surgical minimum-stay flexes, pacing-driven rate shifts, and channel-mix calibration. Optimise feeds new data back into the next Discover cycle, making the Method a continuous loop.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Every Night Is Worth", "description": "The perishable-inventory mental model behind the RevFactor Method. Every calendar night carries a specific revenue value tied to that night's comp set, demand signals, and pacing curve. Once the night passes, the value drops to zero. The pricing question is never 'what should I charge tonight' in the abstract — it is 'what is this specific night worth, given the booking window?'", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Pricing Health Index", "description": "A proprietary RevFactor diagnostic that grades how well a short-term rental's current rate strategy is aligned with market signals — baseline rate, minimum-stay structure, length-of-stay discount ladder, and pacing posture. Used inside the Discover phase of the RevFactor Method.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Market Position Score", "description": "A proprietary RevFactor 0–100 measurement of where a short-term rental listing sits within its comp set on quality, price, and conversion. Used alongside the Pricing Health Index inside the Discover phase of the RevFactor Method.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
+];
+
+const methodItemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "The RevFactor Method — three-phase revenue management process",
+  "description": "The three sequential phases of the RevFactor Method, run as a continuous operating rhythm.",
+  "numberOfItems": 3,
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Discover", "description": "Audit where the property stands today — comp set, RevPAR baseline, Pricing Health Index, Market Position Score, local demand signals." },
+    { "@type": "ListItem", "position": 2, "name": "Strategise", "description": "Build a market-calibrated plan — baseline rate, minimum-stay rules, length-of-stay discount ladder, pacing-aware floors, channel mix." },
+    { "@type": "ListItem", "position": 3, "name": "Optimise", "description": "Execute daily and feed new data back into the next Discover cycle — comp-set reads, event integration, surgical minimum-stay flexes, pacing-driven rate shifts, channel-mix calibration." }
+  ]
+};
 ---
 
 <BaseLayout
   title={post.data.title}
   description={post.data.description}
+  ogImage={heroImage}
   type="article"
   publishedTime={post.data.pubDate.toISOString()}
   modifiedTime={(post.data.updatedDate ?? post.data.pubDate).toISOString()}
   author={post.data.author}
 >
   <Fragment slot="head">
+    {/* LCP optimization: preload the hero image with srcset hints so the browser
+        kicks off the download in parallel with HTML parsing. fetchpriority="high"
+        on the <img> tag pairs with this. */}
+    {heroSrcset ? (
+      <link
+        rel="preload"
+        as="image"
+        href={heroSrcset.src}
+        imagesrcset={heroSrcset.srcset}
+        imagesizes={heroSrcset.sizes}
+        fetchpriority="high"
+      />
+    ) : (
+      <link rel="preload" as="image" href={heroImage} fetchpriority="high" />
+    )}
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     {webPageSchema && <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />}
     {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
@@ -286,9 +385,16 @@ const dynamicPricingDefinedTerms = [
     {isDynamicPricing && dynamicPricingDefinedTerms.map((t) => (
       <script type="application/ld+json" set:html={JSON.stringify(t)} />
     ))}
+    {isMethod && <script type="application/ld+json" set:html={JSON.stringify(howToRevFactorMethod)} />}
+    {isMethod && <script type="application/ld+json" set:html={JSON.stringify(methodItemList)} />}
+    {isMethod && methodDefinedTerms.map((t) => (
+      <script type="application/ld+json" set:html={JSON.stringify(t)} />
+    ))}
   </Fragment>
 
   <Navbar client:load />
+
+  {/* Schedule-modal click interceptor lives in BaseLayout (site-wide) — no per-page wiring needed. */}
 
   <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-cedar z-[100] transition-[width] duration-75" style="width:0;"></div>
 
@@ -304,8 +410,15 @@ const dynamicPricingDefinedTerms = [
            scale(1.15) gives parallax headroom so translateY never exposes the section background. -->
       <img
         id="heroBg"
-        src={heroImage}
+        src={heroSrcset?.src || heroImage}
+        srcset={heroSrcset?.srcset}
+        sizes={heroSrcset?.sizes}
         alt={heroAlt}
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+        width="1920"
+        height="1080"
         class="absolute inset-0 w-full h-full object-cover will-change-transform"
         style="transform:scale(1.15); transform-origin:center center; z-index:0;"
       />
@@ -580,6 +693,16 @@ const dynamicPricingDefinedTerms = [
     .prose-rf-after > :global(*) {
       grid-column: body-start / body-end;
       max-width: 100%;
+    }
+    /* Astro's React-island wrapper is a custom element that defaults to
+       display:inline. Inside the grid that collapses its width to ~content,
+       which on the ADR-vs-RevPAR post squeezed the embedded RevPARCalculator
+       to ~58px on mobile (Muskan QA 2026-05-19). Force block layout so the
+       island fills its grid track. */
+    .prose-rf > :global(astro-island),
+    .prose-rf-after > :global(astro-island) {
+      display: block;
+      width: 100%;
     }
     .prose-rf > :global(.rf-figure),
     .prose-rf > :global(.rf-philosophy),
@@ -926,7 +1049,7 @@ const dynamicPricingDefinedTerms = [
 
     /* Tables — body cells now 16px, mono numerics, with horizontal scroll on narrow viewports */
     .prose-rf :global(table) { width:100%; border-collapse:collapse; margin:1.75rem 0; font-size:16px; display:block; overflow-x:auto; }
-    @media (min-width: 768px) { .prose-rf :global(table) { display:table; } }
+    @media (min-width: 1024px) { .prose-rf :global(table) { display:table; } }
     .prose-rf :global(table thead) { border-bottom:2px solid #3F261F; }
     .prose-rf :global(table th) { text-align:left; padding:14px 14px; font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#3F261F; white-space:nowrap; }
     .prose-rf :global(table td) { padding:16px 14px; font-family:'JetBrains Mono',monospace; font-size:15px; color:#3F261F; border-bottom:1px solid #C8C4BC; vertical-align:top; }
@@ -952,6 +1075,61 @@ const dynamicPricingDefinedTerms = [
     }
     @media (max-width: 640px) {
       .prose-rf :global(.rf-figure figcaption) { font-size:17px; }
+    }
+
+    /* Vendor card: small frame around a homepage screenshot in the listicles.
+       Lower visual weight than .rf-figure so vendor screenshots read as
+       reference material, not editorial photography. The optional
+       .rf-vendor-logo-strip sits above the screenshot with a 32px favicon
+       and the domain. */
+    .prose-rf :global(.rf-vendor-figure) {
+      margin:1.25rem 0 1.5rem;
+      padding:8px;
+      border:1px solid #C8C4BC;
+      background:#E8E6E1;
+      border-radius:12px;
+    }
+    .prose-rf :global(.rf-vendor-figure img.rf-vendor-shot) {
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:6px;
+    }
+    .prose-rf :global(.rf-vendor-figure figcaption) {
+      font-family:'JetBrains Mono',monospace;
+      font-size:10.5px;
+      letter-spacing:0.5px;
+      text-transform:uppercase;
+      color:#76574C;
+      margin-top:8px;
+      text-align:center;
+    }
+    .prose-rf :global(.rf-vendor-logo-strip) {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:0 4px 8px;
+    }
+    .prose-rf :global(.rf-vendor-logo-strip img) {
+      width:32px;
+      height:32px;
+      border-radius:6px;
+      flex-shrink:0;
+      background:#DDDAD3;
+      object-fit:contain;
+      padding:2px;
+    }
+    .prose-rf :global(.rf-vendor-logo-strip a) {
+      font-family:'JetBrains Mono',monospace;
+      font-size:11px;
+      letter-spacing:0.5px;
+      color:#3F261F;
+      text-decoration:none;
+      border-bottom:1px dotted #76574C;
+    }
+    .prose-rf :global(.rf-vendor-logo-strip a:hover) {
+      color:#13342D;
+      border-bottom-color:#13342D;
     }
 
     /* Quote-overlay variant: image with a Federico pull-quote anchored bottom-left over a soft dark gradient. */

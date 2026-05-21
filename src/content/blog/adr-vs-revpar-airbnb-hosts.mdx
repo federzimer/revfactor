@@ -1,0 +1,349 @@
+---
+title: "ADR vs RevPAR: The Metrics That Run Airbnb Revenue"
+description: "ADR vs RevPAR for Airbnb hosts: most hosts brag about ADR; RevPAR is the number that actually grows revenue. ADR (Average Daily Rate) is total revenue divided by booked nights. RevPAR (Revenue Per Available Room, adopted from hotels) is revenue divided by every available night, booked or empty."
+subhead: "ADR is the number hosts brag about. RevPAR is the number that pays them."
+pubDate: 2026-05-15
+updatedDate: 2026-05-15
+author: "Federico Zimerman"
+category: "Strategy"
+tags: ["RevPAR", "ADR", "Airbnb metrics", "short-term rental", "vacation rental revenue"]
+image: "/photos/blog/cluster-heroes-v2/adr-revpar-interior-dawn-2400.webp"
+imageAlt: "A rustic log-cabin short-term rental interior at dawn with steaming coffee on a wooden farmhouse table, warm light streaming in from a forest window — the quiet moment before you do the math on ADR and RevPAR."
+featured: false
+readingTime: 13
+faqs:
+  - q: "What is the best way to increase RevPAR for vacation rentals?"
+    a: "The fastest path to higher RevPAR is rebalancing pricing across the full calendar: softer mid-week rates to capture occupancy, stronger peak-night rates to capture pricing power, and length-of-stay discounts that match real demand patterns. Audit minimum-stay restrictions and listing visibility before assuming rates are the problem."
+  - q: "How do I improve my revenue per available night on Airbnb?"
+    a: "Improving RevPAR on Airbnb requires moving both inputs together: ADR and occupancy. Start by benchmarking against your comp set. If your RevPAR trails comparable listings, the issue is usually one of three things: minimum-stay rules that block bookings, weekday rates set too high, or a listing that is not surfacing in search."
+  - q: "How can I increase my Airbnb income without lowering rates?"
+    a: "Tighten operational levers instead of dropping rates. Minimum-stay flexibility, length-of-stay discount ladders, instant-book settings, listing photography, and search-rank signals all move bookings without touching the nightly price. Most hosts have 10–15% of revenue trapped in restrictions and listing-quality issues, not in pricing."
+  - q: "What services help increase the average daily rate for Airbnb hosts?"
+    a: "Dedicated revenue management services pair pricing software (PriceLabs, Beyond Pricing, Wheelhouse) with active human strategy: comp set analysis, pacing review, calendar-restriction tuning, and event-aware rate setting. Pricing tools alone increase ADR modestly. Pricing tools plus active management is where the meaningful lift comes from."
+  - q: "How do I know if my Airbnb is underpriced or overpriced?"
+    a: "Compare your RevPAR to your comp set, not your gut. If occupancy is high but RevPAR trails comparable listings, you are likely underpriced. If occupancy is low and RevPAR also trails, you are likely overpriced. The diagnostic is RevPAR relative to comp set; occupancy in isolation tells you almost nothing."
+  - q: "What is the best pricing strategy for Airbnb hosts?"
+    a: "The best pricing strategy is one designed around the perishable nature of nightly inventory: dynamic base rates calibrated to live demand, length-of-stay discounts matched to your booking pattern, peak-window premium pricing, and a monthly review of ADR, occupancy, RevPAR, and pacing."
+  - q: "What is the difference between ADR and RevPAR?"
+    a: "ADR (Average Daily Rate) is total revenue divided by booked nights. RevPAR (Revenue Per Available Room) is total revenue divided by available nights. ADR measures pricing power on the nights you booked. RevPAR measures total performance across your full calendar, booked or empty."
+  - q: "What is a good RevPAR for a short-term rental?"
+    a: "There is no universal benchmark. A good RevPAR beats your direct comp set and is trending upward year-over-year. RevPAR varies enormously by market, property type, and seasonality. A $120 RevPAR can be excellent in one market and underperforming in another. As a directional benchmark: in most stable U.S. STR markets, beating your comp set's median RevPAR by 10–15% year-over-year is a strong signal."
+  - q: "Can RevPAR be more than ADR?"
+    a: "No. RevPAR can never exceed ADR mathematically. RevPAR equals ADR multiplied by occupancy rate, and occupancy rate is always between 0% and 100%. The two numbers are equal only at 100% occupancy; every empty night pulls RevPAR below ADR. The gap between them tells you how much revenue your empty nights are costing you, expressed in per-night terms."
+  - q: "Is RevPAR the same as ADR?"
+    a: "No. ADR measures the average rate on nights you actually booked. RevPAR measures the average revenue per available night, booked or empty. A property with a $400 ADR at 50% occupancy has a $200 RevPAR. A property with a $300 ADR at 75% occupancy has a $225 RevPAR — different ADR ceilings, but the second property earns more across the calendar. ADR rewards pricing power; RevPAR rewards total performance."
+  - q: "How do you calculate RevPAR and ADR?"
+    a: "ADR = total revenue ÷ booked nights. RevPAR = total revenue ÷ total available nights. RevPAR also equals ADR × occupancy rate. Example: a property earning $36,000 over 90 days with 60 booked nights has an ADR of $600 and a RevPAR of $400 (60 of 90 nights = 67% occupancy, and $600 × 0.67 = $400). Run the math monthly, not annually — seasonality distorts the picture if you only look at it once a year."
+  - q: "Which is better, RevPAR or ADR?"
+    a: "RevPAR is the better single number to optimize. ADR alone hides the cost of empty nights — a $500 ADR at 30% occupancy looks great on a screenshot and leaks revenue every week. RevPAR forces you to value every available night, which is what the listing actually has to sell. Use ADR to diagnose pricing power and minimum-stay friction; use RevPAR to judge whether your calendar is working."
+  - q: "What is GOPPAR and how does it differ from RevPAR?"
+    a: "GOPPAR (Gross Operating Profit Per Available Room) is RevPAR minus the operating costs of running the unit on that night — cleaning, supplies, channel commissions, dynamic-pricing fees. RevPAR optimizes for top-line; GOPPAR optimizes for the cash that actually reaches the owner. Hotel revenue managers report both. STR hosts rarely do, which is why a property with a strong RevPAR can still be a poor investment once cleaning and channel fees are subtracted. RevPAR for benchmarking; GOPPAR for the owner's actual return."
+---
+
+<div class="rf-quick-answer">
+  <p class="kicker">QUICK ANSWER</p>
+  <p>ADR (Average Daily Rate) is total revenue divided by booked nights — it measures pricing power. RevPAR (Revenue Per Available Room, adopted directly from hotel revenue management) is total revenue divided by every available night, booked or empty. RevPAR is the better single number for Airbnb performance because it captures pricing and demand at once. Two hosts at the same $400 ADR can post a $43,800 annual revenue gap on identical pricing — and only RevPAR sees it.</p>
+</div>
+
+<div class="rf-takeaways">
+
+### Key Takeaways
+
+- ADR (Average Daily Rate) measures revenue per booked night. RevPAR (Revenue Per Available Room) measures revenue per available night, booked or not.
+- ADR tells you what you charged. RevPAR tells you what you actually earned across your entire calendar.
+- Two hosts with identical $400 ADRs can post wildly different revenue numbers. The one at 65% occupancy out-earns the one at 35% by $43,800 a year on the same nightly rate.
+- A high ADR with low occupancy often signals a pricing strategy leaving money on the table, not a property winning its market.
+- RevPAR is the better single number for measuring overall short-term rental (STR) performance because it captures both pricing and demand at once.
+- The "80% occupancy" goal is a vanity benchmark. The right occupancy is whatever maximizes RevPAR for your specific market and property type.
+- Short-term rental nights are perishable inventory. That single fact is the underlying reason ADR alone cannot tell you how the business is doing.
+
+</div>
+
+Let me show you the math hosts are missing.
+
+Two properties in the same sub-market. Host A charges $600 a night and books 8 nights a month. Host B charges $350 and books 20.
+
+Host A's revenue: $4,800. Host B's revenue: $7,000.
+
+That is a 46% revenue gap on a lower headline rate. And yet sit in any short-term rental (STR) Facebook group, on any STR Twitter thread, on any "how I scaled to seven figures" podcast, and you will hear hosts trade ADR like a high score. *I'm at $750 a night now. I broke $1,000 in peak season.*
+
+Almost no one talks about RevPAR.
+
+American Airlines essentially invented modern revenue management in the late 1970s. Hotels institutionalized it. Cruise lines refined it. They figured out a long time ago that the price on a rate card means very little if you cannot tell me what is actually happening across the full inventory. STRs are still catching up to that basic discipline.
+
+This is the gap. ADR is the metric hosts love. RevPAR is the metric that tells the truth. Let me walk through what each one actually is, when each one matters, and how to use both together.
+
+<section class="rf-bleed">
+  <img loading="lazy" decoding="async" src="/photos/blog/season/winter-cabin-snow-fall-2400.webp" alt="A snowed-in short-term rental cabin at dusk — every empty winter night is revenue you cannot resell tomorrow" />
+  <div class="rf-bleed-inner">
+    <blockquote>
+      <p>“Two hosts can post the same $400 ADR and run two completely different businesses. Only the calendar tells you which one.”</p>
+      <cite>— Federico Zimerman</cite>
+    </blockquote>
+  </div>
+</section>
+
+## ADR Defined: The Metric Hosts Love (For the Wrong Reasons)
+
+### What is ADR?
+
+ADR (Average Daily Rate) is the average price charged per booked night. The formula is simple: **Total Revenue ÷ Number of Booked Nights**. ADR measures pricing power, not overall performance.
+
+### Why ADR feels like a win
+
+ADR feels like proof. It is one number that says *I am running a premium product*. Pricing tools like PriceLabs, Beyond Pricing, and Wheelhouse all surface ADR by default on their dashboards, which is part of why hosts over-fixate on it. If the dashboard puts a number front and center, that is the number people optimize.
+
+The problem is what ADR ignores. ADR is calculated only on the nights that are booked. It tells you nothing about the nights that didn't. A property charging $800 a night that books four nights a month has the same ADR as a property charging $800 a night that books twenty-four nights a month. Same number, fundamentally different businesses.
+
+### When ADR alone is useful
+
+ADR is not useless. It is incomplete. There are three situations where ADR is the right number to look at:
+
+1. **Testing the pricing ceiling on a single peak window** — a holiday weekend, a local festival, a one-off event night where supply is tight.
+2. **Comparing two near-identical listings** of the same size, same category, same micro-market. Strip out occupancy noise; ADR is the cleaner read.
+3. **Measuring whether a recent rate change held** the next 30 days after a price move, before occupancy data has had time to settle.
+
+Outside those windows, ADR alone is misleading. Which is why hosts who treat this as a business eventually move to RevPAR.
+
+## RevPAR Defined: The Metric That Tells You the Truth
+
+### What is RevPAR?
+
+RevPAR stands for **Revenue Per Available Room**. The term originated in hotel revenue management decades ago and was adopted directly by short-term rental operators when the discipline crossed over from hospitality. Whether the inventory is a hotel room or a vacation rental, the meaning is the same: total revenue divided by every available night in the period.
+
+The formula is: **Revenue ÷ Available Nights**, or equivalently **ADR × Occupancy Rate**. RevPAR captures pricing power and demand in a single number, which is what makes it a better measure of overall STR performance than ADR.
+
+### Why RevPAR is the honest metric
+
+ADR can lie. RevPAR cannot. If your nights are sitting empty, RevPAR drops, and there is nowhere for the number to hide. It forces an honest conversation about whether your pricing strategy is actually working across the full calendar, not just the nights that happened to book.
+
+### Worked example: two hosts, same ADR, different realities
+
+| Host | ADR | Occupancy | RevPAR |
+|---|---|---|---|
+| Host A | $400 | 35% | $140 |
+| Host B | $400 | 65% | $260 |
+
+Same nightly rate. Same product type. Host B is earning 86% more per available night.
+
+Stretch that across 365 nights, and Host A pulls $51,100 in annual revenue while Host B pulls $94,900. That is a $43,800 gap on identical pricing. If you do not look at RevPAR, you will never see that gap. Both hosts will keep telling each other *I'm at $400 a night* and walk away thinking they are running the same business.
+
+They are not.
+
+<div class="rf-chart">
+  <div class="rf-chart-header">
+    <p class="kicker">Same ADR · different business</p>
+    <h3>Two hosts at $400/night. $43,800 revenue gap.</h3>
+    <p class="lede">Annualized revenue across 365 available nights. Same nightly rate. Different occupancy. RevPAR is the only metric that surfaces the difference.</p>
+  </div>
+  <div class="rf-chart-rows">
+    <div class="rf-chart-row">
+      <span class="rf-chart-label">Host A · 35% occ</span>
+      <span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:54%"></span></span>
+      <span class="rf-chart-value">$51,100</span>
+    </div>
+    <div class="rf-chart-row">
+      <span class="rf-chart-label">Host B · 65% occ</span>
+      <span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span>
+      <span class="rf-chart-value">$94,900</span>
+    </div>
+  </div>
+  <div class="rf-chart-legend">
+    <span><span class="swatch walnut"></span>Comp host (ADR-led)</span>
+    <span><span class="swatch cedar"></span>RevPAR-managed host</span>
+  </div>
+</div>
+
+## Why This Debate Matters: Perishability Is a Metric Design Problem
+
+STR nights are perishable inventory. They have a specific revenue value tied to a specific date, and once that date passes, the revenue is gone. You cannot sell yesterday. This is the same economic structure that runs airline seats, concert tickets, and ski-pass days. The implication for a host is that every empty night carries an opportunity cost equal to the rate that night could have commanded, not zero. ADR is blind to that cost. RevPAR isn't. For the full economic case, the airline pedigree, the bookshop analogy, and the ski-pass example, see the pillar guide on [revenue management for short-term rentals](/blog/revenue-management-for-short-term-rentals/).
+
+What matters here is something more specific: perishability is not just an economic observation. It is a constraint on how you design metrics.
+
+ADR is structurally incapable of capturing perishability. It is a per-booked-night number. By definition, it does not see the nights that were not booked; those nights are excluded from the denominator. So an empty calendar with three booked weekends at $1,200 a night returns the same ADR as a full calendar at $1,200 a night.
+
+RevPAR is the metric forced to capture perishability. Available nights live in the denominator, whether they sold or not. Empty nights pull the average down. The metric is designed to surface the very thing ADR is designed to ignore.
+
+This is the deeper reason the ADR-versus-RevPAR question matters. The two metrics are not measuring the same thing differently. They are measuring fundamentally different things, and only one of them captures the economics of the business you are actually running.
+
+<section class="rf-bleed">
+  <img loading="lazy" decoding="async" src="/photos/blog/season/autumn-cabin-leaves-2400.webp" alt="An autumn cabin nestled in fall foliage at golden hour — the perishable-inventory season where weak ADR alone leaves money on the table" />
+  <div class="rf-bleed-inner">
+    <blockquote>
+      <p>“Occupancy is half the story. ADR is the other half. RevPAR is the single number that reads them together, and it's the one that lands in the bank.”</p>
+      <cite>— Federico Zimerman</cite>
+    </blockquote>
+  </div>
+</section>
+
+## When ADR Matters More vs When RevPAR Wins
+
+Most hosts treat this as a binary. It isn't. ADR is a lever. RevPAR is the outcome. Pull the lever; watch the outcome.
+
+**ADR is a lever. RevPAR is the outcome.**
+
+| Use ADR when… | Use RevPAR when… | Why this matters |
+|---|---|---|
+| Testing maximum pricing on a single peak-demand night | Evaluating overall property performance month-over-month | ADR isolates the pricing decision; RevPAR reflects business health |
+| Comparing two near-identical listings in the same micro-market | Benchmarking against your comp set | ADR strips out occupancy noise; RevPAR includes the demand reality |
+| Measuring whether a rate change held in a specific window | Deciding whether the broader pricing strategy is working | ADR is a tactical signal; RevPAR is a strategic one |
+| Setting a peak-season rate ceiling | Setting an annual revenue target | ADR caps your upside per night; RevPAR projects your real revenue |
+| Negotiating a comp set or appraisal benchmark | Reporting performance to a co-host, partner, or accountant | ADR is what you charged; RevPAR is what the business earned |
+
+Use both. But report on RevPAR.
+
+The Four Pillars of STR revenue management are: **Historical Data** (what the market has actually done), **Inventory Management** (minimum stays, calendar controls, length-of-stay rules), **Forecasting** (what demand signals say about the next 30–90 days), and **Pricing Strategy** (the visible output that the first three pillars feed into). ADR and RevPAR sit inside Pillar 4. They are the diagnostic outputs that tell you whether Pillars 1–3 are working. For the full operational treatment, see the pillar guide on [revenue management for short-term rentals](/blog/revenue-management-for-short-term-rentals/). The pricing mechanics that move ADR in the first place are unpacked in our [dynamic pricing guide for STR beginners](/blog/dynamic-pricing-str-beginners-guide/).
+
+## The 80% Occupancy Myth
+
+There is a number that gets traded around hosting groups like a passing grade: 80% occupancy. The implicit logic is that an 80%-full calendar means you are doing the job. A 40%-full calendar means you are failing.
+
+That logic is wrong, and the math is unforgiving.
+
+<section class="rf-bleed">
+  <img loading="lazy" decoding="async" src="/photos/blog/coastal/beach-house-sunset-2400.webp" alt="A coastal vacation rental porch facing a pink sunset — the kind of listing where the right RevPAR is rarely 80% occupancy" />
+  <div class="rf-bleed-inner">
+    <blockquote>
+      <p>“A full calendar is not a metric. RevPAR is. The right occupancy is whatever clears the highest revenue per available night for that property — and it is almost never the round number hosts brag about.”</p>
+      <cite>— Federico Zimerman</cite>
+    </blockquote>
+  </div>
+</section>
+
+Sarah runs Boho Bungalow in San Diego. She came to RevFactor with a calendar that was filling but rates that were soft, and a listing leaving meaningful money on the table. We rebuilt the pricing strategy from the ground up. The result, summer-over-summer: a **98.6% revenue lift**, with the largest ADR jump in the entire portfolio at **+39.7%**. Occupancy did not collapse. ADR climbed. And RevPAR, the actual measure of what the property earned per night of available inventory, moved hard.
+
+Compare that to the alternative path. Drop rates aggressively to chase a higher occupancy number. The calendar fills. The host posts the screenshot. The bank account earns less.
+
+The honest version of this principle is that there is a RevPAR-maximising occupancy for every property, and it is rarely 80%. Sometimes it is 65%. Sometimes 50%. For a true luxury listing in a thin-demand market, even lower. The right answer is whatever combination of ADR and occupancy produces the highest sustainable RevPAR for your specific property, not whatever combination hits a round number on the calendar.
+
+## How to Calculate RevPAR for Your Airbnb (Step-by-Step)
+
+The calculation itself takes thirty seconds. Pulling the right inputs from your platforms takes another five.
+
+### The formula
+
+**RevPAR = Total Revenue ÷ Total Available Nights**
+
+Equivalently: **RevPAR = ADR × Occupancy Rate**
+
+Both formulas return the same number. Use whichever is easier, given the data you have.
+
+### A 30-second example
+
+Take a 90-day window. You booked 60 nights at an average of $300 each.
+
+| Input | Value |
+|---|---|
+| Total revenue | 60 × $300 = $18,000 |
+| Available nights | 90 |
+| Booked nights | 60 |
+| ADR | $18,000 ÷ 60 = **$300** |
+| Occupancy | 60 ÷ 90 = **67%** |
+| RevPAR | $18,000 ÷ 90 = **$200** |
+
+ADR was $300. RevPAR was $200. The $100 gap is what the empty nights cost you, expressed in honest per-night terms.
+
+### Try it on your own numbers
+
+import RevPARCalculator from '../../components/RevPARCalculator.jsx';
+
+<RevPARCalculator client:load />
+
+If you would rather run the numbers in a spreadsheet, the three formulas you need are:
+
+| Metric | Formula |
+|---|---|
+| **ADR** | `= total_revenue / booked_nights` |
+| **Occupancy** | `= booked_nights / available_nights` |
+| **RevPAR** | `= total_revenue / available_nights` (or `ADR × Occupancy`) |
+| **GOPPAR** | `= (total_revenue − operating_costs) / available_nights` |
+
+GOPPAR (Gross Operating Profit Per Available Room) subtracts cleaning, channel commissions, dynamic-pricing fees, and supplies. It is the cleanest one-number view of what actually reaches the owner. RevPAR is the right metric for benchmarking against a comp set; GOPPAR is the right metric for judging an investment.
+
+### How to pull the numbers from your platforms
+
+**Airbnb.** Open the Earnings dashboard. Filter to the date range you care about, pull total payouts and total nights booked, then divide payouts by available nights in the window.
+
+**Vrbo.** The equivalent dashboard sits under Performance > Revenue.
+
+**PriceLabs.** The Performance dashboard surfaces ADR, occupancy, and RevPAR side by side at the listing and portfolio level. That is the cleanest view if you are running multiple properties or comparing against your local comp set.
+
+If you manage across both Airbnb and Vrbo, you will need to combine the inputs manually or rely on a multi-platform tool. Single-platform RevPAR is misleading if half your bookings come from somewhere else.
+
+## The Metric Most Hosts Are Actually Missing: Pacing
+
+Even RevPAR has a blind spot.
+
+<figure class="rf-figure rf-figure-quote">
+  <div class="rf-figure-frame">
+    <img loading="lazy" decoding="async" src="/photos/blog/cabin/black-aframe-fall-2400.webp" alt="A black A-frame short-term rental in an autumn forest — the property and the pacing curve seen at the same time" />
+    <blockquote class="rf-figure-overlay">
+      <p>“You're looking at a frozen, still moment in time, a snapshot, instead of looking at a whole movie.”</p>
+      <cite>Federico Zimerman</cite>
+    </blockquote>
+  </div>
+  <figcaption>Maryssa's waterfront property in Albion, Michigan — tracking +18.4% versus prior-year final revenue mid-season because the pacing curve, not the rear-view RevPAR, drove the pricing moves.</figcaption>
+</figure>
+
+RevPAR last month tells you how last month went. It does not tell you how next month is shaping up. The number that tells you that is **pacing** — booked revenue and booked nights for a future window, tracked against the same window in prior years and against the rest of your comp set.
+
+Consider a recent example. Maryssa runs a waterfront property in Albion, Michigan, and was tracking **+18.4%** versus prior-year final revenue mid-season. The pacing curve was healthy. The temptation in that situation is to either coast or to push rates aggressively and see what sticks. We did neither. The pacing data showed exactly which forward windows had real demand pull and which were softer than the year before. Pricing moves followed the pacing data, not the other way around.
+
+That is the discipline RevPAR alone cannot give you. RevPAR is the rear-view mirror. Pacing is the windshield.
+
+A full guide to reading pacing curves on a 90-day forward horizon is coming next in this series. For now, the principle is enough: do not optimize solely on what has already happened. Optimize on what is happening to your forward calendar right now.
+
+## How to Use ADR and RevPAR Together: A Practical Playbook
+
+Once a month, sit down with your data and run a five-step review. The whole exercise takes about twenty minutes.
+
+### Step 1: Pull last month's numbers
+
+ADR, occupancy, RevPAR, total revenue. Do this for each listing, then for the portfolio in aggregate. Mixing listing-level and portfolio-level numbers is the most common analysis mistake. Keep them separate.
+
+### Step 2: Compare to the same month last year
+
+Year-over-year is the only fair comparison for a seasonal business. Month-over-month tells you almost nothing meaningful in a market where summer is 4× winter. If you do not have last year's numbers, start logging them this month so you have them next year.
+
+### Step 3: Compare to your comp set
+
+If you do not have a comp set defined, define one. Eight to fifteen directly comparable listings in your micro-market, same bedroom count, same broad guest profile. Compare ADR and RevPAR against the comp set's medians. Underperforming the comp set on RevPAR is the single most actionable diagnostic in STR management. For the full walkthrough on how to assemble one, see [building a comp set](/blog/how-to-build-comp-set-str/).
+
+### Step 4: Read the diagnostic
+
+Now read the two numbers together.
+
+If **RevPAR is down and ADR is up**, you have a demand problem. The rates held, but the bookings did not show up. The play is to audit minimum-stay restrictions, listing visibility, search ranking, and photo refresh. Not to drop rates.
+
+If **RevPAR is up and ADR is down**, you are trading rate for occupancy. That is sometimes the right move and sometimes the wrong one. The play is to check whether the length-of-stay discount ladder is over-firing, or whether weekday rates are set too soft.
+
+If both are up, the strategy is working. If both are down, it isn't. Most months land in the diagonal cases above, which is where the analysis actually matters.
+
+### Step 5: Pick one move
+
+Do not change five things at once. Pick the highest-impact move suggested by Step 4, make the change, and measure it next month. Iteration beats overhaul.
+
+<div class="rf-band cedar">
+  <p class="kicker">The 5-Minute Monthly Read</p>
+  <h3>One framework. Five steps. Twenty minutes a month.</h3>
+  <p>1. Pull ADR, occupancy, RevPAR per listing and portfolio. 2. Compare year-over-year, same month. 3. Compare to the comp set median. 4. Read the ADR-RevPAR diagnostic. 5. Pick one move. Measure next month.</p>
+</div>
+
+## The Bottom Line: Stop Optimizing the Wrong Number
+
+ADR is the number hosts talk about at meetups. RevPAR is the number that tells you whether the business is working. Pacing is the number that tells you what to do next.
+
+Most hosts are stuck on ADR because it is the easiest to find, the easiest to brag about, and the easiest to confuse with success. The fix is simple to describe and harder to execute: pull the lever of ADR, watch the outcome in RevPAR, and look ahead through pacing.
+
+This is the discipline of revenue management. RevFactor was built around exactly this set of habits — calm, analytical, data-led decisions instead of round-number vanity benchmarks.
+
+If you want to see how RevFactor uses these metrics on real client portfolios, [The RevFactor Method](/blog/the-revfactor-method/) walks through it phase by phase. If you want an experienced revenue manager to run the numbers for you, [start a conversation](/short-term-rental-consultant/).
+
+Stop optimizing the wrong number.
+
+<div class="rf-band moss">
+  <p class="kicker">The scoreboard</p>
+  <h3>ADR is a lever. RevPAR is the outcome. Pacing is the windshield.</h3>
+  <p>If you take one number from this guide, take RevPAR. Compare it to your comp set. Watch your pacing. Then ask yourself, every week, whether the tool you trust is actually doing the job — or whether somebody needs to be driving.</p>
+</div>
+
