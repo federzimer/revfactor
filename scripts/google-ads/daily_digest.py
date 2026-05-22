@@ -256,6 +256,61 @@ def posthog_friction(num_days=1):
     return out
 
 
+def ga4_bookings(num_days=1):
+    """Query GA4 for `book_strategy_call` events from schedule.revfactor.io.
+
+    Returns dict like {'yesterday': 2, 'last_7d': 6, 'lifetime': 10, 'value': 6000}
+    or None if creds not configured. Aaron's #1 lesson 2026-05-15: check GA4
+    directly because the iframe scheduler fires conversion events under its
+    own origin — invisible to the parent's PostHog or Ads dashboard.
+    """
+    pid = os.environ.get("GA4_PROPERTY_ID", "533592968")
+    client_id = os.environ.get("GA4_CLIENT_ID", "")
+    client_secret = os.environ.get("GA4_CLIENT_SECRET", "")
+    refresh = os.environ.get("GA4_REFRESH_TOKEN", "")
+    if not (client_id and client_secret and refresh):
+        return None
+    try:
+        # Refresh token to get access token
+        req = urllib.request.Request(
+            "https://oauth2.googleapis.com/token",
+            data=urllib.parse.urlencode({
+                "client_id": client_id, "client_secret": client_secret,
+                "refresh_token": refresh, "grant_type": "refresh_token",
+            }).encode(), method="POST")
+        access = json.loads(urllib.request.urlopen(req, timeout=15).read())["access_token"]
+
+        def run_report(start_date, end_date):
+            body = {
+                "dimensions": [{"name": "eventName"}],
+                "metrics": [{"name": "eventCount"}, {"name": "eventValue"}],
+                "dateRanges": [{"startDate": start_date, "endDate": end_date}],
+                "dimensionFilter": {"filter": {"fieldName": "eventName",
+                    "stringFilter": {"value": "book_strategy_call"}}},
+            }
+            req = urllib.request.Request(
+                f"https://analyticsdata.googleapis.com/v1beta/properties/{pid}:runReport",
+                data=json.dumps(body).encode(),
+                headers={"Authorization": f"Bearer {access}",
+                         "Content-Type": "application/json"}, method="POST")
+            d = json.loads(urllib.request.urlopen(req, timeout=20).read())
+            rows = d.get("rows", [])
+            if not rows: return (0, 0)
+            return (int(rows[0]["metricValues"][0]["value"]),
+                    int(rows[0]["metricValues"][1]["value"]))
+
+        yest_count, yest_val = run_report("yesterday", "yesterday")
+        wk_count, wk_val = run_report(f"{num_days+6}daysAgo", "yesterday")
+        lt_count, lt_val = run_report("2026-04-01", "today")
+        return {
+            "yesterday": yest_count, "yesterday_value": yest_val,
+            "last_7d": wk_count, "last_7d_value": wk_val,
+            "lifetime": lt_count, "lifetime_value": lt_val,
+        }
+    except Exception as e:
+        return {"error": str(e)[:120]}
+
+
 def fraudblocker_blocked_count(domain="revfactor.io", range_="1d"):
     """Pull yesterday's fraud-detection summary from Fraud Blocker.
 
@@ -333,6 +388,7 @@ def build_digest():
     blocked = fraudblocker_blocked_count()
     is_rows = impression_share(client, yesterday, yesterday)
     friction = posthog_friction(num_days=1)
+    ga4 = ga4_bookings()
 
     # Build recommendations
     recs = []
@@ -383,6 +439,26 @@ def build_digest():
                 f"{row['top_is']}% top | "
                 f"lost-budget {row['lost_budget']}% | lost-rank {row['lost_rank']}%"
             )
+
+    # GA4 actual bookings — the TRUTH on bookings (since Ads conversion
+    # tracking is currently disconnected; bookings fire on schedule.revfactor.io
+    # under a separate origin and don't reach Ads dashboard).
+    if isinstance(ga4, dict) and "error" not in ga4:
+        lines.append("")
+        lines.append("*Actual bookings (GA4: book_strategy_call)*")
+        lines.append(f"• Yesterday: {ga4['yesterday']} bookings")
+        lines.append(f"• Last 7 days: {ga4['last_7d']} bookings")
+        lines.append(f"• Lifetime (since 4/1): {ga4['lifetime']} bookings")
+        if ga4['yesterday'] > 0 and total_conv == 0:
+            recs.append(
+                f"🎯 GA4 shows {ga4['yesterday']} booking(s) yesterday but "
+                f"Google Ads logged 0. Conversion import / cross-origin "
+                f"attribution still not wired — Fede needs to ship "
+                f"postMessage in setStep('confirmed')."
+            )
+    elif isinstance(ga4, dict) and "error" in ga4:
+        lines.append("")
+        lines.append(f"*GA4 query failed*: {ga4['error']}")
 
     # PostHog friction summary
     if isinstance(friction, dict) and friction:

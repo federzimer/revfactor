@@ -519,13 +519,14 @@ export default function PPCLanding({
               </div>
             </div>
 
-            {/* RIGHT — dynamically-sized iframe wrapper. Height tracks the
-                scheduler's posted iframeHeight (auto-grows per step:
-                date → time → form → confirmed). Capped at viewport - 200px
-                so short viewports scroll the iframe internally. marginTop:-38
-                clips 38px of the embed's 48px py-12 padding. */}
+            {/* RIGHT — dynamically-sized iframe wrapper. id="schedule" in
+                split layout so the existing in-page CTAs (which scroll to
+                #schedule) target this hero iframe directly. The redundant
+                #schedule section below is hidden in split mode to avoid
+                loading the scheduler iframe twice. */}
             <div
-              className="rounded-[16px] overflow-hidden"
+              id="schedule"
+              className="rounded-[16px] overflow-hidden scroll-mt-24"
               style={{ height: `min(${Math.max(480, calHeight)}px, calc(100vh - 200px))` }}
             >
               <iframe
@@ -714,13 +715,12 @@ export default function PPCLanding({
         </div>
       </section>
 
-      {/* ─── INLINE CALENDAR EMBED ─── (Moved up: directly after testimonials,
-           so a converted visitor can book within 2 scrolls of the hero. The
-           comparison table and process now act as objection handlers for
-           visitors who scrolled past the calendar without booking.
-           Asymmetric vertical padding: tight to the testimonial section above
-           — visitors who saw +75% / +20% / 5★ should hit the calendar
-           immediately, not scroll past 200px of dead space first.) */}
+      {/* ─── INLINE CALENDAR EMBED ─── Only rendered in stacked layout —
+           the split layout already has the calendar in the hero's right
+           column (with id="schedule") so this section would be a duplicate
+           iframe that fires competing postMessage events and doubles the
+           scheduler app bandwidth. */}
+      {effectiveLayout !== 'split' && (
       <section id="schedule" className="bg-[#DDDAD3] pt-4 pb-12 md:pt-6 md:pb-16">
         <div className="max-w-3xl mx-auto px-6 md:px-12">
           {/* Section header removed — the embedded calendar's own header
@@ -751,6 +751,7 @@ export default function PPCLanding({
           </div>
         </div>
       </section>
+      )}
 
       {/* ─── COMPARISON TABLE ─── */}
       <section id="difference" className="bg-[#E8E6E1] py-12 md:py-16">
