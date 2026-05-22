@@ -72,8 +72,13 @@ export default function QualifierGate({ onQualified, onClose }) {
         is_pm: isPM,
         path: !hasProperty ? 'no_property' : 'pm',
       });
-      // Google Ads conversion — lead capture
+      // Google Ads conversion — Discovery Lead Captured (Secondary, $75)
       if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-18106897053/MT8ACNTnqbEcEJ2lhbpD',
+          value: 75.0,
+          currency: 'USD',
+        });
         window.gtag('event', 'generate_lead', {
           path: !hasProperty ? 'no_property' : 'pm',
         });
