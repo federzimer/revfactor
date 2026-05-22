@@ -14,9 +14,9 @@ const ACTIVE_SET = new Set(ACTIVE_STATES);
 const SORTED_MARKERS = [...MAP_MARKERS].sort((a, b) => b.count - a.count);
 
 const STATS = [
-  { value: '165+', label: 'PROPERTIES' },
+  { value: '198', label: 'PROPERTIES' },
   { value: '24', label: 'STATES' },
-  { value: '56', label: 'MARKETS' },
+  { value: '67', label: 'MARKETS' },
 ];
 
 // ─── Map Tooltip (desktop — HTML portal) ───────────────────
@@ -166,7 +166,7 @@ function USMap({ onMarkerHover, onMarkerLeave, onMarkerTap, isMobile }) {
     >
       <title>RevFactor US Market Coverage Map</title>
       <desc>
-        An interactive map highlighting 24 active states and 56 market locations
+        An interactive map highlighting 24 active states and 67 market locations
         where RevFactor manages short-term rental properties.
       </desc>
 
