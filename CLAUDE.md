@@ -223,3 +223,40 @@ ScrollTrigger is used for scroll-based reveals. Most elements use a class-based 
 ## QA / functional testing
 
 User-facing flows are tested with Playwright via the [qa-flow-tester skill](/Users/aaronwhittaker/.claude/skills/qa-flow-tester/SKILL.md). Tests live at [tests/playwright/specs/](tests/playwright/specs/). Setup, decision tree, and a working reference test are documented in the skill — copy the pattern from [/Users/aaronwhittaker/Claude/cynthiastayscurated/tests/playwright/specs/travel-quote.spec.js](/Users/aaronwhittaker/Claude/cynthiastayscurated/tests/playwright/specs/travel-quote.spec.js) when adding the first flow.
+
+## Portfolio stats — single source of truth
+
+Numbers like properties managed (198), markets (67), states (24), and RevPAR lift (+24%) refresh often. They live in **one place**: [`src/data/portfolio-stats.ts`](src/data/portfolio-stats.ts) (the `PORTFOLIO_STATS` + `STAT_LABELS` exports).
+
+**React / Astro components** import `STAT_LABELS` directly and rerender on rebuild:
+- [`src/components/Hero.jsx`](src/components/Hero.jsx) — hero stat ribbon
+- [`src/components/AboutPage.jsx`](src/components/AboutPage.jsx) — `/about/` STATS cards + map aria-desc
+- [`src/pages/blog/index.astro`](src/pages/blog/index.astro) — Journal hero stats + newsletter blurb
+
+**MDX/Astro prose** can't import a TS file (it's rendered as static markdown), so the canonical numbers are carried as literal text and kept in sync by a script:
+
+```bash
+# Update everything in one command (only writes the flags you pass):
+python3 scripts/update_portfolio_stats.py \
+  --properties 220 --markets 72 --states 26 --lift 26
+
+# Dry-run first:
+python3 scripts/update_portfolio_stats.py --properties 220 --dry-run
+```
+
+The script:
+1. Writes new values into `src/data/portfolio-stats.ts`
+2. Regex-sweeps known patterns across `src/content/blog/`, `src/pages/`, `src/components/` (e.g. `"198 short-term rentals"`, `"67 markets"`, `"+24% lift"`)
+3. Prints a count of rewrites per pattern
+4. Leaves Google Ads RSAs untouched (those live in the Google Ads API, separate concern — see below)
+
+**Google Ads ad copy uses the same numbers but lives out-of-band** in the Google Ads account (account ID `5342635272`). When portfolio stats refresh, also run:
+
+```bash
+# Audit live RSAs for stale references:
+python3 scripts/google-ads/check_stale_stats.py
+
+# Then refresh the affected ad groups via:
+python3 scripts/google-ads/add_rsa_variants.py
+# or edit scripts/google-ads/campaigns_config.py + re-run the apply script
+```

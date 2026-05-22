@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ArrowRight } from 'lucide-react';
 import ScheduleModal from './ScheduleModal';
+import { STAT_LABELS } from '../data/portfolio-stats';
 
 export default function Hero() {
   const [scheduleOpen, setScheduleOpen] = useState(false);
@@ -29,9 +30,9 @@ export default function Hero() {
   }, []);
 
   const stats = [
-    { label: 'PROPERTIES MANAGED', value: '198' },
+    { label: 'PROPERTIES MANAGED', value: STAT_LABELS.propertiesShort },
     // { label: 'AVG REVENUE LIFT', value: '+22%' },
-    { label: 'MARKETS', value: '67 US-WIDE' },
+    { label: 'MARKETS', value: STAT_LABELS.marketsHero },
   ];
 
   return (

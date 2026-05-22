@@ -65,7 +65,7 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'BEYOND PRICING TOOLS',
     headlinePart1: 'Pricing tools set numbers.',
     headlinePart2Italic: 'We set strategy.',
-    subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work and pull back the 18% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist plus 24/7 dashboard messaging. Flat $320/mo.',
+    subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work and pull back the 24% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist plus 24/7 dashboard messaging. Flat $320/mo.',
     ctaText: 'Book a Discovery Call',
   },
   // Conquest campaign — searcher is on PriceLabs / Wheelhouse / Beyond
@@ -95,9 +95,9 @@ function readMessageVariant() {
    That keeps Google Ads campaigns on their tuned messaging while the
    experiment runs on baseline (organic / direct / SEO) traffic. */
 const SUBHEAD_VARIANTS = {
-  b: 'Your tool sets the number. We set the strategy. Comp tracking, calendar moves, length-of-stay rules, channel mix. The work that recovers the 18% an algorithm can’t see. Direct access to a senior strategist. $320/month per property, less per door at scale.',
-  c: 'Most STRs run a pricing tool and stop there. They leave 18% on the table. We pull it back with the work a tool can’t do: comp positioning, calendar timing, length-of-stay strategy. Every move a human catches that an algorithm misses. $320/month per property, volume pricing past 5.',
-  d: 'A pricing tool sets your nightly number. That’s about all it can do. The 18% lift comes from the work around it: comp tracking, calendar moves, length-of-stay rules. Judgment calls a strategist makes that an algorithm can’t. You get one. $320/month per property, less per door at scale.',
+  b: 'Your tool sets the number. We set the strategy. Comp tracking, calendar moves, length-of-stay rules, channel mix. The work that recovers the 24% an algorithm can’t see. Direct access to a senior strategist. $320/month per property, less per door at scale.',
+  c: 'Most STRs run a pricing tool and stop there. They leave 24% on the table. We pull it back with the work a tool can’t do: comp positioning, calendar timing, length-of-stay strategy. Every move a human catches that an algorithm misses. $320/month per property, volume pricing past 5.',
+  d: 'A pricing tool sets your nightly number. That’s about all it can do. The 24% lift comes from the work around it: comp tracking, calendar moves, length-of-stay rules. Judgment calls a strategist makes that an algorithm can’t. You get one. $320/month per property, less per door at scale.',
 };
 
 function readSubheadOverride() {

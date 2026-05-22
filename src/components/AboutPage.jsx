@@ -6,6 +6,7 @@ import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import us from 'us-atlas/states-10m.json';
 import { MAP_MARKERS, ACTIVE_STATES } from '../data/mapData';
+import { STAT_LABELS } from '../data/portfolio-stats';
 import Footer from './Footer';
 
 // ─── Constants ─────────────────────────────────────────────
@@ -14,9 +15,9 @@ const ACTIVE_SET = new Set(ACTIVE_STATES);
 const SORTED_MARKERS = [...MAP_MARKERS].sort((a, b) => b.count - a.count);
 
 const STATS = [
-  { value: '198', label: 'PROPERTIES' },
-  { value: '24', label: 'STATES' },
-  { value: '67', label: 'MARKETS' },
+  { value: STAT_LABELS.propertiesShort, label: 'PROPERTIES' },
+  { value: STAT_LABELS.statesShort, label: 'STATES' },
+  { value: STAT_LABELS.marketsShort, label: 'MARKETS' },
 ];
 
 // ─── Map Tooltip (desktop — HTML portal) ───────────────────

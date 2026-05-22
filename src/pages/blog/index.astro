@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
 import MasonryCard from '../../components/blog/MasonryCard.astro';
+import { STAT_LABELS } from '../../data/portfolio-stats';
 
 // Source: feature/journal — adapted for launch with the 2 real posts.
 // Branding: "The Rev Journal — Field notes on the cabin economy."
@@ -263,16 +264,16 @@ const schema = {
           </span>
         </h1>
         <p class="text-[15px] leading-[1.7] text-[#C8C4BC] max-w-[520px] mb-8">
-          A working journal on pricing, pacing, and yield — across 165 short-term rentals, one night at a time.
+          A working journal on pricing, pacing, and yield — across {STAT_LABELS.propertiesPhrase}, one night at a time.
         </p>
         <div class="flex flex-wrap gap-6 md:gap-10">
           <div class="flex flex-col gap-0.5">
             <span class="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase">Properties</span>
-            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">165</span>
+            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">{STAT_LABELS.propertiesShort}</span>
           </div>
           <div class="flex flex-col gap-0.5">
             <span class="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase">Coverage</span>
-            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">56 Markets</span>
+            <span class="text-[18px] text-[#E8E6E1] font-medium" style="font-family:'JetBrains Mono',monospace;">{STAT_LABELS.marketsShort} Markets</span>
           </div>
           <div class="flex flex-col gap-0.5">
             <span class="text-[11px] tracking-[2px] text-[#7A8B76] font-bold uppercase">Latest dispatch</span>
@@ -512,7 +513,7 @@ const schema = {
           Outprice the market.<br/><em style="font-style:italic; color:#F0C9C2; font-weight:300;">Direct to your inbox.</em>
         </h3>
         <p class="text-[15px] leading-[1.6] text-[#F0DAD5]/75 max-w-xl mx-auto mb-8">
-          Pricing strategy, market moves, and operator field notes from inside 165 listings. Written for people who actually read the calendar view.
+          Pricing strategy, market moves, and operator field notes from inside {STAT_LABELS.propertiesLong}. Written for people who actually read the calendar view.
         </p>
         <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto" novalidate>
           <input id="newsletter-email" type="email" name="email" placeholder="you@cabin.co" required autocomplete="email" class="flex-1 px-5 py-3 rounded-full bg-[#E8E6E1]/10 border border-[#E8E6E1]/25 text-[14px] text-[#E8E6E1] placeholder:text-[#E8C7C1]/55 outline-none" />
