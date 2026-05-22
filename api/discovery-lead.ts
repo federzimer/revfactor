@@ -7,17 +7,22 @@
 // Required env vars (Vercel project settings → Environment Variables):
 //   SUPABASE_URL                — same as newsletter endpoint
 //   SUPABASE_SERVICE_ROLE_KEY   — same as newsletter endpoint
-//   RESEND_API_KEY              — sending key for revfactor.io (verified domain)
+//   RESEND_API_KEY              — Resend API key (account: aaron@procloser.ai)
 //   DISCOVERY_NOTIFY_TO         — comma-separated recipient list
-//                                 (default: aaron@procloser.ai,federico@blackbirdhm.com)
-//   DISCOVERY_NOTIFY_FROM       — sender (default: notifications@revfactor.io)
+//                                 (default: aaron@procloser.ai — Resend's free
+//                                 onboarding@resend.dev sender restricts delivery
+//                                 to the account owner only; Fede gets notified
+//                                 via a Gmail forwarding filter on Aaron's box.
+//                                 Once revfactor.io DNS verifies on Resend,
+//                                 switch back to direct aaron+federico fan-out.)
+//   DISCOVERY_NOTIFY_FROM       — sender (default: onboarding@resend.dev)
 
 export const config = { runtime: 'edge' };
 
 const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 
-const DEFAULT_NOTIFY_TO = 'aaron@procloser.ai,federico@blackbirdhm.com';
-const DEFAULT_NOTIFY_FROM = 'RevFactor <notifications@revfactor.io>';
+const DEFAULT_NOTIFY_TO = 'aaron@procloser.ai';
+const DEFAULT_NOTIFY_FROM = 'RevFactor Discovery <onboarding@resend.dev>';
 
 export default async function handler(req: Request): Promise<Response> {
   if (req.method !== 'POST') {
