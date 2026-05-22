@@ -26,7 +26,7 @@ for (const page of PPC_PAGES) {
     test.use({ viewport: { width: 1440, height: 900 } });
 
     test('no inline schedule iframe in the DOM', async ({ page: pw }) => {
-      await pw.goto(page.path, { waitUntil: 'networkidle' });
+      await pw.goto(page.path, { waitUntil: 'domcontentloaded' });
       // Modal iframe is only rendered AFTER QualifierGate qualifies; on first
       // paint there should be ZERO schedule.revfactor.io iframes.
       const iframes = pw.locator('iframe[src*="schedule.revfactor.io"]');
@@ -34,7 +34,7 @@ for (const page of PPC_PAGES) {
     });
 
     test('CTA opens modal + no_property path POSTs to /api/discovery-lead', async ({ page: pw }) => {
-      await pw.goto(page.path, { waitUntil: 'networkidle' });
+      await pw.goto(page.path, { waitUntil: 'domcontentloaded' });
       const cta = pw.getByRole('button', { name: /book a discovery call|schedule a discovery call/i }).first();
       await cta.scrollIntoViewIfNeeded();
       await pw.waitForTimeout(300); // animation settle
@@ -56,7 +56,7 @@ for (const page of PPC_PAGES) {
 
     test('self-host path opens the scheduler iframe inside the modal (with UTMs forwarded)', async ({ page: pw }) => {
       // Visit with UTMs + gclid to test forwarding into the modal iframe.
-      await pw.goto(`${page.path}?utm_source=playwright&utm_campaign=ppc-modal-qa&gclid=PWTEST123`, { waitUntil: 'networkidle' });
+      await pw.goto(`${page.path}?utm_source=playwright&utm_campaign=ppc-modal-qa&gclid=PWTEST123`, { waitUntil: 'domcontentloaded' });
       const cta = pw.getByRole('button', { name: /book a discovery call|schedule a discovery call/i }).first();
       await cta.scrollIntoViewIfNeeded();
       await pw.waitForTimeout(300);
