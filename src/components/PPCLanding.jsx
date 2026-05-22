@@ -287,54 +287,30 @@ export default function PPCLanding({
   // Available: clifftop (V3 dusk), aframe (V4 golden hour), snowcap (V2 peaks),
   // meadow (V1 hazy mountains).
   heroBase = "clifftop",
-  // Optional override for the split-hero variant only — lets a brighter
-  // image surface behind the calendar without changing the stacked hero.
-  // Falls back to heroBase when not provided.
-  splitHeroBase,
   heroAlt = "Modern luxury short-term rental property managed by RevFactor",
-  // "stacked" (default, image bg + CTA above the comparison/testimonials/calendar
-  // sections) or "split" (calendar embedded RIGHT-of-hero, headline on the LEFT).
-  // Split layout = ClickFunnels-style book-without-scrolling treatment for paid
-  // traffic. A/B test variant.
-  layout = "stacked",
 }) {
   const [scheduleOpen, setScheduleOpen] = useState(false);
-  // All page CTAs scroll to the inline #schedule section instead of opening
-  // a duplicate-calendar modal. ExitIntent popup is the only place that
-  // still uses an embedded calendar (since the user is mid-exit and we
-  // want to keep them in-context).
+  // All page CTAs open the Discovery Call modal (QualifierGate → optional
+  // scheduler iframe) instead of scrolling to an inline embed. Removes the
+  // unqualified-PM-company calendar bookings that were clogging Fede's
+  // calendar; adds the no-property + PM-company lead-capture paths.
   const open = () => {
-    const el = typeof document !== 'undefined' && document.getElementById('schedule');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof window !== 'undefined') {
+      window.posthog?.capture('schedule_modal_opened', { source: 'ppc' });
+    }
+    setScheduleOpen(true);
   };
-  const calRef = useRef(null);
-  // Default tall enough that the calendar's date grid + bottom legend always
-  // show without scrolling on mobile + desktop. The scheduler app posts a
-  // height update via postMessage when the user changes step (date → time →
-  // form → confirmed) — until then this minimum keeps the embed unclipped.
-  const [calHeight, setCalHeight] = useState(820);
 
   // DTR — read ?msg= URL param after mount and override hero copy if it
   // matches a known variant. Server-rendered HTML uses the .astro page's
   // default props; the swap happens on client hydration. Page is noindex,
   // so SEO impact of the brief content swap is irrelevant.
   const [variant, setVariant] = useState(null);
-  // Layout A/B: precedence is URL override (?v=split for QA) > GrowthBook
-  // feature flag (production traffic split) > page-level layout prop default.
-  // Read GrowthBook directly via gb.evalFeature() instead of the React hook
-  // (the hook needs a Provider in the parent tree; we'd rather keep this
-  // component standalone since it's mounted via Astro's client:load).
-  const [layoutOverride, setLayoutOverride] = useState(null);
-  const [gbLayout, setGbLayout] = useState(null);
   const [subheadOverride, setSubheadOverride] = useState(null);
   const [gbSubhead, setGbSubhead] = useState(null);
   useEffect(() => {
     setVariant(readMessageVariant());
     setSubheadOverride(readSubheadOverride());
-    if (typeof window !== 'undefined') {
-      const v = new URLSearchParams(window.location.search).get('v');
-      if (v === 'split' || v === 'stacked') setLayoutOverride(v);
-    }
     if (GROWTHBOOK_KEY) {
       // GA4 forwarding for rollout-type rules. The SDK's trackingCallback
       // fires only for proper experiment rules; rollout rules deliver a
@@ -353,11 +329,6 @@ export default function PPCLanding({
       };
       const tick = () => {
         try {
-          const v = gb.getFeatureValue('ppc_hero_layout', '');
-          if (v === 'split' || v === 'stacked') {
-            setGbLayout(v);
-            fireOnce('ppc_hero_layout', v);
-          }
           const s = gb.getFeatureValue('ppc_subhead_variant', '');
           if (s in SUBHEAD_VARIANTS) {
             setGbSubhead(s);
@@ -372,7 +343,6 @@ export default function PPCLanding({
       return () => { clearTimeout(t1); clearTimeout(t2); };
     }
   }, []);
-  const effectiveLayout = layoutOverride || gbLayout || layout;
   const eyebrow = variant?.eyebrow ?? defaultEyebrow;
   const headlinePart1 = variant?.headlinePart1 ?? defaultHeadlinePart1;
   const headlinePart2Italic = variant?.headlinePart2Italic ?? defaultHeadlinePart2Italic;
@@ -382,41 +352,6 @@ export default function PPCLanding({
   const subhead = variant?.subhead
     ?? (subheadKey ? SUBHEAD_VARIANTS[subheadKey] : defaultSubhead);
   const ctaText = variant?.ctaText ?? defaultCtaText;
-
-  // Forward UTMs + Google Ads ValueTrack params to the schedule iframe so
-  // bookings carry the campaign attribution into Fede's CRM. Without this,
-  // we know a conversion fired (gtag inside the iframe attributes to GA4 +
-  // Google Ads) but the booking record itself has no campaign metadata.
-  const scheduleUrl = (() => {
-    const base = 'https://schedule.revfactor.io/embed';
-    if (typeof window === 'undefined') return base;
-    const parentParams = new URLSearchParams(window.location.search);
-    const out = new URLSearchParams();
-    for (const [k, v] of parentParams) {
-      if (k.startsWith('utm_') || k.startsWith('gad_') || k === 'gclid' || k === 'msg') {
-        out.set(k, v);
-      }
-    }
-    const query = out.toString();
-    return query ? `${base}?${query}` : base;
-  })();
-
-  // Schedule iframe at schedule.revfactor.io is a custom Next.js app —
-  // it posts iframe dimensions via postMessage so the parent can resize.
-  useEffect(() => {
-    const onMessage = (e) => {
-      if (!e.data || typeof e.data !== 'object') return;
-      const h =
-        e.data?.data?.iframeHeight ??
-        e.data?.iframeHeight ??
-        e.data?.data?.height ??
-        e.data?.height;
-      const n = Number(h);
-      if (Number.isFinite(n) && n > 200 && n < 2000) setCalHeight(n);
-    };
-    window.addEventListener('message', onMessage);
-    return () => window.removeEventListener('message', onMessage);
-  }, []);
 
   return (
     <>
@@ -435,112 +370,9 @@ export default function PPCLanding({
         }
       `}</style>
 
-      {/* ─── HERO ─── Two layouts: "stacked" (image bg + CTA, calendar lives
-           in #schedule below) or "split" (calendar embedded right-of-hero so
-           visitors book without scrolling). Toggled via layout prop or
-           ?v=split URL param for A/B testing. */}
-      {effectiveLayout === 'split' ? (
-        <section className="relative min-h-[88vh] md:min-h-[92vh] flex items-center overflow-hidden bg-[#161910]">
-          {/* Background image — full opacity, lighter directional gradient so
-              the image actually reads behind the calendar. Gradient tint
-              keeps headline legible on the left half. Same treatment as
-              stacked hero. splitHeroBase lets the page swap in a brighter
-              image for this variant only. */}
-          {(() => {
-            const splitBase = splitHeroBase || heroBase;
-            return (
-              <picture>
-                <source
-                  type="image/webp"
-                  srcSet={`/heroes/${splitBase}-1200.webp 1200w, /heroes/${splitBase}-1920.webp 1920w, /heroes/${splitBase}-2400.webp 2400w`}
-                  sizes="100vw"
-                />
-                <img
-                  src={`/heroes/${splitBase}-1920.webp`}
-                  alt={heroAlt}
-                  fetchpriority="high"
-                  decoding="async"
-                  width="1920"
-                  height="1048"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </picture>
-            );
-          })()}
-          {/* Sub-lg (single-column, copy stacked above calendar): darker
-              top-down gradient so the headline reads against the brighter
-              parts of the image. lg+ (two-column, copy on left): horizontal
-              gradient — darker on left where text sits, image visible right
-              behind the calendar. */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#161910]/85 via-[#161910]/55 to-[#161910]/20 lg:hidden" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#161910] via-[#161910]/70 to-[#161910]/15 hidden lg:block" />
-
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-12 md:pt-32 md:pb-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-            {/* LEFT — copy + risk-reversal + founder signature */}
-            <div className="lg:pr-6">
-              <p className="font-bold uppercase text-[11px] tracking-[3px] text-[#A8BBA3] mb-5">
-                {eyebrow}
-              </p>
-              <h1
-                className="text-[clamp(34px,5.4vw,60px)] leading-[1.05] text-[#E8E6E1] mb-5"
-                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, letterSpacing: '0.5px' }}
-              >
-                {headlinePart1}{' '}
-                {headlinePart2Italic && (
-                  <span className="ppc-hero-italic" style={{ fontStyle: 'italic', color: '#A8BBA3' }}>
-                    {headlinePart2Italic}
-                  </span>
-                )}
-              </h1>
-              <p className="text-[16px] md:text-[18px] leading-[1.55] text-[#DDDAD3] mb-6">
-                {subhead}
-              </p>
-              <div className="flex items-start gap-2.5 mb-6">
-                <ShieldCheck className="w-5 h-5 text-[#A8BBA3] mt-[2px] flex-shrink-0" />
-                <p className="text-[15px] leading-[1.55] text-[#C8C4BC]">
-                  <span className="font-bold text-[#E8E6E1]">Our promise:</span>{' '}
-                  3 specific revenue recommendations even if we never work together.
-                </p>
-              </div>
-              <div className="flex items-center gap-3 pt-5 border-t border-[#3F261F]/40">
-                <img
-                  src="/team/federico.jpg"
-                  alt="Federico Zimerman, founder of RevFactor"
-                  width="56"
-                  height="56"
-                  loading="eager"
-                  decoding="async"
-                  className="w-14 h-14 rounded-full object-cover flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
-                />
-                <div className="leading-tight">
-                  <p className="text-[15px] text-[#E8E6E1] font-medium mb-0.5">Federico Zimerman</p>
-                  <p className="text-[10px] uppercase tracking-[1.5px] text-[#A8BBA3] font-bold">Founder · STR Revenue Strategist</p>
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT — dynamically-sized iframe wrapper. id="schedule" in
-                split layout so the existing in-page CTAs (which scroll to
-                #schedule) target this hero iframe directly. The redundant
-                #schedule section below is hidden in split mode to avoid
-                loading the scheduler iframe twice. */}
-            <div
-              id="schedule"
-              className="rounded-[16px] overflow-hidden scroll-mt-24"
-              style={{ height: `min(${Math.max(480, calHeight)}px, calc(100vh - 200px))` }}
-            >
-              <iframe
-                src={scheduleUrl}
-                title="Schedule a Discovery Call with RevFactor"
-                className="w-full border-0 block"
-                style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}
-                allow="payment"
-              />
-            </div>
-          </div>
-        </section>
-      ) : (
-      /* ─── STACKED HERO (default) — image background + CTA, calendar in #schedule below ─── */
+      {/* ─── HERO ─── Image background + CTA. CTA opens the Discovery Call
+           modal (QualifierGate → optional scheduler iframe). No inline
+           scheduler embed — the modal handles the booking surface. */}
       <section className="relative min-h-[78vh] md:min-h-[88vh] flex items-end overflow-hidden">
         <picture>
           <source
@@ -620,14 +452,13 @@ export default function PPCLanding({
           </div>
         </div>
       </section>
-      )}
 
       {/* ─── PROOF STRIP — animated count-up on scroll ─── */}
       <section className="bg-[#13342D] py-12">
         <div className="max-w-5xl mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
-            { to: 18,  prefix: '+', suffix: '%',     label: 'Avg revenue lift' },
-            { to: 165, prefix: '',  suffix: '+',     label: 'Properties managed' },
+            { to: 24,  prefix: '+', suffix: '%',     label: 'Avg revenue lift' },
+            { to: 198, prefix: '',  suffix: '',      label: 'Listings managed' },
             { to: 320, prefix: '$', suffix: '',      label: '/mo flat per property' },
             { to: 30,  prefix: '',  suffix: ' min',  label: 'Free Discovery Call' },
           ].map((s, i) => (
@@ -715,43 +546,31 @@ export default function PPCLanding({
         </div>
       </section>
 
-      {/* ─── INLINE CALENDAR EMBED ─── Only rendered in stacked layout —
-           the split layout already has the calendar in the hero's right
-           column (with id="schedule") so this section would be a duplicate
-           iframe that fires competing postMessage events and doubles the
-           scheduler app bandwidth. */}
-      {effectiveLayout !== 'split' && (
-      <section id="schedule" className="bg-[#DDDAD3] pt-4 pb-12 md:pt-6 md:pb-16">
-        <div className="max-w-3xl mx-auto px-6 md:px-12">
-          {/* Section header removed — the embedded calendar's own header
-              ("rf. DISCOVERY — Book a 30 minute discovery call") carries
-              the same context, so the duplicate was costing ~120px of
-              vertical room visitors had to scroll past before reaching
-              date slots. */}
-          {/* Inline calendar — dynamically-sized via calHeight state (set
-              by the postMessage listener up top). Tracks the scheduler's
-              posted iframeHeight per step. Default 820px (state initial)
-              so the form step (~720-800px) fits without scrollbar before
-              any postMessage fires. Capped at viewport - 160px so short
-              viewports scroll the iframe internally. marginTop:-38 clips
-              38px of the embed's 48px py-12 padding. */}
-          <div
-            className="rounded-[20px] overflow-hidden shadow-[0_16px_64px_rgba(22,25,16,0.12)] border border-[#C8C4BC]"
-            style={{ height: `min(${Math.max(480, calHeight)}px, calc(100vh - 160px))` }}
+      {/* ─── MID-PAGE CTA ─── Replaces the prior inline calendar embed.
+           Same conversion surface (CTA → Discovery Call modal) without the
+           weight of a second iframe. */}
+      <section className="bg-[#DDDAD3] py-12 md:py-16 text-center">
+        <div className="max-w-2xl mx-auto px-6 md:px-12">
+          <h2
+            className="text-[clamp(26px,4vw,38px)] leading-[1.15] text-[#3F261F] mb-5"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            <iframe
-              ref={calRef}
-              src={scheduleUrl}
-              title="Schedule a Discovery Call with RevFactor"
-              className="w-full border-0 block"
-              style={{ marginTop: '-38px', height: 'calc(100% + 38px)' }}
-              loading="lazy"
-              allow="payment"
-            />
-          </div>
+            Ready to talk{' '}
+            <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>strategy?</span>
+          </h2>
+          <p className="text-[16px] leading-[1.65] text-[#76574C] mb-8">
+            30-minute Discovery Call. We pull your comp set, walk through where pacing is leaving money, and tell you whether RevFactor is the right fit. No pitch deck.
+          </p>
+          <button
+            onClick={open}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+          >
+            <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
+            <span className="relative z-10">{ctaText}</span>
+            <ArrowRight className="relative z-10 w-4 h-4" />
+          </button>
         </div>
       </section>
-      )}
 
       {/* ─── COMPARISON TABLE ─── */}
       <section id="difference" className="bg-[#E8E6E1] py-12 md:py-16">

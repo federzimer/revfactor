@@ -24,6 +24,26 @@ export default function ScheduleModal({ onClose }) {
   // actual content height per step.
   const [iframeContentHeight, setIframeContentHeight] = useState(900);
 
+  // Forward UTMs + Google Ads ValueTrack params + the DTR ?msg= variant key
+  // to the scheduler iframe so the booking record carries campaign metadata
+  // into Fede's CRM. Without this, conversions still attribute properly (the
+  // parent BaseLayout postMessage listener fires the $1500 conversion from
+  // revfactor.io origin which naturally carries gclid), but Fede's CRM
+  // booking row would lose its source attribution.
+  const scheduleUrl = (() => {
+    const base = 'https://schedule.revfactor.io/embed';
+    if (typeof window === 'undefined') return base;
+    const parentParams = new URLSearchParams(window.location.search);
+    const out = new URLSearchParams();
+    for (const [k, v] of parentParams) {
+      if (k.startsWith('utm_') || k.startsWith('gad_') || k === 'gclid' || k === 'msg') {
+        out.set(k, v);
+      }
+    }
+    const qs = out.toString();
+    return qs ? `${base}?${qs}` : base;
+  })();
+
   // Listen for postMessage from the scheduler iframe to auto-resize.
   useEffect(() => {
     const onMsg = (e) => {
@@ -157,7 +177,7 @@ export default function ScheduleModal({ onClose }) {
               }}
             >
               <iframe
-                src="https://schedule.revfactor.io/embed"
+                src={scheduleUrl}
                 title="Book a Discovery Call with RevFactor"
                 className="w-full rounded-[12px] border-0 block"
                 style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
