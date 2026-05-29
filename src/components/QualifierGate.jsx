@@ -162,12 +162,12 @@ export default function QualifierGate({ onQualified, onClose }) {
         </p>
         <h3 className="qg-title">
           {isNoProperty
-            ? 'We\'re building something for hosts before they own.'
+            ? 'Price your first listing right from day one.'
             : 'Let\'s talk partnership.'}
         </h3>
         <p className="qg-sub">
           {isNoProperty
-            ? 'Short courses, market reads, getting-started playbooks for the pre-property stretch. Drop your email and we\'ll let you know when it ships — or come back when your first property is live. The Rev Journal lands in your inbox in the meantime.'
+            ? 'Most first-time hosts undercut by 15-30% the first 90 days because they don\'t know what their market actually pays. Drop your email and we\'ll send the getting-started pricing playbook (market reads, rate benchmarks, first-90-days strategy) — plus a heads-up when our pre-property service launches. The Rev Journal lands in your inbox in the meantime.'
             : 'Federico will reach out to walk through how RevFactor\'s revenue layer plugs into a PM portfolio — pricing strategy, calendar, length-of-stay, channel mix. We work alongside the operations team you already run.'}
         </p>
         <form
@@ -222,7 +222,7 @@ export default function QualifierGate({ onQualified, onClose }) {
       <h3 className="qg-title">You're in.</h3>
       <p className="qg-sub">
         {!hasProperty
-          ? 'We\'ll let you know when the pre-property offering ships. Until then, The Rev Journal lands in your inbox when something interesting drops.'
+          ? 'Pricing playbook on the way. The Rev Journal will land in your inbox when something interesting drops, and we\'ll flag you the moment the pre-property service ships.'
           : 'Federico will reach out within one business day. Talk soon.'}
       </p>
       <button
