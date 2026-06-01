@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 7 v2 — Strategic Feedback (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .blue table { font-size: 13px; }
+  .blue th, .blue td { border-color: #b6c8e8; }
+  .blue th { background: #e0eaff; }
+  .blue.banner { background: #1a4fbf; color: #fff; border-left-color: #0a2e80; padding: 14px 18px; }
+  .blue.banner strong { color: #fff; }
+  .red { color: #8b1a1a; background: #fff0f0; border-left: 4px solid #8b1a1a; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .red strong { color: #5a0000; }
+  .original { font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
+  .green { color: #0a7a3c; background: #f0fff5; border-left: 4px solid #0a7a3c; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .green strong { color: #0a4f25; }
+  .green .label { color: #0a4f25; }
+  .green.banner { background: #0a7a3c; color: #fff; border-left-color: #0a4f25; padding: 14px 18px; }
+  .green.banner strong { color: #fff; }
+  .legend { background: #f8f8f4; border: 1px solid #ddd; padding: 12px 16px; margin: 16px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 13px; }
+  .legend span { display: inline-block; margin-right: 18px; }
+  .legend .swatch { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Blog 7 v2 (2nd Draft) — Strategic Feedback</h1>
+<p class="original"><strong>Project:</strong> RevFactor.io Blog 7 — second-round review<br>
+<strong>Title:</strong> Airbnb Revenue Management Company: When (And When Not) to Hire One<br>
+<strong>Author Attribution:</strong> Federico Zimerman, Founder, RevFactor<br>
+<strong>Brief Source:</strong> GetCito v2 (Muskan, 2026-05-29 14:26 UTC, in response to RevFactor's 2026-05-27 outline-feedback doc)<br>
+<em>Review by: RevFactor team — cross-referenced against the 49-item Feedback Implementation Table GetCito published in Part 11, live revfactor.io cluster (pillar, Blog 4, Blog 5, ADR vs RevPAR), case-study allocation matrix (updated 2026-05-27), Federico's persona guide, and the prior outline-feedback doc.</em></p>
+
+<div class="legend">
+<strong>Color key:</strong>
+<span><span class="swatch" style="background:#222"></span> Original brief (black)</span>
+<span><span class="swatch" style="background:#1a4fbf"></span> Our feedback (blue)</span>
+<span><span class="swatch" style="background:#8b1a1a"></span> Critical / blocker (red)</span>
+<span><span class="swatch" style="background:#0a7a3c"></span> Resolved / positive (green)</span>
+</div>
+
+<div class="green banner">
+<p class="label" style="color:#d8f0e0">Top-line decision</p>
+<p><strong>Approve to begin drafting, conditional on three must-resolve items before the writer starts.</strong> This is the strongest GetCito brief we've reviewed by a wide margin. All 6 hard constraints attempted, 47 of 49 feedback items in the Implementation Table fully implemented, and a value-add beyond what we asked for (Erin Warren bare-percentage hype risk). The Implementation Table itself (Part 11) is the kind of structured response that makes the next round of QA fast.</p>
+<p style="margin-top:8px"><strong>Word-count approved at the proposed 2,800–3,200 range.</strong> The new owned sections (§4 survivorship + §6 consolidated signals + §9 onboarding walkthrough) are justified expansion — quality of content beats the prior 2,400–2,800 cap. Update Part 11 row #2 and metadata accordingly.</p>
+<p style="margin-top:8px"><strong>Homepage +18% widget concern was a false flag</strong> — see §"Homepage +18% — verified non-issue" below. No site reconciliation needed.</p>
+<p style="margin-top:8px"><strong>The three items below need to clear before drafting begins.</strong> None require a re-outline — they're decisions or quick verifications. After they clear, GetCito has license to write the MDX.</p>
+</div>
+
+<h2>Must-resolve before drafting (3 items — all answered below)</h2>
+
+<div class="red">
+<p class="label-red">1 — §6 sign #7 is placeholder text</p>
+<p>The consolidated signals list runs 1–6 with concrete content, then signal #7 reads: <em>"[From Blog 6 — incorporate as a distinct signal] e.g., your market has complex, multi-season demand you can't track manually, or your booking window has compressed, and you're still pricing on last year's lead-time assumptions. Pull the strongest, unique Blog 6 readiness signal that isn't already covered above."</em></p>
+<p>That's a TODO, not a sign. <strong>Fill in this exact text before drafting:</strong></p>
+<blockquote style="margin: 8px 0; padding-left: 12px; border-left: 3px solid #8b1a1a;">
+<p><strong>7. Your booking window has compressed and you're still pricing on last year's lead-time assumptions.</strong> 27% of 2025 STR bookings landed within 7 days of check-in, up from 21% (AirROI). If your floor rates and last-minute logic are still tuned to a 30+ day average lead time, you're either turning away last-minute demand or capitulating on price too late in the curve. Last year's pacing model is now a year stale, in a year when the curve shifted.</p>
+</blockquote>
+<p>Anchors the §2 booking-window-compression stat into the §6 diagnostic — same article-internal reference doing double duty for AEO. Approved fill — use verbatim, no Federico ping required.</p>
+</div>
+
+<div class="green">
+<p class="label">2 — Erin Warren figures RESOLVED (already published on the live pillar)</p>
+<p>Hype risk on the bare +512% / +285% / +3,789% lifts is real, but the baseline + dollar data is already published in the live pillar (<code>/blog/revenue-management-for-short-term-rentals/</code>, line 817) with primary attribution to the portfolio sheet. No Federico ping needed. <strong>Use this exact framing in §2 and §7</strong> (replaces the brief's "⚠️ confirm figures with Federico" placeholder):</p>
+<table>
+<tr><th>Property</th><th>Prior year</th><th>Q1/Summer 2026</th><th>Absolute lift</th><th>Context</th></tr>
+<tr><td>Hues Casita / Tucson studio (B&B)</td><td>$1,668 (Q1 2025)</td><td>$10,222 (Q1 2026)</td><td><strong>+$8,554</strong></td><td>Tenured B&B unit; first full quarter on the program</td></tr>
+<tr><td>Desert Hues / Tucson B&B</td><td>$7,753 (Q1 2025)</td><td>$29,874 (Q1 2026)</td><td><strong>+$22,121</strong></td><td>Same operator's second property — portfolio-effect angle</td></tr>
+<tr><td>Little Stuga / Orcas Island</td><td>$492 (prior year same point)</td><td>$19,137 (summer pacing)</td><td><strong>+$18,645</strong></td><td>Off near-zero baseline — effectively new-listing context, unbooked prior summer</td></tr>
+<tr><td><strong>Combined first full quarter</strong></td><td>$9,913</td><td>$59,233</td><td><strong>~$48K</strong></td><td>Single strategist watching three calendars</td></tr>
+</table>
+<p>Onboarding context (also from pillar line 817): <em>"Erin Warren brought three properties onto the program in late 2025"</em> — so Q1 2026 = first full quarter on the program. <em>"None of the three is a prestige listing"</em> is Federico's published framing.</p>
+<p><strong>Recommended brief copy for GetCito to drop into §7 verbatim (and condensed into §2 sidebar):</strong></p>
+<blockquote style="margin: 8px 0; padding-left: 12px; border-left: 3px solid #0a7a3c;">
+<p><em>"Erin Warren brought three properties onto RevFactor in late 2025 — two B&B units in Tucson and a small cabin on Orcas Island. None are prestige listings. By Q1 2026 — the first full quarter on the program — the Tucson studio (Hues Casita) had lifted from $1,668 to $10,222 in quarterly revenue. The second Tucson unit (Desert Hues) went from $7,753 to $29,874. Little Stuga on Orcas was booking $19,137 in summer pacing against $492 the prior year at the same calendar point — an effectively new-listing context where the baseline reflects an unbooked summer, not a comparable performance benchmark. Combined, the three properties added ~$48K in absolute revenue in their first full quarter, with a single strategist watching all three calendars at once. The portfolio-effect read matters more than any single percentage — the lifts compound because the strategist's view of the cluster informs every individual decision."</em></p>
+</blockquote>
+<p>Bare percentages replaced with dollars and baselines — no hype read, no Federico ping required. Hype-risk concern in Part 11 row #49 is closed.</p>
+</div>
+
+<div class="green">
+<p class="label">3 — Federico sign-off package RESOLVED (use these values exactly)</p>
+<p>All six sub-questions answered. Drop the values below into the affected sections; no further Federico ping required for this article.</p>
+<table>
+<tr><th>Question</th><th>Approved answer</th><th>Section + how to use</th></tr>
+<tr><td><strong>(a) Gaston attribution</strong></td><td><strong>NO</strong> — do not name Gaston publicly</td><td>§9 lead: <em>"founded by Federico Zimerman."</em> Standing rule for all future posts.</td></tr>
+<tr><td><strong>(b) Blackbird → RevFactor link</strong></td><td><strong>YES</strong> — surface it (matches pillar)</td><td>§9 portfolio credential paragraph: keep the existing framing — <em>"the frameworks RevFactor brings to clients are the ones Federico developed running Blackbird Hospitality, managing 198 properties across 24 U.S. states and 67 markets."</em></td></tr>
+<tr><td><strong>(c1) % of new RevFactor clients with under-configured PriceLabs</strong></td><td><strong>9 of 10</strong></td><td>§5 sign #5 — write as <em>"9 in 10 new RevFactor clients arrive with PriceLabs running but under-configured — the most common scenario we inherit."</em> Concrete, citable, RevFactor-attributable.</td></tr>
+<tr><td><strong>(c2) Time-to-RevPAR-lift</strong></td><td><strong>Generic 30–60 days</strong> (no RevFactor-specific number)</td><td>§11 FAQ "How long does it take to see results?" — ship as drafted with generic range.</td></tr>
+<tr><td><strong>(c3) Hours saved per property per week</strong></td><td><strong>~5 hours</strong></td><td>§7 ROI math — add as: <em>"A host who hands off to RevFactor reclaims roughly 5 hours per property per week of PriceLabs operation and pacing checks — for a 5-property portfolio, that's a full work day every week."</em> The "full work day" framing turns the directional number into a tangible time-ROI argument alongside the dollar-ROI math.</td></tr>
+<tr><td><strong>(c4) §2 sidebar formula source</strong></td><td><strong>YES</strong> — April 2026 TikTok confirmed</td><td>§2 sidebar — keep the formula and the attribution. (URL itself isn't required for the brief; writer/editor can grab it during drafting if a deep-link footnote is desired.)</td></tr>
+</table>
+<p><strong>Net:</strong> all three sections (§5, §7, §9) ship with the stronger first-party-data versions. §11 FAQ keeps generic range. Drafting unblocked.</p>
+</div>
+
+<div class="green">
+<p class="label">Homepage +18% widget — verified non-issue (GetCito false flag)</p>
+<p>GetCito flagged this as a publish blocker, but a full <code>grep -rniE "\\+?18%" src/</code> against the live tree shows <strong>no stale +18% RevPAR portfolio claim anywhere on the homepage or in <code>Hero.jsx</code> / <code>index.astro</code></strong>. The three +18% references that exist on the live site are all legitimate (not the portfolio stat):</p>
+<table>
+<tr><th>File</th><th>Line</th><th>What it actually is</th><th>Issue?</th></tr>
+<tr><td>Blog 4 cold open</td><td>87</td><td>Fictional host's <em>ADR</em> up 18% YoY (a vanity-metric story Blog 4 opens with — not RevFactor's portfolio stat)</td><td>No</td></tr>
+<tr><td>Pillar Maryssa Payne block</td><td>843</td><td>One specific property's summer pacing +18% vs prior-year <em>final total</em> (single property, single metric — not the portfolio aggregate)</td><td>No</td></tr>
+<tr><td>Comp set guide</td><td>347</td><td>"Quarterly rebuild discipline +15–18%" (a different metric — comp-set rebuild lift, not portfolio RevPAR)</td><td>No</td></tr>
+</table>
+<p>Portfolio RevPAR canonical is correctly <strong>+24%</strong> across the pillar stat block, Blog 4 review schema, Blog 5, dynamic-pricing post chart, and the /blog index. GetCito likely saw one of the three legitimate references in context and misread it as the portfolio stat.</p>
+<p><strong>No site reconciliation needed. Drop Part 9's "+18% homepage widget" qualification before drafting</strong> — keeping it in the brief would create confusion for the writer. Update Part 11 row #12 accordingly.</p>
+</div>
+
+<h2>What landed exceptionally well</h2>
+
+<div class="green">
+<p class="label">Format + structure — the listicle drift is gone</p>
+<p>§3 (Three Models) is the test case: GetCito explicitly says <em>"defer to Blog 4's framework... apply that framework to the hiring decision, not reintroduce it. Open by naming the three models in one sentence and linking to Blog 4 for the full explainer. Do not re-explain the Beyond Pricing 'Pro tier ≠ managed RM' distinction — link out."</em> That's the discipline this URL needed. The comparison table stays (snippet-shaped) but the framework introduction goes. Clean de-dup.</p>
+</div>
+
+<div class="green">
+<p class="label">§4 survivorship-bias-in-algorithms — strongest standalone H2 in the cluster</p>
+<p>This is the section that justifies Blog 7 existing as a separate URL. <em>"The tool answers what worked. A revenue manager asks what would have worked better — and why isn't it in the data?"</em> is the closing line — exactly the kind of clean, AI-extractable parseable framing that wins AI Overview citations. Abraham Wald correctly named; WWII bombers argument applied to algorithm training data crisply; closing keyword target (<em>"difference between PriceLabs and a revenue management company"</em>) wired into the body. Ship as-is.</p>
+</div>
+
+<div class="green">
+<p class="label">§5/§6 consolidated signals list with the "one sign it isn't" honesty hook</p>
+<p>Blog 6 §9 successfully merged into Blog 7 §6 as a single 7–9 item list. The "one sign it isn't time to hire" branch (<em>"If you run a single property in a low-competition market, you check pricing weekly, and your RevPAR is tracking above your comp set, you probably don't need a managed service yet. Saying so is the point of a decision guide."</em>) is the conversion mechanic for the sceptical ICP — and is exactly the trust-build Blog 4 doesn't have. Decision-tree logic spelled out with the 4 input branches. Sign #5 explicitly surfaces "RevFactor's most common acquisition trigger" framing as E-E-A-T weight. (Pending sign #7 resolution per must-resolve #2 above.)</p>
+</div>
+
+<div class="green">
+<p class="label">§7 ROI-first framing inverts Blog 4's table-first arc</p>
+<p>"The real question isn't 'is $320/month expensive?' — it's 'what does one missed opportunity cost?'" leads the section; pricing table follows. All four cost-of-inaction scenarios surfaced ($1,050 missed event weekend, $375 underpriced peak booking, $540 shoulder-season miss, 3–6 month locked-in launch baseline). Fort Worth / Newport / Nashville correctly blocked per allocation matrix. The "one of the only" softening on pricing transparency is exactly right.</p>
+</div>
+
+<div class="green">
+<p class="label">§9 first brand mention nails the disambiguation</p>
+<p>"<em>RevFactor (revfactor.io) is a managed STR revenue management service founded by Federico Zimerman; it is unrelated to RevFactor.ai, a separate and unrelated SaaS product.</em>" — verbatim the pattern we asked for, flagged as <em>"non-negotiable, standing rule"</em> in the brief itself. Co-host onboarding walkthrough (5 concrete steps) is genuinely new content — no top-10 SERP competitor describes the handoff. Service schema added with provider/areaServed/offers/category fields. FAQ "What is RevFactor?" wired for entity locking on AI engines.</p>
+</div>
+
+<div class="green">
+<p class="label">Verification table catches things our outline-feedback missed</p>
+<p>Part 9 flags three things we didn't:</p>
+<ol>
+<li>Homepage +18% widget inconsistency (must-resolve #5 above)</li>
+<li>"+9 percentage-point STR-vs-hotel RevPAR advantage" is unverified — replaces with sourced alternative (US hotel RevPAR fell 0.3% in 2025 vs STR demand +4.9% YoY, AirROI / Reed Smith)</li>
+<li>$140B global market size sourcing — drop or qualify ($87B–$140B range)</li>
+</ol>
+<p>That's value-add review by GetCito, not just compliance. Worth acknowledging.</p>
+</div>
+
+<div class="green">
+<p class="label">Editorial value-add: bare-percentage hype risk on Erin Warren</p>
+<p>Part 11 row #49: <em>"Erin Warren bare-percentage hype risk — Added an editorial caution requiring baselines/timeframes — Bare +3,789% reads as the hype the brand bans — original feedback didn't flag this; added as a value-add."</em> Self-aware, brand-aligned, and exactly right — a sceptical analytical ICP reads bare +3,789% as the kind of guru-marketing the persona guide explicitly bans. Will require Federico data to operationalize (must-resolve #3 above).</p>
+</div>
+
+<h2>Smaller editorial notes (drafting-phase, not blocking)</h2>
+
+<div class="blue">
+<p class="label">Hook — recommend defaulting to the scaling-moment version</p>
+<p>GetCito offers two: (a) the 3rd-property scaling moment, or (b) the cost-of-waiting math hook. <strong>Default to (a).</strong> The scaling moment is the higher-resonance entry for the 3–15 property ICP this URL targets, and the cost-of-waiting material is already concentrated in §7 — leading the hook with it telegraphs the §7 math before the reader has the context for it. Keep (b) as a fallback if the scaling-moment hook doesn't land in editor review.</p>
+</div>
+
+<div class="blue">
+<p class="label">§2 sidebar — verify the 5-night/3-night/+20%/10% formula with Federico</p>
+<p>GetCito flagged this: <em>"⚠️ verify the exact figures/source with Federico before publishing."</em> Worth pinging Federico in the same consolidated package as must-resolve #4 above. If the formula doesn't verify, the sidebar still has value as a non-attributed illustration (drop the Federico attribution, keep the worked example).</p>
+</div>
+
+<div class="blue">
+<p class="label">§5 (ADR/RevPAR primer) — 90–120 word target is right; verify draft doesn't drift</p>
+<p>Section was cut from 280–340 → 90–120 per our feedback, with DefinedTerm schema correctly deferred to the dedicated ADR-vs-RevPAR post. Editorial watchpoint: this is the section most likely to bloat during drafting because the topic is rich. <strong>Hard rule for the writer: if this section runs over 120 words in draft, cut, don't expand.</strong> The cap is the de-cannibalization mechanism.</p>
+</div>
+
+<div class="blue">
+<p class="label">§9 internal link anchor — verify against Blog 5's anchor before draft ships</p>
+<p>Brief instructs: <em>"→ /blog/the-revfactor-method (anchor: 'how RevFactor's method works' — match Blog 5's anchor for the same page — verify before publishing)."</em> Quick grep before MDX commit:</p>
+<pre style="background:#f6f8fa; padding:8px; font-size:12px;">grep -n "the-revfactor-method" src/content/blog/best-airbnb-property-managers-with-dynamic-pricing-2026.mdx</pre>
+<p>Match the anchor exactly.</p>
+</div>
+
+<div class="blue">
+<p class="label">Service schema — add serviceType field</p>
+<p>Brief specs: <em>provider = RevFactor (Organization), areaServed = US, offers = Offer with price $320 (and $256 at 5+), category = "Revenue Management."</em> One missing field that strengthens AI Overview parsing: add <code>serviceType: "Revenue Management Service"</code>. Schema.org Service spec accepts it as a freeform string, and AI engines use it to disambiguate from generic Service entities.</p>
+</div>
+
+<div class="blue">
+<p class="label">Add ItemList schema wrapping §6 (consolidated signals list)</p>
+<p>Schema package in Part 6 lists Article + FAQPage + Review + Service + BreadcrumbList + Person. <strong>Missing: ItemList</strong> wrapping the §6 signals. A numbered diagnostic list is exactly the ItemList pattern Google now lifts into AI Overview rich results, and §6 is the URL's primary AEO target ("signs I need a revenue management company"). Add:</p>
+<pre style="background:#f6f8fa; padding:8px; font-size:11px;">{
+  "@type": "ItemList",
+  "name": "Signs It's Time to Hire an Airbnb Revenue Management Company",
+  "numberOfItems": 7,
+  "itemListElement": [ /* 7 ListItem entries */ ]
+}</pre>
+<p>Companion to FAQPage on §11, not a replacement. ItemList for the diagnostic, FAQPage for the readiness/timing questions.</p>
+</div>
+
+<div class="blue">
+<p class="label">Strip the old "Tab 1" v1 draft from the doc before sharing more widely</p>
+<p>The Google Doc still contains the original first-draft brief in Tab 1 (lines 601+ when exported). The v2 (Tab 2) is the canonical version going forward. Recommend GetCito delete Tab 1 from the doc to prevent confusion when the writer or any QA reviewer opens it. (Internal-to-RevFactor note: harmless if it stays, but cleaner if removed.)</p>
+</div>
+
+<div class="green">
+<p class="label">§10 CTA — /blog/ index stays as-is (Aaron approved 2026-05-29)</p>
+<p>GetCito flagged: <em>"the live /blog index CTA still uses 'where the lift is hiding'…"</em> Aaron's call: <strong>keep the /blog/ index CTA as-is</strong>; use the revised less-promotional wording (<em>"what your calendar is doing that you may not be seeing"</em>) on Blog 7's §10 only. Deliberate inconsistency between the index and the article. No site-side change required.</p>
+</div>
+
+<div class="blue">
+<p class="label">Keyword targeting note from Implementation Table row #7</p>
+<p>GetCito caught an internal inconsistency in our prior outline-feedback regarding "outsource Airbnb pricing" and "flat fee Airbnb revenue management" — our feedback was inconsistent across sections. GetCito followed the SERP-audit verdict (keep both), which is the right call. No action needed; flagged here so the reasoning trace is preserved.</p>
+</div>
+
+<h2>Final shipping checklist</h2>
+
+<div class="blue">
+<p class="label">Before GetCito starts drafting (all GetCito-side, no Federico ping needed)</p>
+<ol>
+<li>Fill §6 sign #7 with the approved booking-window-compression text in must-resolve #1</li>
+<li>Swap the §7 + §2 Erin Warren placeholder for the verified dollar-baseline framing in must-resolve #2</li>
+<li>Drop the Federico answers from must-resolve #3 into §5 sign #5, §7 ROI math, §9 lead, §9 portfolio credentials, §2 sidebar attribution</li>
+<li>Update Part 11 row #2 (word count approved at 2,800–3,200), row #12 (homepage +18% closed as non-issue per RevFactor verification), row #34 (Gaston: no), and Part 10 open-questions list (all closed)</li>
+<li>Strip the old "Tab 1" v1 draft from the Google Doc before MDX delivery</li>
+</ol>
+</div>
+
+<div class="blue">
+<p class="label">During drafting (writer-facing)</p>
+<ol>
+<li>Hold per-section word count discipline; §5 ADR/RevPAR cap of 120 words is the most important</li>
+<li>Em-dashes capped at one per paragraph (humanizer rule)</li>
+<li>US spelling throughout (prior post slipped into British spelling)</li>
+<li>Pair every percentage figure with baseline + timeframe — bare percentages read as hype</li>
+<li>No comp set mention without one-time gloss for first-time readers</li>
+<li>FAQ wording: match Peec prompts verbatim where possible (pre-draft GetCito task)</li>
+</ol>
+</div>
+
+<div class="blue">
+<p class="label">After draft is delivered (RevFactor QA)</p>
+<ol>
+<li>Total word count check (count actual draft, not section budgets)</li>
+<li>Re-verify no Federico quote conflicts with pillar (do a final grep of the pillar's quote inventory vs the draft)</li>
+<li>Service schema validation (run through Google's Rich Results Test)</li>
+<li>Refactor.ai disambiguation appears at first brand mention + FAQ — verify in rendered HTML, not just MDX source</li>
+<li>Bidirectional links: Blog 4, Blog 5, pillar, ADR-vs-RevPAR, RevFactor Method, service page all live and anchor text matches the Internal Linking Plan in Part 5</li>
+<li>Canonical = self (verify in head, not just trust the spec)</li>
+</ol>
+</div>
+
+<h2>Cluster coordination — Blog 6 + cadence locked</h2>
+
+<div class="green">
+<p class="label">Blog 6 = KILL (Aaron approved 2026-05-29)</p>
+<p>Blog 7 v2 absorbed Blog 6's strongest unique contributions (§4 survivorship bias + §6 consolidated signals). Blog 6 cannot ship as a separate URL without duplicating Blog 7's owned sections, so:</p>
+<ul>
+<li>No new <code>/blog/yield-management-short-term-rentals/</code> URL gets created.</li>
+<li>301 redirect: <code>/yield-management-airbnb/ → /blog/revenue-management-for-short-term-rentals/</code> (pillar).</li>
+<li>GetCito refunds / repurposes the Blog 6 brief slot for the next cluster spoke.</li>
+<li>Case-study allocation matrix updated to lock Blog 7's absorbed anchors (Erin Warren multi-property + "Software runs the math" quote + consolidated readiness signals as Blog 7's owned AEO target).</li>
+</ul>
+</div>
+
+<div class="blue">
+<p class="label">Cluster cadence going forward — 1 GetCito outline per week (Aaron approved 2026-05-29)</p>
+<p>Sliding down from GetCito's 2-blogs-a-week pace to 1 per week, halfway between that and a full 4–6 week measurement pause. Practical implications for the next GetCito-RevFactor cycle:</p>
+<ul>
+<li>Each new outline must clear the same de-cannibalization bar Blog 7 v2 cleared (defer to existing cluster URLs; absorb unique contributions where they fit; standalone-or-die per section).</li>
+<li>Next outline shouldn't land until after Blog 7's MDX ships and is indexed by Google + reflected in Peec scores (~7–10 days post-publish), so we have a real signal on which sub-intents are still gaps vs. which are now covered.</li>
+<li>Allocation matrix should be checked first by GetCito before drafting any new brief — every "primary anchor" row is off-limits to the next URL.</li>
+</ul>
+</div>
+
+</body>
+</html>

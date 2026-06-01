@@ -58,3 +58,8 @@ scripts/google-ads/.venv/
 
 # QA harness output (~/.claude/scripts/post-feedback-qa.cjs) — large screenshot dumps, regen on demand
 tests/_artifacts/feedback-qa/
+
+# Playwright qa-flow-tester test artifacts
+tests/playwright/reports/
+tests/playwright/screenshots/
+tests/playwright/videos/

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 6 Outline — Strategic Feedback (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .blue table { font-size: 13px; }
+  .blue th, .blue td { border-color: #b6c8e8; }
+  .blue th { background: #e0eaff; }
+  .blue.banner { background: #1a4fbf; color: #fff; border-left-color: #0a2e80; padding: 14px 18px; }
+  .blue.banner strong { color: #fff; }
+  .blue.banner table th, .blue.banner table td { border-color: #5276c8; color: #fff; }
+  .blue.banner table th { background: #2a5fcf; }
+  .red { color: #8b1a1a; background: #fff0f0; border-left: 4px solid #8b1a1a; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .red strong { color: #5a0000; }
+  .original { font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
+  .resolved { color: #0a7a3c; font-weight: bold; }
+  .green { color: #0a7a3c; background: #f0fff5; border-left: 4px solid #0a7a3c; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .green strong { color: #0a4f25; }
+  .green .label { color: #0a4f25; }
+  .legend { background: #f8f8f4; border: 1px solid #ddd; padding: 12px 16px; margin: 16px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 13px; }
+  .legend span { display: inline-block; margin-right: 18px; }
+  .legend .swatch { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Blog 6 Outline — Strategic Feedback</h1>
+<p class="original"><strong>Project:</strong> RevFactor.io blog #6<br>
+<strong>Title:</strong> Yield Management for Short-Term Rentals: What the Airlines Figured Out First<br>
+<strong>Author Attribution:</strong> Federico Zimerman, Founder, RevFactor<br>
+<strong>Target Length:</strong> 3,200–4,000 words<br>
+<strong>Content Type:</strong> Cluster cornerstone (TOFU awareness)<br>
+<strong>Brief Source:</strong> GetCito (delivered 2026-05-21, owner muskan418940@gmail.com)<br>
+<em>Feedback added by: RevFactor team — sourced from live revfactor.io blog content (pillar, ADR vs RevPAR, RevFactor Method, comp set guide), case-study allocation matrix (2026-05-04), Federico's persona guide, Blog 1 + Blog 2 outline-feedback docs, and live SERP / Ahrefs (US, 2026-05-27).</em></p>
+
+<div class="legend">
+<strong>Color key:</strong>
+<span><span class="swatch" style="background:#222"></span> Original brief (black)</span>
+<span><span class="swatch" style="background:#1a4fbf"></span> Our feedback (blue)</span>
+<span><span class="swatch" style="background:#8b1a1a"></span> Critical / blocker (red)</span>
+<span><span class="swatch" style="background:#0a7a3c"></span> Resolved / positive (green)</span>
+</div>
+
+<div class="red">
+<p class="label-red">Top-line decision (read this first)</p>
+<p>The cornerstone framing this brief proposes <strong>already exists at the pillar URL</strong> — <code>/blog/revenue-management-for-short-term-rentals/</code>. The pillar's subhead is literally <em>"Ten years of airline yield management, applied daily across 198 short-term rentals,"</em> and the pillar already runs the airline analogy, the Bolar ski-pass quote, the Fort Worth $20K case, the Michigan + Newport Beach minimum-stay cases, the Nashville 25% YoY shoulder-season case, the Four Pillars framework, the survivorship-bias / Abraham Wald story, the perishable-inventory quote, and the bookshop analogy. This brief proposes rebuilding that same body of material at a new URL under the "yield management" keyword.</p>
+<p><strong>Three issues need a decision before GetCito drafts:</strong></p>
+<ol>
+<li><strong>Pillar cannibalization is structural, not section-level.</strong> The pillar isn't just touching on yield management; it's the airline-pedigree cornerstone already. Approximately 8 of the 11 proposed sections of Blog 6 re-litigate content the pillar published 2026-05-01. Standing up a second URL under "yield management" the way this brief proposes splits the topical authority that Blog 1 has already earned, and gives Google + AI engines two RevFactor pages claiming the same expert positioning under different keyword labels. The Blog 2 outline-feedback (2026-05-04) flagged the same triangle pattern between the pillar, /dynamic-pricing-str-beginners-guide, and a then-planned /dynamic-pricing-vs-revenue-management. Now we have a four-way overlap with no clean intent boundary.</li>
+<li><strong>The "yield management for short-term rentals" head term has no meaningful Google traffic prize.</strong> SERP audit (US, 2026-05-27): primary KW ~20–50/mo (EST); combined "yield management" STR cluster &lt; 300/mo total. Bing's SERP for the exact phrase returns Investopedia + Merriam-Webster generic "yield" definitions above any STR result — the canary indicator that the phrase is below the index-relevance threshold for hospitality intent. The pillar already ranks ~#5 for the target phrase. <strong>This is AEO-only territory.</strong> Realistic SEO ceiling: 30–80 clicks/mo after 6 months. Pure-AEO plays don't need 3,200–4,000 words — they need a 1,200–1,800 word definitional piece that wins the answer box without competing with the pillar for the entity.</li>
+<li><strong>Refactor.ai disambiguation is missing entirely.</strong> Same issue Blog 2 had. Three pinning locations are now in Blog 1 (definition section + 2 dedicated FAQs + author bio). Every subsequent post needs the brand disambiguation pinned at first brand mention. This brief drops it.</li>
+</ol>
+</div>
+
+<div class="blue banner">
+<p class="label" style="color:#d8f0e0">Recommended decision on the pillar-vs-yield-management overlap</p>
+<table>
+<tr><th style="color:#d8f0e0">URL</th><th style="color:#d8f0e0">Status</th><th style="color:#d8f0e0">Recommended role</th></tr>
+<tr><td>/blog/revenue-management-for-short-term-rentals (pillar)</td><td>Live 2026-05-01, ~7,500 words</td><td><strong>Owns "short term rental revenue management" (vol 100, KD 1, TP 2,900) AND the airline-yield-management positioning</strong>. No structural changes. Receives the new URL's link.</td></tr>
+<tr><td>/blog/yield-management-short-term-rentals (this brief)</td><td>Planned cornerstone</td><td><strong>Recommended pivot:</strong> Rebuild as an <em>AEO-first definitional answer piece</em>, 1,400–1,800 words (NOT 3,200–4,000), with mandatory schema stack (FAQPage + DefinedTerm + Article — none of the top 10 has all three) and a three-way comparison H2 (yield management vs revenue management vs dynamic pricing — genuine SERP gap, no top-10 page does it). <strong>No case studies. No Four Pillars rehash. No Bolar quote. No Fort Worth / Michigan / Nashville / Newport Beach.</strong> Reference — don't repeat — the pillar's airline narrative. Link up to pillar for the operational treatment. Position as a vocabulary / sub-discipline entry point that funnels every "yield management" query into the pillar.</td></tr>
+<tr><td>/yield-management-airbnb/ (proposed redirect)</td><td>Per brief: 301 to new URL</td><td>If the new URL takes the AEO-pivot above, this redirect is correct. If the new URL gets killed entirely, redirect <code>/yield-management-airbnb/</code> directly to the pillar instead.</td></tr>
+</table>
+<p style="margin-top:8px"><strong>Why this works:</strong> the pillar keeps the airline pedigree and the case studies (where they currently rank); the new URL becomes a small, tight, AEO-optimized definitional answer that captures the "yield management for STRs" prompt cluster without dragging the cornerstone topical authority away from Blog 1. The two pages reinforce each other instead of competing.</p>
+<p style="margin-top:8px"><strong>Alternative:</strong> kill the new URL entirely, 301 <code>/yield-management-airbnb/</code> directly to the pillar, and use this brief's strongest unique contribution — the §6.2 survivorship-bias-in-algorithms argument — as a v2 expansion section inside the pillar (the pillar's current Wald treatment is one paragraph; this brief's framing is more developed). Saves a URL slot for higher-leverage content.</p>
+</div>
+
+<h2>1. Strategic Overview</h2>
+
+<table class="original">
+<tr><th>Element</th><th>Brief value</th></tr>
+<tr><td>Primary Keyword</td><td>yield management for short-term rentals</td></tr>
+<tr><td>Secondary Keywords</td><td>STR yield management; revenue management for Airbnb hosts; airline pricing strategy vacation rentals; short-term rental revenue management; yield management Airbnb</td></tr>
+<tr><td>Search Intent</td><td>Informational (primary) with commercial investigation underlay</td></tr>
+<tr><td>Funnel Stage</td><td>TOFU awareness cluster cornerstone</td></tr>
+<tr><td>Recommended Word Count</td><td>3,200–4,000 words</td></tr>
+</table>
+
+<div class="red">
+<p class="label-red">Critical — secondary keyword overlap with pillar</p>
+<p>Two of the five secondary keywords are <strong>head terms the pillar already owns</strong>: "short-term rental revenue management" and "revenue management for Airbnb hosts." Targeting these from a second URL is the textbook definition of cannibalization. If we keep this URL (even in the pivoted AEO-first form), strike both from the secondary list and add yield-management-specific variants instead. Suggested replacements once SERP audit returns: "what is yield management for airbnb," "yield management vs revenue management STR," "perishable inventory pricing."</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — keyword targeting (SERP audit, US, 2026-05-27)</p>
+<p><em>Triangulated estimates — no DataForSEO/Ahrefs MCP this session, so volume + KD figures are EST until Ahrefs API verify. Pattern is unambiguous regardless of exact numbers.</em></p>
+<table>
+<tr><th>Keyword</th><th>Vol/mo EST</th><th>KD EST</th><th>SERP intent</th><th>AI Overview likely</th><th>Verdict</th></tr>
+<tr><td><strong>yield management for short-term rentals</strong> (primary)</td><td><strong>20–50</strong></td><td>15–20</td><td>Definitional</td><td>High</td><td>AEO play only; not an SEO traffic prize</td></tr>
+<tr><td>yield management airbnb</td><td>70–150</td><td>20–25</td><td>Informational + tool-curious</td><td>Medium</td><td>Pillar already ranks; partial capture</td></tr>
+<tr><td>yield management vacation rentals</td><td>50–100</td><td>18–22</td><td>Informational</td><td>High</td><td>Secondary AEO target</td></tr>
+<tr><td>what is yield management for airbnb</td><td>10–30</td><td>10–15</td><td>Pure definitional</td><td>Very high</td><td>FAQ slot — high-fit AEO answer</td></tr>
+<tr><td>dynamic pricing vs yield management</td><td>50–100</td><td>15–20</td><td>Comparative</td><td>High</td><td>Three-way comparison H2 wedge (see below)</td></tr>
+<tr><td>STR booking curve strategy</td><td>20–50</td><td>10–15</td><td>Tactical informational</td><td>Medium</td><td>Optional secondary; pillar already covers pacing</td></tr>
+<tr><td>perishable inventory short-term rental pricing</td><td>&lt;10</td><td>n/a</td><td>Concept long-tail</td><td>Yes if ranks</td><td>Drop from secondary — sub-threshold</td></tr>
+<tr><td>airline pricing strategy vacation rentals</td><td>&lt;10</td><td>n/a</td><td>Concept search</td><td>Yes if ranks</td><td>Drop from secondary — sub-threshold</td></tr>
+<tr><td>STR yield management</td><td>10–30</td><td>10–15</td><td>Industry insider</td><td>Low</td><td>Keep — defensible at this KD</td></tr>
+<tr><td>short-term rental revenue management</td><td>100 (confirmed)</td><td>~30 (KD 1 on Ahrefs per Blog 2)</td><td>Informational</td><td>Medium</td><td><strong>STRIKE from secondary list — pillar owns this head term</strong></td></tr>
+<tr><td>revenue management for Airbnb hosts</td><td>90–200</td><td>25–30</td><td>Informational</td><td>Medium</td><td><strong>STRIKE from secondary list — pillar owns this term</strong></td></tr>
+</table>
+<p><strong>Reality check:</strong> Bing's SERP for the exact-phrase <code>"yield management for short-term rentals"</code> returns generic finance/dictionary "yield" pages (Investopedia, Merriam-Webster) — that's the canary. If the precise phrase had real volume, Bing would surface STR-specific results above generic definitions. It doesn't. <strong>Combined "yield management" cluster (all STR variants) likely &lt; 300/mo total US.</strong></p>
+<p><strong>Recommendation:</strong> This is an <strong>AEO-first play with secondary SEO upside</strong>. Realistic SEO traffic prize is 30–80 clicks/mo after 6 months if the page ranks top 3 for the primary + secondary cluster. Won't move the revenue needle on its own. The real prize is LLM citations (5–15/mo target across ChatGPT/Perplexity/Gemini/AIO within 90 days of publish) and cluster authority reinforcement for the pillar's existing rankings on "short term rental revenue management" (vol 100, TP 2,900). <strong>This is exactly the profile that makes the AEO-first pivot in the top-line banner the right call, not the 3,200–4,000 word cornerstone GetCito proposed.</strong></p>
+</div>
+
+<div class="green">
+<p class="label">Positive — competitive landscape has clean openings</p>
+<p>Top 10 organic for the primary KW: mostly PMS SaaS vendors (Hostaway, Hostfully, iGMS) at 850–2,800 words in glossary or feature length. <strong>No competitor has the FAQ + DefinedTerm + Article schema stack. No competitor has a credentialed first-person airline expert. No competitor does the three-way <em>yield management vs revenue management vs dynamic pricing</em> comparison.</strong> Pillar already ranks ~#5 for the target phrase. Three openings to exploit:</p>
+<ol>
+<li><strong>Schema stack</strong> — FAQPage + DefinedTerm + Article. None of the top 10 has all three.</li>
+<li><strong>Three-way comparison H2</strong> — yield management vs revenue management vs dynamic pricing. Genuine SERP gap.</li>
+<li><strong>Federico voice + airline credential</strong> — but referenced lightly, with the deep narrative kept at the pillar (cannibalization mitigation).</li>
+</ol>
+</div>
+
+<h2>2. Page Metadata</h2>
+
+<div class="green">
+<p class="label">Positive — the metadata block is structurally clean</p>
+<ul>
+<li><strong>SEO Title</strong> ("Yield Management for Short-Term Rentals: The Airline Framework STR Hosts Need") — fine length, descriptive, primary keyword in front.</li>
+<li><strong>Slug</strong> <code>/blog/yield-management-short-term-rentals/</code> — clean.</li>
+<li><strong>Evergreen redirect</strong> <code>/yield-management-airbnb/ → /blog/yield-management-short-term-rentals/</code> — good practice <em>if</em> the new URL goes live; see top-line recommendation above for the alternative.</li>
+<li><strong>Meta description</strong> — 2-part SEO + AEO pattern, under 320 chars, no banned phrases. Conforms to our meta rules.</li>
+<li><strong>Refresh cadence + "Last updated:" timestamp in byline</strong> — exactly the pattern Aaron mandates for evergreen pages.</li>
+</ul>
+</div>
+
+<div class="red">
+<p class="label-red">Stale stat — RevFactor portfolio RevPAR lift</p>
+<p>Brief references <strong>"+18% RevPAR vs. comp set (live site, verified)"</strong> as Federico's portfolio-wide credibility anchor (in §1 facts/stats and §10 closing). <strong>The canonical number is now +24%</strong>, updated in <code>src/data/portfolio-stats.ts</code> on 2026-05-22. The live pillar uses +24% throughout. Blog 4 (listicle) uses +24%. Update everywhere this brief calls out +18%. Future blogs should pull from the canonical source — flag to GetCito that <code>STAT_LABELS.revparLift</code> in <code>portfolio-stats.ts</code> is the single source of truth for this number.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — also confirm canonical scale numbers</p>
+<p>Brief mentions <strong>"165+ properties across 24 U.S. states and 56 markets"</strong> as Blackbird Hospitality's scale. These are the legacy figures from the May 2026 brain doc. Current canonical RevFactor portfolio (different scope — RevFactor's clients, not just Blackbird) per <code>portfolio-stats.ts</code> is <strong>198 listings, 24 states, 67 markets</strong>. The brief correctly attributes 165+/24/56 to <em>Blackbird Hospitality specifically</em>, which is technically right (Blackbird is Federico's own portfolio, distinct from RevFactor's full book), but verify with Federico whether Blackbird's numbers have grown since the brain doc was written. Easier fix: use the RevFactor portfolio numbers (198/24/67) attached to "the portfolio that includes Federico's own properties" rather than dragging Blackbird's separate count into the post.</p>
+</div>
+
+<h2>3. Schema Package</h2>
+
+<div class="green">
+<p class="label">Positive — schema selection is mostly right</p>
+<ul>
+<li><strong>Article, Person, Organization, BreadcrumbList</strong> — standard, correct.</li>
+<li><strong>FAQPage wrapping §11</strong> — correct; this is the highest-leverage AEO play.</li>
+<li><strong>DefinedTerm on "yield management" and "perishable inventory"</strong> — correct, and the right two terms to mark up. Single highest-leverage schema choice on the page.</li>
+<li><strong>Person sameAs array</strong> — verify LinkedIn handle (<code>linkedin.com/in/federico-zimerman-23ab3345</code>) is still active; Instagram <code>@strguide</code> is the high-engagement handle and is correctly listed.</li>
+</ul>
+</div>
+
+<div class="red">
+<p class="label-red">Schema mismatch — HowTo on §9 is the wrong type</p>
+<p>Brief wraps <strong>§9 "Are You Ready for Yield Management? A Self-Assessment"</strong> in HowTo JSON-LD. HowTo schema is reserved for procedural steps that produce a tangible outcome (e.g., "how to set a minimum stay rule"). A diagnostic checklist of seven readiness signals is an <strong>ItemList</strong>, not a HowTo. Google has been increasingly strict on HowTo schema use since the 2023 rich-result deprecation for non-recipe HowTo; misuse can trigger manual action under "spam policy: structured data."</p>
+<p><strong>Fix:</strong> §9 → <code>ItemList</code> with each signal as a <code>ListItem</code>. Keep HowTo only on §8 (the operational weekly/monthly cadence walkthrough), which IS procedural.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — add the schema package the pillar uses</p>
+<p>Pillar has a published JSON-LD package that includes <code>knowsAbout</code> on the Person schema covering "Revenue Management, Dynamic Pricing, RevPAR, Yield Management, Short-Term Rental Strategy" (verified live, Blog 2 outline-feedback §6). Mirror that on this page so Federico's entity profile is reinforced, not duplicated under a separate Person record.</p>
+</div>
+
+<h2>4. Section-by-section feedback</h2>
+
+<h3>Section 1: TL;DR — The Yield Management Framework at a Glance</h3>
+
+<div class="blue">
+<p class="label">Feedback</p>
+<ul>
+<li><strong>Format is on-system</strong> (TL;DR is allowed on blog singles per our content rules). 6-row concept table + 40–60 word snippet box is exactly the right AEO setup.</li>
+<li><strong>Snippet-box wording must NOT reuse the pillar's QUICK ANSWER block verbatim.</strong> Pillar opens with: <em>"Revenue management for short-term rentals is the discipline of selling the right night, to the right guest, at the right price — using historical data, inventory rules, demand forecasting, and pacing — to maximize RevPAR."</em> Blog 6's snippet box has to land on the <em>airline-origin + perishable-inventory</em> angle specifically, not re-define revenue management. Otherwise AI engines pick whichever URL has higher authority and the new URL gets ignored.</li>
+<li><strong>Recommended snippet phrasing:</strong> "Yield management for short-term rentals is the airline-derived discipline of pricing fixed, perishable nightly inventory through segmented demand controls and booking-curve monitoring. It's the system; dynamic pricing is one output of it. Most STR hosts run the output without the system."</li>
+</ul>
+</div>
+
+<h3>Section 2: Opening Hook — The Dashboard Was Right. The Strategy Was Wrong.</h3>
+
+<div class="red">
+<p class="label-red">Critical — opens with a near-duplicate of the pillar's opening anecdote</p>
+<p>Brief proposes: <em>"a host whose pricing tool metrics look healthy, occupancy tracking, and ADR holding, but who finishes peak season behind her projections."</em></p>
+<p>Pillar opens with: <em>"I was on a call with a host who told me her property was performing well. I asked her how much she was selling. Silence. She knew her nightly rate. She knew her occupancy. She didn't know her revenue per available night."</em></p>
+<p>Same anecdote, different wording. The brief even cites <em>"I asked her how much she was selling. Silence."</em> as the verbatim Federico quote to use as a "tone-setting reference" — but it's the literal hook of the pillar. <strong>Pick a different opening anecdote.</strong> Suggested: open with Federico's actual airline-training-room memory (a specific moment from the 10 years at American Airlines tariff department) — that's the angle the pillar doesn't use and the one Blog 6's "what the airlines figured out first" headline actually promises.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — voice marker is correct, direction is wrong</p>
+<p>The required voice marker (<em>"Let me show you why the dashboard was telling her a true story about the wrong things."</em>) is on-system Federico phrasing. Keep the voice marker — but anchor it to an airline-specific scene, not the same host-with-the-dashboard the pillar already uses.</p>
+</div>
+
+<h3>Section 3: What Yield Management Actually Is (And What It Is Not)</h3>
+
+<div class="blue">
+<p class="label">Feedback — strongest section in the brief, two adjustments</p>
+<ul>
+<li><strong>Definitional distinction is the right move.</strong> "Yield management is the system; dynamic pricing is one output of that system" is the kind of clean parseable definition AI engines reward. Build the two DefinedTerm blocks around it as designed.</li>
+<li><strong>Quote conflict — "Revenue management is not just pricing, but it's a whole strategy..."</strong> The brief flags this April 2026 TikTok quote as the anchor here. Pillar already uses the closely-related Ep. 155 version: <em>"Revenue management isn't just pricing. Pricing is only one part of revenue management."</em> Different excerpt, same point. AI engines treat these as substantively identical citations and will pick one URL to credit. Pivot to a quote the pillar doesn't use — for example Federico's Life of Flow line: <em>"It's a discipline. It's a business process."</em> (also from the April 2026 TikTok but a different sentence). Tighter, cleaner, doesn't compete with the pillar's signature quote.</li>
+<li><strong>Three structural conditions (perishable / fixed / segmented) is right framing.</strong> Pillar mentions perishable + segmented but doesn't crisply name the three together. This trio could be Blog 6's unique structural contribution — IF the page survives the pivot to AEO-first.</li>
+</ul>
+</div>
+
+<h3>Section 4: The Three Structural Conditions: Why Your STR Calendar Is an Airline Flight Manifest</h3>
+
+<div class="red">
+<p class="label-red">Critical — three Federico verbatim quote conflicts with the pillar</p>
+<ol>
+<li><strong>§4.1 "If you're selling a physical product and you have inventory and you don't get to sell it this week, you can still sell it next week..."</strong> — Pillar uses this quote verbatim at <code>/blog/revenue-management-for-short-term-rentals/</code> in the "What Is Revenue Management" section. Per case-study allocation matrix: <em>"Don't reuse — pillar owns this canonical home."</em></li>
+<li><strong>§4.2 "America invented revenue management… highly perishable… any night you don't sell, you can never sell again"</strong> (Life of Flow) — Earmarked for <strong>Blog 2 §5.1</strong> in the Blog 2 outline-feedback (2026-05-04). Blog 2 is still in flight (sheet status: Partial). Reusing this quote in Blog 6 takes it from Blog 2.</li>
+<li><strong>§4.3 Bolar ski-pass full quote</strong> — Pillar uses the full ~150-word verbatim in its "What It Looks Like in Practice: The Bolar Ski-Pass Example" section. Per allocation: <em>"Don't reuse — pillar owns this canonical home."</em></li>
+</ol>
+<p><strong>Net:</strong> §4 as written can't ship. Three options: (a) the pivot in the top-line banner (kill the section as part of the AEO-first pivot); (b) replace with three different Federico quotes covering the same conditions (the brain doc has more material than the pillar absorbed); (c) shorten dramatically and link out to the pillar for the full quoted treatment of each condition.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — §4.3 worked formula is reusable as-is</p>
+<p>The "5-night market / 3-night offering / +20% rate / 10% discount for 5+ nights" worked formula (April 2026 TikTok) is <em>not</em> in the pillar and <em>not</em> earmarked elsewhere in the allocation matrix. If this section survives, lead with that worked formula instead of the Bolar quote — it's a unique tactical contribution and exactly the kind of named formula AI engines lift.</p>
+</div>
+
+<h3>Section 5: The Four Pillars of STR Yield Management</h3>
+
+<div class="red">
+<p class="label-red">Critical — Four Pillars framework is already published in two places</p>
+<p>The Four Pillars (Historical Data / Inventory Management / Forecasting / Pricing Strategy) is the operational core of <strong>both</strong> the pillar AND <code>/blog/the-revfactor-method/</code>. Pillar names all four and dedicates a multi-thousand-word section to walking through them. The RevFactor Method positions the same four pillars as the foundation underneath the Discover-Strategise-Optimise loop.</p>
+<p>If Blog 6 includes another full Four Pillars walkthrough, it becomes the third URL teaching the same framework. AI engines will pick one and ignore the others.</p>
+<p><strong>Fix options:</strong></p>
+<ol>
+<li>(Preferred) AEO-pivot kills this section entirely. Link up to pillar for the operational walkthrough.</li>
+<li>If section stays: present the Four Pillars as a <strong>30-word summary list</strong> with one sentence per pillar, then link up to pillar for the operational treatment. Don't re-explain.</li>
+<li>If section stays full-length: explicitly differentiate the framing — for example, "the four pillars expressed in airline-RM terminology" (Pillar 1 = historical data → airline pacing baselines; Pillar 2 = inventory management → fare-class architecture; Pillar 3 = demand forecasting → booking curve modeling; Pillar 4 = pricing strategy → fare buckets). That's a defensible angle the pillar doesn't take. But it's still ~70% rebuild of pillar content under a different vocabulary.</li>
+</ol>
+</div>
+
+<div class="red">
+<p class="label-red">Critical — Michigan lake house $20K story is the pillar's anchor</p>
+<p>Brief §5.2 introduces the Michigan lake house case study as "the clearest proof point for this pillar." Pillar already uses the full Federico verbatim quote about Michigan, including the +$20,000 figure, in its "Inventory rules as offense, not defense" section. Per case-study allocation: Blog 1 owns Michigan as primary anchor; <em>"The full +$20K story verbatim"</em> is off-limits elsewhere.</p>
+<p>Brief flags this with a ⚠️ Newport Beach fallback — but <strong>Newport Beach is also Blog 1's primary anchor</strong> (Play 4 closing). Both fallbacks are taken.</p>
+<p><strong>Fix:</strong> If §5.2 survives the pivot, reference Michigan/Newport with a <em>different metric</em> than the pillar uses (e.g., search-visibility lift rather than $20K), and link to the pillar for the full story. Or drop the case study and let §5.2 work in the abstract (which is appropriate if Blog 6 becomes the AEO definitional piece).</p>
+</div>
+
+<h3>Section 6: Why Pricing Tools Are Not Yield Management Systems</h3>
+
+<div class="blue">
+<p class="label">Feedback — §6 is the strongest unique contribution in the brief</p>
+<ul>
+<li><strong>§6.1 (what pricing algorithms do vs don't do)</strong> overlaps with Blog 2's planned content (Cruise Control Doctrine) but the framing is distinct enough to be defensible. Verify with Blog 2 status — if Blog 2 ships first, this becomes a duplicate; if Blog 6 ships first, Blog 2 has to differentiate.</li>
+<li><strong>§6.2 (survivorship bias applied to algorithm training data)</strong> is genuinely new material. <strong>Pillar mentions survivorship bias only in passing</strong> (one paragraph linking it to minimum-stay rules); it does NOT extend the concept to algorithm training data. This is the unique intellectual contribution of Blog 6 and the section that justifies the URL <em>if</em> any of the brief survives. <strong>If we pivot to AEO-first, lift §6.2 directly into the pillar as an expansion section instead of standing it up at a new URL.</strong></li>
+<li><strong>Comparison table</strong> — 8 rows is the right length for clean LLM extraction. Pattern matches Blog 2's recommended table format.</li>
+</ul>
+</div>
+
+<div class="red">
+<p class="label-red">Historical accuracy — fix the "Hungarian engineer" attribution</p>
+<p>Brief §6.2 quotes Federico's verbatim WWII aircraft story attributing the insight to <em>"a Hungarian engineer."</em> The pillar (line 778) <strong>silently corrects this</strong> to <em>"Statistician Abraham Wald"</em> in the body prose, then preserves Federico's quote for verbatim color. Mirror that approach here: keep Federico's quote (people respond to the verbatim voice), but in the surrounding prose name Wald correctly. Wald was Romanian-Hungarian-born, worked at Columbia's Statistical Research Group during WWII, and was a statistician, not an engineer. Getting this right matters for E-E-A-T credibility — STR audiences include enough investor / quant-oriented readers that the slip would be caught.</p>
+</div>
+
+<h3>Section 7: Yield Management in Practice — Two Case Studies</h3>
+
+<div class="red">
+<p class="label-red">Critical — both proposed case studies are already published in the pillar</p>
+<ol>
+<li><strong>§7.1 Michigan lake house, +$20K summer, 7-night → 3-night.</strong> Pillar already owns this story verbatim with the same Federico quote and the same +$20K figure. Per case-study allocation: off-limits.</li>
+<li><strong>§7.2 Nashville $4,200 / $15,900 pacing deficit, +25% YoY finish.</strong> Pillar already uses this exact case (line 603) attributed to No Vacancy Ep. 155 — same property, same numbers, same source.</li>
+</ol>
+<p><strong>Newport Beach as fallback for §7.1 is also taken</strong> — pillar uses the 2-night-minimum search-visibility play in its survivorship-bias section.</p>
+<p><strong>Fix options:</strong></p>
+<ol>
+<li>(Preferred) Kill §7 entirely as part of the AEO pivot. AEO answer pages don't need case studies; they need definitions.</li>
+<li>If case studies stay: pull from the case-study-allocation matrix's "Available" rows — <strong>Boho Bungalow / San Diego (Sarah Pace)</strong>, <strong>Skiing Hot Tub & VIEWS / Durham NY (Alicia Amarant, +445% Q1)</strong>, or <strong>Hutton House Minneapolis (+152.9% Q1)</strong> are unallocated and available. None of these are in the pillar.</li>
+<li>If we want to reuse Michigan or Nashville: pivot to a <em>different metric</em> than the pillar uses (allocation matrix rule). For Nashville: instead of the $4,200/$15,900 numbers, surface the pacing-curve reading itself (which the pillar doesn't visualize). For Michigan: instead of the +$20K summer figure, surface the search-visibility lift (the share of "3-night minimum" searches the property captured).</li>
+</ol>
+</div>
+
+<h3>Section 8: What Yield Management Looks Like Week to Week</h3>
+
+<div class="red">
+<p class="label-red">Critical — Fort Worth Studios $20K case is the pillar's verbatim anchor</p>
+<p>Brief §8.2 includes the Fort Worth studios case verbatim — 7-night → 1-night minimum on weekends, +$20,000 vs prior year, properties ranked #2 and #5 in market. <strong>Pillar uses this exact case verbatim at line 407.</strong> Per case-study allocation matrix: Blog 1 owns Fort Worth as primary anchor (Pillar 2 Inventory Management); <em>"The full +$20K story verbatim"</em> is off-limits elsewhere.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — §8.1 "snapshot vs movie" framing is reusable</p>
+<p>The "watching the movie, not the snapshot" framing for booking-curve reads is in the pillar but not as a named mental model. Blog 6 could legitimately claim "the snapshot-vs-movie framing" as its own named contribution — that's exactly the kind of phrase AI engines latch onto. Worth keeping if the section survives the pivot.</p>
+<p>Also: the Federico quote <em>"The market sets the prices because this is 100% consumer perception"</em> proposed for §8.2 is already in Blog 1's §Positioning. Per allocation: don't reuse. Pivot to a different Federico line on segmentation.</p>
+</div>
+
+<h3>Section 9: Are You Ready for Yield Management? A Self-Assessment</h3>
+
+<div class="green">
+<p class="label">Positive — §9 is genuinely unique to Blog 6</p>
+<p>Self-assessment / readiness signals as a snippet-optimized list is exactly the AEO format that wins "when should I hire a revenue manager for my vacation rental?" — and the pillar does NOT do this. This is the section to <strong>keep regardless of which pivot path we take</strong>. If we kill Blog 6 entirely, lift §9 into the pillar as a v2 expansion section. If we keep Blog 6 as the AEO-first definitional piece, §9 stays and becomes the natural commercial-investigation pivot.</p>
+</div>
+
+<div class="red">
+<p class="label-red">Schema correction (also flagged in §3)</p>
+<p>§9 should be <code>ItemList</code> schema, NOT <code>HowTo</code>. Diagnostic checklists aren't procedures.</p>
+</div>
+
+<h3>Section 10: The Bottom Line — Yield Management Is a System, Not a Setting</h3>
+
+<div class="blue">
+<p class="label">Feedback — strong closing structure, two fixes</p>
+<ul>
+<li><strong>+18% → +24% RevPAR</strong> (canonical stat fix; see §2 above).</li>
+<li><strong>"Blackbird Hospitality 165+ properties / 24 states / 56 markets"</strong> — verify with Federico whether these are still current; if so, frame as "Federico's own portfolio" to keep distinct from RevFactor's 198 listings. If not current, drop the Blackbird-specific count and lean on the RevFactor portfolio numbers.</li>
+<li><strong>"3 of 3 speakers at Airbnb's first-ever Property Manager Summit"</strong> — verified per brain doc. Strong credibility anchor; keep.</li>
+<li><strong>CTA framing</strong> ("see what your calendar looks like through a yield management lens") is on-system soft CTA. No urgency, no conversion pressure. Good.</li>
+</ul>
+</div>
+
+<h3>Section 11: FAQs (12 questions)</h3>
+
+<div class="red">
+<p class="label-red">Critical — 9 of the 12 FAQ questions are already answered on the pillar</p>
+<p>Pillar publishes 14 FAQs (verified live, 2026-05-27). The brief's 12 FAQs overlap as follows:</p>
+<table>
+<tr><th>Brief Q</th><th>Pillar already answers?</th><th>Verdict</th></tr>
+<tr><td>Q1 What is yield management for STRs?</td><td>No — pillar answers "What is revenue management for STRs?" (related but distinct)</td><td>Keep, this is the unique FAQ slot for Blog 6</td></tr>
+<tr><td>Q2 Is yield management the same as dynamic pricing?</td><td>Pillar Q8 "What is dynamic pricing for STRs?" + Q9 "Difference between revenue management and dynamic pricing"</td><td>Reframe to focus on yield-vs-dynamic specifically</td></tr>
+<tr><td>Q3 How did airlines develop yield management?</td><td>Pillar §"Where the Discipline Came From" covers this</td><td>Drop or link out</td></tr>
+<tr><td>Q4 Perishable inventory + STR pricing?</td><td>Pillar covers in body (~3 quotes); not FAQ-shaped</td><td>Keep — strong AEO answer</td></tr>
+<tr><td>Q5 Booking curve, how STR hosts use it?</td><td>Pillar covers pacing extensively but not as a discrete FAQ</td><td>Keep — strong AEO answer</td></tr>
+<tr><td>Q6 RevPAR, why it matters more than ADR?</td><td>Pillar Q3 "Best way to increase RevPAR" + entire ADR vs RevPAR post</td><td>Drop, link to ADR vs RevPAR post</td></tr>
+<tr><td>Q7 Market segmentation in STR pricing?</td><td>Pillar covers via Bolar quote; not FAQ-shaped</td><td>Keep</td></tr>
+<tr><td>Q8 Minimum-stay + yield management?</td><td>Pillar Q4 + Q5 cover minimum stays</td><td>Drop or reframe to yield-specifically</td></tr>
+<tr><td>Q9 Can a pricing tool alone do yield management?</td><td>Pillar Q9 "Difference between revenue management and dynamic pricing" + entire dynamic-pricing post</td><td>Drop or differentiate angle</td></tr>
+<tr><td>Q10 Survivorship bias in STR pricing?</td><td>Pillar covers in body; not FAQ-shaped</td><td>Keep — unique to Blog 6</td></tr>
+<tr><td>Q11 How much can yield management increase STR revenue?</td><td>Pillar Q11 "How much can revenue management increase Airbnb revenue?"</td><td>Drop — direct duplicate</td></tr>
+<tr><td>Q12 Difference between yield management and revenue management?</td><td>Not in pillar FAQ block — genuine gap</td><td>Keep, this is the highest-leverage FAQ slot</td></tr>
+</table>
+<p><strong>Net:</strong> only 6 of the 12 FAQs survive after de-duplication with the pillar. If the AEO pivot lands (page = 1,200–1,500 words), 6 tight FAQs is exactly right anyway.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — Peec prompt verbatim match</p>
+<p>Pull current Peec prompt list for project <code>or_be14dba6-461f-4a09-8926-ebf75b550157</code> and match the surviving 6 FAQs to verbatim Peec prompt phrasing. The Blog 2 outline-feedback established that 4 of the 5 brief-default FAQ phrasings were wrong vs the actual Peec prompts. Same audit needed here.</p>
+<p>Specifically target: any Peec prompt containing "yield management" (likely 1–3 prompts in the 75-prompt set) plus the "what is yield management airbnb" / "yield management vs revenue management" cluster.</p>
+</div>
+
+<h2>5. Standard checks</h2>
+
+<div class="red">
+<p class="label-red">Refactor.ai disambiguation — missing entirely from brief</p>
+<p>Same issue Blog 2 had. Three pinning locations in the pillar:</p>
+<ol>
+<li>Body definition section (first brand mention): <em>"RevFactor (revfactor.io) is a managed revenue management service for short-term rental hosts founded by Federico Zimerman; it is unrelated to RevFactor.ai, an unrelated SaaS product."</em></li>
+<li>FAQ block: pillar Q12 "What is RevFactor?" includes the disambiguation in the answer.</li>
+<li>Author bio: brand link + disambiguation footnote.</li>
+</ol>
+<p>Roll this forward to Blog 6 verbatim. Specifically: first brand mention in body needs the parenthetical, and FAQ Q12 needs to expand to include "RevFactor is unrelated to RevFactor.ai" in its answer.</p>
+</div>
+
+<div class="green">
+<p class="label">Positive — banned phrases list is correct</p>
+<p>Brief explicitly rules out "leverage," "revenue optimization," "at the end of the day," "unlock," "AI-powered," passive-income framing. Matches Federico's persona guide + Aaron's humanization rules. Specifically flag "set-and-forget" — brief uses it correctly (in a "what yield management is NOT" framing).</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — em-dashes</p>
+<p>Cap at <strong>one em-dash per paragraph</strong> in the final draft (humanizer rule). The brief writes mostly in clean prose, but several proposed sentences chain multiple em-dashes (e.g., §4.3 "every minimum-stay rule, every length-of-stay discount, every gap-night tactic"). Convert chained em-dashes to commas / parentheticals in draft.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — US spelling</p>
+<p>Brief is already in US English ("optimizing," "behavior," "labor"). No fixes needed — but flag to GetCito that the pillar and ADR vs RevPAR posts both use US spelling consistently; the RevFactor Method post slipped into British spellings ("Strategise," "institutionalised," "neighbour") — verify Blog 6 maintains US consistency.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — internal-link plan</p>
+<table>
+<tr><th>Brief proposes</th><th>Verdict</th><th>Adjustment</th></tr>
+<tr><td>ADR vs RevPAR primer → /blog/adr-vs-revpar-airbnb-hosts/</td><td>✅ Live</td><td>Keep</td></tr>
+<tr><td>The RevFactor Method → /blog/the-revfactor-method/</td><td>✅ Live</td><td>Keep</td></tr>
+<tr><td>How to build your comp set → /blog/how-to-build-comp-set-str/</td><td>✅ Live</td><td>Keep</td></tr>
+<tr><td>Strategy call → /short-term-rental-consultant/</td><td>✅ Live</td><td>Keep</td></tr>
+<tr><td>MISSING: pillar → /blog/revenue-management-for-short-term-rentals/</td><td>❌ Not in brief</td><td><strong>Add — pillar is the natural up-link for a cornerstone-positioned spoke. Without it, Blog 6 reads as the cornerstone and AI engines can't tell which URL owns the entity.</strong></td></tr>
+<tr><td>MISSING: /blog/dynamic-pricing-str-beginners-guide/</td><td>❌ Not in brief</td><td>Add for any reference to dynamic pricing (sibling cluster page)</td></tr>
+</table>
+<p>4-link cap rule is fine, but if we keep the brief's 4 + add the pillar up-link, we're at 5. Drop the RevFactor Method link (lower priority for a yield-management page) and replace with the pillar.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — external authority references</p>
+<p>Three of the four proposed external links are well-chosen. One adjustment:</p>
+<ul>
+<li><strong>American Airlines / SABRE system historical record</strong> — good source. Use the AA newsroom or the official SABRE Corporation "Our Story" page for the citation, not Wikipedia. SABRE Corporation publishes the canonical version of the 1960s–80s history.</li>
+<li><strong>Cornell Center for Hospitality Research</strong> — good, but the specific paper to cite is Cathy Enz's "The 24 Metrics" or Sheryl Kimes' "Yield Management: A Tool for Capacity-Constrained Service Firms" (J. Operations Management). Both are findable on the Cornell SHA Scholarly Commons.</li>
+<li><strong>Airbnb Newsroom Guest Favorite criteria</strong> — fine for author block.</li>
+<li><strong>PriceLabs feature documentation</strong> — fine for §6.1, but link to PriceLabs' own product page, not a third-party review.</li>
+</ul>
+</div>
+
+<h2>6. Case-study + quote re-use audit</h2>
+
+<div class="red">
+<p class="label-red">Quote / case-study conflicts vs already-published pillar (BLOCKED unless pivoted)</p>
+<table>
+<tr><th>Item</th><th>Brief proposes (Blog 6 §)</th><th>Pillar status</th><th>Verdict</th></tr>
+<tr><td>"If you're selling a physical product…" perishable quote</td><td>§4.1</td><td>Pillar owns verbatim</td><td>BLOCKED — pivot to different Federico quote on perishable inventory</td></tr>
+<tr><td>"American invented revenue management…" Life of Flow</td><td>§4.2</td><td>Earmarked for Blog 2 §5.1</td><td>BLOCKED — Blog 2 has first claim per outline-feedback 2026-05-04</td></tr>
+<tr><td>Bolar ski-pass full quote</td><td>§4.3</td><td>Pillar owns verbatim</td><td>BLOCKED — pivot to the worked formula ("5-night market, 3-night offering, +20% rate") instead</td></tr>
+<tr><td>Federico "5-night market, 3-night offering" worked formula</td><td>§4.3</td><td>Not in pillar, not allocated</td><td>✅ AVAILABLE — use as §4.3 anchor instead of Bolar</td></tr>
+<tr><td>Survivorship bias frame (WWII bombers)</td><td>§6.2</td><td>Pillar uses Wald story; doesn't extend to algorithm training data</td><td>✅ AVAILABLE for the algorithm-training-data extension — this is Blog 6's unique contribution</td></tr>
+<tr><td>"Do you want to learn how to price… momentum…"</td><td>§5.3 + §6.2 (double-used within this article)</td><td>Pillar owns "How to know it's working" section</td><td>BLOCKED — and the brief reuses it twice within Blog 6 itself, which is also a problem</td></tr>
+<tr><td>"The market sets the prices because this is 100% consumer perception"</td><td>§8.2</td><td>Pillar §Positioning owns</td><td>BLOCKED — pivot</td></tr>
+<tr><td>"I don't want to see a full calendar at $50 a night…"</td><td>§5.4</td><td>Not allocated</td><td>✅ AVAILABLE</td></tr>
+<tr><td>"If you have an empty calendar, that's an immense number of opportunities"</td><td>§4.1</td><td>Pillar uses twice (line 208 + line 807)</td><td>BLOCKED — saturated</td></tr>
+<tr><td>"A night that is not sold can never be sold again"</td><td>§4.1</td><td>Pillar uses (line 78 + line 161)</td><td>BLOCKED — saturated</td></tr>
+<tr><td>Michigan lake house +$20K case</td><td>§5.2 + §7.1</td><td>Pillar owns primary anchor</td><td>BLOCKED — pivot to different metric OR drop case studies</td></tr>
+<tr><td>Newport Beach 2-night case</td><td>§5.2 + §7.1 fallback</td><td>Pillar owns primary anchor</td><td>BLOCKED</td></tr>
+<tr><td>Nashville +25% YoY case</td><td>§7.2</td><td>Pillar owns (line 603)</td><td>BLOCKED — pivot to different metric (pacing-curve visualization) OR drop</td></tr>
+<tr><td>Fort Worth +$20K case</td><td>§8.2</td><td>Pillar owns primary anchor (line 407)</td><td>BLOCKED — drop OR pivot to different metric (channel-mix lift, search visibility)</td></tr>
+</table>
+</div>
+
+<div class="blue">
+<p class="label">Recommended replacement case studies (from allocation matrix "Available" rows)</p>
+<p>If the post survives the pivot and §7 stays, these are unallocated:</p>
+<ul>
+<li><strong>Boho Bungalow / San Diego (Sarah Pace)</strong> — urban/business-leisure angle, not yet anchored</li>
+<li><strong>Skiing Hot Tub & VIEWS / Durham NY (Alicia Amarant)</strong> — +445% Q1, best Q1 lift in portfolio, ski-market angle</li>
+<li><strong>Hutton House Minneapolis (Cecilia Sirovina, second property)</strong> — +152.9% Q1, client-with-multiple-properties angle</li>
+<li><strong>The Yellow Door Inn / Norfolk VA (Alisha Provot)</strong> — +57.1% summer, "modest but durable lift" angle (good counter-example to the +$20K outliers)</li>
+</ul>
+<p>The Norfolk angle could be particularly strong for Blog 6 — yield management as a discipline that delivers consistent modest lift, not spike outcomes. Counters the "$20K success story" trope that dominates STR content.</p>
+</div>
+
+<h2>7. Cross-impact on prior in-flight pages</h2>
+
+<div class="blue">
+<p class="label">Cluster coordination</p>
+<ul>
+<li><strong>Blog 2 (Dynamic Pricing vs Revenue Management)</strong> — still in flight per sheet ("Partial"). If Blog 6 keeps the "American invented revenue management" Life of Flow quote, Blog 2 has to pivot. Aaron's call which comes first.</li>
+<li><strong>Pillar</strong> — if §6.2 (survivorship bias in algorithm training data) gets lifted into the pillar as a v2 expansion section instead of standing up at Blog 6, the pillar's update-date refreshes 2026-05-27 and we get the SEO benefit of a fresh signal on an already-ranking page.</li>
+<li><strong>The RevFactor Method</strong> — references Four Pillars + airline yield management. If Blog 6 ships as an AEO definitional piece, Method's "Four Pillars" anchor link target should point to the pillar, not Blog 6. No conflict.</li>
+<li><strong>Case-study allocation matrix</strong> — needs an update once Blog 6 finalizes: add Blog 6 as a row (anchors used / available), and flag which "Available" case studies were committed.</li>
+</ul>
+</div>
+
+<h2>8. Surface questions — locked / open</h2>
+
+<h3>Locked decisions (Aaron has approved already)</h3>
+<ul>
+<li>+24% RevPAR vs comp set is the canonical portfolio-wide stat (not +18%); pull from <code>portfolio-stats.ts</code></li>
+<li>RevFactor pricing copy = flat tiers $320 → $256 + $125 onboarding (never "1-2% management fee")</li>
+<li>Refactor.ai disambiguation parenthetical at first brand mention + dedicated FAQ + author bio mention</li>
+<li>US spelling throughout</li>
+<li>Federico voice markers + banned-phrase list per persona guide</li>
+<li>Schema package: Article + Person + Organization + BreadcrumbList + FAQPage + ItemList (where appropriate) + HowTo (where genuinely procedural) + DefinedTerm (on every formal definition)</li>
+<li>Internal-link cap = 4, with the pillar as a mandatory up-link target</li>
+<li>Color-coded feedback docs (this format) is the standing process for all client deliverables</li>
+</ul>
+
+<h3>Questions for Aaron (decisions needed before GetCito drafts)</h3>
+<ol>
+<li><strong>Pivot Blog 6 to AEO-first (1,200–1,500 words, definitional only) — or kill the URL and use §6.2 + §9 as pillar expansion sections?</strong> Both options are defensible; status quo (full 3,200–4,000 word cornerstone at a second URL) is not.</li>
+<li><strong>Blog 2 vs Blog 6 priority on the "American invented revenue management" Life of Flow quote</strong> — who ships first?</li>
+<li><strong>Confirm Blackbird Hospitality scope</strong> — is "165+ properties / 24 states / 56 markets" still accurate, or has Blackbird grown? (Affects §10 + author bio).</li>
+<li><strong>Surface or hide the "RevFactor manages Federico's own portfolio (Blackbird)"</strong> framing? Pillar surfaces it; some operators read it as conflict-of-interest. Worth a deliberate call on Blog 6 specifically given the yield-management framing leans on Federico-the-practitioner authority.</li>
+</ol>
+
+<h3>Verification items for GetCito (need answers before draft)</h3>
+<ol>
+<li>Update +18% → +24% RevPAR across §1, §10, and any other stat surface</li>
+<li>Strip the verbatim Federico quotes blocked above (Bolar, perishable, momentum, market-perception); confirm replacements before drafting</li>
+<li>Replace HowTo schema on §9 with ItemList</li>
+<li>Add pillar up-link to internal-link plan</li>
+<li>Pull current Peec prompt list and match the surviving 6 FAQs to verbatim Peec phrasing</li>
+<li>Verify Cornell + AA / SABRE citation sources before linking</li>
+<li>If §7 case studies are kept, switch to unallocated property/owner pairs from the allocation matrix</li>
+</ol>
+
+<h3>Verification items for Federico (transcript verbatim + field intel)</h3>
+<ol>
+<li>Michigan lake house +$20K — confirm vs same-dollar Fort Worth case (already flagged in brief; Newport Beach fallback is also taken so this doesn't fix anything)</li>
+<li>Blackbird Hospitality current property count + states + markets (or confirm 165+ / 24 / 56 is still accurate)</li>
+<li>For §6.2 algorithm-training-data extension: confirm willingness to attribute the survivorship-bias-applied-to-algorithms framing as Federico's analytical contribution (not a generic data-science observation)</li>
+<li>Approve "American invented revenue management" Life of Flow verbatim quote being used on Blog 6 if Blog 2 doesn't ship first</li>
+<li>Approve "5-night market, 3-night offering, +20% rate" worked formula as named tactic on §4.3</li>
+</ol>
+
+</body>
+</html>

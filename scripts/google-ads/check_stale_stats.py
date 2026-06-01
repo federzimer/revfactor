@@ -32,6 +32,8 @@ SELECT ad_group_ad.ad.id,
 FROM ad_group_ad
 WHERE ad_group_ad.ad.type = 'RESPONSIVE_SEARCH_AD'
   AND ad_group_ad.status = 'ENABLED'
+  AND ad_group.status = 'ENABLED'
+  AND campaign.status = 'ENABLED'
 """
 
 hits = []

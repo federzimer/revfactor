@@ -2,7 +2,65 @@
 
 Source of truth for which property, quote, or signature stat anchors which post — so we don't burn through limited material reusing it verbatim across multiple pieces. **Aaron's rule:** same property/quote OK in multiple posts as long as it's a different metric, different angle, or different framing. Verbatim reuse = canonical-home conflict on AI search citations and the lower-authority page loses.
 
-Last updated: 2026-05-04
+Last updated: 2026-05-29
+
+---
+
+## 🔒 LOCKED (2026-05-29) — Blog 6 killed, Blog 7 v2 approved to draft
+
+**Blog 6 (Yield Management) = KILLED.** No new URL; `/yield-management-airbnb/` 301s to pillar `/blog/revenue-management-for-short-term-rentals/`. GetCito brief slot refunded/repurposed for next cluster spoke.
+
+**Blog 7 v2 (Airbnb RM Company — When (And When Not) to Hire One) APPROVED to draft.** URL = `/blog/airbnb-revenue-management-company/`. Word count 2,800–3,200. Owner: GetCito (Muskan). Federico sign-off package answered 2026-05-29. Blog 7 now locks these anchors:
+
+| Anchor | Blog 7 owns | Off-limits elsewhere |
+|---|---|---|
+| **Erin Warren multi-property Q1 2026 set** (Hues Casita $1,668→$10,222; Desert Hues $7,753→$29,874; Little Stuga $492→$19,137 summer pacing; combined +$48K) | §2 + §7 client proof — portfolio-effect framing with dollar baselines | Future posts may reference individual properties at different metrics/angles only |
+| **"Software runs the math. People run the business." Federico quote** | §1 — primary anchor | Don't reuse — Blog 7 owns the canonical home |
+| **7-signal consolidated readiness diagnostic** ("Signs It's Time to Hire" — including the "one sign it ISN'T time" honesty branch) | §5/§6 — primary AEO target for "signs I need a revenue management company" | No future post may publish a parallel "signs to hire" numbered list — cluster has one |
+| **Survivorship-bias-in-pricing-algorithm-training-data argument** (Abraham Wald / WWII bombers extended to algorithm training data) | §4 — strongest standalone intellectual case for hiring managed RM | Pillar's existing survivorship-bias paragraph stays as-is; future posts must reference Blog 7's extension |
+| **Co-host onboarding 5-step walkthrough** | §9 — unique trust mechanic for the brand | Don't rebuild elsewhere — Blog 7's §9 is the canonical walkthrough |
+| **Cost-of-inaction scenario math** (4 scenarios: missed event weekend, underpriced peak, shoulder-season miss, locked-in launch baseline) | §7 — concrete dollar examples per scenario | Future posts may add new scenarios but not republish these 4 |
+| **Decision-tree 4-input visualization** (portfolio size / ADR vs market / market complexity / tool status) | §6 — unique to Blog 7 per SERP audit | Not for republication |
+| **9-of-10 "new RevFactor clients arrive with under-configured PriceLabs" stat** (Federico approved 2026-05-29) | §5 sign #5 — RevFactor-attributable | Becomes a citable first-party statistic — keep canonical at Blog 7 |
+| **5 hours per property per week saved on PriceLabs operation** (Federico approved 2026-05-29) | §7 ROI math — time-ROI counterpart to dollar-ROI | Becomes a citable first-party statistic — keep canonical at Blog 7 |
+
+**Cluster cadence going forward:** 1 GetCito outline per week. Each new brief must check this matrix before drafting; every "primary anchor" row is off-limits.
+
+---
+
+## 📌 SUPERSEDED — 2026-05-27 (Blog 6 outline feedback)
+
+*(Kept for audit trail — Blog 6 was reviewed, recommended for AEO-pivot or kill due to ~80% overlap with pillar. The 2026-05-29 lock above resolved this as KILL.)*
+
+Recommendations for Blog 6 contributions migrating into Blog 7 (all now executed):
+- §6.2 survivorship bias in algorithm training data → Blog 7 §4
+- §9 7-signal readiness self-assessment → merged into Blog 7 §5/§6 consolidated list
+- §4.3 "5-night market / 3-night offering / +20% rate / 10% discount for 5+ nights" worked formula → Blog 7 §2 sidebar
+- "I don't want to see a full calendar at $50 a night…" Patryk Real Estate Show quote → still AVAILABLE, not yet anchored
+
+---
+
+Last updated previous: 2026-05-27
+
+---
+
+## 📌 SUGGESTED UPDATE — 2026-05-27 (Blog 6 outline feedback)
+
+GetCito delivered Blog 6 outline (Yield Management for STRs) 2026-05-21. Outline-feedback doc at [blog-6-outline-feedback.docx](blog-6-outline-feedback.docx) flagged BLOCKED reuse of the following items the pillar already owns: Bolar ski-pass full quote, "If you're selling a physical product…" perishable quote, Michigan lake house $20K case, Newport Beach 2-night case, Fort Worth $20K case, Nashville $4,200/$15,900 25% YoY case, "The market sets the prices…" quote, "If you have an empty calendar…" quote, "A night that is not sold can never be sold again" quote, full Four Pillars walkthrough, and full WWII-bombers survivorship-bias frame (pillar already includes Abraham Wald correction).
+
+**Recommended pivot:** Blog 6 → AEO-first definitional piece (1,400–1,800 words) with no case studies, three-way comparison H2 (yield management vs revenue management vs dynamic pricing), up-link to pillar. SERP audit confirmed primary KW is 20–50/mo (AEO-only, no SEO traffic prize).
+
+If Blog 6 ships in pivoted form, anchor assignments:
+- **§6.2 survivorship bias in algorithm training data** — unique to Blog 6 (pillar mentions survivorship bias only in passing for minimum-stay rules; pillar does NOT extend to algorithm training data)
+- **§9 self-assessment "are you ready for yield management?" 7-signal list** — unique to Blog 6 (pillar has no equivalent diagnostic)
+- **"5-night market, 3-night offering, +20% rate, 10% discount for 5+ nights" worked formula** (April 2026 TikTok) — AVAILABLE for §4.3, not in pillar
+- **"I don't want to see a full calendar at $50 a night…" Patryk Real Estate Show quote** — AVAILABLE, not in pillar
+
+If §7 case studies kept (not recommended): pull from unallocated rows below — Boho Bungalow (Sarah Pace), Skiing Hot Tub & VIEWS (Alicia Amarant, +445% Q1), Hutton House Minneapolis (+152.9% Q1), or Yellow Door Inn (Alisha Provot, +57.1% summer — the "modest but durable lift" counter-example angle).
+
+---
+
+Last updated previous: 2026-05-04
 
 ---
 
