@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BarChart3, Zap, CalendarDays } from 'lucide-react';
+import { PORTFOLIO_STATS } from '../data/portfolio-stats';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +12,7 @@ function MetricShuffler() {
   const metrics = [
     { label: 'Market Position Score', value: '94', suffix: '/100' },
     { label: 'Pricing Health Index', value: 'A+', suffix: '' },
-    { label: 'Revenue vs Comp Set', value: '+18', suffix: '%' },
+    { label: 'Revenue vs Comp Set', value: `+${PORTFOLIO_STATS.revparLiftPct}`, suffix: '%' },
   ];
 
   useEffect(() => {
