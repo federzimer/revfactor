@@ -60,6 +60,20 @@
 <p style="margin-top:8px"><strong>GetCito also raised a process question</strong> (cluster numbering — Option A vs B) at the top of the doc that needs Aaron's call. See §"GetCito's numbering question" below.</p>
 </div>
 
+<div class="green">
+<p class="label">Correction — homepage +18% widget was a real issue (GetCito was right)</p>
+<p>In the v2 outline-feedback doc I told the team this was a "false flag" after a <code>grep -rniE "\\+?18%"</code> sweep of <code>src/</code> turned up only legitimate references (Blog 4 cold open, pillar's Maryssa Payne stat, comp set guide's discipline metric). <strong>I was wrong.</strong></p>
+<p>The +18% lived in <code>src/components/Features.jsx:14</code> as a split string: <code>value: '+18'</code> + <code>suffix: '%'</code>. Concatenated only at React render time, never both in the same source line, so the regex missed it. The screenshot GetCito shared (Revenue Intelligence card on the live homepage) showed the rendered output.</p>
+<p><strong>Fix committed to staging branch <code>fifa-post-staging-2026-05-22</code> (commit 10acfa0):</strong></p>
+<ul>
+<li>Features.jsx now imports <code>PORTFOLIO_STATS</code> from <code>src/data/portfolio-stats.ts</code></li>
+<li>Hardcoded <code>'+18'</code> → <code>` +${PORTFOLIO_STATS.revparLiftPct}`</code> — tracks the SSOT automatically on future refreshes</li>
+<li>Build verified: <code>+24%</code> now appears in <code>dist/</code> output; <code>+18%</code> gone</li>
+<li>Full site sweep confirmed: this was the only stale +18% reference anywhere in the codebase</li>
+</ul>
+<p><strong>Live homepage won't update until staging branch merges to main</strong> — Aaron's call on timing (see chat).</p>
+</div>
+
 <h2>Three fixes before MDX commit</h2>
 
 <div class="red">
