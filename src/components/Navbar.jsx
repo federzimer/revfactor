@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
-import { Building2, X, ArrowRight, Check, Phone } from 'lucide-react';
-import ScheduleModal from './ScheduleModal';
+import { Building2, X, ArrowRight, Check, TrendingUp } from 'lucide-react';
 
 /* ─── Stripe Checkout URLs (keyed by property count) ─── */
 const STRIPE_URLS = {
@@ -24,7 +23,7 @@ const propertyOptions = [
 /* ─── Subscribe Modal ───
    Mounted/unmounted by parent via conditional rendering.
    Handles its own exit animation before calling onClose. */
-function SubscribeModal({ onClose, onOpenSchedule }) {
+function SubscribeModal({ onClose }) {
   const [selectedCount, setSelectedCount] = useState(null);
   const isClosingRef = useRef(false);
   const overlayRef = useRef(null);
@@ -207,21 +206,15 @@ function SubscribeModal({ onClose, onOpenSchedule }) {
             <ArrowRight className="relative z-10 w-4 h-4" />
           </button>
 
-          {/* Schedule Free Strategy Call — secondary path. Lets visitors who
-              want human guidance before committing to a tier book a call
-              instead of bouncing. PostHog data showed one buyer cycled
-              through 4 tiers in 2 minutes without checking out. */}
-          <button
-            onClick={() => {
-              window.posthog?.capture('schedule_modal_opened', { source: 'subscribe_modal' });
-              onOpenSchedule();
-            }}
+          <a
+            href="/revenue-check"
+            onClick={() => window.posthog?.capture('revenue_check_clicked', { source: 'subscribe_modal' })}
             className="mt-3 w-full flex items-center justify-center gap-2 py-3 font-bold uppercase text-[10px] tracking-[2px] rounded-full text-[#8B3A3A] hover:bg-[#8B3A3A]/5 transition-colors duration-[200ms] cursor-pointer"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
-            <Phone className="w-3.5 h-3.5" />
-            <span>schedule free strategy call</span>
-          </button>
+            <TrendingUp className="w-3.5 h-3.5" />
+            <span>start revenue check</span>
+          </a>
         </div>
       </div>
     </div>,
@@ -234,7 +227,6 @@ export default function Navbar({ lightBg = false }) {
   const [scrolled, setScrolled] = useState(lightBg);
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [scheduleOpen, setScheduleOpen] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -289,8 +281,8 @@ export default function Navbar({ lightBg = false }) {
           ))}
         </div>
 
-        {/* Desktop Buttons — order: Owners → Subscribe → Free Strategy Call.
-            Free Strategy Call sits on the right (visually heaviest) so it
+        {/* Desktop Buttons — order: Owners → Subscribe → Revenue Check.
+            Revenue Check sits on the right (visually heaviest) so it
             anchors the eye as the primary conversion path. */}
         <div className="hidden lg:flex items-center gap-2 ml-2">
           {/* Owners — outline (renamed from "owner portal" for compactness) */}
@@ -309,7 +301,7 @@ export default function Navbar({ lightBg = false }) {
             owners
           </a>
 
-          {/* Subscribe — moss. Sits between Owners and Free Strategy Call. */}
+          {/* Subscribe — moss. Sits between Owners and Revenue Check. */}
           <button
             onClick={() => { window.posthog?.capture('subscribe_modal_opened', { source: 'navbar_desktop' }); setModalOpen(true); }}
             className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
@@ -322,10 +314,11 @@ export default function Navbar({ lightBg = false }) {
             <span className="relative z-10">subscribe</span>
           </button>
 
-          {/* Free Strategy Call — brownish-red (#8B3A3A) primary CTA on the
+          {/* Revenue Check — brownish-red (#8B3A3A) primary CTA on the
               right edge. */}
-          <button
-            onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'navbar_desktop' }); setScheduleOpen(true); }}
+          <a
+            href="/revenue-check"
+            onClick={() => window.posthog?.capture('revenue_check_clicked', { source: 'navbar_desktop' })}
             className="inline-flex items-center px-5 py-2 border border-transparent bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
@@ -334,10 +327,10 @@ export default function Navbar({ lightBg = false }) {
               style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
             />
             <span className="relative z-10 flex items-center gap-1.5 whitespace-nowrap">
-              <Phone className="w-3 h-3" />
-              free strategy call
+              <TrendingUp className="w-3 h-3" />
+              revenue check
             </span>
-          </button>
+          </a>
         </div>
 
         {/* Mobile / tablet menu button — visible <1024px */}
@@ -413,17 +406,17 @@ export default function Navbar({ lightBg = false }) {
             >
               subscribe
             </button>
-            <button
+            <a
+              href="/revenue-check"
               onClick={() => {
                 setMenuOpen(false);
-                window.posthog?.capture('schedule_modal_opened', { source: 'navbar_mobile' });
-                setScheduleOpen(true);
+                window.posthog?.capture('revenue_check_clicked', { source: 'navbar_mobile' });
               }}
               className="flex items-center justify-center gap-2 mt-2 w-full py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full cursor-pointer"
             >
-              <Phone className="w-3.5 h-3.5" />
-              free strategy call
-            </button>
+              <TrendingUp className="w-3.5 h-3.5" />
+              revenue check
+            </a>
           </div>
         )}
       </nav>
@@ -433,16 +426,8 @@ export default function Navbar({ lightBg = false }) {
       {modalOpen && (
         <SubscribeModal
           onClose={() => setModalOpen(false)}
-          onOpenSchedule={() => {
-            setModalOpen(false);
-            setScheduleOpen(true);
-          }}
         />
       )}
-
-      {/* Schedule Modal — direct from "Free Strategy Call" button or
-          handed off from SubscribeModal. */}
-      {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>
   );
 }

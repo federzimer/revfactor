@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.jsx';
+import RevenueCheckFlow from '../components/RevenueCheckFlow.jsx';
+import Footer from '../components/Footer.jsx';
+---
+
+<BaseLayout
+  title="Revenue Check — RevFactor"
+  description="Check whether your short-term rental is a fit for RevFactor revenue management before booking a call."
+>
+  <Navbar client:load lightBg={true} />
+  <main>
+    <RevenueCheckFlow client:load />
+  </main>
+  <Footer client:visible />
+</BaseLayout>

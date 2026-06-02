@@ -1,10 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ArrowRight } from 'lucide-react';
-import ScheduleModal from './ScheduleModal';
 
 export default function Hero() {
-  const [scheduleOpen, setScheduleOpen] = useState(false);
   const sectionRef = useRef(null);
   const overlineRef = useRef(null);
   const line1Ref = useRef(null);
@@ -125,24 +123,23 @@ export default function Hero() {
 
             {/* CTA */}
             <div ref={ctaRef} className="opacity-0">
-              <button
-                onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'hero' }); setScheduleOpen(true); }}
+              <a
+                href="/revenue-check"
+                onClick={() => window.posthog?.capture('revenue_check_clicked', { source: 'hero' })}
                 data-umami-event="CTA-2"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(93,109,89,0.35)]"
                 style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
               >
                 <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
-                <span className="relative z-10">schedule a strategy call</span>
+                <span className="relative z-10">start revenue check</span>
                 <ArrowRight className="relative z-10 w-4 h-4" />
-              </button>
+              </a>
             </div>
           </div>
         </div>
 
       </section>
 
-      {/* Schedule Modal — conditionally mounted */}
-      {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>
   );
 }

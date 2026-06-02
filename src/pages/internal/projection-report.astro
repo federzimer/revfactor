@@ -1,0 +1,907 @@
+---
+import '../../index.css';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Internal Projection Report | RevFactor</title>
+  </head>
+  <body class="projection-tool">
+    <main class="tool-shell">
+      <section class="input-panel no-print" aria-label="Projection report controls">
+        <div>
+          <p class="eyebrow">Internal report builder</p>
+          <h1>AirROI projection report</h1>
+          <p class="lede">
+            Drop a client address with city and state, choose the wrapper, then print the output to PDF.
+          </p>
+        </div>
+
+        <form id="report-form" class="report-form">
+          <label>
+            <span>Property address</span>
+            <textarea
+              id="address"
+              name="address"
+              rows="4"
+              placeholder="123 Main St, Gatlinburg, TN"
+              required></textarea>
+          </label>
+
+          <fieldset>
+            <legend>Branding</legend>
+            <div class="brand-options">
+              <label>
+                <input type="radio" name="brand" value="dual" checked />
+                <span>Both</span>
+              </label>
+              <label>
+                <input type="radio" name="brand" value="revfactor" />
+                <span>RevFactor</span>
+              </label>
+              <label>
+                <input type="radio" name="brand" value="blackbird" />
+                <span>Blackbird</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="primary-action">Generate report</button>
+        </form>
+
+        <div class="actions">
+          <button id="print-report" type="button" disabled>Print / save PDF</button>
+          <button id="copy-summary" type="button" disabled>Copy summary</button>
+          <button id="copy-json" type="button" disabled>Copy JSON</button>
+        </div>
+
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="report" class="report-shell brand-dual" aria-label="Generated projection report">
+        <div class="empty-state">
+          <p>Report preview</p>
+          <span>Generated AirROI market projections will appear here.</span>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const form = document.querySelector('#report-form');
+      const reportEl = document.querySelector('#report');
+      const statusEl = document.querySelector('#status');
+      const printButton = document.querySelector('#print-report');
+      const copySummaryButton = document.querySelector('#copy-summary');
+      const copyJsonButton = document.querySelector('#copy-json');
+      let currentReport = null;
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const address = String(formData.get('address') || '').trim();
+        const brand = String(formData.get('brand') || 'dual');
+
+        setLoading(true, 'Pulling AirROI market data...');
+        try {
+          const response = await fetch('/api/projection-report', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ address, brand }),
+          });
+          const payload = await response.json();
+          if (!response.ok || !payload.ok) {
+            throw new Error(payload.message || payload.detail || payload.error || 'Report generation failed');
+          }
+
+          currentReport = payload.report;
+          renderReport(currentReport);
+          setLoading(false, `Generated ${currentReport.market.label} report.`);
+          printButton.disabled = false;
+          copySummaryButton.disabled = false;
+          copyJsonButton.disabled = false;
+        } catch (error) {
+          setLoading(false, error.message || 'Report generation failed');
+          printButton.disabled = true;
+          copySummaryButton.disabled = true;
+          copyJsonButton.disabled = true;
+        }
+      });
+
+      printButton.addEventListener('click', () => window.print());
+
+      copySummaryButton.addEventListener('click', async () => {
+        if (!currentReport) return;
+        const text = [
+          `${currentReport.market.label} projection`,
+          `Projected annual revenue: ${money(currentReport.headline.projectedAnnualRevenue)}`,
+          `Managed upside range: ${money(currentReport.scenarios[0].annualRevenue)} - ${money(currentReport.scenarios[2].annualRevenue)}`,
+          `Market ADR: ${money(currentReport.marketMetrics.averageDailyRate)}`,
+          `Market occupancy: ${percent(currentReport.marketMetrics.occupancy)}`,
+          `Active listings: ${whole(currentReport.marketMetrics.activeListings)}`,
+        ].join('\n');
+        await navigator.clipboard.writeText(text);
+        statusEl.textContent = 'Summary copied.';
+      });
+
+      copyJsonButton.addEventListener('click', async () => {
+        if (!currentReport) return;
+        await navigator.clipboard.writeText(JSON.stringify(currentReport, null, 2));
+        statusEl.textContent = 'Report JSON copied.';
+      });
+
+      function setLoading(isLoading, message) {
+        form.querySelector('button[type="submit"]').disabled = isLoading;
+        statusEl.textContent = message;
+      }
+
+      function renderReport(report) {
+        reportEl.className = `report-shell brand-${report.brand}`;
+        reportEl.innerHTML = `
+          <article class="report-page">
+            <header class="report-header">
+              <div>
+                <div class="brand-lockup">${brandLockup(report.brand)}</div>
+                <p class="report-kicker">Projection report</p>
+                <h2>${escapeHtml(report.market.label)}</h2>
+                <p class="address">${escapeHtml(report.requestedAddress || report.market.label)}</p>
+              </div>
+              <div class="report-meta">
+                <span>Generated ${formatDate(report.generatedAt)}</span>
+                <span>AirROI market data</span>
+              </div>
+            </header>
+
+            <section class="hero-metrics" aria-label="Projection headline metrics">
+              ${metric('Projected annual', money(report.headline.projectedAnnualRevenue), 'Seasonal 12-month market projection')}
+              ${metric('Managed upside', money(report.headline.managedUpsideAnnualRevenue), 'Internal upside planning case')}
+              ${metric('Market ADR', money(report.marketMetrics.averageDailyRate), `${percent(report.marketMetrics.occupancy)} occupancy`)}
+              ${metric('Active listings', whole(report.marketMetrics.activeListings), 'AirROI market sample')}
+            </section>
+
+            <section class="report-section">
+              <div class="section-heading">
+                <p>Scenario range</p>
+                <h3>Projection cases</h3>
+              </div>
+              <div class="scenario-grid">
+                ${report.scenarios.map((scenario) => `
+                  <div class="scenario">
+                    <p>${escapeHtml(scenario.label)}</p>
+                    <strong>${money(scenario.annualRevenue)}</strong>
+                    <span>${money(scenario.monthlyRevenue)} / month</span>
+                    <dl>
+                      <div><dt>ADR</dt><dd>${money(scenario.adr)}</dd></div>
+                      <div><dt>Occ.</dt><dd>${percent(scenario.occupancy)}</dd></div>
+                    </dl>
+                    <small>${escapeHtml(scenario.note)}</small>
+                  </div>
+                `).join('')}
+              </div>
+            </section>
+
+            <section class="report-section split-section">
+              <div>
+                <div class="section-heading">
+                  <p>Market context</p>
+                  <h3>Operating profile</h3>
+                </div>
+                <div class="context-list">
+                  ${contextRow('RevPAR', money(report.marketMetrics.revPar))}
+                  ${contextRow('AirROI revenue field', report.marketMetrics.airroiRevenue ? money(report.marketMetrics.airroiRevenue) : 'n/a')}
+                  ${contextRow('Booking lead time', `${one(report.marketMetrics.bookingLeadTime)} days`)}
+                  ${contextRow('Length of stay', `${one(report.marketMetrics.lengthOfStay)} nights`)}
+                  ${contextRow('Minimum nights', `${one(report.marketMetrics.minNights)} nights`)}
+                </div>
+              </div>
+              <div>
+                <div class="section-heading">
+                  <p>Readout</p>
+                  <h3>What to tell the client</h3>
+                </div>
+                <ul class="insight-list">
+                  ${report.insights.map((insight) => `<li>${escapeHtml(insight)}</li>`).join('')}
+                </ul>
+              </div>
+            </section>
+
+            ${report.next90Pacing ? `
+              <section class="report-section pacing-band">
+                <div class="section-heading">
+                  <p>Forward pacing</p>
+                  <h3>Next ${report.next90Pacing.days} days</h3>
+                </div>
+                <div class="pacing-grid">
+                  ${metric('Booked ADR', money(report.next90Pacing.bookedAdr), 'Reserved nights')}
+                  ${metric('Available ADR', money(report.next90Pacing.availableAdr), 'Open inventory')}
+                  ${metric('Fill rate', percent(report.next90Pacing.fillRate), 'Current market compression')}
+                </div>
+              </section>
+            ` : ''}
+
+            <section class="report-section">
+              <div class="section-heading">
+                <p>Seasonality</p>
+                <h3>12-month projection</h3>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Month</th>
+                    <th>ADR</th>
+                    <th>Occupancy</th>
+                    <th>Projected revenue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${report.monthlyProjection.map((month) => `
+                    <tr>
+                      <td>${escapeHtml(month.label)}</td>
+                      <td>${money(month.adr)}</td>
+                      <td>${percent(month.occupancy)}</td>
+                      <td>${money(month.projectedRevenue)}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </section>
+
+            <section class="report-section notes-section">
+              <div>
+                <div class="section-heading">
+                  <p>Assumptions</p>
+                  <h3>Use with context</h3>
+                </div>
+                <ul>
+                  ${report.assumptions.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+                </ul>
+              </div>
+              <div>
+                <div class="section-heading">
+                  <p>Sources</p>
+                  <h3>Data pulled</h3>
+                </div>
+                <ul>
+                  ${report.sources.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+                </ul>
+              </div>
+            </section>
+          </article>
+        `;
+      }
+
+      function brandLockup(brand) {
+        if (brand === 'blackbird') return '<strong>BLACKBIRD</strong><span>Property Management</span>';
+        if (brand === 'revfactor') return '<strong>RevFactor</strong><span>Revenue Management</span>';
+        return '<strong>BLACKBIRD</strong><span>Property Management</span><em>+</em><strong>RevFactor</strong><span>Revenue Management</span>';
+      }
+
+      function metric(label, value, caption) {
+        return `
+          <div class="metric">
+            <p>${escapeHtml(label)}</p>
+            <strong>${escapeHtml(value)}</strong>
+            <span>${escapeHtml(caption)}</span>
+          </div>
+        `;
+      }
+
+      function contextRow(label, value) {
+        return `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
+      }
+
+      function money(value) {
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          maximumFractionDigits: 0,
+        }).format(Number(value || 0));
+      }
+
+      function percent(value) {
+        return new Intl.NumberFormat('en-US', {
+          style: 'percent',
+          maximumFractionDigits: 0,
+        }).format(Number(value || 0));
+      }
+
+      function whole(value) {
+        return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Number(value || 0));
+      }
+
+      function one(value) {
+        return new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 }).format(Number(value || 0));
+      }
+
+      function formatDate(value) {
+        return new Intl.DateTimeFormat('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        }).format(new Date(value));
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(body.projection-tool) {
+    min-height: 100vh;
+    background: #eef0eb;
+    color: #20231f;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  :global(body.projection-tool::after) {
+    display: none;
+  }
+
+  .tool-shell {
+    display: grid;
+    grid-template-columns: minmax(320px, 400px) minmax(0, 1fr);
+    gap: 24px;
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  .input-panel {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    display: grid;
+    gap: 22px;
+    padding: 24px;
+    border: 1px solid #c8cec5;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 20px 50px rgb(38 45 39 / 10%);
+  }
+
+  .eyebrow,
+  .report-kicker,
+  .section-heading p {
+    margin: 0 0 8px;
+    color: #526258;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: #151815;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  h1 {
+    font-size: clamp(32px, 4vw, 46px);
+    line-height: 0.95;
+  }
+
+  .lede {
+    margin: 14px 0 0;
+    color: #526258;
+    line-height: 1.55;
+  }
+
+  .report-form {
+    display: grid;
+    gap: 18px;
+  }
+
+  label,
+  fieldset {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #303830;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  textarea {
+    width: 100%;
+    resize: vertical;
+    border: 1px solid #aeb8ad;
+    border-radius: 6px;
+    padding: 12px;
+    color: #151815;
+    font: inherit;
+    font-weight: 500;
+    line-height: 1.45;
+    background: #f9faf7;
+  }
+
+  textarea:focus {
+    outline: 2px solid #1d5b4f;
+    outline-offset: 2px;
+  }
+
+  legend {
+    padding: 0;
+  }
+
+  .brand-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .brand-options label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    border: 1px solid #c8cec5;
+    border-radius: 6px;
+    background: #f9faf7;
+    cursor: pointer;
+  }
+
+  .brand-options input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .brand-options label:has(input:checked) {
+    border-color: #1d5b4f;
+    color: #ffffff;
+    background: #1d5b4f;
+  }
+
+  button {
+    min-height: 42px;
+    border: 1px solid #aeb8ad;
+    border-radius: 6px;
+    padding: 0 14px;
+    color: #1c211d;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    background: #ffffff;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .primary-action {
+    border-color: #151815;
+    color: #ffffff;
+    background: #151815;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .status {
+    min-height: 20px;
+    margin: 0;
+    color: #526258;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .report-shell {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .empty-state {
+    display: grid;
+    place-content: center;
+    width: min(100%, 900px);
+    min-height: calc(100vh - 48px);
+    border: 1px dashed #b4beb3;
+    border-radius: 8px;
+    color: #526258;
+    text-align: center;
+    background: #f9faf7;
+  }
+
+  .empty-state p {
+    margin: 0 0 8px;
+    color: #151815;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 34px;
+  }
+
+  .report-page {
+    width: min(100%, 960px);
+    background: #fdfdfb;
+    box-shadow: 0 24px 70px rgb(24 29 25 / 14%);
+  }
+
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 42px;
+    color: #ffffff;
+    background: #131714;
+  }
+
+  .brand-revfactor .report-header {
+    background: #14382f;
+  }
+
+  .brand-blackbird .report-header {
+    background: #101112;
+  }
+
+  .brand-dual .report-header {
+    background: linear-gradient(135deg, #101112 0%, #101112 47%, #174338 47%, #174338 100%);
+  }
+
+  .brand-lockup {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 34px;
+    color: #f8f8f4;
+  }
+
+  .brand-lockup strong {
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+
+  .brand-lockup span {
+    color: #d5d9d2;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .brand-lockup em {
+    color: #b8c5bf;
+    font-style: normal;
+  }
+
+  .report-header .report-kicker {
+    color: #cdd6d1;
+  }
+
+  .report-header h2 {
+    color: #ffffff;
+    font-size: clamp(44px, 7vw, 76px);
+    line-height: 0.92;
+  }
+
+  .address {
+    max-width: 560px;
+    margin: 18px 0 0;
+    color: #dfe3de;
+    line-height: 1.5;
+  }
+
+  .report-meta {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    min-width: 190px;
+    color: #dfe3de;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .hero-metrics,
+  .pacing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid #d8ddd5;
+    background: #ffffff;
+  }
+
+  .pacing-grid {
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid #d8ddd5;
+  }
+
+  .metric {
+    min-width: 0;
+    padding: 24px;
+    border-right: 1px solid #d8ddd5;
+  }
+
+  .metric:last-child {
+    border-right: 0;
+  }
+
+  .metric p {
+    margin: 0 0 10px;
+    color: #526258;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .metric strong {
+    display: block;
+    color: #151815;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .metric span {
+    display: block;
+    margin-top: 10px;
+    color: #68736b;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .report-section {
+    padding: 34px 42px;
+    border-bottom: 1px solid #d8ddd5;
+  }
+
+  .section-heading {
+    margin-bottom: 18px;
+  }
+
+  .section-heading h3 {
+    font-size: 28px;
+  }
+
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .scenario {
+    display: grid;
+    gap: 12px;
+    padding: 18px;
+    border: 1px solid #d8ddd5;
+    border-radius: 8px;
+    background: #ffffff;
+  }
+
+  .scenario p {
+    margin: 0;
+    color: #526258;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .scenario strong {
+    color: #151815;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .scenario span,
+  .scenario small {
+    color: #5c675f;
+    line-height: 1.45;
+  }
+
+  .scenario dl {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 0;
+  }
+
+  .scenario dl div {
+    padding: 10px;
+    background: #f3f5f1;
+  }
+
+  dt {
+    color: #68736b;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 4px 0 0;
+    color: #151815;
+    font-weight: 800;
+  }
+
+  .split-section,
+  .notes-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .context-list {
+    display: grid;
+    border-top: 1px solid #d8ddd5;
+  }
+
+  .context-list div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #d8ddd5;
+  }
+
+  .context-list span {
+    color: #68736b;
+  }
+
+  .context-list strong {
+    color: #151815;
+  }
+
+  .insight-list,
+  .notes-section ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #3d463f;
+    line-height: 1.55;
+  }
+
+  .insight-list li,
+  .notes-section li {
+    margin-bottom: 10px;
+  }
+
+  .pacing-band {
+    background: #f4f6f3;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: #ffffff;
+  }
+
+  th,
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #d8ddd5;
+    text-align: right;
+  }
+
+  th:first-child,
+  td:first-child {
+    text-align: left;
+  }
+
+  th {
+    color: #526258;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    background: #f3f5f1;
+  }
+
+  td {
+    color: #252b26;
+    font-weight: 700;
+  }
+
+  @media (max-width: 980px) {
+    .tool-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .input-panel {
+      position: static;
+    }
+
+    .hero-metrics,
+    .scenario-grid,
+    .split-section,
+    .notes-section,
+    .pacing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .metric {
+      border-right: 0;
+      border-bottom: 1px solid #d8ddd5;
+    }
+
+    .report-header {
+      display: grid;
+    }
+
+    .report-meta {
+      text-align: left;
+    }
+  }
+
+  @media print {
+    @page {
+      size: letter;
+      margin: 0.35in;
+    }
+
+    :global(body.projection-tool) {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .no-print {
+      display: none !important;
+    }
+
+    .tool-shell {
+      display: block;
+      min-height: 0;
+      padding: 0;
+    }
+
+    .report-page {
+      width: 100%;
+      box-shadow: none;
+    }
+
+    .report-header {
+      padding: 30px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .report-header h2 {
+      font-size: 48px;
+    }
+
+    .report-section {
+      padding: 24px 30px;
+      break-inside: avoid;
+    }
+
+    .metric {
+      padding: 16px;
+    }
+
+    .metric strong {
+      font-size: 28px;
+    }
+
+    .scenario-grid,
+    .hero-metrics {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero-metrics .metric:last-child {
+      display: none;
+    }
+
+    button {
+      display: none;
+    }
+  }
+</style>

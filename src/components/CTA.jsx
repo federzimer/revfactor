@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
-import ScheduleModal from './ScheduleModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CTA() {
-  const [scheduleOpen, setScheduleOpen] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -40,32 +38,30 @@ export default function CTA() {
           READY TO START?
         </p>
         <h2
-          className="cta-animate opacity-0 text-[clamp(32px,5vw,44px)] leading-[1.15] text-[#E8E6E1] mb-4"
+          className="cta-animate opacity-0 text-[40px] leading-[1.15] text-[#E8E6E1] mb-4"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
         >
           Ready to maximize{' '}
           <span style={{ fontStyle: 'italic' }}>your revenue?</span>
         </h2>
         <p className="cta-animate opacity-0 text-[15px] leading-[1.7] text-[#8F6E62] max-w-lg mx-auto mb-10">
-          Book a free strategy call. We'll analyze your market, review your current
-          pricing, and show you exactly where the revenue opportunity lies.
+          Start with a revenue check. If your property looks like a fit,
+          we will invite you to request a short call.
         </p>
         <div className="cta-animate opacity-0">
-          <button
-            onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'cta_section' }); setScheduleOpen(true); }}
+          <a
+            href="/revenue-check"
+            onClick={() => window.posthog?.capture('revenue_check_clicked', { source: 'cta_section' })}
             className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(93,109,89,0.35)]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
             <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
-            <span className="relative z-10">schedule a strategy call</span>
+            <span className="relative z-10">start revenue check</span>
             <ArrowRight className="relative z-10 w-4 h-4" />
-          </button>
+          </a>
         </div>
       </div>
     </section>
-
-    {/* Schedule Modal — conditionally mounted */}
-    {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>
   );
 }
