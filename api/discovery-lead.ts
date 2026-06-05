@@ -62,6 +62,15 @@ export default async function handler(req: Request): Promise<Response> {
   if (typeof body?.hasProperty !== 'boolean') {
     return json({ error: 'invalid_qualifier' }, 400);
   }
+  // PM path requires portfolio URL + property count
+  if (hasProperty && isPM) {
+    if (!portfolioUrl) {
+      return json({ error: 'portfolio_link_required' }, 400);
+    }
+    if (propertyCount == null) {
+      return json({ error: 'property_count_required' }, 400);
+    }
+  }
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || null;
   const userAgent = req.headers.get('user-agent')?.slice(0, 500) || null;

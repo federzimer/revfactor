@@ -25,6 +25,8 @@ export default function QualifierGate({ onQualified, onClose }) {
   const [portfolioUrl, setPortfolioUrl] = useState('');
   const [propertyCount, setPropertyCount] = useState('');
   const [emailError, setEmailError] = useState(null);
+  const [portfolioError, setPortfolioError] = useState(null);
+  const [propertyCountError, setPropertyCountError] = useState(null);
   const [serverError, setServerError] = useState(null);
   const cardRef = useRef(null);
 
@@ -43,11 +45,37 @@ export default function QualifierGate({ onQualified, onClose }) {
 
   const submit = useCallback(async () => {
     const e = email.trim().toLowerCase();
+    const isPMPath = hasProperty === true && isPM === true;
+    const portfolio = portfolioUrl.trim();
+    const countStr = propertyCount.trim();
+    const countNum = countStr ? Number(countStr) : NaN;
+
+    let hasError = false;
     if (!EMAIL_RX.test(e)) {
       setEmailError('Please enter a valid email.');
-      return;
+      hasError = true;
+    } else {
+      setEmailError(null);
     }
-    setEmailError(null);
+    if (isPMPath) {
+      if (!portfolio) {
+        setPortfolioError('Please add a link to your listings, profile, or portfolio.');
+        hasError = true;
+      } else {
+        setPortfolioError(null);
+      }
+      if (!Number.isFinite(countNum) || countNum < 1) {
+        setPropertyCountError('Please enter how many properties you manage.');
+        hasError = true;
+      } else {
+        setPropertyCountError(null);
+      }
+    } else {
+      setPortfolioError(null);
+      setPropertyCountError(null);
+    }
+    if (hasError) return;
+
     setServerError(null);
     setStep('submitting');
 
@@ -59,8 +87,8 @@ export default function QualifierGate({ onQualified, onClose }) {
           email: e,
           hasProperty,
           isPM,
-          portfolioUrl: portfolioUrl.trim() || null,
-          propertyCount: propertyCount.trim() ? Number(propertyCount) : null,
+          portfolioUrl: isPMPath ? portfolio : null,
+          propertyCount: isPMPath ? Math.floor(countNum) : null,
           source: 'modal',
           pageUrl: typeof window !== 'undefined' ? window.location.href : null,
         }),
@@ -74,8 +102,8 @@ export default function QualifierGate({ onQualified, onClose }) {
       window.posthog?.capture('discovery_lead_captured', {
         has_property: hasProperty,
         is_pm: isPM,
-        property_count: propertyCount.trim() ? Number(propertyCount) : null,
-        has_portfolio_url: !!portfolioUrl.trim(),
+        property_count: isPMPath ? Math.floor(countNum) : null,
+        has_portfolio_url: isPMPath,
         path: !hasProperty ? 'no_property' : 'pm',
       });
       // Google Ads conversion — Discovery Lead Captured (Secondary, $75)
@@ -193,21 +221,26 @@ export default function QualifierGate({ onQualified, onClose }) {
             aria-label="Email address"
             aria-invalid={emailError ? 'true' : 'false'}
           />
+          {emailError && <p className="qg-error">{emailError}</p>}
           {!isNoProperty && (
             <>
               <input
                 type="url"
                 inputMode="url"
+                required
                 placeholder="Listings, profile, or portfolio link"
                 value={portfolioUrl}
                 onChange={(e) => setPortfolioUrl(e.target.value)}
                 className="qg-input"
                 disabled={step === 'submitting'}
                 aria-label="Listings, profile, or portfolio link"
+                aria-invalid={portfolioError ? 'true' : 'false'}
               />
+              {portfolioError && <p className="qg-error">{portfolioError}</p>}
               <input
                 type="number"
                 inputMode="numeric"
+                required
                 min="1"
                 step="1"
                 placeholder="How many properties do you manage?"
@@ -216,10 +249,11 @@ export default function QualifierGate({ onQualified, onClose }) {
                 className="qg-input"
                 disabled={step === 'submitting'}
                 aria-label="Number of properties under management"
+                aria-invalid={propertyCountError ? 'true' : 'false'}
               />
+              {propertyCountError && <p className="qg-error">{propertyCountError}</p>}
             </>
           )}
-          {emailError && <p className="qg-error">{emailError}</p>}
           {serverError && <p className="qg-error">{serverError}</p>}
           <button
             type="submit"
