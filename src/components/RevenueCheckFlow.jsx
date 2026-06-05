@@ -715,10 +715,37 @@ function LiveReportPreview({ details }) {
 
 function LeadCaptureModal({ config, context, details, initialSubmitted = false, onClose }) {
   const [submitted, setSubmitted] = useState(initialSubmitted);
+  const [form, setForm] = useState({ name: '', email: '', phone: '' });
+  const [sending, setSending] = useState(false);
 
-  function handleSubmit(event) {
+  const setField = (key) => (event) => setForm((prev) => ({ ...prev, [key]: event.target.value }));
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    setSubmitted(true);
+    if (sending) return;
+    setSending(true);
+    // Notify the team of every lead. The endpoint is a Vercel function, so it is
+    // a no-op under `astro dev`; we advance to success regardless so the flow
+    // never dead-ends, and rely on the endpoint + Vercel preview for delivery.
+    try {
+      await fetch('/api/revenue-check-lead', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          tag: config.tag,
+          formTitle: config.title,
+          context,
+        }),
+      });
+    } catch (error) {
+      console.warn('revenue-check lead notify failed', error);
+    } finally {
+      setSending(false);
+      setSubmitted(true);
+    }
   }
 
   return (
@@ -764,17 +791,17 @@ function LeadCaptureModal({ config, context, details, initialSubmitted = false, 
             <div className="grid gap-4 md:grid-cols-2">
               {config.fields.includes('name') && (
                 <Field label="Name">
-                  <Input required placeholder="Your name" />
+                  <Input required name="name" autoComplete="name" placeholder="Your name" value={form.name} onChange={setField('name')} />
                 </Field>
               )}
               {config.fields.includes('email') && (
                 <Field label="Email">
-                  <Input required type="email" placeholder="you@email.com" />
+                  <Input required type="email" name="email" autoComplete="email" placeholder="you@email.com" value={form.email} onChange={setField('email')} />
                 </Field>
               )}
               {config.fields.includes('phone') && (
                 <Field label="Phone">
-                  <Input type="tel" placeholder="Optional" />
+                  <Input type="tel" name="phone" autoComplete="tel" placeholder="Optional" value={form.phone} onChange={setField('phone')} />
                 </Field>
               )}
             </div>
@@ -786,9 +813,10 @@ function LeadCaptureModal({ config, context, details, initialSubmitted = false, 
             )}
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#13342D] px-5 py-3 text-[10px] font-bold uppercase tracking-[2px] text-[#E8E6E1]"
+              disabled={sending}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#13342D] px-5 py-3 text-[10px] font-bold uppercase tracking-[2px] text-[#E8E6E1] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {config.cta} <ArrowRight className="h-4 w-4" />
+              {sending ? 'Sending…' : config.cta} <ArrowRight className="h-4 w-4" />
             </button>
             {config.tag === 'live_property_analyzer' && (
               <button
