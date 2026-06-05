@@ -47,6 +47,13 @@ export default async function handler(req: Request): Promise<Response> {
   const isPM = body?.isPM === true;
   const source = String(body?.source || 'modal').slice(0, 50);
   const pageUrl = body?.pageUrl ? String(body.pageUrl).slice(0, 500) : null;
+  const portfolioUrl = typeof body?.portfolioUrl === 'string' && body.portfolioUrl.trim()
+    ? body.portfolioUrl.trim().slice(0, 500)
+    : null;
+  const propertyCountRaw = body?.propertyCount;
+  const propertyCount = Number.isFinite(propertyCountRaw) && propertyCountRaw >= 0 && propertyCountRaw <= 100000
+    ? Math.floor(propertyCountRaw)
+    : null;
 
   if (!EMAIL_RX.test(email) || email.length > 254) {
     return json({ error: 'invalid_email' }, 400);
@@ -71,6 +78,8 @@ export default async function handler(req: Request): Promise<Response> {
       email,
       has_property: hasProperty,
       is_pm: hasProperty ? isPM : null,
+      portfolio_url: hasProperty && isPM ? portfolioUrl : null,
+      property_count: hasProperty && isPM ? propertyCount : null,
       source,
       page_url: pageUrl,
       ip,
@@ -97,6 +106,10 @@ export default async function handler(req: Request): Promise<Response> {
       `Email: ${email}`,
       `Has property: ${hasProperty ? 'yes' : 'no'}`,
       `Is PM company: ${hasProperty ? (isPM ? 'yes' : 'no') : 'n/a (no property)'}`,
+      ...(hasProperty && isPM ? [
+        `Properties under management: ${propertyCount != null ? propertyCount : 'n/a'}`,
+        `Portfolio link: ${portfolioUrl || 'n/a'}`,
+      ] : []),
       `Source: ${source}`,
       `Page: ${pageUrl || 'n/a'}`,
       `IP: ${ip || 'n/a'}`,

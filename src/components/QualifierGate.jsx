@@ -22,6 +22,8 @@ export default function QualifierGate({ onQualified, onClose }) {
   const [hasProperty, setHasProperty] = useState(null);
   const [isPM, setIsPM] = useState(null);
   const [email, setEmail] = useState('');
+  const [portfolioUrl, setPortfolioUrl] = useState('');
+  const [propertyCount, setPropertyCount] = useState('');
   const [emailError, setEmailError] = useState(null);
   const [serverError, setServerError] = useState(null);
   const cardRef = useRef(null);
@@ -57,6 +59,8 @@ export default function QualifierGate({ onQualified, onClose }) {
           email: e,
           hasProperty,
           isPM,
+          portfolioUrl: portfolioUrl.trim() || null,
+          propertyCount: propertyCount.trim() ? Number(propertyCount) : null,
           source: 'modal',
           pageUrl: typeof window !== 'undefined' ? window.location.href : null,
         }),
@@ -70,6 +74,8 @@ export default function QualifierGate({ onQualified, onClose }) {
       window.posthog?.capture('discovery_lead_captured', {
         has_property: hasProperty,
         is_pm: isPM,
+        property_count: propertyCount.trim() ? Number(propertyCount) : null,
+        has_portfolio_url: !!portfolioUrl.trim(),
         path: !hasProperty ? 'no_property' : 'pm',
       });
       // Google Ads conversion — Discovery Lead Captured (Secondary, $75)
@@ -88,7 +94,7 @@ export default function QualifierGate({ onQualified, onClose }) {
       setServerError('Network error. Please try again.');
       setStep('email');
     }
-  }, [email, hasProperty, isPM]);
+  }, [email, hasProperty, isPM, portfolioUrl, propertyCount]);
 
   // Q1 — has property
   if (step === 'q1') {
@@ -187,6 +193,32 @@ export default function QualifierGate({ onQualified, onClose }) {
             aria-label="Email address"
             aria-invalid={emailError ? 'true' : 'false'}
           />
+          {!isNoProperty && (
+            <>
+              <input
+                type="url"
+                inputMode="url"
+                placeholder="Listings, profile, or portfolio link"
+                value={portfolioUrl}
+                onChange={(e) => setPortfolioUrl(e.target.value)}
+                className="qg-input"
+                disabled={step === 'submitting'}
+                aria-label="Listings, profile, or portfolio link"
+              />
+              <input
+                type="number"
+                inputMode="numeric"
+                min="1"
+                step="1"
+                placeholder="How many properties do you manage?"
+                value={propertyCount}
+                onChange={(e) => setPropertyCount(e.target.value)}
+                className="qg-input"
+                disabled={step === 'submitting'}
+                aria-label="Number of properties under management"
+              />
+            </>
+          )}
           {emailError && <p className="qg-error">{emailError}</p>}
           {serverError && <p className="qg-error">{serverError}</p>}
           <button
