@@ -42,6 +42,19 @@ async function airroiGet<T>(apiKey: string, path: string, params: Record<string,
   const res = await fetch(`${AIRROI_BASE}${path}?${qs}`, {
     headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' },
   });
+  return parseAirroi<T>(res);
+}
+
+async function airroiPost<T>(apiKey: string, path: string, body: unknown): Promise<T> {
+  const res = await fetch(`${AIRROI_BASE}${path}`, {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  return parseAirroi<T>(res);
+}
+
+async function parseAirroi<T>(res: Response): Promise<T> {
   const text = await res.text();
   let payload: any = {};
   try {
@@ -85,11 +98,25 @@ export const POST: APIRoute = async ({ request }) => {
   });
 
   const comps: AnyObj[] = Array.isArray(comparablesResp?.listings) ? comparablesResp.listings : [];
-  const report = buildReport(id, subjectResp, comps);
+
+  // Market layer (seasonality + signals), keyed to the listing's own market.
+  const market = { country: loc.country_code || 'US', region: loc.region, locality: loc.locality };
+  const [summary, adrHistory, occHistory] = await Promise.all([
+    airroiPost<AnyObj>(apiKey, '/markets/summary', { market, num_months: 12, currency: 'native' }),
+    airroiPost<AnyObj>(apiKey, '/markets/metrics/average-daily-rate', { market, num_months: 36, currency: 'native' }),
+    airroiPost<AnyObj>(apiKey, '/markets/metrics/occupancy', { market, num_months: 36 }),
+  ]);
+
+  const report = buildReport(id, subjectResp, comps, { summary, adrHistory, occHistory });
   return json({ ok: true, report });
 };
 
-function buildReport(id: string, subject: AnyObj, rawComps: AnyObj[]) {
+function buildReport(
+  id: string,
+  subject: AnyObj,
+  rawComps: AnyObj[],
+  marketData: { summary: AnyObj; adrHistory: AnyObj; occHistory: AnyObj },
+) {
   const info = subject.listing_info || {};
   const host = subject.host_info || {};
   const loc = subject.location_info || {};
@@ -112,6 +139,23 @@ function buildReport(id: string, subject: AnyObj, rawComps: AnyObj[]) {
 
   const amenities: string[] = Array.isArray(prop.amenities) ? prop.amenities : [];
   const topAmenities = pickTopAmenities(amenities);
+
+  // Market layer: 12-month seasonality (RevPAR = monthly ADR x occupancy) +
+  // headline market signals, derived from the listing's own market.
+  const summary = marketData.summary || {};
+  const adrRows: AnyObj[] = Array.isArray(marketData.adrHistory?.results) ? marketData.adrHistory.results : [];
+  const occRows: AnyObj[] = Array.isArray(marketData.occHistory?.results) ? marketData.occHistory.results : [];
+  const seasonality = nextTwelveMonths().map((m) => {
+    const adr = seasonalAvg(adrRows, m.month) || num(perf.ttm_avg_rate);
+    const occ = seasonalAvg(occRows, m.month) || num(perf.ttm_occupancy);
+    return { month: m.label, revpar: Math.round(adr * occ) };
+  });
+  const revparVals = seasonality.map((s) => s.revpar).filter((v) => v > 0);
+  const peakRevpar = revparVals.length ? Math.max(...revparVals) : 0;
+  const lowRevpar = revparVals.length ? Math.min(...revparVals) : 0;
+  const seasonalitySwingPct = lowRevpar > 0 ? Math.round((peakRevpar / lowRevpar - 1) * 100) : 0;
+  const peakMonth = seasonality.find((s) => s.revpar === peakRevpar)?.month || '';
+  const lowMonth = seasonality.find((s) => s.revpar === lowRevpar)?.month || '';
 
   return {
     generatedAt: new Date().toISOString(),
@@ -166,6 +210,21 @@ function buildReport(id: string, subject: AnyObj, rawComps: AnyObj[]) {
       projectedAnnual: Math.round(subjRevenue + lift),
       outperformPct, // real subject-vs-comp delta (can be negative)
     },
+    market: {
+      label: [loc.locality, loc.region].filter(Boolean).join(', '),
+      bookingLeadTime: round1(num(summary.booking_lead_time)),
+      lengthOfStay: round1(num(summary.length_of_stay)),
+      minNights: round1(num(summary.min_nights)),
+      activeListings: Math.round(num(summary.active_listings_count)) || comps.length,
+      adr: Math.round(num(summary.average_daily_rate)),
+      occupancy: round3(num(summary.occupancy)),
+      seasonality, // [{ month, revpar }] x12
+      peakRevpar,
+      lowRevpar,
+      peakMonth,
+      lowMonth,
+      seasonalitySwingPct,
+    },
     disclaimer:
       'Estimates derived from public Airbnb listing data and AirROI market signals. Not a guarantee of future revenue; actual results vary by property, seasonality, demand, and execution.',
   };
@@ -180,6 +239,25 @@ function pickTopAmenities(amenities: string[]): string[] {
     if (found.length >= 3) break;
   }
   return found.length ? found : amenities.slice(0, 3);
+}
+
+function nextTwelveMonths() {
+  const now = new Date();
+  return Array.from({ length: 12 }, (_, i) => {
+    const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + i, 1));
+    return {
+      label: d.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }),
+      month: d.getUTCMonth() + 1,
+    };
+  });
+}
+
+function seasonalAvg(rows: AnyObj[], month: number): number {
+  const vals = rows
+    .filter((r) => new Date(`${r.date}T00:00:00Z`).getUTCMonth() + 1 === month)
+    .map((r) => num(r.avg))
+    .filter((v) => v > 0);
+  return avg(vals);
 }
 
 function avg(values: number[]): number {
