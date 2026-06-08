@@ -1,0 +1,20 @@
+---
+// LOCAL working copy of revenue-check.astro. Renders the local flow component
+// whose live report is wired to real AirROI data. Fede's revenue-check.astro
+// is untouched. Local-first; integrate after review.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.jsx';
+import RevenueCheckFlowLocal from '../components/RevenueCheckFlowLocal.jsx';
+import Footer from '../components/Footer.jsx';
+---
+
+<BaseLayout
+  title="Revenue Check (local) — RevFactor"
+  description="Check whether your short-term rental is a fit for RevFactor revenue management before booking a call."
+>
+  <Navbar client:load lightBg={true} />
+  <main>
+    <RevenueCheckFlowLocal client:load />
+  </main>
+  <Footer client:visible />
+</BaseLayout>

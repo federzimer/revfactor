@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -170,6 +170,10 @@ function parseMoney(value) {
   return Number.isFinite(number) ? number : 0;
 }
 
+function clampScore(value) {
+  return Math.max(0, Math.min(100, Number.isFinite(value) ? value : 0));
+}
+
 function currency(value) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -328,10 +332,66 @@ function NextStepPanel({ eyebrow = 'Next step', title, text, children }) {
 }
 
 function LiveReportPreview({ details }) {
-  const baseAnnualRevenue = details?.annualRevenueUnknown ? 58102 : parseMoney(details?.annualRevenue) || 58102;
+  // Fetch the real AirROI-backed report for the entered listing.
+  const [report, setReport] = useState(null);
+  const [status, setStatus] = useState('loading');
+  const listingUrl = details?.listingUrl || '';
+
+  useEffect(() => {
+    let active = true;
+    if (!listingUrl) {
+      setStatus('error');
+      return;
+    }
+    setStatus('loading');
+    fetch('/api/listing-report-local', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ listingUrl }),
+    })
+      .then((res) => res.json())
+      .then((payload) => {
+        if (!active) return;
+        if (payload?.ok && payload.report) {
+          setReport(payload.report);
+          setStatus('ready');
+        } else {
+          setStatus('error');
+        }
+      })
+      .catch(() => active && setStatus('error'));
+    return () => {
+      active = false;
+    };
+  }, [listingUrl]);
+
   const [revenueMode, setRevenueMode] = useState('unconfirmed');
-  const [adjustedRevenue, setAdjustedRevenue] = useState(String(baseAnnualRevenue));
+  const [adjustedRevenue, setAdjustedRevenue] = useState('');
   const [monthsLive, setMonthsLive] = useState('6');
+
+  if (status === 'loading') {
+    return (
+      <div className="mt-6 grid place-items-center gap-4 rounded-[16px] bg-[#D9D5CD] p-12 text-center text-[#3F261F]">
+        <div className="h-10 w-10 animate-spin rounded-full border-[3px] border-[#13342D]/20 border-t-[#13342D]" />
+        <p className="text-[16px]" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>Pulling live market data for your listing…</p>
+        <p className="text-[12px] text-[#76574C]">Analyzing the listing, comparable properties, and market seasonality.</p>
+      </div>
+    );
+  }
+
+  if (status === 'error' || !report) {
+    return (
+      <div className="mt-6 grid gap-3 rounded-[16px] bg-[#D9D5CD] p-8 text-center text-[#3F261F]">
+        <p className="text-[20px]" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>We couldn't pull live data for this listing.</p>
+        <p className="text-[13px] leading-[1.6] text-[#76574C]">
+          The Airbnb listing may be new, private, or outside coverage. Our team can still run it manually — your details were captured.
+        </p>
+      </div>
+    );
+  }
+
+  const r = report;
+  const baseAnnualRevenue = r.performance.annualRevenue;
   const adjustedValue = parseMoney(adjustedRevenue) || baseAnnualRevenue;
   const annualRevenue =
     revenueMode === 'partial'
@@ -339,40 +399,64 @@ function LiveReportPreview({ details }) {
       : revenueMode === 'adjusted'
         ? adjustedValue
         : baseAnnualRevenue;
-  const annualLift = Math.round(annualRevenue * 0.08);
+  const annualLift = Math.round(annualRevenue * r.opportunity.liftPct);
   const monthlyLift = Math.round(annualLift / 12);
   const projected = annualRevenue + annualLift;
   const confidenceLabel =
     revenueMode === 'confirmed' ? 'Owner-confirmed baseline' : revenueMode === 'partial' ? 'Partial-year projection' : revenueMode === 'adjusted' ? 'Owner-adjusted baseline' : 'AirROI estimate';
-  const listing = details?.listingUrl || 'https://www.airbnb.com/rooms/1029127048442041204';
-  const seasonality = [
-    ['May', 78],
-    ['Jun', 116],
-    ['Jul', 162],
-    ['Aug', 92],
-    ['Sep', 112],
-    ['Oct', 114],
-    ['Nov', 54],
-    ['Dec', 60],
-    ['Jan', 49],
-    ['Feb', 63],
-    ['Mar', 77],
-    ['Apr', 16],
-  ];
+  const listing = r.listingUrl || listingUrl;
+
+  const seasonality = r.market.seasonality.map((s) => [s.month, s.revpar]);
+  const peakRevpar = r.market.peakRevpar || Math.max(1, ...seasonality.map((s) => s[1]));
   const marketSignals = [
-    [Clock, 'Booking window', '50', 'days', 'avg lead time'],
-    [Moon, 'Stay length', '3.9', 'nights', 'avg per booking'],
-    [BarChart3, 'Supply', '11', 'listings', '+22% YoY'],
-    [Flame, 'Seasonality', '913%', '', 'Jul 25 -> Apr 26'],
-    [SlidersHorizontal, 'Min nights', '2', 'avg', 'across market'],
+    [Clock, 'Booking window', String(r.market.bookingLeadTime), 'days', 'avg lead time'],
+    [Moon, 'Stay length', String(r.market.lengthOfStay), 'nights', 'avg per booking'],
+    [BarChart3, 'Supply', String(r.market.activeListings), 'listings', 'in market'],
+    [Flame, 'Seasonality', `${r.market.seasonalitySwingPct}%`, '', `${r.market.peakMonth} -> ${r.market.lowMonth}`],
+    [SlidersHorizontal, 'Min nights', String(r.market.minNights), 'avg', 'across market'],
   ];
   const insights = [
-    [Clock, 'Guests book ~50 days ahead -- a mid-window market. Use pacing reviews every 2 weeks to defend ADR as peak dates approach.'],
-    [Moon, 'Typical stay: 3.9 nights -- weekend-dominant market. Set 2-night minimums for Thu-Sun; 1-night for gap-night mid-week fills.'],
-    [BarChart3, 'Supply up 22% in the last year -- new competition is entering fast. Photo/listing optimization is critical to defend conversion rate.'],
-    [Flame, 'Extreme seasonality: peak RevPAR is 913% above low season. Event-based pricing is the single highest-leverage revenue lever here.'],
-    [SlidersHorizontal, 'Market-wide minimum nights average 2 -- standard weekend-minimum market.'],
+    [Clock, `Guests book ~${r.market.bookingLeadTime} days ahead. Run pacing reviews every 2 weeks to defend ADR as peak dates approach.`],
+    [Moon, `Typical stay is ${r.market.lengthOfStay} nights. Set minimum-night rules to match weekend demand and fill mid-week gaps.`],
+    [BarChart3, `The market has ${r.market.activeListings} comparable listings. Photo and listing optimization is critical to defend conversion rate.`],
+    [Flame, `Peak RevPAR (${r.market.peakMonth}) runs ${r.market.seasonalitySwingPct}% above the low month (${r.market.lowMonth}). Event-based pricing is the highest-leverage lever here.`],
+    [SlidersHorizontal, `Market-wide minimum nights average ${r.market.minNights}.`],
   ];
+
+  // Pricing health derived from real ratings + market positioning.
+  const reliability = clampScore(Math.round((r.ratings.overall / 5) * 100));
+  const interest = clampScore(Math.round((r.property.superhost ? 60 : 40) + Math.min(40, r.ratings.reviews / 5)));
+  const positioning = clampScore(
+    Math.round(
+      50 +
+        (r.performance.occupancy / (r.market.occupancy || r.performance.occupancy) - 1) * 60 +
+        (r.performance.adr / (r.market.adr || r.performance.adr) - 1) * 30,
+    ),
+  );
+  const healthOverall = Math.round((interest + reliability + positioning) / 3);
+  const healthGrade = healthOverall >= 90 ? 'A+' : healthOverall >= 80 ? 'A' : healthOverall >= 70 ? 'B' : healthOverall >= 60 ? 'C' : 'D';
+  const healthPillars = [
+    ['Interest', interest, 'Reviews · Superhost · trust'],
+    ['Reliability', reliability, 'Guest rating · consistency'],
+    ['Positioning', positioning, 'ADR · occupancy vs market'],
+  ];
+
+  // Real subject-vs-comp delta drives the headline.
+  const outperform = r.opportunity.outperformPct;
+  const isTop = outperform >= 0;
+  const bedLabel = `${r.property.bedrooms}BR`;
+  const headlineTitle = isTop ? "You're a top performer — protect & expand it" : 'There is real room to grow here';
+  const headlineSub = isTop
+    ? `Your listing is outpacing similar ${bedLabel} properties by ${outperform}%. The risk now is regression as the comp set adjusts.`
+    : `Your listing is trailing similar ${bedLabel} properties by ${Math.abs(outperform)}%. That gap is the opportunity.`;
+
+  // Playbook rules fire from real data.
+  const playbook = [
+    [Flame, 'Capture the seasonality swing', 'High impact', 'Seasonal', `Your market swings ${r.market.seasonalitySwingPct}% in RevPAR between peak (${r.market.peakMonth}) and low (${r.market.lowMonth}). Most hosts price flat and leave peak money on the table.`, 'Set peak-month rates 30-50% above base. Identify local events and price premium weekends 90+ days out.'],
+  ];
+  if (r.booking.instantBook !== true) {
+    playbook.push([Zap, 'Enable Instant Book to lift conversion', 'Medium impact', 'Conversion', "Instant Book is not enabled on your listing. Airbnb's algorithm rewards Instant Book with higher placement, and guests convert faster.", 'Enable Instant Book with guest requirements. You control who books — you just remove the friction.']);
+  }
 
   function handleRevenueModeChange(mode) {
     setRevenueMode(mode);
@@ -389,30 +473,42 @@ function LiveReportPreview({ details }) {
     <div className="mt-6 grid gap-5 bg-[#D9D5CD] p-3 text-[#3F261F] md:p-5">
       <div className="rounded-[16px] bg-white p-4 md:flex md:items-center md:gap-5">
         <img
-          src="/images/cabin-hero-1200.webp"
+          src={r.property.coverPhoto || '/images/cabin-hero-1200.webp'}
           alt=""
           className="h-40 w-full rounded-[10px] object-cover md:h-36 md:w-56"
         />
         <div className="mt-4 md:mt-0">
           <div className="flex flex-wrap gap-2">
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#EEF1ED] px-3 py-2 text-[10px] font-bold uppercase tracking-[2px] text-[#5D6D59]">
-              <Award className="h-3.5 w-3.5" /> Top performer
-            </span>
-            <span className="rounded-full bg-[#EEF1ED] px-3 py-2 text-[10px] font-bold uppercase tracking-[2px] text-[#5D6D59]">
-              Superhost
-            </span>
+            {isTop && (
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#EEF1ED] px-3 py-2 text-[10px] font-bold uppercase tracking-[2px] text-[#5D6D59]">
+                <Award className="h-3.5 w-3.5" /> Top performer
+              </span>
+            )}
+            {r.property.superhost && (
+              <span className="rounded-full bg-[#EEF1ED] px-3 py-2 text-[10px] font-bold uppercase tracking-[2px] text-[#5D6D59]">
+                Superhost
+              </span>
+            )}
           </div>
           <h3 className="mt-4 text-[28px] leading-[1.08] text-[#17140F] md:text-[34px]">
-            Cozy Private Cabin | Hot Tub, Ski & Outdoor Haven
+            {r.property.name}
           </h3>
           <p className="mt-3 flex flex-wrap items-center gap-3 text-[15px] text-[#76574C]">
-            <span>3BR</span>
-            <span>2BA</span>
-            <span>sleeps 8</span>
-            <span>Darby, Montana</span>
-            <span className="inline-flex items-center gap-1 text-[#5D6D59]"><Star className="h-4 w-4 fill-current" /> 5 (33)</span>
+            <span>{r.property.bedrooms}BR</span>
+            <span>{r.property.baths}BA</span>
+            <span>sleeps {r.property.guests}</span>
+            <span>{r.property.locationLabel}</span>
+            {r.ratings.overall > 0 && (
+              <span className="inline-flex items-center gap-1 text-[#5D6D59]"><Star className="h-4 w-4 fill-current" /> {r.ratings.overall} ({r.ratings.reviews})</span>
+            )}
           </p>
-          <span className="mt-3 inline-flex rounded-full bg-[#EEF1ED] px-3 py-2 text-[12px] text-[#13342D]">Hot tub</span>
+          {r.property.topAmenities.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {r.property.topAmenities.map((a) => (
+                <span key={a} className="inline-flex rounded-full bg-[#EEF1ED] px-3 py-2 text-[12px] text-[#13342D]">{a}</span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -447,10 +543,10 @@ function LiveReportPreview({ details }) {
           </div>
         </div>
         <p className="mt-8 text-[36px] italic leading-[1.1]" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-          You're a top performer -- protect & expand it
+          {headlineTitle}
         </p>
         <p className="mx-auto mt-5 max-w-3xl text-[15px] leading-[1.7] text-[#E8E6E1]/80">
-          Your listing is outpacing similar 3BR hot-tub properties by 145%. The risk now is regression as the comp set adjusts.
+          {headlineSub}
         </p>
       </div>
 
@@ -458,17 +554,17 @@ function LiveReportPreview({ details }) {
         <div className="rounded-[12px] bg-white p-5">
           <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#8F6E62]">Your listing</p>
           <p className="mt-3 text-[38px] leading-none" style={{ fontFamily: "'JetBrains Mono', monospace" }}>{currency(annualRevenue)}</p>
-          <p className="mt-3 text-[13px] text-[#76574C]">$269 avg · 47.9% occ</p>
+          <p className="mt-3 text-[13px] text-[#76574C]">{currency(r.performance.adr)} avg · {(r.performance.occupancy * 100).toFixed(1)}% occ</p>
         </div>
         <div className="rounded-[12px] bg-[#963D3D] p-5 text-white">
-          <p className="text-[10px] font-bold uppercase tracking-[3px] text-white/75">3BR in Darby</p>
-          <p className="mt-3 text-[38px] leading-none" style={{ fontFamily: "'JetBrains Mono', monospace" }}>$23,717</p>
-          <p className="mt-3 text-[13px] text-white/75">$250 avg · 43.0% occ · 11 comps</p>
+          <p className="text-[10px] font-bold uppercase tracking-[3px] text-white/75">{bedLabel} in {r.property.locality || 'market'}</p>
+          <p className="mt-3 text-[38px] leading-none" style={{ fontFamily: "'JetBrains Mono', monospace" }}>{currency(r.comps.avgRevenue)}</p>
+          <p className="mt-3 text-[13px] text-white/75">{currency(r.comps.avgAdr)} avg · {(r.comps.avgOccupancy * 100).toFixed(1)}% occ · {r.comps.count} comps</p>
         </div>
         <div className="rounded-[12px] bg-[#08372F] p-5 text-white">
           <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#A8BBA3]">Potential with RevFactor</p>
           <p className="mt-3 text-[38px] leading-none" style={{ fontFamily: "'JetBrains Mono', monospace" }}>{currency(projected)}</p>
-          <p className="mt-3 text-[13px] text-[#A8BBA3]">+8% baseline lift</p>
+          <p className="mt-3 text-[13px] text-[#A8BBA3]">+{Math.round(r.opportunity.liftPct * 100)}% baseline lift</p>
         </div>
       </div>
 
@@ -551,8 +647,8 @@ function LiveReportPreview({ details }) {
         <div className="grid gap-6 md:grid-cols-[150px_1fr] md:items-center">
           <div className="grid h-32 w-32 place-items-center rounded-full border-[7px] border-[#5D6D59] text-center text-[#5D6D59]">
             <div>
-              <p className="text-[42px] leading-none">A+</p>
-              <p className="text-[10px] font-bold tracking-[2px]">96/100</p>
+              <p className="text-[42px] leading-none">{healthGrade}</p>
+              <p className="text-[10px] font-bold tracking-[2px]">{healthOverall}/100</p>
             </div>
           </div>
           <div>
@@ -563,11 +659,7 @@ function LiveReportPreview({ details }) {
           </div>
         </div>
         <div className="mt-7 grid gap-5 md:grid-cols-3">
-          {[
-            ['Interest', 100, 'Reviews · Superhost · trust'],
-            ['Reliability', 100, 'Guest rating · consistency'],
-            ['Positioning', 88, 'ADR · occupancy vs market'],
-          ].map(([label, score, note]) => (
+          {healthPillars.map(([label, score, note]) => (
             <div key={label}>
               <div className="mb-2 flex items-center justify-between text-[11px] font-bold uppercase tracking-[2px]">
                 <span>{label}</span>
@@ -589,7 +681,7 @@ function LiveReportPreview({ details }) {
           </div>
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#76574C]">Market intelligence</p>
-            <p className="mt-1 text-[14px] text-[#76574C]">Live demand signals for <strong>Darby, Montana.</strong></p>
+            <p className="mt-1 text-[14px] text-[#76574C]">Live demand signals for <strong>{r.market.label}.</strong></p>
           </div>
         </div>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -607,14 +699,14 @@ function LiveReportPreview({ details }) {
         <div className="mt-7">
           <div className="mb-3 flex justify-between text-[10px] font-bold uppercase tracking-[3px] text-[#76574C]">
             <span>12-month RevPAR seasonality</span>
-            <span>Peak $162 · Low $16</span>
+            <span>Peak {currency(r.market.peakRevpar)} · Low {currency(r.market.lowRevpar)}</span>
           </div>
           <div className="flex h-52 items-end gap-2 rounded-[12px] bg-[#F7F6F2] px-4 pb-8 pt-6">
             {seasonality.map(([month, value]) => (
               <div key={month} className="flex h-full flex-1 flex-col justify-end">
                 <div
-                  className={`rounded-t-[6px] ${month === 'Jul' ? 'bg-[#5D6D59]' : month === 'Apr' ? 'bg-[#963D3D]' : 'bg-[#BCA8A0]'}`}
-                  style={{ height: `${Math.max(8, (value / 162) * 100)}%` }}
+                  className={`rounded-t-[6px] ${month === r.market.peakMonth ? 'bg-[#5D6D59]' : month === r.market.lowMonth ? 'bg-[#963D3D]' : 'bg-[#BCA8A0]'}`}
+                  style={{ height: `${Math.max(8, (value / peakRevpar) * 100)}%` }}
                 />
                 <span className="mt-2 text-center text-[11px] text-[#76574C]">{month}</span>
               </div>
@@ -638,14 +730,11 @@ function LiveReportPreview({ details }) {
           </div>
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#76574C]">Revenue management playbook</p>
-            <p className="mt-1 text-[16px]">2 rules fired on your listing. Stacked combined upside: <strong>~14%</strong> annually.</p>
+            <p className="mt-1 text-[16px]">{playbook.length} rule{playbook.length === 1 ? '' : 's'} fired on your listing from live market signals.</p>
           </div>
         </div>
         <div className="mt-6 grid gap-4">
-          {[
-            [Flame, 'Capture the seasonality swing', 'High impact', '+8% annual', 'Your market has a 913% RevPAR swing between peak and low dates. Most hosts price flat and leave peak money on the table.', 'Set peak-month rates 30-50% above base. Identify local events and price premium weekends 90+ days out.'],
-            [Zap, 'Enable Instant Book to lift conversion', 'Medium impact', '+6% annual', "Instant Book is disabled on your listing. Airbnb's algorithm rewards Instant Book with higher placement, and guests convert faster.", 'Enable Instant Book with guest requirements. You control who books -- you just remove the friction.'],
-          ].map(([Icon, title, impact, liftText, body, action]) => (
+          {playbook.map(([Icon, title, impact, liftText, body, action]) => (
             <div key={title} className="rounded-[12px] border border-[#3F261F]/10 bg-[#F7F6F2] p-5">
               <div className="flex items-start gap-4">
                 <div className="grid h-12 w-12 shrink-0 place-items-center rounded-[10px] bg-[#F0E7E5] text-[#963D3D]">
@@ -715,10 +804,37 @@ function LiveReportPreview({ details }) {
 
 function LeadCaptureModal({ config, context, details, initialSubmitted = false, onClose }) {
   const [submitted, setSubmitted] = useState(initialSubmitted);
+  const [form, setForm] = useState({ name: '', email: '', phone: '' });
+  const [sending, setSending] = useState(false);
 
-  function handleSubmit(event) {
+  const setField = (key) => (event) => setForm((prev) => ({ ...prev, [key]: event.target.value }));
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    setSubmitted(true);
+    if (sending) return;
+    setSending(true);
+    // Notify the team of every lead. The endpoint is a Vercel function, so it is
+    // a no-op under `astro dev`; we advance to success regardless so the flow
+    // never dead-ends, and rely on the endpoint + Vercel preview for delivery.
+    try {
+      await fetch('/api/revenue-check-lead', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          tag: config.tag,
+          formTitle: config.title,
+          context,
+        }),
+      });
+    } catch (error) {
+      console.warn('revenue-check lead notify failed', error);
+    } finally {
+      setSending(false);
+      setSubmitted(true);
+    }
   }
 
   return (
@@ -764,17 +880,17 @@ function LeadCaptureModal({ config, context, details, initialSubmitted = false, 
             <div className="grid gap-4 md:grid-cols-2">
               {config.fields.includes('name') && (
                 <Field label="Name">
-                  <Input required placeholder="Your name" />
+                  <Input required name="name" autoComplete="name" placeholder="Your name" value={form.name} onChange={setField('name')} />
                 </Field>
               )}
               {config.fields.includes('email') && (
                 <Field label="Email">
-                  <Input required type="email" placeholder="you@email.com" />
+                  <Input required type="email" name="email" autoComplete="email" placeholder="you@email.com" value={form.email} onChange={setField('email')} />
                 </Field>
               )}
               {config.fields.includes('phone') && (
                 <Field label="Phone">
-                  <Input type="tel" placeholder="Optional" />
+                  <Input type="tel" name="phone" autoComplete="tel" placeholder="Optional" value={form.phone} onChange={setField('phone')} />
                 </Field>
               )}
             </div>
@@ -786,9 +902,10 @@ function LeadCaptureModal({ config, context, details, initialSubmitted = false, 
             )}
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#13342D] px-5 py-3 text-[10px] font-bold uppercase tracking-[2px] text-[#E8E6E1]"
+              disabled={sending}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#13342D] px-5 py-3 text-[10px] font-bold uppercase tracking-[2px] text-[#E8E6E1] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {config.cta} <ArrowRight className="h-4 w-4" />
+              {sending ? 'Sending…' : config.cta} <ArrowRight className="h-4 w-4" />
             </button>
             {config.tag === 'live_property_analyzer' && (
               <button
