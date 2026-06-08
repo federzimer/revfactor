@@ -7,7 +7,7 @@
 // Required env vars (Vercel project settings → Environment Variables):
 //   SUPABASE_URL                — same as newsletter endpoint
 //   SUPABASE_SERVICE_ROLE_KEY   — same as newsletter endpoint
-//   RESEND_API_KEY              — Resend API key (account: aaron@procloser.ai)
+//   RESEND_API_KEY              — Resend API key (revfactor.io sending domain)
 //   DISCOVERY_NOTIFY_TO         — comma-separated recipient list, all paths
 //                                 (default: aaron@procloser.ai)
 //   DISCOVERY_NOTIFY_TO_PM      — comma-separated recipient list, PM path only
@@ -19,7 +19,7 @@
 // (DKIM resend._domainkey, SPF MX feedback-smtp.us-east-1.amazonses.com on send,
 //  SPF TXT v=spf1 include:amazonses.com ~all on send — verified live 2026-06-05).
 // While DEFAULT_NOTIFY_FROM is still onboarding@resend.dev, Resend restricts
-// delivery to the account owner (aaron@procloser.ai). External recipients
+// delivery to the Resend account owner only. External recipients
 // (federico@blackbirdhm.com, gaston@blackbirdhm.com) won't receive notifications
 // until DISCOVERY_NOTIFY_FROM is switched to a revfactor.io sender — e.g.
 // "RevFactor Discovery <notifications@revfactor.io>" — and Resend's domain
