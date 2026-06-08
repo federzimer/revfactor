@@ -184,10 +184,10 @@ function StickyMobileCTA({ onOpen }) {
     >
       <button
         onClick={onOpen}
-        className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full active:scale-[0.98] transition-transform"
+        className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[13px] tracking-[2px] rounded-full active:scale-[0.98] transition-transform shadow-[0_8px_24px_rgba(93,109,89,0.5),0_0_0_1px_rgba(232,230,225,0.2)]"
       >
         <span>Book a Discovery Call</span>
-        <ArrowRight className="w-4 h-4" />
+        <ArrowRight className="w-5 h-5" />
       </button>
     </div>
   );
@@ -417,11 +417,11 @@ export default function PPCLanding({
             </p>
             <button
               onClick={open}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[12px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(93,109,89,0.35)]"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[13px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] shadow-[0_10px_32px_rgba(93,109,89,0.55),0_0_0_1px_rgba(232,230,225,0.18)] hover:shadow-[0_14px_40px_rgba(93,109,89,0.65)] ppc-hero-cta"
             >
               <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
               <span className="relative z-10">{ctaText}</span>
-              <ArrowRight className="relative z-10 w-4 h-4" />
+              <ArrowRight className="relative z-10 w-5 h-5" />
             </button>
             {/* Risk-reversal — explicit guarantee badge under the CTA. Reframes
                 the call as "free advice, not a sales pitch" → lifts CVR for
@@ -563,11 +563,11 @@ export default function PPCLanding({
           </p>
           <button
             onClick={open}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[13px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] shadow-[0_10px_32px_rgba(93,109,89,0.45)] hover:shadow-[0_14px_40px_rgba(93,109,89,0.55)]"
           >
             <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
             <span className="relative z-10">{ctaText}</span>
-            <ArrowRight className="relative z-10 w-4 h-4" />
+            <ArrowRight className="relative z-10 w-5 h-5" />
           </button>
         </div>
       </section>
@@ -703,11 +703,11 @@ export default function PPCLanding({
           </p>
           <button
             onClick={open}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[13px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] shadow-[0_10px_32px_rgba(93,109,89,0.45)] hover:shadow-[0_14px_40px_rgba(93,109,89,0.55)]"
           >
             <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
             <span className="relative z-10">{ctaText}</span>
-            <ArrowRight className="relative z-10 w-4 h-4" />
+            <ArrowRight className="relative z-10 w-5 h-5" />
           </button>
         </div>
       </section>
