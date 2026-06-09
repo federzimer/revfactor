@@ -4,7 +4,8 @@
  * Update here, then run `python3 scripts/update_portfolio_stats.py` to
  * propagate to MDX/Astro prose that can't import this file directly.
  *
- * Last update: 2026-05-22 (FIFA launch session)
+ * Last update: 2026-06-09 (Federico pricing refresh — flat $350, no
+ * volume scale; onboarding $150; child listing $50)
  */
 
 export const PORTFOLIO_STATS = {
@@ -12,9 +13,10 @@ export const PORTFOLIO_STATS = {
   states: 24,
   markets: 67,
   revparLiftPct: 24, // +24% RevPAR vs comp set
-  flatFeeBase: 320,
-  flatFeeScale: 256,
-  onboardingFee: 125,
+  flatFee: 350, // flat $350/mo per property, 1–5 properties (was $320 sliding to $256)
+  onboardingFee: 150, // one-time per property (was $125)
+  childListingFee: 50, // child listing add-on, $/mo (was $35)
+  enterpriseThreshold: 5, // properties past this point = custom enterprise pricing
 } as const;
 
 /**
@@ -33,4 +35,7 @@ export const STAT_LABELS = {
   statesLong: '24 U.S. states',
   revparLift: '+24%',
   revparLiftPhrase: '+24% RevPAR lift vs. comp set',
+  flatFeePhrase: 'Flat $350/month per property',
+  flatFeeShort: '$350',
+  onboardingPhrase: '$150 one-time onboarding per property',
 } as const;
