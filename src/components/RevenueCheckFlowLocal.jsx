@@ -817,7 +817,7 @@ function LeadCaptureModal({ config, context, details, initialSubmitted = false, 
     // a no-op under `astro dev`; we advance to success regardless so the flow
     // never dead-ends, and rely on the endpoint + Vercel preview for delivery.
     try {
-      await fetch('/api/revenue-check-lead', {
+      await fetch('/api/revenue-check-lead-local', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -1480,23 +1480,25 @@ function ResearchingPath({ openCapture }) {
 }
 
 export default function RevenueCheckFlow() {
-  const initialLivePreview =
-    typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('preview') === 'live-report';
-  const [activePath, setActivePath] = useState(initialLivePreview ? 'live' : null);
-  const [capture, setCapture] = useState(
-    initialLivePreview
-      ? {
-          config: captureConfigs.liveAnalyzer,
-          context: 'Demo preview report from the live-property funnel.',
-          details: {
-            listingUrl: 'https://www.airbnb.com/rooms/1029127048442041204',
-            annualRevenue: '78000',
-            annualRevenueUnknown: false,
-          },
-          initialSubmitted: true,
-        }
-      : null
-  );
+  // Read the ?preview deep-link after mount (not during render) so server and
+  // client produce identical initial HTML — avoids a hydration mismatch.
+  const [activePath, setActivePath] = useState(null);
+  const [capture, setCapture] = useState(null);
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('preview') === 'live-report') {
+      setActivePath('live');
+      setCapture({
+        config: captureConfigs.liveAnalyzer,
+        context: 'Demo preview report from the live-property funnel.',
+        details: {
+          listingUrl: 'https://www.airbnb.com/rooms/1029127048442041204',
+          annualRevenue: '78000',
+          annualRevenueUnknown: false,
+        },
+        initialSubmitted: true,
+      });
+    }
+  }, []);
   const selectedPath = paths.find((path) => path.id === activePath);
   const ActiveIcon = selectedPath?.icon ?? TrendingUp;
 
