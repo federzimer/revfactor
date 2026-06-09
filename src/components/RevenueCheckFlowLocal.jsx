@@ -517,7 +517,7 @@ function LiveReportPreview({ details }) {
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#5D6D59]">Estimate basis</p>
             <p className="mt-2 text-[14px] leading-[1.65] text-[#76574C]">
-              This preview is based on public Airbnb listing data, AirROI-style market signals, and comparable 3BR listings. It may miss direct bookings, owner blocks, PMS adjustments, taxes, fees, and partial-year history.
+              This preview is based on public Airbnb listing data, AirROI-style market signals, and comparable {bedLabel} listings. It may miss direct bookings, owner blocks, PMS adjustments, taxes, fees, and partial-year history.
             </p>
           </div>
           <span className="inline-flex shrink-0 rounded-full bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-[2px] text-[#13342D]">
@@ -607,7 +607,7 @@ function LiveReportPreview({ details }) {
         {(revenueMode === 'adjusted' || revenueMode === 'partial') && (
           <div className="mt-5 grid gap-4 rounded-[12px] border border-[#3F261F]/10 bg-[#F7F6F2] p-4 md:grid-cols-2">
             <Field label={revenueMode === 'partial' ? 'Revenue so far' : 'Actual annual revenue'}>
-              <Input value={adjustedRevenue} onChange={(event) => setAdjustedRevenue(event.target.value)} placeholder="$58,102" />
+              <Input value={adjustedRevenue} onChange={(event) => setAdjustedRevenue(event.target.value)} placeholder={currency(baseAnnualRevenue)} />
             </Field>
             {revenueMode === 'partial' ? (
               <Field label="Months live">
