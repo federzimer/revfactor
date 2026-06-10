@@ -131,14 +131,16 @@ function StrategyTypewriter() {
 }
 
 /* ─── Card 3: Calendar Optimizer ─── */
+// Deterministic seed for SSR + first client paint (prevents React #418
+// hydration mismatch). Randomized after mount in the effect below.
+const SEED_CAL_PRICES = Array.from({ length: 28 }, (_, i) => ({
+  day: i + 1,
+  price: 120 + ((i * 29) % 100),
+  optimized: false,
+}));
+
 function CalendarOptimizer() {
-  const [prices, setPrices] = useState(() =>
-    Array.from({ length: 28 }, (_, i) => ({
-      day: i + 1,
-      price: Math.floor(Math.random() * 100) + 120,
-      optimized: false,
-    }))
-  );
+  const [prices, setPrices] = useState(SEED_CAL_PRICES);
   const [cursorPos, setCursorPos] = useState(null);
   const [optimizing, setOptimizing] = useState(false);
 
@@ -181,6 +183,12 @@ function CalendarOptimizer() {
 
       return () => clearInterval(interval);
     };
+
+    // Randomize the seeded calendar once after hydration so it looks live
+    // immediately, without breaking the SSR/client match.
+    setPrices((prev) =>
+      prev.map((p) => ({ ...p, price: Math.floor(Math.random() * 100) + 120 }))
+    );
 
     const timeout = setTimeout(runCycle, 1500);
     const cycle = setInterval(runCycle, 10000);

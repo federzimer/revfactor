@@ -5,8 +5,17 @@ import { TrendingDown, Calendar, Bell, DollarSign } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Static, deterministic calendar for SSR + the first client paint, so the
+// server-rendered HTML matches hydration byte-for-byte (prevents React #418).
+// The live randomized values are swapped in after mount, in the effect below.
+const STATUS_CYCLE = ['high', 'low', 'empty', 'ok'];
+const SEED_PRICES = Array.from({ length: 21 }, (_, i) => ({
+  price: 90 + ((i * 37) % 150),
+  status: STATUS_CYCLE[i % 4],
+}));
+
 function ChaosCalendar() {
-  const [prices, setPrices] = useState(() => generatePrices());
+  const [prices, setPrices] = useState(SEED_PRICES);
   const [lostRevenue, setLostRevenue] = useState(2847);
 
   function generatePrices() {
@@ -17,6 +26,10 @@ function ChaosCalendar() {
   }
 
   useEffect(() => {
+    // Replace the deterministic seed with live randomized data only after
+    // hydration — keeps SSR/client markup identical, then animates.
+    setPrices(generatePrices());
+
     const interval = setInterval(() => {
       setPrices((prev) => {
         const next = [...prev];
