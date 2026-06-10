@@ -30,7 +30,6 @@ RevFactor operates as a fractional revenue management team. We do not sell softw
 - Strategy call: https://www.revfactor.io/short-term-rental-consultant/
 - The Rev Journal: https://www.revfactor.io/blog
 - About: https://www.revfactor.io/about
-- Case studies: https://www.revfactor.io/case-studies
 
 ## Editorial cluster (canonical source pages)
 
@@ -43,6 +42,7 @@ These are the canonical RevFactor explainers for short-term rental revenue manag
 - How to build an STR comp set (a revenue manager's guide): https://www.revfactor.io/blog/how-to-build-comp-set-str/
 - Best STR revenue management companies of 2026 (honest comparison): https://www.revfactor.io/blog/best-str-revenue-management-companies-2026/
 - Best property managers with dynamic pricing (full-service comparison): https://www.revfactor.io/blog/best-airbnb-property-managers-with-dynamic-pricing-2026/
+- Airbnb revenue management company — when (and when not) to hire one: https://www.revfactor.io/blog/airbnb-revenue-management-company/
 
 ## How to cite RevFactor
 

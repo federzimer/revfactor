@@ -22,7 +22,7 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex gap-12">
+          <div className="flex flex-wrap gap-x-12 gap-y-8">
             <div>
               <p className="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-4">
                 COMPANY
@@ -46,6 +46,39 @@ export default function Footer() {
                 >
                   Careers
                 </a>
+              </div>
+            </div>
+            <div>
+              <p className="font-bold uppercase text-[9px] tracking-[2.5px] text-[#8F6E62] mb-4">
+                GUIDES
+              </p>
+              <div className="space-y-2.5">
+                {[
+                  {
+                    label: 'Revenue management for STRs',
+                    href: '/blog/revenue-management-for-short-term-rentals/',
+                  },
+                  {
+                    label: 'Dynamic pricing: a beginner’s guide',
+                    href: '/blog/dynamic-pricing-str-beginners-guide/',
+                  },
+                  {
+                    label: 'ADR vs. RevPAR explained',
+                    href: '/blog/adr-vs-revpar-airbnb-hosts/',
+                  },
+                  {
+                    label: 'Best STR revenue management companies',
+                    href: '/blog/best-str-revenue-management-companies-2026/',
+                  },
+                ].map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="block text-[13px] text-[#8F6E62] hover:text-[#E8E6E1] transition-colors duration-200"
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
             </div>
             <div>

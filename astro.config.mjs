@@ -9,7 +9,21 @@ export default defineConfig({
   // Canonical + sitemap + OG URLs must match the served host or Google
   // sees a self-referential redirect loop on canonicalization.
   site: 'https://www.revfactor.io',
-  integrations: [react(), mdx(), sitemap()],
+  integrations: [
+    react(),
+    mdx(),
+    // Keep noindex PPC landing pages out of the sitemap. Listing a
+    // `noindex,nofollow` URL in the sitemap sends Google a mixed signal
+    // ("index me" vs the page's "don't"). These three are paid-traffic LPs.
+    sitemap({
+      filter: (page) =>
+        ![
+          'https://www.revfactor.io/short-term-rental-consultant/',
+          'https://www.revfactor.io/vs/pricelabs/',
+          'https://www.revfactor.io/airbnb-pricing-strategy/',
+        ].includes(page),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
