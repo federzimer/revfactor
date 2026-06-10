@@ -7,21 +7,30 @@
 // Required env vars (Vercel project settings → Environment Variables):
 //   SUPABASE_URL                — same as newsletter endpoint
 //   SUPABASE_SERVICE_ROLE_KEY   — same as newsletter endpoint
-//   RESEND_API_KEY              — Resend API key (account: aaron@procloser.ai)
-//   DISCOVERY_NOTIFY_TO         — comma-separated recipient list
-//                                 (default: aaron@procloser.ai — Resend's free
-//                                 onboarding@resend.dev sender restricts delivery
-//                                 to the account owner only; Fede gets notified
-//                                 via a Gmail forwarding filter on Aaron's box.
-//                                 Once revfactor.io DNS verifies on Resend,
-//                                 switch back to direct aaron+federico fan-out.)
+//   RESEND_API_KEY              — Resend API key (revfactor.io sending domain)
+//   DISCOVERY_NOTIFY_TO         — comma-separated recipient list, all paths
+//                                 (default: aaron@procloser.ai)
+//   DISCOVERY_NOTIFY_TO_PM      — comma-separated recipient list, PM path only
+//                                 (default: Federico + Gaston at blackbirdhm.com)
+//                                 PM-path emails fan out to NOTIFY_TO ∪ NOTIFY_TO_PM.
 //   DISCOVERY_NOTIFY_FROM       — sender (default: onboarding@resend.dev)
+//
+// Deliverability note: revfactor.io DNS records for Resend are LIVE on Namecheap
+// (DKIM resend._domainkey, SPF MX feedback-smtp.us-east-1.amazonses.com on send,
+//  SPF TXT v=spf1 include:amazonses.com ~all on send — verified live 2026-06-05).
+// While DEFAULT_NOTIFY_FROM is still onboarding@resend.dev, Resend restricts
+// delivery to the Resend account owner only. External recipients
+// (federico@blackbirdhm.com, gaston@blackbirdhm.com) won't receive notifications
+// until DISCOVERY_NOTIFY_FROM is switched to a revfactor.io sender — e.g.
+// "RevFactor Discovery <notifications@revfactor.io>" — and Resend's domain
+// verification button has been clicked in their dashboard.
 
 export const config = { runtime: 'edge' };
 
 const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 
 const DEFAULT_NOTIFY_TO = 'aaron@procloser.ai';
+const DEFAULT_NOTIFY_TO_PM = 'Federico Zimerman <federico@blackbirdhm.com>, Gaston Corbalan <gaston@blackbirdhm.com>';
 const DEFAULT_NOTIFY_FROM = 'RevFactor Discovery <onboarding@resend.dev>';
 
 export default async function handler(req: Request): Promise<Response> {
@@ -47,6 +56,13 @@ export default async function handler(req: Request): Promise<Response> {
   const isPM = body?.isPM === true;
   const source = String(body?.source || 'modal').slice(0, 50);
   const pageUrl = body?.pageUrl ? String(body.pageUrl).slice(0, 500) : null;
+  const portfolioUrl = typeof body?.portfolioUrl === 'string' && body.portfolioUrl.trim()
+    ? body.portfolioUrl.trim().slice(0, 500)
+    : null;
+  const propertyCountRaw = body?.propertyCount;
+  const propertyCount = Number.isFinite(propertyCountRaw) && propertyCountRaw >= 0 && propertyCountRaw <= 100000
+    ? Math.floor(propertyCountRaw)
+    : null;
 
   if (!EMAIL_RX.test(email) || email.length > 254) {
     return json({ error: 'invalid_email' }, 400);
@@ -54,6 +70,15 @@ export default async function handler(req: Request): Promise<Response> {
   // hasProperty must be a real boolean; isPM only matters when hasProperty=true
   if (typeof body?.hasProperty !== 'boolean') {
     return json({ error: 'invalid_qualifier' }, 400);
+  }
+  // PM path requires portfolio URL + property count
+  if (hasProperty && isPM) {
+    if (!portfolioUrl) {
+      return json({ error: 'portfolio_link_required' }, 400);
+    }
+    if (propertyCount == null) {
+      return json({ error: 'property_count_required' }, 400);
+    }
   }
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || null;
@@ -71,6 +96,8 @@ export default async function handler(req: Request): Promise<Response> {
       email,
       has_property: hasProperty,
       is_pm: hasProperty ? isPM : null,
+      portfolio_url: hasProperty && isPM ? portfolioUrl : null,
+      property_count: hasProperty && isPM ? propertyCount : null,
       source,
       page_url: pageUrl,
       ip,
@@ -97,6 +124,10 @@ export default async function handler(req: Request): Promise<Response> {
       `Email: ${email}`,
       `Has property: ${hasProperty ? 'yes' : 'no'}`,
       `Is PM company: ${hasProperty ? (isPM ? 'yes' : 'no') : 'n/a (no property)'}`,
+      ...(hasProperty && isPM ? [
+        `Properties under management: ${propertyCount != null ? propertyCount : 'n/a'}`,
+        `Portfolio link: ${portfolioUrl || 'n/a'}`,
+      ] : []),
       `Source: ${source}`,
       `Page: ${pageUrl || 'n/a'}`,
       `IP: ${ip || 'n/a'}`,
@@ -111,8 +142,14 @@ export default async function handler(req: Request): Promise<Response> {
         }).join('')
       + `</table>`;
 
-    const to = (process.env.DISCOVERY_NOTIFY_TO || DEFAULT_NOTIFY_TO)
+    const baseTo = (process.env.DISCOVERY_NOTIFY_TO || DEFAULT_NOTIFY_TO)
       .split(',').map((s) => s.trim()).filter(Boolean);
+    const pmTo = hasProperty && isPM
+      ? (process.env.DISCOVERY_NOTIFY_TO_PM || DEFAULT_NOTIFY_TO_PM)
+          .split(',').map((s) => s.trim()).filter(Boolean)
+      : [];
+    // De-dupe in case the same address is listed in both env vars.
+    const to = Array.from(new Set([...baseTo, ...pmTo]));
     const from = process.env.DISCOVERY_NOTIFY_FROM || DEFAULT_NOTIFY_FROM;
 
     try {

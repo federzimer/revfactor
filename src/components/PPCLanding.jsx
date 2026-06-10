@@ -57,7 +57,7 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'STR REVENUE STRATEGY',
     headlinePart1: 'Most STRs lose 24% in revenue.',
     headlinePart2Italic: 'We get it back.',
-    subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account. Monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +24% lift. Flat $320/mo.',
+    subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account. Monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +24% lift. Flat $350/mo.',
     ctaText: 'Book a Discovery Call',
   },
   // Tool Intent campaign — searcher is shopping a pricing tool, reframe the category
@@ -65,7 +65,7 @@ const MESSAGE_VARIANTS = {
     eyebrow: 'BEYOND PRICING TOOLS',
     headlinePart1: 'Pricing tools set numbers.',
     headlinePart2Italic: 'We set strategy.',
-    subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work and pull back the 24% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist plus 24/7 dashboard messaging. Flat $320/mo.',
+    subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work and pull back the 24% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist plus 24/7 dashboard messaging. Flat $350/mo.',
     ctaText: 'Book a Discovery Call',
   },
   // Conquest campaign — searcher is on PriceLabs / Wheelhouse / Beyond
@@ -95,9 +95,9 @@ function readMessageVariant() {
    That keeps Google Ads campaigns on their tuned messaging while the
    experiment runs on baseline (organic / direct / SEO) traffic. */
 const SUBHEAD_VARIANTS = {
-  b: 'Your tool sets the number. We set the strategy. Comp tracking, calendar moves, length-of-stay rules, channel mix. The work that recovers the 24% an algorithm can’t see. Direct access to a senior strategist. $320/month per property, less per door at scale.',
-  c: 'Most STRs run a pricing tool and stop there. They leave 24% on the table. We pull it back with the work a tool can’t do: comp positioning, calendar timing, length-of-stay strategy. Every move a human catches that an algorithm misses. $320/month per property, volume pricing past 5.',
-  d: 'A pricing tool sets your nightly number. That’s about all it can do. The 24% lift comes from the work around it: comp tracking, calendar moves, length-of-stay rules. Judgment calls a strategist makes that an algorithm can’t. You get one. $320/month per property, less per door at scale.',
+  b: 'Your tool sets the number. We set the strategy. Comp tracking, calendar moves, length-of-stay rules, channel mix. The work that recovers the 24% an algorithm can’t see. Direct access to a senior strategist. Flat $350/month per property.',
+  c: 'Most STRs run a pricing tool and stop there. They leave 24% on the table. We pull it back with the work a tool can’t do: comp positioning, calendar timing, length-of-stay strategy. Every move a human catches that an algorithm misses. Flat $350/month per property, enterprise pricing past 5.',
+  d: 'A pricing tool sets your nightly number. That’s about all it can do. The 24% lift comes from the work around it: comp tracking, calendar moves, length-of-stay rules. Judgment calls a strategist makes that an algorithm can’t. You get one. Flat $350/month per property.',
 };
 
 function readSubheadOverride() {
@@ -269,7 +269,7 @@ const PROCESS_STEPS = [
   {
     n: "03",
     title: "Ongoing Strategy",
-    body: "Monthly Discovery Calls with your dedicated strategist, dynamic pricing calibration, calendar optimization, and comp tracking. Always-on dashboard messaging between calls. Flat $320/mo per property.",
+    body: "Monthly Discovery Calls with your dedicated strategist, dynamic pricing calibration, calendar optimization, and comp tracking. Always-on dashboard messaging between calls. Flat $350/mo per property.",
   },
 ];
 

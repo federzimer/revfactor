@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found — RevFactor"
+  description="The page you're looking for doesn't exist. Explore RevFactor's revenue management resources or head back home."
+  noindex={true}
+>
+  <main
+    class="min-h-[70vh] flex items-center justify-center px-6 bg-[#DDDAD3]"
+  >
+    <div class="max-w-xl text-center">
+      <p
+        class="font-bold uppercase text-[10px] tracking-[3px] text-[#5D6D59] mb-6"
+      >
+        ERROR 404
+      </p>
+      <h1
+        class="mb-6 text-[#3F261F]"
+        style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:clamp(36px,6vw,64px);line-height:1.05;letter-spacing:0.5px"
+      >
+        This page checked out early.
+      </h1>
+      <p class="text-[15px] text-[#76574C] mb-10 leading-relaxed">
+        The link you followed doesn't lead anywhere. Let's get you back to
+        something useful.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/"
+          class="inline-block rounded-full bg-[#13342D] px-7 py-3 font-bold uppercase text-[11px] tracking-[2px] text-[#E8E6E1] transition-transform duration-200 hover:scale-[1.02]"
+        >
+          Back home
+        </a>
+        <a
+          href="/blog"
+          class="inline-block rounded-full border border-[#C8C4BC] px-7 py-3 font-bold uppercase text-[11px] tracking-[2px] text-[#3F261F] transition-colors duration-200 hover:bg-[#C8C4BC]/30"
+        >
+          The Rev Journal
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
