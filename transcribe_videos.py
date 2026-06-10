@@ -5,13 +5,14 @@ Saves transcripts to instagram_videos/transcripts/
 """
 
 import json
+import os
 import time
 import subprocess
 from pathlib import Path
 from google import genai
 from google.genai import types
 
-API_KEY = "AIzaSyAylMkmDbgG79mUcu8AtNRJC33lDvScYa0"
+API_KEY = os.environ.get("GEMINI_API_KEY") or exit("Set GEMINI_API_KEY")
 VIDEO_DIR = Path("/Users/aaronwhittaker/Claude/RevFactor/instagram_videos")
 TRANSCRIPT_DIR = VIDEO_DIR / "transcripts"
 TRANSCRIPT_DIR.mkdir(exist_ok=True)
