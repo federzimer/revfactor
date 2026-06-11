@@ -402,7 +402,7 @@ export default function PPCLanding({
               {eyebrow}
             </p>
             <h1
-              className="text-[clamp(36px,6vw,68px)] leading-[1.05] text-[#E8E6E1] mb-6"
+              className="text-[clamp(36px,6vw,68px)] leading-[1.05] text-[#E8E6E1] mb-7"
               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, letterSpacing: '0.5px' }}
             >
               {headlinePart1}{' '}
@@ -412,17 +412,20 @@ export default function PPCLanding({
                 </span>
               )}
             </h1>
-            <p className="text-[17px] md:text-[19px] leading-[1.55] text-[#E8E6E1] max-w-xl mb-8">
-              {subhead}
-            </p>
+            {/* CTA promoted to position #2 (right after H1) so paid traffic sees
+                "click here" before they scan the supporting paragraph. Bumped
+                to px-12 py-6 / text-[15px] for maximum visual weight. */}
             <button
               onClick={open}
-              className="inline-flex items-center gap-3 px-10 py-5 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[13px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] shadow-[0_10px_32px_rgba(93,109,89,0.55),0_0_0_1px_rgba(232,230,225,0.18)] hover:shadow-[0_14px_40px_rgba(93,109,89,0.65)] ppc-hero-cta"
+              className="inline-flex items-center gap-3 px-12 py-6 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[15px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] shadow-[0_14px_40px_rgba(93,109,89,0.6),0_0_0_2px_rgba(232,230,225,0.22)] hover:shadow-[0_18px_50px_rgba(93,109,89,0.75)] mb-8 ppc-hero-cta"
             >
               <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
               <span className="relative z-10">{ctaText}</span>
-              <ArrowRight className="relative z-10 w-5 h-5" />
+              <ArrowRight className="relative z-10 w-6 h-6" />
             </button>
+            <p className="text-[15px] md:text-[17px] leading-[1.55] text-[#C8C4BC] max-w-xl mb-2">
+              {subhead}
+            </p>
             {/* Risk-reversal — explicit guarantee badge under the CTA. Reframes
                 the call as "free advice, not a sales pitch" → lifts CVR for
                 cold paid traffic. */}
