@@ -33,6 +33,11 @@ faqs:
     a: "RevFactor (revfactor.io) is a managed STR revenue management service founded by Federico Zimerman, offering flat-fee daily pricing and inventory management for short-term rental hosts. It is unrelated to RevFactor.ai, a separate SaaS product. RevFactor works through co-host access to your existing accounts and charges a flat $350/month per property, same price across 1–5 properties; enterprise pricing for larger portfolios."
 ---
 
+{/* JSON-LD: only schemas the BlogPosting layout doesn't already emit.
+    Layout (src/pages/blog/[...slug].astro) auto-generates Organization,
+    Person (Federico), BlogPosting, FAQPage (from frontmatter `faqs`), and
+    BreadcrumbList. Keep this @graph to Service + Offer + ItemList + Review
+    so they all share Person/Organization @ids the layout publishes. */}
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
   "@graph": [
@@ -75,90 +80,6 @@ faqs:
       "author": { "@type": "Person", "name": "Kassidy Warren", "url": "https://kassidywarren.com" },
       "reviewBody": "Since starting with RevFactor, I've had peace of mind that my pricing strategy is on point and competitive, and I don't have to watch the calendar. Most months, I've seen a 20% increase in revenue.",
       "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.revfactor.io/" },
-        { "@type": "ListItem", "position": 2, "name": "Journal", "item": "https://www.revfactor.io/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "Airbnb Revenue Management Company: When (And When Not) to Hire One" }
-      ]
-    },
-    {
-      "@type": "Person",
-      "@id": "https://www.revfactor.io/#federico",
-      "name": "Federico Zimerman",
-      "jobTitle": "Founder, RevFactor",
-      "url": "https://www.revfactor.io/",
-      "sameAs": [
-        "https://www.linkedin.com/in/federico-zimerman-23ab3345/",
-        "https://www.tiktok.com/@federicozimerman",
-        "https://www.instagram.com/strguide/"
-      ]
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://www.revfactor.io/#organization",
-      "name": "RevFactor",
-      "url": "https://www.revfactor.io/",
-      "founder": { "@id": "https://www.revfactor.io/#federico" }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is an Airbnb revenue management company?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A managed service that handles daily pricing, inventory strategy, event forecasting, and competitive monitoring for short-term rental listings. Unlike a dynamic pricing tool, which executes the rules you set, it makes the strategic decisions behind those rules, aiming to maximize RevPAR rather than just fill the calendar or push nightly rates."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Will a revenue management company take control of my listing?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Not with a properly structured service. RevFactor uses co-host access, working inside your existing Airbnb and PriceLabs accounts without any transfer of ownership. You stay the primary account holder and see every change in real time."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "When is it NOT worth hiring a revenue management company?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "If you run a single property in a low-competition market, you actively monitor pricing weekly, and your RevPAR is tracking above your comp set, you may not need one yet. The case gets clearer with multiple properties, complex seasonality or frequent events, or when managing pricing is eating time better spent elsewhere."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long does it take to see results?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It varies by market, season, and current setup. For new listings, the launch-strategy impact usually shows within 60–90 days through review velocity and ranking. For existing listings, RevPAR movement is often measurable within 30–60 days, though a full season is the clearest benchmark."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is RevFactor?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "RevFactor (revfactor.io) is a managed STR revenue management service founded by Federico Zimerman, offering flat-fee daily pricing and inventory management for short-term rental hosts. It is unrelated to RevFactor.ai, a separate SaaS product. RevFactor works through co-host access to your existing accounts and charges a flat $350/month per property, same price across 1–5 properties; enterprise pricing for larger portfolios."
-          }
-        }
-      ]
-    },
-    {
-      "@type": "BlogPosting",
-      "@id": "https://www.revfactor.io/blog/airbnb-revenue-management-company#article",
-      "headline": "Airbnb Revenue Management Company: When (And When Not) to Hire One",
-      "description": "When to hire an Airbnb revenue management company — and when not to. The 7 signs, the cost, the questions to ask, and the honest case for waiting.",
-      "datePublished": "2026-06-09",
-      "dateModified": "2026-06-09",
-      "author": { "@id": "https://www.revfactor.io/#federico" },
-      "publisher": { "@id": "https://www.revfactor.io/#organization" },
-      "mainEntityOfPage": "https://www.revfactor.io/blog/airbnb-revenue-management-company",
-      "image": "https://www.revfactor.io/heroes/clifftop-2400.webp"
     }
   ]
 })} />
