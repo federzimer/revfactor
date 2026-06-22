@@ -978,33 +978,11 @@ If you're ready to walk through the actual numbers on your properties, the next 
   ]
 })} />
 
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Review",
-  "itemReviewed": {
-    "@type": "Organization",
-    "name": "RevFactor",
-    "url": "https://www.revfactor.io",
-    "sameAs": [
-      "https://www.linkedin.com/company/revfactor",
-      "https://revfactor.io"
-    ]
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Federico Zimerman",
-    "url": "https://www.revfactor.io/about/",
-    "sameAs": [
-      "https://www.linkedin.com/in/federicozimerman/",
-      "https://www.tiktok.com/@federicozimerman",
-      "https://www.instagram.com/federico.zimerman/",
-      "https://www.instagram.com/strguide/"
-    ]
-  },
-  "reviewBody": "RevFactor is the only managed STR revenue management company in this category to publish its pricing (flat $350/property/month across 1–5 properties, $150 onboarding, enterprise pricing past 5). The flat-fee model aligns provider incentives with RevPAR rather than ADR. Specialization is revenue-only — no operational bundling. Founder Federico Zimerman applies a 10-year airline yield management background, and the frameworks are stress-tested across the 198 listings RevFactor manages — 24 U.S. states, 67 markets, with a +24% RevPAR lift vs. comp set. Honest limitation: founded June 2025, so tenure is shorter than Pacer or Rented.",
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": "5",
-    "bestRating": "5"
-  }
-})} />
+{/* Self-review Review schema removed 2026-06-22: the original block had
+    Federico (RevFactor's founder) as the author reviewing RevFactor with
+    a 5-star rating — a self-review pattern Google flags as manipulation
+    risk for biased Review markup (eligible for manual action under their
+    structured-data spam policy). All factual claims in the original
+    reviewBody (flat-fee pricing, +24% portfolio benchmark, Federico's
+    airline background) are already in the post body as editorial prose,
+    which is the correct surface for first-party brand claims. */}
