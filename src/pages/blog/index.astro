@@ -137,7 +137,8 @@ type MasonryPost = {
 // don't echo each other. Bottom cards are intentionally varied (wide,
 // portrait, classic) so the lower edge staggers heavily across columns.
 const MASONRY_OVERRIDES: Record<string, Partial<MasonryPost> & { variant: MasonryPost['variant']; col?: 'a' | 'b' | 'c' }> = {
-  // Col A — TALL top, WIDE bottom (descending). Newest post anchors the col.
+  // Col A — TALL top, WIDE bottom + newsletter signup mounts at column end.
+  // Holds 2 posts; the rf-journal-newsletter card adds the visual third slot.
   'best-airbnb-property-managers-with-dynamic-pricing-2026': {
     variant: 'overlay', ar: '3/4', col: 'a',
   },
@@ -145,20 +146,27 @@ const MASONRY_OVERRIDES: Record<string, Partial<MasonryPost> & { variant: Masonr
     variant: 'overlay', ar: '16/9', col: 'a',
   },
 
-  // Col B — VERY-TALL top, PORTRAIT bottom (tallest total column).
+  // Col B — VERY-TALL top, PORTRAIT middle, CLASSIC bottom (tallest column).
   'best-str-revenue-management-companies-2026': {
     variant: 'overlay', ar: '2/3', col: 'b',
   },
   'adr-vs-revpar-airbnb-hosts': {
     variant: 'overlay', ar: '4/5', col: 'b',
   },
+  'revenue-management-for-short-term-rentals': {
+    variant: 'overlay', ar: '4/3', col: 'b',
+  },
 
-  // Col C — TALL top, CLASSIC bottom (medium total, distinct from A & B).
+  // Col C — TALL top, CLASSIC middle, WIDE bottom (medium total).
+  // Distinct silhouette from A (which is tall+wide) and B (which leads very-tall).
   'the-revfactor-method': {
     variant: 'overlay', ar: '3/4', col: 'c',
   },
   'dynamic-pricing-str-beginners-guide': {
     variant: 'overlay', ar: '4/3', col: 'c',
+  },
+  'airbnb-revenue-management-company': {
+    variant: 'overlay', ar: '16/9', col: 'c',
   },
 };
 
