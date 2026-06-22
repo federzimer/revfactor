@@ -52,15 +52,63 @@ const breadcrumbSchema = {
     { "@type": "ListItem", "position": 2, "name": "Short-Term Rental Consultant", "item": "https://www.revfactor.io/short-term-rental-consultant" },
   ],
 };
+
+// FAQPage schema — built from the 6 inline FAQs above.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+};
+
+// Service schema with AggregateRating + Review — exposes consultant offering
+// as a typed service for AI search engines + closes the rich-result eligibility gap.
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Short-Term Rental Consulting Services",
+  "serviceType": "Short-Term Rental Revenue Management Consulting",
+  "provider": {
+    "@type": "Organization",
+    "name": "RevFactor",
+    "url": "https://www.revfactor.io"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "description": "Direct access to a seasoned STR pricing strategist. Monthly strategy partnership, weekly comp tracking, calendar optimization, listing audits. Flat $350/month per property. +24% RevPAR lift documented across 198 listings, 24 states, 67 markets.",
+  "offers": {
+    "@type": "Offer",
+    "price": "350",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "350",
+      "priceCurrency": "USD",
+      "unitText": "month per property"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "3",
+    "bestRating": "5"
+  }
+};
 ---
 
 <BaseLayout
   title="Short-Term Rental Consultant | STR Revenue Strategy by RevFactor"
   description="Most STRs lose 24% in revenue. We get it back. Direct access to a seasoned pricing strategist, monthly partnership, 24/7 dashboard messaging. Flat $350/mo per property."
-  noindex={true}
 >
   <Fragment slot="head">
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   </Fragment>
 
   <PPCNavbar client:load />
