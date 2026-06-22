@@ -157,23 +157,10 @@ The opportunity is not subtle. The calendar is set. The hotel revenue managers h
 
 If you want to walk through what this looks like applied to your specific portfolio and host city, [book a Discovery Call](/short-term-rental-consultant/) and we'll pull your comp set and the relevant venue calendar together on a thirty-minute call.
 
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "NewsArticle",
-  "headline": "FIFA 2026 World Cup: The Largest STR Pricing Event in U.S. History",
-  "datePublished": "2026-05-22",
-  "dateModified": "2026-05-22",
-  "author": {
-    "@type": "Person",
-    "name": "Federico Zimerman",
-    "url": "https://www.revfactor.io"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "RevFactor",
-    "url": "https://www.revfactor.io"
-  },
-  "image": "https://www.revfactor.io/photos/blog/fifa/stadium-final-night-2400.webp",
-  "articleSection": "Markets",
-  "keywords": ["FIFA 2026", "World Cup", "STR pricing", "event pricing", "dynamic pricing", "short-term rental"]
-})} />
+{/* NewsArticle schema removed 2026-06-22: the BlogPosting layout already
+    emits headline, datePublished/dateModified, author (with proper @id ref
+    to Person/Federico), publisher (with @id ref to Organization), and image.
+    The inline block re-declared author/publisher as new entities (no @id),
+    which orphaned them from the entity graph. If NewsArticle type is
+    desired in the future, switch the layout's @type conditionally for this
+    post — don't add a second block. */}

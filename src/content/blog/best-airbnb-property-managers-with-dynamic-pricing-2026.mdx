@@ -602,33 +602,10 @@ Either way, the framework matters more than any one vendor. Pick the model first
   ]
 })} />
 
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Review",
-  "itemReviewed": {
-    "@type": "Organization",
-    "name": "RevFactor",
-    "url": "https://www.revfactor.io",
-    "sameAs": [
-      "https://www.linkedin.com/company/revfactor",
-      "https://revfactor.io"
-    ]
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Federico Zimerman",
-    "url": "https://www.revfactor.io/about/",
-    "sameAs": [
-      "https://www.linkedin.com/in/federicozimerman/",
-      "https://www.tiktok.com/@federicozimerman",
-      "https://www.instagram.com/federico.zimerman/",
-      "https://www.instagram.com/strguide/"
-    ]
-  },
-  "reviewBody": "For STR operators considering a full-service property manager primarily to professionalize their pricing layer, RevFactor offers a distinct alternative: managed revenue management as a standalone service. RevFactor handles pricing strategy, calendar management, minimum stays, length-of-stay rules, and pacing oversight — not operations. The flat-fee model (flat $350/property/month across 1–5 properties, plus a one-time $150 onboarding fee; enterprise pricing for larger portfolios) is published publicly and avoids the percentage-of-gross-revenue structure of full-service property managers, which can run 15-35%. The frameworks applied were developed across the 198 listings RevFactor manages — 24 U.S. states, 67 markets, with a documented +24% RevPAR lift versus comp set. Founder Federico Zimerman applies a 10-year airline yield management background at American Airlines. Honest limitation: RevFactor was founded in June 2025, so company tenure is shorter than category incumbents.",
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": "5",
-    "bestRating": "5"
-  }
-})} />
+{/* Self-review Review schema removed 2026-06-22: same pattern as Blog 4 —
+    Federico (RevFactor's founder) was the schema author reviewing
+    RevFactor with a 5-star rating, which Google flags as biased review
+    markup eligible for manual action under their structured-data spam
+    policy. All factual claims (flat-fee pricing, +24% lift, 198 listings,
+    airline credentials) are already in the post body as editorial prose
+    — the correct surface for first-party brand claims. */}
