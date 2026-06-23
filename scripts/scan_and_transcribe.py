@@ -196,14 +196,10 @@ def _ytdlp_with_browser_cookies(browser: str):
 
 def _apify_instagram(apify_token: str):
     """Call Apify's Instagram Profile Scraper. Returns [] on failure.
-<<<<<<< Updated upstream
-    Uses the apify/instagram-profile-scraper actor — paid (~$0.50/run for ~12 posts)."""
-=======
 
     The actor returns one item per username — the profile — with a nested
     `latestPosts` array. We extract shortcodes from there. Cost: ~$0.40 per
     profile call (well within the $5/mo free tier for daily runs)."""
->>>>>>> Stashed changes
     import urllib.request, urllib.error
     try:
         url = f"https://api.apify.com/v2/acts/apify~instagram-profile-scraper/run-sync-get-dataset-items?token={apify_token}&clean=true&format=json"
@@ -216,14 +212,6 @@ def _apify_instagram(apify_token: str):
                                      headers={"Content-Type": "application/json"})
         with urllib.request.urlopen(req, timeout=180) as r:
             data = json.loads(r.read())
-<<<<<<< Updated upstream
-        posts = []
-        for item in data[:12]:
-            shortcode = item.get("shortCode") or item.get("id") or ""
-            if not shortcode:
-                continue
-            caption = (item.get("caption") or "")[:80]
-=======
         if not data:
             return []
         # Actor returns one profile item per username; posts are nested.
@@ -234,7 +222,6 @@ def _apify_instagram(apify_token: str):
             if not shortcode:
                 continue
             caption = (p.get("caption") or "")[:80]
->>>>>>> Stashed changes
             posts.append({"id": shortcode, "title": caption})
         return posts
     except Exception as e:
