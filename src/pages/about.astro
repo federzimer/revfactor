@@ -18,15 +18,27 @@ const schema = {
     "value": 10
   }
 };
+
+// BreadcrumbList — site → about.
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.revfactor.io/" },
+    { "@type": "ListItem", "position": 2, "name": "About", "item": "https://www.revfactor.io/about/" }
+  ]
+};
 ---
 
 <BaseLayout
-  title="Where We Operate — RevFactor"
-  description="RevFactor manages 198 short-term rental listings across 24 states and 67 US markets — from mountain cabins to coastal condos."
+  title="About RevFactor: STR Revenue Management Across 24 States"
+  description="RevFactor is a managed STR revenue management service founded by Federico Zimerman. Dynamic pricing run daily across 198 properties in 24 states and 67 markets — delivering +24% RevPAR vs. comp set."
+  ogImageAlt="About RevFactor — a managed short-term rental revenue management service founded by Federico Zimerman, running across 198 properties in 24 states and 67 US markets."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
   <Navbar client:load />
-  <AboutPage client:only="react" />
+  <AboutPage client:load />
 </BaseLayout>
