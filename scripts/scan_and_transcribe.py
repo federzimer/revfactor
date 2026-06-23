@@ -168,36 +168,116 @@ def list_tiktok_videos():
         return []
 
 
+def _ytdlp_with_browser_cookies(browser: str):
+    """Try yt-dlp with cookies from a specific browser. Returns [] on failure."""
+    try:
+        result = subprocess.run(
+            ["python3", "-m", "yt_dlp", "--flat-playlist",
+             "--print", "%(id)s|%(title)s",
+             "--cookies-from-browser", browser,
+             "--no-warnings", INSTAGRAM_URL],
+            capture_output=True, text=True, timeout=180,
+        )
+        if result.returncode != 0:
+            stderr = result.stderr.strip()[-200:]
+            log(f"  yt-dlp ({browser} cookies): rc={result.returncode} stderr={stderr}")
+            return []
+        posts = []
+        for line in result.stdout.strip().split("\n"):
+            if "|" in line:
+                parts = line.split("|", 1)
+                if len(parts) == 2 and parts[0]:
+                    posts.append({"id": parts[0], "title": parts[1]})
+        return posts
+    except Exception as e:
+        log(f"  yt-dlp ({browser} cookies) error: {e}")
+        return []
+
+
+def _apify_instagram(apify_token: str):
+    """Call Apify's Instagram Profile Scraper. Returns [] on failure.
+    Uses the apify/instagram-profile-scraper actor — paid (~$0.50/run for ~12 posts)."""
+    import urllib.request, urllib.error
+    try:
+        url = f"https://api.apify.com/v2/acts/apify~instagram-profile-scraper/run-sync-get-dataset-items?token={apify_token}&clean=true&format=json"
+        payload = json.dumps({
+            "usernames": [INSTAGRAM_HANDLE],
+            "resultsType": "posts",
+            "resultsLimit": 12,
+        }).encode()
+        req = urllib.request.Request(url, data=payload,
+                                     headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=180) as r:
+            data = json.loads(r.read())
+        posts = []
+        for item in data[:12]:
+            shortcode = item.get("shortCode") or item.get("id") or ""
+            if not shortcode:
+                continue
+            caption = (item.get("caption") or "")[:80]
+            posts.append({"id": shortcode, "title": caption})
+        return posts
+    except Exception as e:
+        log(f"  Apify path error: {e}")
+        return []
+
+
 def list_instagram_posts():
-    """List recent IG posts. Tries instaloader (works with logged-in browser
-    cookies) first, falls back to yt-dlp's profile extractor (often broken
-    in 2026 due to IG anti-scraping). Returns [] if both fail."""
-    # Path 1: instaloader with chrome cookies. Requires Aaron logged into
-    # IG in Chrome (or Safari) on this Mac. Catches IG's auth-required block
-    # gracefully when the cookie store has no IG cookies.
+    """List recent IG posts. Tries multiple auth paths in order:
+
+      1. yt-dlp + Chrome cookies (free; needs Aaron logged into IG in Chrome)
+      2. yt-dlp + Safari cookies (free; needs Aaron logged into IG in Safari)
+      3. yt-dlp + Firefox cookies (free; if Firefox is installed)
+      4. Apify Instagram Profile Scraper (paid ~$0.50/run; needs
+         `apify-instagram` keychain entry with the token)
+      5. instaloader anonymous (free; almost always 403'd in 2026)
+      6. yt-dlp anonymous (free; usually 403'd in 2026)
+
+    Returns the first path that yields posts. Empty list if all fail.
+    Logs which path succeeded so Aaron can see the auth state from logs."""
+
+    # Path 1-3: browser-cookie paths (preferred — zero new credentials)
+    for browser in ("chrome", "safari", "firefox"):
+        posts = _ytdlp_with_browser_cookies(browser)
+        if posts:
+            log(f"  [Instagram] success via yt-dlp + {browser} cookies "
+                f"({len(posts)} posts)")
+            return posts
+
+    # Path 4: Apify (paid alternative — needs APIFY_TOKEN in keychain)
+    apify_token = _keychain("apify-instagram")
+    if apify_token:
+        posts = _apify_instagram(apify_token)
+        if posts:
+            log(f"  [Instagram] success via Apify ({len(posts)} posts)")
+            return posts
+    else:
+        log("  [Instagram] no apify-instagram keychain entry; skipping Apify path")
+
+    # Path 5: instaloader anonymous (kept as last-resort free fallback)
     try:
         import instaloader
         L = instaloader.Instaloader(quiet=True, download_pictures=False,
                                     download_videos=False, download_video_thumbnails=False,
                                     save_metadata=False, compress_json=False,
                                     max_connection_attempts=1, request_timeout=15)
-        # Try to import session cookies from Chrome (best-effort)
         try:
             L.load_session_from_file(INSTAGRAM_HANDLE)
         except FileNotFoundError:
-            pass  # no saved session — proceed anonymously, may 401
+            pass
         profile = instaloader.Profile.from_username(L.context, INSTAGRAM_HANDLE)
         posts = []
         for i, post in enumerate(profile.get_posts()):
             posts.append({"id": post.shortcode, "title": (post.caption or "")[:80]})
-            if i >= 11:  # cap at 12 most recent (sorted newest first)
+            if i >= 11:
                 break
         if posts:
+            log(f"  [Instagram] success via instaloader ({len(posts)} posts)")
             return posts
     except Exception as e:
         log(f"  instaloader path failed: {type(e).__name__}: {e}")
 
-    # Path 2: yt-dlp profile extractor (fallback, often broken)
+    # Path 6: yt-dlp anonymous (final fallback)
     try:
         result = subprocess.run(
             ["python3", "-m", "yt_dlp", "--flat-playlist",
@@ -211,9 +291,11 @@ def list_instagram_posts():
                 parts = line.split("|", 1)
                 if len(parts) == 2 and parts[0]:
                     posts.append({"id": parts[0], "title": parts[1]})
+        if posts:
+            log(f"  [Instagram] success via yt-dlp anonymous ({len(posts)} posts)")
         return posts
     except Exception as e:
-        log(f"  yt-dlp path failed: {e}")
+        log(f"  yt-dlp anonymous path failed: {e}")
         return []
 
 
@@ -314,20 +396,28 @@ def scan_instagram(state):
     log(f"Scanning Instagram @{INSTAGRAM_HANDLE}...")
     posts = list_instagram_posts()
     if not posts:
-        # Track consecutive empty fetches in state. After 3 zero-result days,
-        # alert Slack — IG is genuinely broken not just rate-limited.
+        # Track consecutive empty fetches in state. Slack-alert weekly (not daily)
+        # once broken — the fix is auth-related and Aaron doesn't need 7 daily
+        # alerts saying the same thing.
         empty_count = state.get("instagram_empty_streak", 0) + 1
         state["instagram_empty_streak"] = empty_count
         save_state(state)
         log(f"  Instagram scan returned no posts (streak: {empty_count} day(s))")
-        if empty_count >= 3 and empty_count % 3 == 0:
+        if empty_count == 3 or (empty_count >= 7 and empty_count % 7 == 0):
             slack_alert(
                 f":no_entry: [revfactor brain-scan] Instagram pull has returned 0 posts "
-                f"for {empty_count} consecutive runs. yt-dlp + instaloader can't list "
-                f"@{INSTAGRAM_HANDLE} without auth.\n"
-                f"To fix: log into Instagram in Chrome on Mac Studio, then re-run "
-                f"`/Users/aaronwhittaker/Claude/RevFactor/.venv/bin/python3 "
-                f"/Users/aaronwhittaker/Claude/RevFactor/scripts/scan_and_transcribe.py`"
+                f"for {empty_count} consecutive runs — Fede's IG content is not landing "
+                f"in the brain.\n\n"
+                f"To fix, pick one of:\n"
+                f"• *Apify (recommended, paid ~$15/mo)* — create an Apify account at "
+                f"https://apify.com, add the token via "
+                f"`security add-generic-password -a $USER -s apify-instagram -w <TOKEN>`. "
+                f"Daily IG scans resume automatically the next morning.\n"
+                f"• *Browser cookies (free, fragile)* — log into Instagram in Chrome on "
+                f"this Mac; cookies last ~6 months before re-login needed.\n"
+                f"• *Fede's IG login (free, robust)* — instaloader CLI:\n"
+                f"`instaloader --login {INSTAGRAM_HANDLE}` then enter Fede's password. "
+                f"Session persists until Meta invalidates it."
             )
         return 0
     # Reset the empty streak on a successful fetch
