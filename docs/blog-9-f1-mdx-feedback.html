@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 9 (F1 Playbook) MDX Delivery — Technical Feedback (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  code { background: #f6f8fa; padding: 1px 4px; border-radius: 3px; font-family: Menlo, Monaco, monospace; font-size: 12px; }
+  pre { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 4px; padding: 12px; font-family: Menlo, Monaco, monospace; font-size: 11px; line-height: 1.45; overflow-x: auto; white-space: pre; color: #24292f; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .blue table { font-size: 13px; }
+  .blue th, .blue td { border-color: #b6c8e8; }
+  .blue th { background: #e0eaff; }
+  .blue.banner { background: #1a4fbf; color: #fff; border-left-color: #0a2e80; padding: 14px 18px; }
+  .blue.banner strong { color: #fff; }
+  .red { color: #8b1a1a; background: #fff0f0; border-left: 4px solid #8b1a1a; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .red strong { color: #5a0000; }
+  .red.banner { background: #8b1a1a; color: #fff; border-left-color: #5a0000; padding: 14px 18px; }
+  .red.banner strong { color: #fff; }
+  .original { font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; background: #fafafa; border-left: 3px solid #ccc; padding: 8px 12px; margin: 8px 0; font-style: italic; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
+  .green { color: #0a7a3c; background: #f0fff5; border-left: 4px solid #0a7a3c; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .green strong { color: #0a4f25; }
+  .green .label { color: #0a4f25; }
+  .legend { background: #f8f8f4; border: 1px solid #ddd; padding: 12px 16px; margin: 16px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 13px; }
+  .legend span { display: inline-block; margin-right: 18px; }
+  .legend .swatch { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Blog 9 (F1 Race Weekend Revenue Playbook) — MDX Delivery Feedback</h1>
+<p class="original"><strong>Project:</strong> RevFactor.io Blog 9 — F1 Race Weekend Revenue Playbook (pre-commit MDX review)<br>
+<strong>Title:</strong> The F1 Race Weekend Revenue Playbook: How to Price Miami, Austin &amp; Las Vegas<br>
+<strong>Target path:</strong> <code>src/content/blog/f1-race-weekend-str-pricing-playbook.mdx</code><br>
+<strong>Target URL:</strong> <code>https://www.revfactor.io/blog/f1-race-weekend-str-pricing-playbook/</code><br>
+<em>Review by: RevFactor team — diff against the Astro content-config + existing live blog MDX patterns (pillar, Blog 5, Blog 7, FIFA).</em></p>
+
+<div class="legend">
+<strong>Color key:</strong>
+<span><span class="swatch" style="background:#222"></span> File contents (italic, light grey background)</span>
+<span><span class="swatch" style="background:#1a4fbf"></span> Our feedback / nice-to-have (blue)</span>
+<span><span class="swatch" style="background:#8b1a1a"></span> Critical / build blocker (red)</span>
+<span><span class="swatch" style="background:#0a7a3c"></span> What's already correct (green)</span>
+</div>
+
+<div class="red banner">
+<p class="label" style="color:#ffd8d8">Top-line: content is strong; delivery format will fail the build</p>
+<p><strong>The body content is high quality.</strong> Federico voice is well-matched, the Three-Archetype framing (Miami premium / Austin reliable / Vegas volatile) is genuinely useful, and the cited stats are linked to real sources. The piece reads like a Federico essay.</p>
+<p style="margin-top:8px"><strong>But there are seven delivery-layer issues that block the commit, six of them mechanical.</strong> Three will fail the Astro build outright (invalid category enum, placeholder hero image, JSON-LD @graph collision with the layout). The other four affect rendering, routing, or schema validity. Same chronic UTF-8 mojibake we saw on Blog 7 v1 is back too.</p>
+<p style="margin-top:8px"><strong>Once these land, this is a clean commit and push.</strong> The fixes are all in the file — no content rewrites required.</p>
+</div>
+
+<h2>Issue 1 — <code>category: "Event Pricing"</code> is not in the schema enum (build will FAIL)</h2>
+
+<div class="red">
+<p class="label-red">Build-blocker — Astro content-collection validation</p>
+<p>The Astro content config at <code>src/content/config.ts</code> defines a strict enum for <code>category</code>:</p>
+<pre>category: z.enum(['Strategy', 'Pricing', 'Markets', 'Tools', 'Case Study'])</pre>
+<p><code>"Event Pricing"</code> is not in that enum. Astro will throw a Zod validation error at build time and the post won't render at all.</p>
+<p><strong>Fix:</strong> Change to one of the valid values. The cleanest match for this piece is:</p>
+<pre>category: "Pricing"</pre>
+<p>(<code>"Strategy"</code> would also work and matches Blog 7. <code>"Pricing"</code> is more literal — this post is explicitly an event-pricing playbook.)</p>
+</div>
+
+<h2>Issue 2 — Hero image is a literal placeholder string (build will produce broken hero)</h2>
+
+<div class="red">
+<p class="label-red">Build-blocker — placeholder unfilled</p>
+<p>Frontmatter currently reads:</p>
+<pre>image: "/heroes/[hero-image-filename].webp"
+imageAlt: "A split aerial view of Hard Rock Stadium Miami, Circuit of the Americas Austin, and the Las Vegas Strip at night..."</pre>
+<p>The literal string <code>[hero-image-filename]</code> will be requested by the browser as-is. Result: broken hero image on production + broken OG card.</p>
+<p><strong>Fix:</strong> RevFactor team will assign an actual hero. For now, leave a real file from <code>public/heroes/</code> (e.g. <code>clifftop-2400.webp</code>, <code>cliffside-2400.webp</code>, or <code>meadow-2400.webp</code>) as a placeholder so the build doesn't break. The <code>imageAlt</code> is good and can stay once we generate the actual race-collage hero.</p>
+</div>
+
+<h2>Issue 3 — Frontmatter <code>slug</code> and <code>canonical</code> will create <code>/blog/blog/...</code> URL duplication</h2>
+
+<div class="red">
+<p class="label-red">Same bug we hit on FIFA post + Blog 7 v1 — known regression</p>
+<p>Frontmatter currently has:</p>
+<pre>slug: /blog/f1-race-weekend-str-pricing-playbook
+canonical: https://www.revfactor.io/blog/f1-race-weekend-str-pricing-playbook</pre>
+<p>Astro uses filename-based routing — the file <code>src/content/blog/f1-race-weekend-str-pricing-playbook.mdx</code> is automatically served at <code>/blog/f1-race-weekend-str-pricing-playbook/</code>. Adding a <code>slug:</code> prefixed with <code>/blog/</code> double-prefixes it to <code>/blog/blog/f1-race-weekend-str-pricing-playbook/</code>.</p>
+<p>Canonical is also auto-emitted by the BaseLayout from <code>Astro.url</code>. Hard-coding it in frontmatter is at best redundant; at worst it overrides the route Astro picked and creates a canonical mismatch.</p>
+<p><strong>Fix:</strong> remove both lines entirely. The Astro layout handles routing and canonical from the filename.</p>
+<pre>slug: /blog/f1-race-weekend-str-pricing-playbook     ← DELETE
+canonical: https://www.revfactor.io/...               ← DELETE</pre>
+</div>
+
+<h2>Issue 4 — JSON-LD <code>@graph</code> duplicates everything the layout auto-emits (schema collision)</h2>
+
+<div class="red">
+<p class="label-red">Same problem Muskan flagged on Blog 7 + FIFA — the layout-emitted entities are colliding with the MDX-defined ones</p>
+<p>The blog layout (<code>src/pages/blog/[...slug].astro</code>) automatically emits, for every post:</p>
+<ul>
+<li><code>Organization</code> (with <code>@id: #organization</code> and the full sameAs + logo + description)</li>
+<li><code>Person</code> for Federico (with <code>@id: #federico</code>, 7+ <code>sameAs</code> URLs, jobTitle, knowsAbout array, alumniOf American Airlines, worksFor reference)</li>
+<li><code>BlogPosting</code> (with all the dates, author/publisher refs, isPartOf Blog, articleSection from category)</li>
+<li><code>FAQPage</code> (built from the frontmatter <code>faqs:</code> array)</li>
+<li><code>BreadcrumbList</code></li>
+</ul>
+<p>The F1 MDX <code>@graph</code> currently redefines <strong>all five of these</strong> with shorter, less-complete versions that fight the layout. The federico <code>sameAs</code> list in the MDX (3 entries) is missing 4 entries the layout publishes — Google ingests the smaller set and the entity graph fragments.</p>
+<p><strong>Worse:</strong> the MDX-defined <code>BlogPosting</code> has a different <code>@id</code> than the layout's (<code>#article</code> vs <code>#blogposting</code>), so Google sees TWO BlogPosting nodes for the same URL, with mismatched data on each. This is the same dup-schema warning Muskan flagged on Blog 7.</p>
+<p><strong>Fix:</strong> strip the entire <code>@graph</code> down to only what the layout doesn't already emit. The only block worth keeping is the <code>ItemList</code> ("Common F1 Pricing Mistakes"). The <code>Table</code> type isn't valid Schema.org and should be dropped or converted to an <code>ItemList</code>.</p>
+<p><strong>Replace the entire <code>&lt;script type="application/ld+json"&gt;...&lt;/script&gt;</code> block with just this:</strong></p>
+<pre>&#123;/* JSON-LD: only schemas the BlogPosting layout doesn't already emit.
+    Layout (src/pages/blog/[...slug].astro) auto-generates Organization,
+    Person (Federico), BlogPosting, FAQPage (from frontmatter `faqs`), and
+    BreadcrumbList. Keep this @graph to ItemList + Event references only. */&#125;
+&lt;script type="application/ld+json" set:html=&#123;JSON.stringify(&#123;
+  "@context": "https://schema.org",
+  "@graph": [
+    &#123;
+      "@type": "ItemList",
+      "name": "Common F1 Pricing Mistakes STR Hosts Make",
+      "numberOfItems": 7,
+      "itemListElement": [
+        &#123; "@type": "ListItem", "position": 1, "name": "Treating F1 like a normal weekend and misreading the booking curve" &#125;,
+        &#123; "@type": "ListItem", "position": 2, "name": "Anchoring to last year's headline rate in a correcting market" &#125;,
+        &#123; "@type": "ListItem", "position": 3, "name": "Setting over-aggressive minimum stays that strand orphan nights" &#125;,
+        &#123; "@type": "ListItem", "position": 4, "name": "Opening the calendar too late and losing the early premium, especially in Miami" &#125;,
+        &#123; "@type": "ListItem", "position": 5, "name": "Ignoring the build and teardown shoulder nights on either side of race day" &#125;,
+        &#123; "@type": "ListItem", "position": 6, "name": "Chasing average rate at the expense of occupancy, or the reverse" &#125;,
+        &#123; "@type": "ListItem", "position": 7, "name": "Setting one flat price in January and never revisiting it before the race" &#125;
+      ]
+    &#125;,
+    &#123;
+      "@type": "Event",
+      "name": "Miami Grand Prix 2026",
+      "startDate": "2026-05-01",
+      "endDate": "2026-05-03",
+      "location": &#123; "@type": "Place", "name": "Hard Rock Stadium", "address": &#123; "@type": "PostalAddress", "addressLocality": "Miami Gardens", "addressRegion": "FL", "addressCountry": "US" &#125; &#125;
+    &#125;,
+    &#123;
+      "@type": "Event",
+      "name": "United States Grand Prix 2026",
+      "startDate": "2026-10-23",
+      "endDate": "2026-10-25",
+      "location": &#123; "@type": "Place", "name": "Circuit of the Americas", "address": &#123; "@type": "PostalAddress", "addressLocality": "Austin", "addressRegion": "TX", "addressCountry": "US" &#125; &#125;
+    &#125;,
+    &#123;
+      "@type": "Event",
+      "name": "Las Vegas Grand Prix 2026",
+      "startDate": "2026-11-19",
+      "endDate": "2026-11-21",
+      "location": &#123; "@type": "Place", "name": "Las Vegas Street Circuit", "address": &#123; "@type": "PostalAddress", "addressLocality": "Las Vegas", "addressRegion": "NV", "addressCountry": "US" &#125; &#125;
+    &#125;
+  ]
+&#125;)&#125; /&gt;</pre>
+<p>That keeps the Event references (useful — Google understands them as named events) and the ItemList (useful — drives the "common mistakes" snippet), strips everything that collides with the layout, and drops the invalid Table.</p>
+</div>
+
+<h2>Issue 5 — Manual <code>## Frequently Asked Questions</code> section in the body duplicates the auto-rendered FAQ accordion</h2>
+
+<div class="red">
+<p class="label-red">Will render the FAQ block twice on the live page</p>
+<p>The blog layout reads the frontmatter <code>faqs:</code> array and auto-renders a styled accordion at the end of the article body. The MDX also has a manual <code>## Frequently Asked Questions</code> H2 with 6 Q/A pairs hand-written into the body.</p>
+<p>Result on the live page: <strong>two FAQ sections</strong>, identical content. Plus the manually written FAQs in the body wrap each question as <code>### Question</code> H3s, which inflates the TOC by 6 extra entries the reader doesn't need.</p>
+<p><strong>Fix:</strong> delete the entire <code>## Frequently Asked Questions</code> section from the body (the last ~30 lines before the file ends). The layout will render the styled accordion from the frontmatter automatically.</p>
+</div>
+
+<h2>Issue 6 — UTF-8 mojibake (em-dashes saved as Latin-1)</h2>
+
+<div class="red">
+<p class="label-red">Same chronic export issue we hit on Blog 7 v1 — needs a re-save as UTF-8 without BOM</p>
+<p>Em-dashes (<code>—</code>) appear as the literal byte sequence <code>â</code> in several places. If committed as-is, the LIVE page renders those broken characters verbatim.</p>
+<table>
+<tr><th>In the file</th><th>Should be</th><th>Location</th></tr>
+<tr><td><code>price Miami, Austin &amp; Las Vegas â what hosts should charge</code></td><td><code>price Miami, Austin &amp; Las Vegas — what hosts should charge</code></td><td>title in frontmatter + body H1 echoes</td></tr>
+<tr><td><code>not just where fans should stay.</code> (mangled em-dash before)</td><td><code>not just where fans should stay.</code></td><td>description + subhead</td></tr>
+<tr><td>Same em-dash mangling</td><td>Same fix</td><td>JSON-LD <code>description</code> field</td></tr>
+</table>
+<p><strong>Fix:</strong> re-save the file as UTF-8 without BOM. From command line:</p>
+<pre>iconv -f WINDOWS-1252 -t UTF-8 f1-race-weekend-str-pricing-playbook.mdx &gt; fixed.mdx</pre>
+<p>Or in VS Code: bottom status bar → "UTF-8" → "Save with Encoding" → "UTF-8".</p>
+</div>
+
+<h2>Issue 7 — Closing CTA links to the wrong post</h2>
+
+<div class="blue">
+<p class="label">Anchor text doesn't match destination URL</p>
+<p>Last paragraph reads:</p>
+<div class="original">"If you are weighing whether to keep doing it yourself, our guide on <strong>when to hire an Airbnb revenue management company</strong> walks through the decision..."</div>
+<p>The link target on that anchor text is <code>https://www.revfactor.io/blog/best-airbnb-property-managers-with-dynamic-pricing-2026</code> — that's Blog 5 (PM listicle with dynamic pricing), not the "when to hire" decision guide.</p>
+<p>The actual "when to hire" post is Blog 7 at <code>/blog/airbnb-revenue-management-company/</code> — its full title is "Airbnb Revenue Management Company: When (And When Not) to Hire One." That's the one this anchor text describes.</p>
+<p><strong>Fix:</strong> change the link target to:</p>
+<pre>https://www.revfactor.io/blog/airbnb-revenue-management-company/</pre>
+</div>
+
+<h2>Issue 8 — Two internal links have a space inside the closing paren</h2>
+
+<div class="blue">
+<p class="label">Cosmetic rendering bug</p>
+<p>Two internal links have a stray space before the closing markdown paren that will render the link target visibly in the body:</p>
+<table>
+<tr><th>Current (broken)</th><th>Should be</th></tr>
+<tr><td><code>[dynamic pricing for short-term rentals] (https://www.revfactor.io/blog/dynamic-pricing-str-beginners-guide )</code></td><td><code>[dynamic pricing for short-term rentals](/blog/dynamic-pricing-str-beginners-guide/)</code></td></tr>
+<tr><td><code>[ADR versus RevPAR] (https://www.revfactor.io/blog/adr-vs-revpar-airbnb-hosts )</code></td><td><code>[ADR versus RevPAR](/blog/adr-vs-revpar-airbnb-hosts/)</code></td></tr>
+</table>
+<p>Two fixes per link: (1) close the gap between <code>]</code> and <code>(</code> (markdown link syntax requires no space), and (2) drop the trailing space before <code>)</code>. While we're touching them, swap to relative URLs (the rest of the cluster uses relative paths) and add the trailing slash for consistency.</p>
+</div>
+
+<h2>Issue 9 — Missing cross-link to the FIFA post</h2>
+
+<div class="blue">
+<p class="label">High-value cluster link that's referenced but not wired</p>
+<p>The Miami section explicitly calls out Hard Rock Stadium hosting both the F1 Miami GP and 7 FIFA 2026 World Cup matches, and references the FIFA post by name:</p>
+<div class="original">"We covered the mechanics in our piece on the <strong>FIFA 2026 World Cup</strong> as the largest STR pricing event in U.S. history..."</div>
+<p>The link <strong>is</strong> wired (good), but the anchor text and destination are a quiet underused cluster signal. Two refinements:</p>
+<ol>
+<li>Make sure the link target matches the actual file ID — it should be <code>/blog/fifa-2026-world-cup-str-pricing/</code> (with trailing slash, per cluster convention).</li>
+<li>Add a second cross-link in the body of the Miami section — when discussing villa group demand, link to the FIFA post with anchor text describing the Miami matches specifically. Two links to one related cluster post is healthy; the cluster's pillar shows the pattern.</li>
+</ol>
+</div>
+
+<h2>Issue 10 — <code>updatedDate</code> should bump to ship date</h2>
+
+<div class="blue">
+<p class="label">Freshness signal</p>
+<p>Frontmatter currently has both dates set to <code>2026-06-04</code>. If we ship today (2026-06-23), the updatedDate should bump:</p>
+<pre>pubDate: 2026-06-04
+updatedDate: 2026-06-23     ← change to today's actual ship date</pre>
+<p>Astro's layout renders the "Last updated" timestamp in the byline when <code>updatedDate &gt; pubDate</code>. Bumping it on ship day gives Google the freshness signal the cluster is engineered for.</p>
+</div>
+
+<h2>What's already correct</h2>
+
+<div class="green">
+<p class="label">Content quality and voice</p>
+<ul>
+<li><strong>Federico voice matches the cluster.</strong> Calm, analytical, expert. The "two hosts who both get F1 weekend wrong" opener is structurally consistent with how the pillar opens.</li>
+<li><strong>The Three-Archetype framing (Miami premium / Austin reliable / Vegas volatile) is genuinely useful.</strong> It gives the piece a memorable structure and a real differentiator vs. the standard "where to stay" content other sites publish.</li>
+<li><strong>Cited stats are linked to real sources.</strong> VegasInsider, KXAN/Visit Austin, 8 News Now, Review-Journal, Applied Analysis — all named and linked. This is the citation pattern AI engines parse.</li>
+<li><strong>No banned phrases.</strong> Clean on "leverage," "unlock," "passive income." "Set-and-forget" appears once and is used as a failure mode (consistent with pillar precedent — allowed).</li>
+<li><strong>Cluster cross-links are mostly correct.</strong> Pillar, ADR-vs-RevPAR, Method, dynamic pricing — all referenced. (The two link-formatting bugs flagged above + the wrong Blog-7-vs-Blog-5 anchor are the only exceptions.)</li>
+<li><strong>FAQ frontmatter is correctly populated.</strong> Once the manual body duplicate is stripped (Issue 5), the layout will render the accordion automatically and the FAQPage schema will mint cleanly from the YAML.</li>
+<li><strong>The 12-Month F1 Revenue Runbook section is a clean addition.</strong> It converts the framework into a timeline, which is the format AI Overviews extract best from event-pricing pages.</li>
+</ul>
+</div>
+
+<h2>Summary — fix sheet for Muskan</h2>
+
+<div class="blue">
+<p class="label">Once these 7 fixes land, the file is ready to commit</p>
+<table>
+<tr><th>#</th><th>Issue</th><th>Severity</th><th>Effort</th></tr>
+<tr><td>1</td><td>Change <code>category</code> to <code>"Pricing"</code></td><td>Build blocker</td><td>1 line</td></tr>
+<tr><td>2</td><td>Replace placeholder hero image filename</td><td>Build blocker</td><td>1 line</td></tr>
+<tr><td>3</td><td>Delete <code>slug:</code> + <code>canonical:</code> from frontmatter</td><td>Build blocker (routing)</td><td>2 lines</td></tr>
+<tr><td>4</td><td>Strip JSON-LD <code>@graph</code> down to ItemList + Events only (layout emits the rest)</td><td>Schema duplication</td><td>~150 lines deleted</td></tr>
+<tr><td>5</td><td>Delete manual <code>## Frequently Asked Questions</code> section from body</td><td>Rendering duplication</td><td>~30 lines deleted</td></tr>
+<tr><td>6</td><td>Re-save file as UTF-8 (fix <code>â</code> → <code>—</code>)</td><td>Rendering blocker</td><td>1 command</td></tr>
+<tr><td>7</td><td>Fix closing-CTA link target (Blog 7, not Blog 5)</td><td>Wrong destination</td><td>1 line</td></tr>
+<tr><td>8</td><td>Fix two malformed markdown link parens (space inside <code>](&nbsp;url )</code>)</td><td>Cosmetic</td><td>2 lines</td></tr>
+<tr><td>9</td><td>Add a second FIFA cross-link in Miami section body</td><td>Nice-to-have</td><td>1 line</td></tr>
+<tr><td>10</td><td>Bump <code>updatedDate</code> to today's ship date</td><td>Nice-to-have</td><td>1 line</td></tr>
+</table>
+<p><strong>After fixes:</strong> commit message can be <code>Blog 9: ship 'F1 Race Weekend Revenue Playbook'</code>. RevFactor team will handle the actual commit + hero-image swap on our side.</p>
+</div>
+
+</body>
+</html>
