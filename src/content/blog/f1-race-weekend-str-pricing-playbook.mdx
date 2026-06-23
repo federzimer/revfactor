@@ -1,0 +1,350 @@
+---
+title: "The F1 Race Weekend Revenue Playbook: How to Price Miami, Austin & Las Vegas"
+description: "A revenue manager's playbook for pricing the Miami, Austin, and Las Vegas Grands Prix — what hosts should charge, not just where fans should stay."
+subhead: "Three races, three different markets, one operating system for STR operators who want to stop leaving race-weekend revenue on the table."
+metaTitle: "F1 Race Weekend Revenue Playbook: Pricing Miami, Austin & Las Vegas"
+metaDescription: "How to price your Airbnb for the Miami, Austin, and Las Vegas Grands Prix. The operator's playbook covering demand curves, booking windows, and what each race actually rewards."
+pubDate: 2026-06-04
+updatedDate: 2026-06-23
+author: "Federico Zimerman"
+category: "Pricing"
+tags:
+  [
+    "F1 pricing",
+    "Airbnb hosts",
+    "event revenue management",
+    "Miami Grand Prix",
+    "Austin Grand Prix",
+    "Las Vegas Grand Prix",
+    "STR pricing strategy",
+    "dynamic pricing",
+  ]
+image: "/photos/blog/f1/race-weekend-stadium-twilight-2400.webp"
+imageAlt: "An illuminated open-air stadium at twilight surrounded by a glowing city skyline, evoking the demand surge of a U.S. Formula 1 race weekend."
+featured: false
+readingTime: 16
+faqs:
+  - q: "Do F1 weekends actually increase Airbnb revenue?"
+    a: "Yes. Race weekends are among the strongest annual demand events in their host cities. In Austin, average Airbnb prices have risen roughly 84 percent during U.S. Grand Prix week, and hotel occupancy reaches near 87 percent. The catch is that most hosts never price the surge deliberately, so the revenue is there mainly for operators who plan for it."
+  - q: "How much can I charge for my Airbnb during F1 weekend?"
+    a: "It depends on the race and your distance from the track. In Austin, the citywide Airbnb average has reached about $780 during race week, up from roughly $423 the surrounding weekend, with track-adjacent and luxury homes commanding more. Miami's luxury villas command the highest rates of the three U.S. races, while Las Vegas now sits closer to a corrected, realistic market."
+  - q: "Is the Las Vegas Grand Prix still worth it for hosts?"
+    a: "Yes, but the economics have normalized. Citywide room rates fell from $249.31 in 2023 to $198.72 in 2024, a 20.3 percent drop, and accommodation costs fell again in 2025. It remains a strong weekend, but only for hosts who price to the corrected market instead of the 2023 hype."
+  - q: "Why did Las Vegas Grand Prix prices fall after the first year?"
+    a: "First-year hype drove rates far above real demand. As inventory grew and the novelty faded, the market corrected toward a normal November pattern. Notably, occupancy actually rose as prices fell, because realistic rates filled more rooms."
+  - q: "Which F1 race is best for short-term rental hosts?"
+    a: "Austin is generally the most reliable: a broad, citywide demand lift powered by regional drive-in traffic and a deep mid-market that rewards every property tier. Miami offers the highest ceiling for premium and group properties, while Las Vegas carries the most pricing risk and demands the most discipline."
+  - q: "What minimum-night stay should I set for F1 weekend?"
+    a: "Match the minimum to the event window, commonly three nights. Avoid over-aggressive minimums, which strand single orphan nights and suppress occupancy. The goal is to capture the full race window without blocking bookings from guests who are only attending part of the weekend."
+---
+
+{/* JSON-LD: only schemas the BlogPosting layout doesn't already emit.
+    Layout (src/pages/blog/[...slug].astro) auto-generates Organization,
+    Person (Federico), BlogPosting, FAQPage (from frontmatter `faqs`), and
+    BreadcrumbList. Keep this @graph to ItemList + Event references only. */}
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "name": "Common F1 Pricing Mistakes STR Hosts Make",
+      "numberOfItems": 7,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Treating F1 like a normal weekend and misreading the booking curve" },
+        { "@type": "ListItem", "position": 2, "name": "Anchoring to last year's headline rate in a correcting market" },
+        { "@type": "ListItem", "position": 3, "name": "Setting over-aggressive minimum stays that strand orphan nights" },
+        { "@type": "ListItem", "position": 4, "name": "Opening the calendar too late and losing the early premium, especially in Miami" },
+        { "@type": "ListItem", "position": 5, "name": "Ignoring the build and teardown shoulder nights on either side of race day" },
+        { "@type": "ListItem", "position": 6, "name": "Chasing average rate at the expense of occupancy, or the reverse" },
+        { "@type": "ListItem", "position": 7, "name": "Setting one flat price in January and never revisiting it before the race" }
+      ]
+    },
+    {
+      "@type": "Event",
+      "name": "Miami Grand Prix 2026",
+      "startDate": "2026-05-01",
+      "endDate": "2026-05-03",
+      "location": { "@type": "Place", "name": "Hard Rock Stadium", "address": { "@type": "PostalAddress", "addressLocality": "Miami Gardens", "addressRegion": "FL", "addressCountry": "US" } }
+    },
+    {
+      "@type": "Event",
+      "name": "United States Grand Prix 2026",
+      "startDate": "2026-10-23",
+      "endDate": "2026-10-25",
+      "location": { "@type": "Place", "name": "Circuit of the Americas", "address": { "@type": "PostalAddress", "addressLocality": "Austin", "addressRegion": "TX", "addressCountry": "US" } }
+    },
+    {
+      "@type": "Event",
+      "name": "Las Vegas Grand Prix 2026",
+      "startDate": "2026-11-19",
+      "endDate": "2026-11-21",
+      "location": { "@type": "Place", "name": "Las Vegas Street Circuit", "address": { "@type": "PostalAddress", "addressLocality": "Las Vegas", "addressRegion": "NV", "addressCountry": "US" } }
+    }
+  ]
+})} />
+
+<div class="rf-takeaways">
+
+## Key Takeaways
+
+- F1 race weekends are among the strongest annual demand events in their host cities, yet most hosts never price them deliberately. Research on Airbnb pricing finds these frictions cost hosts as much as 15 percent of profit ([Huang, SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3767103)).
+
+- The three U.S. Grands Prix are not one event repeated three times. They are three different markets: Miami the premium race, Austin the reliable race, Las Vegas the volatile one.
+
+- Miami rewards early, premium positioning. Its top inventory books three to six months out, and opening late costs more here than at any other U.S. race.
+
+- Austin is the steadiest and broadest operator opportunity. Race-weekend Airbnb prices have climbed about 84 percent ([VegasInsider](https://www.vegasinsider.com/auto-racing/us-gp-accommodation-and-ticket-costs/)), and the lift reaches the whole city, not just the track.
+
+- Las Vegas is the cautionary tale. Citywide room rates fell from $249.31 to $198.72 between 2023 and 2024 ([8 News Now](https://www.8newsnow.com/news/local-news/visitor-numbers-up-but-f1-skews-comparisons-of-las-vegas-hotel-rates-revenue/)) as the market corrected from first-year hype.
+
+- Occupancy and average rate move independently and have to be read together. In Vegas, occupancy rose to 87 percent even as rates dropped more than 20 percent ([Las Vegas Review-Journal](https://www.reviewjournal.com/sports/motor-sports/formula-1/2024-las-vegas-grand-prix-economic-impact-revealed-3314022/)).
+
+- The operators who win price the demand curve, not a single flat event rate.
+
+</div>
+
+<div class="rf-key-stats">
+  <div class="stat">
+    <p class="label">AUSTIN AIRBNB LIFT · U.S. GP WEEK</p>
+    <p class="number">+84%</p>
+    <p class="caption">$423 → $780 average nightly rate</p>
+  </div>
+  <div class="stat">
+    <p class="label">VEGAS ROOM RATE · 2023 → 2024</p>
+    <p class="number">−20.3%</p>
+    <p class="caption">$249.31 → $198.72 citywide</p>
+  </div>
+  <div class="stat">
+    <p class="label">VEGAS OCCUPANCY · 2024</p>
+    <p class="number">~87%</p>
+    <p class="caption">rose as rates fell — the paradox</p>
+  </div>
+</div>
+
+The market is paying a premium for the operators who price the race deliberately. The rest of the field is leaving the surge on the table — in opposite directions.
+
+## The Two Hosts Who Both Get F1 Weekend Wrong
+
+The week before a Grand Prix, two hosts feel good about their pricing for opposite reasons.
+
+The first one remembered to add a surcharge. Sometime in the autumn they bumped the nightly rate, felt clever, and moved on. The second set one flat race-weekend price back in January, locked it in, and has not looked at it since. They feel safe.
+
+Both are leaving money on the table, just in different directions.
+
+Every F1 accommodation guide on the internet is written for the same person: the fan deciding where to stay, what it will cost, and how close they can get to the track. Not one is written for the operator on the other side of that transaction, the one deciding what to charge. That is the gap this playbook fills.
+
+A race weekend is not a number you mark up once. It is a demand curve you manage over several weeks, and the three U.S. races each ask for a different hand. Miami, Austin, and Las Vegas reward three different instincts, and reading them wrong is how good inventory ends up underpriced or sitting empty. What follows is the operator's manual nobody else has written.
+
+## Why Formula 1 Creates a Demand Surge Most Hosts Underprice
+
+### How big is the F1 effect, really?
+
+F1 race weekends rank among the strongest annual demand events in their host cities. In Austin, average Airbnb prices have jumped roughly 84 percent during U.S. Grand Prix week, climbing from about $423 the surrounding weekend to $780 during the race ([VegasInsider](https://www.vegasinsider.com/auto-racing/us-gp-accommodation-and-ticket-costs/)), while hotel occupancy has reached around 87 percent ([KXAN, citing Visit Austin](https://www.kxan.com/sports/f1-austin/how-booked-are-airbnbs-in-austin-ahead-of-formula-1-georgia-texas-gameday/)).
+
+That surge dwarfs an ordinary weekend, and it shows up across the board: hotels, short-term rentals, and the satellite supply that fills in once the closest inventory sells out. The effect is not uniform from city to city, which is the whole point of this article, but the headline is consistent everywhere. When a Grand Prix comes to town, demand arrives early, concentrates hard, and pays a premium.
+
+### How F1 demand actually forms, and why it fools hosts
+
+F1 demand does not behave like normal leisure travel. It forms earlier, concentrates harder, and tolerates higher rates than the booking pace most hosts are used to reading.
+
+Demand for the race starts building weeks before it registers in conventional hotel data (Hotel Dive, AirDNA). Guests book further ahead, accept premium pricing, and compress their stays into tight two to five night windows around the three-day event. Prices for a Grand Prix peak the night before the race and revert to normal within roughly 48 hours, so the entire opportunity lives inside a narrow band of nights.
+
+The host watching a normal booking pace through this window misreads an event pace. They see their calendar fill slower than a typical summer weekend and panic-discount, or they see it sit quiet in month eight and assume the demand is not there, only for it to arrive late and firm. Both reactions come from reading the wrong curve.
+
+<div class="rf-quick-answer">
+  <p class="kicker">THE REAL PROBLEM</p>
+  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '18px', letterSpacing: '0.5px', margin: '0 0 1rem' }}>Most hosts never price the event at all.</p>
+  <p>Research on Airbnb pricing by economist Yufeng Huang (Simon Business School, University of Rochester) found that realized prices are remarkably simple and largely unresponsive to market conditions, and that this does not improve as hosts gain experience, get better tools, or grow in scale. Those frictions cost sellers as much as <strong>15 percent in profit</strong>, on top of a 14 percent loss in average consumer surplus. The opportunity on a race weekend is not a clever markup. It is having any deliberate event strategy at all when most of your comp set has none.</p>
+</div>
+
+If you want the mechanics behind that, our guide to [dynamic pricing for short-term rentals](/blog/dynamic-pricing-str-beginners-guide/) covers how to move rates with demand instead of leaving them static, and our breakdown of [ADR versus RevPAR](/blog/adr-vs-revpar-airbnb-hosts/) explains why a high nightly rate is not the same as a high return.
+
+## Three Races, Three Different Markets: The Three-Archetype Framework
+
+The single most useful thing an operator can internalize about U.S. Formula 1 is that the three races are not interchangeable. They draw different crowds, book on different timelines, and punish different mistakes.
+
+We call this the Three-Archetype Framework: three distinct revenue personalities, each rewarding a different instinct. It is the spine the rest of this playbook hangs on, introduced here and then expanded race by race.
+
+<div class="rf-table-scroll" style="overflow-x:auto; -webkit-overflow-scrolling:touch; margin-bottom:1.5rem; max-width:100%;">
+
+| Race             | 2026 dates   | Archetype         | Demand signature                                    | Typical booking lead | Operator priority                                 |
+| ---------------- | ------------ | ----------------- | --------------------------------------------------- | -------------------- | ------------------------------------------------- |
+| **Miami GP**         | May 1 → 3   | The Premium Race  | Luxury and group or villa; affluent                 | 3 to 6 months        | Open premium inventory early; protect the ceiling |
+| **U.S. GP (Austin)** | Oct 23 → 25 | The Reliable Race | Broad, citywide; deep mid-market; regional drive-in | Weeks to months      | Capture the dependable premium across every tier  |
+| **Las Vegas GP**     | Nov 19 → 21 | The Volatile Race | Affluent but supply-heavy and correcting            | Variable; firms late | Price discipline; never anchor to last year       |
+
+</div>
+
+### Miami: the premium race
+
+The highest ceiling of the three, the earliest to book, and the least forgiving of a late calendar. Miami draws an affluent, group-heavy crowd chasing villas and luxury homes, and the operators who win here open early and protect the top of their pricing. The race where opening late costs you the most.
+
+### Austin: the reliable race
+
+The broadest and steadiest demand of the three, powered by regional drive-in traffic and a deep mid-market. This is the operator's race: dependable premiums across every property tier, not just the homes next to the circuit.
+
+### Las Vegas: the volatile race
+
+The inaugural-hype-and-correction story in miniature. The demand is real, but the market punishes hosts who price off last year's headline. Vegas is where discipline earns its keep.
+
+## The Miami Grand Prix Playbook
+
+<figure class="rf-figure rf-figure-quote">
+  <div class="rf-figure-frame">
+    <img loading="lazy" decoding="async" src="/photos/blog/f1/miami-luxury-villa-golden-hour-2400.webp" alt="A luxury modern Miami villa with infinity pool at golden hour — the premium inventory the Miami Grand Prix audience pays the highest rates of any U.S. F1 race to occupy." />
+    <blockquote class="rf-figure-overlay">
+      <p>“The Miami crowd is buying an experience, not a bargain. Open early and price the ceiling.”</p>
+      <cite>Federico Zimerman</cite>
+    </blockquote>
+  </div>
+  <figcaption>The Premium Race rewards operators who release their luxury inventory three to six months out. By April, the group that wanted your villa has already booked someone else's.</figcaption>
+</figure>
+
+### The demand profile
+
+Miami's Grand Prix is a premium, affluent, group-heavy event anchored at Hard Rock Stadium in Miami Gardens. Hotels openly apply an F1 surcharge, and the luxury-villa segment runs hot: large homes that sleep groups of fifteen to twenty command the top rates of the weekend, because the crowd this race attracts is buying an experience, not a bargain.
+
+There is a useful cross-reference here. The same Hard Rock Stadium hosts seven matches during the [2026 FIFA World Cup](/blog/fifa-2026-world-cup-str-pricing/), which means the event-pricing logic in this playbook carries straight across to that summer. We covered the mechanics in our piece on the [FIFA 2026 World Cup as the largest STR pricing event in U.S. history](/blog/fifa-2026-world-cup-str-pricing/), and Miami operators should treat the two as companion case studies in the same venue.
+
+### Where to position
+
+For Miami Grand Prix demand, the strongest positions sit within roughly 15 to 30 minutes of Hard Rock Stadium: Miami Gardens, Aventura, Miami Shores, and North Miami. Miami Beach commands high rates but carries a one-hour-plus race-day commute. Hollywood and Fort Lauderdale absorb the overflow once closer inventory fills.
+
+### The pricing approach
+
+The problem in Miami is overshooting the premium and then watching it sit. The principle is to anchor to the luxury comp set rather than to a number you invented, protect your peak nights (Friday through Sunday), and resist the urge to flat-rate a property that could tier its nights instead. In practice, the affluent, lower-price-sensitivity audience here will support aggressive peak pricing, but only if it is paired with an early calendar release. The action is simple: price the top of the market with confidence, but earn the right to that price by being available before everyone else.
+
+### When to open the calendar
+
+Premium and group inventory sells three to six months out, and Miami punishes late openers more than any other U.S. race. Open early, set the minimum-stay to the event window, and monitor early booking pace rather than waiting for a late surge that, for the top tier, never comes. The villa that lists in February captures the group that is already planning. The villa that lists in April is competing for whatever is left.
+
+## The United States Grand Prix Playbook (Austin / COTA)
+
+### The demand profile
+
+Austin is the most reliable of the three for hosts. Hotel occupancy has run near 87 percent on race weekend ([KXAN, citing Visit Austin](https://www.kxan.com/sports/f1-austin/how-booked-are-airbnbs-in-austin-ahead-of-formula-1-georgia-texas-gameday/)), the lift is citywide rather than confined to the track, and it is powered by a regional drive-in engine: about half of Airbnb bookings come from within Texas ([Airbnb, reported by KXAN](https://www.kxan.com/news/local/austin/how-much-money-do-airbnbs-make-during-big-austin-events-like-acl-f1/)). Layer in October's dual peak, where the Grand Prix stacks against the Austin City Limits festival, and the month becomes the city's revenue engine.
+
+That breadth is Austin's defining advantage. In Miami the money concentrates around the stadium and the luxury tier. In Austin the demand spreads, which means a well-run mid-market property a few miles from the action still captures a meaningful premium.
+
+### How much can you actually charge?
+
+During U.S. Grand Prix weekend, average Austin Airbnb prices have risen about 84 percent, from roughly $423 to $780 ([VegasInsider](https://www.vegasinsider.com/auto-racing/us-gp-accommodation-and-ticket-costs/)). The week after the race, that average falls back toward $257, which shows the true shape of the spike: a sharp, short window rather than a gentle seasonal lift.
+
+The closer you are to the circuit, the steeper the premium. Properties within about 15 minutes of Circuit of the Americas, and well-positioned luxury homes in particular, can reach several hundred dollars a night and beyond during the race window, well above the citywide average. The lesson is not to chase a single track-adjacent number from a property that cannot hold it, but to read where your specific listing sits in that curve.
+
+### Where to position
+
+Two pockets matter most. Within roughly 15 minutes of COTA (Del Valle and southeast Austin) for the track premium, and downtown for the guests who want nightlife and walkability over proximity to the circuit. Because demand extends citywide, even non-adjacent properties capture a real lift, which is exactly what makes Austin the safest of the three for an operator who does not happen to own next to the track.
+
+### Pricing approach and booking window
+
+In a deep, supply-heavy market, the discipline is to capture the dependable premium across tiers rather than to price every listing as if it were on the circuit fence.
+
+One 2026-specific factor is worth building into your plan: Austin's new short-term rental rules. Operator licensing requirements took effect October 1, 2025, and from July 1, 2026, booking platforms must display a valid license number on every Austin listing and remove unlicensed properties within ten days of a city request ([Austin Monitor](https://austinmonitor.com/stories/2025/09/council-oks-new-rules-for-short-term-rentals/)). With only around 2,400 active licenses against an estimated nearly 15,000 active listings ([KUT](https://www.kut.org/austin/2025-09-11/austin-tx-airbnbs-short-term-rental-property-changes-city-council)), that enforcement is likely to tighten effective supply heading into the October race. For compliant operators, fewer competing listings on the weekend that matters most is a quiet tailwind. Get your license sorted well ahead of the deadline, because applications can take weeks to process.
+
+To set your floor and ceiling against the right neighbors, our walkthrough on [how to build an STR comp set](/blog/how-to-build-comp-set-str/) shows how to choose comparable properties rather than guessing.
+
+## The Las Vegas Grand Prix Playbook (The Cautionary Tale)
+
+<figure class="rf-figure rf-figure-quote">
+  <div class="rf-figure-frame">
+    <img loading="lazy" decoding="async" src="/photos/blog/f1/vegas-strip-balcony-night-2400.webp" alt="An elevated nighttime view of the Las Vegas Strip from a modern hotel balcony — the market that proved a lower rate can fill more rooms than a higher headline number." />
+    <blockquote class="rf-figure-overlay">
+      <p>“Vegas occupancy rose as rates fell. The headline rate is vanity. The revenue is the point.”</p>
+      <cite>Federico Zimerman</cite>
+    </blockquote>
+  </div>
+  <figcaption>The Volatile Race teaches discipline the expensive way. The host who held a 2023 rate into 2024 watched their calendar stay empty. The host who priced to the corrected market filled it.</figcaption>
+</figure>
+
+### The demand profile
+
+Las Vegas turns one of its quietest November weekends into a major event, but the economics have normalized hard since the 2023 debut. This is the race that teaches price discipline, and it teaches it the expensive way.
+
+### The mean-reversion story: why 2023 lied to everyone
+
+Walk the correction with the numbers.
+
+First-year hype pushed rates far past real demand. Caesars Palace opened race-weekend rooms at $5,323 a night when they first went on sale, then watched that figure slide to about $2,420 a little over a month before the race ([Las Vegas Review-Journal](https://www.reviewjournal.com/sports/motor-sports/formula-1/whats-a-hotel-room-gonna-cost-over-las-vegas-grand-prix-weekend-3204034/)). Citywide, average daily room rates fell from $249.31 in 2023 to $198.72 in 2024, a 20.3 percent drop ([8 News Now](https://www.8newsnow.com/news/local-news/visitor-numbers-up-but-f1-skews-comparisons-of-las-vegas-hotel-rates-revenue/)). Accommodation costs fell again in 2025, with Airbnb prices specifically down 22.4 percent year over year ([VegasInsider](https://www.vegasinsider.com/auto-racing/2025-las-vegas-grand-prix-accommodation-prices-drop/)).
+
+The economic-impact headline tells the same story: roughly $1.5 billion in 2023 against $934 million in 2024 ([Applied Analysis, reported by the Las Vegas Review-Journal](https://www.reviewjournal.com/sports/motor-sports/formula-1/2024-las-vegas-grand-prix-economic-impact-revealed-3314022/)), although much of that first-year figure reflected one-time construction and infrastructure spending rather than visitor demand. Strip the noise away and the pattern is clean. A market overshot on novelty, then settled toward what the weekend is actually worth.
+
+For a host, the trap is obvious in hindsight and easy to fall into anyway: pricing the 2024 calendar off the 2023 headline, and then off 2024 in 2025, always one year behind the correction.
+
+### The occupancy paradox most hosts miss
+
+<div class="rf-quick-answer">
+  <p class="kicker">THE LAS VEGAS PARADOX</p>
+  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '18px', letterSpacing: '0.5px', margin: '0 0 1rem' }}>Occupancy ↑ 87% · Rate ↓ 20% · Take-home went UP for the operators who repriced</p>
+  <p>In 2024, Vegas occupancy actually <strong>rose to about 87 percent</strong>, up from around 80 percent in 2023, even as average rates fell more than 20 percent ([Las Vegas Review-Journal](https://www.reviewjournal.com/sports/motor-sports/formula-1/2024-las-vegas-grand-prix-economic-impact-revealed-3314022/)). Lower, realistic pricing filled more rooms. A higher headline rate and a higher take-home are not the same thing. This is the clearest live demonstration you will find of why average rate and occupancy have to be read together — the exact relationship at the heart of <a href="/blog/adr-vs-revpar-airbnb-hosts/">ADR versus RevPAR</a>.</p>
+</div>
+
+This is the part the rest of the market misses. Every competitor reported that Vegas prices fell, and most read it as bad news for hosts. It is not. The host who held an aggressive 2023 rate into 2024 watched their calendar stay empty. The host who priced to the corrected market filled it, and in many cases took home more. The headline rate is vanity. The revenue is the point.
+
+### The pricing approach
+
+The single biggest Vegas mistake is anchoring to last year's peak. In a normalizing, supply-heavy market, last year's headline rate is this year's empty calendar. Price to the corrected market, watch for late-firming demand (Vegas books later than Miami), and let occupancy, not nostalgia, set the rate.
+
+## The RevFactor Event-Pricing Framework
+
+The three race playbooks above are really one operating system seen from three angles. We call it the RevFactor Event-Pricing Framework, and it works for any concentrated demand event, not only Formula 1.
+
+### Price the curve, not a flat rate
+
+The principle that ties everything together: an event is a curve, not a number. You anchor against the right comp set, open early, hold your peak nights, and release the laggards strategically as the window approaches. Compare that to the amateur move of setting one flat race-weekend price in January and never touching it. The flat rate cannot capture the early premium Miami pays, cannot read the late firming Vegas shows, and cannot tier the peak nights Austin rewards. The curve does all three.
+
+### The two ways hosts lose
+
+There are exactly two failure modes, and they sit on opposite ends of the same spectrum.
+
+The first is the panic-discount: dumping prime nights the moment an event calendar looks empty, because the host has mistaken a slow-building event pace for weak demand. The second is the greed-hold: anchoring so high that the calendar never fills, the Las Vegas trap in its purest form. The entire discipline of event pricing is sitting calmly between the two, neither flinching at a quiet month eight nor falling in love with a number the market has already moved past.
+
+### The minimum-stay and length-of-stay levers
+
+The operational mechanics matter as much as the headline rate. Match your minimum-stay to the event window, commonly three nights, but avoid over-aggressive minimums that strand single orphan nights and suppress occupancy. Think through the build and teardown nights and the Thursday and Sunday shoulders, where partial-weekend guests live. And watch for the search-outward demand that appears once track-adjacent inventory and hotels fill, because that overflow is where satellite properties earn their premium.
+
+This is the layer where a deliberate method separates from guesswork. Our [RevFactor Method](/blog/the-revfactor-method/) lays out how we approach pricing, pacing, and positioning together rather than one at a time.
+
+## The 12-Month F1 Revenue Runbook
+
+Frameworks are only useful if they become a habit. Here is the same logic as a timeline you can act on, with one or two concrete moves at each stage.
+
+**12 months out.** Confirm the race date, set your anchor against last year and your comp set, and decide your tier and positioning.
+
+**6 months out.** Open premium inventory, especially for Miami, set your minimum-stay to the event window, and start monitoring early booking pace.
+
+**90 days out.** Validate pace against the event curve, not a normal weekend, and tune your peak-night premiums.
+
+**30 days out.** Firm up your pricing and capture late high-intent demand, which matters most in Las Vegas, where the calendar fills late.
+
+**Race week.** Manage orphan nights and last-minute pickups, and avoid dumping prime nights prematurely.
+
+If you want the broader framework this runbook sits inside, start with our [revenue management for short-term rentals](/blog/revenue-management-for-short-term-rentals/) pillar guide.
+
+## Common F1 Pricing Mistakes
+
+Every mistake below ties back to a real lesson from an earlier section, which is what makes them worth listing.
+
+- **Treating F1 like a normal weekend.** The booking curve is different, so reading it like a summer Saturday gets you the wrong rate.
+- **Anchoring to last year's headline rate.** The Las Vegas trap. In a correcting market, last year's peak is this year's empty calendar.
+- **Over-aggressive minimum stays.** A four or five night minimum on a three-night event strands orphan nights and suppresses occupancy.
+- **Opening the calendar too late.** The Miami penalty. The group that wanted your villa has already booked someone else's.
+- **Ignoring the build and teardown shoulder.** The nights on either side of the race window hold real, often overlooked, demand.
+- **Chasing average rate at the expense of occupancy, or the reverse.** Vegas proved a lower rate can mean more revenue. Read both together.
+- **Leaving a price untouched on a known annual spike.** A race weekend is the most predictable demand event on your calendar. Pricing it once and walking away is the most avoidable miss of all.
+
+If several of these feel familiar, that is usually the signal an operator has outgrown doing pricing by hand.
+
+## The Bottom Line: Price the Race, Not the Rumor
+
+Come back to the two hosts from the start. The surcharge and the flat January rate are the same mistake wearing different clothes: both treat a race weekend as a single number rather than a curve to manage.
+
+The surge is real and it is capturable. But the operators who win are not the ones with the boldest markup or the safest flat rate. They are the ones who read each race for what it actually is and price the demand curve accordingly. Miami rewards early nerve. Austin rewards steady breadth. Las Vegas rewards discipline. Three races, three instincts, one habit of pricing the market in front of you instead of the one you remember.
+
+Professional revenue management is not a surcharge you remember to add. It is the discipline of layering pricing, pacing, and positioning on top of the right data, every night, across every market. That is the difference between a tool that prices your calendar and a strategy that grows your revenue. If you are weighing whether to keep doing it yourself, our guide on [when to hire an Airbnb revenue management company](/blog/airbnb-revenue-management-company/) walks through the decision, and if you would rather talk it through, you can [book a Discovery Call](/short-term-rental-consultant/).
+
+<div class="rf-band moss">
+  <p class="kicker">The scoreboard</p>
+  <h3>One operating system, three different instincts.</h3>
+  <p>Miami rewards early nerve. Austin rewards steady breadth. Las Vegas rewards discipline. The operators who win price the race in front of them, not the one they remember.</p>
+</div>
