@@ -12,17 +12,24 @@ Strategy:
 Outputs:
   revfactor_keyword_research_ahrefs.csv  — full result set
   revfactor_keyword_top.md                — campaign-ready top picks
+
+Requires AHREFS_API_KEY in the environment — see ~/.config/flightdeck/revfactor-ads.env
 """
 
 from __future__ import annotations
 
 import csv
+import os
 import time
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-API_KEY = "M8K_PtZiP3ZMZnJV-cdgGGPioS_J4YxuXS7RQqSv"
+API_KEY = os.environ.get("AHREFS_API_KEY", "")
+if not API_KEY:
+    raise SystemExit(
+        "Missing AHREFS_API_KEY env var — source ~/.config/flightdeck/revfactor-ads.env"
+    )
 BASE = "https://api.ahrefs.com/v3"
 COUNTRY = "us"
 HERE = Path(__file__).parent

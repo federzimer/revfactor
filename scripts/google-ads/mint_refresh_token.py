@@ -4,8 +4,11 @@ Opens the browser, you log in as aaron@thriveagency.com and grant the
 'adwords' scope, the script captures the auth code via a localhost
 callback, exchanges it for a refresh token, and writes the full
 google-ads.yaml config that the google-ads-python client library expects.
+
+Requires GOOGLE_ADS_DEVELOPER_TOKEN in the environment — see ~/.config/flightdeck/revfactor-ads.env
 """
 
+import os
 from pathlib import Path
 import yaml
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -14,7 +17,11 @@ HERE = Path(__file__).parent
 CLIENT_SECRETS_FILE = HERE / "oauth_client.json"
 OUTPUT_YAML = HERE / "google-ads.yaml"
 
-DEVELOPER_TOKEN = "TAVLprDp4xahVBF66z1o6Q"
+DEVELOPER_TOKEN = os.environ.get("GOOGLE_ADS_DEVELOPER_TOKEN", "")
+if not DEVELOPER_TOKEN:
+    raise SystemExit(
+        "Missing GOOGLE_ADS_DEVELOPER_TOKEN env var — source ~/.config/flightdeck/revfactor-ads.env"
+    )
 LOGIN_CUSTOMER_ID = "8226967901"
 
 SCOPES = ["https://www.googleapis.com/auth/adwords"]

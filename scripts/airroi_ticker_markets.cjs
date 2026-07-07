@@ -1,9 +1,14 @@
 // Pull market summaries for ~12 US STR archetypes so I can decide which
 // markets and metrics to feature in the journal-index ticker.
+// Requires AIRROI_API_KEY in the environment — see ~/.config/flightdeck/revfactor-ads.env
 const fs = require('fs');
 const path = require('path');
 
-const KEY = '7MbvQHvzOK4fhF5IT02B10VesLaBLND7E3JM93Ld';
+const KEY = process.env.AIRROI_API_KEY;
+if (!KEY) {
+  console.error('Missing AIRROI_API_KEY env var — source ~/.config/flightdeck/revfactor-ads.env');
+  process.exit(1);
+}
 
 const MARKETS = [
   { country: 'United States', region: 'Tennessee',     locality: 'Gatlinburg' },

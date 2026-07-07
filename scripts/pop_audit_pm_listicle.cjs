@@ -4,7 +4,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const POP_API_KEY = process.env.POP_API_KEY || 'DEV_PACKAGE_ef3f98cff0494c82';
+// Requires POP_API_KEY in the environment — see ~/.config/flightdeck/revfactor-ads.env
+const POP_API_KEY = process.env.POP_API_KEY;
+if (!POP_API_KEY) {
+  console.error('Missing POP_API_KEY env var — source ~/.config/flightdeck/revfactor-ads.env');
+  process.exit(1);
+}
 const TARGET_URL = 'https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/blog/best-airbnb-property-managers-with-dynamic-pricing-2026/';
 const KEYWORD = 'best airbnb property managers';
 const LOCATION = 'United States';
