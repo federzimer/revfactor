@@ -50,6 +50,13 @@ _image-gallery/
 *.syncthing.*.tmp
 .syncthing.*.tmp
 
+# Developer handoff doc — contains live secrets, never commit/push
+JLO-HANDOFF.md
+
+# Jlo handoff package — secrets file & action list, never commit/push
+jlo-handoff/RevFactor-Secrets-LastPass.md
+jlo-handoff/INSTRUCTIONS-FOR-AARON.md
+
 # Google Ads + OAuth secrets — never commit
 scripts/google-ads/google-ads.yaml
 scripts/google-ads/oauth_client.json

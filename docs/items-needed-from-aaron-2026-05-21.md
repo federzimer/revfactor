@@ -15,7 +15,7 @@ Ranked by what's blocking the next deploy. Pin a slack thread or reply inline.
 
 ### 2. Confirm sender & recipient defaults are right
 - Default sender (`DISCOVERY_NOTIFY_FROM`): `RevFactor <notifications@revfactor.io>` — confirm or swap.
-- Default recipients (`DISCOVERY_NOTIFY_TO`): `aaron@procloser.ai, federico@blackbirdhm.com` — confirm or add CC list.
+- Default recipients (`DISCOVERY_NOTIFY_TO`): `notifications@revfactor.io, federico@blackbirdhm.com` — confirm or add CC list.
 
 ---
 

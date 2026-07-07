@@ -21,7 +21,7 @@ Pulled directly from the Fireflies transcript:
 | 2 | Share **content strategy document** with blog pillars and distribution plan | 18:00 | ⚠️ Partial — verbally walked through 6 categories on the call; no written doc circulated |
 | 3 | Develop **controlled forums resembling Private Blog Networks** for niche authority (GEO) | 30:00 | 🟡 Started — 1 custom subreddit `r/STRRevenueTips` + 1 custom Quora space `strrevenuetips.quora.com` live. Was framed as "a couple of forums" — only one of each shipped so far. |
 | 4 | Begin basic backlink tasks (profile listings + citations) **immediately after blog publishing** | 1:02:47 | ❌ Not started. No profile listings (Crunchbase, G2, GoodFirms, Capterra, Clutch, Manifest, BNI directories, etc.) submitted. |
-| 5 | **Provide detailed backlink + citation plan** similar to Thrive/Procloser deliverables for Aaron's review | 1:04:19 | ❌ Not delivered. On the call: "I haven't created a plan for backlinks as of now." Aaron asked again at the close: "Can you give me a more detailed plan like you did for Thrive and Procloser?" Avinash: "I'll do that, I'll do that." 18 days later, still nothing. |
+| 5 | **Provide detailed backlink + citation plan** similar to Thrive and another client's deliverables for Aaron's review | 1:04:19 | ❌ Not delivered. On the call: "I haven't created a plan for backlinks as of now." Aaron asked again at the close: "Can you give me a more detailed plan like you did for Thrive and another client?" Avinash: "I'll do that, I'll do that." 18 days later, still nothing. |
 | 6 | LinkedIn posts 3x/week (founder + RevFactor profile, with reposting protocol) | (call body) | ❓ Status unknown — need to verify with Federico |
 | 7 | YouTube shorts strategy + Vidiq purchase for keyword research | (call body) | ❓ Vidiq purchase status unknown |
 | 8 | 6 pillar pages + LLMs.txt + author bio + entity-consistent branding (weeks 1–2) | (call body) | ❓ Need delivery confirmation |
@@ -92,11 +92,11 @@ These are the **"basic backlink tasks"** Avinash described as "starting tomorrow
 
 ## 4. The single most important missing deliverable
 
-**A written backlink + citation plan modeled after the Thrive / Procloser deliverables.**
+**A written backlink + citation plan modeled after the Thrive and another client deliverables.**
 
 Avinash agreed to this twice on the call:
 - At 1:04:19 as a formal action item
-- Again at 1:18:00 (call wrap-up) when Aaron asked specifically: *"Can you give me a more detailed plan like you did in this document for Thrive and Procloser, so I can know better, exactly what you're planning for the link building and citations for those sites?"*
+- Again at 1:18:00 (call wrap-up) when Aaron asked specifically: *"Can you give me a more detailed plan like you did in this document for Thrive and another client, so I can know better, exactly what you're planning for the link building and citations for those sites?"*
 
 Avinash: *"I'll do that, I'll do that."*
 
@@ -178,7 +178,7 @@ Goal: **Genuine engagement on the highest-cited UGC surfaces — Reddit (485 cit
 ## 7. What I need from GetCito (asks for Monday)
 
 ### By end of this week (2026-05-16):
-1. **Written backlink + citation plan** modeled after the Thrive / Procloser docs (the deliverable promised on 4/22)
+1. **Written backlink + citation plan** modeled after the Thrive and another client docs (the deliverable promised on 4/22)
 2. **Status report on the 8 blogs scheduled for May** — what's published, what's drafted, what's late
 3. **Status on the 6 pillar pages + LLMs.txt + author bio** (weeks 1–2 deliverables, should be done)
 4. **Status on profile listings** — what's been submitted, where (Crunchbase, G2, GoodFirms, Clutch, DesignRush, Capterra, HotelTechReport, VRMA, BiggerPockets)

@@ -10,7 +10,7 @@
 
 The DKIM/SPF/DMARC values rotate per Resend account, so grab the live values rather than relying on the older doc.
 
-1. Sign in at https://resend.com/login (account: `aaron@procloser.ai`).
+1. Sign in at https://resend.com/login (the RevFactor Resend account).
 2. Sidebar → **Domains** → `revfactor.io`.
 3. The page shows the four records Resend wants. Keep this tab open.
 
@@ -90,7 +90,7 @@ The Discovery Call API endpoint reads `RESEND_API_KEY` from the Vercel environme
 5. Redeploy: **Deployments** → latest `cluster-builds-2026-05-15` deploy → **⋯** → **Redeploy** (or push any commit to the branch to trigger a new build).
 
 **Optional overrides** — same Environment Variables panel:
-- `DISCOVERY_NOTIFY_TO` — comma-separated recipient list. Default if unset: `aaron@procloser.ai,federico@blackbirdhm.com`.
+- `DISCOVERY_NOTIFY_TO` — comma-separated recipient list. Default if unset: `notifications@revfactor.io,federico@blackbirdhm.com`.
 - `DISCOVERY_NOTIFY_FROM` — sender. Default if unset: `RevFactor <notifications@revfactor.io>`.
 
 ---
@@ -103,14 +103,14 @@ Once Vercel redeployed AND the domain is `verified` in Resend:
 curl -sS -X POST "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/api/discovery-lead" \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test+nopath@procloser.ai",
+    "email": "test+nopath@revfactor.io",
     "hasProperty": false,
     "source": "smoke-test",
     "pageUrl": "https://www.revfactor.io/"
   }'
 ```
 
-Expected response: `{"ok":true}` (HTTP 200). Within ~5 seconds you should see a notification email arrive at `aaron@procloser.ai` (and `federico@blackbirdhm.com` if you didn't override `DISCOVERY_NOTIFY_TO`) from `notifications@revfactor.io`, with subject `RevFactor lead (no property yet) — test+nopath@procloser.ai`.
+Expected response: `{"ok":true}` (HTTP 200). Within ~5 seconds you should see a notification email arrive at `notifications@revfactor.io` (and `federico@blackbirdhm.com` if you didn't override `DISCOVERY_NOTIFY_TO`) from `notifications@revfactor.io`, with subject `RevFactor lead (no property yet) — test+nopath@revfactor.io`.
 
 Repeat with the PM-company payload:
 
@@ -118,7 +118,7 @@ Repeat with the PM-company payload:
 curl -sS -X POST "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/api/discovery-lead" \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test+pm@procloser.ai",
+    "email": "test+pm@revfactor.io",
     "hasProperty": true,
     "isPM": true,
     "source": "smoke-test",
@@ -126,7 +126,7 @@ curl -sS -X POST "https://revfactor-git-cluster-builds-2b123a-federico-zimermans
   }'
 ```
 
-Subject should land: `RevFactor lead (PM company) — test+pm@procloser.ai`.
+Subject should land: `RevFactor lead (PM company) — test+pm@revfactor.io`.
 
 Also verify the row landed in Supabase:
 
@@ -151,5 +151,5 @@ Also verify the row landed in Supabase:
 ## After verification
 
 - Delete this doc (or move to `docs/_archive/`) once it's all set up.
-- Confirm both `aaron@procloser.ai` and `federico@blackbirdhm.com` see the test emails. If Fede sees nothing, check his spam folder or add an inbox filter.
+- Confirm both `notifications@revfactor.io` and `federico@blackbirdhm.com` see the test emails. If Fede sees nothing, check his spam folder or add an inbox filter.
 - The same Resend domain enables the existing newsletter sender (`scripts/newsletter/`) which is currently using `onboarding@resend.dev` as a fallback. Once verified you can swap the newsletter `from` to `journal@revfactor.io`.

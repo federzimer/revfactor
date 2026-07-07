@@ -10,7 +10,7 @@
 const { test, expect } = require('@playwright/test');
 
 const RUN_ID = Date.now();
-const testEmail = (page, tag) => `aaron+rftest-${RUN_ID}-ppc-${page}-${tag}@procloser.ai`;
+const testEmail = (page, tag) => `qa+rftest-${RUN_ID}-ppc-${page}-${tag}@revfactor.io`;
 
 const PPC_PAGES = [
   { path: '/airbnb-pricing-strategy/', label: 'airbnb-pricing-strategy' },

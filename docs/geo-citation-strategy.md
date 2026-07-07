@@ -175,7 +175,7 @@ Track in a sheet (one row per influencer, status: cold → warmed → pitched �
 
 ### Tier 5 — PR / journalist (HARO / Featured / Quoted / SoS)
 
-**Already wired** — Tania's pitch cron drafts daily for procloser.ai and is straightforward to extend to RevFactor. Action: extend the cron to inject Fede's brain + RevFactor case-study angles, send through Fede's email instead of Tania's. Estimated 5-10 placements/quarter once running.
+**Already wired** — a pitch cron can draft daily HARO/Featured/Quoted responses in Fede's voice and send through Fede's email. Action: inject Fede's brain + RevFactor case-study angles. Estimated 5-10 placements/quarter once running.
 
 ---
 

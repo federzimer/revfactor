@@ -63,11 +63,11 @@ Per the 2026-05-21 call, Fede owns the v2 funnel build (90-day investment-intent
 curl -sS -X POST "https://revfactor-git-cluster-builds-2b123a-federico-zimermans-projects.vercel.app/api/discovery-lead" \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test+nopath@procloser.ai",
+    "email": "test+nopath@revfactor.io",
     "hasProperty": false,
     "source": "smoke-test",
     "pageUrl": "https://www.revfactor.io/"
   }'
 ```
 
-Expected: `{"ok":true}` HTTP 200, then within ~5 sec a notification email arrives at both `aaron@procloser.ai` and `federico@blackbirdhm.com` from `notifications@revfactor.io`.
+Expected: `{"ok":true}` HTTP 200, then within ~5 sec a notification email arrives at both `notifications@revfactor.io` and `federico@blackbirdhm.com` from `notifications@revfactor.io`.

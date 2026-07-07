@@ -20,7 +20,7 @@ This document is the action list extracted from the call. Group A is what's alre
 | Self-host path → existing Cal.com embed | ✅ |
 | Supabase `discovery_leads` table + RLS | ✅ |
 | `api/discovery-lead.ts` Vercel edge function | ✅ |
-| Resend notification email → aaron@procloser.ai + federico@blackbirdhm.com | ✅ (needs `RESEND_API_KEY` env var in Vercel) |
+| Resend notification email → notifications@revfactor.io + federico@blackbirdhm.com | ✅ (needs `RESEND_API_KEY` env var in Vercel) |
 
 **Blocker before this is fully live:** Vercel env var `RESEND_API_KEY` needs to be set on the project. Without it the lead still saves, but no notification email goes out.
 

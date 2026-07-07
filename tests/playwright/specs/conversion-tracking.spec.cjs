@@ -11,7 +11,7 @@
 const { test, expect } = require('@playwright/test');
 
 const RUN_ID = Date.now();
-const testEmail = (tag) => `aaron+rftest-${RUN_ID}-conv-${tag}@procloser.ai`;
+const testEmail = (tag) => `qa+rftest-${RUN_ID}-conv-${tag}@revfactor.io`;
 
 // Sniff dataLayer for a payload matching predicate; resolve with the first
 // match within `timeoutMs` ms.

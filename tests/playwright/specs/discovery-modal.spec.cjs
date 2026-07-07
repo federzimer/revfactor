@@ -6,13 +6,13 @@
 //   3. UI:  Hero CTA → modal opens → Q1 "Yes" → Q2 "PM company" → email → submit → "done"
 //   4. UI:  Hero CTA → modal opens → Q1 "Yes" → Q2 "Self-host" → Cal.com iframe mounts
 //
-// Test emails are prefixed `aaron+rftest-` so they can be filtered later
-// per the filter-test-bookings memory rule.
+// Test emails are prefixed `qa+rftest-` so they can be filtered later
+// per the filter-test-bookings rule.
 
 const { test, expect } = require('@playwright/test');
 
 const RUN_ID = Date.now();
-const testEmail = (tag) => `aaron+rftest-${RUN_ID}-${tag}@procloser.ai`;
+const testEmail = (tag) => `qa+rftest-${RUN_ID}-${tag}@revfactor.io`;
 
 test.describe('Discovery modal — API direct', () => {
   test('no_property path returns ok', async ({ request, baseURL }) => {

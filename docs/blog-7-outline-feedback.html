@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 7 Outline — Strategic Feedback (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .blue table { font-size: 13px; }
+  .blue th, .blue td { border-color: #b6c8e8; }
+  .blue th { background: #e0eaff; }
+  .blue.banner { background: #1a4fbf; color: #fff; border-left-color: #0a2e80; padding: 14px 18px; }
+  .blue.banner strong { color: #fff; }
+  .blue.banner table th, .blue.banner table td { border-color: #5276c8; color: #fff; }
+  .blue.banner table th { background: #2a5fcf; }
+  .red { color: #8b1a1a; background: #fff0f0; border-left: 4px solid #8b1a1a; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .red strong { color: #5a0000; }
+  .original { font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
+  .resolved { color: #0a7a3c; font-weight: bold; }
+  .green { color: #0a7a3c; background: #f0fff5; border-left: 4px solid #0a7a3c; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .green strong { color: #0a4f25; }
+  .green .label { color: #0a4f25; }
+  .legend { background: #f8f8f4; border: 1px solid #ddd; padding: 12px 16px; margin: 16px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 13px; }
+  .legend span { display: inline-block; margin-right: 18px; }
+  .legend .swatch { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Blog 7 Outline — Strategic Feedback</h1>
+<p class="original"><strong>Project:</strong> RevFactor.io blog #7<br>
+<strong>Title:</strong> Airbnb Revenue Management Companies: What They Do and When to Hire One<br>
+<strong>Author Attribution:</strong> Federico Zimerman, Founder, RevFactor<br>
+<strong>Target Length:</strong> 3,400–4,000 words<br>
+<strong>Content Type:</strong> Commercial-investigation pillar / hiring decision guide<br>
+<strong>Brief Source:</strong> GetCito (delivered 2026-05-26, owner muskan418940@gmail.com)<br>
+<em>Feedback added by: RevFactor team — sourced from live revfactor.io blog content (Blog 4 listicle, Blog 5 property-managers listicle, pillar, ADR vs RevPAR, RevFactor Method), case-study allocation matrix (updated 2026-05-27), Federico's persona guide, and live SERP audit (US, 2026-05-27, parallel agent).</em></p>
+
+<div class="legend">
+<strong>Color key:</strong>
+<span><span class="swatch" style="background:#222"></span> Original brief (black)</span>
+<span><span class="swatch" style="background:#1a4fbf"></span> Our feedback (blue)</span>
+<span><span class="swatch" style="background:#8b1a1a"></span> Critical / blocker (red)</span>
+<span><span class="swatch" style="background:#0a7a3c"></span> Resolved / positive (green)</span>
+</div>
+
+<div class="red">
+<p class="label-red">Top-line decision (read this first)</p>
+<p>This brief is <strong>structurally well-built</strong> — sourced stats, named case studies, banned-phrases enforced, $320/$256/$125 pricing verified against Stripe. Best-constructed brief GetCito has shipped to date. We're greenlighting the URL.</p>
+<p><strong>SERP audit verdict (US, 2026-05-27):</strong> Coexistence with Blog 4 (<code>/blog/best-str-revenue-management-companies-2026</code>, live 2026-05-15) is feasible — the two queries currently resolve to different SERP types (decision-guide SERP vs listicle SERP). RevFactor doesn't rank top-20 for either "Airbnb revenue management company" or "STR revenue management company" with existing URLs. The pillar + dynamic-pricing guide target the discipline, not the buyer query. This new URL fills a real gap — IF it ships disciplined.</p>
+<p><strong>Decision: ship Blog 7 as a decision guide.</strong> Five hard constraints GetCito must respect — these are not suggestions:</p>
+<ol>
+<li><strong>Decision-guide format, NOT a parallel listicle.</strong> No ranked list of companies. Ends with one recommendation (RevFactor) + a soft "see our full comparison" link to Blog 4. Self-canonical. If the draft drifts into listicle territory, we'll send it back.</li>
+<li><strong>Word count: 2,400–2,800</strong> (NOT 3,400–4,000). Top-10 competitors sit at 2,200–3,000. The inflated word count in the brief signals the listicle drift this URL has to avoid. Cut tightly.</li>
+<li><strong>H1 pivot to: <em>"Airbnb Revenue Management Company: When (And When Not) to Hire One"</em></strong> (over both options A and B in the brief). Anchors the decision-stage intent ("hire an Airbnb revenue manager" — 70–140/mo, KD ~25 — the highest-intent secondary), differentiates cleanly from Blog 4's listicle H1, signals the buyer's-guide format Google's already returning for this query.</li>
+<li><strong>De-duplicate against Blog 4 throughout.</strong> Blog 4 already does ~70% of what this brief proposes:
+  <ul>
+  <li>Three Models framework (Software / Managed RM / Bundled PM) — Blog 4 §"The Three Models of STR Revenue Management" owns the framework. <strong>Blog 7 §3 must defer to Blog 4's naming and link to Blog 4 for the framework explainer.</strong></li>
+  <li>"ADR up / RevPAR sliding" cold-open scenario — Blog 4's "When the Numbers Look Right and the Year Still Misses" uses this. <strong>Pick a different hook for Blog 7</strong> (see §"Opening Hook" feedback below).</li>
+  <li>RevFactor pricing tiers $320 → $256 / $125 onboarding callout — Blog 4 publishes the same table. <strong>Blog 7 can include the table but must lead with a different framing</strong> (e.g., ROI math first, then table).</li>
+  <li>"Why don't most STR RM companies publish pricing?" FAQ — Blog 4 owns this answer. Drop from Blog 7 FAQ.</li>
+  <li>"How much can a revenue management company increase my Airbnb revenue?" FAQ — Blog 4 owns this. Drop from Blog 7 FAQ.</li>
+  <li>Beyond Pricing Pro tier distinction (CSM ≠ managed RM) — Blog 4 covers. Don't re-explain in Blog 7 §3 lead-in; link out.</li>
+  <li>Flat-fee vs %-of-revenue incentive alignment argument — Blog 4 FAQ owns. Drop from Blog 7 FAQ; reference once in §6 then move on.</li>
+  <li>Federico voice marker <em>"Let me show you why the dashboard was lying to her"</em> — Blog 4 uses verbatim. Use a different Federico voice marker.</li>
+  </ul>
+</li>
+<li><strong>Refactor.ai disambiguation is missing.</strong> Chronic across briefs. First brand mention in §8 body needs the parenthetical: <em>"RevFactor (revfactor.io) is a managed STR revenue management service founded by Federico Zimerman; it is unrelated to RevFactor.ai, an unrelated SaaS product."</em> FAQ block needs a "What is RevFactor?" entry repeating the disambiguation. Non-negotiable — applies to every RevFactor post going forward.</li>
+<li><strong>Blog 7 must stand alone with minimal repeat from the rest of the cluster.</strong> If de-duplication leaves Blog 7 looking like a cross-link directory ("see the pillar for X, see Blog 4 for Y, see ADR vs RevPAR for Z"), the URL doesn't justify itself. The standard for shipping: every section either (a) owns content no other RevFactor URL covers, or (b) adds a unique angle / data point / framing to content other URLs cover. See §"What Blog 7 absorbs from Blog 6" and §"Unique data Blog 7 should own" below for the load-bearing additions that make this URL standalone.</li>
+</ol>
+</div>
+
+<div class="blue banner">
+<p class="label" style="color:#d8f0e0">Recommended cluster shape (after SERP audit verdict)</p>
+<table>
+<tr><th style="color:#d8f0e0">URL</th><th style="color:#d8f0e0">Status</th><th style="color:#d8f0e0">Recommended role</th></tr>
+<tr><td>/blog/best-str-revenue-management-companies-2026 (Blog 4)</td><td>Live 2026-05-15, 34-min read</td><td><strong>Owns the "best STR RM companies 2026" listicle SERP + the Three Models framework + the RevFactor pricing transparency callout.</strong> No structural changes. Receives a "decision guide companion" link from Blog 7.</td></tr>
+<tr><td>/blog/airbnb-revenue-management-company (this brief, recommended path)</td><td>Planned — SHIP as decision guide</td><td><strong>Owns the "Airbnb revenue management company" decision-guide SERP</strong> (different from Blog 4's listicle SERP per audit). Hard guardrails: 2,400–2,800 words, no ranked list of companies, ends with one recommendation (RevFactor) + soft link to Blog 4, differentiated H1 ("When (And When Not) to Hire One"), self-canonical. <strong>If GetCito drifts into a parallel listicle, kill the URL.</strong></td></tr>
+<tr><td>/blog/best-airbnb-property-managers-with-dynamic-pricing-2026 (Blog 5)</td><td>Live</td><td><strong>Already answers "managed RM vs full PM" — verify Blog 7's §3 comparison doesn't duplicate.</strong> Blog 5 FAQ Q1 covers same ground.</td></tr>
+</table>
+<p style="margin-top:8px"><strong>Why this works:</strong> per the SERP audit, the live top-10 for "Airbnb revenue management company" returns service pages + decision guides (Truvi, AirDNA, Host Coach) — zero ranked listicles. The "best STR RM companies 2026" SERP returns listicles + comparison posts. Google is treating these as two distinct intents today, so Blog 4 + Blog 7 can coexist IF they stay in their respective formats. Cross-link bidirectionally; canonical to themselves.</p>
+<p style="margin-top:8px"><strong>Money keyword, not traffic keyword:</strong> realistic SEO traffic prize is 30–80 visits/mo at maturity. This page exists to convert qualified leads, not pull traffic. CPC ~$4–8 in paid signals the commercial value — a single qualified lead from this page is worth 20× its monthly traffic value.</p>
+</div>
+
+<h2>1. Strategic Overview</h2>
+
+<table class="original">
+<tr><th>Element</th><th>Brief value</th></tr>
+<tr><td>Primary Keyword</td><td>Airbnb revenue management company</td></tr>
+<tr><td>Secondary Keywords</td><td>short-term rental revenue management company; STR revenue management company; hire an Airbnb revenue manager; Airbnb revenue management service; vacation rental revenue management company; outsource Airbnb pricing; Airbnb pricing management service; revenue management vs property management Airbnb; flat fee Airbnb revenue management</td></tr>
+<tr><td>Search Intent</td><td>Commercial investigation</td></tr>
+<tr><td>Target Word Count</td><td>3,400–4,000 words</td></tr>
+</table>
+
+<div class="red">
+<p class="label-red">Critical — secondary keyword overlap with Blog 4</p>
+<p>Six of the nine secondary keywords are <strong>head terms Blog 4 either already ranks for or directly targets</strong>:</p>
+<ul>
+<li><em>short-term rental revenue management company</em> — Blog 4 H2 + multiple body mentions</li>
+<li><em>STR revenue management company</em> — Blog 4 H2 + multiple body mentions</li>
+<li><em>Airbnb revenue management service</em> — Blog 4 body</li>
+<li><em>vacation rental revenue management company</em> — Blog 4 FAQ</li>
+<li><em>outsource Airbnb pricing</em> — Blog 4 FAQ</li>
+<li><em>flat fee Airbnb revenue management</em> — Blog 4 Three Models framework + RevFactor pricing callout</li>
+</ul>
+<p>Targeting these from a second URL is the textbook definition of cannibalization. If the URL survives the pivot, these have to come off the secondary list and be replaced with sub-intent variants the listicle doesn't own (e.g., "when to hire airbnb revenue manager," "signs I need airbnb revenue management," "airbnb pricing strategy roi calculator").</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — keyword targeting (SERP audit, US, 2026-05-27)</p>
+<p><em>Triangulated estimates — no DataForSEO/Ahrefs MCP this session. Pattern is unambiguous regardless of exact numbers. Validate in Ahrefs before brief sign-off.</em></p>
+<table>
+<tr><th>Keyword</th><th>Vol/mo EST</th><th>KD EST</th><th>Intent</th><th>AI Overview</th><th>Verdict</th></tr>
+<tr><td><strong>Airbnb revenue management company</strong> (primary)</td><td><strong>50–90</strong></td><td>25–32</td><td>Commercial Investigation</td><td>Low</td><td>Money KW. Low volume, high conversion.</td></tr>
+<tr><td><strong>hire an Airbnb revenue manager</strong></td><td><strong>70–140</strong></td><td>22–28</td><td>Decision-Stage Info</td><td>Maybe</td><td><strong>Use as H1 hook — highest-intent informational anchor</strong></td></tr>
+<tr><td>outsource Airbnb pricing</td><td>80–160</td><td>18–25</td><td>Info → Commercial</td><td>Likely</td><td>Easier ranking, broader funnel — use as a secondary H2</td></tr>
+<tr><td>Airbnb revenue management service</td><td>60–110</td><td>28–35</td><td>Commercial</td><td>No</td><td>SaaS-dominated SERP; difficult — leave to body</td></tr>
+<tr><td>short-term rental revenue management company</td><td>40–80</td><td>30–38</td><td>Commercial</td><td>No</td><td><strong>Pacer owns #1 — strong competitor on this term</strong></td></tr>
+<tr><td>STR revenue management company</td><td>20–40</td><td>28–35</td><td>Commercial</td><td>No</td><td><strong>Freewyld Foundry dominates "STR RM" cluster</strong></td></tr>
+<tr><td>vacation rental revenue management company</td><td>30–60</td><td>30–36</td><td>Commercial</td><td>No</td><td>Beyond + Streamline + Awning dominant — PMS-heavy SERP</td></tr>
+<tr><td>flat fee Airbnb revenue management</td><td>&lt;20</td><td>15–22</td><td>Decision-Stage Comm</td><td>No</td><td><strong>RevFactor's exact positioning, near-zero competition — easy long-tail win</strong></td></tr>
+<tr><td>what does an Airbnb revenue management company do</td><td>30–80</td><td>12–18</td><td>Info</td><td><strong>Likely Yes</strong></td><td>Featured-snippet target — Section 2 already shapes for this</td></tr>
+<tr><td>how much does Airbnb revenue management cost</td><td>50–120</td><td>14–22</td><td>Info → Commercial</td><td><strong>Yes</strong></td><td>Strong AIO opportunity — Section 6 ROI math + pricing table is the answer</td></tr>
+<tr><td>signs I need to hire a revenue management company</td><td>&lt;20</td><td>8–14</td><td>Decision-Stage Info</td><td>Likely</td><td>Section 5 6-signs list captures this</td></tr>
+<tr><td>is hiring an Airbnb revenue manager worth it</td><td>&lt;20</td><td>10–15</td><td>Decision-Stage Info</td><td>Likely</td><td>Snippet bait — pair with cost block</td></tr>
+</table>
+<p><strong>Cannibalization check — none of RevFactor's existing URLs currently rank top-20 for the primary or "STR revenue management company"</strong>. The pillar + dynamic-pricing guide target the discipline, not the buyer query. This URL fills a real gap.</p>
+<p><strong>Top SEO target verdict:</strong> Anchor on "Airbnb revenue management company" (primary, body + meta) with "hire an Airbnb revenue manager" as the H1 hook. Skip the listicle treatment. Frame as a buyer's decision framework that ends with RevFactor as the obvious answer.</p>
+</div>
+
+<div class="green">
+<p class="label">Positive — clean wedge angles vs top-10 (none of which RevFactor's competitors lead with)</p>
+<ol>
+<li><strong>Flat-fee model</strong> — every top-10 result quotes commission %; none lead with flat fee. RevFactor's wedge.</li>
+<li><strong>Co-host access model</strong> — unique to RevFactor. None of the competitors describe this.</li>
+<li><strong>Real RevPAR data</strong> — AirDNA hides it behind their data product; PriceLabs uses generic ranges. RevFactor can publish concrete numbers.</li>
+<li><strong>Decision-tree, not feature list</strong> — "should I hire?" flowchart based on portfolio size, ADR, market complexity.</li>
+<li><strong>FAQ schema with the 5 decision-stage long-tails baked in</strong> — guarantees AI Overview citation eligibility.</li>
+</ol>
+<p>The brief already nails 1, 2, and 5. Add #3 (publish concrete numbers in §6 — Erin Warren multi-property lifts are the strongest specific RevPAR-data set RevFactor can lead with) and #4 (the decision-tree visual could be in §5 or §7 — none of the top-10 has it).</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — competitor presence to address in the brief</p>
+<ul>
+<li><strong>Pacer (pacerrev.com)</strong> — currently ranks #1 for "short-term rental revenue management company." Strong competitor on RevFactor's primary secondary KW. Blog 7 §3 naming Pacer as a Managed RM example is fine; Blog 4 already does the same. Be aware they're the SERP gatekeeper on that secondary.</li>
+<li><strong>Freewyld Foundry</strong> — confirmed exists; owns 3 of top-10 for "STR revenue management" cluster. Not a phantom entity per the standing check. <strong>Keep in §3 comparison table</strong> — verified.</li>
+<li><strong>Vacasa, AvantStay, RedAwning, Evolve</strong> — absent from this SERP. They target "Airbnb management" not "RM company" — different cluster. Brief's framing as "full-service property manager" comparison is consistent with Blog 4 + Blog 5.</li>
+</ul>
+</div>
+
+<h2>2. Market Context Stats — fact-check</h2>
+
+<div class="green">
+<p class="label">Positive — first GetCito brief with sourced market stats</p>
+<p>The "Market Context" table cites AirDNA, StayFi, AirROI, Research Nester, Key Data — primary or secondary-sourceable. This is a meaningful step up from prior briefs (Blog 6 had zero outside stats). The instruction to "distribute across sections where they add contextual weight" is exactly the right framing for E-E-A-T.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — verify each stat against primary source before drafting</p>
+<table>
+<tr><th>Stat</th><th>Brief value</th><th>Verification status</th><th>Action</th></tr>
+<tr><td>US STR listings projected 2026</td><td>~1.77M</td><td>Plausible per AirDNA 2026 Outlook; secondhand StayFi citation</td><td>Cite primary AirDNA report, not StayFi compilation</td></tr>
+<tr><td>US STR supply growth 2026</td><td>+4.6% (vs 20% 2021–22 peak)</td><td>Plausible; matches AirDNA's reported supply moderation</td><td>Cite primary AirDNA report</td></tr>
+<tr><td>National avg US RevPAR 2025</td><td>$119.27</td><td>Specific to AirDNA's national rollup; varies by source</td><td>OK if AirDNA-attributed</td></tr>
+<tr><td>National avg US ADR 2025</td><td>$246.62</td><td>Same as above</td><td>OK if AirDNA-attributed</td></tr>
+<tr><td>National avg US occupancy 2025</td><td>48.4%</td><td>Same as above</td><td>OK</td></tr>
+<tr><td>RevPAR growth projected 2026</td><td>~0.5–0.6%</td><td>Modest projection consistent with AirDNA's 2026 Outlook</td><td>OK</td></tr>
+<tr><td>Global STR market size 2025</td><td>$140B+</td><td>Multiple sources disagree (Grand View, Research Nester, Statista vary $87B–$140B)</td><td>Drop or qualify ("estimated $87B–$140B depending on source")</td></tr>
+<tr><td>STRs vs hotels RevPAR advantage Q2 2025</td><td>+9 percentage points</td><td>Key Data Dashboard claim; verify quarter + methodology</td><td>Verify against current Key Data report before drafting</td></tr>
+<tr><td>Booking window compression</td><td>27% of 2025 bookings within 7 days of check-in (up from 21%)</td><td>AirROI; consistent with their public commentary</td><td>OK; this is the strongest specific stat in the set — use prominently in §2.3</td></tr>
+<tr><td>Nashville ADR climbed 29.3% / RevPAR +26% Feb 2025 → Feb 2026</td><td>§4 brief proposes this stat</td><td>Specific AirROI claim; needs verification</td><td>Verify before citing; if accurate, strong proof point for the "ADR-and-RevPAR-can-grow-together" frame</td></tr>
+</table>
+</div>
+
+<div class="red">
+<p class="label-red">Stale stat — +18% vs +24% RevPAR</p>
+<p>Brief §6 includes a writer instruction: <em>"The Content Brain notes both +18% (original stat) and +24% (current blog display). Use whichever is on the live site at publication date — do not use both without noting the distinction."</em> Good awareness. <strong>The canonical answer is +24%</strong>, per <code>src/data/portfolio-stats.ts</code> last updated 2026-05-22. Live pillar, Blog 4, and Blog 5 all use +24%. Update brief's writer instruction to specify +24% directly and reference <code>portfolio-stats.ts</code> as the single source of truth so this question doesn't keep getting re-asked.</p>
+</div>
+
+<h2>3. Schema package</h2>
+
+<div class="green">
+<p class="label">Positive — schema selection is correct</p>
+<ul>
+<li><strong>Article, FAQPage, BreadcrumbList, Person</strong> — standard, all correct.</li>
+<li><strong>Review schema on §8 testimonial</strong> — good. Kassidy Warren testimonial as Review schema is the right call; AI engines lift Review-wrapped quotes more reliably than prose quotes.</li>
+</ul>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — add Service schema</p>
+<p>This is the first GetCito brief positioning a managed service explicitly. Add <code>Service</code> schema (Schema.org/Service) on §8 wrapping the RevFactor offering: <code>provider</code> = RevFactor Organization, <code>areaServed</code> = US, <code>offers</code> = Offer with <code>price</code> $320/$256, <code>category</code> = "Revenue Management". This is the highest-leverage schema play for commercial-intent pages and none of the top-10 SERP competitors do it.</p>
+</div>
+
+<h2>4. Section-by-section feedback</h2>
+
+<h3>Key Takeaways Box (before opening hook)</h3>
+
+<div class="blue">
+<p class="label">Feedback — strong format, two fixes</p>
+<ul>
+<li>Bullet 3 — <strong>+18% → +24%</strong> if RevPAR claim included (the brief's takeaways don't include it but the live pillar's stat-block does)</li>
+<li>Strong AEO format — short standalone facts each readable as a snippet answer. Pattern matches pillar's "Key Takeaways" block.</li>
+</ul>
+</div>
+
+<h3>Opening Hook (180–220 words)</h3>
+
+<div class="red">
+<p class="label-red">Critical — hook duplicates Blog 4's hook</p>
+<p>Brief proposes: <em>"The calendar looks normal. Occupancy is decent. But at the end of a season that felt busy, the revenue number is quietly behind where it should be. The pricing tool is on. The settings haven't changed. Nothing looks wrong, and that's exactly the problem."</em></p>
+<p>Blog 4's hook: <em>"Last October, a host managing five properties across two markets sent me an email I've seen some version of at least a dozen times. She wasn't panicking. She was confused… Her ADR was up 18% year-over-year. Her PriceLabs dashboard was clean. Occupancy was holding. And she still finished the season 11% behind her revenue projections."</em></p>
+<p>Same setup, same beats, same frame. <strong>Pick a different hook</strong> — possibilities:</p>
+<ul>
+<li>Open with the <em>cost</em> of waiting (e.g., one missed event weekend = $1,050 = three months of RevFactor's fee — already in §6 ROI math, surfacing it as hook material).</li>
+<li>Open with the moment a host realizes the comp set is outperforming them (§5 sign #6).</li>
+<li>Open with the <em>3rd-property scaling moment</em> — when DIY pricing breaks (§5 sign #1).</li>
+</ul>
+</div>
+
+<h3>Section 1: What Is an Airbnb Revenue Management Company?</h3>
+
+<div class="blue">
+<p class="label">Feedback — strongest section in the brief, two adjustments</p>
+<ul>
+<li><strong>Definition paragraph is well-shaped for snippet capture.</strong> Keep as proposed.</li>
+<li><strong>Federico verbatim quote</strong> ("Revenue management is not just pricing…") — pillar already uses the closely-related Ep. 155 version: <em>"Revenue management isn't just pricing. Pricing is only one part of revenue management."</em> Different excerpt but AI engines treat as substantively identical. Pivot to a quote not in the pillar — Federico's "Software runs the math. People run the business." (allocation matrix lists as available for Blog 2 §5.8 closing — verify Blog 2 hasn't claimed it yet).</li>
+<li><strong>"Vacasa, Casago, Evolve" examples in supporting content</strong> — Blog 4 already names Vacasa, Evolve, AvantStay; Blog 5 covers same set. Stay consistent with how those brands are framed in Blog 5 to avoid contradictions.</li>
+</ul>
+</div>
+
+<h3>Section 2: What a Revenue Management Company Actually Does (Day-to-Day)</h3>
+
+<div class="red">
+<p class="label-red">Critical — Fort Worth + Newport Beach case studies are pillar's primary anchors</p>
+<p>Both case studies in §2 are taken from the pillar's allocation:</p>
+<ul>
+<li><strong>Fort Worth studios +$20K + #2/#5 ranking</strong> — Pillar owns verbatim at line 407 (per case-study allocation: Blog 1 owns Fort Worth as primary anchor for Pillar 2 Inventory Management; the full +$20K story verbatim is off-limits elsewhere).</li>
+<li><strong>Newport Beach 2-night minimum / only 12 listings / premium 4-night booking</strong> — Pillar owns verbatim at line 789. Per allocation: don't reuse.</li>
+</ul>
+<p><strong>Fix options:</strong></p>
+<ol>
+<li>(Preferred if Blog 7 kills) These case studies stay in pillar. No action.</li>
+<li>If Blog 7 ships separately: pivot to <em>different metrics</em> than the pillar uses (allocation matrix rule). For Fort Worth: instead of $20K, surface the search-impressions lift on weekend queries. For Newport Beach: instead of the 12-listings statistic, surface the rank-position improvement.</li>
+<li>Replace with unallocated case studies — Erin Warren portfolio (Tucson + Orcas Island, Q1 2026 numbers, +512% / +285% / +3,789% lifts, attribute to verified RevFactor managed accounts) is unallocated for §2 daily-management framing.</li>
+</ol>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — "What's included" summary table</p>
+<p>Strong format. AI engines lift this kind of clean two-column "service → what it means" table reliably. Keep as designed. Consider adding a row: <em>"Reauthentication / co-host access management"</em> — explicit mention of how RevFactor accesses accounts is a trust signal worth surfacing.</p>
+</div>
+
+<h3>Section 3: Revenue Management Company vs Property Manager vs Pricing Tool</h3>
+
+<div class="red">
+<p class="label-red">Critical — this is the Three Models framework Blog 4 already owns</p>
+<p>Blog 4 names its framework explicitly: "The Three Models of STR Revenue Management" — Software / Managed RM / Bundled PM. Blog 4 owns this framework as a brand-attributable concept ("Get the model wrong, and no amount of vendor quality will fix it"). This brief's §3 rebuilds the same three-way comparison at a second URL.</p>
+<p><strong>If Blog 7 survives the kill:</strong> the §3 comparison MUST defer to Blog 4's Three Models naming and link to Blog 4 for the framework explainer. The comparison table can stay (it's snippet-shaped), but the section needs to position itself as <em>"applying the Three Models framework to the hiring decision specifically"</em> — not as a parallel introduction of the framework.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — competitor naming</p>
+<p>Brief's §3 table names "Pacer, Freewyld Foundry" as Managed RM examples. Two issues:</p>
+<ul>
+<li><strong>Pacer</strong> — confirmed in Blog 4 listicle. Keep.</li>
+<li><strong>Freewyld Foundry</strong> — confirmed via SERP audit (owns 3 of top-10 for "STR revenue management" cluster). Not a phantom. Keep in §3 table. Note: Blog 4 listicle doesn't include Freewyld; flag for Aaron whether to add them to the next Blog 4 refresh for consistency across the cluster.</li>
+<li><strong>Casago (formerly Vacasa)</strong> — this is the right current naming. Verify Blog 5 uses the same framing for consistency.</li>
+</ul>
+</div>
+
+<h3>Section 4: The Metric Most Hosts Are Tracking Wrong</h3>
+
+<div class="red">
+<p class="label-red">Critical — ADR vs RevPAR is already a dedicated live URL</p>
+<p>Brief proposes a 280–340 word ADR-vs-RevPAR primer inside this article. <strong>RevFactor has a published ADR-vs-RevPAR post</strong> at <code>/blog/adr-vs-revpar-airbnb-hosts/</code> (~5,000 words). The brief already proposes linking to it. Inline-duplicating ~300 words of definitional content here creates an internal cannibalization vector — Google indexes both pages on the ADR/RevPAR query and dilutes the dedicated post's authority.</p>
+<p><strong>Fix:</strong> Cut §4 from 280–340 words to 80–120 words. Keep the ADR-up/RevPAR-down scenario (it's the AEO snippet target). Strip the definition box (the ADR vs RevPAR post owns the DefinedTerm schema for these terms). Link prominently. Make this section the bridge into §5 (the 6 Signs) rather than a standalone definitional detour.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — Nashville ADR/RevPAR stat</p>
+<p>The "Nashville ADR climbed 29.3% / RevPAR +26% Feb 2025 → Feb 2026" stat is the strongest single proof point in the brief for the "ADR-and-RevPAR-grow-together-when-strategy-is-right" frame. If verifiable to AirROI, surface it prominently. If not verifiable to a primary source, drop.</p>
+</div>
+
+<h3>Section 5: 6 Signs You've Outgrown DIY Pricing</h3>
+
+<div class="green">
+<p class="label">Positive — this is the strongest unique section in the brief</p>
+<p>Blog 4 doesn't have an equivalent diagnostic. Pillar doesn't have an equivalent diagnostic. Blog 5 doesn't have an equivalent diagnostic. <strong>This is the section to keep regardless of which pivot path lands</strong> — if Blog 7 dies, §5 lifts directly into Blog 4 as a new H2; if Blog 7 narrows to "when to hire," §5 becomes the article's core.</p>
+<p>Each of the 6 signs maps to a recognizable ICP pain point. Each is written as a standalone snippet-extractable answer. The "⚡ GEO Note" instruction (write each as a self-contained AI answer) is exactly the right framing.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — two specific adjustments</p>
+<ul>
+<li><strong>Sign #5 ("paying for PriceLabs but not logging in consistently")</strong> — this is concretely RevFactor's most common acquisition trigger per Federico's persona guide ("most common scenario RevFactor inherits from new clients"). Surface that explicitly. Adds E-E-A-T weight.</li>
+<li><strong>Sign #6 closing Federico quote</strong> (<em>"If you're looking only at your property, you're on an island"</em>) — pillar uses this in §Positioning. Per case-study allocation: don't reuse. Pivot to a different Federico line on comp-set awareness — for example his TikTok line on "you cannot make decisions without momentum" (also allocated to pillar) or pull a fresh line from the brain doc / FireFlies that hasn't been used yet.</li>
+</ul>
+</div>
+
+<div class="green">
+<p class="label">Resolved — Blog 6 §9 absorbed into Blog 7 §5</p>
+<p>Blog 6 outline's §9 ("Are You Ready for Yield Management? A Self-Assessment") was a 7-signal list designed for the same AEO snippet position as Blog 7 §5. Resolution: <strong>Blog 7 §5 absorbs Blog 6's unique signals, becoming the single 7–9 item list in the cluster.</strong> See §4a above for the absorption map. Net: Blog 7 §5 owns the "signs I need a revenue management company" AEO snippet target across all RevFactor URLs; Blog 6 (if it ships at all) does not duplicate.</p>
+</div>
+
+<h3>Section 6: What It Costs and Whether It Pays For Itself</h3>
+
+<div class="blue">
+<p class="label">Feedback — strong section, two fixes</p>
+<ul>
+<li><strong>Pricing table</strong> — verified against Stripe + live site. Correct numbers ($320 → $256 sliding tiers + $125 onboarding). Keep.</li>
+<li><strong>"RevFactor is the only managed STR revenue management company with publicly published pricing"</strong> — Blog 4 makes the identical claim. If Blog 7 ships, the claim has to be consistent with Blog 4's framing. <strong>Alternative</strong>: phrase as <em>"one of the only"</em> if you want to soften the absolute-claim risk (e.g., if Pacer or Freewyld Foundry has published pricing somewhere we haven't found).</li>
+<li><strong>ROI Framework "$350/night × 3-night event weekend = $1,050"</strong> — concrete and useful. Keep. Consider surfacing as a callout box.</li>
+<li><strong>Verified client outcomes block</strong>:
+  <ul>
+  <li>Fort Worth + Nashville + Newport Beach — all pillar's primary anchors. BLOCKED per allocation matrix. Replace with Zoey Berghoff's $30K booking (already in brief — keep), Kassidy Warren's "20% increase most months" (already in brief — keep), and add Erin Warren portfolio Q1 numbers (Tucson Hues +512%, Desert Hues +285%, Orcas Little Stuga +3,789%) as the multi-property proof.</li>
+  </ul>
+</li>
+</ul>
+</div>
+
+<h3>Section 7: What to Look For When Hiring</h3>
+
+<div class="green">
+<p class="label">Positive — strongest evaluation-criteria section in the cluster</p>
+<p>6 criteria each one written as a buyer-evaluation question. The framing ("each criterion should be one that RevFactor meets; let the reader draw the conclusion") is exactly the right voice for trust-building. Blog 4 doesn't have this structure as a discrete section. <strong>Keep this section regardless of pivot path</strong> — it's the strongest brand-positioning content in the brief.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — surface the criteria as Peec-prompt-matched questions</p>
+<p>Convert each criterion's bold lead-in to a question form (e.g., "Do they publish their pricing before the sales call?" → already done; "What metric do they report on?" → already in question form). Six question-headed criteria function as a secondary FAQ-PA structure that AI engines can extract in addition to the formal FAQ in §9. Free AEO leverage.</p>
+</div>
+
+<h3>Section 8: How RevFactor Works</h3>
+
+<div class="blue">
+<p class="label">Feedback — first GetCito brief with a dedicated RevFactor brand block. Three adjustments.</p>
+<ul>
+<li><strong>"Founded in June 2025 by Federico Zimerman and his partner Gaston"</strong> — first time Gaston is named in any GetCito-delivered brief. Verify with Federico whether he wants Gaston named in this framing on a marketing page. Persona guide doesn't mention Gaston explicitly. Aaron's standing rule (CC Gaston on RevFactor emails) implies Gaston is operational, but public attribution as "co-founder partner" may not match how Federico wants the brand framed. <strong>Federico sign-off required before this line ships.</strong></li>
+<li><strong>"Federico developed [the pricing frameworks] while running Blackbird Hospitality"</strong> — keep. This is the right attribution per allocation matrix.</li>
+<li><strong>Property count placeholder [verify at revfactor.io at time of writing]</strong> — current canonical = 198 properties / 24 states / 67 markets per <code>src/data/portfolio-stats.ts</code> (last updated 2026-05-22). Replace placeholder with concrete numbers and reference the canonical source so writer doesn't have to chase it.</li>
+<li><strong>Internal link to /blog/the-revfactor-method</strong> — good. Verify anchor text matches Blog 5's anchor for cluster consistency.</li>
+</ul>
+</div>
+
+<div class="red">
+<p class="label-red">Missing — Refactor.ai disambiguation</p>
+<p>§8 is the natural location for the brand pinning. <strong>Add at first brand mention</strong>: <em>"RevFactor (revfactor.io) is a managed STR revenue management service founded by Federico Zimerman; it is unrelated to RevFactor.ai, an unrelated SaaS product."</em> Also add the disambiguation to FAQ Q "What is RevFactor?" if added (see §9 feedback).</p>
+</div>
+
+<h3>Section 9: FAQ</h3>
+
+<div class="red">
+<p class="label-red">Critical — 6 of 10 FAQs duplicate Blog 4 + pillar FAQ blocks</p>
+<table>
+<tr><th>Brief Q</th><th>Where Else Answered?</th><th>Verdict</th></tr>
+<tr><td>Q1 What is an Airbnb revenue management company?</td><td>Pillar Q12 + Blog 4 §"What You're Actually Buying"</td><td>Keep — different phrasing OK for AEO</td></tr>
+<tr><td>Q2 Difference between RM company and property manager?</td><td>Blog 5 FAQ Q1 (verbatim) + Blog 4 implicit</td><td>Drop, link to Blog 5</td></tr>
+<tr><td>Q3 Do I still need an RM company if I use PriceLabs?</td><td>Pillar Q9 + Blog 4 FAQ</td><td>Drop OR reframe to PriceLabs-specific decision</td></tr>
+<tr><td>Q4 How much does Airbnb RM cost?</td><td>Blog 4 §"Pricing Models" + RevFactor pricing callout</td><td>Drop, link to Blog 4</td></tr>
+<tr><td>Q5 Will an RM company take control of my listing?</td><td>Pillar Q12 + Blog 4 implicit</td><td>Keep — co-host access frame is unique</td></tr>
+<tr><td>Q6 Is revenue management the same as dynamic pricing?</td><td>Pillar Q9 (verbatim) + entire dynamic-pricing post</td><td>Drop — direct duplicate</td></tr>
+<tr><td>Q7 When is it not worth hiring an RM company?</td><td>Not covered elsewhere</td><td>Keep — unique to Blog 7</td></tr>
+<tr><td>Q8 How long does it take to see results?</td><td>Not covered elsewhere</td><td>Keep — unique to Blog 7</td></tr>
+<tr><td>Q9 What metrics should an RM company report on?</td><td>Pillar implicit + §7 of this brief covers</td><td>Drop — §7 owns this</td></tr>
+<tr><td>Q10 Flat-fee vs %-of-revenue model?</td><td>Blog 4 FAQ Q8 (verbatim)</td><td>Drop, link to Blog 4</td></tr>
+</table>
+<p><strong>Net:</strong> 4 of 10 FAQs survive de-duplication. If Blog 7 narrows to "when to hire" (alternative pivot), the surviving 4 FAQs are exactly the readiness/timing cluster the new URL should own.</p>
+<p><strong>Add:</strong> a "What is RevFactor?" FAQ with the Refactor.ai disambiguation. Mirrors the pattern in pillar Q12 + Blog 4 implicit positioning. Every commercial-intent post needs this FAQ to lock the brand entity for AI engines.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — Peec prompt verbatim match</p>
+<p>Pull current Peec prompt list for project <code>or_be14dba6-461f-4a09-8926-ebf75b550157</code> and match surviving FAQs to verbatim Peec phrasing. Same pattern Blog 2 + Blog 6 needed. Specifically target any Peec prompt containing "when to hire," "is it worth hiring," "signs I need," "outsource pricing" — these are the prompts Blog 4 doesn't have a clean FAQ answer for yet.</p>
+</div>
+
+<h3>Section 10: Closing</h3>
+
+<div class="blue">
+<p class="label">Feedback — clean close, one CTA fix</p>
+<ul>
+<li><strong>"Free 30-minute Discovery Call with Federico, bring your PriceLabs comp set or AirDNA dashboard, and walk through where the lift is hiding."</strong> — this CTA is more aggressive than Blog 4's CTA voice ("see what your calendar looks like through a yield management lens"). Aaron's rule: CTA framing should be a strategy conversation, not a product pitch. The "bring your PriceLabs comp set" line is concrete and operational — keep. Drop the "where the lift is hiding" close — too sales-y, slips into "we'll find money" framing. Replace with: <em>"...and walk through what your calendar is doing that you may not be seeing."</em></li>
+<li><strong>Primary CTA link</strong> — verify <code>/short-term-rental-consultant/</code> matches Blog 4's primary CTA target for consistency.</li>
+</ul>
+</div>
+
+<h2>4a. What Blog 7 absorbs from Blog 6</h2>
+
+<div class="blue">
+<p class="label">Migrating contributions — make Blog 7 the home for Blog 6's strongest unique angles</p>
+<p>Blog 6 (Yield Management for STRs) was reviewed separately and recommended for AEO-pivot or kill due to ~80% overlap with the pillar. Two sections from Blog 6 are genuinely unique to the cluster and should be lifted into Blog 7 rather than rebuilt anywhere else.</p>
+<table>
+<tr><th>From Blog 6 outline</th><th>Where it lands in Blog 7</th><th>Why it works here</th></tr>
+<tr><td><strong>Blog 6 §6.2 — Survivorship bias applied to dynamic-pricing algorithm training data</strong></td><td>New Blog 7 H2 between §3 and §4 (or expansion of §3): <em>"Why the Tool Alone Can't Catch the Demand It Doesn't See"</em></td><td>Direct answer to the buyer's question "do I need a human if I already have PriceLabs?" Pillar mentions survivorship bias only in passing for minimum-stay rules; Blog 4 doesn't extend the concept to algorithm training data. This is the cluster's strongest standalone intellectual argument for hiring managed RM. Preserves the verbatim Federico WWII-bombers quote; surrounding prose names Wald correctly.</td></tr>
+<tr><td><strong>Blog 6 §9 — 7-signal yield-management readiness self-assessment</strong></td><td>Merge into Blog 7 §5: combine Blog 6's 7 signals + Blog 7's 6 signs into a single deduplicated list (~7–9 items)</td><td>Two RevFactor URLs running parallel signal-lists is exactly the cannibalization to avoid. Blog 7 §5 absorbs Blog 6's unique signals (e.g., "missed event week with comparable property nearby capitalizing on it" is in both — keep one phrasing). Blog 7 §5 becomes the single AEO snippet target for "signs I need a revenue management company" — vol &lt;20/mo, KD 8–14, easy AIO win.</td></tr>
+<tr><td><strong>Blog 6 §4.3 — "5-night market, 3-night offering, +20% rate, 10% discount for 5+ nights" worked formula</strong> (April 2026 TikTok)</td><td>Blog 7 §2 (Daily Pricing and Calendar Management) — surface as a sidebar example of the kind of decision a revenue manager makes that a tool won't</td><td>Unique tactical content not in pillar or Blog 4. Gives Blog 7 §2 a specific, named formula AI engines can lift.</td></tr>
+<tr><td><strong>Blog 6 §4.1 — Three structural conditions framing</strong> (perishable / fixed / segmented)</td><td>Skip — already in pillar via different framing</td><td>Don't absorb. Pillar's framing wins.</td></tr>
+<tr><td><strong>Blog 6 §10 — Closing "system not a setting" frame</strong></td><td>Skip — Blog 7 §10 already has its own closing voice</td><td>Don't absorb.</td></tr>
+</table>
+<p><strong>Net effect:</strong> Blog 6 either (a) gets killed and these contributions land in Blog 7, or (b) gets reduced to the AEO-pivot form (1,200–1,500 word definitional sibling) without these sections, with Blog 7 now owning the survivorship-bias-in-algorithms argument and the consolidated signal-list. Either way, only one RevFactor URL owns each of these contributions.</p>
+</div>
+
+<h2>4b. Unique data Blog 7 should own</h2>
+
+<div class="blue">
+<p class="label">What none of Blog 7's competitors (or the rest of RevFactor's cluster) currently surface</p>
+<p>For Blog 7 to stand alone as the conversion-stage URL, it has to publish proof points the rest of the SERP doesn't have. Per the SERP audit, top-10 competitors are PMS SaaS vendors + small service operators — none lead with first-party operational data. Five data adds that turn Blog 7 from "another decision guide" into the obvious-answer page:</p>
+<ol>
+<li><strong>Market-context block in opening hook</strong> — distribute the 4 strongest verified stats across §"Opening Hook" and §2 (not in a single paragraph): <em>1.77M US STR listings projected 2026 (AirDNA); national RevPAR $119.27 / ADR $246.62 / occupancy 48.4% in 2025 (AirDNA); 27% of 2025 bookings within 7 days of check-in, up from 21% (AirROI); RevPAR projected to grow only ~0.5–0.6% in 2026 (AirDNA Outlook).</em> The compression-of-supply-growth + booking-window-compression combo establishes <em>why now</em> — managed RM matters more in a flat-RevPAR market than in a 20% supply-growth market. Blog 4 doesn't open this way; pillar doesn't open this way. Real differentiator.</li>
+<li><strong>First-party RevFactor operational data — never been published anywhere on revfactor.io</strong>:
+  <ul>
+  <li><em>% of new RevFactor clients arriving with unused or under-configured PriceLabs subscriptions</em> — Federico says publicly that this is "the most common scenario RevFactor inherits." Quantify it (even at "9 of 10" precision) and it becomes a citable Federico statistic. Strong proof for §5 sign #5.</li>
+  <li><em>Time-to-RevPAR-lift on RevFactor accounts</em> — internal benchmark: how many days from onboarding until clients see measurable RevPAR vs comp set movement (typically 30–60). Use as the answer to FAQ "How long does it take to see results?" instead of the generic "30–60 days" answer the brief proposes. Cite as RevFactor portfolio data.</li>
+  <li><em>Average time saved per property per week</em> — for a host who hands off pricing to RevFactor, how many hours/week of PriceLabs operation are eliminated? Use in §"What it costs" alongside the dollar ROI to anchor the time ROI. Even a directional number ("4–6 hours per property per week") creates a citable claim.</li>
+  </ul>
+</li>
+<li><strong>Co-host access onboarding mechanics walkthrough</strong> — Blog 4 mentions co-host access; Blog 7 walks through what it actually looks like operationally (what RevFactor sees, what stays in your control, what the handoff in PriceLabs + Airbnb co-host UI requires from the host). 4–5 concrete steps. None of Blog 7's top-10 SERP competitors describes this — it's the trust-mechanic that turns the abstract decision into a concrete next step.</li>
+<li><strong>Decision-tree visualization</strong> (text-based or SVG) — "Should I hire managed RM?" Yes/No flow keyed on: portfolio size (1 / 2 / 3+ properties), ADR ($150 below / above), market complexity (single market / multi-market), current tool status (no tool / tool but inactive / tool actively managed). Lands as a flowchart in §5 or §7. <strong>No top-10 competitor has one</strong> per the SERP audit. Pure differentiator.</li>
+<li><strong>Cost-of-inaction math, scaled to specific scenarios</strong> — brief has the "one missed 3-night event weekend = $1,050 = three months of RevFactor's fee" example. Add three more scenario-specific calculations:
+  <ul>
+  <li><em>Shoulder-season pricing miss:</em> 30 nights @ 60% occupancy @ $200/night avg, with 15% RevPAR upside left on the table = $540 lost in a single shoulder month per property</li>
+  <li><em>Underpriced peak weekend:</em> a 3-night peak booking captured at $350/night when comp set cleared at $475/night = $375 lost in a single booking</li>
+  <li><em>Locked-in launch baseline:</em> a new listing priced 20% below market for the first 60 days locks in algorithmic positioning that costs roughly 3–6 months to recover</li>
+  </ul>
+  Stack these in §6 as a "what waiting costs" callout. Concrete, operational, and currently nowhere else in the cluster.
+</li>
+</ol>
+<p><strong>Net additions:</strong> 5 categories of standalone-value content that exist nowhere on revfactor.io today. Combined with the absorbed Blog 6 contributions above, Blog 7 has ~30–40% of its body coming from genuinely net-new material — clears the standalone bar.</p>
+</div>
+
+<h2>5. Standard checks</h2>
+
+<div class="red">
+<p class="label-red">Refactor.ai disambiguation — missing entirely (chronic across briefs)</p>
+<p>Same issue Blog 2 + Blog 6 had. Add to §8 first brand mention + FAQ block. Standing rule per Aaron's memory: roll forward to every post.</p>
+</div>
+
+<div class="green">
+<p class="label">Positive — banned phrases list is correct</p>
+<p>Brief explicitly rules out "leverage," "revenue optimization," "unlock," "set and forget," "AI-powered," "circle back," "passive income," "guaranteed revenue," "1-2% management fee." Matches Federico's persona guide + Aaron's humanization rules. <strong>Best banned-phrases coverage of any GetCito brief delivered to date.</strong></p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — em-dashes</p>
+<p>Cap at <strong>one em-dash per paragraph</strong> in the final draft (humanizer rule). The brief writes mostly in clean prose. Watch §3 comparison-table prose — natural place for em-dash overuse.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — US spelling</p>
+<p>Brief is in US English. Verify draft stays consistent — the RevFactor Method post slipped into British spellings ("Strategise," "institutionalised"), so flag for Blog 7's writer specifically.</p>
+</div>
+
+<div class="blue">
+<p class="label">Feedback — internal-link plan</p>
+<table>
+<tr><th>Brief proposes</th><th>Verdict</th><th>Adjustment</th></tr>
+<tr><td>/blog/revenue-management-for-short-term-rentals (pillar)</td><td>✅ Live</td><td>Keep — but ensure anchor text is "revenue management for short-term rentals," not "revenue management."</td></tr>
+<tr><td>/blog/best-str-revenue-management-companies-2026 (Blog 4 listicle)</td><td>✅ Live</td><td>Keep — anchor "compare STR revenue management companies"</td></tr>
+<tr><td>/blog/adr-vs-revpar-airbnb-hosts</td><td>✅ Live</td><td>Keep — anchor "ADR vs RevPAR"</td></tr>
+<tr><td>/blog/the-revfactor-method</td><td>✅ Live</td><td>Keep — anchor "how RevFactor's method works"</td></tr>
+<tr><td>MISSING: /blog/best-airbnb-property-managers-with-dynamic-pricing-2026 (Blog 5)</td><td>❌ Not in brief</td><td>Add in §3 (comparison) — Blog 5 covers "RM service vs property manager" decision; natural cross-link</td></tr>
+<tr><td>MISSING: /short-term-rental-consultant/ (service page)</td><td>Implicit in CTA but not in link plan</td><td>Add to link plan explicitly</td></tr>
+</table>
+</div>
+
+<h2>6. Case-study + quote re-use audit</h2>
+
+<div class="red">
+<p class="label-red">Quote / case-study conflicts vs pillar + Blog 4 (BLOCKED unless pivoted)</p>
+<table>
+<tr><th>Item</th><th>Brief proposes (Blog 7 §)</th><th>Pillar / Blog 4 status</th><th>Verdict</th></tr>
+<tr><td>Fort Worth studios +$20K + #2/#5 ranking</td><td>§2 + §6</td><td>Pillar owns verbatim (line 407)</td><td>BLOCKED — pivot to different metric or drop</td></tr>
+<tr><td>Nashville +25% YoY May revenue</td><td>§6</td><td>Pillar owns verbatim (line 603)</td><td>BLOCKED — pivot to different metric or drop</td></tr>
+<tr><td>Newport Beach 2-night minimum / 12 listings / 4-night booking</td><td>§2 + §6</td><td>Pillar owns verbatim (line 789)</td><td>BLOCKED — pivot or drop</td></tr>
+<tr><td>"Revenue management is not just pricing… whole strategy"</td><td>§1</td><td>Pillar owns closely-related Ep. 155 version</td><td>BLOCKED — pivot to "Software runs the math. People run the business." (allocated to Blog 2 — verify Blog 2 hasn't claimed it)</td></tr>
+<tr><td>"If you're looking only at your property, you're on an island"</td><td>§5 sign #6</td><td>Pillar §Positioning owns</td><td>BLOCKED — pivot</td></tr>
+<tr><td>"A lot of people don't want to pay for full management… revenue management is an area that can be challenging"</td><td>§3</td><td>Federico verbatim, in brain doc but not yet locked elsewhere</td><td>✅ AVAILABLE — keep</td></tr>
+<tr><td>Kassidy Warren "20% increase most months"</td><td>§6 + §8</td><td>Blog 4 §"Verified Client Outcomes" uses</td><td>OK to reuse — testimonial reuse standard; same wording</td></tr>
+<tr><td>Zoey Berghoff "$30,000 booking" testimonial</td><td>§6</td><td>Blog 4 §"Verified Client Outcomes" uses</td><td>OK to reuse</td></tr>
+<tr><td>Emilie Cohen "losing hundreds, if not thousands of dollars"</td><td>§6</td><td>Not yet on RevFactor live blogs</td><td>✅ AVAILABLE — keep, attributes to verified source</td></tr>
+<tr><td>Erin Warren portfolio Q1 2026 numbers (Tucson Hues +512%, Desert Hues +285%, Orcas +3,789%)</td><td>Not in brief</td><td>Pillar uses in §Tactical Playbook</td><td>RECOMMEND ADD as replacement for blocked Fort Worth/Newport/Nashville case studies</td></tr>
+</table>
+</div>
+
+<h2>7. Cross-impact on prior in-flight pages</h2>
+
+<div class="blue">
+<p class="label">Cluster coordination</p>
+<ul>
+<li><strong>Blog 2 (Dynamic Pricing vs Revenue Management)</strong> — still in flight per sheet ("Partial"). Confirm whether Blog 2 has claimed "Software runs the math. People run the business." quote. If not, Blog 7 §1 can use.</li>
+<li><strong>Blog 4 (listicle)</strong> — if Blog 7 dies, lift §5 "6 Signs" + §7 "What to Ask" + §6 ROI math into Blog 4 as expansion sections; refresh Blog 4's <code>updatedDate</code> for SEO freshness signal.</li>
+<li><strong>Blog 5 (property managers listicle)</strong> — already answers "when to hire a property manager instead of a revenue manager" (FAQ Q1). If Blog 7 narrows to "when to hire RM," verify the two FAQs don't directly duplicate.</li>
+<li><strong>Blog 6 (yield management)</strong> — Blog 6's §6.2 + §9 contributions absorb into Blog 7 (see §4a). Blog 6 itself either kills or narrows to AEO-pivot definitional form. Net: no parallel signal-list, no parallel survivorship-bias treatment.</li>
+<li><strong>Pillar</strong> — no structural changes; pillar's "Who This Guide Is For" section can add an inline reference to Blog 7 as the buyer's guide once Blog 7 ships.</li>
+<li><strong>Case-study allocation matrix</strong> — needs an update once Blog 7 finalizes: add Blog 7 row, flag which case studies are committed, surface Erin Warren as the recommended replacement set.</li>
+</ul>
+</div>
+
+<h2>8. Surface questions — locked / open</h2>
+
+<h3>Locked decisions (Aaron has approved already)</h3>
+<ul>
+<li>+24% RevPAR vs comp set is the canonical portfolio stat; pull from <code>portfolio-stats.ts</code></li>
+<li>RevFactor pricing = flat tiers $320 → $256 + $125 onboarding (never "1-2% management fee")</li>
+<li>Refactor.ai disambiguation parenthetical at first brand mention + dedicated FAQ + author bio</li>
+<li>US spelling throughout</li>
+<li>Federico voice markers + banned phrases per persona guide</li>
+<li>Co-host access framing (RevFactor never takes ownership of accounts)</li>
+<li>Standard schema package + Service schema on commercial-intent pages</li>
+<li>Color-coded feedback docs (this format) is the standing process</li>
+</ul>
+
+<h3>Decisions locked (Aaron approved 2026-05-27)</h3>
+<ol>
+<li><strong>Ship Blog 7 as a decision guide</strong> with the 6 hard constraints in the top-line banner. Word count 2,400–2,800; differentiated H1; self-canonical; minimal repeat from other cluster URLs; Refactor.ai disambiguation pinned.</li>
+<li><strong>Blog 6 contributions absorb into Blog 7</strong> — §6.2 (algorithm-training survivorship bias) becomes a new H2 in Blog 7 between §3 and §4; §9 (readiness signals) merges into Blog 7 §5 as the consolidated 7–9 item list. Blog 6 either kills entirely or narrows to the AEO-pivot form without these sections.</li>
+<li><strong>"Software runs the math. People run the business." Federico quote</strong> — Blog 2 was abandoned-by-merge, not in flight. Allocation matrix entry for Blog 2 §5.8 is stale. <strong>Blog 7 §1 can use this quote freely.</strong></li>
+</ol>
+
+<h3>Questions still open for Aaron</h3>
+<ol>
+<li><strong>Gaston attribution</strong> — is <em>"founded by Federico Zimerman and his partner Gaston"</em> the framing Federico wants on a public marketing page? Or keep Gaston operational-only? §8 hinges on this.</li>
+<li><strong>Surfacing the Blackbird → RevFactor relationship in §8</strong> — pillar surfaces it ("the frameworks RevFactor brings to outside clients are the ones Federico developed while running Blackbird Hospitality"). Some operators read this as conflict-of-interest. Deliberate call for Blog 7 specifically given the commercial-investigation intent.</li>
+<li><strong>Which first-party RevFactor operational data points are publishable</strong> (§4b above) — % of clients arriving with under-configured PriceLabs, time-to-RevPAR-lift, average time saved per property/week. Need Federico's sign-off on specific numbers before drafting.</li>
+</ol>
+
+<h3>Verification items for GetCito (need answers before draft)</h3>
+<ol>
+<li>Verify all 10 market-context stats against primary sources (AirDNA 2026 Outlook, AirROI, Key Data); replace secondhand StayFi citations with primary attribution</li>
+<li>Verify Freewyld Foundry exists as a managed RM service before naming in §3 comparison table</li>
+<li>Replace blocked Fort Worth + Nashville + Newport Beach case studies with Erin Warren portfolio Q1 2026 numbers (or different unallocated properties)</li>
+<li>Update +18% → +24% RevPAR throughout</li>
+<li>Drop or qualify "$140B+ global STR market size" — sources disagree</li>
+<li>Strip the verbatim Federico quotes blocked above ("Revenue management is not just pricing…" and "If you're looking only at your property, you're on an island")</li>
+<li>Pull current Peec prompt list and match surviving 4 FAQs to verbatim Peec phrasing</li>
+<li>Add Refactor.ai disambiguation parenthetical at §8 first brand mention + FAQ Q "What is RevFactor?"</li>
+<li>Verify CTA target URL <code>/short-term-rental-consultant/</code> matches Blog 4's CTA target</li>
+<li>Add Blog 5 to internal-link plan in §3 comparison</li>
+</ol>
+
+<h3>Verification items for Federico (transcript verbatim + field intel)</h3>
+<ol>
+<li>Approve "founded by Federico Zimerman and his partner Gaston" framing for §8 OR provide preferred alternative wording</li>
+<li>Confirm Nashville ADR +29.3% / RevPAR +26% Feb 2025 → Feb 2026 against AirROI</li>
+<li>Approve "RevFactor inherits clients running PriceLabs but not logging in consistently" framing for §5 sign #5</li>
+<li>Confirm current Blackbird Hospitality property count + states + markets (or confirm 198/24/67 RevFactor portfolio figures are the right ones to surface here)</li>
+<li>Surface or hide the Blackbird → RevFactor connection? §8 says "the same frameworks RevFactor brings to outside clients are the ones Federico developed while running Blackbird Hospitality" — some operators read this as conflict-of-interest. Worth a deliberate call.</li>
+</ol>
+
+</body>
+</html>

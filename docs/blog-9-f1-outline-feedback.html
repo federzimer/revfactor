@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 9 (F1) Outline — Strategic Feedback (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  code { background: #f4f4f4; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  pre { background: #f6f8fa; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; line-height: 1.45; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .red { color: #8b1a1a; background: #fff0f0; border-left: 4px solid #8b1a1a; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .red strong { color: #5a0000; }
+  .green { color: #0a7a3c; background: #f0fff5; border-left: 4px solid #0a7a3c; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .green strong { color: #0a4f25; }
+  .green.banner { background: #0a7a3c; color: #fff; border-left-color: #0a4f25; padding: 14px 18px; }
+  .green.banner strong { color: #fff; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
+  .label-green { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a4f25; text-transform: uppercase; }
+  .legend { background: #f8f8f4; border: 1px solid #ddd; padding: 12px 16px; margin: 16px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 13px; }
+  .legend span { display: inline-block; margin-right: 18px; }
+  .legend .swatch { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Blog 9 (F1 Race Weekend Playbook) — Outline Feedback</h1>
+<p style="font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px;">
+<strong>Project:</strong> RevFactor.io Blog 9 — outline review<br>
+<strong>Title:</strong> The F1 Race Weekend Revenue Playbook: How to Price Miami, Austin & Las Vegas<br>
+<strong>Source:</strong> GetCito (Muskan), 2026-06-22<br>
+<strong>Word-count target:</strong> ~3,500 (per-section sum estimates ~3,800)<br>
+<em>Review by: RevFactor team — verified against the cluster (FIFA, pillar, Blog 4 listicle, Blog 5, ADR/RevPAR, Method, Comp Set, Dynamic Pricing, Blog 7 shipped 2026-06-09), the case-study allocation matrix, Federico's persona guide, and the standing schema + voice rules.</em>
+</p>
+
+<div class="legend">
+<strong>Color key:</strong>
+<span><span class="swatch" style="background:#0a7a3c"></span> Strong — ship as-is</span>
+<span><span class="swatch" style="background:#1a4fbf"></span> Editorial flag</span>
+<span><span class="swatch" style="background:#8b1a1a"></span> Must-fix before draft</span>
+</div>
+
+<div class="green banner">
+<p class="label" style="color:#d8f0e0">Top-line: strongest GetCito outline to date — approve to draft with 4 small fixes</p>
+<p>This brief shows GetCito has internalized the standing rules. <strong>Strengths landed clean:</strong></p>
+<ul>
+<li><strong>Timing & Framing Note at the top</strong> — explicit instruction to write evergreen + forward-looking because Miami 2026 has already run. Editorial discipline.</li>
+<li><strong>Every stat is sourced</strong> — VegasInsider, LV Review-Journal, KXAN, AirDNA, Hotel Dive, Huang SSRN 2025. No "industry sources say" filler.</li>
+<li><strong>Two proprietary frameworks named explicitly</strong> — "Three Archetypes" (§4) + "Event-Pricing Framework" (§8). Both are genuinely new editorial contributions; no cluster competitor has either.</li>
+<li><strong>Vegas occupancy paradox</strong> (§7 H3) — occupancy ROSE as ADR fell. This is the screenshot-and-share AEO moment of the piece.</li>
+<li><strong>Dollar baselines on every percentage</strong> — "84% ($423 to $780)" — exactly the Erin Warren rule applied to F1 data.</li>
+<li><strong>Brand voice notes are spot-on</strong> — banned phrases list ("leverage", "unlock", "AI-powered", "set and forget", "passive income", "goldmine") + Problem→Principle→Example→Action rhythm + "no fabricated quotes — flag where a one-line founder quote would add weight and let the client provide it" + US spelling flagged explicitly.</li>
+<li><strong>FIFA cross-link to Miami</strong> — same Hard Rock Stadium, same event-pricing logic. Smart cluster move.</li>
+<li><strong>Sales language is concentrated to §8 and §11</strong> — soft positioning with one CTA, exactly the editorial standard.</li>
+</ul>
+<p style="margin-top:8px"><strong>Three small fixes below.</strong> None require a re-outline; all are drafting-phase clarifications. After these clear, GetCito can write the MDX.</p>
+</div>
+
+<h2>Must-fix before draft (3 items)</h2>
+
+<div class="red">
+<p class="label-red">Fix 1 — URL slug missing the <code>/blog/</code> prefix</p>
+<p>Brief proposes <code>/f1-race-weekend-str-revenue-playbook</code>. The Astro content collection routes all posts under <code>/blog/</code>, and the brief's slug doesn't include it. Same trap GetCito's Blog 7 hit — when shipped, the post landed at <code>/blog/blog/...</code> until the slug was stripped from frontmatter.</p>
+<p><strong>Fix:</strong> drop the <code>slug:</code> field entirely from frontmatter. Astro routes filename-based, so:</p>
+<pre>src/content/blog/f1-race-weekend-str-pricing-playbook.mdx</pre>
+<p>resolves automatically to <code>/blog/f1-race-weekend-str-pricing-playbook/</code>. Recommended filename change: drop "revenue" → "pricing" to match the FIFA sister post pattern (<code>fifa-2026-world-cup-str-pricing</code>).</p>
+</div>
+
+<div class="red">
+<p class="label-red">Fix 2 — JSON-LD schema package not specified in the brief</p>
+<p>Every other outline GetCito's delivered has had a "Schema Package (Required for Publish)" block. This one doesn't. Per the Blog 7 dedupe pattern we just shipped (commit <code>e9289ba</code>), <strong>the BlogPosting layout already auto-generates Organization, Person (Federico), BlogPosting, FAQPage, and BreadcrumbList</strong>. GetCito must not re-declare those in the MDX <code>@graph</code> or rich results get downgraded.</p>
+<p><strong>Schemas this post uniquely needs (NOT auto-generated by layout):</strong></p>
+<table>
+<tr><th>Schema</th><th>Where it lives</th><th>Why</th></tr>
+<tr><td><code>HowTo</code></td><td>§9 (12-Month Runbook)</td><td>5 time-phased milestones with concrete actions → HowTo is the right type</td></tr>
+<tr><td><code>ItemList</code></td><td>§4 (Three Archetypes table)</td><td>3-archetype comparison; matches Google's ItemList rich-result pattern</td></tr>
+<tr><td><code>ItemList</code></td><td>§10 (Common Mistakes)</td><td>6–7 item diagnostic list — same pattern Blog 7's "7 Signs" uses</td></tr>
+</table>
+<p>Use Astro's <code>set:html={JSON.stringify(...)}</code> wrapper inside the MDX (NOT raw inline <code>&lt;script&gt;{...}&lt;/script&gt;</code> — that breaks the MDX parser). Add a writer instruction in the brief noting this so the dev who commits the MDX doesn't re-add the duplicates.</p>
+</div>
+
+<div class="red">
+<p class="label-red">Fix 3 — Internal-link plan missing the just-shipped Blog 7</p>
+<p>Blog 7 (<em>"When (And When Not) to Hire One"</em>) shipped 2026-06-09 at <code>/blog/airbnb-revenue-management-company/</code> — natural cross-link target for this piece because §9 and §11 both reach the moment where the operator is weighing whether to hand off pricing.</p>
+<p><strong>Add to the internal-link plan:</strong></p>
+<table>
+<tr><th>Anchor</th><th>Target</th><th>Section</th></tr>
+<tr><td>"when to hire an Airbnb revenue management company"</td><td>/blog/airbnb-revenue-management-company/</td><td>§11 (closing — the natural pivot moment)</td></tr>
+<tr><td>"the seven signs you've outgrown DIY pricing"</td><td>/blog/airbnb-revenue-management-company/#signs</td><td>§10 (Common Mistakes — a tighter cluster bridge)</td></tr>
+</table>
+<p>Both anchors point a reader who has just learned event pricing is "a discipline most hosts skip" (§3 close) into the hiring-decision page. That's exactly the funnel Blog 7 was built to land at.</p>
+</div>
+
+<h2>Editorial flags (drafting-phase, not blocking)</h2>
+
+<div class="green">
+<p class="label-green">GetCito already flagged this in the brief — just calling it out</p>
+<p><strong>Keyword targeting — validate before drafting.</strong> Brief flags this itself: <em>"confirm head term against client volume data."</em> Primary <em>"F1 race weekend revenue strategy"</em> is operator-framed but probably sub-100/mo. Secondary <em>"F1 Airbnb pricing"</em> + <em>"Grand Prix short-term rental revenue"</em> likely have more real volume. Worth a quick Ahrefs/DataForSEO pull before drafting — same discipline as Blog 6 + Blog 7 SERP audits.</p>
+<p>If the head term comes in low (&lt;50/mo), this is an AEO-first play (which the brief is structurally suited for — answer-first §3 + FAQ schema + 8 voice-search Qs). Don't let the SEO traffic number distract from the AEO upside.</p>
+</div>
+
+<div class="blue">
+<p class="label">RevFactor-side flag — pricing references (safety check)</p>
+<p>2026-06-09 pricing model is now flat <strong>$350/month per property</strong> (was $320 sliding to $256) with <strong>$150 onboarding</strong> (was $125). The brief correctly does NOT surface RevFactor pricing — event-pricing playbook doesn't need it. Just confirm during drafting that no "$320" / "$256" / "$125" slips into §8 or §11 from copy-paste habit. If a fee comes up at all, use $350 / $150.</p>
+</div>
+
+<div class="blue">
+<p class="label">RevFactor-side flag — word-count budget</p>
+<p>Section-format estimates (Key Takeaways 200 + Hook 250 + §3 350 + §4 350 + §5 400 + §6 400 + §7 450 + §8 350 + §9 250 + §10 200 + §11 250 + FAQ 400) sum to <strong>~3,850 words</strong> — about 10% over the stated 3,500 target. Either approve the higher target explicitly or trim §7 (Vegas) by 50 words and the FAQ by 100 (drop FAQ Q3 and Q8 — both rephrase points already covered in §6 and §5 respectively).</p>
+</div>
+
+<div class="blue">
+<p class="label">RevFactor-side flag — Vegas §7 2025 stat needs a primary source</p>
+<p>The 2023→2024 numbers ($249.31 → $198.72 ADR; $1.5B → $934M economic impact) are well-sourced. The "<strong>accommodation costs fell a further ~24% in 2025 (Airbnb specifically -22.4%)</strong>" claim needs a primary source citation in the brief — currently grouped under "VegasInsider" but the 2025 -22.4% Airbnb figure needs its own AirDNA / AirROI lookup before drafting. If it can't be sourced cleanly, drop it and rely on the 2023→2024 story (which is sourced and load-bearing).</p>
+</div>
+
+<div class="blue">
+<p class="label">RevFactor-side flag — Huang SSRN 2025 "3–4 price points/year"</p>
+<p>The §3 anchor stat (<em>"the median Airbnb host sets only three to four price points per year"</em>) is sourced to Huang, <em>Pricing Frictions and Platform Remedies</em> (SSRN, 2025). SSRN hosts both peer-reviewed papers and working-paper preprints. Before drafting, confirm this paper is either (a) accepted at a peer-reviewed venue, or (b) is a working paper from a credible institution. If neither, downgrade the prose from "research shows" to "one academic analysis suggests" and link to the SSRN page.</p>
+</div>
+
+<div class="blue">
+<p class="label">RevFactor-side flag — numbering / naming convention</p>
+<p>Per the 2026-05-29 lock, we're on <strong>Option A (Sequential Blog 1–N)</strong>. This is Blog 9 (after pillar, Blog 4 listicle, Blog 5 PM listicle, ADR/RevPAR, RevFactor Method, Comp Set, FIFA, Dynamic Pricing v2, Blog 7). Tell GetCito the file should be tracked as Blog 9 in the next status update.</p>
+</div>
+
+<h2>What's working that we should keep doing</h2>
+
+<div class="green">
+<p class="label-green">Editorial discipline GetCito has internalized — keep applying to future outlines</p>
+<ul>
+<li><strong>Timing & Framing Note at the top of every brief</strong> — apply to every event-pricing or seasonal post going forward (next: 2026-2027 winter peak post if commissioned).</li>
+<li><strong>Sources inline with every stat</strong> — every brief should do this. If GetCito can't source a stat in 30 seconds of search, it doesn't go in.</li>
+<li><strong>"No fabricated Federico quotes — flag where one would add weight"</strong> — exactly the rule we want on every brief. The "let the client provide it" framing prevents the chronic "Federico said X (verify before draft)" pattern that delayed Blog 6.</li>
+<li><strong>Banned-phrases list embedded in every brief</strong> — keep doing this; the writer doesn't have to re-read the persona guide each time.</li>
+<li><strong>US spelling flagged explicitly</strong> — this is the safeguard against the British-spelling slip the RevFactor Method post hit.</li>
+<li><strong>Two named, proprietary frameworks per piece</strong> — Three Archetypes + Event-Pricing Framework. The cluster needs this — each post that does NOT add a named framework is a missed citation opportunity in AI search.</li>
+<li><strong>Answer-first structured answers for AEO</strong> — every section has the "45-word AI-snippet target" block. This is correctly the brief-template standard now.</li>
+</ul>
+</div>
+
+<h2>Pre-draft checklist</h2>
+
+<div class="blue">
+<p class="label">Send-back summary for GetCito</p>
+<p><strong>3 must-fix items:</strong></p>
+<ol>
+<li><strong>Drop the <code>slug:</code> field</strong> from frontmatter — let Astro filename-route. Suggested filename: <code>f1-race-weekend-str-pricing-playbook.mdx</code></li>
+<li><strong>Add JSON-LD schema package block</strong> to the brief: HowTo on §9 runbook + ItemList on §4 archetypes + ItemList on §10 mistakes. Wrap in Astro's <code>set:html={JSON.stringify(...)}</code> pattern; do NOT re-declare BlogPosting / FAQPage / BreadcrumbList / Person / Organization (the layout already emits those).</li>
+<li><strong>Add Blog 7 to internal links</strong> — 2 anchors in §10 and §11.</li>
+</ol>
+<p style="margin-top: 10px;"><strong>5 editorial flags to confirm / verify before drafting:</strong></p>
+<ol>
+<li><strong>Validate keyword volumes</strong> in Ahrefs/DataForSEO before approving primary head term <em>(GetCito already flagged this in the brief)</em>.</li>
+<li><strong>Verify the 2025 Vegas -22.4% Airbnb stat</strong> against AirDNA / AirROI or drop it.</li>
+<li><strong>Confirm the Huang SSRN paper</strong> is peer-reviewed (or downgrade the prose framing).</li>
+<li><strong>Confirm word-count target</strong> — 3,500 or 3,850?</li>
+<li><strong>Confirm no RevFactor pricing slips into §8 or §11</strong> — if any fee mentioned, must be $350 / $150 per the 2026-06-09 model.</li>
+</ol>
+</div>
+
+<h2>One question for you</h2>
+
+<div class="blue">
+<p class="label">Naming the frameworks</p>
+<p>The brief calls them <strong>"The Three Archetype Framework"</strong> (§4) and <strong>"The RevFactor Event-Pricing Framework"</strong> (§8). Both are good. Worth deciding now whether you want either name to become a brand-attributable concept like Blog 4's "Three Models of STR Revenue Management" — i.e., one that we reference verbatim from other cluster posts going forward. If yes, lock the exact framework name in the brief before drafting so the writer doesn't drift to a near-paraphrase. If no, fine as-is. Recommend locking — these are both citation-worthy framings.</p>
+</div>
+
+</body>
+</html>

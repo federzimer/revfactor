@@ -10,7 +10,7 @@ const path = require('path');
 
 const ART = '/Users/aaronwhittaker/Claude/RevFactor/tests/_artifacts';
 const NAME = 'TEST — Conversion Tracking — please cancel';
-const EMAIL = 'aaron@procloser.ai';
+const EMAIL = 'qa+conv-e2e@revfactor.io';
 
 (async () => {
   const browser = await chromium.launch({ headless: true });

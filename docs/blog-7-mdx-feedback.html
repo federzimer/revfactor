@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 7 MDX Delivery — Technical Feedback (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  code { background: #f6f8fa; padding: 1px 4px; border-radius: 3px; font-family: Menlo, Monaco, monospace; font-size: 12px; }
+  pre { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 4px; padding: 12px; font-family: Menlo, Monaco, monospace; font-size: 11px; line-height: 1.45; overflow-x: auto; white-space: pre; color: #24292f; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .blue table { font-size: 13px; }
+  .blue th, .blue td { border-color: #b6c8e8; }
+  .blue th { background: #e0eaff; }
+  .blue.banner { background: #1a4fbf; color: #fff; border-left-color: #0a2e80; padding: 14px 18px; }
+  .blue.banner strong { color: #fff; }
+  .red { color: #8b1a1a; background: #fff0f0; border-left: 4px solid #8b1a1a; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .red strong { color: #5a0000; }
+  .red.banner { background: #8b1a1a; color: #fff; border-left-color: #5a0000; padding: 14px 18px; }
+  .red.banner strong { color: #fff; }
+  .original { font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; background: #fafafa; border-left: 3px solid #ccc; padding: 8px 12px; margin: 8px 0; font-style: italic; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
+  .green { color: #0a7a3c; background: #f0fff5; border-left: 4px solid #0a7a3c; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .green strong { color: #0a4f25; }
+  .green .label { color: #0a4f25; }
+  .legend { background: #f8f8f4; border: 1px solid #ddd; padding: 12px 16px; margin: 16px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 13px; }
+  .legend span { display: inline-block; margin-right: 18px; }
+  .legend .swatch { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Blog 7 MDX Delivery — Technical Feedback</h1>
+<p class="original"><strong>Project:</strong> RevFactor.io Blog 7 — MDX file review (pre-commit pass)<br>
+<strong>Title:</strong> Airbnb Revenue Management Company: When (And When Not) to Hire One<br>
+<strong>Target path:</strong> <code>src/content/blog/airbnb-revenue-management-company.mdx</code><br>
+<strong>Target URL:</strong> <code>https://www.revfactor.io/blog/airbnb-revenue-management-company/</code><br>
+<em>Review by: RevFactor team — diff against the Astro content-config + existing live blog MDX patterns.</em></p>
+
+<div class="legend">
+<strong>Color key:</strong>
+<span><span class="swatch" style="background:#222"></span> File contents (italic, light grey background)</span>
+<span><span class="swatch" style="background:#1a4fbf"></span> Our feedback (blue)</span>
+<span><span class="swatch" style="background:#8b1a1a"></span> Critical / blocker (red)</span>
+<span><span class="swatch" style="background:#0a7a3c"></span> Resolved / positive (green)</span>
+</div>
+
+<div class="red banner">
+<p class="label" style="color:#ffd8d8">Top-line: not ready to commit</p>
+<p><strong>Content is right; delivery format has five technical issues that will cause the page to render broken on the live site.</strong> Approved content from the draft v3 sign-off (2026-06-02) is preserved verbatim — that's good. The problems are all delivery-layer: character encoding, link wiring, missing frontmatter fields, missing schema, and link rendering. Two of these (encoding + missing schema) are publish-blockers; the other three are quality issues that affect SEO + the /blog index display.</p>
+<p style="margin-top:8px"><strong>Five fixes below.</strong> Once they land, this is a one-line <code>git add + commit + push</code> away from going live.</p>
+</div>
+
+<h2>Issue 1 — Character encoding broken throughout (publish blocker)</h2>
+
+<div class="red">
+<p class="label-red">Every em-dash and emoji landed as broken UTF-8 bytes</p>
+<p>The file appears to have been saved as Latin-1 / Windows-1252 instead of UTF-8. Em-dashes (<code>—</code>) and arrows / emoji landed as the literal byte sequence <code>â</code> or <code>ð</code>. If committed as-is, the LIVE site renders those broken characters verbatim — readers will see <code>â</code> wherever you intended an em-dash.</p>
+<p><strong>Sample of what's in the file vs what it should be:</strong></p>
+<table>
+<tr><th>In the file</th><th>Should be</th><th>Location</th></tr>
+<tr><td><code>## ð Key Takeaways</code></td><td><code>## 📌 Key Takeaways</code> (or whichever emoji was intended)</td><td>Takeaways H2</td></tr>
+<tr><td><code>20â40% of gross revenue</code></td><td><code>20–40% of gross revenue</code></td><td>Key Takeaways + §3 + §7</td></tr>
+<tr><td><code>$30â$150/mo</code></td><td><code>$30–$150/mo</code></td><td>§3 pricing table</td></tr>
+<tr><td><code>3â6 months to recover</code></td><td><code>3–6 months to recover</code></td><td>§7 cost-of-inaction</td></tr>
+<tr><td><code>â $1,050 lost</code></td><td><code>— $1,050 lost</code></td><td>§7 missed event weekend</td></tr>
+<tr><td><code>â Zoey Berghoff</code> (every quote attribution)</td><td><code>— Zoey Berghoff</code></td><td>§7, §9 testimonials</td></tr>
+<tr><td><code>and why isn't it in the data?</code> (mangled em-dash before "and")</td><td><code>better — and why isn't it in the data?</code></td><td>§4 closing line</td></tr>
+<tr><td><code>â /short-term-rental-consultant/</code></td><td><code>→ /short-term-rental-consultant/</code></td><td>§10 CTA arrow</td></tr>
+<tr><td><code>60â90 days</code> / <code>30â60 days</code></td><td><code>60–90 days</code> / <code>30–60 days</code></td><td>§11 FAQ "How long does it take"</td></tr>
+</table>
+<p><strong>Fix:</strong> re-save / re-export the MDX file as <code>UTF-8 without BOM</code>. Most editors have this option — VS Code: bottom status bar → "UTF-8" → "Save with Encoding" → "UTF-8". From command line:</p>
+<pre>iconv -f WINDOWS-1252 -t UTF-8 airbnb-revenue-management-company.mdx > fixed.mdx</pre>
+<p>Verify after re-save by opening the file and confirming em-dashes display as <code>—</code> not <code>â</code>.</p>
+</div>
+
+<h2>Issue 2 — Internal links are plain text, not markdown links</h2>
+
+<div class="red">
+<p class="label-red">Five internal cross-links written as words, not wired as links</p>
+<p>The brief specified the internal-link plan. The MDX writes the link text but doesn't wrap it in markdown link syntax, so they render as plain prose. Result: readers can't click through; Google can't see the cluster cross-links; the topical-authority signal the cluster was designed for evaporates.</p>
+<table>
+<tr><th>Where in the file</th><th>Current text</th><th>Should be</th></tr>
+<tr><td>After §1 "What Is an Airbnb RM Company?"</td><td><em>"see our guide to revenue management for short-term rentals."</em></td><td><code>see our guide to [revenue management for short-term rentals](/blog/revenue-management-for-short-term-rentals/).</code></td></tr>
+<tr><td>End of §3 "RM vs PM vs Pricing Tool"</td><td><em>"Want the full ranked breakdown? Compare STR revenue management companies"</em></td><td><code>Want the full ranked breakdown? [Compare STR revenue management companies](/blog/best-str-revenue-management-companies-2026/).</code></td></tr>
+<tr><td>End of §5 "The Metric"</td><td><em>"The full breakdown lives in our ADR vs RevPAR guide."</em></td><td><code>The full breakdown lives in our [ADR vs RevPAR](/blog/adr-vs-revpar-airbnb-hosts/) guide.</code></td></tr>
+<tr><td>End of §9 "How RevFactor Works"</td><td><em>"See exactly how RevFactor's method works."</em></td><td><code>See exactly [how RevFactor's method works](/blog/the-revfactor-method/).</code></td></tr>
+<tr><td>§10 CTA</td><td><em>"â /short-term-rental-consultant/"</em></td><td><code>→ [Book your Discovery Call](https://www.revfactor.io/short-term-rental-consultant/)</code></td></tr>
+</table>
+<p><strong>Note:</strong> the §10 CTA href fix was made in the v3 Google Doc on 2026-06-02 (Fix 2 of the draft-review). It regressed somewhere between Doc → MDX export. Worth checking the export pipeline.</p>
+</div>
+
+<h2>Issue 3 — Frontmatter missing fields the Astro content config expects</h2>
+
+<div class="red">
+<p class="label-red">Frontmatter has 6 of 17 expected fields</p>
+<p>Comparing against the pillar (<code>revenue-management-for-short-term-rentals.mdx</code>) and Blog 4 (<code>best-str-revenue-management-companies-2026.mdx</code>):</p>
+<table>
+<tr><th>Field</th><th>Status</th><th>Effect on the live site if missing</th></tr>
+<tr><td><code>title</code>, <code>metaTitle</code>, <code>metaDescription</code>, <code>slug</code>, <code>canonical</code>, <code>author</code></td><td>✅ Present</td><td>—</td></tr>
+<tr><td><code>description</code></td><td>❌ Missing</td><td>Used by the Astro layout for OG / Twitter card preview; falls back to metaDescription if missing but loses the layered intro line other RevFactor blogs have</td></tr>
+<tr><td><code>subhead</code></td><td>❌ Missing</td><td>Hero subhead under the H1 won't render; the article looks bare above-the-fold compared to the rest of the cluster</td></tr>
+<tr><td><code>pubDate</code></td><td>❌ Missing</td><td>Astro content config likely treats this as required; build may fail OR the post won't appear in the /blog/ index sorted feed</td></tr>
+<tr><td><code>updatedDate</code></td><td>❌ Missing</td><td>"Last updated" timestamp in byline won't show; freshness signal lost</td></tr>
+<tr><td><code>category</code></td><td>❌ Missing</td><td>Won't appear in the journal's category filter; can't be cross-tagged with Strategy / Tools / Pricing</td></tr>
+<tr><td><code>tags</code></td><td>❌ Missing</td><td>Tag-based related-posts module won't link to/from this article</td></tr>
+<tr><td><code>image</code> + <code>imageAlt</code></td><td>❌ Missing</td><td>Hero image won't render; /blog/ index masonry card has nothing to show; OG preview falls back to default</td></tr>
+<tr><td><code>featured</code></td><td>❌ Missing</td><td>Defaults to false — won't be eligible for the featured slot on /blog/ index (probably correct for this post; just flag it)</td></tr>
+<tr><td><code>readingTime</code></td><td>❌ Missing</td><td>"X-min read" badge won't show in card or byline</td></tr>
+<tr><td><code>faqs</code> array</td><td>❌ Missing</td><td><strong>This is the publish blocker.</strong> The FAQPage schema is built from this YAML array, not from the in-body FAQ H3s. Without it, the FAQ block ships without schema markup and loses AI Overview eligibility.</td></tr>
+</table>
+<p><strong>Recommended frontmatter (paste-ready):</strong></p>
+<pre>---
+title: "Airbnb Revenue Management Company: When (And When Not) to Hire One"
+description: "When to hire an Airbnb revenue management company — and when not to. The 7 signs, the cost, the questions to ask, and the honest case for waiting."
+subhead: "A decision guide for 3–15 property STR operators weighing whether to hand off pricing to a specialist."
+metaTitle: "Airbnb Revenue Management Company: When to Hire One"
+metaDescription: "Wondering whether to hire an Airbnb revenue management company? A clear guide to what they do, what they cost, and the signs you're actually ready."
+slug: /blog/airbnb-revenue-management-company
+canonical: https://www.revfactor.io/blog/airbnb-revenue-management-company
+pubDate: 2026-06-04
+updatedDate: 2026-06-04
+author: "Federico Zimerman"
+category: "Hiring"
+tags: ["revenue management", "Airbnb hosts", "STR managed service", "hiring guide", "PriceLabs"]
+image: "/heroes/[hero-image-filename].webp"
+imageAlt: "[describe the hero image — e.g., 'A property owner at a kitchen table comparing pricing dashboards across three Airbnb listings, late afternoon light through the window.']"
+featured: false
+readingTime: 14
+faqs:
+  - q: "What is an Airbnb revenue management company?"
+    a: "A managed service that handles daily pricing, inventory strategy, event forecasting, and competitive monitoring for short-term rental listings. Unlike a dynamic pricing tool, which executes the rules you set, it makes the strategic decisions behind those rules, aiming to maximize RevPAR rather than just fill the calendar or push nightly rates."
+  - q: "Will a revenue management company take control of my listing?"
+    a: "Not with a properly structured service. RevFactor uses co-host access, working inside your existing Airbnb and PriceLabs accounts without any transfer of ownership. You stay the primary account holder and see every change in real time."
+  - q: "When is it NOT worth hiring a revenue management company?"
+    a: "If you run a single property in a low-competition market, you actively monitor pricing weekly, and your RevPAR is tracking above your comp set, you may not need one yet. The case gets clearer with multiple properties, complex seasonality or frequent events, or when managing pricing is eating time better spent elsewhere."
+  - q: "How long does it take to see results?"
+    a: "It varies by market, season, and current setup. For new listings, the launch-strategy impact usually shows within 60–90 days through review velocity and ranking. For existing listings, RevPAR movement is often measurable within 30–60 days, though a full season is the clearest benchmark."
+  - q: "What is RevFactor?"
+    a: "RevFactor (revfactor.io) is a managed STR revenue management service founded by Federico Zimerman, offering flat-fee daily pricing and inventory management for short-term rental hosts. It is unrelated to RevFactor.ai, a separate SaaS product. RevFactor works through co-host access to your existing accounts and charges a flat monthly fee from $320 per property."
+---</pre>
+<p><strong>Two fields need values from your team:</strong> the hero image filename + alt text (line items <code>image</code> + <code>imageAlt</code>). Everything else is locked. Once the FAQs are in the frontmatter, you can DELETE the duplicate "## Frequently Asked Questions" body block — the Astro layout renders them from the YAML automatically.</p>
+</div>
+
+<h2>Issue 4 — No JSON-LD schema package</h2>
+
+<div class="red">
+<p class="label-red">Brief specified 7 schema types; MDX has 0</p>
+<p>The v2 outline brief locked the schema package: <strong>Article + FAQPage + Service (with <code>serviceType</code> + Offer with price $320) + ItemList (wrapping §6's 7 signs) + Review (Kassidy testimonial) + BreadcrumbList + Person</strong>. None are in the MDX file.</p>
+<p>The FAQPage and Article schemas are usually auto-generated by the Astro layout if the frontmatter <code>faqs</code> array exists and <code>pubDate</code> is set — so Fix 3 handles those two automatically. <strong>The remaining four (Service, ItemList, Review, BreadcrumbList, Person) need to be added inline.</strong></p>
+<p><strong>Recommended placement:</strong> insert immediately after the H1 + Key Takeaways block (before the opening hook) as a single <code>&lt;script type="application/ld+json"&gt;</code> block. Paste-ready JSON-LD:</p>
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.revfactor.io/#service",
+      "name": "RevFactor Managed Revenue Management",
+      "serviceType": "Revenue Management Service",
+      "provider": { "@id": "https://www.revfactor.io/#organization" },
+      "areaServed": { "@type": "Country", "name": "United States" },
+      "offers": {
+        "@type": "Offer",
+        "price": "320",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "320",
+          "priceCurrency": "USD",
+          "unitText": "MONTH"
+        }
+      }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Signs It's Time to Hire an Airbnb Revenue Management Company",
+      "numberOfItems": 7,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "You're managing three or more properties and pricing has become a part-time job you're doing badly" },
+        { "@type": "ListItem", "position": 2, "name": "Your ADR is up but your revenue is flat or behind" },
+        { "@type": "ListItem", "position": 3, "name": "You missed a local event and a comparable property nearby didn't" },
+        { "@type": "ListItem", "position": 4, "name": "Your new listing isn't gaining traction in its first 60 days" },
+        { "@type": "ListItem", "position": 5, "name": "You're paying for PriceLabs but barely logging in" },
+        { "@type": "ListItem", "position": 6, "name": "A comparable property nearby consistently outperforms you for no obvious reason" },
+        { "@type": "ListItem", "position": 7, "name": "Your booking window has compressed and you're still pricing on last year's lead-time assumptions" }
+      ]
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://www.revfactor.io/#organization" },
+      "author": { "@type": "Person", "name": "Kassidy Warren", "url": "https://kassidywarren.com" },
+      "reviewBody": "Since starting with RevFactor, I've had peace of mind that my pricing strategy is on point and competitive, and I don't have to watch the calendar. Most months, I've seen a 20% increase in revenue.",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.revfactor.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Journal", "item": "https://www.revfactor.io/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Airbnb Revenue Management Company: When (And When Not) to Hire One" }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.revfactor.io/#federico",
+      "name": "Federico Zimerman",
+      "jobTitle": "Founder, RevFactor",
+      "url": "https://www.revfactor.io/",
+      "sameAs": [
+        "https://www.linkedin.com/in/federico-zimerman-23ab3345/",
+        "https://www.tiktok.com/@federicozimerman",
+        "https://www.instagram.com/strguide/"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.revfactor.io/#organization",
+      "name": "RevFactor",
+      "url": "https://www.revfactor.io/",
+      "founder": { "@id": "https://www.revfactor.io/#federico" }
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+<p>RevFactor team: verify the LinkedIn / TikTok / Instagram handles in the Person <code>sameAs</code> array match Federico's actual current profiles before commit.</p>
+</div>
+
+<h2>Issue 5 — H1 duplicated outside the layout</h2>
+
+<div class="blue">
+<p class="label">Minor — H1 written into the body</p>
+<p>The file has both:</p>
+<ul>
+<li><code>title: "Airbnb Revenue Management Company: When (And When Not) to Hire One"</code> in the frontmatter</li>
+<li><code># Airbnb Revenue Management Company: When (And When Not) to Hire One</code> as the first body line</li>
+</ul>
+<p>Most Astro blog layouts render the H1 from the <code>title</code> frontmatter field. Writing it again as a body <code>#</code> heading creates a duplicate H1 on the page — bad for SEO (Google expects one H1 per page) and visual layout (two huge headings stacked).</p>
+<p><strong>Fix:</strong> delete the <code># Airbnb Revenue Management Company...</code> body line. Confirm the layout component renders the H1 from frontmatter (it does on the pillar + Blog 4 + Blog 5 — verify by checking <code>src/layouts/BlogPost.astro</code> or whichever layout is wired in <code>src/content/config.ts</code>).</p>
+</div>
+
+<h2>What landed correctly (content side)</h2>
+
+<div class="green">
+<p class="label">All content from the v3 draft sign-off (2026-06-02) preserved verbatim</p>
+<ul>
+<li><strong>Opening hook</strong> — third-property scaling moment ✅</li>
+<li><strong>§1</strong> — definition + "Software runs the math. People run the business." Federico quote ✅</li>
+<li><strong>§2</strong> — three H3s + April 2026 TikTok sidebar + AirROI 27%/21% booking-window stat + service table with co-host row ✅</li>
+<li><strong>§3</strong> — defers to Blog 4's Three Models framework + comparison table ✅</li>
+<li><strong>§4</strong> — Wald + WWII bombers + algorithm extension ✅</li>
+<li><strong>§5</strong> — "ADR climbing year over year and her pacing chart reading green" (Fix 1 from draft-review intact) ✅</li>
+<li><strong>§6</strong> — 7 signs including the booking-window-compression signal #7 + "one sign it isn't" + decision tree ✅</li>
+<li><strong>§7</strong> — pricing table + 4 cost-of-inaction scenarios + 5-hrs/week + Erin Warren dollar baselines + Zoey/Kassidy/Emilie testimonials + +24% benchmark ✅</li>
+<li><strong>§8</strong> — 6 questions phrased as questions ✅</li>
+<li><strong>§9</strong> — Refactor.ai disambiguation verbatim + 5-step onboarding + Blackbird 198/24/67 + Property Manager Summit + Guest Favorite + Kassidy testimonial ✅</li>
+<li><strong>§10</strong> — "what your calendar is doing that you may not be seeing" CTA wording ✅</li>
+<li><strong>FAQ</strong> — 5 questions with disambiguation in "What is RevFactor?" ✅</li>
+<li><strong>No banned phrases</strong> ✅</li>
+<li><strong>Pricing tiers</strong> $320 → $256 + $125 onboarding ✅</li>
+<li><strong>No Fort Worth / Newport / Nashville</strong> case studies (allocation matrix respected) ✅</li>
+</ul>
+<p>This is a delivery-format problem, not a content problem. The writing is locked.</p>
+</div>
+
+<h2>Suggested fix order for GetCito</h2>
+
+<div class="blue">
+<p class="label">15-minute total at GetCito's end</p>
+<ol>
+<li><strong>Re-save the MDX file as UTF-8 without BOM.</strong> Verify em-dashes display as <code>—</code> not <code>â</code>. (5 min)</li>
+<li><strong>Wire the 5 internal links</strong> using markdown link syntax — paste the link targets from the table in Issue 2. (3 min)</li>
+<li><strong>Replace the frontmatter block</strong> with the paste-ready block in Issue 3. Provide hero image filename + alt text (the only two fields needing input). (4 min)</li>
+<li><strong>Add the JSON-LD script block</strong> from Issue 4, inserted after the Key Takeaways and before the opening hook paragraph. Verify Federico's social handles in Person <code>sameAs</code>. (2 min)</li>
+<li><strong>Delete the duplicate body H1</strong>. (1 min)</li>
+</ol>
+<p>Re-deliver as a single .mdx file. RevFactor team commits to staging, runs <code>npm run build</code> to verify clean build, deploys via Vercel auto-deploy from main.</p>
+</div>
+
+<div class="blue">
+<p class="label">Alternative — RevFactor handles the cleanup locally</p>
+<p>All 5 fixes are mechanical and don't require new editorial input. If turning the file around with GetCito adds latency, RevFactor team can apply all 5 fixes in a local commit (~10 min). The content layer is locked, so there's no risk of editorial drift.</p>
+</div>
+
+</body>
+</html>

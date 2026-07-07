@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 7 Draft v3 — Sign-off Review (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .blue table { font-size: 13px; }
+  .blue th, .blue td { border-color: #b6c8e8; }
+  .blue th { background: #e0eaff; }
+  .red { color: #8b1a1a; background: #fff0f0; border-left: 4px solid #8b1a1a; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .red strong { color: #5a0000; }
+  .original { font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; background: #fafafa; border-left: 3px solid #ccc; padding: 8px 12px; margin: 8px 0; font-style: italic; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
+  .green { color: #0a7a3c; background: #f0fff5; border-left: 4px solid #0a7a3c; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .green strong { color: #0a4f25; }
+  .green .label { color: #0a4f25; }
+  .green.banner { background: #0a7a3c; color: #fff; border-left-color: #0a4f25; padding: 14px 18px; }
+  .green.banner strong { color: #fff; }
+  .legend { background: #f8f8f4; border: 1px solid #ddd; padding: 12px 16px; margin: 16px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 13px; }
+  .legend span { display: inline-block; margin-right: 18px; }
+  .legend .swatch { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Blog 7 Draft v3 — Sign-off Review</h1>
+<p class="original"><strong>Project:</strong> RevFactor.io Blog 7 — fourth-round review (sign-off pass)<br>
+<strong>Title:</strong> Airbnb Revenue Management Company: When (And When Not) to Hire One<br>
+<strong>URL:</strong> /blog/airbnb-revenue-management-company<br>
+<strong>Draft source:</strong> GetCito v3 (Muskan, doc modified 2026-06-02 13:42 UTC)<br>
+<strong>Measured word count:</strong> 3,551 (down from 3,584 in v2)<br>
+<strong>Diff vs 2026-05-29 v2:</strong> §5 paragraph rewrite + §10 CTA href fix + minor §7 line tightening. No other substantive changes.<br>
+<em>Review by: RevFactor team — verified against the 3 fixes flagged in the 2026-05-29 draft-review doc.</em></p>
+
+<div class="legend">
+<strong>Color key:</strong>
+<span><span class="swatch" style="background:#222"></span> Draft text (italic, light grey background)</span>
+<span><span class="swatch" style="background:#1a4fbf"></span> Our feedback (blue)</span>
+<span><span class="swatch" style="background:#8b1a1a"></span> Critical / blocker (red)</span>
+<span><span class="swatch" style="background:#0a7a3c"></span> Resolved / positive (green)</span>
+</div>
+
+<div class="green banner">
+<p class="label" style="color:#d8f0e0">Top-line: ship-ready</p>
+<p><strong>Two of three fixes landed clean. Third (word count trim) was optional and skipped — Aaron's prior signal was "fine if quality is high," which it is.</strong> No outstanding blockers. GetCito can hand the MDX to your dev / publishing pipeline.</p>
+<p style="margin-top:8px"><strong>One open Aaron-decision still carried over from the 2026-05-29 review:</strong> cluster numbering convention (Option A sequential vs Option B structured). Doc still labeled "Cluster 8 — RevFactor" at the top, which means GetCito's default is Option B until you say otherwise. Worth locking before commissioning Blog 8 next week.</p>
+</div>
+
+<h2>Fix verification</h2>
+
+<div class="green">
+<p class="label">Fix 1 ✅ — §5 ADR-18% scenario rewritten verbatim</p>
+<p>The "ADR up 18% + clean PriceLabs dashboard + finished season behind" near-duplicate with Blog 4's cold-open is gone. Draft now reads:</p>
+<p class="original">"A host sees ADR climbing year over year and her pacing chart reading green, and still finishes the season behind. The rate climbed, occupancy quietly compressed, fewer nights filled at higher prices, and the tool logged it as a win."</p>
+<p>Verbatim match to my suggested rewrite, plus they split the paragraph for readability (the "When ADR rises, and RevPAR slips" line is now a separate paragraph). Clean. AI-engine near-duplicate detection no longer picks one URL over the other.</p>
+</div>
+
+<div class="green">
+<p class="label">Fix 2 ✅ — §10 CTA href fixed</p>
+<table>
+<tr><th>Was</th><th>Now</th></tr>
+<tr><td><code>https://www.revfactor.io/</code> (root, broken)</td><td><code>https://www.revfactor.io/short-term-rental-consultant/</code> ✅</td></tr>
+</table>
+<p>Anchor text unchanged ("/short-term-rental-consultant/"). Verify at MDX commit that this is the same target Blog 4's CTA points to — should be.</p>
+</div>
+
+<div class="blue">
+<p class="label">Fix 3 — word count trim skipped (3,551 vs target ~3,300)</p>
+<p>Word count came down 33 words (3,584 → 3,551), basically just from the §5 paragraph rewording. The deeper trim I suggested (§7 ~150 words + §6 ~100 words to land at ~3,300) didn't happen. Still ~350 over the approved 3,200 ceiling.</p>
+<p><strong>Aaron's prior signal:</strong> "It's fine since it's high quality." That logic still applies — every paragraph earns its space, the unique-content density (§4 survivorship, §6 7-signal diagnostic, §7 cost-of-inaction scenarios, §9 onboarding walkthrough) is the reason this URL exists. <strong>Recommend accepting the overrun and shipping.</strong> If you want the trim, GetCito has the two specific targets (§7 Erin Warren paragraph and §6 sign-by-sign opening sentences) — easy 20-minute pass.</p>
+</div>
+
+<h2>One open decision (carried forward)</h2>
+
+<div class="blue">
+<p class="label">Cluster numbering — pick Option A or B before Blog 8 next week</p>
+<p>The doc still leads with <em>"# Cluster 8 — RevFactor"</em> at the top, which means GetCito kept their default labeling — Option B (Pillar + FIFA = Blog 1/2; Cluster blogs = Cluster 1–8). My prior recommendation was Option A (sequential Blog 1–8 across the board) because it matches our internal docs / allocation matrix / feedback filenames.</p>
+<p>Either way is fine — just pick one and lock it before commissioning Blog 8. If you go with A, ask GetCito to drop the "Cluster 8" header. If B, tell them to keep using cluster numbering going forward but provide a topic for Cluster 7 (per their note in the doc).</p>
+</div>
+
+<h2>Quality holds — nothing regressed</h2>
+
+<div class="green">
+<p class="label">All v2-locked items intact in v3</p>
+<ul>
+<li><strong>§9 first brand mention disambiguation</strong> — verbatim: <em>"RevFactor (revfactor.io) is a managed STR revenue management service founded by Federico Zimerman; it is unrelated to RevFactor.ai, a separate and unrelated SaaS product."</em> ✅</li>
+<li><strong>FAQ "What is RevFactor?"</strong> — disambiguation repeats here too ✅</li>
+<li><strong>Gaston not named publicly</strong> — §9 says "founded by Federico Zimerman" per your sign-off ✅</li>
+<li><strong>Blackbird → RevFactor link surfaced</strong> with 198/24/67 numbers ✅</li>
+<li><strong>9-in-10 PriceLabs stat</strong> in §6 sign #5 ✅</li>
+<li><strong>5 hrs/week "full work day every week" framing</strong> in §7 ✅</li>
+<li><strong>Erin Warren dollar baselines</strong> in §7 (no bare percentages anywhere) ✅</li>
+<li><strong>§6 sign #7 booking-window-compression text</strong> verbatim ✅</li>
+<li><strong>"One sign it isn't time yet" honesty branch</strong> kept ✅</li>
+<li><strong>§4 survivorship-bias H2 with Wald correctly attributed</strong> ✅</li>
+<li><strong>§3 defers to Blog 4's Three Models framework</strong> + soft "Compare STR RM companies" link ✅</li>
+<li><strong>§10 CTA wording</strong> — "what your calendar is doing that you may not be seeing" verbatim ✅</li>
+<li><strong>+24% portfolio benchmark</strong> (not +18%) ✅</li>
+<li><strong>Pricing tiers</strong> $320 / $304 / $288 / $272 / $256 + $125 onboarding ✅</li>
+<li><strong>Banned phrases</strong> clean (no leverage / unlock / set-and-forget / AI-powered / at-the-end-of-the-day / passive income) ✅</li>
+<li><strong>Fort Worth / Newport / Nashville all blocked</strong> per allocation matrix ✅</li>
+<li><strong>US spelling</strong> clean throughout ✅</li>
+</ul>
+</div>
+
+<div class="green">
+<p class="label">Cleaner doc — working notes stripped</p>
+<p>The "Writer-facing shipping checklist" / "Verification & allocation compliance" / "Feedback Implementation Table" / "Schema appendix" sections from the v2 are no longer in the body of the draft — good editorial cleanup. (The v2 brief tab below the draft still has them, which is fine — they belong in the brief, not the article.)</p>
+</div>
+
+<h2>Pre-MDX checklist (RevFactor-side)</h2>
+
+<div class="blue">
+<p class="label">Verify at MDX commit + publish</p>
+<ol>
+<li><strong>Schema package in <code>&lt;head&gt;</code>:</strong> Article + FAQPage + Service (with <code>serviceType: "Revenue Management Service"</code> + Offer with <code>price: 320</code>) + ItemList (wrapping §6's 7 signals) + Review (Kassidy Warren) + BreadcrumbList + Person. Run through Google Rich Results Test.</li>
+<li><strong>Canonical = self</strong> (<code>https://www.revfactor.io/blog/airbnb-revenue-management-company/</code>) — verify in rendered head, not just MDX source.</li>
+<li><strong>Refactor.ai disambiguation appears in rendered HTML</strong> at both pinning locations (§9 first brand mention + FAQ "What is RevFactor?").</li>
+<li><strong>All 5 internal links resolve correctly</strong> (pillar, Blog 4, Blog 5, ADR vs RevPAR, RevFactor Method).</li>
+<li><strong>§10 CTA href</strong> matches Blog 4's CTA target (both should point to <code>/short-term-rental-consultant/</code>).</li>
+<li><strong>Pricing numbers pull from <code>src/data/portfolio-stats.ts</code> SSOT</strong> where possible — same pattern as the homepage Revenue Intelligence card fix (commit 10acfa0, 2026-05-29).</li>
+<li><strong>IndexNow ping</strong> to Bing on publish so ChatGPT Search picks up the page quickly (per RevFactor's standing IndexNow protocol).</li>
+<li><strong>Add Blog 7 to the pillar's "Who This Guide Is For" section</strong> as the buyer's guide cross-link — not blocking publish, queue for the next pillar refresh.</li>
+</ol>
+</div>
+
+<h2>Cluster status after publish</h2>
+
+<div class="green">
+<p class="label">What's live + what's next</p>
+<table>
+<tr><th>URL</th><th>Status post-Blog 7</th></tr>
+<tr><td>Pillar (revenue-management-for-short-term-rentals)</td><td>Live — owns the discipline</td></tr>
+<tr><td>Blog 4 (best-str-revenue-management-companies-2026)</td><td>Live — owns the ranked vendor SERP</td></tr>
+<tr><td>Blog 5 (best-airbnb-property-managers-with-dynamic-pricing-2026)</td><td>Live — owns "managed RM vs full PM" decision</td></tr>
+<tr><td>Blog 7 (airbnb-revenue-management-company)</td><td><strong>Shipping</strong> — owns "when (and when not) to hire" decision-guide intent</td></tr>
+<tr><td>Blog 6 (yield management)</td><td>Killed — 301 <code>/yield-management-airbnb/</code> → pillar</td></tr>
+<tr><td>ADR vs RevPAR / RevFactor Method / Comp Set / Dynamic Pricing / FIFA</td><td>Live</td></tr>
+</table>
+<p><strong>Next:</strong> 1 GetCito outline/week starting ~7–10 days after Blog 7 indexes (gives Google + Peec time to register a signal on which sub-intents are still gaps). Case-study allocation matrix is locked at Blog 7's 9 owned anchors — next brief must check before touching them.</p>
+</div>
+
+</body>
+</html>

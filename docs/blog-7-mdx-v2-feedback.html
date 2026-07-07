@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog 7 MDX v2 — Feedback (RevFactor)</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 880px; margin: 40px auto; padding: 0 32px; line-height: 1.55; color: #222; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { font-size: 16px; margin-top: 22px; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; vertical-align: top; font-size: 14px; }
+  th { background: #f4f4f4; }
+  ul { margin: 6px 0 12px 0; }
+  li { margin-bottom: 4px; }
+  code { background: #f4f4f4; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  pre { background: #f6f8fa; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; line-height: 1.4; }
+  .blue { color: #1a4fbf; background: #f0f5ff; border-left: 4px solid #1a4fbf; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .blue strong { color: #0a2e80; }
+  .red { color: #8b1a1a; background: #fff0f0; border-left: 4px solid #8b1a1a; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .red strong { color: #5a0000; }
+  .green { color: #0a7a3c; background: #f0fff5; border-left: 4px solid #0a7a3c; padding: 10px 14px; margin: 10px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px; }
+  .green strong { color: #0a4f25; }
+  .label { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a2e80; text-transform: uppercase; }
+  .label-red { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #5a0000; text-transform: uppercase; }
+  .label-green { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: #0a4f25; text-transform: uppercase; }
+  .legend { background: #f8f8f4; border: 1px solid #ddd; padding: 12px 16px; margin: 16px 0; font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 13px; }
+  .legend span { display: inline-block; margin-right: 18px; }
+  .legend .swatch { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Blog 7 MDX v2 — Feedback</h1>
+<p style="font-family: -apple-system, system-ui, Helvetica, Arial, sans-serif; font-size: 14px;">
+<strong>Project:</strong> RevFactor.io Blog 7 — MDX file v2 (revised after 2026-06-05 MDX-feedback doc)<br>
+<strong>Delivered:</strong> GetCito (Muskan), 2026-06-08<br>
+<strong>Result:</strong> 3 of 5 prior fixes landed clean. 2 still need a quick pass before commit.
+</p>
+
+<div class="legend">
+<strong>Color key:</strong>
+<span><span class="swatch" style="background:#0a7a3c"></span> Fixed</span>
+<span><span class="swatch" style="background:#8b1a1a"></span> Still broken — blocks commit</span>
+<span><span class="swatch" style="background:#1a4fbf"></span> Editorial note</span>
+</div>
+
+<h2>Status of the 5 fixes from the 2026-06-05 review</h2>
+
+<div class="green">
+<p class="label-green">✅ Fix 2 — internal links wired as proper markdown</p>
+<p>All five wired correctly with the right destination URLs:</p>
+<ul>
+<li><code>[revenue management for short-term rentals](/blog/revenue-management-for-short-term-rentals/)</code></li>
+<li><code>[Compare STR revenue management companies](/blog/best-str-revenue-management-companies-2026/)</code></li>
+<li><code>[ADR vs RevPAR](/blog/adr-vs-revpar-airbnb-hosts/)</code></li>
+<li><code>[how RevFactor's method works](/blog/the-revfactor-method/)</code></li>
+<li><code>[Book your Discovery Call](https://www.revfactor.io/short-term-rental-consultant/)</code> — also fixed the §10 CTA which was previously a plain-text arrow</li>
+</ul>
+</div>
+
+<div class="green">
+<p class="label-green">✅ Fix 3 — frontmatter is complete</p>
+<p>All required fields landed: <code>title</code>, <code>description</code>, <code>subhead</code>, <code>metaTitle</code>, <code>metaDescription</code>, <code>slug</code>, <code>canonical</code>, <code>pubDate</code>, <code>updatedDate</code>, <code>author</code>, <code>category</code>, <code>tags</code>, <code>image</code> (placeholder), <code>imageAlt</code> (placeholder), <code>featured</code>, <code>readingTime</code>, <code>faqs</code>. The image placeholder is flagged in Muskan's note — that's expected; the hero asset slots in later from your end.</p>
+</div>
+
+<div class="green">
+<p class="label-green">✅ Fix 4 — JSON-LD schema package is largely in (one gap, see below)</p>
+<p>Added Service (with <code>serviceType</code> + Offer at $320), ItemList wrapping the 7 signs, Review (Kassidy Warren), BreadcrumbList, Person (Federico), Organization, and FAQPage. Clean structure, correct <code>@id</code> wiring between Person and Organization. <em>One schema is missing — see Issue B below.</em></p>
+</div>
+
+<div class="red">
+<p class="label-red">❌ Issue A — UTF-8 encoding still broken (same as last time)</p>
+<p>The file is still being saved in a non-UTF-8 encoding. Every em-dash, en-dash, emoji, and curly quote came through as broken bytes:</p>
+<table>
+<tr><th>What's in the file</th><th>What it should be</th><th>Where</th></tr>
+<tr><td><code>â</code> (em-dash mojibake)</td><td><code>—</code></td><td>Description, subhead, body throughout — every quote attribution, every range like <code>20â40%</code>, <code>3â6 months</code>, <code>60â90 days</code>, etc.</td></tr>
+<tr><td><code>â</code> (en-dash mojibake)</td><td><code>–</code></td><td>Ranges like <code>3â15 property</code>, <code>$30â$150/mo</code>, decision-tree arrows</td></tr>
+<tr><td><code>ð</code> (broken emoji byte)</td><td>📌 or whatever was intended (or just remove)</td><td><code>### **ð Key Takeaways**</code></td></tr>
+</table>
+<p>The file will render those literal characters on the live site — looks broken to every reader. <strong>One-line fix on GetCito's end:</strong> open the file in a UTF-8-aware editor (VS Code, Sublime, BBEdit) and re-save as UTF-8 without BOM. Or on the command line:</p>
+<pre>iconv -f LATIN1 -t UTF-8 airbnb-revenue-management-company.mdx &gt; fixed.mdx
+# then manually swap â → — and â → – with find/replace</pre>
+<p>This is the same root issue as the 2026-06-05 doc — their editor is defaulting to Latin-1/Windows-1252 on save. Worth flagging that <em>every future delivery</em> needs to be UTF-8 or this will keep happening.</p>
+</div>
+
+<div class="red">
+<p class="label-red">❌ Issue B — missing Article schema</p>
+<p>The <code>@graph</code> in the JSON-LD has Service, ItemList, Review, BreadcrumbList, Person, Organization, and FAQPage — but no <code>Article</code> entry. Article is the foundational schema for any blog post — without it Google can't reliably identify the page as an article, the author byline, or the published/modified dates for Top Stories / Discover eligibility.</p>
+<p><strong>Add this to the <code>@graph</code> array:</strong></p>
+<pre>{
+  "@type": "Article",
+  "@id": "https://www.revfactor.io/blog/airbnb-revenue-management-company#article",
+  "headline": "Airbnb Revenue Management Company: When (And When Not) to Hire One",
+  "description": "When to hire an Airbnb revenue management company — and when not to. The 7 signs, the cost, the questions to ask, and the honest case for waiting.",
+  "datePublished": "2026-06-04",
+  "dateModified": "2026-06-04",
+  "author": { "@id": "https://www.revfactor.io/#federico" },
+  "publisher": { "@id": "https://www.revfactor.io/#organization" },
+  "mainEntityOfPage": "https://www.revfactor.io/blog/airbnb-revenue-management-company",
+  "image": "https://www.revfactor.io/heroes/[hero-image-filename].webp"
+}</pre>
+<p>Wires up to the existing Person + Organization @ids cleanly. <code>image</code> filename can be filled when the hero asset lands.</p>
+</div>
+
+<div class="red">
+<p class="label-red">❌ Issue C — duplicate body H1 (confirmed must drop)</p>
+<p>The body still opens with <code># Airbnb Revenue Management Company: When (And When Not) to Hire One</code>. Verified against all 3 live RevFactor posts in <code>src/content/blog/</code>:</p>
+<ul>
+<li><code>revenue-management-for-short-term-rentals.mdx</code> — 0 body H1s</li>
+<li><code>the-revfactor-method.mdx</code> — 0 body H1s</li>
+<li><code>adr-vs-revpar-airbnb-hosts.mdx</code> — 0 body H1s</li>
+</ul>
+<p><strong>The Astro template renders the frontmatter <code>title</code> as the page H1.</strong> Leaving the body H1 in creates two H1s on the rendered page — SEO antipattern and Lighthouse/a11y flag. <strong>Delete the line:</strong></p>
+<pre># Airbnb Revenue Management Company: When (And When Not) to Hire One</pre>
+<p>The first H2 (<code>## What Is an Airbnb Revenue Management Company?</code>) becomes the first body heading.</p>
+</div>
+
+<div class="blue">
+<p class="label">Issue D — minor editorial</p>
+<ul>
+<li><strong>"Key Takeaways" callout</strong> — currently uses H3 with a broken emoji (<code>### **ð Key Takeaways**</code>). Other live RevFactor posts use a custom <code>&lt;div class="rf-takeaways"&gt;</code> wrapper without emoji. Worth either dropping the emoji entirely (just <code>### Key Takeaways</code>) or wrapping in the rf-takeaways div for visual consistency with the rest of the cluster.</li>
+<li><strong>"What to Ask Before You Hire"</strong> dropped the 1–6 numbering it had in the v3 draft. Now just bold lead-ins. Either works for AEO; the numbered version is slightly more snippet-extractable. Either way is fine.</li>
+</ul>
+</div>
+
+<h2>Hero image placeholder — Muskan's flag</h2>
+
+<div class="blue">
+<p class="label">Acknowledged — hero asset is on your side, not GetCito's</p>
+<p>Muskan flagged: <em>"we don't currently have the hero image asset, so the hero image filename and alt text could not be added at this time."</em> Fair — the hero is RevFactor's design call. Two options when you fill it in:</p>
+<ol>
+<li>Reuse one of the existing heroes in <code>/public/heroes/</code> (cliffside, lakefront-dawn, etc.) — fastest path</li>
+<li>Generate a new one via the seo-image-gen skill / nanobanana — matches the cluster's "Precision Revenue Craft" aesthetic</li>
+</ol>
+<p>The <code>imageAlt</code> placeholder GetCito left in the frontmatter is fine as a guide for whoever fills the asset slot.</p>
+</div>
+
+<h2>Net: 2 GetCito-side fixes before commit</h2>
+
+<div class="blue">
+<p class="label">Send-back summary — 3 GetCito-side fixes</p>
+<ol>
+<li><strong>Re-save the file as UTF-8</strong> — fixes every <code>â</code> and <code>ð</code> in one pass. Chronic delivery-format issue from last round.</li>
+<li><strong>Add the Article schema</strong> to the <code>@graph</code> — paste the block in Issue B above.</li>
+<li><strong>Delete the duplicate body H1</strong> — confirmed against your 3 live posts. The frontmatter <code>title</code> renders as the page H1.</li>
+</ol>
+<p>After those land, the MDX is commit-ready — Aaron supplies the hero image filename when the asset is finalised, then it ships.</p>
+</div>
+
+</body>
+</html>

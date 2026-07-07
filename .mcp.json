@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "ahrefs": {
+      "command": "npx",
+      "args": [
+        "--prefix=~/.global-node-modules",
+        "@ahrefs/mcp"
+      ],
+      "env": {
+        "API_KEY": "M8K_PtZiP3ZMZnJV-cdgGGPioS_J4YxuXS7RQqSv"
+      }
+    },
+    "peec": {
+      "type": "http",
+      "url": "https://api.peec.ai/mcp"
+    }
+  }
+}
