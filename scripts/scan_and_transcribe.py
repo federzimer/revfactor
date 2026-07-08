@@ -243,13 +243,23 @@ def list_instagram_posts():
     Returns the first path that yields posts. Empty list if all fail.
     Logs which path succeeded so Aaron can see the auth state from logs."""
 
-    # Path 1-3: browser-cookie paths (preferred — zero new credentials)
-    for browser in ("chrome", "safari", "firefox"):
-        posts = _ytdlp_with_browser_cookies(browser)
-        if posts:
-            log(f"  [Instagram] success via yt-dlp + {browser} cookies "
-                f"({len(posts)} posts)")
-            return posts
+    # Path 1-3: browser-cookie paths — ATTENDED RUNS ONLY.
+    # Under launchd/cron there is no TTY; `yt-dlp --cookies-from-browser chrome`
+    # makes macOS pop a "Chrome Safe Storage" password prompt, hangs ~180s on it,
+    # and fails anyway (Apify below succeeds). So skip these unless a human is at
+    # a terminal, or ALLOW_BROWSER_COOKIES=1 is explicitly set.
+    import sys, os as _os
+    attended = sys.stdin.isatty() or _os.environ.get("ALLOW_BROWSER_COOKIES") == "1"
+    if attended:
+        for browser in ("chrome", "safari", "firefox"):
+            posts = _ytdlp_with_browser_cookies(browser)
+            if posts:
+                log(f"  [Instagram] success via yt-dlp + {browser} cookies "
+                    f"({len(posts)} posts)")
+                return posts
+    else:
+        log("  [Instagram] unattended run — skipping browser-cookie paths "
+            "(would trigger a keychain password prompt); using Apify/anonymous")
 
     # Path 4: Apify (paid alternative — needs APIFY_TOKEN in keychain)
     apify_token = _keychain("apify-instagram")
