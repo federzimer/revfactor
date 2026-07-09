@@ -12,6 +12,8 @@
 //     user_agent text
 //   );
 
+import { forwardLeadToHub } from './_hub-lead';
+
 export const config = { runtime: 'edge' };
 
 const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
@@ -59,6 +61,9 @@ export default async function handler(req: Request): Promise<Response> {
     console.error('supabase insert failed', upsert.status, text);
     return json({ error: 'storage_failed' }, 502);
   }
+
+  // Mirror the signup into the Blackbird Hub pipeline (best-effort, never blocks).
+  await forwardLeadToHub({ email, lead_source: `newsletter_${source}` });
 
   return json({ ok: true });
 }

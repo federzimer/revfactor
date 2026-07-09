@@ -25,6 +25,8 @@
 // "RevFactor Discovery <notifications@revfactor.io>" — and Resend's domain
 // verification button has been clicked in their dashboard.
 
+import { forwardLeadToHub } from './_hub-lead';
+
 export const config = { runtime: 'edge' };
 
 const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
@@ -110,6 +112,19 @@ export default async function handler(req: Request): Promise<Response> {
     console.error('discovery_leads insert failed', insert.status, text);
     return json({ error: 'storage_failed' }, 502);
   }
+
+  // Mirror the lead into the Blackbird Hub pipeline (best-effort, never blocks).
+  await forwardLeadToHub({
+    email,
+    lead_source: `landing_${source}`,
+    description: [
+      `has_property=${hasProperty ? 'yes' : 'no'}`,
+      hasProperty ? `is_pm=${isPM ? 'yes' : 'no'}` : null,
+      hasProperty && isPM && propertyCount != null ? `properties=${propertyCount}` : null,
+      hasProperty && isPM && portfolioUrl ? `portfolio=${portfolioUrl}` : null,
+      pageUrl ? `page=${pageUrl}` : null,
+    ].filter(Boolean).join('; '),
+  });
 
   // Notify Aaron + Federico. Non-blocking on the response body — log + 200 on failure
   // so the user still gets confirmation even if the email fan-out hiccups.
