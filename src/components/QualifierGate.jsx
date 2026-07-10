@@ -91,6 +91,9 @@ export default function QualifierGate({ onQualified, onClose }) {
           propertyCount: isPMPath ? Math.floor(countNum) : null,
           source: 'modal',
           pageUrl: typeof window !== 'undefined' ? window.location.href : null,
+          attribution: (() => {
+            try { return JSON.parse(sessionStorage.getItem('rf_attr') || 'null'); } catch { return null; }
+          })(),
         }),
       });
       if (!res.ok) {

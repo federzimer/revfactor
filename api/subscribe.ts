@@ -12,7 +12,7 @@
 //     user_agent text
 //   );
 
-import { forwardLeadToHub } from './_hub-lead';
+import { forwardLeadToHub, formatAttribution } from './_hub-lead';
 
 export const config = { runtime: 'edge' };
 
@@ -63,7 +63,12 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   // Mirror the signup into the Blackbird Hub pipeline (best-effort, never blocks).
-  await forwardLeadToHub({ email, lead_source: `newsletter_${source}` });
+  const attribution = formatAttribution(body?.attribution);
+  await forwardLeadToHub({
+    email,
+    lead_source: `newsletter_${source}`,
+    ...(attribution ? { description: attribution } : {}),
+  });
 
   return json({ ok: true });
 }

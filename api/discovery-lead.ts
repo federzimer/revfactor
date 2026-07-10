@@ -25,7 +25,7 @@
 // "RevFactor Discovery <notifications@revfactor.io>" — and Resend's domain
 // verification button has been clicked in their dashboard.
 
-import { forwardLeadToHub } from './_hub-lead';
+import { forwardLeadToHub, formatAttribution } from './_hub-lead';
 
 export const config = { runtime: 'edge' };
 
@@ -114,6 +114,7 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   // Mirror the lead into the Blackbird Hub pipeline (best-effort, never blocks).
+  const attribution = formatAttribution(body?.attribution);
   await forwardLeadToHub({
     email,
     lead_source: `landing_${source}`,
@@ -123,6 +124,7 @@ export default async function handler(req: Request): Promise<Response> {
       hasProperty && isPM && propertyCount != null ? `properties=${propertyCount}` : null,
       hasProperty && isPM && portfolioUrl ? `portfolio=${portfolioUrl}` : null,
       pageUrl ? `page=${pageUrl}` : null,
+      attribution || null,
     ].filter(Boolean).join('; '),
   });
 
@@ -144,6 +146,7 @@ export default async function handler(req: Request): Promise<Response> {
         `Portfolio link: ${portfolioUrl || 'n/a'}`,
       ] : []),
       `Source: ${source}`,
+      `Traffic: ${attribution || 'direct / unknown'}`,
       `Page: ${pageUrl || 'n/a'}`,
       `IP: ${ip || 'n/a'}`,
       `User-Agent: ${userAgent || 'n/a'}`,

@@ -22,6 +22,23 @@ export interface HubLead {
   timezone?: string;
 }
 
+// Sanitize the client-supplied attribution blob (sessionStorage 'rf_attr',
+// set by the BaseLayout inline script) into a compact "k=v; k=v" string.
+// Allowlisted keys only, values length-capped — never trust the browser.
+const ATTR_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'msclkid', 'msg', 'referrer', 'landing'];
+
+export function formatAttribution(raw: unknown): string {
+  if (!raw || typeof raw !== 'object') return '';
+  const parts: string[] = [];
+  for (const k of ATTR_KEYS) {
+    const v = (raw as Record<string, unknown>)[k];
+    if (typeof v === 'string' && v.trim()) {
+      parts.push(`${k}=${v.trim().slice(0, 200)}`);
+    }
+  }
+  return parts.join('; ');
+}
+
 export async function forwardLeadToHub(lead: HubLead): Promise<void> {
   const secret = process.env.HUB_WEBHOOK_SECRET;
   if (!secret) {

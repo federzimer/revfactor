@@ -58,6 +58,35 @@ const canonicalUrl = Astro.url.href;
     })();
   </script>
 
+  {/* First-touch attribution: persist utm_* / gclid / referrer / landing page
+      in sessionStorage so lead submissions carry traffic source even when the
+      visitor navigates away from the landing page before converting (Astro =
+      full page loads, query params are lost on nav). Read by QualifierGate
+      and the Journal subscribe form; forwarded to the Hub lead pipeline. */}
+  <script is:inline>
+    (function () {
+      try {
+        var KEY = 'rf_attr';
+        var q = new URLSearchParams(location.search);
+        var params = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','msclkid','msg'];
+        var fresh = {};
+        for (var i = 0; i < params.length; i++) {
+          var v = q.get(params[i]);
+          if (v) fresh[params[i]] = v.slice(0, 120);
+        }
+        var attr = {};
+        try { attr = JSON.parse(sessionStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+        // Click IDs / UTMs from a newer visit win; referrer + landing are first-touch.
+        for (var k in fresh) attr[k] = fresh[k];
+        if (!attr.referrer && document.referrer && document.referrer.indexOf(location.hostname) === -1) {
+          attr.referrer = document.referrer.slice(0, 200);
+        }
+        if (!attr.landing) attr.landing = (location.pathname + (fresh.utm_source ? location.search : '')).slice(0, 200);
+        sessionStorage.setItem(KEY, JSON.stringify(attr));
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- Fraud Blocker — bot/click-fraud detection. Deferred until window.load
        so it doesn't block first paint. Bot signals still reach Fraud
        Blocker for any user actually engaging with the page. -->
