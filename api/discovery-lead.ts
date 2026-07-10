@@ -170,21 +170,29 @@ export default async function handler(req: Request): Promise<Response> {
     const to = Array.from(new Set([...baseTo, ...pmTo]));
     const from = process.env.DISCOVERY_NOTIFY_FROM || DEFAULT_NOTIFY_FROM;
 
-    try {
-      const r = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${resendKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ from, to, subject, text, html }),
-      });
-      if (!r.ok) {
-        const errText = await r.text().catch(() => '');
-        console.error('resend notify failed', r.status, errText);
+    // One API call per recipient: while Resend is unverified/test-mode it
+    // rejects the ENTIRE send if any recipient isn't the account owner —
+    // a combined to:[] silently cost Aaron the lead alert too (seen live
+    // 2026-07-10, s1nergystays lead). Isolating sends guarantees the
+    // owner copy always delivers; the rest start working once the
+    // revfactor.io domain is verified in Resend.
+    for (const recipient of to) {
+      try {
+        const r = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${resendKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ from, to: [recipient], subject, text, html }),
+        });
+        if (!r.ok) {
+          const errText = await r.text().catch(() => '');
+          console.error('resend notify failed', recipient, r.status, errText);
+        }
+      } catch (e) {
+        console.error('resend notify threw', recipient, e);
       }
-    } catch (e) {
-      console.error('resend notify threw', e);
     }
   } else {
     console.warn('discovery-lead: RESEND_API_KEY not set; skipped notification');
