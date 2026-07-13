@@ -25,7 +25,7 @@
 // "RevFactor Discovery <notifications@revfactor.io>" — and Resend's domain
 // verification button has been clicked in their dashboard.
 
-import { forwardLeadToHub, formatAttribution } from './_hub-lead';
+import { forwardLeadToHub, buildAttribution } from './_hub-lead';
 
 export const config = { runtime: 'edge' };
 
@@ -114,18 +114,19 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   // Mirror the lead into the Blackbird Hub pipeline (best-effort, never blocks).
-  const attribution = formatAttribution(body?.attribution);
+  // Structured attribution per Gaston's Pipeline Integration contract: qualifier
+  // answers + page ride inside `attribution` (Hub keeps them in attribution_extra).
+  const attribution = buildAttribution(body?.attribution, {
+    has_property: hasProperty ? 'yes' : 'no',
+    is_pm: hasProperty ? (isPM ? 'yes' : 'no') : undefined,
+    properties: hasProperty && isPM && propertyCount != null ? String(propertyCount) : undefined,
+    portfolio: hasProperty && isPM && portfolioUrl ? portfolioUrl : undefined,
+    page: pageUrl || undefined,
+  });
   await forwardLeadToHub({
     email,
     lead_source: `landing_${source}`,
-    description: [
-      `has_property=${hasProperty ? 'yes' : 'no'}`,
-      hasProperty ? `is_pm=${isPM ? 'yes' : 'no'}` : null,
-      hasProperty && isPM && propertyCount != null ? `properties=${propertyCount}` : null,
-      hasProperty && isPM && portfolioUrl ? `portfolio=${portfolioUrl}` : null,
-      pageUrl ? `page=${pageUrl}` : null,
-      attribution || null,
-    ].filter(Boolean).join('; '),
+    ...(attribution ? { attribution } : {}),
   });
 
   // Notify Aaron + Federico. Non-blocking on the response body — log + 200 on failure
@@ -146,7 +147,7 @@ export default async function handler(req: Request): Promise<Response> {
         `Portfolio link: ${portfolioUrl || 'n/a'}`,
       ] : []),
       `Source: ${source}`,
-      `Traffic: ${attribution || 'direct / unknown'}`,
+      `Traffic: ${attribution ? Object.entries(attribution).map(([k, v]) => `${k}=${v}`).join('; ') : 'direct / unknown'}`,
       `Page: ${pageUrl || 'n/a'}`,
       `IP: ${ip || 'n/a'}`,
       `User-Agent: ${userAgent || 'n/a'}`,

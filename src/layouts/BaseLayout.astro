@@ -68,7 +68,7 @@ const canonicalUrl = Astro.url.href;
       try {
         var KEY = 'rf_attr';
         var q = new URLSearchParams(location.search);
-        var params = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','msclkid','msg'];
+        var params = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','msclkid','fbclid','msg','gbraid','wbraid','gad_source'];
         var fresh = {};
         for (var i = 0; i < params.length; i++) {
           var v = q.get(params[i]);

@@ -1,11 +1,20 @@
 // Shared helper — forward captured leads to the Blackbird Hub pipeline.
-// Spec from Gaston (2026-07-09 email, "Quick Question for Business Listings" thread):
+// Contract from Gaston's "Pipeline Integration" PDF (2026-07-13):
 //   POST https://hub.revfactor.io/api/webhooks/new-lead
 //   Headers: Content-Type: application/json, x-webhook-secret: HUB_WEBHOOK_SECRET
-//   Body: { email (required), lead_source, full_name?, phone?, location?, description?, timezone? }
+//   Body: { email (required), full_name?, project_name?, phone?, lead_source?,
+//           scheduled_date?, timezone?, location?, description?, external_ref?,
+//           attribution?: { canonical utm/click-id keys + any extra } }
 //   201 = created, 200 deduped=true = active lead already exists, 400/401 = bad input/secret.
 //
-// Best-effort by design: never throws, ~5s timeout, failures are logged only —
+// Attribution is sent as a nested object (Gaston's preferred structured path,
+// replacing the old description=blob). The Hub promotes ten canonical keys to
+// their own columns (utm_source, utm_medium, utm_campaign, utm_content,
+// utm_term, gclid, msclkid, fbclid, referrer, landing_page) and preserves any
+// other key (gbraid, wbraid, msg, has_property, is_pm, properties, portfolio, …)
+// in attribution_extra — so we forward everything and nothing is dropped.
+//
+// Best-effort by design: never throws, ~5s timeout, failures logged only —
 // the visitor's form submission must never block on the Hub being up.
 //
 // Required env var (Vercel project settings): HUB_WEBHOOK_SECRET
@@ -16,27 +25,45 @@ export interface HubLead {
   email: string;
   lead_source: string;
   full_name?: string;
+  project_name?: string;
   phone?: string;
   location?: string;
   description?: string;
   timezone?: string;
+  external_ref?: string;
+  attribution?: Record<string, string>;
 }
 
-// Sanitize the client-supplied attribution blob (sessionStorage 'rf_attr',
-// set by the BaseLayout inline script) into a compact "k=v; k=v" string.
-// Allowlisted keys only, values length-capped — never trust the browser.
-const ATTR_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'msclkid', 'msg', 'referrer', 'landing'];
+// Canonical attribution keys the Hub promotes to columns. The client stores the
+// landing URL under `landing`; the Hub's canonical key is `landing_page`, so we
+// remap it here. All other keys pass through verbatim (extras -> attribution_extra).
+const CANONICAL = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'msclkid', 'fbclid', 'referrer', 'landing_page'];
+const PASSTHROUGH_EXTRA = ['msg', 'gbraid', 'wbraid', 'gad_source', 'page'];
 
-export function formatAttribution(raw: unknown): string {
-  if (!raw || typeof raw !== 'object') return '';
-  const parts: string[] = [];
-  for (const k of ATTR_KEYS) {
-    const v = (raw as Record<string, unknown>)[k];
-    if (typeof v === 'string' && v.trim()) {
-      parts.push(`${k}=${v.trim().slice(0, 200)}`);
+// Build the structured attribution object from the client blob (sessionStorage
+// 'rf_attr') plus any server-known extras (qualifier answers, page URL).
+// Allowlisted keys only, values length-capped — never trust the browser.
+export function buildAttribution(
+  raw: unknown,
+  extra?: Record<string, string | number | null | undefined>,
+): Record<string, string> | undefined {
+  const out: Record<string, string> = {};
+  const src = (raw && typeof raw === 'object') ? (raw as Record<string, unknown>) : {};
+  // client blob stores landing URL as `landing` -> canonical `landing_page`
+  if (typeof src.landing === 'string' && src.landing.trim() && !src.landing_page) {
+    out.landing_page = String(src.landing).trim().slice(0, 300);
+  }
+  for (const k of [...CANONICAL, ...PASSTHROUGH_EXTRA]) {
+    const v = src[k];
+    if (typeof v === 'string' && v.trim()) out[k] = v.trim().slice(0, 300);
+  }
+  // server-known extras (qualifiers, page) — kept in attribution_extra by the Hub
+  if (extra) {
+    for (const [k, v] of Object.entries(extra)) {
+      if (v !== null && v !== undefined && String(v).trim()) out[k] = String(v).trim().slice(0, 300);
     }
   }
-  return parts.join('; ');
+  return Object.keys(out).length ? out : undefined;
 }
 
 export async function forwardLeadToHub(lead: HubLead): Promise<void> {
