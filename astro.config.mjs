@@ -15,12 +15,19 @@ export default defineConfig({
     // Keep noindex PPC landing pages out of the sitemap. Listing a
     // `noindex,nofollow` URL in the sitemap sends Google a mixed signal
     // ("index me" vs the page's "don't"). These three are paid-traffic LPs.
+    // Legal/utility pages stay indexable but are excluded too — the sitemap
+    // should spend Google's attention on money and blog pages.
     sitemap({
       filter: (page) =>
         ![
           'https://www.revfactor.io/short-term-rental-consultant/',
           'https://www.revfactor.io/vs/pricelabs/',
           'https://www.revfactor.io/airbnb-pricing-strategy/',
+          'https://www.revfactor.io/cookies/',
+          'https://www.revfactor.io/privacy/',
+          'https://www.revfactor.io/terms/',
+          'https://www.revfactor.io/feedback/',
+          'https://www.revfactor.io/review/',
         ].includes(page),
     }),
   ],
