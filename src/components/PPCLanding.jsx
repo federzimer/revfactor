@@ -301,6 +301,21 @@ export default function PPCLanding({
     setScheduleOpen(true);
   };
 
+  // Honor CTA clicks that land BEFORE this island finishes hydrating.
+  // An inline script on the .astro page captures early "Book a Discovery Call"
+  // clicks, sets window.__pendingSchedule, and dispatches revfactor:open-schedule.
+  // Without this, a click in the first ~2-3s of load did nothing (the React
+  // onClick wasn't wired yet) — a silent conversion leak on paid traffic.
+  useEffect(() => {
+    const openFromEvent = () => setScheduleOpen(true);
+    window.addEventListener('revfactor:open-schedule', openFromEvent);
+    if (window.__pendingSchedule) {
+      window.__pendingSchedule = false;
+      setScheduleOpen(true);
+    }
+    return () => window.removeEventListener('revfactor:open-schedule', openFromEvent);
+  }, []);
+
   // DTR — read ?msg= URL param after mount and override hero copy if it
   // matches a known variant. Server-rendered HTML uses the .astro page's
   // default props; the swap happens on client hydration. Page is noindex,

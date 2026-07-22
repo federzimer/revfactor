@@ -58,6 +58,21 @@ const breadcrumbSchema = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
 
+  {/* Capture "Book a Discovery Call" clicks that land before PPCLanding
+      hydrates, then re-fire once the modal island is ready. Fixes a silent
+      conversion leak where the first click (in the ~2-3s hydration window)
+      did nothing. */}
+  <script is:inline>
+    document.addEventListener('click', function (e) {
+      var el = e.target && e.target.closest && e.target.closest('button, a');
+      if (!el) return;
+      var t = (el.textContent || '').toLowerCase();
+      if (t.indexOf('discovery call') === -1 && t.indexOf('strategy call') === -1) return;
+      window.__pendingSchedule = true;
+      window.dispatchEvent(new CustomEvent('revfactor:open-schedule'));
+    }, true);
+  </script>
+
   <PPCNavbar client:load />
   <main>
     <PPCLanding
