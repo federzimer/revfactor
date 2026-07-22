@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, X, ShieldCheck } from 'lucide-react';
-import { GrowthBook } from '@growthbook/growthbook-react';
 import ScheduleModal from './ScheduleModal';
 
 /* ─── GrowthBook A/B testing ───
@@ -10,25 +9,6 @@ import ScheduleModal from './ScheduleModal';
    id (stable per visitor on repeat visits). When unset, the SDK no-ops
    and the layout prop / ?v= URL param wins. */
 const GROWTHBOOK_KEY = import.meta.env.PUBLIC_GROWTHBOOK_KEY;
-const gb = new GrowthBook({
-  apiHost: 'https://cdn.growthbook.io',
-  clientKey: GROWTHBOOK_KEY || '',
-  enableDevMode: import.meta.env.DEV,
-  // Per-visitor sticky bucketing. Cookie 'gb_visitor' is set on first visit
-  // and re-used for variant assignment. Falls back to a random id if cookie
-  // can't be read (server-side / first paint).
-  trackingCallback: (experiment, result) => {
-    if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
-    // Forward GrowthBook variant assignment to GA4 so we can attribute
-    // book_strategy_call conversions back to stacked vs split.
-    window.gtag('event', 'experiment_viewed', {
-      experiment_id: experiment.key,
-      variation_id: result.variationId,
-      variation_value: String(result.value),
-    });
-  },
-});
-
 function getOrSetVisitorId() {
   if (typeof document === 'undefined') return 'ssr';
   const m = document.cookie.match(/(?:^|;\s*)gb_visitor=([^;]+)/);
@@ -39,9 +19,33 @@ function getOrSetVisitorId() {
   return id;
 }
 
-if (GROWTHBOOK_KEY && typeof window !== 'undefined') {
-  gb.setAttributes({ id: getOrSetVisitorId(), url: window.location.pathname });
-  gb.loadFeatures({ autoRefresh: false }).catch(() => { /* fail open: defaults apply */ });
+// Lazy-load the GrowthBook SDK OFF the critical hydration path (it was ~30KB
+// inside the main PPCLanding bundle, blocking LCP/TBT). It only drives the
+// subhead A/B variant, so a slightly-later resolve just swaps subhead text
+// (SSR default shows first). Returns an initialized client, or null.
+async function loadGrowthBook() {
+  if (!GROWTHBOOK_KEY || typeof window === 'undefined') return null;
+  try {
+    const { GrowthBook } = await import('@growthbook/growthbook-react');
+    const gb = new GrowthBook({
+      apiHost: 'https://cdn.growthbook.io',
+      clientKey: GROWTHBOOK_KEY,
+      enableDevMode: import.meta.env.DEV,
+      trackingCallback: (experiment, result) => {
+        if (typeof window.gtag !== 'function') return;
+        window.gtag('event', 'experiment_viewed', {
+          experiment_id: experiment.key,
+          variation_id: result.variationId,
+          variation_value: String(result.value),
+        });
+      },
+    });
+    gb.setAttributes({ id: getOrSetVisitorId(), url: window.location.pathname });
+    await gb.loadFeatures({ autoRefresh: false });
+    return gb;
+  } catch {
+    return null; // fail open: SSR/default subhead applies
+  }
 }
 
 /* ─── Dynamic Text Replacement (DTR) variants ───
@@ -327,35 +331,26 @@ export default function PPCLanding({
     setVariant(readMessageVariant());
     setSubheadOverride(readSubheadOverride());
     if (GROWTHBOOK_KEY) {
-      // GA4 forwarding for rollout-type rules. The SDK's trackingCallback
-      // fires only for proper experiment rules; rollout rules deliver a
-      // bucketed value but stay silent. We fire experiment_viewed manually
-      // once per page-load per feature so GA4 can attribute conversions.
-      const fired = new Set();
-      const fireOnce = (feature, value) => {
-        if (fired.has(feature) || !value) return;
-        fired.add(feature);
-        if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-          window.gtag('event', 'experiment_viewed', {
-            experiment_id: feature,
-            variation_value: String(value),
-          });
-        }
-      };
-      const tick = () => {
+      // Load the SDK lazily (off the critical path), then read the subhead
+      // variant once features resolve. fireOnce forwards to GA4 for rollout
+      // rules (the SDK's trackingCallback stays silent on those).
+      let cancelled = false;
+      loadGrowthBook().then((gb) => {
+        if (!gb || cancelled) return;
         try {
           const s = gb.getFeatureValue('ppc_subhead_variant', '');
           if (s in SUBHEAD_VARIANTS) {
             setGbSubhead(s);
-            fireOnce('ppc_subhead_variant', s);
+            if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+              window.gtag('event', 'experiment_viewed', {
+                experiment_id: 'ppc_subhead_variant',
+                variation_value: String(s),
+              });
+            }
           }
         } catch { /* fail open */ }
-      };
-      tick();
-      // Re-check after features load (~50-200ms post-mount).
-      const t1 = setTimeout(tick, 250);
-      const t2 = setTimeout(tick, 1000);
-      return () => { clearTimeout(t1); clearTimeout(t2); };
+      });
+      return () => { cancelled = true; };
     }
   }, []);
   const eyebrow = variant?.eyebrow ?? defaultEyebrow;
