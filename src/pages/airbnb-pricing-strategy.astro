@@ -55,6 +55,15 @@ const breadcrumbSchema = {
   noindex={true}
 >
   <Fragment slot="head">
+    {/* Preload the LCP hero so the browser fetches it immediately, before CSS/JS. */}
+    <link
+      rel="preload"
+      as="image"
+      href="/heroes/cliffside-1920.webp"
+      imagesrcset="/heroes/cliffside-1200.webp 1200w, /heroes/cliffside-1920.webp 1920w, /heroes/cliffside-2400.webp 2400w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
 
