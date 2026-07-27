@@ -95,6 +95,56 @@ Those four white squares aren't demand she didn't get. They're demand she isn't 
 
 Here's the thing about orphan nights: they are the only revenue leak in this business that you build yourself, on purpose, one setting at a time. And because they never touch your ADR, you can run one for years and never see a number move.
 
+<figure class="rf-diagram" aria-label="A 30-night calendar strip showing four reservations covering 24 nights, with six vacant nights stranded as unbookable orphan gaps of one and two nights between them.">
+  <svg viewBox="0 0 880 240" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:880px; display:block; margin:0 auto;">
+    <rect width="880" height="240" fill="#DDDAD3"/>
+    <text x="30" y="28" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2.5" fill="#3F261F">ONE 30-NIGHT MONTH · 24 NIGHTS BOOKED · 6 STRANDED</text>
+    {/* Reservation labels */}
+    <g font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5" fill="#5D6D59" text-anchor="middle">
+      <text x="123" y="70">RESERVATION 1</text>
+      <text x="325" y="70">RESERVATION 2</text>
+      <text x="541" y="70">RESERVATION 3</text>
+      <text x="744" y="70">RESERVATION 4</text>
+    </g>
+    {/* Booked, bookable stretches */}
+    <g>
+      <rect x="30"  y="80" width="186" height="46" rx="5" fill="#13342D"/>
+      <rect x="246" y="80" width="159" height="46" rx="5" fill="#13342D"/>
+      <rect x="462" y="80" width="159" height="46" rx="5" fill="#13342D"/>
+      <rect x="678" y="80" width="132" height="46" rx="5" fill="#13342D"/>
+    </g>
+    {/* Orphan nights — vacant but unbookable */}
+    <g fill="#DDDAD3" stroke="#8B3A3A" stroke-width="2">
+      <rect x="219" y="80" width="24" height="46" rx="4"/>
+      <rect x="408" y="80" width="24" height="46" rx="4"/>
+      <rect x="435" y="80" width="24" height="46" rx="4"/>
+      <rect x="624" y="80" width="24" height="46" rx="4"/>
+      <rect x="651" y="80" width="24" height="46" rx="4"/>
+      <rect x="813" y="80" width="24" height="46" rx="4"/>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="13" fill="#8B3A3A" text-anchor="middle">
+      <text x="231" y="150">1</text>
+      <text x="433" y="150">2</text>
+      <text x="649" y="150">2</text>
+      <text x="825" y="150">1</text>
+    </g>
+    <g font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="14" fill="#8B3A3A" text-anchor="middle">
+      <text x="231" y="172">orphan</text>
+      <text x="433" y="172">orphans</text>
+      <text x="649" y="172">orphans</text>
+      <text x="825" y="172">orphan</text>
+    </g>
+    {/* Legend */}
+    <g font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="0.5" fill="#3F261F">
+      <rect x="30" y="205" width="16" height="16" rx="3" fill="#13342D"/>
+      <text x="54" y="218">Booked and bookable</text>
+      <rect x="250" y="205" width="16" height="16" rx="3" fill="#DDDAD3" stroke="#8B3A3A" stroke-width="2"/>
+      <text x="274" y="218">Orphan — vacant, unbookable under a 3-night minimum</text>
+    </g>
+  </svg>
+  <figcaption>Four reservations, a month that looks full — and six nights your own minimum stay made impossible to sell. This is the leak your ADR will never show you.</figcaption>
+</figure>
+
 ## 1. What Is an Orphan Night? (And Why It's Also Called a Gap Night)
 
 An orphan night is a vacant night, sometimes two or three, sitting between two confirmed reservations that no guest can book, because the open window is shorter than the minimum stay you've set for those dates.
@@ -159,11 +209,37 @@ Run the arithmetic on two real markets. [AirROI's market data](https://www.airro
 | Booked nights per year | ~175 | ~179 |
 | Check-in events per year | ~52 | ~30 |
 
+<div class="rf-chart">
+  <div class="rf-chart-header">
+    <p class="kicker">AirROI · trailing twelve months</p>
+    <h3>Same occupancy, 22 more chances to strand a night</h3>
+    <p class="lede">Two markets, nearly identical occupancy — but a short average stay manufactures far more check-in events, and every one is a chance to leave an orphan.</p>
+  </div>
+  <div class="rf-chart-rows">
+    <div class="rf-chart-row"><span class="rf-chart-label">Gatlinburg</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">~52</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Scottsdale</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:58%"></span></span><span class="rf-chart-value">~30</span></div>
+  </div>
+  <div class="rf-chart-legend">
+    <span><span class="swatch cedar"></span>Gatlinburg · 3.4-night avg stay</span>
+    <span><span class="swatch walnut"></span>Scottsdale · 5.9-night avg stay</span>
+  </div>
+</div>
+
 Effectively identical occupancy. Fifty-two checkouts versus thirty. Twenty-two more chances a year to strand a night, before either operator has touched a single setting.
 
 AirROI's own read on Gatlinburg's short average stay is that it means higher turnover and cleaning costs, but also more bookings per year. Both are true. And more bookings per year is also more gap-creation events per year. Market choice is itself a risk factor. If you're buying into a short-LOS market, you're buying a structurally higher orphan rate, and it belongs in your model alongside the cleaning cost.
 
 The practical move is to benchmark your market's actual booked length of stay and your competitors' restrictions rather than assuming. That's a comp-set exercise, and the method is in our [guide to building an STR comp set](/blog/how-to-build-comp-set-str/).
+
+<section class="rf-bleed">
+  <img loading="lazy" decoding="async" src="/photos/blog/cabin/empty-deck-dusk-2400.webp" alt="A single empty deck chair on a short-term rental balcony at dusk — the one night on the calendar that was available but never allowed to sell." />
+  <div class="rf-bleed-inner">
+    <blockquote>
+      <p>“An orphan night doesn't cost you a booking. It costs you the chance at one.”</p>
+      <cite>— Federico Zimerman</cite>
+    </blockquote>
+  </div>
+</section>
 
 ## 3. The Real Cost: The Leak Your ADR Can't See
 
@@ -188,6 +264,26 @@ Same market, same 30-night month, same $300 ADR, same four reservations covering
 | RevPAR | $270 | $240 |
 | Month revenue | $8,100 | $7,200 |
 
+<div class="rf-chart">
+  <div class="rf-chart-header">
+    <p class="kicker">Same month · same $300 ADR · same four reservations</p>
+    <h3>The only difference is where the six vacant nights sit</h3>
+    <p class="lede">Property A keeps its vacancy in bookable blocks; Property B strands it as orphans. ADR is identical at $300. Every other number moves.</p>
+  </div>
+  <div class="rf-chart-rows">
+    <div class="rf-chart-row"><span class="rf-chart-label">Occupancy · A</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">90%</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Occupancy · B</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:89%"></span></span><span class="rf-chart-value">80%</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">RevPAR · A</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">$270</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">RevPAR · B</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:89%"></span></span><span class="rf-chart-value">$240</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Revenue · A</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">$8,100</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Revenue · B</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:89%"></span></span><span class="rf-chart-value">$7,200</span></div>
+  </div>
+  <div class="rf-chart-legend">
+    <span><span class="swatch cedar"></span>Property A — block preserved</span>
+    <span><span class="swatch walnut"></span>Property B — orphans stranded</span>
+  </div>
+</div>
+
 Illustrative. Same reservations, same rate, same market. $900 apart in one month, roughly $10,800 a year on one listing.
 
 Read the ADR row twice. It's identical. Every number that would have told you something is somewhere else on the page.
@@ -210,9 +306,35 @@ That's the number. It's the only one that isolates this problem from everything 
 
 <div class="rf-band cedar">
   <p class="kicker">RevFactor's own data</p>
-  <h3>Average Orphan Rate fell from 25.0% to 11.9% under management — a 53% reduction.</h3>
-  <p>Across our 198-listing managed portfolio, the average listing's Orphan Rate fell from 25.0% before management to 11.9% after. Portfolio-wide, orphan rate sits at 8.9% today versus 9.8% a year ago.</p>
+  <div class="rf-band-split">
+    <div>
+      <p class="rf-band-stat">53%</p>
+      <p class="rf-band-stat-label">Reduction in the average listing's orphan rate under management</p>
+    </div>
+    <div>
+      <h3>Average Orphan Rate fell from 25.0% to 11.9% under management.</h3>
+      <p>Across our 198-listing managed portfolio, the average listing's Orphan Rate fell from 25.0% before management to 11.9% after. Portfolio-wide, orphan rate sits at 8.9% today versus 9.8% a year ago.</p>
+    </div>
+  </div>
   <p><em>Methodology: RevFactor calculated Orphan Rate as orphan nights ÷ available nights across a 198-listing active managed portfolio. Orphan nights = open 1–3 night gaps bounded on both sides by booked or blocked/unavailable nights. Current data: PriceLabs calendar, July 21–October 18 2026; before-management comparison uses the same dates one year earlier via PriceLabs STLY calendar status fields.</em></p>
+</div>
+
+<div class="rf-chart">
+  <div class="rf-chart-header">
+    <p class="kicker">RevFactor managed portfolio · 198 listings</p>
+    <h3>Orphan Rate, before and after management</h3>
+    <p class="lede">The average listing came in at a 25.0% orphan rate before management and settled at 11.9% after — and the portfolio-wide rate keeps falling year over year.</p>
+  </div>
+  <div class="rf-chart-rows">
+    <div class="rf-chart-row"><span class="rf-chart-label">Before mgmt</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:100%"></span></span><span class="rf-chart-value">25.0%</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">After mgmt</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:48%"></span></span><span class="rf-chart-value">11.9%</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Portfolio · 1 yr ago</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:39%"></span></span><span class="rf-chart-value">9.8%</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Portfolio · today</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:36%"></span></span><span class="rf-chart-value">8.9%</span></div>
+  </div>
+  <div class="rf-chart-legend">
+    <span><span class="swatch cedar"></span>Under management</span>
+    <span><span class="swatch walnut"></span>Before / prior year</span>
+  </div>
 </div>
 
 Its companion is the leakage formula:
@@ -226,6 +348,52 @@ At RevFactor, we already run two internal gauges on every property: a Market Pos
 ## 4. A Taxonomy of Orphan Nights (Six Types)
 
 Orphan nights aren't one thing. Six distinct mechanics produce them, and each has a different fix. Treating them as one undifferentiated problem, "turn on a gap discount," is why most operators solve a third of theirs and believe they're finished.
+
+<div class="rf-leaks">
+  <div class="rf-leaks-header">
+    <p class="kicker">Six mechanics, one white square on the calendar</p>
+    <h3>a taxonomy of orphan nights</h3>
+    <p class="lede">On a monthly calendar all six look identical. Each forms differently, and each takes a different fix. Most portfolios run four of the six at once.</p>
+  </div>
+  <div class="rf-leaks-grid">
+    <div class="rf-leak-card cedar">
+      <p class="num">01</p>
+      <p class="label">Configuration</p>
+      <p class="title">Minimum-stay orphan</p>
+      <p class="body">Two bookings leave a window shorter than the minimum live on those dates. <em>Fix:</em> a conditional orphan-gap rule that drops the minimum to the gap length, for that window only.</p>
+    </div>
+    <div class="rf-leak-card moss">
+      <p class="num">02</p>
+      <p class="label">Configuration</p>
+      <p class="title">Turnover-buffer orphan</p>
+      <p class="body">Preparation-time settings auto-block nights around each reservation. The hole reads "blocked," invisible in a gap count. <em>Fix:</em> audit prep time to none wherever the turn is serviceable same-day.</p>
+    </div>
+    <div class="rf-leak-card tobacco">
+      <p class="num">03</p>
+      <p class="label">Configuration</p>
+      <p class="title">Arrival/departure orphan</p>
+      <p class="body">Check-in/check-out day rules leave a stub too short for the minimum. <em>Fix:</em> re-cut the CTA/CTD rules against how the market actually arrives, not around the cleaning schedule.</p>
+    </div>
+    <div class="rf-leak-card walnut">
+      <p class="num">04</p>
+      <p class="label">Judgment</p>
+      <p class="title">Event-shoulder orphan</p>
+      <p class="body">A high minimum set for an event block strands the night either side. <em>Fix:</em> judgment, not a rule — price the shoulder as its own decision every time.</p>
+    </div>
+    <div class="rf-leak-card moss">
+      <p class="num">05</p>
+      <p class="label">Market decision</p>
+      <p class="title">Structural / market-LOS orphan</p>
+      <p class="body">Short-average-stay markets produce far more check-in events per year, and every one is a chance. <em>Fix:</em> calibrate the minimum to that market's booked length of stay, not a portfolio default.</p>
+    </div>
+    <div class="rf-leak-card tobacco">
+      <p class="num">06</p>
+      <p class="label">Cadence</p>
+      <p class="title">Pacing-decay orphan</p>
+      <p class="body">A gap fillable at 45 days hardens because nobody flexed it as the window closed. <em>Fix:</em> a weekly pacing review plus a lead-time ladder that steps the minimum down.</p>
+    </div>
+  </div>
+</div>
 
 | # | Type | How it forms | Telltale sign | Primary fix |
 |---|---|---|---|---|
@@ -263,6 +431,15 @@ First, some of your "gaps" aren't gaps. They're preparation time doing precisely
 
 Second, orphans cluster. They are not randomly distributed. They pile up on the same weekdays, in the same months, around the same events. That's the diagnosis right there. A random scatter means bad luck. A cluster means a rule.
 
+<figure class="rf-figure rf-figure-quote">
+  <div class="rf-figure-frame">
+    <img loading="lazy" decoding="async" src="/photos/blog/operations/laptop-calendar-2400.webp" alt="A laptop open to a booking calendar and a spreadsheet beside a coffee — the ninety-minute orphan audit needs an export and a spreadsheet, not a tool." />
+    <blockquote class="rf-figure-overlay">
+      <p>“You don't need a tool. You need an export and a spreadsheet.”</p>
+    </blockquote>
+  </div>
+</figure>
+
 This is the Discover phase of [the RevFactor Method](/blog/the-revfactor-method/) pointed at one problem: read where you actually stand before you touch a price.
 
 ## 6. Prevention First: Designing a Calendar That Doesn't Manufacture Orphans
@@ -282,6 +459,24 @@ A working default for a leisure market:
 | Trough season | 2, sometimes 1 | You're now competing with hotels that have no minimum at all |
 | Inside 14 days | Step down 1 night | The far-out rule has done its job; stop running it |
 | Inside 7 days | Step down again | Option value has collapsed; take the stay |
+
+<div class="rf-chart">
+  <div class="rf-chart-header">
+    <p class="kicker">A working leisure-market default</p>
+    <h3>One number is the cause. A ladder is the fix.</h3>
+    <p class="lede">Minimum nights aren't one setting — they step down across the season and as the date approaches, so the far-out rule stops manufacturing orphans up close.</p>
+  </div>
+  <div class="rf-chart-rows">
+    <div class="rf-chart-row"><span class="rf-chart-label">Peak and events</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">4+ nt</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Baseline</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:75%"></span></span><span class="rf-chart-value">3 nt</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Trough / inside 14d</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:50%"></span></span><span class="rf-chart-value">2 nt</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Inside 7 days</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:25%"></span></span><span class="rf-chart-value">1 nt</span></div>
+  </div>
+  <div class="rf-chart-legend">
+    <span><span class="swatch cedar"></span>Protect high-value demand</span>
+    <span><span class="swatch walnut"></span>Step down to take the stay</span>
+  </div>
+</div>
 
 The step-down matters more than the baseline. PriceLabs' own minimum-stay recommendation engine is built on exactly this shape: hold longer minimums far out, where a lot of demand is yet to book, and reduce them as the date gets close so the shorter booking gets taken instead of nothing. Most operators never build the ladder. They set the far-out rule and run it right up to the arrival date.
 
@@ -309,6 +504,50 @@ Say a five-night window opens between two reservations, Monday to Friday, and yo
 | Tue–Wed | Monday alone + Thu–Fri | One orphan ❌ |
 | Wed–Thu | Mon–Tue + Friday alone | One orphan ❌ |
 | Thu–Fri | Mon–Wed open (3 nights) | Still bookable ✅ |
+
+<figure class="rf-diagram" aria-label="Four scenarios of where a two-night guest can land inside a five-night Monday-to-Friday window: booking the edges preserves a bookable block, booking the middle strands an orphan night.">
+  <svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:780px; display:block; margin:0 auto;">
+    <rect width="780" height="400" fill="#DDDAD3"/>
+    <text x="24" y="28" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2.5" fill="#3F261F">A 5-NIGHT WINDOW · WHERE A 2-NIGHT GUEST LANDS</text>
+    {/* Day headers */}
+    <g font-family="JetBrains Mono, monospace" font-size="11" fill="#76574C" text-anchor="middle">
+      <text x="210" y="64">MON</text><text x="296" y="64">TUE</text><text x="382" y="64">WED</text><text x="468" y="64">THU</text><text x="554" y="64">FRI</text>
+    </g>
+    {/* Row 1: Mon–Tue */}
+    <text x="24" y="106" font-family="JetBrains Mono, monospace" font-size="13" fill="#13342D">Mon–Tue</text>
+    <rect x="170" y="78" width="80" height="52" rx="5" fill="#5D6D59"/>
+    <rect x="256" y="78" width="80" height="52" rx="5" fill="#5D6D59"/>
+    <rect x="342" y="78" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="428" y="78" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="514" y="78" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <text x="616" y="109" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="17" fill="#5D6D59">block preserved</text>
+    {/* Row 2: Tue–Wed */}
+    <text x="24" y="186" font-family="JetBrains Mono, monospace" font-size="13" fill="#13342D">Tue–Wed</text>
+    <rect x="170" y="158" width="80" height="52" rx="5" fill="#DDDAD3" stroke="#8B3A3A" stroke-width="2"/>
+    <rect x="256" y="158" width="80" height="52" rx="5" fill="#5D6D59"/>
+    <rect x="342" y="158" width="80" height="52" rx="5" fill="#5D6D59"/>
+    <rect x="428" y="158" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="514" y="158" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <text x="616" y="189" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="17" fill="#8B3A3A">one orphan</text>
+    {/* Row 3: Wed–Thu */}
+    <text x="24" y="266" font-family="JetBrains Mono, monospace" font-size="13" fill="#13342D">Wed–Thu</text>
+    <rect x="170" y="238" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="256" y="238" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="342" y="238" width="80" height="52" rx="5" fill="#5D6D59"/>
+    <rect x="428" y="238" width="80" height="52" rx="5" fill="#5D6D59"/>
+    <rect x="514" y="238" width="80" height="52" rx="5" fill="#DDDAD3" stroke="#8B3A3A" stroke-width="2"/>
+    <text x="616" y="269" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="17" fill="#8B3A3A">one orphan</text>
+    {/* Row 4: Thu–Fri */}
+    <text x="24" y="346" font-family="JetBrains Mono, monospace" font-size="13" fill="#13342D">Thu–Fri</text>
+    <rect x="170" y="318" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="256" y="318" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="342" y="318" width="80" height="52" rx="5" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="428" y="318" width="80" height="52" rx="5" fill="#5D6D59"/>
+    <rect x="514" y="318" width="80" height="52" rx="5" fill="#5D6D59"/>
+    <text x="616" y="349" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="17" fill="#5D6D59">block preserved</text>
+  </svg>
+  <figcaption>Booked in moss, open in bone, orphan in red. Two of the four landings keep the window bookable; two strand a night. The guest neither knows nor cares which — so price the edges cheap and the middle dear.</figcaption>
+</figure>
 
 Two of the four landings preserve the block. Two of them cost you a night. The guest doesn't know or care which. Left to chance, you take the middle half the time.
 
@@ -362,6 +601,15 @@ Direct answer: a last-minute, exact-fit orphan usually deserves a premium. A wid
 
 Think about who books a single Wednesday, three days out, in a market with a three-night minimum. She isn't shopping. She has a reason to be in that specific place on that specific date: a wedding, a closing, a hospital, a job. Every listing running a longer minimum has already filtered her out; Airbnb never showed them to her. Yours is one of very few she can even see. She is, by construction, the least price-sensitive guest in your entire funnel.
 
+<figure class="rf-figure rf-figure-quote">
+  <div class="rf-figure-frame">
+    <img loading="lazy" decoding="async" src="/photos/blog/cabin/cliffside-glass-home-2400.webp" alt="A striking cliffside glass home lit at dusk — the exact-fit, short-notice guest who needs this specific night is the least price-sensitive booking in the funnel." />
+    <blockquote class="rf-figure-overlay">
+      <p>“The guest who needs one exact night at short notice is the least price-sensitive guest in your funnel — and you're about to hand her 20% off.”</p>
+    </blockquote>
+  </div>
+</figure>
+
 And you're about to hand her 20% off.
 
 The defaults point the wrong way for this case. PriceLabs applies a 20% discount to gaps of two nights or less unless you say otherwise, and if the orphan is also a last-minute booking, it applies the larger of the two discounts. That's a sensible starting point for an engine that prices hundreds of thousands of listings without knowing anything about yours. It is not a strategy.
@@ -376,6 +624,45 @@ PriceLabs' own documentation shows the other side, and it's telling how few peop
 | 3+ nights | 60+ days out | Soft | Modest discount to seed it. A wide gap far out is a booking window, not a scrap. Treat it like inventory. |
 | Any | Event shoulder | Compressed | Judgment. See below. |
 | Any | Inside 48 hours | Any | Clear it. A night with two days left has almost no option value. Take the rate that moves it. |
+
+<figure class="rf-diagram" aria-label="A decision quadrant plotting gap width against lead time. Wide gaps far out call for a discount; exact-fit single nights at the last minute call for a premium.">
+  <svg viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:820px; display:block; margin:0 auto;">
+    <rect width="820" height="470" fill="#DDDAD3"/>
+    <text x="40" y="30" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2.5" fill="#3F261F">DISCOUNT OR PREMIUM? READ GAP WIDTH AGAINST LEAD TIME</text>
+    {/* Quadrant cells */}
+    <rect x="150" y="70"  width="310" height="165" rx="6" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="460" y="70"  width="310" height="165" rx="6" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="150" y="235" width="310" height="165" rx="6" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="460" y="235" width="310" height="165" rx="6" fill="#13342D" stroke="#13342D"/>
+    {/* TL — discount */}
+    <text x="170" y="110" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#76574C">DISCOUNT</text>
+    <text x="170" y="140" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="18" fill="#13342D">Wide gap, far out</text>
+    <text x="170" y="166" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#3F261F">A booking window, not a scrap —</text>
+    <text x="170" y="186" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#3F261F">seed it early and treat it like inventory.</text>
+    {/* TR — clear it */}
+    <text x="480" y="110" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#5D6D59">CLEAR IT</text>
+    <text x="480" y="140" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="18" fill="#13342D">Any gap, hours on the clock</text>
+    <text x="480" y="166" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#3F261F">Almost no option value left.</text>
+    <text x="480" y="186" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#3F261F">Take the rate that moves it.</text>
+    {/* BL — standard */}
+    <text x="170" y="275" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#3F261F">HOLD / STANDARD</text>
+    <text x="170" y="305" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="18" fill="#13342D">1–2 nights, mid lead, soft</text>
+    <text x="170" y="331" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#3F261F">Drop the minimum to the gap length.</text>
+    <text x="170" y="351" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#3F261F">Let it clear on its own merits.</text>
+    {/* BR — premium */}
+    <text x="480" y="275" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#A9BBA3">PREMIUM · +10–25%</text>
+    <text x="480" y="305" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="18" fill="#E8E6E1">Exact-fit single night, last-minute</text>
+    <text x="480" y="331" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#DDDAD3">She has no alternative — the least</text>
+    <text x="480" y="351" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#DDDAD3">price-sensitive guest in your funnel.</text>
+    {/* Axis labels */}
+    <text x="110" y="152" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5" fill="#76574C" text-anchor="middle" transform="rotate(-90 110 152)">WIDE GAP (3+ NT)</text>
+    <text x="110" y="318" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5" fill="#76574C" text-anchor="middle" transform="rotate(-90 110 318)">SINGLE NIGHT</text>
+    <text x="150" y="428" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5" fill="#76574C">FAR OUT (60+ DAYS)</text>
+    <text x="770" y="428" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5" fill="#76574C" text-anchor="end">LAST-MINUTE (INSIDE 48H)</text>
+    <text x="460" y="450" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="2.5" fill="#3F261F" text-anchor="middle">LEAD TIME →</text>
+  </svg>
+  <figcaption>The reflex is to discount every gap. It points the wrong way for the one guest who most deserves a premium: the exact-fit, last-minute single night no competitor with a longer minimum can even show her.</figcaption>
+</figure>
 
 The principle underneath all six rows: as the window closes, the value of holding a night falls and the value of the guest who needs that exact night rises. Somewhere those two lines cross. The crossing point is different for every date, every market, and every listing. A rule can't find it. A person reading the calendar on Tuesday morning can.
 
@@ -414,6 +701,24 @@ A recovered orphan is a full turnover for one night of revenue. The rate you cle
 ```
 
 Fill in your own numbers; the ratio is the point, not my arithmetic. On a $150 night against a $100 turn cost, you're working for the platform. On a $400 night against the same $100, you're not. Which is why the premium move in §7 isn't a rate trick. It's the thing that makes single-night recovery viable at all. Solve the cleaning-to-revenue ratio with price, not with a blanket policy about whether you "accept one-nighters."
+
+<div class="rf-chart">
+  <div class="rf-chart-header">
+    <p class="kicker">Same $100 turn cost · one night of revenue</p>
+    <h3>The rate decides whether recovery pays</h3>
+    <p class="lede">A recovered orphan is a full turnover for a single night. Judge it on what reaches the account after the turn — not the headline rate.</p>
+  </div>
+  <div class="rf-chart-rows">
+    <div class="rf-chart-row"><span class="rf-chart-label">$150 · gross</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:37.5%"></span></span><span class="rf-chart-value">$150</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">$150 · net</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:12.5%"></span></span><span class="rf-chart-value">$50</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">$400 · gross</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">$400</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">$400 · net</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:75%"></span></span><span class="rf-chart-value">$300</span></div>
+  </div>
+  <div class="rf-chart-legend">
+    <span><span class="swatch walnut"></span>$150 night — the turn eats most of it</span>
+    <span><span class="swatch cedar"></span>$400 night — the turn is a rounding error</span>
+  </div>
+</div>
 
 Four cases where you leave the orphan dark:
 
@@ -457,6 +762,16 @@ One strategist across a portfolio does two things a per-listing rule cannot.
 
 Across the 198 listings the RevFactor playbook runs on daily through Blackbird Hospitality, in 24 states and 67 markets, that calibration is most of the work. Same tool. Same feature. Sixty-seven different right answers. That daily read is the Optimise phase of [the RevFactor Method](/blog/the-revfactor-method/), and it's the half of the job software doesn't do.
 
+<section class="rf-bleed">
+  <img loading="lazy" decoding="async" src="/photos/blog/lake/reflective-lake-cabin-2400.webp" alt="A cabin mirrored in still lake water at dawn — the daily read of the calendar that software cannot do for you." />
+  <div class="rf-bleed-inner">
+    <blockquote>
+      <p>“The tool sets the rule. Somebody still has to decide what the rule should say, and notice the week it stops being right.”</p>
+      <cite>— Federico Zimerman</cite>
+    </blockquote>
+  </div>
+</section>
+
 ## 10. Measuring the Fix: Orphan Rate, Occupancy Reconciliation, RevPAR vs. Comp Set
 
 Three gauges, one cadence. Orphan rate trending down. Occupancy converging on what your booked stretches imply. RevPAR beating your comp set. If all three move, the fix worked. If only the first moves, you filled orphans at rates that didn't pay.
@@ -476,6 +791,43 @@ I spent ten years in revenue management at American Airlines before I priced my 
 An airline's problem was never one seat on one flight. It was that a single flight leg is shared by dozens of itineraries of different lengths and different values. Sell the Dallas–Miami leg to a passenger flying only Dallas–Miami, and you may have just locked out the Los Angeles–Miami passenger who needed that same leg as the second half of a far more valuable trip. The seat sold. The revenue didn't.
 
 Read that again with a calendar in your head. A night is a leg. A reservation is an itinerary. Sell Wednesday to the wrong stay, and you've blocked the longer stay that needed Wednesday in the middle, and stranded Monday and Tuesday on the way out.
+
+<figure class="rf-diagram" aria-label="An evolution diagram: the same revenue-management problem moves from an airline seat in the 1980s, to a hotel room, to a short-term-rental night. The inventory unit changed; the mathematics did not.">
+  <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:900px; display:block; margin:0 auto;">
+    <defs>
+      <marker id="arrowLineage" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#76574C"/>
+      </marker>
+    </defs>
+    <rect width="900" height="280" fill="#DDDAD3"/>
+    <text x="40" y="30" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2.5" fill="#3F261F">ONE SOLVED PROBLEM, THREE INVENTORY UNITS</text>
+    {/* Card 1 — SEAT */}
+    <rect x="40" y="60" width="220" height="130" rx="8" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="40" y="60" width="220" height="34" rx="8" fill="#13342D"/>
+    <text x="150" y="82" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="2" fill="#A9BBA3">1980s · AIRLINES</text>
+    <text x="150" y="140" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="38" fill="#13342D">SEAT</text>
+    <text x="150" y="170" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="16" fill="#76574C">virtual nesting</text>
+    {/* Card 2 — ROOM */}
+    <rect x="340" y="60" width="220" height="130" rx="8" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="340" y="60" width="220" height="34" rx="8" fill="#5D6D59"/>
+    <text x="450" y="82" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="2" fill="#E8E6E1">HOTELS</text>
+    <text x="450" y="140" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="38" fill="#13342D">ROOM</text>
+    <text x="450" y="170" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="16" fill="#76574C">MinLOS · CTA · CTD</text>
+    {/* Card 3 — NIGHT */}
+    <rect x="640" y="60" width="220" height="130" rx="8" fill="#E8E6E1" stroke="#C8C4BC"/>
+    <rect x="640" y="60" width="220" height="34" rx="8" fill="#3F261F"/>
+    <text x="750" y="82" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="2" fill="#A9BBA3">SHORT-TERM RENTALS</text>
+    <text x="750" y="140" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="38" fill="#13342D">NIGHT</text>
+    <text x="750" y="170" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="16" fill="#76574C">orphan-gap rules</text>
+    {/* Arrows */}
+    <line x1="266" y1="125" x2="334" y2="125" stroke="#76574C" stroke-width="2" marker-end="url(#arrowLineage)"/>
+    <line x1="566" y1="125" x2="634" y2="125" stroke="#76574C" stroke-width="2" marker-end="url(#arrowLineage)"/>
+    {/* Footer */}
+    <text x="450" y="232" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="22" fill="#13342D">The inventory unit changed. The mathematics did not.</text>
+    <text x="450" y="258" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#76574C">FIXED CAPACITY · PERISHABLE UNITS · RESTRICTIONS THAT STRAND VALUE</text>
+  </svg>
+  <figcaption>American solved a structurally identical problem in 1983 and won the 1991 Franz Edelman Award for it. The restriction protects the high-value stay; the exception layer keeps it from stranding a night nobody meant to lose.</figcaption>
+</figure>
 
 American named the problem and solved it, and the work is public. Smith, Leimkuhler and Darrow's [Yield Management at American Airlines](https://pubsonline.informs.org/doi/10.1287/inte.22.1.8), published in Interfaces in 1992, decomposes the discipline into three subproblems: overbooking, discount allocation, and traffic management. Traffic management is ours: deciding which itineraries get availability on which legs, so a low-value short trip never locks out a high-value long one. The work won the 1991 Franz Edelman Award. It is, by any reasonable measure, one of the most consequential applied-mathematics projects in commercial history.
 
