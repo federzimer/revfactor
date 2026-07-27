@@ -148,7 +148,7 @@ def transcribe_with_gemini(audio_path: Path) -> str:
 def list_tiktok_videos():
     try:
         result = subprocess.run(
-            ["python3", "-m", "yt_dlp", "--flat-playlist",
+            [sys.executable, "-m", "yt_dlp", "--flat-playlist",
              "--print", "%(id)s|%(duration)s|%(timestamp)s|%(title)s",
              "--no-warnings", TIKTOK_URL],
             capture_output=True, text=True, timeout=180,
@@ -172,7 +172,7 @@ def _ytdlp_with_browser_cookies(browser: str):
     """Try yt-dlp with cookies from a specific browser. Returns [] on failure."""
     try:
         result = subprocess.run(
-            ["python3", "-m", "yt_dlp", "--flat-playlist",
+            [sys.executable, "-m", "yt_dlp", "--flat-playlist",
              "--print", "%(id)s|%(title)s",
              "--cookies-from-browser", browser,
              "--no-warnings", INSTAGRAM_URL],
@@ -297,7 +297,7 @@ def list_instagram_posts():
     # Path 6: yt-dlp anonymous (final fallback)
     try:
         result = subprocess.run(
-            ["python3", "-m", "yt_dlp", "--flat-playlist",
+            [sys.executable, "-m", "yt_dlp", "--flat-playlist",
              "--print", "%(id)s|%(title)s",
              "--no-warnings", INSTAGRAM_URL],
             capture_output=True, text=True, timeout=180,
@@ -326,20 +326,33 @@ def download_and_transcribe(url, video_id, title, video_dir, transcript_dir, lab
     audio_path = video_dir / f"{video_id}.mp3"
 
     log(f"  Downloading {label}: {video_id} — {title[:60]}")
-    r = subprocess.run(
-        ["python3", "-m", "yt_dlp", "-o", str(video_path),
-         "--no-warnings", "--quiet", url],
-        capture_output=True, text=True, timeout=180,
-    )
+    try:
+        r = subprocess.run(
+            [sys.executable, "-m", "yt_dlp", "-o", str(video_path),
+             "--no-warnings", "--quiet", url],
+            capture_output=True, text=True, timeout=180,
+        )
+    except subprocess.TimeoutExpired:
+        log(f"  DOWNLOAD TIMEOUT (>180s) — skipping (will retry next run): {video_id}")
+        video_path.unlink(missing_ok=True)
+        return False
+    except Exception as e:
+        log(f"  DOWNLOAD ERROR ({type(e).__name__}) — skipping: {video_id}")
+        return False
     if r.returncode != 0 or not video_path.exists():
         log(f"  DOWNLOAD FAILED: {r.stderr[-300:]}")
         return False
 
-    subprocess.run(
-        [FFMPEG, "-y", "-i", str(video_path),
-         "-vn", "-ar", "16000", "-ac", "1", "-q:a", "2", str(audio_path)],
-        capture_output=True, timeout=120,
-    )
+    try:
+        subprocess.run(
+            [FFMPEG, "-y", "-i", str(video_path),
+             "-vn", "-ar", "16000", "-ac", "1", "-q:a", "2", str(audio_path)],
+            capture_output=True, timeout=120,
+        )
+    except subprocess.TimeoutExpired:
+        log(f"  FFMPEG TIMEOUT (>120s) — skipping: {video_id}")
+        video_path.unlink(missing_ok=True)
+        return False
     if not audio_path.exists():
         log(f"  AUDIO EXTRACT FAILED: {video_id}")
         video_path.unlink(missing_ok=True)
@@ -508,8 +521,17 @@ def main():
     log(f"Delta mode — already seen {len(state.get('tiktok', []))} TikToks, "
         f"{len(state.get('instagram', []))} IG posts")
 
-    tt = scan_tiktok(state)
-    ig = scan_instagram(state)
+    # Each platform is isolated: a crash in one must never block the other.
+    try:
+        tt = scan_tiktok(state)
+    except Exception as e:
+        log(f"  scan_tiktok crashed ({type(e).__name__}: {e}) — continuing to Instagram")
+        tt = 0
+    try:
+        ig = scan_instagram(state)
+    except Exception as e:
+        log(f"  scan_instagram crashed ({type(e).__name__}: {e})")
+        ig = 0
 
     auto_commit_new_content(tt, ig)
 
