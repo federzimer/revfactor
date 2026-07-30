@@ -70,3 +70,6 @@ tests/_artifacts/feedback-qa/
 tests/playwright/reports/
 tests/playwright/screenshots/
 tests/playwright/videos/
+
+# QA scratch output — never committed
+temporary screenshots/
