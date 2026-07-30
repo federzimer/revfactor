@@ -29,6 +29,9 @@ const VENDORS = [
   { slug: 'dosbnb',          domain: 'dosbnb.com' },
   { slug: 'beyond-pricing',  domain: 'beyondpricing.com' },
   { slug: 'maverick-str',    domain: 'maverickstr.co' },
+  // Dynamic pricing software compared in the Airbnb RM listicle
+  { slug: 'pricelabs',       domain: 'pricelabs.co' },
+  { slug: 'wheelhouse',      domain: 'usewheelhouse.com' },
 ];
 
 function download(url, dest) {
