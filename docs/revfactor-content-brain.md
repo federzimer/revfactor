@@ -18,10 +18,11 @@
 | Co-founder / Partner | Gaston (handles revenue management with Federico) |
 | Service category | Managed STR revenue management (not a tool, not full-property management) |
 | Pricing model | Flat monthly fee per property |
-| Pricing tiers | $320 / 1 prop · $304/ea (2) · $288/ea (3) · $272/ea (4) · $256/ea (5+) |
-| Onboarding fee | $125 one-time (all tiers) |
-| Documented portfolio lift | +18% RevPAR vs comp set (live site stat) |
-| Client property count | 165+ properties across 24 U.S. states and 56 markets |
+| Pricing (current, verified live 2026-07) | Flat **$350 / property / month** — same price 1–5 properties; enterprise pricing past 5 |
+| Onboarding fee | **$150 one-time** per property |
+| Documented portfolio lift | **+24% RevPAR vs comp set** (24-month rolling average) |
+| Client property count | **198 listings across 24 U.S. states and 67 markets** (managed via Blackbird Hospitality) |
+| Orphan Rate benchmark (first-party, Fede 2026-07-21) | Portfolio **8.9%** now vs 9.8% a year ago; listing-level avg **25.0% → 11.9%** post-management (**53% reduction**) |
 | Founder location | Upstate New York (relocated from Argentina November 2023) |
 | Tagline | "Intelligent Pricing for Inspired Stays" |
 | Sister company | Blackbird Hospitality (Federico's STR property management firm — separate entity) |
@@ -116,7 +117,13 @@ Plus a one-time **$125 onboarding fee** (all tiers).
 ### Confirmed proprietary metrics (live on Features.jsx)
 - **Market Position Score:** 94/100
 - **Pricing Health Index:** A+
-- **Revenue vs Comp Set:** +18%
+- **Revenue vs Comp Set:** +24% (24-month rolling avg)
+- **Orphan Rate** (third gauge, added 2026-07): orphan nights ÷ available nights. Portfolio 8.9% (2026) vs 9.8% a year prior; per-listing avg fell 25.0% → 11.9% under management (53% reduction). Methodology: orphan nights = open 1–3 night gaps bounded both sides by booked/blocked nights; PriceLabs calendar Jul 21–Oct 18 2026 vs same dates STLY. Use as first-party, citable data in orphan-night / gap-night content.
+
+### 🔴 Stale numbers to STOP using (superseded 2026-07)
+- ❌ "165+ properties / 56 markets" → ✅ **198 listings / 67 markets** (24 states unchanged)
+- ❌ "+18% RevPAR" → ✅ **+24% RevPAR** vs comp set
+- ❌ "$320/$304/… tiered pricing + $125 onboarding" → ✅ **flat $350/property/mo + $150 onboarding**, enterprise past 5
 
 ### Compatible PMS / tool stack
 - Primary pricing engine: PriceLabs
