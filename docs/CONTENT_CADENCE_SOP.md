@@ -26,7 +26,7 @@ The strategy sets the target cadence: **1 new post/week · 5 optimizations/week 
 `seo-toolkit cannibalization --sitemap https://www.revfactor.io/sitemap-index.xml --title "<proposed title>"`
 If it returns HIGH (exit 1), the title targets a head keyword we already own — **consolidate or re-scope, do not publish a near-duplicate.** A different angle does NOT clear a HIGH flag. (Guardrail added 2026-08-03 after the best-str near-duplicate.)
 
-🔴 **Ordering rule (Aaron, 2026-08-03): fastest expected AI-citation/ranking impact FIRST.** Sequenced by the validated format data (Jimi/L40 Peec measurements): X-vs-Y comparisons = most reliable citations · first-person "what I learned" = highest ceiling · titles = the exact question a buyer asks AI (hook titles get 0). Applies to every future schedule.
+🔴 **Ordering rule (Aaron, 2026-08-03): fastest expected AI-citation/ranking impact FIRST.** Format hierarchy: **listicles are the most impactful and go first** — but each needs a distinct head keyword so the viable count per site is limited; front-load the strong ones and **mix** the rest of the calendar with the other proven formats (X-vs-Y = most reliable citations · first-person "what I learned" = highest ceiling · exact-buyer-prompt titles; hook titles get 0). Applies to every future schedule. Noindexed pages (e.g. /vs/* PPC LPs) never count as cannibalization conflicts.
 
 | Week of | Post | Why it's in this slot (speed-to-impact) | De-dupe |
 |---|---|---|---|
