@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "lint": "eslint .",
     "check:links": "node scripts/check-links.mjs",
-    "check:links:external": "node scripts/check-links.mjs --external"
+    "check:links:external": "node scripts/check-links.mjs --external",
+    "check:contrast": "node tests/contrast-check.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
