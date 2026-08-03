@@ -32,12 +32,13 @@ If it returns HIGH (exit 1), the title targets a head keyword we already own —
 |---|---|---|---|
 | **Aug 4** | **Ship the consolidated "Best Airbnb & STR Revenue Management Companies and Tools (2026)"** (staged, in review) | Fastest possible win — already built, already converting leads, targets the 26 service-intent prompts | HIGH resolved by merge |
 | Aug 4 (optimization, not a post) | **Push `adr-vs-revpar` from pos 15 → top 5** | GSC's ONLY real non-brand striking-distance cluster (37 impr "adr vs revpar" + long tail). Priority #1 in Jlo's weekly pass | existing post |
-| Aug 11 | **"PriceLabs vs Wheelhouse vs a Revenue Manager: Which Should Run Your Airbnb Pricing?"** | X-vs-Y = the most RELIABLE citation format + flanks PriceLabs' 71% usage. Title = exact buyer prompt | Verify vs `/vs/pricelabs` first |
-| Aug 18 | **"I Priced Airline Seats for 10 Years. Here's What Airbnb Hosts Get Wrong About Pricing"** (first-person Fede) | First-person = highest citation CEILING (159 on one L40 piece). Real story, brain voice, zero competitors can copy it | PASS — new |
-| Aug 25 | **"How Much Does Airbnb Revenue Management Cost? (2026 Fees + ROI Math)"** | Cost questions = AI-answer magnets; retitled to the literal prompt. First-party $350 math | PASS |
-| Sep 1 | **7 Ways to Increase Airbnb Revenue Without Lowering Rates** | Number-led how-to + case-study numbers; YouTube-flagship companion | PASS |
-| Sep 8 | **STR Revenue Management Glossary** (Muskan drafts in parallel — slots in whenever her draft clears review) | Baseline long-tail format → later slot | PASS |
-| Sep 15 | **Levels of Delegation for STR Operations** (Fede's idea) | Educational, slower-burn | PASS |
+| Aug 11 | **"Best PriceLabs Alternatives for Airbnb Hosts (2026)"** (listicle) | Listicles first — open head-keyword slot (checked: 0 HIGH, 0 MEDIUM), high commercial intent, flanks PriceLabs' 74.7% AI dominance | PASS (2026-08-03) |
+| Aug 18 | **"PriceLabs vs Wheelhouse vs a Revenue Manager: Which Should Run Your Airbnb Pricing?"** | X-vs-Y = the most RELIABLE citation format. Title = exact buyer prompt | PASS (0 HIGH; `/vs/pricelabs` is noindex = exempt) |
+| Aug 25 | **"I Priced Airline Seats for 10 Years. Here's What Airbnb Hosts Get Wrong About Pricing"** (first-person Fede) | First-person = highest citation CEILING (159 on one L40 piece). Real story, brain voice, zero competitors can copy it | PASS — new |
+| Sep 1 | **"How Much Does Airbnb Revenue Management Cost? (2026 Fees + ROI Math)"** | Cost questions = AI-answer magnets; retitled to the literal prompt. First-party $350 math | PASS |
+| Sep 8 | **7 Ways to Increase Airbnb Revenue Without Lowering Rates** | Number-led how-to + case-study numbers; YouTube-flagship companion | PASS |
+| Sep 15 | **STR Revenue Management Glossary** (Muskan drafts in parallel — slots in whenever her draft clears review) | Baseline long-tail format → later slot | PASS |
+| Sep 22 | **Levels of Delegation for STR Operations** (Fede's idea) | Educational, slower-burn | PASS |
 
 Cross-link (don't consolidate) the complementary posts the check flags on head keyword but not intent: `airbnb-revenue-management-company` (when-to-hire decision) and `revenue-management-for-short-term-rentals` (pillar). Remember RevFactor's citation mix is UGC-heavy (YouTube 52% / Reddit 19%) — the channel work outpaces on-site posts for AI visibility; on-site is the compounding base.
 
