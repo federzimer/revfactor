@@ -26,16 +26,20 @@ The strategy sets the target cadence: **1 new post/week · 5 optimizations/week 
 `seo-toolkit cannibalization --sitemap https://www.revfactor.io/sitemap-index.xml --title "<proposed title>"`
 If it returns HIGH (exit 1), the title targets a head keyword we already own — **consolidate or re-scope, do not publish a near-duplicate.** A different angle does NOT clear a HIGH flag. (Guardrail added 2026-08-03 after the best-str near-duplicate.)
 
-| Week of | Post | Angle / target | De-dupe status |
-|---|---|---|---|
-| **Aug 4** | **Consolidate → "The 6 Best Airbnb Revenue Management Companies and Tools (2026)"** | Publish the new listicle + **301 `best-str-revenue-management-companies-2026` → it** (best-str is the stale near-duplicate and is actively driving leads, so 301 preserves equity + lead path) | best-str = HIGH, resolved by consolidation |
-| Aug 11 | **PriceLabs vs Wheelhouse vs a Done-for-You Service** | The head-to-head reserved from the listicle · tool prompts | Verify vs `/vs/pricelabs` + beginners guide before writing |
-| Aug 18 | **STR Revenue Management Glossary** (Muskan) | Definitions hub · long-tail term capture | PASS — no existing glossary |
-| Aug 25 | **Airbnb Revenue Management: What It Costs in 2026** | Cost queries (fees, % models, ROI math) | PASS — cost intent not yet owned; first-party $350 math |
-| Sep 1 | **7 Ways to Increase Airbnb Revenue Without Lowering Rates** | How-to · case-study numbers (+$139,580 across 7, anonymized) | PASS — doubles as the YouTube flagship |
-| Sep 8 | **Levels of Delegation for STR Operations** (Fede's idea) | Cleaning → revenue mgmt → VA → full PM · educational | PASS — new topic |
+🔴 **Ordering rule (Aaron, 2026-08-03): fastest expected AI-citation/ranking impact FIRST.** Sequenced by the validated format data (Jimi/L40 Peec measurements): X-vs-Y comparisons = most reliable citations · first-person "what I learned" = highest ceiling · titles = the exact question a buyer asks AI (hook titles get 0). Applies to every future schedule.
 
-Cross-link (don't consolidate) the complementary posts the check flags on head keyword but not intent: `airbnb-revenue-management-company` (when-to-hire decision) and `revenue-management-for-short-term-rentals` (pillar).
+| Week of | Post | Why it's in this slot (speed-to-impact) | De-dupe |
+|---|---|---|---|
+| **Aug 4** | **Ship the consolidated "Best Airbnb & STR Revenue Management Companies and Tools (2026)"** (staged, in review) | Fastest possible win — already built, already converting leads, targets the 26 service-intent prompts | HIGH resolved by merge |
+| Aug 4 (optimization, not a post) | **Push `adr-vs-revpar` from pos 15 → top 5** | GSC's ONLY real non-brand striking-distance cluster (37 impr "adr vs revpar" + long tail). Priority #1 in Jlo's weekly pass | existing post |
+| Aug 11 | **"PriceLabs vs Wheelhouse vs a Revenue Manager: Which Should Run Your Airbnb Pricing?"** | X-vs-Y = the most RELIABLE citation format + flanks PriceLabs' 71% usage. Title = exact buyer prompt | Verify vs `/vs/pricelabs` first |
+| Aug 18 | **"I Priced Airline Seats for 10 Years. Here's What Airbnb Hosts Get Wrong About Pricing"** (first-person Fede) | First-person = highest citation CEILING (159 on one L40 piece). Real story, brain voice, zero competitors can copy it | PASS — new |
+| Aug 25 | **"How Much Does Airbnb Revenue Management Cost? (2026 Fees + ROI Math)"** | Cost questions = AI-answer magnets; retitled to the literal prompt. First-party $350 math | PASS |
+| Sep 1 | **7 Ways to Increase Airbnb Revenue Without Lowering Rates** | Number-led how-to + case-study numbers; YouTube-flagship companion | PASS |
+| Sep 8 | **STR Revenue Management Glossary** (Muskan drafts in parallel — slots in whenever her draft clears review) | Baseline long-tail format → later slot | PASS |
+| Sep 15 | **Levels of Delegation for STR Operations** (Fede's idea) | Educational, slower-burn | PASS |
+
+Cross-link (don't consolidate) the complementary posts the check flags on head keyword but not intent: `airbnb-revenue-management-company` (when-to-hire decision) and `revenue-management-for-short-term-rentals` (pillar). Remember RevFactor's citation mix is UGC-heavy (YouTube 52% / Reddit 19%) — the channel work outpaces on-site posts for AI visibility; on-site is the compounding base.
 
 ---
 
