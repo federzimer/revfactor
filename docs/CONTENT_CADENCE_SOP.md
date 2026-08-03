@@ -88,6 +88,8 @@ For each post: apply the toolkit's recommendations on staging, **set `updatedDat
 - [ ] **Indexable** live (`index, follow`, never noindex a live post); **IndexNow** fired.
 - [ ] **No client/property/owner names** in any post — results shown by market + property type only ("a Gatlinburg cabin").
 - [ ] Internal cross-links to the pillar + related posts; no duplicate/cannibalizing angle.
-- [ ] Builds clean; all links + images return 200.
+- [ ] Builds clean, **and `npm run check:links` passes.** A clean build is not a link check — `astro build` compiled 24 dead `/journal` links across 12 posts without complaint.
+- [ ] **`npm run check:links:external` reviewed on any post that cites vendors or sources.** HTTP 200 is not proof of life: a parked for-sale domain returns 200, and one in this library served 114 bytes of `location.href=` with the GoDaddy sale page a JS hop away. An off-host redirect means read it as a merger you have not noticed — that is how STR Consulting and Pacer sat in one list as two vendors.
+- [ ] **On any vendor/comparison post: re-verify pricing, tier contents and "best for" claims, not only that the link loads** — and stamp the verification date in the copy. Four vendors in one listicle moved in under three months. Fix the `ItemList` JSON-LD and the FAQ answers too, not just the prose.
 
 **We publish to revfactor.io** — never a vendor. Ship fast, then improve.
