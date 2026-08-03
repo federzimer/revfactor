@@ -18,6 +18,13 @@ The strategy sets the target cadence: **1 new post/week · 5 optimizations/week 
 
 **Golden rule:** nothing goes live without Faulen's QA sign-off. Flow is always **toolkit → staging → Faulen QA → live**.
 
+**Re-check the mailbox before starting a multi-hour build, and again before pushing.** Aaron and
+Jlo both work this repo from separate sessions, and a superseding instruction can land minutes
+after the one you started from. On 2026-08-03 message #54 asked for the Airbnb RM listicle and
+#56 reassigned it 85 minutes later; both sessions built the same post against the same slug. One
+`inbox()` call before a big build is cheaper than a duplicate post. When two branches do target
+the same slug, resolve it before either merges, and state the merge order in the PR.
+
 ---
 
 ## 1. The content pipeline — what to write, in order
