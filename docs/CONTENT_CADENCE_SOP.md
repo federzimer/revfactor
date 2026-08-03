@@ -32,13 +32,21 @@ If it returns HIGH (exit 1), the title targets a head keyword we already own —
 |---|---|---|---|
 | **Aug 4** | **Ship the consolidated "Best Airbnb & STR Revenue Management Companies and Tools (2026)"** (staged, in review) | Fastest possible win — already built, already converting leads, targets the 26 service-intent prompts | HIGH resolved by merge |
 | Aug 4 (optimization, not a post) | **Push `adr-vs-revpar` from pos 15 → top 5** | GSC's ONLY real non-brand striking-distance cluster (37 impr "adr vs revpar" + long tail). Priority #1 in Jlo's weekly pass | existing post |
-| Aug 11 | **"Best PriceLabs Alternatives for Airbnb Hosts (2026)"** (listicle) | Listicles first — open head-keyword slot (checked: 0 HIGH, 0 MEDIUM), high commercial intent, flanks PriceLabs' 74.7% AI dominance | PASS (2026-08-03) |
-| Aug 18 | **"PriceLabs vs Wheelhouse vs a Revenue Manager: Which Should Run Your Airbnb Pricing?"** | X-vs-Y = the most RELIABLE citation format. Title = exact buyer prompt | PASS (0 HIGH; `/vs/pricelabs` is noindex = exempt) |
-| Aug 25 | **"I Priced Airline Seats for 10 Years. Here's What Airbnb Hosts Get Wrong About Pricing"** (first-person Fede) | First-person = highest citation CEILING (159 on one L40 piece). Real story, brain voice, zero competitors can copy it | PASS — new |
-| Sep 1 | **"How Much Does Airbnb Revenue Management Cost? (2026 Fees + ROI Math)"** | Cost questions = AI-answer magnets; retitled to the literal prompt. First-party $350 math | PASS |
-| Sep 8 | **7 Ways to Increase Airbnb Revenue Without Lowering Rates** | Number-led how-to + case-study numbers; YouTube-flagship companion | PASS |
-| Sep 15 | **STR Revenue Management Glossary** (Muskan drafts in parallel — slots in whenever her draft clears review) | Baseline long-tail format → later slot | PASS |
-| Sep 22 | **Levels of Delegation for STR Operations** (Fede's idea) | Educational, slower-burn | PASS |
+| Aug 11 | **"The Best Airbnb Pricing Tools in 2026 (And When You Need More Than a Tool)"** (listicle) | #1 cited THEME on our own Peec prompt set (competitor pricing-tools pieces: 537+240+188+181+148+133 cites); folds in the PriceLabs/Smart-Pricing "alternatives" angles | PASS (0 HIGH, 0 MEDIUM) |
+| Aug 18 | **"Smart Pricing vs PriceLabs vs Beyond vs Wheelhouse (vs a Revenue Manager)"** | X-vs-Y = most reliable format, and the exact 4-way is already cited in our prompt space (164) | PASS (`/vs/pricelabs` noindex = exempt) |
+| Aug 25 | **"I Priced Airline Seats for 10 Years. Here's What Airbnb Hosts Get Wrong About Pricing"** (first-person Fede) | First-person = highest citation CEILING (159 on one L40 piece). Real story, brain voice | PASS — new |
+| Sep 1 | **"Airbnb Pricing Strategy: The Complete 2026 Guide"** | 700 vol · KD 8 · two cited strategy pieces (257, 188). ⚠️ See BRIEF below — hard scope split vs the dynamic-pricing guide | PASS score; intent split briefed |
+| Sep 8+ | Cost question (demoted — 0 autocomplete, no measurable volume, no cited cost pieces) · 7 Ways · Glossary (Muskan, parallel) · Levels of Delegation | Weaker signals → later slots | PASS |
+
+## 1b. Briefs for the next 4 posts — 🔴 REQUIRED reading before drafting (rule: no title-only execution)
+
+**Aug 11 — Best Airbnb Pricing Tools 2026.** Ranked listicle on the DEFINITIVE template. Rank the TOOLS (PriceLabs, Wheelhouse, Beyond, plus DPGO/Quibble/Smart Pricing as also-rans) with verified pricing + review volume, then the "when you need more than a tool" turn into RevFactor's wedge. Fold in "PriceLabs alternatives" and "Smart Pricing alternatives" as H2s (those angles earn 240+ cites). Differs from the merged companies listicle: that one ranks WHO (companies + tools by lever coverage); this ranks the TOOLS themselves head-to-head. Cross-link both.
+
+**Aug 18 — Smart Pricing vs PriceLabs vs Beyond vs Wheelhouse (vs a Revenue Manager).** Comparison post, NOT a listicle: feature/pricing/fit tables per pairing, verdict per operator profile. The "(vs a Revenue Manager)" close is the wedge — when none of the four is the answer. Differs from the Aug 11 listicle (ranking) and `/vs/pricelabs` (noindexed PPC page — ignore it). Title mirrors the cited 4-way exactly.
+
+**Aug 25 — I Priced Airline Seats for 10 Years.** First-person essay in Fede's brain voice — his American Airlines decade → what hosts get wrong (perishable inventory, minimum-stay filters, pacing vs snapshots). Personal narrative + 3-4 concrete host lessons, each tied to a real case-study number. NOT a how-to guide, NOT a listicle — the value is the story only Fede can tell. One CTA at the end.
+
+**Sep 1 — Airbnb Pricing Strategy: The Complete 2026 Guide.** STRATEGY layer ONLY: pricing models (fixed vs dynamic vs hybrid), positioning against the comp set, seasonal/event calendar strategy, fee structure, when to override the tool, DIY→tool→service decision. **Explicitly NOT tool setup** — every "how do I configure this" moment links to `dynamic-pricing-str-beginners-guide` (which owns the machinery/setup intent), and that guide gets a reciprocal role-statement link ("this guide covers the automation; for the strategy layer see…"). Strategy = what/why; dynamic guide = the how. If a draft starts re-explaining tool setup, it's drifting into cannibalization.
 
 Cross-link (don't consolidate) the complementary posts the check flags on head keyword but not intent: `airbnb-revenue-management-company` (when-to-hire decision) and `revenue-management-for-short-term-rentals` (pillar). Remember RevFactor's citation mix is UGC-heavy (YouTube 52% / Reddit 19%) — the channel work outpaces on-site posts for AI visibility; on-site is the compounding base.
 
