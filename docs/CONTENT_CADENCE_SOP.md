@@ -20,16 +20,22 @@ The strategy sets the target cadence: **1 new post/week · 5 optimizations/week 
 
 ---
 
-## 1. The content pipeline — what to write, in order
+## 1. The content schedule — 1 post/week, de-duped
 
-From the strategy's content plan (first-party data + service-intent is the wedge). Write in this order, one per week:
+🔴 **Cannibalization pre-flight (mandatory, every title before it enters this schedule OR gets written):**
+`seo-toolkit cannibalization --sitemap https://www.revfactor.io/sitemap-index.xml --title "<proposed title>"`
+If it returns HIGH (exit 1), the title targets a head keyword we already own — **consolidate or re-scope, do not publish a near-duplicate.** A different angle does NOT clear a HIGH flag. (Guardrail added 2026-08-03 after the best-str near-duplicate.)
 
-| # | Post | Angle / target | Notes |
+| Week of | Post | Angle / target | De-dupe status |
 |---|---|---|---|
-| **NEXT** | **Best Airbnb Revenue Management Companies (2026)** | Honest methodology, **software tools included** · 26 service-intent prompts | ⚠️ Must be a *different take* from the existing `best-str-revenue-management-companies-2026` — Airbnb-specific framing, an honest methodology box, and a comparison that includes the software tools (PriceLabs/Wheelhouse/Beyond) alongside done-for-you services. Don't cannibalize the existing post; cross-link them. |
-| 2 | **PriceLabs vs Wheelhouse vs a Done-for-You Service** | Comparison + tool prompts (flanks PriceLabs' 71% usage) | Comparison table + the tool→tool+strategist reframe (our wedge). |
-| 3 | **Airbnb Revenue Management: What It Costs in 2026** | Cost queries (fees, % models, ROI math) — the AI-answer magnet format | First-party pricing math; ties to the $350/mo model. |
-| 4 | **7 Ways to Increase Airbnb Revenue Without Lowering Rates** | 16 how-to prompts, **case-study numbers** | Use the documented case-study lifts (+$139,580 across 7 properties, incl. +$47,459 single). Anonymize: market + property type only, no client/property names. Doubles as the YouTube flagship video. |
+| **Aug 4** | **Consolidate → "The 6 Best Airbnb Revenue Management Companies and Tools (2026)"** | Publish the new listicle + **301 `best-str-revenue-management-companies-2026` → it** (best-str is the stale near-duplicate and is actively driving leads, so 301 preserves equity + lead path) | best-str = HIGH, resolved by consolidation |
+| Aug 11 | **PriceLabs vs Wheelhouse vs a Done-for-You Service** | The head-to-head reserved from the listicle · tool prompts | Verify vs `/vs/pricelabs` + beginners guide before writing |
+| Aug 18 | **STR Revenue Management Glossary** (Muskan) | Definitions hub · long-tail term capture | PASS — no existing glossary |
+| Aug 25 | **Airbnb Revenue Management: What It Costs in 2026** | Cost queries (fees, % models, ROI math) | PASS — cost intent not yet owned; first-party $350 math |
+| Sep 1 | **7 Ways to Increase Airbnb Revenue Without Lowering Rates** | How-to · case-study numbers (+$139,580 across 7, anonymized) | PASS — doubles as the YouTube flagship |
+| Sep 8 | **Levels of Delegation for STR Operations** (Fede's idea) | Cleaning → revenue mgmt → VA → full PM · educational | PASS — new topic |
+
+Cross-link (don't consolidate) the complementary posts the check flags on head keyword but not intent: `airbnb-revenue-management-company` (when-to-hire decision) and `revenue-management-for-short-term-rentals` (pillar).
 
 ---
 
