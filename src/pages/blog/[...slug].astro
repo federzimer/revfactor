@@ -1071,8 +1071,37 @@ const methodItemList = {
        Bump to 1.22× (was 1.08×) so inline italicized quotes inside body
        paragraphs match the surrounding text weight instead of looking shrunk. */
     .prose-rf :global(em)     { font-family:'Cormorant Garamond',Georgia,serif; color:#13342D; font-style:italic; font-size:1.22em; line-height:1.4; }
-    .prose-rf :global(a)      { color:#13342D; text-decoration:underline; text-underline-offset:3px; }
-    .prose-rf :global(a:hover){ color:#1E4A40; }
+    /* Link colour travels through an inheriting custom property, not through a
+       per-component selector. A prose link is #13342D, which is the EXACT hex of
+       .rf-quick-answer and .rf-band.cedar, so a link dropped inside either one
+       rendered at 1.00:1 contrast: perfectly invisible, no error, and nothing a
+       screenshot of the page shows because the text is simply not there.
+       Because --rf-link inherits, every dark surface below sets it once and any
+       link nested at any depth inside that surface picks it up, including in
+       components written later. A scoped selector per component does not, which
+       is how this shipped in four places across three posts. */
+    .prose-rf :global(a)      { color: var(--rf-link, #13342D); text-decoration:underline; text-underline-offset:3px; }
+    .prose-rf :global(a:hover){ color: var(--rf-link-hover, #1E4A40); }
+
+    /* Dark surfaces: flip the link tone. Values chosen to clear WCAG AA (4.5:1)
+       against each surface, measured, not eyeballed. */
+    .prose-rf :global(.rf-quick-answer),
+    .prose-rf :global(.rf-band.cedar),
+    .prose-rf :global(.rf-band.tobacco),
+    .prose-rf :global(.rf-leak-card),
+    .prose-rf :global(.rf-score-card.cedar),
+    .prose-rf :global(.rf-bleed) {
+      --rf-link: #F3F1EC;        /* 12.0:1 on cedar, 12.3:1 on tobacco */
+      --rf-link-hover: #FFFFFF;
+    }
+    /* Moss and walnut are mid-tones, so near-white is the only safe link tone
+       (#E8E6E1 lands at 4.4:1 on moss, which is under AA). */
+    .prose-rf :global(.rf-band.moss),
+    .prose-rf :global(.rf-leak-card.moss),
+    .prose-rf :global(.rf-leak-card.walnut) {
+      --rf-link: #FFFFFF;        /* 5.5:1 on moss, 6.5:1 on walnut */
+      --rf-link-hover: #FFFFFF;
+    }
     .prose-rf :global(hr)     { border:none; border-top:1px solid #C8C4BC; margin:2.5rem 0; }
 
     /* Blockquote — text uses cedar dark green per Aaron, easier to read */
