@@ -2,6 +2,13 @@
 
 Part of Fede's private multi-business stack; internal context lives in a private vault — ask Fede.
 
+## 🔴 Verification gate (before any deliverable, recommendation, or content ships)
+Full protocol: `~/Claude/VERIFICATION_GATE.md`.
+- **DONE WHEN**: state the checkable done-condition before starting. Does-NOT-count: status reports, suggestions that don't name the metric they move, live-state claims not checked this session.
+- **No claim about the live site / current data without a this-session check cited inline** — curl `www.revfactor.io`, Playwright render, GSC/GA4/Bing, or a build/lint run. Note: `revfactor.io` 307s to `www`; PPC LPs are intentionally `noindex` — verify against the live URL, don't assume. If unverifiable this session, write it as a question, not a finding.
+- **Every recommendation names the goal-metric it moves.** No generic SEO-checklist busywork.
+- **Independent refute pass before delivery** (the `judge` skill / clean-context subagent) — ship only claims that survive a disprove attempt. Do not self-certify.
+
 ## What this is
 The RevFactor marketing/landing site (production: **www.revfactor.io**; `revfactor.io` 307s to `www`). A cinematic, high-fidelity site for a strategic revenue-management consultancy serving short-term-rental (STR) hosts — aesthetic identity "Precision Revenue Craft" (Wall-Street data intelligence + luxury hospitality warmth). Primary CTA: "Schedule a Strategy Call" (a consultation, not an audit or sign-up). Includes a blog/Journal, case studies, an About page, and several paid-traffic landing pages (kept `noindex,nofollow` and out of the sitemap).
 
