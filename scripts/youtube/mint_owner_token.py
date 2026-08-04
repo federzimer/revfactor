@@ -33,7 +33,7 @@ import urllib.request
 
 DEVICE_CODE_URI = "https://oauth2.googleapis.com/device/code"
 TOKEN_URI = "https://oauth2.googleapis.com/token"
-SCOPES = "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.force-ssl"
+SCOPES = "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.upload"
 DEFAULT_CREDENTIALS_FILE = "/Users/aaronwhittaker/Claude/ProCloser.ai Website/credentials.json"
 
 
