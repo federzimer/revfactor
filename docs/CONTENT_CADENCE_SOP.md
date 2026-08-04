@@ -10,7 +10,8 @@ The strategy sets the target cadence: **1 new post/week · 5 optimizations/week 
 
 | When | Who | Do |
 |---|---|---|
-| Mon | Jlo | Run the SEO toolkit on the site (see §3). It lists this week's changes. Pick the top **5 posts** to optimize + confirm this week's **1 new post**. |
+| **Sun 6pm (automated)** | launchd `com.revfactor.weekly-sweep` (Mac Studio) | **Full-library toolkit sweep** — every sitemap URL through ai-eligibility/cqf/passages/receipts + site-level checks (sitemap-hygiene, signal-conflicts, bing-index, crawl-budget). Writes `docs/reports/weekly-sweep-<date>.md` (top-5 pages + per-page fixes), commits + pushes, texts Aaron. |
+| Mon | Jlo | Open the Sunday sweep report — it IS the week's change list. Pick the top **5 pages** to optimize + confirm this week's **1 new post**. |
 | Mon–Wed | Jlo | Write/implement on **staging**: draft the new post + apply the 5 optimizations. **Set the `updatedDate` on every page you touch.** |
 | Wed–Thu | Faulen | **QA** on staging: content accuracy, best-practice + client alignment, house-style, schema, visuals. Flag anything off to Aaron. |
 | Thu–Fri | Jlo | Apply Faulen's fixes → **push live** → fire **IndexNow** on every changed/new URL → confirm live (200, indexable, `updatedDate` correct). |
@@ -69,7 +70,9 @@ Cross-link (don't consolidate) the complementary posts the check flags on head k
 
 ## 3. The weekly optimization pass — running the toolkit
 
-Run the toolkit on the site, apply what it finds to **5 posts/week**, and **bump `updatedDate` on each** (freshness signal — pings Bing + GSC).
+The Sunday cron sweeps the **full library weekly** (POP-style audit across every page); apply the deepest fixes to **5 pages/week**, and **bump `updatedDate` on every page that gets a REAL edit** — even a small one (a claim added, a stat refreshed, a link fixed). 🔴 Never bump a date without a content change: inaccurate lastmod is worse than none (Google treats manipulated freshness as a negative signal; our own `sitemap-hygiene` check enforces this). In practice the weekly sweep surfaces genuine touches for most pages most weeks — that's how the library stays legitimately fresh.
+
+🔴 **First-party citation infrastructure — the Benchmarks page.** Atomic claims come from Fede's own portfolio data, so they need a citable source. The page `/blog/str-revenue-benchmarks/` ("STR Revenue Benchmarks: RevFactor Portfolio Data", de-dupe PASS 2026-08-04) is the living data hub: portfolio stats, orphan-rate benchmark, case-study lifts, ADR ladders — each with n=, method, and a date; `Dataset` + `dateModified` schema; authored by Federico (Person schema). **Every atomic claim in every post cites it**: "according to RevFactor portfolio data (n=198, Aug 2026)" + internal link. That's what grounds passages (the adr-vs-revpar fix), feeds claim density, and gives external writers + AI one canonical URL to cite.
 
 Prerequisite: toolkit access/env (Doppler `seo-toolkit`). If Jlo isn't set up yet, Aaron runs it and passes the change list until access is handed over.
 
