@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 
 const fmtUSD = (n) => (Number.isFinite(n) ? `$${n.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '—');
 const fmtPct = (n) => (Number.isFinite(n) ? `${(n * 100).toFixed(1)}%` : '—');
@@ -8,6 +8,14 @@ export default function RevPARCalculator({ defaultRevenue = 36000, defaultBooked
   const [booked, setBooked] = useState(defaultBooked);
   const [available, setAvailable] = useState(defaultAvailable);
   const [cost, setCost] = useState(defaultCost);
+
+  // One engagement event per mount — first edit of any input.
+  const engagedRef = useRef(false);
+  const markEngaged = () => {
+    if (engagedRef.current) return;
+    engagedRef.current = true;
+    window.rfTrack?.('calculator-engaged', { calculator: 'revpar', page: location.pathname });
+  };
 
   const metrics = useMemo(() => {
     const rev = Number(revenue) || 0;
@@ -66,19 +74,19 @@ export default function RevPARCalculator({ defaultRevenue = 36000, defaultBooked
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px', marginBottom: '16px' }}>
         <div>
           <label style={labelStyle} htmlFor="rev-rev">Total revenue ($)</label>
-          <input id="rev-rev" type="number" min="0" step="100" value={revenue} onChange={(e) => setRevenue(e.target.value)} style={inputStyle} />
+          <input id="rev-rev" type="number" min="0" step="100" value={revenue} onChange={(e) => { markEngaged(); setRevenue(e.target.value); }} style={inputStyle} />
         </div>
         <div>
           <label style={labelStyle} htmlFor="rev-booked">Booked nights</label>
-          <input id="rev-booked" type="number" min="0" step="1" value={booked} onChange={(e) => setBooked(e.target.value)} style={inputStyle} />
+          <input id="rev-booked" type="number" min="0" step="1" value={booked} onChange={(e) => { markEngaged(); setBooked(e.target.value); }} style={inputStyle} />
         </div>
         <div>
           <label style={labelStyle} htmlFor="rev-available">Available nights</label>
-          <input id="rev-available" type="number" min="0" step="1" value={available} onChange={(e) => setAvailable(e.target.value)} style={inputStyle} />
+          <input id="rev-available" type="number" min="0" step="1" value={available} onChange={(e) => { markEngaged(); setAvailable(e.target.value); }} style={inputStyle} />
         </div>
         <div>
           <label style={labelStyle} htmlFor="rev-cost" title="Cleaning + supplies + channel commission + dynamic pricing fees over the same period">Operating cost ($)</label>
-          <input id="rev-cost" type="number" min="0" step="50" value={cost} onChange={(e) => setCost(e.target.value)} style={inputStyle} />
+          <input id="rev-cost" type="number" min="0" step="50" value={cost} onChange={(e) => { markEngaged(); setCost(e.target.value); }} style={inputStyle} />
         </div>
       </div>
 

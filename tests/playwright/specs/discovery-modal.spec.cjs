@@ -64,10 +64,10 @@ test.describe('Discovery modal — UI flows (desktop)', () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
   // Selectors keyed off data-umami-event (stable, won't shift with copy edits).
-  const Q1_YES = '[data-umami-event="qualifier-q1-yes"]';
-  const Q1_NO  = '[data-umami-event="qualifier-q1-no"]';
-  const Q2_HOST = '[data-umami-event="qualifier-q2-host"]';
-  const Q2_PM   = '[data-umami-event="qualifier-q2-pm"]';
+  const Q1_YES = '[data-umami-event="qualifier-step"][data-umami-event-answer="yes"]';
+  const Q1_NO  = '[data-umami-event="qualifier-step"][data-umami-event-answer="no"]';
+  const Q2_HOST = '[data-umami-event="qualifier-step"][data-umami-event-answer="host"]';
+  const Q2_PM   = '[data-umami-event="qualifier-step"][data-umami-event-answer="pm"]';
 
   async function openModal(page) {
     await page.goto('/', { waitUntil: 'networkidle' });

@@ -127,6 +127,7 @@ export default function ReviewPage() {
                 href="https://schedule.revfactor.io/"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-rf-source="review-hero"
                 className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
                 style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
               >
@@ -180,6 +181,7 @@ export default function ReviewPage() {
               href="https://schedule.revfactor.io/"
               target="_blank"
               rel="noopener noreferrer"
+              data-rf-source="review-bottom"
               className="inline-flex items-center gap-3 px-8 py-4 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
               style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
             >

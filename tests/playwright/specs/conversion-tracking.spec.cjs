@@ -46,7 +46,7 @@ test.describe('Conversion tracking — production', () => {
     await cta.scrollIntoViewIfNeeded();
     await page.waitForTimeout(400);
     await cta.click();
-    await expect(page.locator('[data-umami-event="qualifier-q1-no"]')).toBeVisible({ timeout: 10_000 });
+    await expect(page.locator('[data-umami-event="qualifier-step"][data-umami-event-answer="no"]')).toBeVisible({ timeout: 10_000 });
 
     // Arm the dataLayer listener BEFORE the form submit. The conversion event
     // fires synchronously alongside the API success.
@@ -63,7 +63,7 @@ test.describe('Conversion tracking — production', () => {
       12_000,
     );
 
-    await page.locator('[data-umami-event="qualifier-q1-no"]').click();
+    await page.locator('[data-umami-event="qualifier-step"][data-umami-event-answer="no"]').click();
     await page.locator('input[type="email"]').fill(testEmail('lead'));
     await page.getByRole('button', { name: /^keep me posted$/i }).click();
 

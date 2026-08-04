@@ -298,9 +298,10 @@ export default function PPCLanding({
   // scheduler iframe) instead of scrolling to an inline embed. Removes the
   // unqualified-PM-company calendar bookings that were clogging Fede's
   // calendar; adds the no-property + PM-company lead-capture paths.
-  const open = () => {
+  const open = (source) => {
     if (typeof window !== 'undefined') {
       window.posthog?.capture('schedule_modal_opened', { source: 'ppc' });
+      window.rfTrack?.('schedule-cta-click', { source, page: location.pathname });
     }
     setScheduleOpen(true);
   };
@@ -426,7 +427,7 @@ export default function PPCLanding({
                 "click here" before they scan the supporting paragraph. Bumped
                 to px-12 py-6 / text-[15px] for maximum visual weight. */}
             <button
-              onClick={open}
+              onClick={() => open('ppc-hero')}
               className="inline-flex items-center gap-3 px-12 py-6 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[15px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] shadow-[0_14px_40px_rgba(93,109,89,0.6),0_0_0_2px_rgba(232,230,225,0.22)] hover:shadow-[0_18px_50px_rgba(93,109,89,0.75)] mb-8 ppc-hero-cta"
             >
               <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
@@ -575,7 +576,7 @@ export default function PPCLanding({
             30-minute Discovery Call. We pull your comp set, walk through where pacing is leaving money, and tell you whether RevFactor is the right fit. No pitch deck.
           </p>
           <button
-            onClick={open}
+            onClick={() => open('ppc-mid')}
             className="inline-flex items-center gap-3 px-10 py-5 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[13px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] shadow-[0_10px_32px_rgba(93,109,89,0.45)] hover:shadow-[0_14px_40px_rgba(93,109,89,0.55)]"
           >
             <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
@@ -683,6 +684,7 @@ export default function PPCLanding({
               <details
                 key={i}
                 className="bg-[#DDDAD3] rounded-[14px] px-6 py-4 border border-[#C8C4BC] group"
+                onToggle={(e) => { if (e.currentTarget.open) window.rfTrack?.('faq-toggle', { question: q.q, page: location.pathname }); }}
               >
                 <summary className="cursor-pointer text-[16px] font-bold text-[#3F261F] flex justify-between items-center list-none">
                   <span>{q.q}</span>
@@ -715,7 +717,7 @@ export default function PPCLanding({
             Even if you don't end up working with us.
           </p>
           <button
-            onClick={open}
+            onClick={() => open('ppc-final')}
             className="inline-flex items-center gap-3 px-10 py-5 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[13px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] shadow-[0_10px_32px_rgba(93,109,89,0.45)] hover:shadow-[0_14px_40px_rgba(93,109,89,0.55)]"
           >
             <span className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]" />
@@ -743,7 +745,7 @@ export default function PPCLanding({
            when #schedule is in viewport — when the user is already at the
            calendar, the sticky bar would just overlap the booking form
            (especially on short iPhones where it covers the email field). */}
-      <StickyMobileCTA onOpen={open} />
+      <StickyMobileCTA onOpen={() => open('ppc-sticky')} />
       {/* Spacer so the sticky bar never covers the final CTA on mobile.
           bg-onyx so when fully scrolled there's no bone-light gap between
           the footer and the sticky bar's translucent top edge. */}

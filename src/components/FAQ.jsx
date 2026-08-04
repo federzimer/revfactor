@@ -128,7 +128,10 @@ export default function FAQ() {
               onToggle={() => {
               const opening = openIndex !== i;
               setOpenIndex(openIndex === i ? null : i);
-              if (opening) window.posthog?.capture('faq_item_expanded', { question: item.q });
+              if (opening) {
+                window.posthog?.capture('faq_item_expanded', { question: item.q });
+                window.rfTrack?.('faq-toggle', { question: item.q, page: '/' });
+              }
             }}
             />
           ))}

@@ -70,6 +70,7 @@ export default function PPCNavbar() {
       <div className="hidden md:flex items-center gap-2 ml-2">
         <a
           href="#schedule"
+          data-rf-source="ppc-navbar-desktop"
           onClick={scrollTo('#schedule')}
           className="inline-flex items-center px-5 py-2 border border-transparent bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
           style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
@@ -132,6 +133,7 @@ export default function PPCNavbar() {
           ))}
           <a
             href="#schedule"
+            data-rf-source="ppc-navbar-mobile"
             onClick={scrollTo('#schedule')}
             className="block mt-2 w-full text-center py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full cursor-pointer"
           >

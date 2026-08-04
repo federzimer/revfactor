@@ -109,6 +109,10 @@ export default function QualifierGate({ onQualified, onClose }) {
         has_portfolio_url: isPMPath,
         path: !hasProperty ? 'no_property' : 'pm',
       });
+      window.rfTrack?.('lead-captured', {
+        path: !hasProperty ? 'no-property' : 'pm',
+        property_count: isPMPath ? Math.floor(countNum) : 0,
+      });
       // Google Ads conversion — Discovery Lead Captured (Secondary, $75)
       if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
         window.gtag('event', 'conversion', {
@@ -138,7 +142,9 @@ export default function QualifierGate({ onQualified, onClose }) {
           <button
             type="button"
             className="qg-btn qg-btn-primary"
-            data-umami-event="qualifier-q1-yes"
+            data-umami-event="qualifier-step"
+            data-umami-event-step="q1"
+            data-umami-event-answer="yes"
             onClick={() => { setHasProperty(true); setStep('q2'); }}
           >
             Yes, I do
@@ -146,13 +152,24 @@ export default function QualifierGate({ onQualified, onClose }) {
           <button
             type="button"
             className="qg-btn qg-btn-secondary"
-            data-umami-event="qualifier-q1-no"
+            data-umami-event="qualifier-step"
+            data-umami-event-step="q1"
+            data-umami-event-answer="no"
             onClick={() => { setHasProperty(false); goToEmail(); }}
           >
             Not yet
           </button>
         </div>
-        <button type="button" className="qg-close-text" onClick={onClose}>Cancel</button>
+        <button
+          type="button"
+          className="qg-close-text"
+          data-umami-event="qualifier-step"
+          data-umami-event-step="q1"
+          data-umami-event-answer="cancel"
+          onClick={onClose}
+        >
+          Cancel
+        </button>
         <QualifierStyles />
       </div>
     );
@@ -169,7 +186,9 @@ export default function QualifierGate({ onQualified, onClose }) {
           <button
             type="button"
             className="qg-btn qg-btn-primary"
-            data-umami-event="qualifier-q2-host"
+            data-umami-event="qualifier-step"
+            data-umami-event-step="q2"
+            data-umami-event-answer="host"
             onClick={() => { setIsPM(false); onQualified({ hasProperty: true, isPM: false }); }}
           >
             I'm a self-host
@@ -177,13 +196,24 @@ export default function QualifierGate({ onQualified, onClose }) {
           <button
             type="button"
             className="qg-btn qg-btn-secondary"
-            data-umami-event="qualifier-q2-pm"
+            data-umami-event="qualifier-step"
+            data-umami-event-step="q2"
+            data-umami-event-answer="pm"
             onClick={() => { setIsPM(true); goToEmail(); }}
           >
             Property management company
           </button>
         </div>
-        <button type="button" className="qg-back-text" onClick={() => setStep('q1')}>← Back</button>
+        <button
+          type="button"
+          className="qg-back-text"
+          data-umami-event="qualifier-step"
+          data-umami-event-step="q2"
+          data-umami-event-answer="back"
+          onClick={() => setStep('q1')}
+        >
+          ← Back
+        </button>
         <QualifierStyles />
       </div>
     );
@@ -261,7 +291,10 @@ export default function QualifierGate({ onQualified, onClose }) {
           <button
             type="submit"
             className="qg-btn qg-btn-primary qg-btn-full"
-            data-umami-event={isNoProperty ? 'qualifier-email-no-property' : 'qualifier-email-pm'}
+            data-umami-event="qualifier-step"
+            data-umami-event-step="email"
+            data-umami-event-answer="submit"
+            data-umami-event-path={isNoProperty ? 'no-property' : 'pm'}
             disabled={step === 'submitting'}
           >
             {step === 'submitting' ? 'Sending…' : (isNoProperty ? 'Keep me posted' : 'Get in touch')}
@@ -270,6 +303,9 @@ export default function QualifierGate({ onQualified, onClose }) {
         <button
           type="button"
           className="qg-back-text"
+          data-umami-event="qualifier-step"
+          data-umami-event-step="email"
+          data-umami-event-answer="back"
           onClick={() => setStep(isNoProperty ? 'q1' : 'q2')}
           disabled={step === 'submitting'}
         >

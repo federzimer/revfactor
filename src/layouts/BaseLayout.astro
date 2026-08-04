@@ -58,6 +58,37 @@ const canonicalUrl = Astro.url.href;
     })();
   </script>
 
+  {/* Umami safety wrapper: umami.track is undefined until the deferred
+      script loads, so rfTrack queues early events and replays them once
+      Umami is ready. Analytics must never break the UI, hence try/catch. */}
+  <script is:inline>
+    (function () {
+      window.rfTrack = function (name, props) {
+        try {
+          if (window.umami && typeof window.umami.track === 'function') {
+            window.umami.track(name, props);
+          } else {
+            (window.__rfTrackQ = window.__rfTrackQ || []).push([name, props]);
+          }
+        } catch (e) {}
+      };
+      window.addEventListener('load', function () {
+        var tries = 0;
+        (function flush() {
+          if (window.umami && typeof window.umami.track === 'function') {
+            var q = window.__rfTrackQ || [];
+            for (var i = 0; i < q.length; i++) {
+              try { window.umami.track(q[i][0], q[i][1]); } catch (e) {}
+            }
+            window.__rfTrackQ = null;
+            return;
+          }
+          if (++tries < 20) setTimeout(flush, 250); // give up ~5s in (adblock)
+        })();
+      });
+    })();
+  </script>
+
   {/* First-touch attribution: persist utm_* / gclid / referrer / landing page
       in sessionStorage so lead submissions carry traffic source even when the
       visitor navigates away from the landing page before converting (Astro =
@@ -155,11 +186,13 @@ const canonicalUrl = Astro.url.href;
        Without this, non-JS crawlers see all content at full opacity. -->
   <script is:inline>document.documentElement.classList.add('js')</script>
 
-  <!-- Umami Analytics -->
+  <!-- Umami Analytics. data-domains keeps localhost / vercel.app preview
+       traffic out of the production website's data. -->
   <script
     defer
     src="https://umami-rgc.up.railway.app/script.js"
     data-website-id="fd5982fb-76c6-4a8c-bf65-2ad69c72c306"
+    data-domains="www.revfactor.io,revfactor.io"
   ></script>
 
   <!-- Google Analytics + Google Ads (one gtag.js load handles both IDs).
@@ -214,6 +247,10 @@ const canonicalUrl = Astro.url.href;
           currency: 'USD',
           source: 'scheduler_embed'
         });
+        window.rfTrack('booking-confirmed', {
+          page: location.pathname,
+          source: 'scheduler-embed'
+        });
       });
     })();
 
@@ -256,6 +293,12 @@ const canonicalUrl = Astro.url.href;
       if (!target) return;
       // Only intercept primary-button clicks (not new-tab / cmd-click)
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      window.rfTrack('schedule-cta-click', {
+        source: target.dataset.rfSource ||
+                (location.pathname.indexOf('/blog/') === 0 ? 'blog-body' : 'inline-link'),
+        page: location.pathname,
+        href: target.getAttribute('href') || '',
+      });
       e.preventDefault();
       window.dispatchEvent(new CustomEvent('revfactor:open-schedule'));
     });

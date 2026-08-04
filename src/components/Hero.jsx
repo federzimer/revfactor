@@ -127,8 +127,7 @@ export default function Hero() {
             {/* CTA */}
             <div ref={ctaRef} className="opacity-0">
               <button
-                onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'hero' }); setScheduleOpen(true); }}
-                data-umami-event="CTA-2"
+                onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'hero' }); window.rfTrack?.('schedule-cta-click', { source: 'hero', page: location.pathname }); setScheduleOpen(true); }}
                 className="inline-flex items-center gap-3 px-8 py-4 bg-error text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(139,58,58,0.35)]"
                 style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
               >

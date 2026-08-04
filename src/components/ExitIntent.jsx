@@ -42,6 +42,7 @@ export default function ExitIntent() {
         window.gtag('event', 'exit_intent_shown', { reason });
       }
       window.posthog?.capture('exit_intent_shown', { trigger_reason: reason });
+      window.rfTrack?.('exit-intent', { action: 'shown', reason, page: location.pathname });
     };
 
     // Track cursor Y so we can distinguish "user leaving via the top of the
@@ -113,6 +114,7 @@ export default function ExitIntent() {
       window.gtag('event', 'exit_intent_dismissed');
     }
     window.posthog?.capture('exit_intent_dismissed');
+    window.rfTrack?.('exit-intent', { action: 'dismissed' });
   };
 
   const handleOverlayClick = (e) => {

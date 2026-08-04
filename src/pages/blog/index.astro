@@ -708,6 +708,7 @@ const schema = {
         btn.textContent = 'Subscribing…';
         resetStatusStyle();
         statusEl.textContent = defaultStatus;
+        window.rfTrack('newsletter-signup', { status: 'submit' });
 
         try {
           var res = await fetch('/api/subscribe', {
@@ -722,11 +723,13 @@ const schema = {
             }),
           });
           if (!res.ok) throw new Error('http ' + res.status);
+          window.rfTrack('newsletter-signup', { status: 'success' });
           btn.textContent = 'Subscribed ✓';
           applySuccessStyle();
           statusEl.textContent = 'You’re on the list. First dispatch arrives soon.';
           emailEl.value = '';
         } catch (err) {
+          window.rfTrack('newsletter-signup', { status: 'error' });
           btn.disabled = false;
           btn.textContent = 'Subscribe';
           resetStatusStyle();

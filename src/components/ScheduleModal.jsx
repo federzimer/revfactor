@@ -85,6 +85,8 @@ export default function ScheduleModal({ onClose }) {
     if (isClosingRef.current) return;
     isClosingRef.current = true;
     window.posthog?.capture('schedule_modal_dismissed');
+    // stage tells qualifier abandonment apart from closing over the calendar
+    window.rfTrack?.('schedule-modal-close', { stage: qualified ? 'calendar' : 'qualifier' });
 
     if (!overlayRef.current || !panelRef.current) {
       onClose();
@@ -101,7 +103,7 @@ export default function ScheduleModal({ onClose }) {
       ease: 'power2.in',
     });
     tl.to(overlayRef.current, { opacity: 0, duration: 0.2, ease: 'power2.in' }, '-=0.1');
-  }, [onClose]);
+  }, [onClose, qualified]);
 
   // Escape key
   useEffect(() => {
@@ -162,7 +164,6 @@ export default function ScheduleModal({ onClose }) {
           <button
             onClick={handleClose}
             aria-label="Close schedule dialog"
-            data-umami-event="CTA-2"
             className="absolute top-3 right-3 z-20 w-9 h-9 flex items-center justify-center rounded-full bg-white/85 backdrop-blur-sm text-[#76574C] hover:bg-[#C8C4BC]/60 shadow-[0_2px_8px_rgba(22,25,16,0.12)] transition-colors duration-200 cursor-pointer"
           >
             <X className="w-4.5 h-4.5" />

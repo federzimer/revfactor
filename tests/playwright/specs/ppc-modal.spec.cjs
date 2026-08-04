@@ -18,8 +18,8 @@ const PPC_PAGES = [
   { path: '/short-term-rental-consultant/', label: 'consultant' },
 ];
 
-const Q1_NO  = '[data-umami-event="qualifier-q1-no"]';
-const Q1_YES = '[data-umami-event="qualifier-q1-yes"]';
+const Q1_NO  = '[data-umami-event="qualifier-step"][data-umami-event-answer="no"]';
+const Q1_YES = '[data-umami-event="qualifier-step"][data-umami-event-answer="yes"]';
 
 for (const page of PPC_PAGES) {
   test.describe(`PPC ${page.label}`, () => {
@@ -64,7 +64,7 @@ for (const page of PPC_PAGES) {
       await expect(pw.locator(Q1_YES)).toBeVisible({ timeout: 10_000 });
 
       await pw.locator(Q1_YES).click();
-      await pw.locator('[data-umami-event="qualifier-q2-host"]').click();
+      await pw.locator('[data-umami-event="qualifier-step"][data-umami-event-answer="host"]').click();
 
       // Iframe is now rendered inside the modal. Its src should carry the
       // forwarded UTM + gclid params.

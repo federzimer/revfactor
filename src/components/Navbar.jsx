@@ -10,6 +10,8 @@ const CHECKOUT_URL = 'https://checkout.revfactor.io/b/bJe7sKdnK0hcdqQ0ay0ZW0b';
 
 function goToCheckout(source) {
   window.posthog?.capture('subscribe_checkout_started', { source });
+  // Umami props are kebab-case sitewide; PostHog keeps its snake_case source
+  window.rfTrack?.('outbound-click', { destination: 'subscribe', source: source.replace('_', '-') });
   window.open(CHECKOUT_URL, '_blank');
 }
 
@@ -99,7 +101,7 @@ export default function Navbar({ lightBg = false }) {
             href="https://owner.revfactor.io"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => window.posthog?.capture('owner_portal_clicked')}
+            onClick={() => { window.posthog?.capture('owner_portal_clicked'); window.rfTrack?.('outbound-click', { destination: 'owner-portal', source: 'navbar-desktop' }); }}
             className={`inline-flex items-center gap-1.5 px-4 py-2 border font-bold uppercase text-[9px] tracking-[2px] rounded-full transition-all duration-[200ms] hover:scale-[1.02] ${scrolled
                 ? 'border-[#3F261F]/30 text-[#3F261F] hover:bg-[#3F261F] hover:text-[#DDDAD3] hover:border-[#3F261F]'
                 : 'border-[#E8E6E1]/30 text-[#E8E6E1] hover:bg-[#3F261F] hover:text-[#DDDAD3] hover:border-[#3F261F]'
@@ -126,7 +128,7 @@ export default function Navbar({ lightBg = false }) {
           {/* Discovery Call — brownish-red (#8B3A3A) primary CTA on the
               right edge. */}
           <button
-            onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'navbar_desktop' }); setScheduleOpen(true); }}
+            onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'navbar_desktop' }); window.rfTrack?.('schedule-cta-click', { source: 'navbar-desktop', page: location.pathname }); setScheduleOpen(true); }}
             className="inline-flex items-center px-5 py-2 border border-transparent bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
             style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
           >
@@ -198,6 +200,7 @@ export default function Navbar({ lightBg = false }) {
               onClick={() => {
                 setMenuOpen(false);
                 window.posthog?.capture('owner_portal_clicked');
+                window.rfTrack?.('outbound-click', { destination: 'owner-portal', source: 'navbar-mobile' });
               }}
               className="flex items-center justify-center gap-2 mt-2 py-3 border border-[#3F261F]/20 text-[#3F261F] font-bold uppercase text-[10px] tracking-[2px] rounded-full"
             >
@@ -217,6 +220,7 @@ export default function Navbar({ lightBg = false }) {
               onClick={() => {
                 setMenuOpen(false);
                 window.posthog?.capture('schedule_modal_opened', { source: 'navbar_mobile' });
+                window.rfTrack?.('schedule-cta-click', { source: 'navbar-mobile', page: location.pathname });
                 setScheduleOpen(true);
               }}
               className="flex items-center justify-center gap-2 mt-2 w-full py-3 bg-[#8B3A3A] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full cursor-pointer"
