@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RevFactor — Content QA Request</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bone:#DDDAD3; --bone-light:#E8E6E1; --bone-dark:#C8C4BC;
+    --moss:#5D6D59; --cedar:#13342D; --walnut:#76574C; --walnut-light:#8F6E62;
+    --tobacco:#3F261F; --onyx:#161910;
+    --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+    --sans:Helvetica,"Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; padding:0; }
+  body {
+    font-family:var(--sans);
+    font-size:10.5pt; line-height:1.62; color:var(--tobacco);
+    background:#fff;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .page { padding:0 4mm; }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    border-bottom:1.5px solid var(--cedar);
+    padding-bottom:14px; margin-bottom:26px;
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+  }
+  .brand {
+    font-family:var(--sans); font-weight:700; font-size:8.5pt;
+    letter-spacing:2.6px; text-transform:uppercase; color:var(--cedar);
+  }
+  .masthead h1 {
+    font-family:var(--display); font-weight:400; font-size:27pt;
+    line-height:1.08; margin:7px 0 0; color:var(--tobacco); letter-spacing:0.3px;
+  }
+  .meta {
+    font-family:var(--mono); font-size:7.6pt; line-height:1.75;
+    color:var(--walnut-light); text-align:right; white-space:nowrap;
+  }
+  .meta b { color:var(--tobacco); font-weight:400; }
+
+  /* ---------- intro ---------- */
+  .intro { font-size:11pt; margin-bottom:22px; }
+  .intro p { margin:0 0 9px; }
+  .reassure {
+    background:var(--bone-light); border-left:3px solid var(--moss);
+    padding:11px 15px; margin:16px 0 26px; font-size:10pt; color:var(--tobacco);
+  }
+  .reassure strong { color:var(--cedar); }
+
+  /* ---------- section headings ---------- */
+  h2 {
+    font-family:var(--display); font-weight:600; font-size:16.5pt;
+    color:var(--cedar); margin:30px 0 3px; letter-spacing:0.2px;
+    border-bottom:1px solid var(--bone-dark); padding-bottom:6px;
+  }
+  h2 + .sub {
+    font-size:9.4pt; color:var(--walnut-light); margin:0 0 15px; font-style:italic;
+  }
+
+  /* ---------- page cards ---------- */
+  .card {
+    border:1px solid var(--bone-dark); border-radius:9px;
+    padding:15px 17px 14px; margin-bottom:14px; break-inside:avoid;
+    background:#fff;
+  }
+  .card .num {
+    font-family:var(--mono); font-size:7.6pt; letter-spacing:2px;
+    color:var(--moss); text-transform:uppercase; margin-bottom:5px;
+  }
+  .card h3 {
+    font-family:var(--display); font-weight:600; font-size:14pt;
+    margin:0 0 9px; color:var(--tobacco); line-height:1.22;
+  }
+  .card p { margin:0 0 8px; }
+  .card p:last-child { margin-bottom:0; }
+  .linkline { margin:0 0 11px; }
+  .linkline a {
+    display:inline-block; font-family:var(--sans); font-weight:700;
+    font-size:8.2pt; letter-spacing:1.7px; text-transform:uppercase;
+    color:#fff; background:var(--cedar); text-decoration:none;
+    padding:7px 15px; border-radius:100px;
+  }
+  .url {
+    font-family:var(--mono); font-size:6.9pt; color:var(--walnut-light);
+    word-break:break-all; margin:6px 0 0; line-height:1.5;
+  }
+  .flag {
+    background:#F4F1EC; border-left:2px solid var(--walnut);
+    padding:8px 12px; margin:9px 0 0; font-size:9.7pt;
+  }
+
+  /* ---------- checklist ---------- */
+  ul.checks { list-style:none; margin:0; padding:0; }
+  ul.checks li {
+    position:relative; padding:0 0 0 25px; margin-bottom:9px; break-inside:avoid;
+  }
+  ul.checks li::before {
+    content:""; position:absolute; left:2px; top:4.5px;
+    width:9px; height:9px; border:1.5px solid var(--moss); border-radius:2px;
+  }
+  ul.checks strong { color:var(--cedar); }
+
+  /* ---------- table ---------- */
+  table { width:100%; border-collapse:collapse; margin:14px 0 12px; font-size:9.6pt; }
+  th {
+    font-family:var(--sans); font-weight:700; font-size:7.6pt;
+    letter-spacing:1.5px; text-transform:uppercase; color:var(--cedar);
+    text-align:left; padding:0 10px 7px 0; border-bottom:1.5px solid var(--cedar);
+  }
+  td { padding:8px 10px 8px 0; border-bottom:1px solid var(--bone-dark); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  td.n { font-family:var(--mono); font-size:9.2pt; white-space:nowrap; }
+  td.src { color:var(--walnut-light); }
+
+  /* ---------- footer ---------- */
+  .signoff { margin-top:26px; padding-top:16px; border-top:1px solid var(--bone-dark); }
+  .signoff p { margin:0 0 8px; }
+  .name { font-family:var(--display); font-size:14pt; color:var(--tobacco); margin-top:12px; }
+  .credit {
+    margin-top:22px; padding-top:11px; border-top:1px solid var(--bone-dark);
+    font-family:var(--mono); font-size:7pt; letter-spacing:0.6px;
+    color:var(--walnut-light); text-align:center;
+  }
+  strong { font-weight:700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <div>
+      <div class="brand">RevFactor</div>
+      <h1>Content QA Request</h1>
+    </div>
+    <div class="meta">
+      <div><b>For</b> &nbsp;Faulen</div>
+      <div><b>From</b> &nbsp;Jlo</div>
+      <div><b>Date</b> &nbsp;7 August 2026</div>
+      <div><b>To review</b> &nbsp;3 articles</div>
+    </div>
+  </div>
+
+  <div class="intro">
+    <p>Hi Faulen,</p>
+    <p>Three RevFactor articles are ready for your review. Everything opens in a browser, and
+    there is nothing to install or set up.</p>
+  </div>
+
+  <div class="reassure">
+    These are <strong>staging links</strong>, which means the pages are not public yet and
+    nothing you click can affect the live site. <strong>Nothing ships until you sign off</strong>,
+    so take the time you need. Early next week keeps us on schedule.
+  </div>
+
+  <h2>The three pages</h2>
+  <p class="sub">Click each button to open the page. The full address is printed underneath in case you need it.</p>
+
+  <div class="card">
+    <div class="num">Page 1 &nbsp;·&nbsp; the big one</div>
+    <h3>Best Airbnb &amp; STR Revenue Management Companies and Tools (2026)</h3>
+    <div class="linkline">
+      <a href="https://revfactor-kavbbhe4w-federico-zimermans-projects.vercel.app/blog/best-str-revenue-management-companies-2026/">Open page 1</a>
+      <p class="url">revfactor-kavbbhe4w-federico-zimermans-projects.vercel.app/blog/best-str-revenue-management-companies-2026/</p>
+    </div>
+    <p>This is our most important page and it is a rebuild of one we already had. Two older
+    articles were combined into this single one, so the place to look hardest is where they
+    join. That is where a combined article usually starts to repeat itself or contradict
+    itself.</p>
+    <p>The article ranks six companies. Three of them do the work for you, and three are
+    software you run yourself. Further down there is a separate section for companies that
+    show up when people search for this but that do not actually do revenue management.</p>
+    <div class="flag"><strong>Keeping those two groups clearly separate is the whole point of
+    the article.</strong> If anywhere in the writing it gets blurry which group a company
+    belongs to, please flag it.</div>
+  </div>
+
+  <div class="card">
+    <div class="num">Page 2 &nbsp;·&nbsp; needs your judgement</div>
+    <h3>Best Airbnb Property Managers With Dynamic Pricing (2026)</h3>
+    <div class="linkline">
+      <a href="https://revfactor-kavbbhe4w-federico-zimermans-projects.vercel.app/blog/best-airbnb-property-managers-with-dynamic-pricing-2026/">Open page 2</a>
+      <p class="url">revfactor-kavbbhe4w-federico-zimermans-projects.vercel.app/blog/best-airbnb-property-managers-with-dynamic-pricing-2026/</p>
+    </div>
+    <p>Blackbird Hospitality is now listed at number one on this page. Blackbird is Fede's own
+    company. The page says so openly and scores it against the same criteria as every other
+    company on the list.</p>
+    <div class="flag">Please read that disclosure the way a stranger would, and tell us
+    honestly whether it reads as upfront or as something we are slipping past people. It is a
+    judgement call, and we would rather have yours than ours.</div>
+  </div>
+
+  <div class="card">
+    <div class="num">Page 3 &nbsp;·&nbsp; brand new</div>
+    <h3>Is a Pricing Tool Enough? How to Choose an Airbnb Revenue Management Solution</h3>
+    <div class="linkline">
+      <a href="https://revfactor-git-content-best-a-1b2275-federico-zimermans-projects.vercel.app/blog/is-a-pricing-tool-enough-airbnb-revenue-management/">Open page 3</a>
+      <p class="url">revfactor-git-content-best-a-1b2275-federico-zimermans-projects.vercel.app/blog/is-a-pricing-tool-enough-airbnb-revenue-management/</p>
+    </div>
+    <p>A new article for people trying to work out whether they need an actual person or just
+    software.</p>
+    <div class="flag">This page links across to page 1, and <strong>that one link will not
+    work yet</strong>. That is expected, not a bug. It starts working once both pages go live,
+    so no need to report it.</div>
+  </div>
+
+  <h2>What we would like you to check</h2>
+  <p class="sub">No technical knowledge needed. All of this is reading the pages the way a customer would.</p>
+
+  <ul class="checks">
+    <li><strong>Is anything factually wrong?</strong> Especially a company name, a price, or a
+    claim about what a company actually does.</li>
+    <li><strong>Does it read like a person wrote it?</strong> Flag anything stiff, repetitive
+    or robotic.</li>
+    <li><strong>Do the source links work, and do they say what we claim they say?</strong>
+    Click a fair few. A link that opens is not the same as a link that backs up the sentence
+    it is attached to.</li>
+    <li><strong>Does it look as good as our best articles?</strong> Charts, images and tables
+    should be spread throughout, not a wall of text.</li>
+    <li><strong>No names, anywhere.</strong> Never a client, owner or property name. Results
+    are described by market and property type only, for example "a Gatlinburg cabin".</li>
+    <li><strong>Anything that makes you wince.</strong> If a claim feels too strong or a
+    comparison feels unfair, say so, even if you cannot say exactly why.</li>
+  </ul>
+
+  <h2>One task that specifically needs you</h2>
+  <p class="sub">This one genuinely needs a human with a browser, which is why it is yours rather than ours.</p>
+
+  <p>Five review scores appear on <strong>page 1</strong> inside a box meant to build trust.
+  Each needs someone to open the review site and confirm it, because we will not publish a
+  number we have not seen with our own eyes.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:22%">Company</th><th style="width:42%">What we currently claim</th><th style="width:36%">Where to check</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>PriceLabs</td><td class="n">4.9 out of 5, from 250 reviews</td><td class="src">Capterra</td></tr>
+      <tr><td>Wheelhouse</td><td class="n">4.8 from 162 reviews</td><td class="src">Capterra</td></tr>
+      <tr><td>Wheelhouse</td><td class="n">4.9 from 88 reviews</td><td class="src">G2</td></tr>
+      <tr><td>Beyond</td><td class="n">4.7 from 150 reviews</td><td class="src">G2</td></tr>
+      <tr><td>AirDNA</td><td class="n">4.0 from 942 reviews</td><td class="src">Trustpilot</td></tr>
+    </tbody>
+  </table>
+
+  <p>Just tell us the number you see and the date you checked.</p>
+  <div class="flag"><strong>If a review count does not match, do not worry about it.</strong>
+  We will simply drop the counts and keep the scores. A wrong number in a trust box costs us
+  far more than not having the number at all.</div>
+
+  <h2>How to send it back</h2>
+  <p class="sub">Whatever is easiest for you.</p>
+  <p>A list in a message, comments in a document, or screenshots all work equally well. The
+  page name and a quick description of what is wrong is plenty. I will turn fixes around the
+  same day.</p>
+
+  <div class="signoff">
+    <p>Thanks for taking this on.</p>
+    <div class="name">Jlo</div>
+  </div>
+
+  <div class="credit">RevFactor &nbsp;·&nbsp; Content QA &nbsp;·&nbsp; 7 August 2026</div>
+
+</div>
+</body>
+</html>
