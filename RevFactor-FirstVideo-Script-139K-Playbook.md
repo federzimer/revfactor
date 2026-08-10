@@ -24,6 +24,20 @@
 
 ---
 
+## Fede shot list (record these, in order, one sitting, ~20 min)
+This is the only new footage needed. Everything else (the tactic explanations, B-roll) comes from existing brain clips, and Jlo builds the graphics. Fede records these talking-head segments straight to camera. He can reword to his own voice, but keep the airline framing and the anonymization.
+
+1. **Cold open hook** (the empty-seat line + the $139K number). ~15 sec.
+2. **The promise** (10 years in airlines, "the three things we did, you can copy all of it"). ~30 sec.
+3. **The setup** (7 properties, different markets, the underpriced/overpriced pattern). ~45 sec.
+4. **Transition into each of the 3 parts** (one short line each: minimum-stay, the two-cycle climb, pacing). The deep explanation of each tactic can be an existing clip intercut, so Fede only needs the framing line. ~20 sec each.
+5. **The results reveal** ("here's what those three moves did, on the books, ahead of last year… cabin up forty-seven thousand… seven properties, a hundred and thirty-nine thousand more"). ~45 sec.
+6. **CTA** ("if you want this done for you, that's what we do at RevFactor, link's in the description"). ~15 sec.
+
+Total on-camera time is roughly 3 to 4 minutes of usable footage. The full lines are in the script below.
+
+---
+
 ## The script
 
 ### 0:00 to 0:15 · Cold open (hook)
