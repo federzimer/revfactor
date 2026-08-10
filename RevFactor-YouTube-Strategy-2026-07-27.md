@@ -32,7 +32,7 @@ The brain has **144 transcribed clips**, and they map onto every cited format. T
 
 **Ready-now Shorts, each from a single existing clip:** "Airbnb tells you what your comps charge (free hack)"; "Your minimum-stay setting is quietly losing you money"; "Fix orphan gaps with this cancellation-policy trick"; "Price like a pro: the momentum concept most hosts miss." We have the content for all of it. The work is production and editing, not sourcing.
 
-## ⭐ FIRST VIDEO, the flagship: our answer to "Add $130K to your revenue"
+## ⭐ FIRST VIDEO, the flagship (Tier 1, Fede films the narration spine): our answer to "Add $130K to your revenue"
 **Build this one first.** It hits the exact format AI cites most (a big number, "copy this", and the tactics), and we have the documented data behind it. Across our seven published case-study properties, the on-the-books summer lift totals **$139,580**, which clears the $130K bar, and every figure is backed by month-by-month data.
 
 **🔴 Anonymize in scripting, titles, and descriptions.** Show results by market and property type only ("a Gatlinburg cabin"), no property nicknames or owner names. *Exception: if Fede chooses to name a client on camera, that's his call.*
@@ -52,7 +52,7 @@ The brain has **144 transcribed clips**, and they map onto every cited format. T
 - **First video (portfolio hero):** "How We Added $139K to 7 Airbnbs in One Summer (The Exact Playbook)." This mirrors the #1 cited video ("Add $130K, copy what I did," 27 citations) most directly, so it is the one to make first.
 - **Follow-up (single-property hero):** "How We Added $47,459 to One Gatlinburg Cabin in a Single Summer." Cleaner, one story, biggest single number. Good as the second video or a Shorts teaser cut from the flagship.
 
-The "how" is the same brain tactics on film: minimum-stay flexibility to beat the market floor, the two-cycle ADR climb, and pacing discipline. **Frame the number honestly as on-the-books and ahead-of-last-year** (calendars are still booking), not banked profit. Full production script for this video lives in a separate doc (linked at top).
+The "how" is the same brain tactics on film: minimum-stay flexibility to beat the market floor, the two-cycle ADR climb, and pacing discipline. **Frame the number honestly as on-the-books and ahead-of-last-year** (calendars are still booking), not banked profit. **Footage:** Fede films the narration spine (a short talking-head session, roughly 3 to 4 minutes of him talking). The tactic explanations and B-roll come from existing brain clips, and Jlo builds the data graphics. Full production script and Fede's shot list live in a separate doc (linked at top).
 
 ## Two-channel model: each channel has DISTINCT content (we do NOT mirror videos)
 Per the 7/31 pivot, we run **two channels with different jobs**, not one. Fede's personal brand carries the human authority (what AI and buyers trust). The RevFactor channel accrues the brand-entity citations. **The key rule: each channel has its own primary content. We do not double-post the same video to both, because that splits watch time, comments, and citation authority across two URLs.**
@@ -74,9 +74,19 @@ Per the 7/31 pivot, we run **two channels with different jobs**, not one. Fede's
 - **Fede's personal channel:** already exists (@federicozimerman). Align the About and banner to reference RevFactor so the two are connected.
 - Every video description (both channels): a one or two sentence answer to the video's question in the first line (AI reads descriptions), a link to the matching revfactor.io blog, and the discovery-call link.
 
+## Footage source: which videos need Fede, which Jlo builds solo
+Not every video is worth Fede's filming time. We split content into two tiers so his effort goes only where it matters.
+
+| Tier | Who shoots | Which videos | Why |
+|---|---|---|---|
+| **Tier 1: new footage (Fede on camera)** | Fede films a short talking-head session | The **flagship case-study videos** (the $139K first video) and the **podcast** | These are the authority pieces. His face on camera is the trust and E-E-A-T signal. The flagship's footage is reused for the single-property follow-up cut, so it's one shoot, not two |
+| **Tier 2: existing clips only (Jlo solo, no Fede time)** | Jlo assembles from the archive | All **Track A Shorts**, all **Track B compilation guides**, all **podcast clips** | Built entirely from the 144-clip brain archive plus on-screen graphics and voiceover. This is the volume engine and it runs without Fede |
+
+**Rule of thumb:** if a video carries the brand's authority (a case-study result, a flagship guide Fede fronts), Fede films it. If it's volume or a repurpose of something he already said, Jlo builds it from existing clips. When in doubt, default to existing clips and save Fede's time for the pieces that earn citations and trust.
+
 ## Content plan: two tracks off the SAME source material
 
-### Track A: Shorts (fast, high-volume): repurpose Fede's existing vertical content
+### Track A (Tier 2, existing clips): Shorts (fast, high-volume), repurpose Fede's existing vertical content
 Fede's brain has **31 STR-tactic reels/TikToks** already transcribed and ready. Vertical format drops straight into YouTube Shorts. Highest-value ones to ship first (titles rewritten to match the cited-Shorts pattern):
 - "Most hosts pay $20-50/mo for comp data. Airbnb gives it to you free." becomes **"The Free Airbnb Comp Tool Most Hosts Miss"**
 - Minimum-stay strategy reel becomes **"The Minimum-Stay Setting That's Costing You Bookings"**
@@ -86,7 +96,7 @@ Fede's brain has **31 STR-tactic reels/TikToks** already transcribed and ready. 
 
 Batch-produce 2-4 Shorts/week from the 31-video backlog. Title each to a **tracked Peec prompt** ("how to increase Airbnb revenue", "how to price my Airbnb").
 
-### Track B: Long-form guides (citation magnets): the number-led format AI cites most
+### Track B (Tier 2, existing clips): Long-form guides (citation magnets), the number-led format AI cites most
 **No new filming from Fede yet. Build these entirely from footage we already have.** The brain has 144 transcribed reels/TikToks. Each long-form guide is an *edit or compilation* of existing clips grouped by theme, plus on-screen text, B-roll, and a voiceover we can assemble, matching the winning titles:
 1. **"10 Ways to Charge More on Airbnb in 2026":** stitch 10 of Fede's existing tactic reels into one number-led guide. It mirrors the 22-27 citation format, and it's the fastest to assemble because the clips already exist.
 2. **"How I Add [X] to Airbnb Revenue Without Lowering Rates"** (mirrors the #1 cited "add $130K" video): compile the revenue and pricing reels, and use a real portfolio number from the case-study data. No new claim from Fede needed.
@@ -95,7 +105,7 @@ Batch-produce 2-4 Shorts/week from the 31-video backlog. Title each to a **track
 
 Each long-form doubles as the on-site embed for the matching blog (keeps users on-page longer, which is a ranking signal) and gets chaptered (chapters are extractable passages AI can cite). **Only once these existing-footage cuts prove out do we ask Fede to film anything net-new.** By then we'll know which titles and topics earn citations, so his filming time goes to proven winners, not guesses.
 
-### Track C: Podcast (net-new long-form; home = Fede's personal channel)
+### Track C (Tier 1, new footage Fede already records): Podcast (net-new long-form; home = Fede's personal channel)
 Fede now produces a podcast (EP.01 recorded, 36 min). This is a **new content source the earlier plan didn't account for**, and it changes the supply so Track A no longer depends only on a finite reel backlog. **Every episode gives us 5-10 Shorts plus one chaptered full upload.**
 - **Home:** the **full episode** lives on Fede's personal channel (recorded and branded there). **Clips are cut and posted natively to RevFactor** (branded). We do not re-upload the full episode to RevFactor.
 - **EP.01 gives us 7 Shorts already mapped** (airline-pricing hooks: "your Airbnb is a plane with an empty seat", "you need the movie, not the picture", the $7K-vs-$4.5K first-class refund story). Cut these now, **publish after Fede finalizes his EP.01 re-cut** (new intro, hook, and end CTA).
