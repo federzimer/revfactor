@@ -68,7 +68,7 @@
 
 > "The cabin, up forty-seven thousand. The lake house, twenty-three. And it keeps going. Seven properties, a hundred and thirty-nine thousand dollars more than the year before. And the calendars were still booking when we pulled these numbers. Nothing here required new furniture or a new listing. It is the same houses, priced like an airline instead of a guess."
 
-### 9:30 to end — CTA
+### 9:30 to end · CTA
 > "If you want this done on your properties instead of doing it yourself every week, that is what we do at RevFactor. Link is in the description. Book a strategy call and we will look at your calendar with you."
 
 **On screen:** "RevFactor · revfactor.io · Book a strategy call."
