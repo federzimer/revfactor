@@ -26,34 +26,34 @@
 
 ## The 10 tactics (each = one existing clip + a text card)
 
-**#10 — Use Airbnb's free comp data.** Most hosts pay $20 to $50 a month for comp tools. Airbnb shows you what similar listings charge for free, right in the app.
+**#10: Use Airbnb's free comp data.** Most hosts pay $20 to $50 a month for comp tools. Airbnb shows you what similar listings charge for free, right in the app.
 - *Source clip:* the comp-data hack reel. *Card:* "Airbnb tells you your comps. Free."
 
-**#9 — Flex your minimum-stay.** A rigid three-night minimum turns every gap into an unsellable night. Shorten the minimum the moment a gap appears.
+**#9: Flex your minimum-stay.** A rigid three-night minimum turns every gap into an unsellable night. Shorten the minimum the moment a gap appears.
 - *Source clip:* the minimum-stay reel. *Card:* "Rigid minimum = empty nights."
 
-**#8 — Fix orphan gaps.** The one and two-night holes between bookings are pure lost revenue. Price them down or open the minimum to fill them.
+**#8: Fix orphan gaps.** The one and two-night holes between bookings are pure lost revenue. Price them down or open the minimum to fill them.
 - *Source clip:* the orphan-gap / gap-night clip. *Card:* "Fill the gaps others leave empty."
 
-**#7 — Climb your rate in two cycles.** Do not jump to your top price and wait. Start under market to build pace, then raise into the demand you created.
+**#7: Climb your rate in two cycles.** Do not jump to your top price and wait. Start under market to build pace, then raise into the demand you created.
 - *Source clip:* the ADR / pricing reel. *Card:* "Build pace, then raise the rate."
 
-**#6 — Pace against last year, not last year's price.** Track how fast you are booking versus the same week last year and adjust weekly.
+**#6: Pace against last year, not last year's price.** Track how fast you are booking versus the same week last year and adjust weekly.
 - *Source clip:* the pacing / momentum clip. *Card:* "The photo vs the movie."
 
-**#5 — Use the seasonal cancellation policy.** A firmer policy in peak season protects your calendar and your rate.
+**#5: Use the seasonal cancellation policy.** A firmer policy in peak season protects your calendar and your rate.
 - *Source clip:* the cancellation-policy reel. *Card:* "Protect peak dates with policy."
 
-**#4 — Charge for the amenities that actually convert.** The right design and amenity details let you hold a premium. Not every upgrade pays, the guest-facing ones do.
+**#4: Charge for the amenities that actually convert.** The right design and amenity details let you hold a premium. Not every upgrade pays, the guest-facing ones do.
 - *Source clip:* the amenity / design ROI clip. *Card:* "Charge for what guests actually value."
 
-**#3 — Earn reviews faster, then price up.** Review velocity moves you up the rankings, and ranking lets you charge more. Build the review flywheel first.
+**#3: Earn reviews faster, then price up.** Review velocity moves you up the rankings, and ranking lets you charge more. Build the review flywheel first.
 - *Source clip:* the review / ranking clip. *Card:* "Reviews first, premium second."
 
-**#2 — Discount length-of-stay the smart way.** Weekly and monthly discounts fill shoulder season without gutting your nightly rate. Set them by demand, not by default.
+**#2: Discount length-of-stay the smart way.** Weekly and monthly discounts fill shoulder season without gutting your nightly rate. Set them by demand, not by default.
 - *Source clip:* the length-of-stay / discount clip. *Card:* "Discount the calendar, not the night."
 
-**#1 — Think like a revenue manager, not a host.** Every night is perishable inventory, like an airline seat. Price to demand and never let a night take off empty.
+**#1: Think like a revenue manager, not a host.** Every night is perishable inventory, like an airline seat. Price to demand and never let a night take off empty.
 - *Source clip:* the "price like a professional revenue manager" / airline clip. *Card:* "Your night is a plane seat."
 
 ---
