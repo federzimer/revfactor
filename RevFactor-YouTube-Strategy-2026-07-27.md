@@ -54,17 +54,19 @@ Two cuts, both from footage + data we already have:
 
 The "how" is the same brain tactics on film: minimum-stay flexibility to beat the market floor, the two-cycle ADR climb, and pacing discipline. **Frame the number honestly as on-the-books / ahead-of-last-year** (calendars still booking), not banked profit.
 
-## Two-channel model (this is split across BOTH of Fede's channels)
-Per the 7/31 pivot, we run **two channels with different jobs**, not one. This lets Fede's personal brand carry the human authority (what AI and buyers trust) while the RevFactor channel accrues the brand-entity citations.
+## Two-channel model — each channel has DISTINCT content (we do NOT mirror videos)
+Per the 7/31 pivot, we run **two channels with different jobs**, not one. Fede's personal brand carries the human authority (what AI and buyers trust); the RevFactor channel accrues the brand-entity citations. **The key rule: each channel has its own primary content — we do not double-post the same video to both, because that splits watch time, comments, and citation authority across two URLs.**
 
 | | **Fede's personal — @federicozimerman** | **RevFactor company — @RevFactor** |
 |---|---|---|
 | **Job** | The human + authority/E-E-A-T; the face buyers and AI trust | The brand entity citations attach to |
-| **Primary content** | **The podcast** (recorded in his Studio), talking-head takes, TikTok/IG cross-posts | Number-led compilation guides (Track B), the $139K case-study flagship videos |
-| **Shorts** | Best clips post here **and** cross-post to RevFactor | Best clips post here **and** cross-post from personal |
+| **Owns (primary)** | The **podcast** (full episodes) + his native vertical Shorts (as he already makes them) | Number-led compilation guides (Track B) + case-study videos + Shorts **cut from those** |
 | **Why** | Personal brand is already warm (144 clips of proof); people follow people | Brand handle @RevFactor so citations name the company; links to revfactor.io |
 
-**Cross-posting rule:** Shorts and podcast clips go to **both** channels (native upload to each, not a share, so each accrues its own watch time + citations). Long-form compilation guides live on **RevFactor**. The full podcast lives on **personal** with clips cross-posted to RevFactor.
+**Cross-posting rule (deliberately limited, to avoid repetitive duplicates):**
+- **Long-form (podcast episodes, compilation guides, case-study videos): ONE home each — never re-uploaded to the other channel.** The full podcast lives on personal; the guides + case-study videos live on RevFactor. If the other channel should point at it, use a Community post or a short clip, not a duplicate full upload.
+- **Shorts: each channel produces its own.** Only the occasional standout Short crosses over, and when it does it gets a **different hook / title / thumbnail** and is **staggered a week or more** — never a carbon copy posted the same day. (Low risk: the two audiences barely overlap yet, and Shorts are feed-distributed, not subscriber-fed.)
+- **Podcast clips** are cut from the episode and posted natively to **RevFactor** (branded), with Fede free to post his own cuts on personal — different edits, not the same file.
 
 ## Channel setup
 - **🔴 We don't name clients in our video framing** — titles, thumbnails, and descriptions show results by market + property type only (e.g. "a Gatlinburg cabin"), no property nicknames, addresses, or owner names. *Exception: if Fede chooses to mention a client on camera, that's his call.*
@@ -94,7 +96,7 @@ Each long-form doubles as the on-site embed for the matching blog (keeps users o
 
 ### Track C — Podcast (net-new long-form; home = Fede's personal channel)
 Fede now produces a podcast (EP.01 recorded, 36 min). This is a **new content source the earlier plan didn't account for** — it changes the supply so Track A no longer depends only on a finite reel backlog. **Every episode = 5–10 Shorts + one chaptered full upload.**
-- **Home:** Fede's personal channel (that's where it's recorded/branded); full episode there, **clips cross-posted to RevFactor**.
+- **Home:** the **full episode** lives on Fede's personal channel (recorded/branded there). **Clips are cut and posted natively to RevFactor** (branded) — we do not re-upload the full episode to RevFactor.
 - **EP.01 → 7 Shorts already mapped** (airline-pricing hooks: "your Airbnb is a plane with an empty seat," "you need the movie, not the picture," the $7K-vs-$4.5K first-class refund story). These are cut now, **published after Fede finalizes his EP.01 re-cut** (new intro + hook + end CTA).
 - **Honest role:** the podcast's job is **(1) Shorts fuel, (2) brand/authority/E-E-A-T, (3) chaptered episodes that can earn citations on specific Q&A moments.** It does *not* replace Track B — the number-led guides stay the primary citation magnets. Fede's airline-revenue-management framing is distinctive and quotable, which is where the citation upside sits.
 
