@@ -54,11 +54,23 @@ Two cuts, both from footage + data we already have:
 
 The "how" is the same brain tactics on film: minimum-stay flexibility to beat the market floor, the two-cycle ADR climb, and pacing discipline. **Frame the number honestly as on-the-books / ahead-of-last-year** (calendars still booking), not banked profit.
 
+## Two-channel model (this is split across BOTH of Fede's channels)
+Per the 7/31 pivot, we run **two channels with different jobs**, not one. This lets Fede's personal brand carry the human authority (what AI and buyers trust) while the RevFactor channel accrues the brand-entity citations.
+
+| | **Fede's personal — @federicozimerman** | **RevFactor company — @RevFactor** |
+|---|---|---|
+| **Job** | The human + authority/E-E-A-T; the face buyers and AI trust | The brand entity citations attach to |
+| **Primary content** | **The podcast** (recorded in his Studio), talking-head takes, TikTok/IG cross-posts | Number-led compilation guides (Track B), the $139K case-study flagship videos |
+| **Shorts** | Best clips post here **and** cross-post to RevFactor | Best clips post here **and** cross-post from personal |
+| **Why** | Personal brand is already warm (144 clips of proof); people follow people | Brand handle @RevFactor so citations name the company; links to revfactor.io |
+
+**Cross-posting rule:** Shorts and podcast clips go to **both** channels (native upload to each, not a share, so each accrues its own watch time + citations). Long-form compilation guides live on **RevFactor**. The full podcast lives on **personal** with clips cross-posted to RevFactor.
+
 ## Channel setup
 - **🔴 We don't name clients in our video framing** — titles, thumbnails, and descriptions show results by market + property type only (e.g. "a Gatlinburg cabin"), no property nicknames, addresses, or owner names. *Exception: if Fede chooses to mention a client on camera, that's his call.*
-- **Create a RevFactor *company* channel** (not Fede's personal) — brand handle @RevFactor, so citations attach to the brand entity, and a Reddit-style handle-as-mention benefit applies.
-- Channel art + About using the canonical description ("done-for-you short-term rental revenue management"); link revfactor.io + the discovery-call CTA.
-- Every video description: 1–2 sentence answer to the video's question in the first line (AI reads descriptions), a link to the matching revfactor.io blog, and the discovery-call link.
+- **RevFactor company channel:** brand handle @RevFactor, channel art + About using the canonical description ("done-for-you short-term rental revenue management"); link revfactor.io + the discovery-call CTA.
+- **Fede's personal channel:** already exists (@federicozimerman); align the About/banner to reference RevFactor so the two are connected.
+- Every video description (both channels): 1–2 sentence answer to the video's question in the first line (AI reads descriptions), a link to the matching revfactor.io blog, and the discovery-call link.
 
 ## Content plan — two tracks off the SAME source material
 
@@ -80,12 +92,30 @@ Fede's brain has **31 STR-tactic reels/TikToks** already transcribed and ready �
 
 Each long-form doubles as the on-site embed for the matching blog (keeps users on-page longer = ranking signal) and gets chaptered (chapters = extractable passages AI can cite). **Only once these existing-footage cuts prove out do we ask Fede to film anything net-new** — and by then we'll know exactly which titles/topics earn citations, so his filming time is spent on proven winners, not guesses.
 
+### Track C — Podcast (net-new long-form; home = Fede's personal channel)
+Fede now produces a podcast (EP.01 recorded, 36 min). This is a **new content source the earlier plan didn't account for** — it changes the supply so Track A no longer depends only on a finite reel backlog. **Every episode = 5–10 Shorts + one chaptered full upload.**
+- **Home:** Fede's personal channel (that's where it's recorded/branded); full episode there, **clips cross-posted to RevFactor**.
+- **EP.01 → 7 Shorts already mapped** (airline-pricing hooks: "your Airbnb is a plane with an empty seat," "you need the movie, not the picture," the $7K-vs-$4.5K first-class refund story). These are cut now, **published after Fede finalizes his EP.01 re-cut** (new intro + hook + end CTA).
+- **Honest role:** the podcast's job is **(1) Shorts fuel, (2) brand/authority/E-E-A-T, (3) chaptered episodes that can earn citations on specific Q&A moments.** It does *not* replace Track B — the number-led guides stay the primary citation magnets. Fede's airline-revenue-management framing is distinctive and quotable, which is where the citation upside sits.
+
+## Weekly cadence (so Jlo knows the target each week)
+**Start small, prove the pipeline, then ramp.** Everything below comes from existing footage — no dependency on Fede filming net-new (except the podcast, which he's already recording).
+
+| Phase | Weeks | Shorts / week | Long-form | Podcast | Notes |
+|---|---|--:|---|---|---|
+| **Phase 1 — Start small** | Now → wk 4 | **2–4** | 1 total (the flagship $139K/$47K cut) | EP.01 clips staged | Build the habit + the tracking sheet rhythm; learn what lands |
+| **Phase 2 — Ramp** | wk 5–8 | **4–5** | 1 every 2 wks | EP.01 live + clips | Add Track B compilation guides once Phase 1 Shorts prove out |
+| **Phase 3 — Scale** | wk 9–12 | **5–7** | 1 / wk | 1 episode + its clips | Re-pull Peec; double down on the titles/topics actually earning citations |
+
+**This week's concrete target for Jlo (Phase 1):** 2–4 Shorts from the 31-reel backlog (retitled to tracked Peec prompts) + start assembling the flagship "$47,459 Gatlinburg cabin" cut. Cut (don't publish) the 7 EP.01 Shorts. Log every item in the tracking sheet.
+
 ## The repurpose pipeline (so this is sustainable, not a one-off)
 Fede already produces daily TikTok/IG. The brain transcribes it. The pipeline:
 **Fede's TikTok/IG → brain (auto-transcribe) → we pick the STR-tactic ones → post as YouTube Shorts (retitled) + batch the best into long-form guides.**
 This depends on the brain-scan staying healthy. It had been silently broken since Jun 23 (TikTok downloads failing, no alerting) — now fixed (impersonation dep installed) and being migrated to an always-on host with failure alerting so it can't silently die again. Inventory is current as of today: 136 IG transcripts (via Apify) + TikToks, no new posts pending.
 
 ## Targets (tie to the 90-day plan)
-- Month 1: channel live, **8–12 Shorts** (from the backlog) + **1 long-form guide**.
-- Month 2–3: 2–4 Shorts/week + 1 long-form/2 weeks; re-pull Peec — goal: **revfactor.io + youtube.com/@RevFactor both appearing** in the cited set for the revenue/pricing prompts.
+- Month 1 (Phase 1): both channels set up, **8–12 Shorts total** (2–4/wk from the backlog) + **the flagship case-study video** + EP.01's 7 Shorts cut and staged.
+- Month 2–3 (Phase 2–3): ramp to 4–7 Shorts/wk + 1 long-form guide/1–2 weeks + 1 podcast episode/its clips; re-pull Peec — goal: **revfactor.io + youtube.com/@RevFactor both appearing** in the cited set for the revenue/pricing prompts.
 - Success metric: RevFactor's own YouTube URLs start showing up in the Peec cited-URLs report (currently zero; the 25 cited URLs are all competitors/creators).
+- **Everything tracked in the RevFactor YouTube Tracker sheet** (linked at top) — Jlo logs each video's status, channel(s), source clip, title, tracked prompt, publish date, and Peec-cited check.
