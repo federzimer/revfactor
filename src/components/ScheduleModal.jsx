@@ -3,14 +3,15 @@ import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { X } from 'lucide-react';
 import QualifierGate from './QualifierGate.jsx';
+import { GHL_BOOKING, withTrackingParams, loadGhlEmbedScript } from '../data/ghl.ts';
 
 /* ─── Schedule Modal ───
    Two-stage modal:
      1. QualifierGate — 2-question pre-booking qualifier.
-        Q1 No / Q2 PM paths capture email + close (server saves + notifies).
-        Q1 Yes + Q2 Self-host → renders the Cal.com embed below.
-     2. Cal.com iframe — auto-sizes to the embed's posted iframeHeight,
-        max-h:92dvh safety cap. */
+        Q1 No / Q2 PM paths embed a GHL form (leads land in the CRM).
+        Q1 Yes + Q2 Self-host → renders the GHL booking widget below.
+     2. GHL booking iframe — auto-resized by form_embed.js (iframe-resizer),
+        max-h:92dvh safety cap on the wrapper. */
 export default function ScheduleModal({ onClose }) {
   const isClosingRef = useRef(false);
   const overlayRef = useRef(null);
@@ -18,44 +19,19 @@ export default function ScheduleModal({ onClose }) {
   // Gate stays mounted until visitor self-identifies as a self-host.
   // null = still qualifying; { hasProperty: true, isPM: false } = unlocked.
   const [qualified, setQualified] = useState(null);
-  // Default to 900px so the modal opens large enough to fit the calendar
-  // (~720-800px content) even before the scheduler posts an iframeHeight
-  // message. Adjusts down via postMessage when the scheduler reports its
-  // actual content height per step.
-  const [iframeContentHeight, setIframeContentHeight] = useState(900);
 
   // Forward UTMs + Google Ads ValueTrack params + the DTR ?msg= variant key
-  // to the scheduler iframe so the booking record carries campaign metadata
-  // into Fede's CRM. Without this, conversions still attribute properly (the
-  // parent BaseLayout postMessage listener fires the $1500 conversion from
-  // revfactor.io origin which naturally carries gclid), but Fede's CRM
-  // booking row would lose its source attribution.
-  const scheduleUrl = (() => {
-    const base = 'https://schedule.revfactor.io/embed';
-    if (typeof window === 'undefined') return base;
-    const parentParams = new URLSearchParams(window.location.search);
-    const out = new URLSearchParams();
-    for (const [k, v] of parentParams) {
-      if (k.startsWith('utm_') || k.startsWith('gad_') || k === 'gclid' || k === 'msg') {
-        out.set(k, v);
-      }
-    }
-    const qs = out.toString();
-    return qs ? `${base}?${qs}` : base;
-  })();
+  // to the booking widget so the GHL booking record carries campaign
+  // metadata. Conversions still attribute either way (BaseLayout's
+  // postMessage listener fires the $1500 conversion from revfactor.io
+  // origin, which naturally carries gclid), but the CRM row would lose its
+  // source attribution without this.
+  const scheduleUrl = withTrackingParams(GHL_BOOKING);
 
-  // Listen for postMessage from the scheduler iframe to auto-resize.
+  // form_embed.js resizes the GHL iframe from the parent side.
   useEffect(() => {
-    const onMsg = (e) => {
-      if (!e.data || typeof e.data !== 'object') return;
-      const h = e.data.iframeHeight ?? e.data.height
-              ?? e.data.data?.height ?? e.data.data?.iframeHeight;
-      const n = Number(h);
-      if (Number.isFinite(n) && n > 400 && n < 1600) setIframeContentHeight(n);
-    };
-    window.addEventListener('message', onMsg);
-    return () => window.removeEventListener('message', onMsg);
-  }, []);
+    if (qualified) loadGhlEmbedScript();
+  }, [qualified]);
 
   // Entrance animation + scroll lock on mount
   useEffect(() => {
@@ -118,11 +94,6 @@ export default function ScheduleModal({ onClose }) {
     if (e.target === e.currentTarget) handleClose();
   };
 
-  // Visible iframe area = posted height minus the 48px we clip from top
-  // (embed page wraps card in py-12 = 48px). Min 480 so first paint isn't
-  // squished while iframe is loading.
-  const visibleIframeHeight = Math.max(480, iframeContentHeight - 48);
-
   return createPortal(
     <div
       ref={overlayRef}
@@ -170,23 +141,29 @@ export default function ScheduleModal({ onClose }) {
           </button>
 
           {qualified ? (
-            // Self-host path → Cal.com embed
+            // Self-host path → GHL booking widget. form_embed.js sets the
+            // iframe height to the widget's content; the wrapper scrolls
+            // only if the widget outgrows the viewport.
             <div
-              className="sm-iframe-wrap min-h-0 px-4 pb-4 overflow-hidden"
+              className="sm-iframe-wrap min-h-0 px-4 pb-4"
               style={{
-                height: `min(${Math.max(480, iframeContentHeight)}px, calc(92dvh - 48px))`,
+                maxHeight: 'calc(92dvh - 48px)',
+                minHeight: 480,
+                overflowY: 'auto',
               }}
             >
               <iframe
                 src={scheduleUrl}
+                id="ghl-booking-modal"
                 title="Book a Discovery Call with RevFactor"
                 className="w-full rounded-[12px] border-0 block"
-                style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
+                style={{ minHeight: 480 }}
+                scrolling="no"
                 allow="payment"
               />
             </div>
           ) : (
-            // Pre-booking qualifier — Q1 then Q2 (or email capture on no/PM paths)
+            // Pre-booking qualifier — Q1 then Q2 (or GHL form on no/PM paths)
             <QualifierGate
               onQualified={(data) => setQualified(data)}
               onClose={handleClose}

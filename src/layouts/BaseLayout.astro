@@ -208,21 +208,27 @@ const canonicalUrl = Astro.url.href;
     gtag('config', 'G-1CTGBJ9RLK');
     gtag('config', 'AW-18106897053');
 
-    // Scheduler booking listener — fires Google Ads "Strategy Call Booked
-    // (Parent Attributed)" conversion + GA4 event when the embedded scheduler
-    // (schedule.revfactor.io) or a Cal.com iframe confirms a booking.
-    // Firing from THIS origin (revfactor.io) carries the gclid into the
-    // conversion ping, which the iframe-origin gtag can't do. This is the
-    // single primary action for Smart Bidding (7614208046); the iframe's
-    // own gtag still fires but its actions (7591215586 + 7604128782) are
-    // demoted to observation-only so they don't pollute bidding.
+    // Booking listener — fires Google Ads "Strategy Call Booked (Parent
+    // Attributed)" conversion + GA4 event when the embedded GHL booking
+    // widget (links.revfactor.io) confirms a booking. GHL iframes post
+    // ARRAYS where data[0] is the action; 'msgsndr-booking-complete' is the
+    // booking-confirmed signal. Legacy object-shaped types from the old
+    // schedule.revfactor.io embed are kept for safety (and the Playwright
+    // conversion test simulates one). Firing from THIS origin (revfactor.io)
+    // carries the gclid into the conversion ping, which the iframe-origin
+    // gtag can't do. Single primary action for Smart Bidding (7614208046).
+    // NOTE: the $75 Discovery Lead conversion is NOT here — it fires from
+    // QualifierGate.jsx, which knows the qualifier path (no-property vs PM).
     (function () {
+      var GHL_BOOKING_TYPES = ['msgsndr-booking-complete'];
       var bookedThisSession = false;
       window.addEventListener('message', function (e) {
         if (!e.data || typeof e.data !== 'object') return;
         var d = e.data;
+        var isGhlBooking = Array.isArray(d) && GHL_BOOKING_TYPES.indexOf(d[0]) !== -1;
         var type = d.type || (d.data && d.data.type);
-        var isBooking = type === 'scheduler_booking_confirmed' ||
+        var isBooking = isGhlBooking ||
+                        type === 'scheduler_booking_confirmed' ||
                         type === 'booking_confirmed' ||
                         type === 'bookingSuccessful' ||
                         type === 'bookingSuccessfulV2' ||
@@ -231,6 +237,7 @@ const canonicalUrl = Astro.url.href;
         if (!isBooking) return;
         if (bookedThisSession) return;
         bookedThisSession = true;
+        var bookingSource = isGhlBooking ? 'ghl-booking' : 'scheduler-embed';
 
         gtag('event', 'conversion', {
           send_to: 'AW-18106897053/l1rvCK6w3q4cEJ2lhbpD',
@@ -240,16 +247,16 @@ const canonicalUrl = Astro.url.href;
         gtag('event', 'strategy_call_booked', {
           value: 1500,
           currency: 'USD',
-          source: 'scheduler_embed'
+          source: bookingSource
         });
         window.posthog?.capture('strategy_call_booked', {
           value: 1500,
           currency: 'USD',
-          source: 'scheduler_embed'
+          source: bookingSource
         });
         window.rfTrack('booking-confirmed', {
           page: location.pathname,
-          source: 'scheduler-embed'
+          source: bookingSource
         });
       });
     })();

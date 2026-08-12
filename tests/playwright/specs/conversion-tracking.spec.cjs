@@ -10,9 +10,6 @@
 
 const { test, expect } = require('@playwright/test');
 
-const RUN_ID = Date.now();
-const testEmail = (tag) => `qa+rftest-${RUN_ID}-conv-${tag}@revfactor.io`;
-
 // Sniff dataLayer for a payload matching predicate; resolve with the first
 // match within `timeoutMs` ms.
 async function waitForDataLayerEvent(page, predicate, timeoutMs = 8000) {
@@ -38,7 +35,7 @@ async function waitForDataLayerEvent(page, predicate, timeoutMs = 8000) {
 test.describe('Conversion tracking — production', () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
-  test('Discovery Lead Captured ($75) fires on no_property submit', async ({ page }) => {
+  test('Discovery Lead Captured ($75) fires on simulated GHL form-submit postMessage', async ({ page }) => {
     await page.goto('/?utm_source=playwright&gclid=PWCONV1', { waitUntil: 'domcontentloaded' });
 
     // Open modal via Hero CTA
@@ -48,8 +45,11 @@ test.describe('Conversion tracking — production', () => {
     await cta.click();
     await expect(page.locator('[data-umami-event="qualifier-step"][data-umami-event-answer="no"]')).toBeVisible({ timeout: 10_000 });
 
-    // Arm the dataLayer listener BEFORE the form submit. The conversion event
-    // fires synchronously alongside the API success.
+    // Reach the GHL form step — QualifierGate's lead listener only mounts here.
+    await page.locator('[data-umami-event="qualifier-step"][data-umami-event-answer="no"]').click();
+    await expect(page.locator('iframe[src*="/widget/form/"]')).toBeVisible({ timeout: 8_000 });
+
+    // Arm the dataLayer listener BEFORE simulating the submit message.
     const conversionPromise = waitForDataLayerEvent(
       page,
       // args is the gtag(...) arguments converted to an object via dataLayer.push;
@@ -63,9 +63,15 @@ test.describe('Conversion tracking — production', () => {
       12_000,
     );
 
-    await page.locator('[data-umami-event="qualifier-step"][data-umami-event-answer="no"]').click();
-    await page.locator('input[type="email"]').fill(testEmail('lead'));
-    await page.getByRole('button', { name: /^keep me posted$/i }).click();
+    // Simulate the GHL form iframe announcing a submission — a real submit
+    // is impossible in CI (cross-origin iframe + would create junk CRM
+    // leads). This is what QualifierGate's message listener catches.
+    await page.evaluate(() => {
+      window.postMessage(
+        ['set-sticky-contacts', '_ud', JSON.stringify({ email: 'qa@revfactor.io' }), 'loc', 'fp'],
+        '*',
+      );
+    });
 
     const fired = await conversionPromise;
     expect(fired, 'AW-18106897053/MT8...$75 conversion event payload').toBeTruthy();
@@ -125,6 +131,31 @@ test.describe('Conversion tracking — production', () => {
 
     const fired = await conversionPromise;
     expect(fired, 'AW-18106897053/l1rv...$1500 strategy-call-booked conversion').toBeTruthy();
+  });
+
+  test('Strategy Call Booked ($1500) fires on simulated GHL booking postMessage', async ({ page }) => {
+    // Fresh page load — BaseLayout's bookedThisSession guard blocks a second
+    // fire within the same page, so this runs independently of the legacy
+    // scheduler_booking_confirmed test above.
+    await page.goto('/?utm_source=playwright&gclid=PWCONV4', { waitUntil: 'domcontentloaded' });
+
+    const conversionPromise = waitForDataLayerEvent(
+      page,
+      (args) =>
+        args && args[0] === 'event' &&
+        args[1] === 'conversion' &&
+        args[2] && args[2].send_to === 'AW-18106897053/l1rvCK6w3q4cEJ2lhbpD' &&
+        args[2].value === 1500,
+      8_000,
+    );
+
+    // GHL booking widgets post ['msgsndr-booking-complete', {...}] on confirm.
+    await page.evaluate(() => {
+      window.postMessage(['msgsndr-booking-complete', { calendarId: 'qa' }], '*');
+    });
+
+    const fired = await conversionPromise;
+    expect(fired, 'AW-18106897053/l1rv...$1500 GHL booking conversion').toBeTruthy();
   });
 
   test('GA4 (G-1CTGBJ9RLK) is configured', async ({ page }) => {

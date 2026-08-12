@@ -1,64 +1,15 @@
-// Discovery Call modal — full E2E QA before production launch.
+// Discovery Call modal — E2E QA of the qualifier → GHL widget pipeline.
 //
-// Covers the launch-blocker pipeline end-to-end:
-//   1. API: /api/discovery-lead accepts both qualifier paths and returns 200
-//   2. UI:  Hero CTA → modal opens → Q1 "Not yet"  → email → submit → "done"
-//   3. UI:  Hero CTA → modal opens → Q1 "Yes" → Q2 "PM company" → email → submit → "done"
-//   4. UI:  Hero CTA → modal opens → Q1 "Yes" → Q2 "Self-host" → Cal.com iframe mounts
+// Covers all three qualifier branches:
+//   1. UI: Hero CTA → modal opens → Q1 "Not yet" → GHL no-listing form mounts
+//   2. UI: Hero CTA → modal opens → Q1 "Yes" → Q2 "PM company" → GHL PM form mounts
+//   3. UI: Hero CTA → modal opens → Q1 "Yes" → Q2 "Self-host" → GHL booking widget mounts
 //
-// Test emails are prefixed `qa+rftest-` so they can be filtered later
-// per the filter-test-bookings rule.
+// Lead capture + booking now live entirely in GoHighLevel (links.revfactor.io);
+// the old /api/discovery-lead endpoint is dormant and no longer exercised here
+// (its API tests were removed with the migration — see git history to revive).
 
 const { test, expect } = require('@playwright/test');
-
-const RUN_ID = Date.now();
-const testEmail = (tag) => `qa+rftest-${RUN_ID}-${tag}@revfactor.io`;
-
-test.describe('Discovery modal — API direct', () => {
-  test('no_property path returns ok', async ({ request, baseURL }) => {
-    const res = await request.post(`${baseURL}/api/discovery-lead`, {
-      data: {
-        email: testEmail('api-noprop'),
-        hasProperty: false,
-        isPM: false,
-        source: 'playwright-api',
-        pageUrl: `${baseURL}/?test=api`,
-      },
-    });
-    expect(res.status(), `body=${await res.text()}`).toBe(200);
-    const body = await res.json();
-    expect(body.ok).toBe(true);
-  });
-
-  test('pm_company path returns ok', async ({ request, baseURL }) => {
-    const res = await request.post(`${baseURL}/api/discovery-lead`, {
-      data: {
-        email: testEmail('api-pm'),
-        hasProperty: true,
-        isPM: true,
-        source: 'playwright-api',
-        pageUrl: `${baseURL}/?test=api`,
-      },
-    });
-    expect(res.status(), `body=${await res.text()}`).toBe(200);
-    const body = await res.json();
-    expect(body.ok).toBe(true);
-  });
-
-  test('invalid email is rejected', async ({ request, baseURL }) => {
-    const res = await request.post(`${baseURL}/api/discovery-lead`, {
-      data: { email: 'not-an-email', hasProperty: false, source: 'playwright-api' },
-    });
-    expect(res.status()).toBe(400);
-  });
-
-  test('missing qualifier boolean is rejected', async ({ request, baseURL }) => {
-    const res = await request.post(`${baseURL}/api/discovery-lead`, {
-      data: { email: testEmail('api-invalid'), source: 'playwright-api' },
-    });
-    expect(res.status()).toBe(400);
-  });
-});
 
 test.describe('Discovery modal — UI flows (desktop)', () => {
   test.use({ viewport: { width: 1440, height: 900 } });
@@ -83,52 +34,35 @@ test.describe('Discovery modal — UI flows (desktop)', () => {
     await expect(page.locator(Q1_YES)).toBeVisible({ timeout: 10_000 });
   }
 
-  test('no_property path: opens, captures email, shows done', async ({ page }) => {
+  test('no_property path: opens and mounts the GHL no-listing form', async ({ page }) => {
     await openModal(page);
     await page.locator(Q1_NO).click();
 
-    // Email step — "Keep me posted" submit
-    const submit = page.getByRole('button', { name: /^keep me posted$/i });
-    await expect(submit).toBeVisible();
-
-    await page.locator('input[type="email"]').fill(testEmail('ui-noprop'));
-
-    const [resp] = await Promise.all([
-      page.waitForResponse((r) => r.url().includes('/api/discovery-lead') && r.request().method() === 'POST', { timeout: 15_000 }),
-      submit.click(),
-    ]);
-    expect(resp.status()).toBe(200);
-
-    // Done state — "You're in."
-    await expect(page.getByRole('heading', { name: /you'?re in/i })).toBeVisible({ timeout: 8_000 });
+    await expect(
+      page.locator('iframe[src*="/widget/form/SUQXaS425Xuw41mNz3sh"]')
+    ).toBeVisible({ timeout: 8_000 });
+    // form_embed.js (GHL auto-resize) is injected alongside the iframe.
+    await expect(page.locator('script[src*="form_embed.js"]')).toHaveCount(1);
   });
 
-  test('pm_company path: opens, captures email, shows done', async ({ page }) => {
+  test('pm_company path: opens and mounts the GHL partnership form', async ({ page }) => {
     await openModal(page);
     await page.locator(Q1_YES).click();
     await expect(page.locator(Q2_PM)).toBeVisible();
     await page.locator(Q2_PM).click();
 
-    // PM email step submit — "Get in touch"
-    const submit = page.getByRole('button', { name: /^get in touch$/i });
-    await expect(submit).toBeVisible();
-
-    await page.locator('input[type="email"]').fill(testEmail('ui-pm'));
-
-    const [resp] = await Promise.all([
-      page.waitForResponse((r) => r.url().includes('/api/discovery-lead') && r.request().method() === 'POST', { timeout: 15_000 }),
-      submit.click(),
-    ]);
-    expect(resp.status()).toBe(200);
-
-    await expect(page.getByRole('heading', { name: /you'?re in/i })).toBeVisible({ timeout: 8_000 });
+    await expect(
+      page.locator('iframe[src*="/widget/form/bEBHJS1TYGvMd92gaafL"]')
+    ).toBeVisible({ timeout: 8_000 });
   });
 
-  test('self_host path: opens, qualifies, shows booking iframe', async ({ page }) => {
+  test('self_host path: opens, qualifies, mounts the GHL booking widget', async ({ page }) => {
     await openModal(page);
     await page.locator(Q1_YES).click();
     await page.locator(Q2_HOST).click();
-    // After onQualified, modal renders Cal.com / scheduler iframe.
-    await expect(page.locator('iframe').first()).toBeVisible({ timeout: 8_000 });
+
+    await expect(
+      page.locator('iframe[src*="/widget/booking/lArwJ0BFe3TYOsCYHfet"]')
+    ).toBeVisible({ timeout: 8_000 });
   });
 });

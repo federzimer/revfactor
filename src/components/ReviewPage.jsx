@@ -1,9 +1,15 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Play, Calendar, ArrowRight, ArrowLeft } from 'lucide-react';
+import { GHL_BOOKING, withTrackingParams, loadGhlEmbedScript } from '../data/ghl.ts';
 
 export default function ReviewPage() {
   const pageRef = useRef(null);
+
+  // GHL booking iframe below is auto-resized by form_embed.js.
+  useEffect(() => {
+    loadGhlEmbedScript();
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -123,10 +129,14 @@ export default function ReviewPage() {
             </div>
 
             <div className="text-center mb-6">
+              {/* data-modal="schedule": BaseLayout's click interceptor opens
+                  the qualifier modal on plain click; the href is the GHL
+                  standalone page fallback for cmd/ctrl-click. */}
               <a
-                href="https://schedule.revfactor.io/"
+                href={GHL_BOOKING}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-modal="schedule"
                 data-rf-source="review-hero"
                 className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
                 style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
@@ -143,15 +153,18 @@ export default function ReviewPage() {
               </p>
             </div>
 
-            {/* Embedded Calendly */}
+            {/* Embedded GHL booking widget — form_embed.js auto-resizes it;
+                min-h is the pre-resize fallback. */}
             <div className="w-full rounded-[12px] overflow-hidden border border-[#C8C4BC]/50">
               <iframe
-                src="https://schedule.revfactor.io/embed"
+                src={withTrackingParams(GHL_BOOKING)}
+                id="ghl-booking-review"
                 width="100%"
-                height="700"
                 title="Schedule Discovery Call"
                 frameBorder="0"
-                className="min-h-[700px]"
+                scrolling="no"
+                allow="payment"
+                className="w-full border-0 block min-h-[700px]"
               />
             </div>
           </div>
@@ -178,9 +191,10 @@ export default function ReviewPage() {
               to optimize their properties and increase their profits.
             </p>
             <a
-              href="https://schedule.revfactor.io/"
+              href={GHL_BOOKING}
               target="_blank"
               rel="noopener noreferrer"
+              data-modal="schedule"
               data-rf-source="review-bottom"
               className="inline-flex items-center gap-3 px-8 py-4 bg-[#13342D] text-[#E8E6E1] font-bold uppercase text-[11px] tracking-[2px] rounded-full relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
               style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}

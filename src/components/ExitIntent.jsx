@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
+import { GHL_BOOKING, withTrackingParams, loadGhlEmbedScript } from '../data/ghl.ts';
 
 /* ─── Exit-Intent Strategy-Call Capture ───
    When the visitor's cursor leaves the top edge of the viewport, surface
@@ -21,8 +22,6 @@ export default function ExitIntent() {
   const [open, setOpen] = useState(false);
   const overlayRef = useRef(null);
   const panelRef = useRef(null);
-  // Posted iframe content height. Default 720 = empty calendar state.
-  const [iframeContentHeight, setIframeContentHeight] = useState(720);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -80,24 +79,12 @@ export default function ExitIntent() {
     };
   }, []);
 
-  // Listen for postMessage from the scheduler iframe to auto-resize the
-  // panel. Same pattern as ScheduleModal so popup grows with calendar
-  // content (date → time → form → confirmed each post different heights).
-  useEffect(() => {
-    const onMsg = (e) => {
-      if (!e.data || typeof e.data !== 'object') return;
-      const h = e.data.iframeHeight ?? e.data.height
-              ?? e.data.data?.height ?? e.data.data?.iframeHeight;
-      const n = Number(h);
-      if (Number.isFinite(n) && n > 400 && n < 1600) setIframeContentHeight(n);
-    };
-    window.addEventListener('message', onMsg);
-    return () => window.removeEventListener('message', onMsg);
-  }, []);
-
-  // Close on Escape + lock body scroll while open
+  // Close on Escape + lock body scroll while open. Also load GHL's
+  // form_embed.js (iframe auto-resize) only once the popup actually opens —
+  // keeps PPC pages iframe/script-free on first paint.
   useEffect(() => {
     if (!open) return;
+    loadGhlEmbedScript();
     const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
     document.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
@@ -122,9 +109,6 @@ export default function ExitIntent() {
   };
 
   if (!open) return null;
-
-  // Visible iframe area = posted height minus the 48px we clip from top.
-  const visibleIframeHeight = Math.max(480, iframeContentHeight - 48);
 
   return (
     <div
@@ -177,20 +161,20 @@ export default function ExitIntent() {
           </button>
         </div>
 
-        {/* Calendar iframe — auto-resized via postMessage; clip top padding
-            with marginTop:-48. overflow-y:auto allows scroll on short
-            viewports (panel can hit max-h:92dvh cap), but the visible
-            scrollbar is hidden via .ei-iframe-wrap CSS to prevent the
-            double-scrollbar look. */}
+        {/* GHL booking iframe — auto-resized by form_embed.js. The wrapper
+            scrolls if the widget outgrows the viewport-capped max height;
+            the visible scrollbar is styled via .ei-iframe-wrap CSS. */}
         <div
-          className="ei-iframe-wrap min-h-0 px-3 pb-3 overflow-hidden"
-          style={{ height: 'min(720px, calc(92dvh - 120px))' }}
+          className="ei-iframe-wrap min-h-0 px-3 pb-3"
+          style={{ maxHeight: 'min(720px, calc(92dvh - 120px))', overflowY: 'auto' }}
         >
           <iframe
-            src="https://schedule.revfactor.io/embed"
+            src={withTrackingParams(GHL_BOOKING)}
+            id="ghl-booking-exit"
             title="Schedule a Discovery Call with RevFactor"
             className="w-full border-0 block rounded-[14px]"
-            style={{ marginTop: '-48px', height: 'calc(100% + 48px)' }}
+            scrolling="no"
+            style={{ minHeight: 480 }}
             allow="payment"
           />
         </div>
