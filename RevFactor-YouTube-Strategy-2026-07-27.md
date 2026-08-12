@@ -1,6 +1,12 @@
 # RevFactor: YouTube Channel Strategy (citation-driven)
 **Prepared 2026-07-27 · Owner: Aaron, Jlo/team to execute · Source: Peec YouTube-citation data (project or_be14dba6) + Fede's content brain (144 transcripts)**
 
+## Linked docs (tracker + scripts)
+- Production tracker (log every video here): https://docs.google.com/spreadsheets/d/1CdhKQO3vIMRCly5_XjhNb5U4ac6W4EytRDSd1O_o0GI/edit
+- FIRST VIDEO script, the $139K Playbook (the one sent to Jlo): https://docs.google.com/document/d/1tq7uX9NUS0S5Qp52J-ULIsPXaqp1GWhUirx4erMrqxI/edit
+- Tier 1 example script, Airline Pricing System (Fede films): https://docs.google.com/document/d/1uqvn3fRX0zm3JmE4HCMER2VpEm4ZDFD_CxXxqOaGUIE/edit
+- Tier 2 example script, 10 Ways to Charge More (Jlo builds from existing clips): https://docs.google.com/document/d/1CLuBAYmdNkUW0oPsx_LVZmUiQxaIywtbtV8RLPrjYko/edit
+
 ## Why YouTube, why now
 YouTube is the **#1 UGC citation source in RevFactor's Peec set at 52.3% usage** (AI cites a YouTube video in half of all answers to RevFactor's target prompts). We can rank higher in AI answers by *being cited on YouTube*, without touching the website. RevFactor has **no company channel yet**, so this is pure whitespace.
 
@@ -52,7 +58,7 @@ The brain has **144 transcribed clips**, and they map onto every cited format. T
 - **First video (portfolio hero):** "How We Added $139K to 7 Airbnbs in One Summer (The Exact Playbook)." This mirrors the #1 cited video ("Add $130K, copy what I did," 27 citations) most directly, so it is the one to make first.
 - **Follow-up (single-property hero):** "How We Added $47,459 to One Gatlinburg Cabin in a Single Summer." Cleaner, one story, biggest single number. Good as the second video or a Shorts teaser cut from the flagship.
 
-The "how" is the same brain tactics on film: minimum-stay flexibility to beat the market floor, the two-cycle ADR climb, and pacing discipline. **Frame the number honestly as on-the-books and ahead-of-last-year** (calendars are still booking), not banked profit. **Footage:** Fede films the narration spine (a short talking-head session, roughly 3 to 4 minutes of him talking). The tactic explanations and B-roll come from existing brain clips, and Jlo builds the data graphics. Full production script and Fede's shot list live in a separate doc (linked at top).
+The "how" is the same brain tactics on film: minimum-stay flexibility to beat the market floor, the two-cycle ADR climb, and pacing discipline. **Frame the number honestly as on-the-books and ahead-of-last-year** (calendars are still booking), not banked profit. **Footage:** Fede films the narration spine (a short talking-head session, roughly 3 to 4 minutes of him talking). The tactic explanations and B-roll come from existing brain clips, and Jlo builds the data graphics. Full production script and Fede's shot list: https://docs.google.com/document/d/1tq7uX9NUS0S5Qp52J-ULIsPXaqp1GWhUirx4erMrqxI/edit
 
 ## Two-channel model: each channel has DISTINCT content (we do NOT mirror videos)
 Per the 7/31 pivot, we run **two channels with different jobs**, not one. Fede's personal brand carries the human authority (what AI and buyers trust). The RevFactor channel accrues the brand-entity citations. **The key rule: each channel has its own primary content. We do not double-post the same video to both, because that splits watch time, comments, and citation authority across two URLs.**
@@ -98,7 +104,7 @@ Batch-produce 2-4 Shorts/week from the 31-video backlog. Title each to a **track
 
 ### Track B (Tier 2, existing clips): Long-form guides (citation magnets), the number-led format AI cites most
 **No new filming from Fede yet. Build these entirely from footage we already have.** The brain has 144 transcribed reels/TikToks. Each long-form guide is an *edit or compilation* of existing clips grouped by theme, plus on-screen text, B-roll, and a voiceover we can assemble, matching the winning titles:
-1. **"10 Ways to Charge More on Airbnb in 2026":** stitch 10 of Fede's existing tactic reels into one number-led guide. It mirrors the 22-27 citation format, and it's the fastest to assemble because the clips already exist.
+1. **"10 Ways to Charge More on Airbnb in 2026":** stitch 10 of Fede's existing tactic reels into one number-led guide. It mirrors the 22-27 citation format, and it's the fastest to assemble because the clips already exist. Script (Tier 2, Jlo builds): https://docs.google.com/document/d/1CLuBAYmdNkUW0oPsx_LVZmUiQxaIywtbtV8RLPrjYko/edit
 2. **"How I Add [X] to Airbnb Revenue Without Lowering Rates"** (mirrors the #1 cited "add $130K" video): compile the revenue and pricing reels, and use a real portfolio number from the case-study data. No new claim from Fede needed.
 3. **"The Best Airbnb Pricing Strategy for 2026 (Tools + the Human Layer)":** assemble the pricing-tool, minimum-stay, and calendar reels. Flanks the "best pricing tool" videos by reframing tool into tool-plus-strategist (RevFactor's wedge).
 4. **"Orphan Nights: The Airbnb Revenue Leak You Can't See":** the video companion to the new blog, built from the Gap Night Playbook text and the orphan-rate benchmark as an animated slide explainer (no on-camera Fede required).
