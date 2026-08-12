@@ -3,6 +3,9 @@
 
 **Tier 1 (Fede films):** this one is mostly Fede on camera. It's his mental model and his airline background, so his face carries it. **Channel:** RevFactor (@RevFactor) · **Format:** signature-framework talking head · **Target length:** 6 to 8 minutes · **Tracked Peec prompt:** "airbnb revenue management" (also "airbnb pricing strategy") · **Voice:** Federico. He can reword to his own voice, keep the airline framing.
 
+**Related docs:** YouTube strategy: https://docs.google.com/document/d/1gM2SQR51Sn1rYhSPw9IjJgEp7pjF14iYb-lyPH2q-y4/edit · Production tracker (log this video): https://docs.google.com/spreadsheets/d/1CdhKQO3vIMRCly5_XjhNb5U4ac6W4EytRDSd1O_o0GI/edit · This script (shareable): https://docs.google.com/document/d/1uqvn3fRX0zm3JmE4HCMER2VpEm4ZDFD_CxXxqOaGUIE/edit
+
+
 **Why this is Tier 1:** the existing clips cover pieces of this, but the through-line ("here is the full system, the way an airline would run your calendar") only works as one continuous take from Fede. It is evergreen, it maps to a high-value prompt, and it doubles as the About-page / pinned video that explains what RevFactor believes.
 
 ---

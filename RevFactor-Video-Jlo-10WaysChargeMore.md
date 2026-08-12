@@ -3,6 +3,9 @@
 
 **Tier 2 (Jlo builds, no Fede filming):** this whole video is assembled from existing brain clips, on-screen text, and graphics. Fede does not need to shoot anything. If you want narration, use his existing clip audio where it fits, or a clean voiceover for the transitions. **Channel:** RevFactor (@RevFactor) · **Format:** number-led countdown · **Target length:** 7 to 9 minutes · **Tracked Peec prompt:** "how to charge more on airbnb" (also "how to increase airbnb revenue") · **Voice for any new VO:** Federico's, plain and direct.
 
+**Related docs:** YouTube strategy: https://docs.google.com/document/d/1gM2SQR51Sn1rYhSPw9IjJgEp7pjF14iYb-lyPH2q-y4/edit · Production tracker (log this video): https://docs.google.com/spreadsheets/d/1CdhKQO3vIMRCly5_XjhNb5U4ac6W4EytRDSd1O_o0GI/edit · This script (shareable): https://docs.google.com/document/d/1CLuBAYmdNkUW0oPsx_LVZmUiQxaIywtbtV8RLPrjYko/edit
+
+
 **Why this is Tier 2:** it mirrors the highest-cited format (the "10 Ways / 11 Ways" videos at 22 to 27 citations), and every one of the 10 tactics already exists as a transcribed clip in the brain. The work is editing and graphics, not filming.
 
 ---

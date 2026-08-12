@@ -3,6 +3,9 @@
 
 **For:** Jlo · **Channel:** RevFactor (@RevFactor) · **Format:** number-led case-study playbook · **Target length:** 8 to 11 minutes · **Tracked Peec prompt:** "how to add revenue to airbnb" · **Voice:** Federico. (Script below is written in his voice; he can adjust wording on camera)
 
+**Related docs:** YouTube strategy: https://docs.google.com/document/d/1gM2SQR51Sn1rYhSPw9IjJgEp7pjF14iYb-lyPH2q-y4/edit · Production tracker (log this video): https://docs.google.com/spreadsheets/d/1CdhKQO3vIMRCly5_XjhNb5U4ac6W4EytRDSd1O_o0GI/edit · This script (shareable): https://docs.google.com/document/d/1tq7uX9NUS0S5Qp52J-ULIsPXaqp1GWhUirx4erMrqxI/edit
+
+
 **🔴 Anonymize everything.** Market and property type only ("a Gatlinburg cabin," "a Lake Michigan lake house"). No owner names, no property nicknames, no addresses. This is a hard rule.
 
 **🔴 Honest framing.** The $139,580 is on-the-books revenue that is pacing ahead of last year, with calendars still booking. Never call it banked profit. On screen and in the script it reads as "on the books, ahead of last year."
