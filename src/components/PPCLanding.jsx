@@ -263,7 +263,7 @@ const PROCESS_STEPS = [
   {
     n: "01",
     title: "Discovery Call",
-    body: "30 minutes with a seasoned pricing strategist. We review your portfolio, market, and current pricing. You leave with concrete revenue recommendations whether you work with us or not.",
+    body: "20 minutes with a seasoned pricing strategist. We review your portfolio, market, and current pricing. You leave with concrete revenue recommendations whether you work with us or not.",
   },
   {
     n: "02",
@@ -473,7 +473,7 @@ export default function PPCLanding({
           {[
             { to: 24,  prefix: '+', suffix: '%',     label: 'Avg revenue lift' },
             { to: 198, prefix: '',  suffix: '',      label: 'Listings managed' },
-            { to: 320, prefix: '$', suffix: '',      label: '/mo flat per property' },
+            { to: 350, prefix: '$', suffix: '',      label: '/mo flat per property' },
             { to: 30,  prefix: '',  suffix: ' min',  label: 'Free Discovery Call' },
           ].map((s, i) => (
             <Reveal key={i} delay={i * 100}>
@@ -573,7 +573,7 @@ export default function PPCLanding({
             <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>strategy?</span>
           </h2>
           <p className="text-[16px] leading-[1.65] text-[#76574C] mb-8">
-            30-minute Discovery Call. We pull your comp set, walk through where pacing is leaving money, and tell you whether RevFactor is the right fit. No pitch deck.
+            20-minute Discovery Call. We pull your comp set, walk through where pacing is leaving money, and tell you whether RevFactor is the right fit. No pitch deck.
           </p>
           <button
             onClick={() => open('ppc-mid')}
@@ -709,7 +709,7 @@ export default function PPCLanding({
             className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#E8E6E1] mb-6"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            Book a free 30-minute{' '}
+            Book a free 20-minute{' '}
             <span style={{ fontStyle: 'italic' }}>Discovery Call</span>
           </h2>
           <p className="text-[16px] leading-[1.7] text-[#8F6E62] max-w-lg mx-auto mb-10">

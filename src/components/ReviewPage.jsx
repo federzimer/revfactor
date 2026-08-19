@@ -139,7 +139,7 @@ export default function ReviewPage() {
                 <span className="relative z-10">schedule discovery call</span>
               </a>
               <p className="text-[12px] text-[#8F6E62] mt-3 tracking-wide">
-                30-minute call &middot; No obligation &middot; Free consultation
+                20-minute call &middot; No obligation &middot; Free consultation
               </p>
             </div>
 
