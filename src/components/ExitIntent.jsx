@@ -173,7 +173,7 @@ export default function ExitIntent() {
             id="ghl-booking-exit"
             title="Schedule a Discovery Call with RevFactor"
             className="w-full border-0 block rounded-[14px]"
-            scrolling="no"
+            scrolling="auto"
             style={{ minHeight: 480 }}
             allow="payment"
           />

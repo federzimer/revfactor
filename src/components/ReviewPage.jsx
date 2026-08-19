@@ -162,7 +162,7 @@ export default function ReviewPage() {
                 width="100%"
                 title="Schedule Discovery Call"
                 frameBorder="0"
-                scrolling="no"
+                scrolling="auto"
                 allow="payment"
                 className="w-full border-0 block min-h-[700px]"
               />

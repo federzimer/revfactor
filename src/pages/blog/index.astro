@@ -13,11 +13,11 @@ const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-// FEATURED: rotated 2026-05-22 to the FIFA 2026 World Cup STR pricing post —
-// the RM pillar (revenue-management-for-short-term-rentals) drops back into
-// the masonry grid below.
-const featuredPost =
-  posts.find((p) => p.id === 'fifa-2026-world-cup-str-pricing') || posts[0];
+// FEATURED (spotlight) = the most recent post. `posts` is sorted newest-first,
+// so the newest post auto-rotates into the spotlight and every other post
+// (including the previous spotlight) drops into the masonry grid below.
+// Publishing a new post automatically puts it in the spotlight + masonry.
+const featuredPost = posts[0];
 const otherPosts = posts.filter((p) => p.id !== featuredPost?.id);
 
 const fmtShort = (d: Date) =>

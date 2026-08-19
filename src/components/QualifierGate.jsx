@@ -186,7 +186,7 @@ export default function QualifierGate({ onQualified, onClose }) {
         id={isNoProperty ? 'ghl-form-no-listing' : 'ghl-form-pm'}
         title={isNoProperty ? 'Stay close to RevFactor' : 'Partner with RevFactor'}
         data-ghl-form={isNoProperty ? 'no-listing' : 'pm'}
-        scrolling="no"
+        scrolling="auto"
         style={{ width: '100%', border: 'none', overflow: 'hidden', minHeight: 420 }}
       />
       <button

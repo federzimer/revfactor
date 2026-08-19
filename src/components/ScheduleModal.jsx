@@ -158,7 +158,7 @@ export default function ScheduleModal({ onClose }) {
                 title="Book a Discovery Call with RevFactor"
                 className="w-full rounded-[12px] border-0 block"
                 style={{ minHeight: 480 }}
-                scrolling="no"
+                scrolling="auto"
                 allow="payment"
               />
             </div>
