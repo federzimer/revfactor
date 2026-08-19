@@ -310,5 +310,21 @@ const canonicalUrl = Astro.url.href;
       window.dispatchEvent(new CustomEvent('revfactor:open-schedule'));
     });
   </script>
+
+  <!-- LeadConnector chat + texting opt-in widget. Consent controls and message
+       disclosures are configured in the LeadConnector-managed widget. -->
+  <script
+    src="https://widgets.leadconnectorhq.com/loader.js"
+    data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+    data-widget-id="6a73564f06b39140c6f13823"
+    data-source="WEB_USER"
+  ></script>
+
+  <!-- LeadConnector external attribution: records page views and eligible
+       form fills/opt-ins across every route that uses this shared layout. -->
+  <script
+    src="https://links.revfactor.io/js/external-tracking.js"
+    data-tracking-id="tk_5770e8c897e34f7f9b8088d5dfdc375a"
+  ></script>
 </body>
 </html>
