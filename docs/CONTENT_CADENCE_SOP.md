@@ -18,6 +18,13 @@ The strategy sets the target cadence: **1 new post/week · 5 optimizations/week 
 
 **Golden rule:** nothing goes live without Faulen's QA sign-off. Flow is always **toolkit → staging → Faulen QA → live**.
 
+**Re-check the mailbox before starting a multi-hour build, and again before pushing.** Aaron and
+Jlo both work this repo from separate sessions, and a superseding instruction can land minutes
+after the one you started from. On 2026-08-03 message #54 asked for the Airbnb RM listicle and
+#56 reassigned it 85 minutes later; both sessions built the same post against the same slug. One
+`inbox()` call before a big build is cheaper than a duplicate post. When two branches do target
+the same slug, resolve it before either merges, and state the merge order in the PR.
+
 ---
 
 ## 1. The content pipeline — what to write, in order
@@ -88,6 +95,8 @@ For each post: apply the toolkit's recommendations on staging, **set `updatedDat
 - [ ] **Indexable** live (`index, follow`, never noindex a live post); **IndexNow** fired.
 - [ ] **No client/property/owner names** in any post — results shown by market + property type only ("a Gatlinburg cabin").
 - [ ] Internal cross-links to the pillar + related posts; no duplicate/cannibalizing angle.
-- [ ] Builds clean; all links + images return 200.
+- [ ] Builds clean, **and `npm run check:links` passes.** A clean build is not a link check — `astro build` compiled 24 dead `/journal` links across 12 posts without complaint.
+- [ ] **`npm run check:links:external` reviewed on any post that cites vendors or sources.** HTTP 200 is not proof of life: a parked for-sale domain returns 200, and one in this library served 114 bytes of `location.href=` with the GoDaddy sale page a JS hop away. An off-host redirect means read it as a merger you have not noticed — that is how STR Consulting and Pacer sat in one list as two vendors.
+- [ ] **On any vendor/comparison post: re-verify pricing, tier contents and "best for" claims, not only that the link loads** — and stamp the verification date in the copy. Four vendors in one listicle moved in under three months. Fix the `ItemList` JSON-LD and the FAQ answers too, not just the prose.
 
 **We publish to revfactor.io** — never a vendor. Ship fast, then improve.

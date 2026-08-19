@@ -29,6 +29,12 @@ const VENDORS = [
   { slug: 'dosbnb',          domain: 'dosbnb.com' },
   { slug: 'beyond-pricing',  domain: 'beyondpricing.com' },
   { slug: 'maverick-str',    domain: 'maverickstr.co' },
+  // Dynamic pricing software compared in the Airbnb RM listicle.
+  // NOTE: pricelabs.co returns a generic placeholder mark from the favicon
+  // service, not the PriceLabs brand logo — verified 2026-07-30. Left out
+  // deliberately; it needs manual extraction before any post uses it, since
+  // shipping the wrong mark for a named vendor is an accuracy problem.
+  { slug: 'wheelhouse',      domain: 'usewheelhouse.com' },
 ];
 
 function download(url, dest) {
