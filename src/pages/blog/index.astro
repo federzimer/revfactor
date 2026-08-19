@@ -139,10 +139,14 @@ type MasonryPost = {
 const MASONRY_OVERRIDES: Record<string, Partial<MasonryPost> & { variant: MasonryPost['variant']; col?: 'a' | 'b' | 'c' }> = {
   // Col A — TALL top, WIDE bottom + newsletter signup mounts at column end.
   // Holds 2 posts; the rf-journal-newsletter card adds the visual third slot.
+  // Col A — TALL top, then the new decision guide, WIDE World Cup bottom + newsletter mounts at end.
   'best-airbnb-property-managers-with-dynamic-pricing-2026': {
     variant: 'overlay', ar: '3/4', col: 'a',
   },
-  'how-to-build-comp-set-str': {
+  'is-a-pricing-tool-enough-airbnb-revenue-management': {
+    variant: 'overlay', ar: '4/3', col: 'a',
+  },
+  'fifa-2026-world-cup-str-pricing': {
     variant: 'overlay', ar: '16/9', col: 'a',
   },
 
@@ -156,6 +160,9 @@ const MASONRY_OVERRIDES: Record<string, Partial<MasonryPost> & { variant: Masonr
   'revenue-management-for-short-term-rentals': {
     variant: 'overlay', ar: '4/3', col: 'b',
   },
+  'f1-race-weekend-str-pricing-playbook': {
+    variant: 'overlay', ar: '4/3', col: 'b',
+  },
 
   // Col C — TALL top, CLASSIC middle, WIDE bottom (medium total).
   // Distinct silhouette from A (which is tall+wide) and B (which leads very-tall).
@@ -166,6 +173,10 @@ const MASONRY_OVERRIDES: Record<string, Partial<MasonryPost> & { variant: Masonr
     variant: 'overlay', ar: '4/3', col: 'c',
   },
   'airbnb-revenue-management-company': {
+    variant: 'overlay', ar: '4/5', col: 'c',
+  },
+  // comp-set moved out of the overloaded col A to the right column to rebalance.
+  'how-to-build-comp-set-str': {
     variant: 'overlay', ar: '16/9', col: 'c',
   },
 };
