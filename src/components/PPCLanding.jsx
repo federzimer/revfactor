@@ -259,7 +259,7 @@ const PROCESS_STEPS = [
   {
     n: "01",
     title: "Strategy Call",
-    body: "30 minutes with a seasoned pricing strategist. We review your portfolio, market, and current pricing. You leave with concrete revenue recommendations whether you work with us or not.",
+    body: "20 minutes with a seasoned pricing strategist. We review your portfolio, market, and current pricing. You leave with concrete revenue recommendations whether you work with us or not.",
   },
   {
     n: "02",
@@ -626,7 +626,7 @@ export default function PPCLanding({
           {[
             { to: 18,  prefix: '+', suffix: '%',     label: 'Avg revenue lift' },
             { to: 165, prefix: '',  suffix: '+',     label: 'Properties managed' },
-            { to: 320, prefix: '$', suffix: '',      label: '/mo flat per property' },
+            { to: 350, prefix: '$', suffix: '',      label: '/mo flat per property' },
             { to: 30,  prefix: '',  suffix: ' min',  label: 'Free strategy call' },
           ].map((s, i) => (
             <Reveal key={i} delay={i * 100}>
@@ -733,7 +733,7 @@ export default function PPCLanding({
             <span style={{ fontStyle: 'italic', color: '#5D6D59' }}>talk strategy</span>
           </h2>
           <p className="text-[16px] leading-[1.55] text-[#76574C] max-w-lg mx-auto mb-6 text-center">
-            30-minute call with a seasoned RevFactor pricing strategist. We'll review your portfolio, comp set, and where the revenue opportunity is.
+            20-minute call with a seasoned RevFactor pricing strategist. We'll review your portfolio, comp set, and where the revenue opportunity is.
           </p>
           {/* Inline calendar — fixed-cap height so the page never grows
               taller than ~720px for the embed; the iframe handles its own
@@ -878,7 +878,7 @@ export default function PPCLanding({
             className="text-[clamp(32px,5vw,48px)] leading-[1.1] text-[#E8E6E1] mb-6"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}
           >
-            Book a free 30-minute{' '}
+            Book a free 20-minute{' '}
             <span style={{ fontStyle: 'italic' }}>strategy call</span>
           </h2>
           <p className="text-[16px] leading-[1.7] text-[#8F6E62] max-w-lg mx-auto mb-10">
