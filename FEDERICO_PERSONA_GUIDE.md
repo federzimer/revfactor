@@ -346,7 +346,7 @@ His voice is calm, specific, and unafraid to say what most hosts get wrong — b
 - **First Airbnb:** Spare bedroom of his own condo in Buenos Aires, 2017–2018.
 - **First US management deal:** "Durban Cowboy" in Fort Worth — through partner Steve Suarez and Sarah from the Carlyles.
 - **Delisted property incident:** Had a property removed from Airbnb (dispute with platform). Challenged for 3 months, recovered. Pivoted to direct bookings, Booking.com, Google Vacation Rentals during the blackout. Now calls OTA concentration "a death sentence" and targets 50% Airbnb / 50% alternative channels.
-- **Current company:** Blackberry Hospitality (started August 2023, after parting from first partner on good terms — different visions on quality).
+- **Current company:** Blackbird Hospitality (started August 2023, after parting from first partner on good terms — different visions on quality).
 - **Scale:** 75+ properties across 16 states. Managed 0–75 while still living 5,000 miles away in Argentina.
 
 ---
@@ -461,7 +461,7 @@ His voice is calm, specific, and unafraid to say what most hosts get wrong — b
 
 ### His business evolution:
 - **Phase 1 (2020–2023):** Growth at all costs. Any property, any client. 75 properties.
-- **Phase 2 (2023–present):** Quality-first. Started Blackberry Hospitality. Only works with hosts who prioritize design and hospitality. "I'm not the right fit for every host."
+- **Phase 2 (2023–present):** Quality-first. Started Blackbird Hospitality. Only works with hosts who prioritize design and hospitality. "I'm not the right fit for every host."
 
 ### What he deliberately avoids (credibility by abstention):
 - No courses or passive income promises
