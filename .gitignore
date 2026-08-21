@@ -70,3 +70,4 @@ tests/_artifacts/feedback-qa/
 tests/playwright/reports/
 tests/playwright/screenshots/
 tests/playwright/videos/
+qa-screenshots/
