@@ -56,7 +56,7 @@ async function loadGrowthBook() {
    When ?msg is absent (organic, direct, or unrecognized), the .astro page's
    own headline/subhead props serve as the default (no DTR override). */
 const MESSAGE_VARIANTS = {
-  // Consultant Intent campaign — searcher already knows they want a consultant
+  // Consultant Intent campaign. Searcher already knows they want a consultant
   consultant: {
     eyebrow: 'STR REVENUE STRATEGY',
     headlinePart1: 'Most STRs lose 24% in revenue.',
@@ -64,7 +64,7 @@ const MESSAGE_VARIANTS = {
     subhead: 'Most consultants run an audit, hand you a deck, and disappear. We don’t. A seasoned pricing strategist stays on every account. Monthly calls, weekly comp tracking, calendar optimization, plus 24/7 dashboard messaging. Documented +24% lift. Flat $350/mo.',
     ctaText: 'Book a Discovery Call',
   },
-  // Tool Intent campaign — searcher is shopping a pricing tool, reframe the category
+  // Tool Intent campaign. Searcher is shopping a pricing tool, reframe the category
   tool: {
     eyebrow: 'BEYOND PRICING TOOLS',
     headlinePart1: 'Pricing tools set numbers.',
@@ -72,7 +72,7 @@ const MESSAGE_VARIANTS = {
     subhead: 'Your pricing tool prices tonight. We build the strategy that makes it work and pull back the 24% your algorithm leaves on the table. Works alongside any tool. Direct access to a seasoned strategist plus 24/7 dashboard messaging. Flat $350/mo.',
     ctaText: 'Book a Discovery Call',
   },
-  // Conquest campaign — searcher is on PriceLabs / Wheelhouse / Beyond
+  // Conquest campaign. Searcher is on PriceLabs / Wheelhouse / Beyond
   conquest: {
     eyebrow: 'STRATEGY YOUR TOOL CAN’T SHIP',
     headlinePart1: 'Already on PriceLabs?',
@@ -91,7 +91,7 @@ function readMessageVariant() {
 /* ─── Subhead A/B/C test ───
    Three rewrites of the default hero subhead, tested against the page's
    built-in copy. Drops the "24/7 dashboard messaging" claim (visitors can
-   message anytime but humans answer business hours — overpromise) and
+   message anytime but humans answer business hours, so the claim overpromises) and
    bakes in volume-discount language so single-property and portfolio
    prospects both see the relevant pricing signal.
 
@@ -130,7 +130,7 @@ function useInView(ref, threshold = 0.25) {
 // Animated number that ticks from 0 → target when first scrolled into view.
 // Default value = target so SSR / crawlers / social-preview screenshots /
 // fast-scrolling users see the correct number, not 0%. Animation runs only
-// when the user has actually scrolled past initial viewport — prevents the
+// when the user has actually scrolled past initial viewport. That prevents the
 // proof strip from flashing 0% on first paint or rendering zeros to bots.
 function CountUp({ to, prefix = '', suffix = '', duration = 1400, decimals = 0 }) {
   const [val, setVal] = useState(to);
@@ -165,7 +165,7 @@ function CountUp({ to, prefix = '', suffix = '', duration = 1400, decimals = 0 }
   return <span ref={ref}>{prefix}{display}{suffix}</span>;
 }
 
-// Sticky mobile CTA — visible by default, hidden once the calendar section
+// Sticky mobile CTA. Visible by default, hidden once the calendar section
 // scrolls into view. Avoids the bar overlapping the booking form on short
 // iPhone viewports (the email field gets covered on iPhone SE / 14 Pro).
 function StickyMobileCTA({ onOpen }) {
@@ -286,7 +286,7 @@ export default function PPCLanding({
   comparisonRows,
   faqs,
   finalCtaPretext = "Ready to talk strategy?",
-  // Hero image base name from public/heroes/ — each PPC page passes its own.
+  // Hero image base name from public/heroes/. Each PPC page passes its own.
   // Files: <heroBase>-1200.webp, -1920.webp, -2400.webp must all exist.
   // Available: clifftop (V3 dusk), aframe (V4 golden hour), snowcap (V2 peaks),
   // meadow (V1 hazy mountains).
@@ -310,7 +310,7 @@ export default function PPCLanding({
   // An inline script on the .astro page captures early "Book a Discovery Call"
   // clicks, sets window.__pendingSchedule, and dispatches revfactor:open-schedule.
   // Without this, a click in the first ~2-3s of load did nothing (the React
-  // onClick wasn't wired yet) — a silent conversion leak on paid traffic.
+  // onClick wasn't wired yet), a silent conversion leak on paid traffic.
   useEffect(() => {
     const openFromEvent = () => setScheduleOpen(true);
     window.addEventListener('revfactor:open-schedule', openFromEvent);
@@ -321,7 +321,7 @@ export default function PPCLanding({
     return () => window.removeEventListener('revfactor:open-schedule', openFromEvent);
   }, []);
 
-  // DTR — read ?msg= URL param after mount and override hero copy if it
+  // DTR: read ?msg= URL param after mount and override hero copy if it
   // matches a known variant. Server-rendered HTML uses the .astro page's
   // default props; the swap happens on client hydration. Page is noindex,
   // so SEO impact of the brief content swap is irrelevant.
@@ -383,7 +383,7 @@ export default function PPCLanding({
 
       {/* ─── HERO ─── Image background + CTA. CTA opens the Discovery Call
            modal (QualifierGate → optional scheduler iframe). No inline
-           scheduler embed — the modal handles the booking surface. */}
+           scheduler embed. The modal handles the booking surface. */}
       <section className="relative min-h-[78vh] md:min-h-[88vh] flex items-end overflow-hidden">
         <picture>
           <source
@@ -401,7 +401,7 @@ export default function PPCLanding({
             className="absolute inset-0 w-full h-full object-cover"
           />
         </picture>
-        {/* Lightened gradient — was dual-overlay charcoal that washed out the cabin.
+        {/* Lightened gradient. Was dual-overlay charcoal that washed out the cabin.
             Now: directional left-side darkening so headline stays legible, but the
             cabin actually shows on the right 50% of the hero. */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#161910] via-[#161910]/75 to-[#161910]/15" />
@@ -437,7 +437,7 @@ export default function PPCLanding({
             <p className="text-[15px] md:text-[17px] leading-[1.55] text-[#C8C4BC] max-w-xl mb-2">
               {subhead}
             </p>
-            {/* Risk-reversal — explicit guarantee badge under the CTA. Reframes
+            {/* Risk-reversal: explicit guarantee badge under the CTA. Reframes
                 the call as "free advice, not a sales pitch" → lifts CVR for
                 cold paid traffic. */}
             <div className="mt-5 flex items-start gap-2.5 max-w-lg">
@@ -447,7 +447,7 @@ export default function PPCLanding({
                 You walk away with 3 specific revenue recommendations for your property, even if we never work together.
               </p>
             </div>
-            {/* Founder signature — Federico's actual photo + name above fold for trust */}
+            {/* Founder signature: Federico's actual photo + name above fold for trust */}
             <div className="mt-7 flex items-center gap-4 pt-5 border-t border-[#3F261F]/40 max-w-md">
               <img
                 src="/team/federico.jpg"
@@ -467,7 +467,7 @@ export default function PPCLanding({
         </div>
       </section>
 
-      {/* ─── PROOF STRIP — animated count-up on scroll ─── */}
+      {/* ─── PROOF STRIP: animated count-up on scroll ─── */}
       <section className="bg-[#13342D] py-12">
         <div className="max-w-5xl mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
@@ -727,7 +727,7 @@ export default function PPCLanding({
         </div>
       </section>
 
-      {/* ─── Minimal footer (no off-page links — ClickFunnels style) ─── */}
+      {/* ─── Minimal footer (no off-page links, ClickFunnels style) ─── */}
       <footer className="bg-[#161910] py-8">
         <div className="max-w-5xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-[#8F6E62]">
           <span
@@ -742,7 +742,7 @@ export default function PPCLanding({
 
       {/* ─── Sticky mobile CTA ─── ClickFunnels-standard always-visible CTA
            so a visitor 8 sections deep is one tap from the calendar. Hidden
-           when #schedule is in viewport — when the user is already at the
+           when #schedule is in viewport. When the user is already at the
            calendar, the sticky bar would just overlap the booking form
            (especially on short iPhones where it covers the email field). */}
       <StickyMobileCTA onOpen={() => open('ppc-sticky')} />

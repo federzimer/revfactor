@@ -157,7 +157,7 @@ const steps = [
   {
     number: '03',
     title: 'Optimize',
-    copy: 'Daily monitoring, strategic adjustments, and monthly reporting — revenue on autopilot.',
+    copy: 'Daily monitoring, strategic adjustments, and monthly reporting. Revenue on autopilot.',
     bg: 'bg-[#5D6D59]',
     Visual: OccupancyEKG,
   },

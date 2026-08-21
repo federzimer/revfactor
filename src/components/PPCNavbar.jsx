@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 /* ─── PPC Navbar ───
    Floating pill nav for paid landing pages: wordmark + 4 in-page jump
    anchors (DIFFERENCE / RESULTS / STRATEGY / FAQ) + primary CTA.
-   No off-page links — anchors smooth-scroll to in-page section IDs. */
+   No off-page links. Anchors smooth-scroll to in-page section IDs. */
 
 const navLinks = [
   { label: 'RESULTS', href: '#results' },
@@ -64,7 +64,7 @@ export default function PPCNavbar() {
         ))}
       </div>
 
-      {/* Desktop CTA — brownish-red (#8B3A3A) to match the main navbar's
+      {/* Desktop CTA: brownish-red (#8B3A3A) to match the main navbar's
           Discovery Call button so the conversion CTA reads the same
           across the brand site and paid landing pages. */}
       <div className="hidden md:flex items-center gap-2 ml-2">

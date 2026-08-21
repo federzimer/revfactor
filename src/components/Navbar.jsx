@@ -4,7 +4,7 @@ import ScheduleModal from './ScheduleModal';
 
 /* ─── Subscribe checkout ───
    Single Stripe checkout link. The "subscribe" buttons send visitors
-   straight here — the property count is selected inside Stripe Checkout
+   straight here. The property count is selected inside Stripe Checkout
    rather than via an on-site modal. */
 const CHECKOUT_URL = 'https://checkout.revfactor.io/b/bJe7sKdnK0hcdqQ0ay0ZW0b';
 
@@ -33,7 +33,7 @@ export default function Navbar({ lightBg = false }) {
   // Open the ScheduleModal from anywhere on the page via custom event.
   // Use it from MDX / inline scripts: window.dispatchEvent(new CustomEvent('revfactor:open-schedule'))
   // Defensive try/catch because posthog can exist as a stub before its
-  // capture function is wired — uncaught throws here would prevent
+  // capture function is wired. Uncaught throws here would prevent
   // setScheduleOpen() from running.
   useEffect(() => {
     const open = () => {
@@ -77,7 +77,7 @@ export default function Navbar({ lightBg = false }) {
           revfactor
         </a>
 
-        {/* Desktop Links — lg breakpoint (1024px) keeps tablets on the
+        {/* Desktop Links. lg breakpoint (1024px) keeps tablets on the
             hamburger menu where the 3 buttons can stack without cutoff. */}
         <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
@@ -92,11 +92,11 @@ export default function Navbar({ lightBg = false }) {
           ))}
         </div>
 
-        {/* Desktop Buttons — order: Owners → Subscribe → Discovery Call.
+        {/* Desktop Buttons, in order: Owners → Subscribe → Discovery Call.
             Discovery Call sits on the right (visually heaviest) so it
             anchors the eye as the primary conversion path. */}
         <div className="hidden lg:flex items-center gap-2 ml-2">
-          {/* Owners — outline (renamed from "owner portal" for compactness) */}
+          {/* Owners: outline (renamed from "owner portal" for compactness) */}
           <a
             href="https://owner.revfactor.io"
             target="_blank"
@@ -112,7 +112,7 @@ export default function Navbar({ lightBg = false }) {
             owners
           </a>
 
-          {/* Subscribe — moss. Goes straight to Stripe Checkout. */}
+          {/* Subscribe: moss. Goes straight to Stripe Checkout. */}
           <button
             onClick={() => goToCheckout('navbar_desktop')}
             className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
@@ -125,7 +125,7 @@ export default function Navbar({ lightBg = false }) {
             <span className="relative z-10">subscribe</span>
           </button>
 
-          {/* Discovery Call — brownish-red (#8B3A3A) primary CTA on the
+          {/* Discovery Call: brownish-red (#8B3A3A) primary CTA on the
               right edge. */}
           <button
             onClick={() => { window.posthog?.capture('schedule_modal_opened', { source: 'navbar_desktop' }); window.rfTrack?.('schedule-cta-click', { source: 'navbar-desktop', page: location.pathname }); setScheduleOpen(true); }}
@@ -143,7 +143,7 @@ export default function Navbar({ lightBg = false }) {
           </button>
         </div>
 
-        {/* Mobile / tablet menu button — visible <1024px */}
+        {/* Mobile / tablet menu button, visible <1024px */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className={`lg:hidden ml-auto p-2 cursor-pointer transition-colors duration-200 ${scrolled ? 'text-[#3F261F]' : 'text-[#E8E6E1]'
@@ -232,7 +232,7 @@ export default function Navbar({ lightBg = false }) {
         )}
       </nav>
 
-      {/* Schedule Modal — opened from the "Discovery Call" button or the
+      {/* Schedule Modal, opened from the "Discovery Call" button or the
           global revfactor:open-schedule event. */}
       {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>

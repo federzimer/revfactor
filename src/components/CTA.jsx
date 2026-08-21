@@ -64,7 +64,7 @@ export default function CTA() {
       </div>
     </section>
 
-    {/* Schedule Modal — conditionally mounted */}
+    {/* Schedule Modal, conditionally mounted */}
     {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>
   );

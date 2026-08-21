@@ -1,5 +1,5 @@
 ---
-// Single-post template — Layout 2 (Immersive)
+// Single-post template: Layout 2 (Immersive)
 // Ported from src/pages/blog-mockups/post-immersive.astro into a content-collection-driven template.
 // Hero headline reduced from clamp(56px,9vw,140px) to clamp(34px,4.5vw,56px) so it reads at journal scale.
 
@@ -9,7 +9,7 @@ import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
 import BlogScheduleCTA from '../../components/BlogScheduleCTA.jsx';
 
-// Federico author headshot — used in hero metadata + bottom author card
+// Federico author headshot: used in hero metadata + bottom author card
 const FEDE_PHOTO = '/blog/revenue-management-for-short-term-rentals/federico-author.webp';
 
 export async function getStaticPaths() {
@@ -84,7 +84,7 @@ const heroSrcset = (() => {
   };
 })();
 
-// Organization entity — referenced by both Person.worksFor and BlogPosting.publisher
+// Organization entity: referenced by both Person.worksFor and BlogPosting.publisher
 // via @id so the entity graph is explicitly connected (top-10 AI-citation factor).
 const revfactorOrg = {
   "@type": "Organization",
@@ -104,7 +104,7 @@ const revfactorOrg = {
   "description": "Standalone short-term rental revenue management service. Flat-fee dynamic pricing across 198 listings, 24 states, 67 markets. +24% RevPAR vs. comp set over a 24-month rolling average."
 };
 
-// Federico Person schema — references the Organization above via @id so the
+// Federico Person schema: references the Organization above via @id so the
 // entity graph is connected (vs. inline duplicate Organization nodes).
 const federicoPerson = {
   "@type": "Person",
@@ -166,7 +166,7 @@ const schema = {
   "@graph": [revfactorOrg, federicoPerson, articleSchema]
 };
 
-// FAQPage schema — only when frontmatter declares faqs (drives both accordion + JSON-LD)
+// FAQPage schema: only when frontmatter declares faqs (drives both accordion + JSON-LD)
 const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -177,7 +177,7 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
   }))
 } : null;
 
-// BreadcrumbList — site → blog → post
+// BreadcrumbList: site → blog → post
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -188,10 +188,10 @@ const breadcrumbSchema = {
   ]
 };
 
-// HowTo + DefinedTerm — per-post schema packages. Pillar gets minimum-stay
+// HowTo + DefinedTerm: per-post schema packages. Pillar gets minimum-stay
 // + listing-launch HowTos and the foundational glossary; dynamic-pricing
 // spoke gets the beginner-playbook HowTo + its own definitions. Both are
-// content-shaped, not hierarchy-gated — each page carries the schema that
+// content-shaped, not hierarchy-gated. Each page carries the schema that
 // describes its own content.
 const isPillar = post.id === 'revenue-management-for-short-term-rentals';
 const isDynamicPricing = post.id === 'dynamic-pricing-str-beginners-guide';
@@ -209,7 +209,7 @@ const howToCompSet = {
     { "@type": "HowToStep", "position": 1, "name": "Filter to your bedroom count exactly", "text": "A 2-bedroom benchmarks against 2-bedrooms only. A 3BR competing against 2BRs sees inflated occupancy benchmarks; a 3BR competing against 4BRs sees inflated rate benchmarks. Mixed-bedroom comp sets corrupt every downstream pricing decision." },
     { "@type": "HowToStep", "position": 2, "name": "Filter to listing type (entire home vs. private room)", "text": "Entire-home and private-room listings live in different demand pools. Even when ADR and occupancy look comparable, the booking lead time, length-of-stay, and guest count distributions are different enough that mixing them creates noise in pacing reads." },
     { "@type": "HowToStep", "position": 3, "name": "Filter to amenity tier (pool / hot tub / waterfront / view)", "text": "Premium amenities define their own subcategory. A pool listing competes against pool listings; a non-pool listing in the same market is a different competitive set. Build comp sets per amenity profile, not per geography alone." },
-    { "@type": "HowToStep", "position": 4, "name": "Filter by submarket proximity (under 5 miles or same district)", "text": "Same city is too broad. Demand patterns change inside a 5-mile radius — beach-block vs. inland, downtown vs. suburb, ski-base vs. valley. Submarket proximity is the load-bearing geographic filter." },
+    { "@type": "HowToStep", "position": 4, "name": "Filter by submarket proximity (under 5 miles or same district)", "text": "Same city is too broad. Demand patterns change inside a 5-mile radius: beach-block vs. inland, downtown vs. suburb, ski-base vs. valley. Submarket proximity is the load-bearing geographic filter." },
     { "@type": "HowToStep", "position": 5, "name": "Filter to review velocity (50+ reviews in trailing 12 months)", "text": "Listings with thin review history have unstable rate and occupancy data. Filter to listings with 50+ reviews in the trailing 12 months so the benchmark reflects what's actually getting booked, not what an unranked test listing shows on the surface." },
     { "@type": "HowToStep", "position": 6, "name": "Verify license status where regulated", "text": "In licensed markets (NYC, San Francisco, parts of LA, much of Hawaii), only licensed listings should sit in the comp set. Unlicensed comparisons distort rate floors and create the appearance of underpricing when the real issue is regulatory cost structure." },
     { "@type": "HowToStep", "position": 7, "name": "Cap the comp set at 10–15 listings and refresh monthly", "text": "More than 15 listings dilutes the signal. Fewer than 8 makes it brittle. Refresh monthly to catch new entrants, listing-tier shifts, and exits. Quarterly is acceptable but slower; annual refresh is too stale for active management." }
@@ -218,9 +218,9 @@ const howToCompSet = {
 
 const adrRevparDefinedTerms = [
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Perishable inventory", "description": "An inventory category where unsold units cannot be stored for later sale. An empty STR night is permanently lost revenue; a vacant night today cannot be sold tomorrow. The foundational economic constraint behind all revenue management practice, ported from airline yield management.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Yield management", "description": "The practice of selling perishable inventory — airline seats, hotel rooms, STR nights — to the right guest at the right price at the right moment. Originated in airline pricing in the 1980s and was the direct intellectual ancestor of modern STR revenue management. Combines demand forecasting, segmentation, and rate optimization.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "GOPPAR", "description": "Gross Operating Profit Per Available Room (or available night, for STRs). RevPAR minus all variable operating costs — cleaning fees, channel commissions, OTA fees, and management overhead. In high-OpEx markets (Big Bear, Tahoe, Hilton Head), GOPPAR is the metric that catches whether a strong-looking RevPAR is actually making it to the owner's bank account.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Comp set", "description": "The 10–15 short-term rental listings in the same submarket, bedroom count, listing type, and amenity tier that a revenue manager benchmarks rate and pacing against. The single most load-bearing input to any RevPAR calculation — a wrong comp set produces wrong benchmarks, which produce wrong pricing decisions. Auto-built comp sets are wrong about half the time and need manual override.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Yield management", "description": "The practice of selling perishable inventory (airline seats, hotel rooms, STR nights) to the right guest at the right price at the right moment. Originated in airline pricing in the 1980s and was the direct intellectual ancestor of modern STR revenue management. Combines demand forecasting, segmentation, and rate optimization.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "GOPPAR", "description": "Gross Operating Profit Per Available Room (or available night, for STRs). RevPAR minus all variable operating costs: cleaning fees, channel commissions, OTA fees, and management overhead. In high-OpEx markets (Big Bear, Tahoe, Hilton Head), GOPPAR is the metric that catches whether a strong-looking RevPAR is actually making it to the owner's bank account.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Comp set", "description": "The 10–15 short-term rental listings in the same submarket, bedroom count, listing type, and amenity tier that a revenue manager benchmarks rate and pacing against. The single most load-bearing input to any RevPAR calculation. A wrong comp set produces wrong benchmarks, which produce wrong pricing decisions. Auto-built comp sets are wrong about half the time and need manual override.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
 ];
 
 const howToMinStay = {
@@ -232,7 +232,7 @@ const howToMinStay = {
   "step": [
     { "@type": "HowToStep", "position": 1, "name": "Pull average length of stay from your top 5 comp-set listings", "text": "Open each comp-set listing's Reviews tab. Estimate average stay length from review timestamps. Take the median across the 5." },
     { "@type": "HowToStep", "position": 2, "name": "Beat the market minimum by one night", "text": "If the average is at least 1.5 nights below the market minimum, set your minimum 1 night below the market (market 5 → you offer 3 or 4)." },
-    { "@type": "HowToStep", "position": 3, "name": "Raise base rates 15–20%", "text": "Capture the visibility premium — you'll appear in searches that competitors are filtered out of. Don't leave the rate flat." },
+    { "@type": "HowToStep", "position": 3, "name": "Raise base rates 15–20%", "text": "Capture the visibility premium. You'll appear in searches that competitors are filtered out of. Don't leave the rate flat." },
     { "@type": "HowToStep", "position": 4, "name": "Layer a 10% LOS discount at the market average", "text": "On stays at or above the market average, offer 10% off. Longer-stay guests still see a deal; you still beat the rate of the higher-minimum competitors." }
   ]
 };
@@ -256,10 +256,10 @@ const definedTerms = [
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "NetRevPAR", "description": "RevPAR minus variable costs per night (cleaning, channel commissions, OTA fees). Tells you whether the rate-and-occupancy win is making it to your bank account.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Pacing", "description": "How bookings accumulate week-over-week vs. the same period last year. The single best leading indicator of revenue.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Length-of-stay discount", "description": "A graduated discount that incentivizes longer bookings without giving away the nightly rate. The discount feels like a deal to the guest; the math is a win for the host.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Survivorship bias (in STR pricing)", "description": "The minimum-stay rules you can see across your competitors are the ones that survived their pricing decision. The listings that didn't survive — priced out by their own restrictions — are invisible. Setting minimums by copying visible competitors compounds the bias.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Survivorship bias (in STR pricing)", "description": "The minimum-stay rules you can see across your competitors are the ones that survived their pricing decision. The listings that didn't survive, priced out by their own restrictions, are invisible. Setting minimums by copying visible competitors compounds the bias.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
 ];
 
-// Dynamic-pricing spoke — its own HowTo (the 6-step beginner playbook
+// Dynamic-pricing spoke: its own HowTo (the 6-step beginner playbook
 // rendered in the rf-plays grid) + DefinedTerm package for the terms it
 // introduces. RevPAR is intentionally NOT duplicated here; the pillar's
 // glossary already covers it across the cluster.
@@ -270,19 +270,19 @@ const howToDynamicPricingSetup = {
   "description": "A six-step beginner playbook for installing PriceLabs, Beyond Pricing, or Wheelhouse on an Airbnb / Vrbo listing without leaving 15-25% of revenue on the table.",
   "totalTime": "PT2H",
   "step": [
-    { "@type": "HowToStep", "position": 1, "name": "Build the comp set", "text": "Identify 10-15 listings in your submarket that match your bedroom count, location, and amenity tier. The tool will auto-suggest. Override the bad matches manually — auto-built comp sets are wrong half the time." },
-    { "@type": "HowToStep", "position": 2, "name": "Set the base rate", "text": "Pull the comp-set median by season — peak, shoulder, trough — for the last twelve months. Set your base rate at or near the median. Refresh quarterly. This is the number every other rule multiplies." },
+    { "@type": "HowToStep", "position": 1, "name": "Build the comp set", "text": "Identify 10-15 listings in your submarket that match your bedroom count, location, and amenity tier. The tool will auto-suggest. Override the bad matches manually. Auto-built comp sets are wrong half the time." },
+    { "@type": "HowToStep", "position": 2, "name": "Set the base rate", "text": "Pull the comp-set median by season (peak, shoulder, trough) for the last twelve months. Set your base rate at or near the median. Refresh quarterly. This is the number every other rule multiplies." },
     { "@type": "HowToStep", "position": 3, "name": "Configure minimum stays", "text": "Different by season, day of week, and lead time. Three nights in July, two nights in February, one night for last-minute. Static minimums are the second-largest revenue leak after a stale base rate." },
-    { "@type": "HowToStep", "position": 4, "name": "Layer length-of-stay discounts", "text": "A graduated discount ladder — 5% off three nights, 10% off five, 15% off seven. Captures longer bookings without giving away the nightly rate. Most beginners skip this. It's quietly worth 5-8% of revenue." },
-    { "@type": "HowToStep", "position": 5, "name": "Customize for known events", "text": "Set rate floors and minimum-stay overrides for events you know are coming — graduations, festivals, sporting weekends. Lock these in 90-180 days out, before the booking window opens. The tool's event database misses the regional ones." },
-    { "@type": "HowToStep", "position": 6, "name": "Turn on auto-sync, then watch pacing", "text": "Push the calendar to Airbnb, Vrbo, and direct. Then check pacing weekly — bookings on the books vs same date last year — and adjust when something's off. The first 60 days of a new setup are the highest-touch." }
+    { "@type": "HowToStep", "position": 4, "name": "Layer length-of-stay discounts", "text": "A graduated discount ladder: 5% off three nights, 10% off five, 15% off seven. Captures longer bookings without giving away the nightly rate. Most beginners skip this. It's quietly worth 5-8% of revenue." },
+    { "@type": "HowToStep", "position": 5, "name": "Customize for known events", "text": "Set rate floors and minimum-stay overrides for events you know are coming: graduations, festivals, sporting weekends. Lock these in 90-180 days out, before the booking window opens. The tool's event database misses the regional ones." },
+    { "@type": "HowToStep", "position": 6, "name": "Turn on auto-sync, then watch pacing", "text": "Push the calendar to Airbnb, Vrbo, and direct. Then check pacing weekly (bookings on the books vs same date last year) and adjust when something's off. The first 60 days of a new setup are the highest-touch." }
   ]
 };
 
 // WebPage entity with about + mentions arrays.
 // Disambiguates the page's subject + referenced entities for AI search engines
 // (Perplexity, ChatGPT Search, Google Knowledge Graph) by linking to canonical
-// Wikipedia / vendor URLs. Per-post — only the pillar and dynamic-pricing
+// Wikipedia / vendor URLs. Per-post: only the pillar and dynamic-pricing
 // spoke have entity packages today; other posts skip this block.
 const webPageEntities = isPillar ? {
   about: [
@@ -327,15 +327,15 @@ const webPageSchema = webPageEntities ? {
 } : null;
 
 const dynamicPricingDefinedTerms = [
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Lead time (STR booking)", "description": "How far ahead of the stay date a guest books. Lead-time curves vary sharply by market — beach markets book 6+ months out, urban markets often book inside 14 days. Dynamic pricing tools weight lead time differently per market.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Lead time (STR booking)", "description": "How far ahead of the stay date a guest books. Lead-time curves vary sharply by market: beach markets book 6+ months out, urban markets often book inside 14 days. Dynamic pricing tools weight lead time differently per market.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Comp set", "description": "The 10-15 short-term rental listings in the same submarket, bedroom count, and amenity tier that a dynamic pricing tool benchmarks against to set rate and pacing signals. Auto-built comp sets are wrong about half the time and need manual override.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Airbnb Smart Pricing", "description": "Airbnb's built-in feature that nudges nightly rates inside a min/max the host sets, based on platform-wide demand signals. Reactive, not strategic — most professional hosts run third-party tools (PriceLabs, Beyond, Wheelhouse) on top of or instead of Smart Pricing.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "75-55 rule (Airbnb)", "description": "A community heuristic that targets roughly 75% occupancy on weekends and 55% on weekdays as a healthy rate-and-occupancy balance for most leisure-market listings. A sanity check, not a benchmark — the number that actually matters is RevPAR vs. comp set.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "80/20 rule (Airbnb)", "description": "The Pareto pattern most STR portfolios follow: roughly 80% of annual revenue comes from 20% of nights — peak weekends, holiday weeks, local-event windows. Implies high-leverage nights deserve months of pre-planning, not algorithmic autopilot.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Base rate (dynamic pricing)", "description": "The anchor nightly rate — set seasonally and refreshed quarterly — that every other dynamic-pricing rule multiplies. Tools optimize from the floor; they don't interrogate it. A floor anchored to last year's comfort costs revenue all year.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Airbnb Smart Pricing", "description": "Airbnb's built-in feature that nudges nightly rates inside a min/max the host sets, based on platform-wide demand signals. Reactive, not strategic. Most professional hosts run third-party tools (PriceLabs, Beyond, Wheelhouse) on top of or instead of Smart Pricing.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "75-55 rule (Airbnb)", "description": "A community heuristic that targets roughly 75% occupancy on weekends and 55% on weekdays as a healthy rate-and-occupancy balance for most leisure-market listings. A sanity check, not a benchmark. The number that actually matters is RevPAR vs. comp set.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "80/20 rule (Airbnb)", "description": "The Pareto pattern most STR portfolios follow: roughly 80% of annual revenue comes from 20% of nights (peak weekends, holiday weeks, local-event windows). Implies high-leverage nights deserve months of pre-planning, not algorithmic autopilot.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Base rate (dynamic pricing)", "description": "The anchor nightly rate, set seasonally and refreshed quarterly, that every other dynamic-pricing rule multiplies. Tools optimize from the floor; they don't interrogate it. A floor anchored to last year's comfort costs revenue all year.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
 ];
 
-// The RevFactor Method (Blog 4) — HowTo for the 4 daily optimisation
+// The RevFactor Method (Blog 4): HowTo for the 4 daily optimisation
 // mechanics, plus DefinedTerm packages for the three branded phase names
 // (Discover, Strategise, Optimise) and the "Every Night Is Worth" mental
 // model. ItemList ties the three phases into an ordered sequence.
@@ -347,7 +347,7 @@ const howToRevFactorMethod = {
   "totalTime": "PT30M",
   "step": [
     { "@type": "HowToStep", "position": 1, "name": "Read the comp set every morning", "text": "Re-read the comp set daily. A pricing tool configures it once at setup; the Method re-reads it every morning. Flag new entrants, overnight rate moves, and minimum-stay shifts within 24 hours." },
-    { "@type": "HowToStep", "position": 2, "name": "Integrate event and demand signals 60-90 days out", "text": "Conventions, festivals, school calendars, concert tours. Inject these into the rate plan before the booking window closes — historical-curve pricing tools will not surface them in time." },
+    { "@type": "HowToStep", "position": 2, "name": "Integrate event and demand signals 60-90 days out", "text": "Conventions, festivals, school calendars, concert tours. Inject these into the rate plan before the booking window closes. Historical-curve pricing tools will not surface them in time." },
     { "@type": "HowToStep", "position": 3, "name": "Apply surgical minimum-stay flexes", "text": "Minimum-stay is a date-specific lever, not a property-wide setting. Two nights on Memorial Day weekend, no minimum on midweek shoulder dates, three nights during major local events. Different per market, per booking window." },
     { "@type": "HowToStep", "position": 4, "name": "Run pacing-driven rate shifts weekly", "text": "Pacing is the difference between bookings on the books for a future date this year vs. the same lead time last year. Pacing ahead → lift the rate. Pacing behind → adjust via rate, LOS discount, or minimum-stay reduction." }
   ]
@@ -356,23 +356,23 @@ const howToRevFactorMethod = {
 const methodDefinedTerms = [
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Discover (RevFactor Method)", "description": "Phase 1 of the RevFactor Method. The diagnostic audit of where a short-term rental property stands today against four inputs: historical market performance, current RevPAR vs. comp set, the Pricing Health Index and Market Position Score, and local demand signals. Discover surfaces the gap between current performance and what the market will pay.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Strategise (RevFactor Method)", "description": "Phase 2 of the RevFactor Method. The market-calibrated plan built from the Discover audit, expressed as a set of rules: when to push baseline rates up, when to flex minimum stays, when to open length-of-stay discounts, and when to hold the line. The strategy lives in the rules, not in a one-page recommendation.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Optimise (RevFactor Method)", "description": "Phase 3 of the RevFactor Method. The daily, weekly, and monthly execution work that adjusts the strategy against reality — comp-set monitoring, event and demand-signal integration, surgical minimum-stay flexes, pacing-driven rate shifts, and channel-mix calibration. Optimise feeds new data back into the next Discover cycle, making the Method a continuous loop.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Every Night Is Worth", "description": "The perishable-inventory mental model behind the RevFactor Method. Every calendar night carries a specific revenue value tied to that night's comp set, demand signals, and pacing curve. Once the night passes, the value drops to zero. The pricing question is never 'what should I charge tonight' in the abstract — it is 'what is this specific night worth, given the booking window?'", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
-  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Pricing Health Index", "description": "A proprietary RevFactor diagnostic that grades how well a short-term rental's current rate strategy is aligned with market signals — baseline rate, minimum-stay structure, length-of-stay discount ladder, and pacing posture. Used inside the Discover phase of the RevFactor Method.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Optimise (RevFactor Method)", "description": "Phase 3 of the RevFactor Method. The daily, weekly, and monthly execution work that adjusts the strategy against reality: comp-set monitoring, event and demand-signal integration, surgical minimum-stay flexes, pacing-driven rate shifts, and channel-mix calibration. Optimise feeds new data back into the next Discover cycle, making the Method a continuous loop.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Every Night Is Worth", "description": "The perishable-inventory mental model behind the RevFactor Method. Every calendar night carries a specific revenue value tied to that night's comp set, demand signals, and pacing curve. Once the night passes, the value drops to zero. The pricing question is never 'what should I charge tonight' in the abstract. It is 'what is this specific night worth, given the booking window?'", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
+  { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Pricing Health Index", "description": "A proprietary RevFactor diagnostic that grades how well a short-term rental's current rate strategy is aligned with market signals: baseline rate, minimum-stay structure, length-of-stay discount ladder, and pacing posture. Used inside the Discover phase of the RevFactor Method.", "inDefinedTermSet": "https://www.revfactor.io/glossary" },
   { "@context": "https://schema.org", "@type": "DefinedTerm", "name": "Market Position Score", "description": "A proprietary RevFactor 0–100 measurement of where a short-term rental listing sits within its comp set on quality, price, and conversion. Used alongside the Pricing Health Index inside the Discover phase of the RevFactor Method.", "inDefinedTermSet": "https://www.revfactor.io/glossary" }
 ];
 
 const methodItemList = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "The RevFactor Method — three-phase revenue management process",
+  "name": "The RevFactor Method: three-phase revenue management process",
   "description": "The three sequential phases of the RevFactor Method, run as a continuous operating rhythm.",
   "numberOfItems": 3,
   "itemListOrder": "https://schema.org/ItemListOrderAscending",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Discover", "description": "Audit where the property stands today — comp set, RevPAR baseline, Pricing Health Index, Market Position Score, local demand signals." },
-    { "@type": "ListItem", "position": 2, "name": "Strategise", "description": "Build a market-calibrated plan — baseline rate, minimum-stay rules, length-of-stay discount ladder, pacing-aware floors, channel mix." },
-    { "@type": "ListItem", "position": 3, "name": "Optimise", "description": "Execute daily and feed new data back into the next Discover cycle — comp-set reads, event integration, surgical minimum-stay flexes, pacing-driven rate shifts, channel-mix calibration." }
+    { "@type": "ListItem", "position": 1, "name": "Discover", "description": "Audit where the property stands today: comp set, RevPAR baseline, Pricing Health Index, Market Position Score, local demand signals." },
+    { "@type": "ListItem", "position": 2, "name": "Strategise", "description": "Build a market-calibrated plan: baseline rate, minimum-stay rules, length-of-stay discount ladder, pacing-aware floors, channel mix." },
+    { "@type": "ListItem", "position": 3, "name": "Optimise", "description": "Execute daily and feed new data back into the next Discover cycle: comp-set reads, event integration, surgical minimum-stay flexes, pacing-driven rate shifts, channel-mix calibration." }
   ]
 };
 ---
@@ -428,14 +428,14 @@ const methodItemList = {
 
   <Navbar client:load />
 
-  {/* Schedule-modal click interceptor lives in BaseLayout (site-wide) — no per-page wiring needed. */}
+  {/* Schedule-modal click interceptor lives in BaseLayout (site-wide). No per-page wiring needed. */}
 
   <div id="progressBar" class="fixed top-0 left-0 h-[3px] bg-cedar z-[100] transition-[width] duration-75" style="width:0;"></div>
 
   <article>
-    <!-- IMMERSIVE FULL-BLEED HERO — min-height so section can grow to fit
+    <!-- IMMERSIVE FULL-BLEED HERO: min-height so section can grow to fit
          the title + metadata stack at very narrow viewports. Was
-         `height:78vh; min-height:580px` — locked the section to 580px on a
+         `height:78vh; min-height:580px`, which locked the section to 580px on a
          667px-tall iPhone SE, but content needed ~600px so the H1 overflowed
          behind the navbar. min-height grows; max-height capped by media
          query below for desktop. -->
@@ -456,11 +456,11 @@ const methodItemList = {
         class="absolute inset-0 w-full h-full object-cover will-change-transform"
         style="transform:scale(1.15); transform-origin:center center; z-index:0;"
       />
-      <!-- Base darkening wash — uniform light tint so the image carries through, text still legible -->
+      <!-- Base darkening wash: uniform light tint so the image carries through, text still legible -->
       <div class="absolute inset-0 z-[1] pointer-events-none" style="background: rgba(22,25,16,0.18);"></div>
-      <!-- Top gradient — strong enough for navbar legibility, then fades fast -->
+      <!-- Top gradient: strong enough for navbar legibility, then fades fast -->
       <div class="absolute top-0 left-0 right-0 h-64 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0.85) 0%, rgba(22,25,16,0.5) 40%, rgba(22,25,16,0.15) 80%, rgba(22,25,16,0) 100%);"></div>
-      <!-- Bottom gradient — preserves text legibility for the title block, lighter than before -->
+      <!-- Bottom gradient: preserves text legibility for the title block, lighter than before -->
       <div class="absolute bottom-0 left-0 right-0 h-[70%] z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(22,25,16,0) 0%, rgba(22,25,16,0.35) 30%, rgba(22,25,16,0.65) 60%, rgba(22,25,16,0.85) 90%, rgba(22,25,16,0.92) 100%);"></div>
 
       <div class="rf-blog-hero-inner relative z-[2] max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-end pb-20 pt-36">
@@ -518,7 +518,7 @@ const methodItemList = {
       </div>
     </section>
 
-    <!-- Floating TOC — XL+ only. Collapsed pill by default; expands on hover/click into full TOC -->
+    <!-- Floating TOC: XL+ only. Collapsed pill by default; expands on hover/click into full TOC -->
     <aside id="tocFloat" class="hidden xl:block fixed left-6 top-32 z-30">
       <div id="tocPill" class="rf-toc-pill" tabindex="0" aria-expanded="false" aria-controls="tocPanel" aria-label="Table of contents">
         <span class="rf-toc-progress" aria-hidden="true"><span id="tocProgressFill"></span></span>
@@ -544,7 +544,7 @@ const methodItemList = {
       </div>
     </aside>
 
-    <!-- Mobile/tablet TOC — collapsible, sits above the body so we keep the grid centered -->
+    <!-- Mobile/tablet TOC: collapsible, sits above the body so we keep the grid centered -->
     <div class="xl:hidden">
       <details class="rf-mobile-toc max-w-2xl mx-auto px-6 md:px-12 mt-12 pb-2 border-y border-[#C8C4BC]">
         <summary class="flex items-center justify-between gap-4 cursor-pointer py-4 list-none">
@@ -564,7 +564,7 @@ const methodItemList = {
       </details>
     </div>
 
-    <!-- BODY — CSS-grid container with width tiers (body / wide / full-bleed) -->
+    <!-- BODY: CSS-grid container with width tiers (body / wide / full-bleed) -->
     <div class="prose-rf pt-10 pb-20 md:pt-12 md:pb-24">
       <Content />
       {post.data.faqs && post.data.faqs.length > 0 && (
@@ -583,7 +583,7 @@ const methodItemList = {
       )}
     </div>
 
-    <!-- Tags + Author card — same grid container so they stay centered with body -->
+    <!-- Tags + Author card: same grid container so they stay centered with body -->
     <div class="prose-rf-after pb-20">
       {post.data.tags.length > 0 && (
         <div class="rf-tags">
@@ -606,7 +606,7 @@ const methodItemList = {
         <div>
           <h3 class="text-[24px] text-[#3F261F] mb-1" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:500;">{post.data.author.toLowerCase()}</h3>
           <div class="font-bold uppercase text-[9px] tracking-[2px] text-[#8F6E62] mb-4">Founder · RevFactor</div>
-          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-3">Federico Zimerman is the founder of <a href="https://www.revfactor.io" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">RevFactor</a>, a managed revenue management service for short-term rental hosts. He spent 10 years in airline revenue management at American Airlines before applying that yield-management playbook to vacation rentals — strategies that run daily across <strong>198 STR listings in 24 U.S. states and 67 markets</strong> through Blackbird Hospitality, with a documented <strong>+24% RevPAR lift vs. comp set</strong>.</p>
+          <p class="text-[14px] leading-[1.6] text-[#76574C] mb-3">Federico Zimerman is the founder of <a href="https://www.revfactor.io" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">RevFactor</a>, a managed revenue management service for short-term rental hosts. He spent 10 years in airline revenue management at American Airlines before applying that yield-management playbook to vacation rentals. Those strategies run daily across <strong>198 STR listings in 24 U.S. states and 67 markets</strong> through Blackbird Hospitality, with a documented <strong>+24% RevPAR lift vs. comp set</strong>.</p>
           <p class="text-[14px] leading-[1.6] text-[#76574C] mb-4">He's been featured on <a href="https://open.spotify.com/episode/5mMJaZvwdHix05EUmiCgyz" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar"><em>No Vacancy with Natalie Palmer</em> (Ep. 155)</a>, <a href="https://lifeofflowpodcast.com/videos/how-to-build-a-profitable-airbnb-and-property-management-business-lof-93/" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar"><em>Life of Flow</em> (Ep. 93)</a>, <a href="https://craftedstays.co/blog/75-properties-later-why-a-delisted-airbnb-made-federico-zimerman-go-direct/" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar"><em>Crafted Stays</em></a>, and <a href="https://podcasts.apple.com/us/podcast/54-the-fastest-way-of-scaling-your-airbnb/id1675408369?i=1000696802443" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar"><em>STR Like The Best</em> (Ep. 54)</a>, and posts daily on TikTok (<a href="https://www.tiktok.com/@federicozimerman" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">@federicozimerman</a>) and Instagram (<a href="https://www.instagram.com/federico.zimerman" target="_blank" rel="noopener" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-cedar hover:text-cedar">@federico.zimerman</a>).</p>
           <div class="flex gap-2 flex-wrap">
             <a href="https://www.linkedin.com/in/federico-zimerman-23ab3345/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-[#C8C4BC] text-[11px] font-bold uppercase tracking-[1.5px] text-[#3F261F] hover:border-[#3F261F] transition-colors">Follow on LinkedIn</a>
@@ -662,28 +662,28 @@ const methodItemList = {
   <Footer client:load />
 
   <style>
-    /* ============== LAYOUT — CSS-grid driven width tiers ==============
+    /* ============== LAYOUT: CSS-grid driven width tiers ==============
        prose-rf is a grid container. Body content lives in the center
        `body` track (max 720px). Wide elements (figures, philosophy, leaks,
        plays, scoreboard, charts) span the `wide` track. Full-bleed images
        break out of the page entirely via the `full` track. Grid columns
        are computed once in CSS so every element is symmetrically centered
-       on the page — no negative-margin breakout hacks. */
-    /* Hero — preserve the desktop max-height cap (was inline `max-height:820px`,
+       on the page, with no negative-margin breakout hacks. */
+    /* Hero: preserve the desktop max-height cap (was inline `max-height:820px`,
        moved here so we can scope it to wide screens only). At narrow viewports
        the hero grows freely via min-height so the H1 + metadata stack never
        collides with the navbar. */
     @media (min-width: 1024px) {
       .rf-blog-hero { max-height: 820px; }
     }
-    /* Mobile padding — pt-36 / pb-20 (144 / 80px) is appropriate for desktop
+    /* Mobile padding: pt-36 / pb-20 (144 / 80px) is appropriate for desktop
        but crushes the content area on iPhone SE (375x667). Reduce to clear
        the navbar (56px tall + 16px top offset = clears at pt-24 / 96px) while
        leaving more room for the title block + metadata. */
     @media (max-width: 640px) {
       .rf-blog-hero-inner {
-        padding-top: 6rem;     /* 96px — was 144px */
-        padding-bottom: 3rem;  /* 48px  — was 80px */
+        padding-top: 6rem;     /* 96px, was 144px */
+        padding-bottom: 3rem;  /* 48px, was 80px */
       }
     }
 
@@ -703,7 +703,7 @@ const methodItemList = {
        for space and shrink it to a sliver (was 116px on a 390px viewport).
        Collapse the sidebar tracks so the body claims the full available
        width up to its 720px max. Wide-track elements (rf-figure, rf-leaks,
-       rf-chart, etc.) still span the same start/end lines — they just
+       rf-chart, etc.) still span the same start/end lines. They just
        become coterminous with the body track at narrower widths. */
     @media (max-width: 1199px) {
       .prose-rf,
@@ -747,10 +747,10 @@ const methodItemList = {
     .prose-rf > :global(.rf-diagram) {
       grid-column: wide-start / wide-end;
     }
-    /* Full-bleed modifier — diagram extends past wide-track to the edge of the
+    /* Full-bleed modifier: diagram extends past wide-track to the edge of the
        page. Used when an SVG needs more horizontal room than the wide track
        (e.g., 7+ input nodes converging into a hub + output rate box).
-       Hidden on mobile where the SVG would compress to unreadable text — the
+       Hidden on mobile where the SVG would compress to unreadable text. The
        paired rf-leaks grid above already enumerates the same content. */
     .prose-rf > :global(.rf-diagram-full) {
       grid-column: full-start / full-end;
@@ -768,14 +768,14 @@ const methodItemList = {
         display: none;
       }
     }
-    /* rf-diagram (custom inline SVGs — flow charts, line charts) */
+    /* rf-diagram (custom inline SVGs: flow charts, line charts) */
     .prose-rf :global(.rf-diagram) {
       margin: 3rem 0 4rem;
       padding: 1.5rem 0;
     }
     .prose-rf :global(.rf-diagram > svg) { display: block; width: 100%; height: auto; max-width: 100%; }
 
-    /* Mobile/tablet chart legibility — SVG line/bar diagrams compress to ~41%
+    /* Mobile/tablet chart legibility: SVG line/bar diagrams compress to ~41%
        of native at iPhone width, making 11px text labels render at ~4.5px
        (unreadable). Below 768px, scroll the SVG horizontally at near-native
        size; pin the figcaption to the left so it stays in view while the
@@ -844,7 +844,7 @@ const methodItemList = {
     /* Floating-TOC behavior: keep panel narrow, tighten line-height,
        active item gets cedar treatment. Hidden until user scrolls past hero.
        Z-index 20 so full-bleed image sections (z-index 30) cover it cleanly. */
-    /* ============== TOC FLOAT — collapsed pill + expand-on-hover panel ==============
+    /* ============== TOC FLOAT: collapsed pill + expand-on-hover panel ==============
        Default: a compact pill showing current section + position (01/11).
        On hover or focus, the pill grows into a full panel listing all sections.
        Active section gets cedar treatment + bumped weight. */
@@ -857,7 +857,7 @@ const methodItemList = {
     }
     #tocFloat.visible { opacity: 1; pointer-events: auto; }
 
-    /* Collapsed pill — always visible when #tocFloat.visible is set */
+    /* Collapsed pill: always visible when #tocFloat.visible is set */
     .rf-toc-pill {
       position: relative;
       display: flex;
@@ -923,7 +923,7 @@ const methodItemList = {
     /* Below 1768px the TOC pill (left:24, max-width:280) overlaps the
        1160px-wide content track (chart/diagram) which centers at chart-left=
        (vw-1160)/2. At 1440 the chart starts at x=140 and the pill ends at
-       x=304 — 127px of occluded title. Hide the section-name label in that
+       x=304. That is 127px of occluded title. Hide the section-name label in that
        range so the pill collapses to ~80px (number + chevron). The full label
        stays visible in the expanded panel. Above 1768 there's natural
        clearance, so we restore the label. */
@@ -931,7 +931,7 @@ const methodItemList = {
       .rf-toc-current { display: none; }
     }
 
-    /* Expanded panel — appears below pill on hover/focus, scrollable if list is long */
+    /* Expanded panel: appears below pill on hover/focus, scrollable if list is long */
     .rf-toc-panel {
       position: absolute;
       top: calc(100% + 8px);
@@ -1009,16 +1009,16 @@ const methodItemList = {
     .toc-link.active { color: #13342D; font-weight: 600; }
 
     /* ============== BODY PROSE ==============
-       Body — sans-serif (Helvetica) per brand spec; serif reserved for headings + quotes */
+       Body: sans-serif (Helvetica) per brand spec; serif reserved for headings + quotes */
     .prose-rf :global(p) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:17px; line-height:1.7; color:#3F261F; margin:0 0 1.25em; }
     @media (max-width: 640px) { .prose-rf :global(p) { font-size:16px; line-height:1.65; } }
 
-    /* H2 / H3 — Cormorant, weight bumped 500 to match homepage hero feel */
+    /* H2 / H3: Cormorant, weight bumped 500 to match homepage hero feel */
     .prose-rf :global(h2) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(32px,3.8vw,46px); line-height:1.15; color:#3F261F; margin:1.75em 0 0.6em; letter-spacing:0.25px; }
     /* Uniform vertical rhythm: when an rf-* component is followed by an h2,
        collapse the h2's top margin so we don't double-space. Without this rule
-       the h2's 1.75em + the component's bottom margin compounds into ~70px gaps
-       — Aaron flagged 4 instances of this on the pillar post.
+       the h2's 1.75em + the component's bottom margin compounds into ~70px gaps.
+       Aaron flagged 4 instances of this on the pillar post.
        Same rule applied to h3 and to component → component direct adjacency. */
     .prose-rf :global(.rf-quick-answer + h2),
     .prose-rf :global(.rf-key-stats + h2),
@@ -1051,7 +1051,7 @@ const methodItemList = {
     }
     .prose-rf :global(h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:clamp(24px,2.8vw,32px); line-height:1.2; color:#3F261F; margin:1.5em 0 0.4em; letter-spacing:0.25px; }
 
-    /* Lists — sans-serif body */
+    /* Lists: sans-serif body */
     .prose-rf :global(ol),
     .prose-rf :global(ul) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:16px; line-height:1.7; color:#3F261F; padding-left:1.5em; margin:0 0 1.25em; }
     @media (max-width: 640px) {
@@ -1063,8 +1063,8 @@ const methodItemList = {
     .prose-rf :global(li) { margin-bottom: 0.6em; }
     .prose-rf :global(li::marker) { color: #5D6D59; }
     .prose-rf :global(strong) { color:#13342D; font-weight:700; }
-    /* Italics — Cormorant serif in cedar (darker green) per Aaron */
-    /* Italic body copy — Cormorant italic optically reads ~10% smaller than the
+    /* Italics: Cormorant serif in cedar (darker green) per Aaron */
+    /* Italic body copy: Cormorant italic optically reads ~10% smaller than the
        Helvetica it's embedded in. Bump 1.08× so an italicized phrase visually
        matches the body weight instead of looking shrunk + bold. */
     /* Cormorant italic reads visually ~15% smaller than Helvetica at the same em.
@@ -1075,13 +1075,13 @@ const methodItemList = {
     .prose-rf :global(a:hover){ color:#1E4A40; }
     .prose-rf :global(hr)     { border:none; border-top:1px solid #C8C4BC; margin:2.5rem 0; }
 
-    /* Blockquote — text uses cedar dark green per Aaron, easier to read */
+    /* Blockquote: text uses cedar dark green per Aaron, easier to read */
     .prose-rf :global(blockquote) { border-left:4px solid #5D6D59; padding:0.5rem 0 0.5rem 1.5rem; margin:2rem 0; background:transparent; }
     .prose-rf :global(blockquote p) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-weight:400; font-size:clamp(22px,2.6vw,28px); line-height:1.3; color:#13342D; margin:0; }
 
     .prose-rf :global(code) { font-family:'JetBrains Mono',monospace; font-size:14px; background:#C8C4BC; color:#13342D; padding:0.15em 0.45em; border-radius:4px; }
 
-    /* Tables — body cells now 16px, mono numerics, with horizontal scroll on narrow viewports */
+    /* Tables: body cells now 16px, mono numerics, with horizontal scroll on narrow viewports */
     .prose-rf :global(table) { width:100%; border-collapse:collapse; margin:1.75rem 0; font-size:16px; display:block; overflow-x:auto; }
     @media (min-width: 1024px) { .prose-rf :global(table) { display:table; } }
     .prose-rf :global(table thead) { border-bottom:2px solid #3F261F; }
@@ -1235,7 +1235,7 @@ const methodItemList = {
     .prose-rf :global(.rf-key-stats .number) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:clamp(26px,3.4vw,36px); color:#13342D; margin:0 0 0.25rem; text-align:center; line-height:1; }
     .prose-rf :global(.rf-key-stats .caption) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; color:#3F261F; margin:0; text-align:center; line-height:1.35; }
 
-    /* Key Takeaways — heading serif, body sans-serif per brand spec */
+    /* Key Takeaways: heading serif, body sans-serif per brand spec */
     .prose-rf :global(.rf-takeaways) { background:rgba(93,109,89,0.05); border:1px solid #C8C4BC; border-radius:16px; padding:1.75rem 2rem; margin:2rem 0 1.5rem; }
     .prose-rf :global(.rf-takeaways h2),
     .prose-rf :global(.rf-takeaways h3) { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:30px; color:#13342D; margin:0 0 1rem !important; letter-spacing:0.25px; }
@@ -1250,7 +1250,7 @@ const methodItemList = {
 
     /* ============== HTML GRID COMPONENTS (responsive, scale with text) ============== */
 
-    /* Strategic Philosophy — 3 cards (cedar / moss / tobacco) on the WIDE grid track. */
+    /* Strategic Philosophy: 3 cards (cedar / moss / tobacco) on the WIDE grid track. */
     .prose-rf :global(.rf-philosophy) { margin:2rem 0 1.5rem; }
     .prose-rf :global(.rf-philosophy-header) { text-align:center; margin-bottom:1.75rem; }
     .prose-rf :global(.rf-philosophy-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
@@ -1294,7 +1294,7 @@ const methodItemList = {
        inherits the card's text color (not moss, which goes invisible on moss/cedar bg) */
     .prose-rf :global(.rf-philosophy-card em) { color:inherit !important; font-family:inherit; }
 
-    /* 7 Leaks — 4-up responsive grid on the WIDE track. */
+    /* 7 Leaks: 4-up responsive grid on the WIDE track. */
     .prose-rf :global(.rf-leaks) { margin:2rem 0 1.5rem; }
     .prose-rf :global(.rf-leaks-header) { text-align:center; margin-bottom:1.5rem; }
     .prose-rf :global(.rf-leaks-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
@@ -1329,7 +1329,7 @@ const methodItemList = {
     /* Override em color inside leak cards so italic doesn't go cedar-on-bone-on-cedar-accent */
     .prose-rf :global(.rf-leak-card em) { color:#13342D; }
 
-    /* ============== RF-SCOREBOARD — RevPAR vs ADR comparison cards ============== */
+    /* ============== RF-SCOREBOARD: RevPAR vs ADR comparison cards ============== */
     .prose-rf :global(.rf-scoreboard) { margin:2rem 0 1.5rem; }
     .prose-rf :global(.rf-scoreboard-header) { text-align:center; margin-bottom:2rem; }
     .prose-rf :global(.rf-scoreboard-header .kicker) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#76574C; margin:0 0 0.75rem; }
@@ -1404,7 +1404,7 @@ const methodItemList = {
     .prose-rf :global(.rf-score-delta .copy) { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; flex:1 1 auto; min-width:0; line-height:1.25; text-align:center; }
     .prose-rf :global(.rf-score-delta .val) { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; color: #E8E6E1; line-height:1; flex:0 0 100%; text-align:center; }
 
-    /* ============== RF-PLAYS — 6 tactical plays grid ============== */
+    /* ============== RF-PLAYS: 6 tactical plays grid ============== */
     .prose-rf :global(.rf-plays) {
       margin: 2rem 0 1.5rem;
       background: #13342D;
@@ -1438,7 +1438,7 @@ const methodItemList = {
     .prose-rf :global(.rf-play-card .copy) { font-family:Helvetica,'Helvetica Neue',Arial,sans-serif; font-size:15px; line-height:1.65; color:#3F261F; margin:0 !important; }
     .prose-rf :global(.rf-play-card em) { color:#13342D; }
 
-    /* ============== RF-BLEED — full-bleed image with quote overlay ============== */
+    /* ============== RF-BLEED: full-bleed image with quote overlay ============== */
     .prose-rf :global(.rf-bleed) {
       position: relative;
       min-height: 480px;
@@ -1498,7 +1498,7 @@ const methodItemList = {
       font-style: normal;
     }
 
-    /* ============== RF-CHART — pure-CSS horizontal bar chart ============== */
+    /* ============== RF-CHART: pure-CSS horizontal bar chart ============== */
     .prose-rf :global(.rf-chart) {
       margin: 3rem 0;
       padding: 2.25rem;
@@ -1581,8 +1581,8 @@ const methodItemList = {
     .prose-rf :global(.rf-chart-legend .swatch.cedar) { background: #13342D; }
     .prose-rf :global(.rf-chart-legend .swatch.walnut) { background: #76574C; }
 
-    /* ============== RF-BAND — colored-section breaks for contrast ==============
-       Full-bleed band on the WIDE grid track (not full viewport — keeps a
+    /* ============== RF-BAND: colored-section breaks for contrast ==============
+       Full-bleed band on the WIDE grid track (not full viewport, which keeps a
        margin so it reads as a callout, not a hero). Variants: cedar, tobacco, moss.
        Place inline in MDX wherever a content beat deserves emphasis. */
     .prose-rf :global(.rf-band) { margin:2rem 0 1.5rem;
@@ -1636,7 +1636,7 @@ const methodItemList = {
     }
     .prose-rf :global(.rf-band strong) { color: inherit !important; opacity: 1; }
 
-    /* RF-CTA-BAND — the post-closing CTA that bridges into the author bio.
+    /* RF-CTA-BAND: the post-closing CTA that bridges into the author bio.
        Uses cedar background to draw the eye without competing with the article body. */
     .prose-rf :global(.rf-cta-band) {
       margin: 3rem 0 2.5rem;
@@ -1688,7 +1688,7 @@ const methodItemList = {
       transform: translateY(-1px);
     }
 
-    /* RF-TESTIMONIAL — client quote card with two avatar states:
+    /* RF-TESTIMONIAL: client quote card with two avatar states:
          - <div class="avatar"><img src=".." /></div> → real client photo
          - <div class="avatar">SK</div>              → placeholder (initials in brand circle)
        Variant: add `.cedar` to the wrapper for an inverted dark-green card. */
@@ -1808,7 +1808,7 @@ const methodItemList = {
       .prose-rf :global(.rf-testimonial .metric) { display: none; }
     }
 
-    /* Optional split layout — for stat + paragraph pairs inside a band */
+    /* Optional split layout: for stat + paragraph pairs inside a band */
     .prose-rf :global(.rf-band-split) {
       display: grid;
       grid-template-columns: 1fr;
@@ -1839,7 +1839,7 @@ const methodItemList = {
       margin-top: 0.5rem;
     }
 
-    /* ============== RF-FAQ — native <details> accordion ============== */
+    /* ============== RF-FAQ: native <details> accordion ============== */
     .prose-rf :global(.rf-faq) { margin: 1.5rem 0 0; }
     .prose-rf :global(.rf-faq details) {
       border: 1px solid #C8C4BC;
@@ -1911,7 +1911,7 @@ const methodItemList = {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // Floating TOC pill — track active section, update collapsed-pill label + progress fill
+    // Floating TOC pill: track active section, update collapsed-pill label + progress fill
     const tocLinks = document.querySelectorAll('.toc-link');
     const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href')));
     const tocCurrentNum = document.getElementById('tocCurrentNum');
@@ -1936,7 +1936,7 @@ const methodItemList = {
     window.addEventListener('scroll', updateTOC, { passive: true });
     updateTOC();
 
-    // Floating TOC pill — click-to-toggle on touch / no-hover devices, auto-close on link
+    // Floating TOC pill: click-to-toggle on touch / no-hover devices, auto-close on link
     const tocPill = document.getElementById('tocPill');
     const tocFloatEl = document.getElementById('tocFloat');
     if (tocPill && tocFloatEl) {

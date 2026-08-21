@@ -7,10 +7,10 @@ import { GHL_BOOKING, withTrackingParams, loadGhlEmbedScript } from '../data/ghl
 
 /* ─── Schedule Modal ───
    Two-stage modal:
-     1. QualifierGate — 2-question pre-booking qualifier.
+     1. QualifierGate: 2-question pre-booking qualifier.
         Q1 No / Q2 PM paths embed a GHL form (leads land in the CRM).
         Q1 Yes + Q2 Self-host → renders the GHL booking widget below.
-     2. GHL booking iframe — auto-resized by form_embed.js (iframe-resizer),
+     2. GHL booking iframe, auto-resized by form_embed.js (iframe-resizer),
         max-h:92dvh safety cap on the wrapper. */
 export default function ScheduleModal({ onClose }) {
   const isClosingRef = useRef(false);
@@ -115,7 +115,7 @@ export default function ScheduleModal({ onClose }) {
         className="relative flex items-center justify-center min-h-full p-4"
         onClick={handleOverlayClick}
       >
-        {/* Panel — max-h:92dvh capped, height auto-grows to header + iframe.
+        {/* Panel: max-h:92dvh capped, height auto-grows to header + iframe.
             On short viewports panel hits the cap and the iframe wrapper
             scrolls inside. */}
         <div
@@ -163,7 +163,7 @@ export default function ScheduleModal({ onClose }) {
               />
             </div>
           ) : (
-            // Pre-booking qualifier — Q1 then Q2 (or GHL form on no/PM paths)
+            // Pre-booking qualifier: Q1 then Q2 (or GHL form on no/PM paths)
             <QualifierGate
               onQualified={(data) => setQualified(data)}
               onClose={handleClose}

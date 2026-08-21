@@ -80,7 +80,7 @@ export default function ExitIntent() {
   }, []);
 
   // Close on Escape + lock body scroll while open. Also load GHL's
-  // form_embed.js (iframe auto-resize) only once the popup actually opens —
+  // form_embed.js (iframe auto-resize) only once the popup actually opens.
   // keeps PPC pages iframe/script-free on first paint.
   useEffect(() => {
     if (!open) return;
@@ -139,7 +139,7 @@ export default function ExitIntent() {
         className="relative bg-[#DDDAD3] rounded-[20px] w-full max-w-[760px] max-h-[92dvh] shadow-[0_24px_80px_rgba(0,0,0,0.4)] outline-none flex flex-col overflow-hidden"
         style={{ animation: 'eiSlideUp 350ms cubic-bezier(0.25,0.1,0.25,1)' }}
       >
-        {/* Header — just the 2-line headline, forced break.
+        {/* Header: just the 2-line headline, forced break.
             Line 1: "Don't leave revenue on the table."
             Line 2: italic "Book your discovery call." */}
         <div className="px-6 md:px-8 pt-6 md:pt-7 pb-4 flex items-start justify-between">
@@ -161,7 +161,7 @@ export default function ExitIntent() {
           </button>
         </div>
 
-        {/* GHL booking iframe — auto-resized by form_embed.js. The wrapper
+        {/* GHL booking iframe, auto-resized by form_embed.js. The wrapper
             scrolls if the widget outgrows the viewport-capped max height;
             the visible scrollbar is styled via .ei-iframe-wrap CSS. */}
         <div

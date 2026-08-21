@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { GHL_FORM_NO_LISTING, GHL_FORM_PM, withTrackingParams, loadGhlEmbedScript } from '../data/ghl.ts';
 
 /**
- * QualifierGate — 2-question pre-booking qualifier.
+ * QualifierGate: 2-question pre-booking qualifier.
  *
  *   Q1: "Do you have a short-term rental property?"
  *       No  → GHL "no listing" form (email capture, no call)
@@ -13,7 +13,7 @@ import { GHL_FORM_NO_LISTING, GHL_FORM_PM, withTrackingParams, loadGhlEmbedScrip
  *       Host → onQualified() → parent unmounts QualifierGate + mounts the
  *              GHL booking widget
  *
- * Non-host paths embed GoHighLevel forms (src/data/ghl.ts) — submissions
+ * Non-host paths embed GoHighLevel forms (src/data/ghl.ts). Submissions
  * land directly in the GHL CRM. The old /api/discovery-lead endpoint is
  * dormant, not deleted.
  */
@@ -53,7 +53,7 @@ export default function QualifierGate({ onQualified, onClose }) {
   );
 
   // While the GHL form is mounted: load form_embed.js (auto-resize) and
-  // listen for the submission message to fire lead tracking parity —
+  // listen for the submission message to fire lead tracking parity:
   // PostHog + Umami + the $75 Google Ads conversion the old first-party
   // form used to fire on POST success.
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function QualifierGate({ onQualified, onClose }) {
         path: isNoProperty ? 'no_property' : 'pm',
       });
       window.rfTrack?.('lead-captured', { path });
-      // Google Ads conversion — Discovery Lead Captured (Secondary, $75)
+      // Google Ads conversion: Discovery Lead Captured (Secondary, $75)
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'conversion', {
           send_to: 'AW-18106897053/MT8ACNTnqbEcEJ2lhbpD',
@@ -86,7 +86,7 @@ export default function QualifierGate({ onQualified, onClose }) {
     return () => window.removeEventListener('message', onMsg);
   }, [step, isNoProperty, hasProperty, isPM]);
 
-  // Q1 — has property
+  // Q1: has property
   if (step === 'q1') {
     return (
       <div ref={cardRef} className="qg-card">
@@ -130,13 +130,13 @@ export default function QualifierGate({ onQualified, onClose }) {
     );
   }
 
-  // Q2 — PM vs self-host
+  // Q2: PM vs self-host
   if (step === 'q2') {
     return (
       <div ref={cardRef} className="qg-card">
         <p className="qg-kicker">DISCOVERY · STEP 2 OF 2</p>
         <h3 className="qg-title">Are you a property management company or a self-host?</h3>
-        <p className="qg-sub">Different fit. Self-hosts get a Discovery Call. Property management companies — we'd love to talk partnership.</p>
+        <p className="qg-sub">Different fit. Self-hosts get a Discovery Call. If you run a property management company, we'd love to talk partnership.</p>
         <div className="qg-buttons">
           <button
             type="button"
@@ -174,7 +174,7 @@ export default function QualifierGate({ onQualified, onClose }) {
     );
   }
 
-  // GHL form (no-property OR PM paths) — the form carries its own heading
+  // GHL form (no-property OR PM paths). The form carries its own heading
   // and thank-you screen; form_embed.js auto-resizes the iframe.
   return (
     <div ref={cardRef} className="qg-card">

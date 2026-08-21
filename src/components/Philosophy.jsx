@@ -36,7 +36,7 @@ export default function Philosophy() {
       ref={sectionRef}
       className="relative py-32 md:py-44 overflow-hidden bg-[#161910]"
     >
-      {/* Parallax Background — <picture> with WebP srcset + JPG fallback. opacity-10 preserves the dark mood overlay. */}
+      {/* Parallax Background: <picture> with WebP srcset + JPG fallback. opacity-10 preserves the dark mood overlay. */}
       <picture>
         <source
           type="image/webp"
@@ -45,7 +45,7 @@ export default function Philosophy() {
         />
         <img
           src="/images/dynamic-pricing-strategy-mountain-cabin-fallback.jpg"
-          alt="Mountain cabin overlooking valley at sunrise — illustrating the philosophy that every night has its true market value"
+          alt="Mountain cabin overlooking valley at sunrise, illustrating the philosophy that every night has its true market value"
           loading="lazy"
           decoding="async"
           width="1920"

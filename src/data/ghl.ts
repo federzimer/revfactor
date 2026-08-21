@@ -1,10 +1,10 @@
 /**
- * GoHighLevel (LeadConnector) widget endpoints — single source of truth.
+ * GoHighLevel (LeadConnector) widget endpoints: single source of truth.
  *
  * All three discovery-call destinations live in GHL (white-labeled at
  * links.revfactor.io). form_embed.js must be loaded on the parent page for
  * GHL iframes to auto-resize (it bundles iframe-resizer and sets
- * iframe.style.height directly — never impose fixed heights on GHL iframes).
+ * iframe.style.height directly, so never impose fixed heights on GHL iframes).
  */
 export const GHL_ORIGIN = 'https://links.revfactor.io';
 
@@ -48,7 +48,7 @@ export function withTrackingParams(base: string): string {
  * GHL BOOKING widgets don't use form_embed.js's resize path (that script
  * only binds iframe-resizer to iframes that announce 'iframeLoaded', which
  * forms do and booking widgets don't). Booking widgets instead post
- * ['highlevel.setHeight', { height }] arrays — handle those ourselves,
+ * ['highlevel.setHeight', { height }] arrays. Handle those ourselves,
  * locating the emitting iframe by its contentWindow.
  */
 declare global {

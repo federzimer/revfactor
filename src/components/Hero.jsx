@@ -41,8 +41,8 @@ export default function Hero() {
         ref={sectionRef}
         className="relative h-[100dvh] min-h-[700px] flex items-end overflow-hidden"
       >
-        {/* Background — <picture> with WebP srcset (1200w mobile / 1920w desktop) + JPG fallback for older Safari.
-            Self-hosted, descriptive filenames, alt text — fully indexable by Google + LLM crawlers. */}
+        {/* Background: <picture> with WebP srcset (1200w mobile / 1920w desktop) + JPG fallback for older Safari.
+            Self-hosted, descriptive filenames, alt text, fully indexable by Google + LLM crawlers. */}
         <picture>
           <source
             type="image/webp"
@@ -51,7 +51,7 @@ export default function Hero() {
           />
           <img
             src="/images/str-revenue-management-hero-fallback.jpg"
-            alt="Mountain cabin short-term rental at dusk — RevFactor delivers expert dynamic pricing strategy for STR hosts"
+            alt="Mountain cabin short-term rental at dusk. RevFactor delivers expert dynamic pricing strategy for STR hosts"
             fetchpriority="high"
             decoding="async"
             width="1920"
@@ -99,7 +99,7 @@ export default function Hero() {
               className="text-[15px] leading-[1.7] text-[#C8C4BC] max-w-[520px] mb-8 opacity-0"
             >
               We combine dynamic pricing tools with expert strategy to maximize
-              your rental income — while you stay in control.
+              your rental income, while you stay in control.
             </p>
 
             {/* Stats Bar */}
@@ -141,7 +141,7 @@ export default function Hero() {
 
       </section>
 
-      {/* Schedule Modal — conditionally mounted */}
+      {/* Schedule Modal, conditionally mounted */}
       {scheduleOpen && <ScheduleModal onClose={() => setScheduleOpen(false)} />}
     </>
   );

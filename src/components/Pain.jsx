@@ -27,7 +27,7 @@ function ChaosCalendar() {
 
   useEffect(() => {
     // Replace the deterministic seed with live randomized data only after
-    // hydration — keeps SSR/client markup identical, then animates.
+    // hydration. Keeps SSR/client markup identical, then animates.
     setPrices(generatePrices());
 
     const interval = setInterval(() => {
@@ -63,7 +63,7 @@ function ChaosCalendar() {
   const notifications = [
     { text: 'Competitor dropped price -$18', delay: 0 },
     { text: '3 empty nights this week', delay: 1 },
-    { text: 'Event in 2 days — no adjustment', delay: 2 },
+    { text: 'Event in 2 days, no adjustment', delay: 2 },
   ];
 
   return (
@@ -173,7 +173,7 @@ export default function Pain() {
     },
     {
       icon: DollarSign,
-      text: 'No clear strategy — just reacting to competitors blindly',
+      text: 'No clear strategy, just reacting to competitors blindly',
     },
     {
       icon: Bell,

@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const faqs = [
   {
     q: 'How does your pricing model work?',
-    a: 'We operate on a flat monthly fee designed to pay for itself — seriously',
+    a: 'We operate on a flat monthly fee designed to pay for itself. Seriously.',
   },
   {
     q: 'Do I lose control of my pricing?',
@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: 'What pricing tools do you work with?',
-    a: 'We work with the leading dynamic pricing platform PriceLabs. We calibrate and layer expert strategy on top of it — because algorithms alone miss the nuance that drives real revenue.',
+    a: 'We work with the leading dynamic pricing platform PriceLabs. We calibrate and layer expert strategy on top of it, because algorithms alone miss the nuance that drives real revenue.',
   },
   {
     q: 'How many properties do I need to get started?',

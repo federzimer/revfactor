@@ -15,10 +15,10 @@ interface Props {
 }
 
 const {
-  title = 'RevFactor — Intelligent Pricing for Inspired Stays',
-  description = 'RevFactor delivers expert dynamic pricing strategy for short-term rental hosts — maximizing revenue without sacrificing control.',
+  title = 'RevFactor: Intelligent Pricing for Inspired Stays',
+  description = 'RevFactor delivers expert dynamic pricing strategy for short-term rental hosts, maximizing revenue without sacrificing control.',
   ogImage = '/og-image.png',
-  ogImageAlt = 'RevFactor — managed short-term rental revenue management. +24% RevPAR vs. comp set across 198 listings, 24 states, 67 markets.',
+  ogImageAlt = 'RevFactor: managed short-term rental revenue management. +24% RevPAR vs. comp set across 198 listings, 24 states, 67 markets.',
   type = 'website',
   publishedTime,
   modifiedTime,
@@ -118,7 +118,7 @@ const canonicalUrl = Astro.url.href;
     })();
   </script>
 
-  <!-- Fraud Blocker — bot/click-fraud detection. Deferred until window.load
+  <!-- Fraud Blocker: bot/click-fraud detection. Deferred until window.load
        so it doesn't block first paint. Bot signals still reach Fraud
        Blocker for any user actually engaging with the page. -->
   <script is:inline>
@@ -168,8 +168,9 @@ const canonicalUrl = Astro.url.href;
   {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
   {author && <meta property="article:author" content={author} />}
 
-  <!-- Twitter Card — twitter:site/creator intentionally omitted; no active X account
-       for RevFactor or Federico as of 2026-06-23. Re-add when one launches. -->
+  <!-- Twitter Card. The twitter:site/creator tags are intentionally omitted;
+       no active X account for RevFactor or Federico as of 2026-06-23.
+       Re-add when one launches. -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
@@ -197,7 +198,7 @@ const canonicalUrl = Astro.url.href;
 
   <!-- Google Analytics + Google Ads (one gtag.js load handles both IDs).
        defer (not async) so the script downloads in parallel but runs after
-       DOMContentLoaded — keeps gtag.js out of the LCP critical path. The
+       DOMContentLoaded, which keeps gtag.js out of the LCP critical path. The
        inline script below queues events into dataLayer; gtag.js processes
        the queue when it eventually executes. -->
   <script defer src="https://www.googletagmanager.com/gtag/js?id=G-1CTGBJ9RLK"></script>
@@ -208,7 +209,7 @@ const canonicalUrl = Astro.url.href;
     gtag('config', 'G-1CTGBJ9RLK');
     gtag('config', 'AW-18106897053');
 
-    // Booking listener — fires Google Ads "Strategy Call Booked (Parent
+    // Booking listener: fires Google Ads "Strategy Call Booked (Parent
     // Attributed)" conversion + GA4 event when the embedded GHL booking
     // widget (links.revfactor.io) confirms a booking. GHL iframes post
     // ARRAYS where data[0] is the action; 'msgsndr-booking-complete' is the
@@ -217,7 +218,7 @@ const canonicalUrl = Astro.url.href;
     // conversion test simulates one). Firing from THIS origin (revfactor.io)
     // carries the gclid into the conversion ping, which the iframe-origin
     // gtag can't do. Single primary action for Smart Bidding (7614208046).
-    // NOTE: the $75 Discovery Lead conversion is NOT here — it fires from
+    // NOTE: the $75 Discovery Lead conversion is NOT here. It fires from
     // QualifierGate.jsx, which knows the qualifier path (no-property vs PM).
     (function () {
       var GHL_BOOKING_TYPES = ['msgsndr-booking-complete'];
@@ -261,7 +262,7 @@ const canonicalUrl = Astro.url.href;
       });
     })();
 
-    // Phone click listener — fires "Phone Click" conversion on tel: links.
+    // Phone click listener: fires "Phone Click" conversion on tel: links.
     document.addEventListener('click', function (e) {
       var a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
       if (!a) return;

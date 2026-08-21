@@ -1,10 +1,10 @@
 /**
- * Portfolio stats — SINGLE SOURCE OF TRUTH for site-wide numbers.
+ * Portfolio stats: SINGLE SOURCE OF TRUTH for site-wide numbers.
  *
  * Update here, then run `python3 scripts/update_portfolio_stats.py` to
  * propagate to MDX/Astro prose that can't import this file directly.
  *
- * Last update: 2026-06-09 (Federico pricing refresh — flat $350, no
+ * Last update: 2026-06-09 (Federico pricing refresh: flat $350, no
  * volume scale; onboarding $150; child listing $50)
  */
 
@@ -20,7 +20,7 @@ export const PORTFOLIO_STATS = {
 } as const;
 
 /**
- * Display strings — used in React/Astro components.
+ * Display strings: used in React/Astro components.
  * MDX prose carries these as literal text and is kept in sync by the
  * update_portfolio_stats.py script.
  */

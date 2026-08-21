@@ -20,7 +20,7 @@ const STATS = [
   { value: STAT_LABELS.marketsShort, label: 'MARKETS' },
 ];
 
-// ─── Map Tooltip (desktop — HTML portal) ───────────────────
+// ─── Map Tooltip (desktop, HTML portal) ───────────────────
 
 function MapTooltip({ marker, position }) {
   if (!marker) return null;
@@ -309,7 +309,7 @@ export default function AboutPage() {
             </h1>
 
             <p className="about-animate opacity-0 text-[15px] leading-[1.7] text-[#8F6E62] max-w-xl mx-auto mb-12 md:mb-16">
-              We optimize pricing for 198 listings across 24 states — from mountain
+              We optimize pricing for 198 listings across 24 states, from mountain
               cabins in the Smokies to beachfront condos on the Carolina coast.
             </p>
 

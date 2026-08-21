@@ -319,7 +319,7 @@ export default function Features() {
             </div>
             <StrategyTypewriter />
             <p className="mt-4 text-[13px] leading-[1.6] text-[#76574C]">
-              Continuous market monitoring with expert-calibrated pricing adjustments — not just algorithmic guesswork.
+              Continuous market monitoring with expert-calibrated pricing adjustments, not just algorithmic guesswork.
             </p>
           </div>
 
@@ -335,7 +335,7 @@ export default function Features() {
             </div>
             <CalendarOptimizer />
             <p className="mt-4 text-[13px] leading-[1.6] text-[#76574C]">
-              Every night priced to its true market value — demand-responsive, event-aware, strategically optimized.
+              Every night priced to its true market value: demand-responsive, event-aware, strategically optimized.
             </p>
           </div>
         </div>

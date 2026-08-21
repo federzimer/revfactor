@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef } from 'react';
 
-const fmtUSD = (n) => (Number.isFinite(n) ? `$${n.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '—');
-const fmtPct = (n) => (Number.isFinite(n) ? `${(n * 100).toFixed(1)}%` : '—');
+const fmtUSD = (n) => (Number.isFinite(n) ? `$${n.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : 'N/A');
+const fmtPct = (n) => (Number.isFinite(n) ? `${(n * 100).toFixed(1)}%` : 'N/A');
 
 export default function RevPARCalculator({ defaultRevenue = 36000, defaultBooked = 60, defaultAvailable = 90, defaultCost = 8400 }) {
   const [revenue, setRevenue] = useState(defaultRevenue);
@@ -9,7 +9,7 @@ export default function RevPARCalculator({ defaultRevenue = 36000, defaultBooked
   const [available, setAvailable] = useState(defaultAvailable);
   const [cost, setCost] = useState(defaultCost);
 
-  // One engagement event per mount — first edit of any input.
+  // One engagement event per mount, on the first edit of any input.
   const engagedRef = useRef(false);
   const markEngaged = () => {
     if (engagedRef.current) return;
@@ -98,7 +98,7 @@ export default function RevPARCalculator({ defaultRevenue = 36000, defaultBooked
       </div>
 
       <p style={{ fontSize: '13px', color: '#76574C', lineHeight: 1.6, marginTop: '14px', marginBottom: 0 }}>
-        ADR is what you charged on booked nights. RevPAR averages revenue across every night you had to sell — the metric that maps to actual revenue. GOPPAR subtracts operating cost (cleaning, supplies, channel commission, pricing fees) and reflects what reaches the owner.
+        ADR is what you charged on booked nights. RevPAR averages revenue across every night you had to sell, which is the metric that maps to actual revenue. GOPPAR subtracts operating cost (cleaning, supplies, channel commission, pricing fees) and reflects what reaches the owner.
       </p>
     </div>
   );

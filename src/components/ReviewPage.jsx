@@ -153,7 +153,7 @@ export default function ReviewPage() {
               </p>
             </div>
 
-            {/* Embedded GHL booking widget — form_embed.js auto-resizes it;
+            {/* Embedded GHL booking widget. form_embed.js auto-resizes it;
                 min-h is the pre-resize fallback. */}
             <div className="w-full rounded-[12px] overflow-hidden border border-[#C8C4BC]/50">
               <iframe
