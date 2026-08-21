@@ -33,7 +33,7 @@ const otherStudies = allStudies
   .sort((a, b) => (b.data.pacing?.liftPct ?? 0) - (a.data.pacing?.liftPct ?? 0))
   .slice(0, 3);
 
-// CaseStudy / Article schema — Article works best for AI engines, augmented with
+// CaseStudy / Article schema: Article works best for AI engines, augmented with
 // a Place entity for the property location and Quantitative metrics.
 const articleSchema = {
   "@context": "https://schema.org",
@@ -79,7 +79,7 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout
-  title={`${study.data.listing} — RevFactor Case Study`}
+  title={`${study.data.listing} | RevFactor Case Study`}
   description={study.data.description}
   type="article"
   publishedTime={study.data.pubDate.toISOString()}
@@ -93,7 +93,7 @@ const breadcrumbSchema = {
   <Navbar client:load />
 
   <article>
-    <!-- Hero — data-led, no image. The metrics ARE the hero. -->
+    <!-- Hero: data-led, no image. The metrics ARE the hero. -->
     <section class="pt-32 md:pt-40 pb-12 md:pb-16 bg-[#DDDAD3]">
       <div class="max-w-5xl mx-auto px-6 md:px-12">
         <!-- Breadcrumb -->
@@ -212,7 +212,7 @@ const breadcrumbSchema = {
             <p class="text-[20px] leading-[1.5] mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;">
               "{study.data.testimonial.quote}"
             </p>
-            <p class="text-[11px] font-bold uppercase tracking-[2px] text-[#A9BBA3]">— {study.data.testimonial.author}</p>
+            <p class="text-[11px] font-bold uppercase tracking-[2px] text-[#A9BBA3]">{study.data.testimonial.author}</p>
             {study.data.testimonial.source && (
               <p class="text-[10px] text-[#A9BBA3]/60 mt-1">{study.data.testimonial.source}</p>
             )}

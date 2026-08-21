@@ -8,7 +8,7 @@ const studies = (await getCollection('caseStudies')).sort(
   (a, b) => (b.data.pacing?.liftPct ?? 0) - (a.data.pacing?.liftPct ?? 0)
 );
 
-// Q1 2026 candidates — high-level table on the index page; detail pages will be
+// Q1 2026 candidates: high-level table on the index page; detail pages will be
 // added once owner sign-off lands and tactical context is filled in. Source: the
 // Q1 tab of /Files/Summer 2026 (OTB pacing).xlsx, 2026-05-04 export.
 const q1Highlights = [
@@ -32,7 +32,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "RevFactor Case Studies",
-  "description": "Documented revenue-management results across short-term rental properties under RevFactor management — pacing, ADR, and Market Penetration data for Summer 2026 and Q1 2026.",
+  "description": "Documented revenue-management results across short-term rental properties under RevFactor management: pacing, ADR, and Market Penetration data for Summer 2026 and Q1 2026.",
   "url": "https://www.revfactor.io/case-studies",
   "publisher": {
     "@type": "Organization",
@@ -52,7 +52,7 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout
-  title="Case Studies — RevFactor | Documented STR Revenue Management Results"
+  title="Case Studies | RevFactor | Documented STR Revenue Management Results"
   description="Documented +57% to +293% summer-pacing lifts across short-term rental properties under RevFactor management. Real data, real properties, real markets."
 >
   <Fragment slot="head">
@@ -87,7 +87,7 @@ const breadcrumbSchema = {
             <em style="font-style: italic; color: #7A8B76;">studies</em>
           </h1>
           <p class="text-[15px] leading-[1.7] text-[#76574C] max-w-xl mb-2">
-            Real properties, real markets, real numbers. Each study below is sourced from RevFactor's pacing reports — on-the-books revenue, ADR, and Market Penetration Index against same-time-last-year and final-year baselines.
+            Real properties, real markets, real numbers. Each study below is sourced from RevFactor's pacing reports: on-the-books revenue, ADR, and Market Penetration Index against same-time-last-year and final-year baselines.
           </p>
           <p class="text-[12px] leading-[1.6] text-[#8F6E62] max-w-xl italic">
             Past performance is not indicative of future results. Owner names are abbreviated where written sign-off is pending.
@@ -96,12 +96,12 @@ const breadcrumbSchema = {
       </div>
     </section>
 
-    <!-- Summer 2026 pacing — featured -->
+    <!-- Summer 2026 pacing: featured -->
     <section class="pb-16 md:pb-24">
       <div class="max-w-7xl mx-auto px-6 md:px-12">
         <div class="flex items-end justify-between mb-8 pb-4 border-b border-[#C8C4BC]">
           <div>
-            <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-2">SUMMER 2026 — ON-THE-BOOKS PACING</p>
+            <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-2">SUMMER 2026 · ON-THE-BOOKS PACING</p>
             <h2
               class="text-[clamp(24px,3.5vw,36px)] leading-[1.15] text-[#3F261F]"
               style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
@@ -179,11 +179,11 @@ const breadcrumbSchema = {
       </div>
     </section>
 
-    <!-- Q1 2026 highlights — table -->
+    <!-- Q1 2026 highlights: table -->
     <section class="pb-16 md:pb-24 bg-[#E8E6E1]">
       <div class="max-w-7xl mx-auto px-6 md:px-12 pt-16 md:pt-20">
         <div class="mb-8 pb-4 border-b border-[#C8C4BC]">
-          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-2">Q1 2026 — ACTUALS</p>
+          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-2">Q1 2026 · ACTUALS</p>
           <h2
             class="text-[clamp(24px,3.5vw,36px)] leading-[1.15] text-[#3F261F] mb-3"
             style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
@@ -191,7 +191,7 @@ const breadcrumbSchema = {
             Top Q1 lifts <em style="font-style: italic; color: #7A8B76;">across the portfolio.</em>
           </h2>
           <p class="text-[14px] leading-[1.6] text-[#76574C] max-w-2xl">
-            Twenty-four RevFactor-managed properties posted positive Q1 2026 revenue lifts vs. Q1 2025. The ten with the largest lifts are below — full case studies for these properties are in production.
+            Twenty-four RevFactor-managed properties posted positive Q1 2026 revenue lifts vs. Q1 2025. The ten with the largest lifts are below. Full case studies for these properties are in production.
           </p>
         </div>
 
@@ -213,7 +213,7 @@ const breadcrumbSchema = {
                 <tr class={i % 2 === 0 ? 'bg-[#DDDAD3]' : 'bg-[#E8E6E1]/50'}>
                   <td class="px-5 py-3.5 text-[13px] text-[#3F261F]" style="font-family: 'Cormorant Garamond', Georgia, serif;">{row.listing}</td>
                   <td class="px-5 py-3.5 text-[12px] text-[#76574C]">{row.city}</td>
-                  <td class="px-5 py-3.5 text-[12px] text-[#3F261F] text-right" style="font-family: 'JetBrains Mono', monospace;">{row.br || '—'}</td>
+                  <td class="px-5 py-3.5 text-[12px] text-[#3F261F] text-right" style="font-family: 'JetBrains Mono', monospace;">{row.br || 'n/a'}</td>
                   <td class="px-5 py-3.5 text-[12px] text-[#3F261F] text-right" style="font-family: 'JetBrains Mono', monospace;">{fmt(row.rev)}</td>
                   <td class="px-5 py-3.5 text-[12px] text-[#5D6D59] text-right" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">{fmtPct(row.lift)}</td>
                   <td class="px-5 py-3.5 text-[12px] text-[#5D6D59] text-right" style="font-family: 'JetBrains Mono', monospace;">+{fmt(row.rev - row.ly)}</td>
@@ -247,7 +247,7 @@ const breadcrumbSchema = {
           </div>
           <div>
             <dt class="font-bold text-[#3F261F]">STLY (same-time-last-year)</dt>
-            <dd>The comparable booking-curve point in the prior year — i.e., what the calendar held a year ago for the same future window. The cleanest apples-to-apples pacing comparison.</dd>
+            <dd>The comparable booking-curve point in the prior year, meaning what the calendar held a year ago for the same future window. The cleanest apples-to-apples pacing comparison.</dd>
           </div>
           <div>
             <dt class="font-bold text-[#3F261F]">LY (last-year final)</dt>
@@ -259,7 +259,7 @@ const breadcrumbSchema = {
           </div>
           <div>
             <dt class="font-bold text-[#3F261F]">ADR (Average Daily Rate)</dt>
-            <dd>Average price of booked nights. Useful as a directional signal but never alone — high ADR with low occupancy can mean the rate is wrong.</dd>
+            <dd>Average price of booked nights. Useful as a directional signal but never alone. High ADR with low occupancy can mean the rate is wrong.</dd>
           </div>
         </dl>
         <p class="text-[12px] text-[#8F6E62] mt-8 italic">

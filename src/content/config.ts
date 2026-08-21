@@ -19,7 +19,7 @@ const blog = defineCollection({
     imageAlt: z.string().optional(),
     featured: z.boolean().default(false),
     readingTime: z.number().optional(),
-    /* Optional FAQ block — drives both the on-page accordion AND the FAQPage JSON-LD.
+    /* Optional FAQ block: drives both the on-page accordion AND the FAQPage JSON-LD.
        Single source of truth so the visible content and schema can never drift. */
     faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
   }),
@@ -45,7 +45,7 @@ const caseStudies = defineCollection({
     clientNamePublic: z.boolean().default(false),
     onboardedDate: z.coerce.date().optional(),
     tenureMonths: z.number().optional(),
-    /* Pacing block — Summer 2026 OTB pacing data */
+    /* Pacing block: Summer 2026 OTB pacing data */
     pacing: z.object({
       period: z.string(),
       otbRev: z.number(),
@@ -86,7 +86,7 @@ const caseStudies = defineCollection({
       author: z.string(),
       source: z.string().optional(),
     }).optional(),
-    /* Tactics used — surfaces on the page as a "what changed" callout */
+    /* Tactics used: surfaces on the page as a "what changed" callout */
     tactics: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
   }),
