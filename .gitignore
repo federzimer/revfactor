@@ -71,3 +71,8 @@ tests/playwright/reports/
 tests/playwright/screenshots/
 tests/playwright/videos/
 qa-screenshots/
+
+# Cron heartbeat state — machine-local, regenerated each run (keep .bing_index_history.json tracked, it's real trend data)
+scripts/.brain_scan_last_success
+scripts/.weekly_sweep_last_success
+scripts/.DS_Store
