@@ -177,6 +177,38 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
   }))
 } : null;
 
+// Service + Offer schema: only when frontmatter declares `service`. Commercial-intent
+// pages ("what does this cost") need a machine-readable price for the buyer query;
+// BlogPosting alone carries no pricing. Linked to the Organization by @id so it joins
+// the same entity cluster rather than floating as a loose node.
+const serviceSchema = post.data.service ? {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${Astro.url.href}#service`,
+  "name": post.data.service.name,
+  "description": post.data.service.description,
+  ...(post.data.service.serviceType ? { "serviceType": post.data.service.serviceType } : {}),
+  "provider": { "@id": "https://www.revfactor.io/#organization" },
+  "areaServed": { "@type": "Country", "name": post.data.service.areaServed },
+  ...(post.data.service.offers.length > 0 ? {
+    "offers": post.data.service.offers.map((o) => ({
+      "@type": "Offer",
+      "name": o.name,
+      "price": o.price,
+      "priceCurrency": o.priceCurrency,
+      ...(o.description ? { "description": o.description } : {}),
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": o.price,
+        "priceCurrency": o.priceCurrency,
+        ...(o.unitCode ? { "unitCode": o.unitCode } : {})
+      },
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.revfactor.io/short-term-rental-consultant/"
+    }))
+  } : {})
+} : null;
+
 // BreadcrumbList: site → blog → post
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -405,6 +437,7 @@ const methodItemList = {
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     {webPageSchema && <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />}
     {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+    {serviceSchema && <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />}
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
     {isPillar && <script type="application/ld+json" set:html={JSON.stringify(howToMinStay)} />}
     {isPillar && <script type="application/ld+json" set:html={JSON.stringify(howToLaunch)} />}

@@ -22,6 +22,25 @@ const blog = defineCollection({
     /* Optional FAQ block: drives both the on-page accordion AND the FAQPage JSON-LD.
        Single source of truth so the visible content and schema can never drift. */
     faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
+    /* Optional Service + Offer schema, for commercial-intent pages where a buyer
+       is comparing what things cost. Emits a schema.org Service node linked to the
+       Organization by @id, with an Offer per published price. Only set this on
+       pages that actually make the commercial case — a how-to does not need it.
+       Prices must match src/data/portfolio-stats.ts; there is no second source. */
+    service: z.object({
+      name: z.string(),
+      description: z.string(),
+      serviceType: z.string().optional(),
+      areaServed: z.string().default('United States'),
+      offers: z.array(z.object({
+        name: z.string(),
+        price: z.number(),
+        priceCurrency: z.string().default('USD'),
+        /* UN/CEFACT code: MON = per month, ANN = per year. Omit for one-time fees. */
+        unitCode: z.string().optional(),
+        description: z.string().optional(),
+      })).default([]),
+    }).optional(),
   }),
 });
 
