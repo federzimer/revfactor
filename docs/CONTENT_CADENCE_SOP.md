@@ -26,9 +26,9 @@ From the strategy's content plan (first-party data + service-intent is the wedge
 
 | # | Post | Angle / target | Notes |
 |---|---|---|---|
-| **NEXT** | **Best Airbnb Revenue Management Companies (2026)** | Honest methodology, **software tools included** · 26 service-intent prompts | ⚠️ Must be a *different take* from the existing `best-str-revenue-management-companies-2026` — Airbnb-specific framing, an honest methodology box, and a comparison that includes the software tools (PriceLabs/Wheelhouse/Beyond) alongside done-for-you services. Don't cannibalize the existing post; cross-link them. |
-| 2 | **PriceLabs vs Wheelhouse vs a Done-for-You Service** | Comparison + tool prompts (flanks PriceLabs' 71% usage) | Comparison table + the tool→tool+strategist reframe (our wedge). |
-| 3 | **Airbnb Revenue Management: What It Costs in 2026** | Cost queries (fees, % models, ROI math) — the AI-answer magnet format | First-party pricing math; ties to the $350/mo model. |
+| ~~1~~ | ~~**Best Airbnb Revenue Management Companies (2026)**~~ | ~~Honest methodology, software tools included~~ | 🔴 **ABSORBED 2026-08-24 — do not write.** Cannibalization check found this title is now three-way HIGH-RISK against existing pages: `/blog/airbnb-revenue-management-company/` (95), `/blog/best-str-revenue-management-companies-2026/` (88), `/blog/is-a-pricing-tool-enough-airbnb-revenue-management/` (64). The merged listicle already covers it, software tier included. |
+| ~~2~~ | ~~**PriceLabs vs Wheelhouse vs a Done-for-You Service**~~ | ~~Comparison + tool prompts~~ | ✅ **SHIPPED 2026-08-24** → `/blog/pricelabs-vs-wheelhouse-vs-done-for-you/`. Brief: `docs/BRIEF-pricelabs-vs-wheelhouse-vs-dfy.md`. |
+| **NEXT** | **Airbnb Revenue Management: What It Costs in 2026** | Cost queries (fees, % models, ROI math) — the AI-answer magnet format | First-party pricing math; ties to the $350/mo model. ⚠️ Run a cannibalization check first against the cost sections now live in `is-a-pricing-tool-enough` and `pricelabs-vs-wheelhouse-vs-done-for-you`. |
 | 4 | **7 Ways to Increase Airbnb Revenue Without Lowering Rates** | 16 how-to prompts, **case-study numbers** | Use the documented case-study lifts (+$139,580 across 7 properties, incl. +$47,459 single). Anonymize: market + property type only, no client/property names. Doubles as the YouTube flagship video. |
 
 ---
