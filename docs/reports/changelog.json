@@ -1,5 +1,5 @@
 {
-  "_comment": "Append-only record of shipped content/SEO changes. Consumed by the weekly autopilot run's '## 0. Since last week' section so rank / GSC / AI-visibility movement can be attributed. Spec: docs/AUTOPILOT_CONSTRAINTS.md §3.",
+  "_comment": "Append-only record of shipped content/SEO changes. Consumed by the weekly autopilot run's '## 0. Since last week' section so rank / GSC / AI-visibility movement can be attributed. Spec: docs/AUTOPILOT_CONSTRAINTS.md \u00a73.",
   "entries": [
     {
       "url": "/blog/best-str-revenue-management-companies-2026/",
@@ -13,28 +13,35 @@
       "date": "2026-08-24",
       "rec_type": "factual_correction",
       "rec_summary": "Wheelhouse pricing corrected against the live vendor page: Pro Flat is $19.99/listing/mo at any portfolio size, discounted 15% to $16.99 between 10 and 49 listings. The prior text said $19.99 was the 10-49 tier dropping to $16.99 at 50+.",
-      "commit_sha": "pending"
+      "commit_sha": "25f8f24"
     },
     {
       "url": "/blog/is-a-pricing-tool-enough-airbnb-revenue-management/",
       "date": "2026-08-24",
       "rec_type": "factual_correction",
       "rec_summary": "Same Wheelhouse Pro Flat correction; vendor-pricing capture date refreshed 2026-08-04 -> 2026-08-24 after re-verifying PriceLabs, Wheelhouse and Beyond live.",
-      "commit_sha": "pending"
+      "commit_sha": "25f8f24"
     },
     {
       "url": "/blog/is-a-pricing-tool-enough-airbnb-revenue-management/",
       "date": "2026-08-24",
       "rec_type": "internal_link_added",
       "rec_summary": "Forward reference to the head-to-head teardown turned into a live internal link to /blog/pricelabs-vs-wheelhouse-vs-done-for-you/.",
-      "commit_sha": "pending"
+      "commit_sha": "25f8f24"
     },
     {
       "url": "/blog/pricelabs-vs-wheelhouse-vs-done-for-you/",
       "date": "2026-08-24",
       "rec_type": "new_post",
       "rec_summary": "New post: PriceLabs vs Wheelhouse vs a Done-for-You Service (2026). SOP pipeline position 2. ~3,900 words, 7-lever comparison table, 2 vendor pricing screenshots captured live 2026-08-24, 1 rf-chart, 2 rf-scoreboards, 4 rf-leak-cards, 3 rf-philosophy-cards, 12 FAQs. Cannibalization CLEAR (0 HIGH / 0 MEDIUM across 16 URLs).",
-      "commit_sha": "pending"
+      "commit_sha": "25f8f24"
+    },
+    {
+      "url": "sitewide (blog layout CSS)",
+      "date": "2026-08-24",
+      "rec_type": "accessibility_contrast_fix",
+      "rec_summary": "Two pre-existing dark-on-dark bugs found by rendering the preview: .rf-score-card.cedar .label inherited the prose paragraph colour, and prose links (#13342D cedar) matched the background of every dark block variant so inline <a> tags inside .rf-band.cedar / .rf-quick-answer / .rf-cta-band / .rf-score-card.cedar / .rf-philosophy-card were invisible. Both were live on production.",
+      "commit_sha": "b7c4a68"
     }
   ]
 }
