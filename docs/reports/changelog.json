@@ -70,6 +70,13 @@
       "rec_type": "internal_link_added",
       "rec_summary": "Wheelhouse entry now links across to the new head-to-head post.",
       "commit_sha": "pending"
+    },
+    {
+      "url": "MERGE",
+      "date": "2026-08-25",
+      "rec_type": "shipped_to_production",
+      "rec_summary": "Branch content/autopilot-w34-optimizations merged to main and deployed. Faulen QA passed 2026-08-25 with one comment (meta description length) answered by the documented two-part <320 standard rather than changed. 5 pages live, IndexNow submitted 200 for all 5, CSS contrast fixes verified live via computed styles.",
+      "commit_sha": "4b50346"
     }
   ]
 }
