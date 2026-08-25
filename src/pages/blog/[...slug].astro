@@ -177,6 +177,38 @@ const faqSchema = post.data.faqs && post.data.faqs.length > 0 ? {
   }))
 } : null;
 
+// Service + Offer schema: only when frontmatter declares `service`. Commercial-intent
+// pages ("what does this cost") need a machine-readable price for the buyer query;
+// BlogPosting alone carries no pricing. Linked to the Organization by @id so it joins
+// the same entity cluster rather than floating as a loose node.
+const serviceSchema = post.data.service ? {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${Astro.url.href}#service`,
+  "name": post.data.service.name,
+  "description": post.data.service.description,
+  ...(post.data.service.serviceType ? { "serviceType": post.data.service.serviceType } : {}),
+  "provider": { "@id": "https://www.revfactor.io/#organization" },
+  "areaServed": { "@type": "Country", "name": post.data.service.areaServed },
+  ...(post.data.service.offers.length > 0 ? {
+    "offers": post.data.service.offers.map((o) => ({
+      "@type": "Offer",
+      "name": o.name,
+      "price": o.price,
+      "priceCurrency": o.priceCurrency,
+      ...(o.description ? { "description": o.description } : {}),
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": o.price,
+        "priceCurrency": o.priceCurrency,
+        ...(o.unitCode ? { "unitCode": o.unitCode } : {})
+      },
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.revfactor.io/short-term-rental-consultant/"
+    }))
+  } : {})
+} : null;
+
 // BreadcrumbList: site → blog → post
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -405,6 +437,7 @@ const methodItemList = {
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     {webPageSchema && <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />}
     {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+    {serviceSchema && <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />}
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
     {isPillar && <script type="application/ld+json" set:html={JSON.stringify(howToMinStay)} />}
     {isPillar && <script type="application/ld+json" set:html={JSON.stringify(howToLaunch)} />}
@@ -1072,6 +1105,23 @@ const methodItemList = {
        paragraphs match the surrounding text weight instead of looking shrunk. */
     .prose-rf :global(em)     { font-family:'Cormorant Garamond',Georgia,serif; color:#13342D; font-style:italic; font-size:1.22em; line-height:1.4; }
     .prose-rf :global(a)      { color:#13342D; text-decoration:underline; text-underline-offset:3px; }
+    /* Prose links are cedar (#13342D), which IS the background of every dark
+       block variant, so an inline link inside one renders invisible. Verified
+       live on /blog/is-a-pricing-tool-enough.../ before this fix. */
+    .prose-rf :global(.rf-band.cedar a),
+    .prose-rf :global(.rf-band.tobacco a),
+    .prose-rf :global(.rf-quick-answer a),
+    .prose-rf :global(.rf-cta-band p a:not(.rf-cta-link)),
+    .prose-rf :global(.rf-score-card.cedar a),
+    .prose-rf :global(.rf-philosophy-card a) { color:#A9BBA3; text-decoration-color:rgba(169,187,163,0.55); }
+    .prose-rf :global(.rf-band.moss a) { color:#E8E6E1; text-decoration-color:rgba(232,230,225,0.6); }
+    .prose-rf :global(.rf-band.cedar a:hover),
+    .prose-rf :global(.rf-band.tobacco a:hover),
+    .prose-rf :global(.rf-band.moss a:hover),
+    .prose-rf :global(.rf-quick-answer a:hover),
+    .prose-rf :global(.rf-cta-band p a:not(.rf-cta-link):hover),
+    .prose-rf :global(.rf-score-card.cedar a:hover),
+    .prose-rf :global(.rf-philosophy-card a:hover) { color:#E8E6E1; }
     .prose-rf :global(a:hover){ color:#1E4A40; }
     .prose-rf :global(hr)     { border:none; border-top:1px solid #C8C4BC; margin:2.5rem 0; }
 
@@ -1353,6 +1403,10 @@ const methodItemList = {
     .prose-rf :global(.rf-score-card.cedar) { background: #13342D; border-color: #13342D; color: #E8E6E1; }
     .prose-rf :global(.rf-score-card .label) { font-family:Helvetica,Arial,sans-serif; font-weight:700; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; opacity:0.7; margin:0 0 1rem !important; }
     .prose-rf :global(.rf-score-card .lede)  { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:22px; line-height:1.3; margin:0 0 1.5rem !important; }
+    /* .label is a <p>, so the prose paragraph colour beats the colour inherited
+       from .rf-score-card.cedar and the label renders dark-on-dark. Set it
+       explicitly, the same way .lede already is. */
+    .prose-rf :global(.rf-score-card.cedar .label) { color: #DDDAD3; }
     .prose-rf :global(.rf-score-card.bone .lede)  { color: #76574C; }
     .prose-rf :global(.rf-score-card.cedar .lede) { color: #DDDAD3; }
     .prose-rf :global(.rf-score-row) {
