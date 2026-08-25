@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from collections import Counter, defaultdict
@@ -58,6 +59,29 @@ USER_AGENT = (
 WORD_RE = re.compile(r"[a-zA-Z][a-zA-Z\-']{2,}")
 
 
+def lemma(w: str) -> str:
+    """Collapse a token to its lemma family so singular/plural and simple verb
+    forms count as ONE term.
+
+    This is load-bearing. Counting raw surface forms is what produced four false
+    "topical gap" recommendations on the 2026-08-23 autopilot run: the target page
+    had `guest` 19 times and `guests` 0 times, so a raw counter reported `guests`
+    as a total gap against competitors who happened to favour the plural. Same for
+    `minimum`/`minimums` (98 vs 4). The competitor side has the same split, so the
+    ratio is wrong in both directions and the direction is unpredictable.
+
+    Deliberately crude — no NLTK dependency, no stemming that mangles real words.
+    It only merges the endings that actually caused misreads.
+    """
+    if len(w) > 4 and w.endswith("ies"):
+        return w[:-3] + "y"          # strategies -> strategy
+    if len(w) > 4 and w.endswith("sses"):
+        return w[:-2]                # addresses -> address
+    if len(w) > 3 and w.endswith("s") and not w.endswith(("ss", "us", "is")):
+        return w[:-1]                # guests -> guest, minimums -> minimum
+    return w
+
+
 @dataclass
 class PageData:
     url: str
@@ -73,8 +97,89 @@ class PageData:
     error: str | None = None
 
 
+def _dfs_auth() -> tuple[str, str]:
+    """DataForSEO login/password: env first, then AWS SSM (/thrive/seo/*)."""
+    login = os.environ.get("DATAFORSEO_LOGIN")
+    pw = os.environ.get("DATAFORSEO_PASSWORD")
+    if login and pw:
+        return login, pw
+    import subprocess
+    def ssm(name: str) -> str:
+        out = subprocess.run(
+            ["aws", "ssm", "get-parameter", "--name", name, "--with-decryption"],
+            capture_output=True, text=True, timeout=30)
+        if out.returncode != 0:
+            raise RuntimeError(f"SSM read failed for {name}: {out.stderr.strip()[:120]}")
+        return json.loads(out.stdout)["Parameter"]["Value"]
+    return ssm("/thrive/seo/DATAFORSEO_LOGIN"), ssm("/thrive/seo/DATAFORSEO_PASSWORD")
+
+
+def fetch_serp_competitors(keyword: str, *, own_domain: str, depth: int = 10,
+                           location: str = "United States",
+                           language: str = "English") -> tuple[list[str], list[str]]:
+    """Pull the live Google SERP for `keyword` and return (competitor_urls, PAA questions).
+
+    Replaces the hand-maintained competitors-*.txt files, which were seeded from a
+    single POP run in May 2026 and went stale the moment the SERP moved.
+
+    Our own domain is excluded — a target page comparing itself against itself
+    inflates every term ratio toward 1.0 and hides real gaps.
+
+    NOTE: DataForSEO must be called ONE TASK PER REQUEST. Batching several keywords
+    into one POST returns results for only the first and silently drops the rest.
+    """
+    login, pw = _dfs_auth()
+    body = [{"keyword": keyword, "location_name": location,
+             "language_name": language, "depth": depth}]
+    r = requests.post(
+        "https://api.dataforseo.com/v3/serp/google/organic/live/advanced",
+        auth=(login, pw), json=body, timeout=90,
+        headers={"Content-Type": "application/json"})
+    r.raise_for_status()
+    data = r.json()
+    if data.get("status_code") != 20000:
+        raise RuntimeError(f"DataForSEO error: {data.get('status_message')}")
+    tasks = data.get("tasks") or []
+    if not tasks or not (tasks[0].get("result") or []):
+        return [], []
+    items = (tasks[0]["result"][0].get("items") or [])
+    urls: list[str] = []
+    paa: list[str] = []
+    for it in items:
+        t = it.get("type")
+        if t == "organic":
+            u = it.get("url") or ""
+            if u and own_domain not in u and u not in urls:
+                urls.append(u)
+        elif t == "people_also_ask":
+            for q in (it.get("items") or []):
+                if q.get("title"):
+                    paa.append(q["title"])
+    return urls[:depth], paa
+
+
+BROWSER_HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Upgrade-Insecure-Requests": "1",
+}
+
+
 def fetch(url: str, timeout: int = 25) -> str:
-    r = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=timeout, allow_redirects=True)
+    """Fetch a competitor page with browser-shaped headers.
+
+    A bare requests UA gets a 403 from a large share of the SERP (CoStar,
+    HotelTechReport, AirDNA and friends). Every 403 silently shrinks the
+    competitor set the averages are computed from, so this is accuracy work,
+    not politeness. Sites behind a full Cloudflare challenge still refuse, which
+    is why fetch failures are counted and surfaced rather than swallowed.
+    """
+    r = requests.get(url, headers=BROWSER_HEADERS, timeout=timeout, allow_redirects=True)
     r.raise_for_status()
     return r.text
 
@@ -98,7 +203,8 @@ def extract_page(url: str, html: str) -> PageData:
     body_lower = body_text.lower()
     words = WORD_RE.findall(body_lower)
     word_count = len(words)
-    freq = Counter(w for w in words if w not in STOPWORDS and len(w) > 2)
+    # Count LEMMA FAMILIES, not surface forms — see lemma() for why.
+    freq = Counter(lemma(w) for w in words if w not in STOPWORDS and len(w) > 2)
 
     # Schema types — collect every JSON-LD @type from the original soup
     soup2 = BeautifulSoup(html, "html.parser")
@@ -147,6 +253,15 @@ def _flatten_jsonld(data: Any) -> list[dict]:
 
 def analyze(target: PageData, competitors: list[PageData], keyword: str) -> dict:
     valid_comps = [c for c in competitors if not c.error and c.word_count > 100]
+    # Coverage gate. Averages built from 4 of 10 competitors are not "the SERP
+    # average", and presenting them as one is the same failure that produced the
+    # 2026-08-23 bad recommendations: a confident number with a false premise.
+    # Below 60% coverage the report still renders, but flags itself as unreliable
+    # so nothing downstream treats the ratios as actionable.
+    fetched = len(valid_comps)
+    attempted = len(competitors)
+    coverage = round(100 * fetched / attempted) if attempted else 0
+    failed_urls = [c.url for c in competitors if c.error]
     if not valid_comps:
         return {"error": "no valid competitors fetched"}
 
@@ -171,7 +286,7 @@ def analyze(target: PageData, competitors: list[PageData], keyword: str) -> dict
     # the stopword filter; weighting by document spread (how many comps use it)
     # mimics POP's ranking better than raw avg-per-doc.
     import math
-    kw_tokens = set(WORD_RE.findall(keyword.lower()))
+    kw_tokens = {lemma(t) for t in WORD_RE.findall(keyword.lower())}
     def lsa_score(t: str) -> float:
         avg = term_total_count[t] / term_doc_freq[t]
         spread = math.log1p(term_doc_freq[t])
@@ -226,6 +341,11 @@ def analyze(target: PageData, competitors: list[PageData], keyword: str) -> dict
     avg_kw_count = round(sum(kw_per_competitor) / len(kw_per_competitor), 1)
 
     return {
+        "competitor_coverage_pct": coverage,
+        "competitors_fetched": fetched,
+        "competitors_attempted": attempted,
+        "competitors_failed": failed_urls,
+        "reliable": coverage >= 60,
         "target": {
             "url": target.url,
             "word_count": target.word_count,
@@ -252,6 +372,21 @@ def render_markdown(report: dict, keyword: str) -> str:
     t, s = report["target"], report["serp_avg"]
     lines = []
     lines.append(f"# SEO Comparison Report — `{keyword}`\n")
+    cov = report.get("competitor_coverage_pct", 0)
+    fetched = report.get("competitors_fetched", 0)
+    attempted = report.get("competitors_attempted", 0)
+    if not report.get("reliable", True):
+        lines.append(
+            f"> ⚠️ **UNRELIABLE — do not act on the ratios below.** Only "
+            f"**{fetched} of {attempted}** SERP competitors could be fetched "
+            f"({cov}% coverage). Every average here is computed from that partial set, "
+            f"so a \"gap\" may just be a page we could not read.\n")
+        for u in report.get("competitors_failed", [])[:10]:
+            lines.append(f"> - blocked: {u}")
+        lines.append("")
+    else:
+        lines.append(f"_Competitor set: {fetched} of {attempted} fetched ({cov}% coverage). "
+                     f"Source: {report.get('competitor_source', 'file')}._\n")
     lines.append(f"**Target:** {t['url']}\n")
     lines.append(f"**Competitors compared:** {s['competitors_used']}  ")
     lines.append("")
@@ -325,12 +460,26 @@ def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--target", required=True, help="Target URL to audit")
     p.add_argument("--keyword", required=True, help="Primary keyword")
-    p.add_argument("--competitors", required=True, help="Path to txt file with competitor URLs (one per line)")
+    p.add_argument("--competitors", help="Path to txt file with competitor URLs (one per line). Omit to auto-fetch the live SERP.")
+    p.add_argument("--auto", action="store_true", help="Auto-fetch competitors from the live Google SERP via DataForSEO")
+    p.add_argument("--depth", type=int, default=10, help="How many SERP results to pull as competitors (default 10)")
+    p.add_argument("--own-domain", default="revfactor.io", help="Domain to exclude from the competitor set")
     p.add_argument("--out", default="report.md", help="Output markdown path")
     p.add_argument("--json", default=None, help="Optional JSON output path")
     args = p.parse_args()
 
-    competitor_urls = [l.strip() for l in Path(args.competitors).read_text().splitlines() if l.strip() and not l.startswith("#")]
+    paa: list[str] = []
+    if args.auto or not args.competitors:
+        print(f"[serp] fetching live top-{args.depth} for \"{args.keyword}\"", file=sys.stderr)
+        competitor_urls, paa = fetch_serp_competitors(
+            args.keyword, own_domain=args.own_domain, depth=args.depth)
+        print(f"[serp] {len(competitor_urls)} competitors, {len(paa)} PAA questions", file=sys.stderr)
+        if not competitor_urls:
+            print("FATAL: SERP returned no competitors", file=sys.stderr)
+            return 1
+    else:
+        competitor_urls = [l.strip() for l in Path(args.competitors).read_text().splitlines()
+                           if l.strip() and not l.startswith("#")]
     print(f"[fetch] target: {args.target}", file=sys.stderr)
     try:
         target = extract_page(args.target, fetch(args.target))
@@ -351,6 +500,8 @@ def main() -> int:
             competitors.append(PageData(url=url, error=str(e)))
 
     report = analyze(target, competitors, args.keyword)
+    report["people_also_ask"] = paa
+    report["competitor_source"] = "live SERP via DataForSEO" if (args.auto or not args.competitors) else args.competitors
     md = render_markdown(report, args.keyword)
     Path(args.out).write_text(md)
     print(f"[done] markdown → {args.out}", file=sys.stderr)
