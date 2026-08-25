@@ -311,12 +311,22 @@ export default function PPCLanding({
   // clicks, sets window.__pendingSchedule, and dispatches revfactor:open-schedule.
   // Without this, a click in the first ~2-3s of load did nothing (the React
   // onClick wasn't wired yet), a silent conversion leak on paid traffic.
+  //
+  // These two paths must go through open(), not setScheduleOpen(). The inline
+  // script listens in the CAPTURE phase on document, so it intercepts EVERY
+  // "Discovery call" click on this page, not only the ones during hydration.
+  // Calling setScheduleOpen() directly therefore opened the modal while never
+  // firing schedule_modal_opened, and this is the page paid traffic lands on:
+  // PostHog recorded zero modal opens from /short-term-rental-consultant/ while
+  // the modal was in fact opening normally. Verified 2026-08-25 by wrapping
+  // window.posthog.capture in a live browser: the homepage CTA emitted
+  // schedule_modal_opened, this page emitted only $autocapture.
   useEffect(() => {
-    const openFromEvent = () => setScheduleOpen(true);
+    const openFromEvent = () => open('pre_hydration_click');
     window.addEventListener('revfactor:open-schedule', openFromEvent);
     if (window.__pendingSchedule) {
       window.__pendingSchedule = false;
-      setScheduleOpen(true);
+      open('pre_hydration_pending');
     }
     return () => window.removeEventListener('revfactor:open-schedule', openFromEvent);
   }, []);
