@@ -1967,7 +1967,16 @@ const methodItemList = {
 
     // Floating TOC pill: track active section, update collapsed-pill label + progress fill
     const tocLinks = document.querySelectorAll('.toc-link');
-    const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href')));
+    // Resolve each TOC target by ID, not by querySelector. Heading slugs on the
+    // listicles start with a digit ("## 1. RevFactor" -> id "1-revfactor"), and a
+    // CSS selector may not begin with one, so querySelector('#1-revfactor') THROWS.
+    // The throw happened inside this .map(), which killed the whole scroll-spy
+    // initialiser: on both listicle pages the floating TOC never tracked the active
+    // section at all. getElementById has no selector-syntax restriction.
+    const sections = Array.from(tocLinks).map(a => {
+      const href = a.getAttribute('href') || '';
+      return href.startsWith('#') ? document.getElementById(href.slice(1)) : null;
+    });
     const tocCurrentNum = document.getElementById('tocCurrentNum');
     const tocCurrentLabel = document.getElementById('tocCurrentLabel');
     const tocProgressFill = document.getElementById('tocProgressFill');
