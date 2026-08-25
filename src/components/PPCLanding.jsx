@@ -324,11 +324,20 @@ export default function PPCLanding({
   useEffect(() => {
     const openFromEvent = () => open('pre_hydration_click');
     window.addEventListener('revfactor:open-schedule', openFromEvent);
+    // Drain a click that landed before hydration...
     if (window.__pendingSchedule) {
       window.__pendingSchedule = false;
       open('pre_hydration_pending');
     }
-    return () => window.removeEventListener('revfactor:open-schedule', openFromEvent);
+    // ...then stand the fallback down. Once React owns the CTAs, every click
+    // runs open() through onClick, and leaving the capture-phase listener armed
+    // made it fire a SECOND time -- schedule_modal_opened captured twice per
+    // click, which corrupts the conversion count in the other direction.
+    window.__rfScheduleHydrated = true;
+    return () => {
+      window.removeEventListener('revfactor:open-schedule', openFromEvent);
+      window.__rfScheduleHydrated = false;
+    };
   }, []);
 
   // DTR: read ?msg= URL param after mount and override hero copy if it

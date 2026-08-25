@@ -131,6 +131,10 @@ const serviceSchema = {
       if (!el) return;
       var t = (el.textContent || '').toLowerCase();
       if (t.indexOf('discovery call') === -1 && t.indexOf('strategy call') === -1) return;
+      // Once PPCLanding has hydrated it handles the click itself via onClick.
+      // Without this guard the capture-phase listener keeps firing for the life
+      // of the page and schedule_modal_opened is captured twice per click.
+      if (window.__rfScheduleHydrated) return;
       window.__pendingSchedule = true;
       window.dispatchEvent(new CustomEvent('revfactor:open-schedule'));
     }, true);
