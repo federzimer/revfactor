@@ -16,7 +16,7 @@ function goToCheckout(source) {
 }
 
 /* ─── Navbar ─── */
-export default function Navbar({ lightBg = false }) {
+export default function Navbar({ lightBg = false, showSubscribe = true }) {
   const [scrolled, setScrolled] = useState(lightBg);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scheduleOpen, setScheduleOpen] = useState(false);
@@ -41,7 +41,7 @@ export default function Navbar({ lightBg = false }) {
         if (typeof window.posthog?.capture === 'function') {
           window.posthog.capture('schedule_modal_opened', { source: 'event' });
         }
-      } catch (_) { /* swallow analytics errors */ }
+      } catch { /* swallow analytics errors */ }
       setScheduleOpen(true);
     };
     window.addEventListener('revfactor:open-schedule', open);
@@ -92,7 +92,7 @@ export default function Navbar({ lightBg = false }) {
           ))}
         </div>
 
-        {/* Desktop Buttons, in order: Owners → Subscribe → Discovery Call.
+        {/* Desktop Buttons, in order: Owners → Subscribe (when enabled) → Discovery Call.
             Discovery Call sits on the right (visually heaviest) so it
             anchors the eye as the primary conversion path. */}
         <div className="hidden lg:flex items-center gap-2 ml-2">
@@ -112,18 +112,19 @@ export default function Navbar({ lightBg = false }) {
             owners
           </a>
 
-          {/* Subscribe: moss. Goes straight to Stripe Checkout. */}
-          <button
-            onClick={() => goToCheckout('navbar_desktop')}
-            className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
-            style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
-          >
-            <span
-              className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]"
+          {showSubscribe && (
+            <button
+              onClick={() => goToCheckout('navbar_desktop')}
+              className="inline-flex items-center px-5 py-2 border border-transparent bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[9px] tracking-[2px] rounded-full whitespace-nowrap cursor-pointer relative overflow-hidden group transition-transform duration-[200ms] hover:scale-[1.02]"
               style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
-            />
-            <span className="relative z-10">subscribe</span>
-          </button>
+            >
+              <span
+                className="absolute inset-0 bg-[#7A8B76] translate-y-full group-hover:translate-y-0 transition-transform duration-[350ms]"
+                style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }}
+              />
+              <span className="relative z-10">subscribe</span>
+            </button>
+          )}
 
           {/* Discovery Call: brownish-red (#8B3A3A) primary CTA on the
               right edge. */}
@@ -207,15 +208,17 @@ export default function Navbar({ lightBg = false }) {
               <Building2 className="w-3.5 h-3.5" />
               owners
             </a>
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                goToCheckout('navbar_mobile');
-              }}
-              className="block mt-2 w-full text-center py-3 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full cursor-pointer"
-            >
-              subscribe
-            </button>
+            {showSubscribe && (
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  goToCheckout('navbar_mobile');
+                }}
+                className="block mt-2 w-full text-center py-3 bg-[#5D6D59] text-[#E8E6E1] font-bold uppercase text-[10px] tracking-[2px] rounded-full cursor-pointer"
+              >
+                subscribe
+              </button>
+            )}
             <button
               onClick={() => {
                 setMenuOpen(false);

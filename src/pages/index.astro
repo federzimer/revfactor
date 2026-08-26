@@ -139,7 +139,7 @@ const faqSchema = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </Fragment>
 
-  <Navbar client:load />
+  <Navbar client:load showSubscribe={false} />
   <main>
     <Hero client:load />
     <Pain client:visible />
