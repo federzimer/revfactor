@@ -3,7 +3,7 @@ title: "Revenue Management for Short-Term Rentals: 2026 Guide"
 description: "Revenue management for short-term rentals isn't just dynamic pricing. It's the discipline of selling the right night, to the right guest, at the right price. Federico Zimerman's frameworks for managing 198 STRs: historical data, inventory rules, forecasting, pacing, and RevPAR."
 subhead: "The discipline behind every booking decision. Ten years of airline yield management, applied daily across 198 short-term rentals."
 pubDate: 2026-05-01
-updatedDate: 2026-07-30
+updatedDate: 2026-08-31
 author: "Federico Zimerman"
 category: "Strategy"
 tags: ["revenue management", "RevPAR", "dynamic pricing", "Airbnb strategy", "STR pricing", "short-term rental"]
@@ -141,7 +141,7 @@ For operators with multi-listing portfolios, the load-bearing sections begin wit
 
 ### Where the Discipline Came From: The Airline Analogy
 
-The discipline didn't start in hospitality. It started in an airline operations room in the late 1970s. American Airlines was staring down newly deregulated competition and realized something brutal: an empty seat at takeoff is revenue lost forever. You can't resell yesterday's flight. So they built the systems (fare classes, advance purchase rules, inventory controls) to move every seat at the highest price the market would bear before the door closed.
+The discipline didn't start in hospitality. It started in an airline operations room in the late 1970s. American Airlines was staring down newly deregulated competition and realized something brutal: an empty seat at takeoff is revenue lost forever. You can't resell yesterday's flight. So they built the systems (fare classes, advance purchase rules, inventory controls) to move every seat at the highest price the market would bear before the door closed. Robert Crandall, the American Airlines CEO who gave yield management its name, called it "the single most important technical development in transportation management since we entered deregulation," per [the documented history of the discipline](https://en.wikipedia.org/wiki/Yield_management).
 
 I spent ten years inside that world before I touched my first short-term rental. When I did, I saw the same problem wearing different clothes. A vacant Friday night in Pigeon Forge is an empty seat at takeoff. You can't sell it tomorrow. The night is gone.
 
@@ -196,7 +196,7 @@ Dynamic pricing tools (PriceLabs, Beyond, and Wheelhouse) are excellent. I use P
 
 | Tool | Pricing Model | Best For | One-line Verdict |
 |---|---|---|---|
-| **PriceLabs** | ~$19.99/listing/month (volume tiers) | Multi-listing operators, deep customization | The most-used pricing engine across the RevFactor portfolio; widest market data, deepest customization, steepest learning curve. |
+| **[PriceLabs](https://www.pricelabs.co/pricing)** | ~$19.99/listing/month (volume tiers) | Multi-listing operators, deep customization | The most-used pricing engine across the RevFactor portfolio; widest market data, deepest customization, steepest learning curve. |
 | **Beyond** | ~1% of booking revenue | Single-property hosts who want hands-off setup | Cleaner UI, weaker customization; the percentage-of-revenue model gets expensive at high ADR. |
 | **Wheelhouse** | ~$19.99/listing/month or ~1% of revenue | Mid-tier portfolios wanting a middle ground | Balances ease and customization; less market data than PriceLabs, more flexibility than Beyond. |
 | **RevFactor** | Flat $350/month per property (1–5), enterprise pricing past 5 | Hosts who want the human discipline layer on top of a pricing tool | Not a tool. A managed revenue service that operates PriceLabs (or your existing tool) with daily expert review. |
@@ -539,7 +539,7 @@ A practical heuristic for distribution health: if Airbnb delivers more than 85% 
 
 ## ADR vs. RevPAR: Why You're Probably Tracking the Wrong Metric
 
-**ADR (Average Daily Rate)** is the average price of your booked nights. **RevPAR (Revenue per Available Night)** is your total revenue divided by the total nights available. ADR ignores empty nights. RevPAR doesn't. RevPAR is the only metric that captures rate and occupancy in one number.
+**ADR (Average Daily Rate)** is the average price of your booked nights. **RevPAR (Revenue per Available Night)** is your total revenue divided by the total nights available, a metric [adopted directly from hotel revenue management](https://en.wikipedia.org/wiki/RevPAR), where it is the standard measure of performance. ADR ignores empty nights. RevPAR doesn't. RevPAR is the only metric that captures rate and occupancy in one number.
 
 | Metric | What It Tells You | What It Hides |
 |---|---|---|
@@ -587,6 +587,14 @@ A 100% occupied calendar at $50 a night is a worse outcome than 50% occupancy at
 **One caveat: what RevPAR doesn't capture.** RevPAR is a top-line metric. It doesn't account for cleaning costs, channel commissions, OTA fees, or dynamic cost-of-goods. For a complete picture, pair RevPAR with NetRevPAR (RevPAR minus variable costs per night), especially in markets where Airbnb's service fee structure or cleaning economics vary widely. RevPAR tells you whether you're winning the rate-and-occupancy game. NetRevPAR tells you whether that win is making it to your bank account.
 
 Track RevPAR. Compare it to comparable properties in your market. That's the scoreboard.
+
+### Run Your Own Numbers
+
+Pull your last 90 days of revenue, booked nights, and available nights, and the calculator below returns your ADR, occupancy, and RevPAR on the spot. It is the same arithmetic we run in the deeper [ADR vs RevPAR guide](/blog/adr-vs-revpar-airbnb-hosts/).
+
+import RevPARCalculator from '../../components/RevPARCalculator.jsx';
+
+<RevPARCalculator client:load />
 
 <div class="rf-band bone">
   <p class="kicker">The diagnostic frame</p>

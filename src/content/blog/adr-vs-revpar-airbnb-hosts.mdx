@@ -1,9 +1,9 @@
 ---
-title: "ADR vs RevPAR: The Metrics That Run Airbnb Revenue"
-description: "ADR vs RevPAR for Airbnb hosts: most hosts brag about ADR; RevPAR is the number that actually grows revenue. ADR (Average Daily Rate) is total revenue divided by booked nights. RevPAR (Revenue Per Available Room, adopted from hotels) is revenue divided by every available night, booked or empty."
+title: "ADR vs RevPAR for Airbnb: What Each Means and Which One Pays You"
+description: "ADR vs RevPAR, explained for Airbnb hosts: ADR (Average Daily Rate) is revenue divided by booked nights and measures pricing power. RevPAR (Revenue Per Available Room) is revenue divided by every available night, booked or empty. Two hosts at the same ADR can post a $43,800 annual gap, and only RevPAR sees it."
 subhead: "ADR is the number hosts brag about. RevPAR is the number that pays them."
 pubDate: 2026-05-15
-updatedDate: 2026-05-15
+updatedDate: 2026-08-31
 author: "Federico Zimerman"
 category: "Strategy"
 tags: ["RevPAR", "ADR", "Airbnb metrics", "short-term rental", "vacation rental revenue"]
@@ -69,7 +69,7 @@ That is a 46% revenue gap on a lower headline rate. And yet sit in any short-ter
 
 Almost no one talks about RevPAR.
 
-American Airlines essentially invented modern revenue management in the late 1970s. Hotels institutionalized it. Cruise lines refined it. They figured out a long time ago that the price on a rate card means very little if you cannot tell me what is actually happening across the full inventory. STRs are still catching up to that basic discipline.
+American Airlines essentially invented modern revenue management in the late 1970s. Robert Crandall, the American Airlines CEO who gave the discipline its name, called yield management "the single most important technical development in transportation management since we entered deregulation," according to [the documented history of yield management](https://en.wikipedia.org/wiki/Yield_management). Hotels institutionalized it. Cruise lines refined it. They figured out a long time ago that the price on a rate card means very little if you cannot tell me what is actually happening across the full inventory. STRs are still catching up to that basic discipline.
 
 This is the gap. ADR is the metric hosts love. RevPAR is the metric that tells the truth. Let me walk through what each one actually is, when each one matters, and how to use both together.
 
@@ -91,7 +91,7 @@ ADR (Average Daily Rate) is the average price charged per booked night. The form
 
 ### Why ADR feels like a win
 
-ADR feels like proof. It is one number that says *I am running a premium product*. Pricing tools like PriceLabs, Beyond Pricing, and Wheelhouse all surface ADR by default on their dashboards, which is part of why hosts over-fixate on it. If the dashboard puts a number front and center, that is the number people optimize.
+ADR feels like proof. It is one number that says *I am running a premium product*. Pricing tools like [PriceLabs](https://www.pricelabs.co/pricing), Beyond Pricing, and Wheelhouse all surface ADR by default on their dashboards, which is part of why hosts over-fixate on it. If the dashboard puts a number front and center, that is the number people optimize.
 
 The problem is what ADR ignores. ADR is calculated only on the nights that are booked. It tells you nothing about the nights that didn't. A property charging $800 a night that books four nights a month has the same ADR as a property charging $800 a night that books twenty-four nights a month. Same number, fundamentally different businesses.
 
@@ -109,7 +109,7 @@ Outside those windows, ADR alone is misleading. Which is why hosts who treat thi
 
 ### What is RevPAR?
 
-RevPAR stands for **Revenue Per Available Room**. The term originated in hotel revenue management decades ago and was adopted directly by short-term rental operators when the discipline crossed over from hospitality. Whether the inventory is a hotel room or a vacation rental, the meaning is the same: total revenue divided by every available night in the period.
+RevPAR stands for **Revenue Per Available Room**. The term [originated in hotel revenue management](https://en.wikipedia.org/wiki/RevPAR) decades ago, where it remains the industry's standard performance metric, and it was adopted directly by short-term rental operators when the discipline crossed over from hospitality. Whether the inventory is a hotel room or a vacation rental, the meaning is the same: total revenue divided by every available night in the period.
 
 The formula is: **Revenue ÷ Available Nights**, or equivalently **ADR × Occupancy Rate**. RevPAR captures pricing power and demand in a single number, which is what makes it a better measure of overall STR performance than ADR.
 
@@ -210,7 +210,7 @@ That logic is wrong, and the math is unforgiving.
   </div>
 </section>
 
-Sarah runs Boho Bungalow in San Diego. She came to RevFactor with a calendar that was filling but rates that were soft, and a listing leaving meaningful money on the table. We rebuilt the pricing strategy from the ground up. The result, summer-over-summer: a **98.6% revenue lift**, with the largest ADR jump in the entire portfolio at **+39.7%**. Occupancy did not collapse. ADR climbed. And RevPAR, the actual measure of what the property earned per night of available inventory, moved hard.
+Sarah runs Boho Bungalow in San Diego. She came to RevFactor with a calendar that was filling but rates that were soft, and a listing leaving meaningful money on the table. We rebuilt the pricing strategy from the ground up. The result, summer-over-summer and according to RevFactor's own client data for the property: a **98.6% revenue lift**, with the largest ADR jump in the entire portfolio at **+39.7%**. The methodology behind moves like this is documented step by step in [The RevFactor Method](/blog/the-revfactor-method/). Occupancy did not collapse. ADR climbed. And RevPAR, the actual measure of what the property earned per night of available inventory, moved hard.
 
 Compare that to the alternative path. Drop rates aggressively to chase a higher occupancy number. The calendar fills. The host posts the screenshot. The bank account earns less.
 
@@ -287,7 +287,7 @@ Even RevPAR has a blind spot.
 
 RevPAR last month tells you how last month went. It does not tell you how next month is shaping up. The number that tells you that is **pacing**: booked revenue and booked nights for a future window, tracked against the same window in prior years and against the rest of your comp set.
 
-Consider a recent example. Maryssa runs a waterfront property in Albion, Michigan. Mid-season she was tracking **+18.4%** versus prior-year final revenue. The pacing curve was healthy. The temptation in that situation is to either coast or to push rates aggressively and see what sticks. We did neither. The pacing data showed exactly which forward windows had real demand pull and which were softer than the year before. Pricing moves followed the pacing data, not the other way around.
+Consider a recent example. Maryssa runs a waterfront property in Albion, Michigan. Mid-season, per RevFactor's pacing data for the property, she was tracking **+18.4%** versus prior-year final revenue. The pacing curve was healthy. The temptation in that situation is to either coast or to push rates aggressively and see what sticks. We did neither. The pacing data showed exactly which forward windows had real demand pull and which were softer than the year before. Pricing moves followed the pacing data, not the other way around.
 
 That is the discipline RevPAR alone cannot give you. RevPAR is the rear-view mirror. Pacing is the windshield.
 
