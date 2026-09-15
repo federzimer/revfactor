@@ -33,17 +33,25 @@ Updated 2026-09-14. Evidence and full plan: `docs/geo-citation-strategy-2026-09-
 - [ ] Competitor: Pricing By Mira has run our tool-versus-strategy angle in paid since June 1. Our edge is the published numbers plus Fede's airline yield background.
 - [ ] Before launch: budget sign-off, hooks rewritten to one sentence per line, one filming session for all 9 creatives (can share the YouTube shoot day), pixel + CAPI verified on the GHL page.
 
-## 5. Revenue Check app (5 min)
+## 5. Case studies, the biggest proof gap (10 min)
+- [ ] **Where we stand:** our competitors publish more proof than we do. One of them shows six client case studies with earned revenue before and after, unit counts and a stated method. Our case study pages are built but not published, so a buyer or an AI engine finds none of them.
+- [ ] **What is already written:** seven case studies covering San Diego, two Lake Michigan properties, North Myrtle Beach, the Minneapolis metro, the Smoky Mountains and Norfolk. They are written on spring booked-revenue pacing, not earned revenue.
+- [ ] **What Fede owns:** earned summer 2026 revenue for those seven properties, same property versus summer 2025, so the numbers become results rather than projections.
+- [ ] **Permission:** written OK from each owner to publish the revenue figures, and to name the property, or we publish by market and property type only. First-name-only approval is already recorded.
+- [ ] **Two numbers to settle:** is the +24% RevPAR versus comp set, or revenue versus comp set (our own records disagree with the site), and are the 198 listings RevFactor's book or Blackbird's.
+- [ ] **Then:** publish all seven with a method note (tenure, window, same property, comp set, blocked nights excluded). That is what lets RevFactor rank first on published proof in our own and third-party lists.
+
+## 6. Revenue Check app (5 min)
 - [ ] Shows an owner how much more they could make with RevFactor from their Airbnb listing URL (live AirROI data, 24% lift).
 - [ ] Staging, verified loading 9/14: https://revfactor-revcheck-staging.vercel.app/revenue-check-local
 - [ ] Needed to go live: **Fede's AirROI account and API key** (staging runs on a temporary key), Resend sender verified on revfactor.io (DNS at Namecheap), lead emails pointed to Fede and Gaston.
 
-## 6. Tracking and site health (5 min)
+## 7. Tracking and site health (5 min)
 - [ ] **Microsoft Clarity is not live.** The tag is missing from the live homepage (checked 9/14); it was never committed, so a production deploy removed it. Commit it to main, and always pull before `vercel --prod`.
 - [ ] GSC Generative AI report: review AI Overviews and AI Mode impressions (data from 5/18).
 - [ ] Weekly sweep: the "Bing deindex" alarm was a broken metric. Fixed 9/14, Bing shows 24 pages indexed and the sitemap is healthy.
 
-## 7. Carry-over
+## 8. Carry-over
 - [ ] **Blackbird size, pick one number:** Fede's author bio and schema on every post say 198 listings in 24 states and 67 markets "through Blackbird Hospitality", but blackbirdhm.com says it "has managed more than 90 properties". The property-manager listicle now quotes the Blackbird site. Which is right, and are the 198 listings RevFactor's book or Blackbird's? We update the bio, the listicle or blackbirdhm.com to match.
 - [ ] **Roami on the property-manager listicle:** its site describes a hospitality brand running whole buildings in Miami and New Orleans, with no owner management offer. Keep or remove?
 - [ ] **Market pages (parked 8/16 plan, never started):** "Airbnb Revenue Management in {Market}" pages plus a paired "Best Airbnb Revenue Management Services for {Market} Hosts" listicle, 2 markets a month. Fede picks the first markets where we have real case data (candidates: Smoky Mountains, Gulf Shores/30A, Orlando/Kissimmee, Scottsdale, Broken Bow, Poconos, Big Bear, Hill Country TX). Plan: `docs/market-pages-addendum-2026-08-16.md`.
