@@ -13,7 +13,7 @@ featured: true
 readingTime: 22
 faqs:
   - q: "What is dynamic pricing for short-term rentals?"
-    a: "Dynamic pricing for short-term rentals is software that automatically adjusts your nightly rate every day based on demand signals: seasonality, day of week, lead time, comp set movement, and local events. Tools like PriceLabs, Beyond Pricing, and Wheelhouse run the math; you set the floor, the ceiling, and the rules. The point isn't to charge more on every night. It's to price each night at the rate the market will actually clear, so empty calendar days shrink and high-demand nights aren't underpriced."
+    a: "Dynamic pricing for short-term rentals is software that automatically adjusts your nightly rate every day based on demand signals: seasonality, day of week, lead time, comp set movement, and local events. Tools like PriceLabs, Beyond Pricing, Wheelhouse and, since September 2026, AirDNA Adapt run the math. You set the floor, the ceiling, and the rules. The point isn't to charge more every night. It's to price each night at the rate the market will actually clear."
   - q: "Does Airbnb use dynamic pricing?"
     a: "Airbnb has a built-in feature called Smart Pricing that adjusts your rate inside a min/max range you set, but most professional hosts treat it as a starting point rather than a strategy. Smart Pricing reacts to platform-wide signals; it doesn't read your specific comp set, your local events, or your booking pacing the way third-party tools do. AirDNA estimates that only 31% of U.S. hosts use dynamic pricing at all, as reported by Skift in September 2026. Hosts who do can run PriceLabs, Beyond Pricing, Wheelhouse or AirDNA Adapt on top of, or instead of, Airbnb's built-in feature."
   - q: "What is the best dynamic pricing tool for Airbnb?"
@@ -69,7 +69,7 @@ faqs:
 
 ## Key Takeaways
 
-- Dynamic pricing for short-term rentals is software, not a strategy. PriceLabs, Beyond Pricing, and Wheelhouse are the engines. The strategy is what you tell them to do.
+- Dynamic pricing for short-term rentals is software, not a strategy. PriceLabs, Beyond Pricing, Wheelhouse and, since September 2026, AirDNA Adapt are the engines. The strategy is what you tell them to do.
 - Static pricing is a guess. A flat $200/night rate is right for some nights and wrong for most, usually wrong on both ends, leaving money on weekends and sitting empty on Tuesdays.
 - Modern pricing tools read seven signals: seasonality, day of week, lead time, comp set movement, local events, your own booking pacing, and supply pressure. Six of them shift every week.
 - Your base rate is the most important number in the system. Tools optimize *from* the floor. They don't interrogate it. A floor anchored to last year's comfort costs you all year.
@@ -147,13 +147,13 @@ That quote says something static pricing can't deliver. A property running 40% o
 
 ### What seasonal swing actually looks like in a real Airbnb market
 
-The argument for dynamic pricing isn't theoretical. Pull twelve months of revenue per available night (RevPAR) for any leisure-driven Airbnb market and the curve makes itself. Below is Pigeon Forge, Tennessee, one of the largest STR markets in the U.S., measured month by month from May 2025 through April 2026 using data from [AirROI's Pigeon Forge market report](https://www.airroi.com/airbnb-data/united-states/tennessee/pigeon-forge). Same market. Same property class. Different month.
+The argument for dynamic pricing isn't theoretical. Pull twelve months of revenue per available night (RevPAR) for any leisure-driven Airbnb market and the curve makes itself. Below is Pigeon Forge, Tennessee, one of the largest STR markets in the U.S., measured month by month from May 2025 through April 2026 in RevFactor's pull of AirROI market data, taken for this guide's May 2026 publication. [AirROI's Pigeon Forge market page](https://www.airroi.com/airbnb-data/united-states/tennessee/pigeon-forge) shows the current 12-month trend. Same market. Same property class. Different month.
 
 <div class="rf-chart">
   <div class="rf-chart-header">
     <p class="kicker">Pigeon Forge, TN · Market RevPAR · 12 months</p>
     <h3>RevPAR swings 2.4× from January to December.</h3>
-    <p class="lede">Source: AirROI market metrics API, May 2025 – April 2026. A static $200 nightly rate produces wildly different revenue per available night depending on the month.</p>
+    <p class="lede">Source: RevFactor's May 2026 pull of AirROI market data, May 2025 to April 2026. A static $200 nightly rate produces wildly different revenue per available night depending on the month.</p>
   </div>
   <div class="rf-chart-rows">
     <div class="rf-chart-row"><span class="rf-chart-label">May '25</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:53%"></span></span><span class="rf-chart-value">$127</span></div>
@@ -193,7 +193,7 @@ The static-pricing host sets one rate for the whole curve. Pick $200 and you're 
   </div>
 </section>
 
-The intra-market spread is just as wide. In December 2025, the Pigeon Forge comp-set ADR ranged from **$266 (25th percentile)** to **$856 (90th percentile)**, a **3.2× spread within the same market on the same nights**, according to [AirROI market data](https://www.airroi.com/airbnb-data/united-states/tennessee/pigeon-forge). That's the comp-set-percentile data your pricing tool is supposed to be reading. Most beginners never look.
+The intra-market spread is just as wide. On [AirROI's Pigeon Forge market page](https://www.airroi.com/airbnb-data/united-states/tennessee/pigeon-forge), updated September 12, 2026, bottom-quartile listings earn **$71 RevPAR** while the top 10% earn **$280**, nearly a **4× spread within the same market**. That's the comp-set-percentile data your pricing tool is supposed to be reading. Most beginners never look.
 
 ## How Dynamic Pricing Tools Actually Work
 
@@ -328,7 +328,7 @@ An open calendar 60 days out isn't a problem yet. It's a window. Pacing is the o
 
 ### Lead time is local: three markets, three completely different curves
 
-Signal #3 deserves a separate look. **Lead time**, how many days out a guest typically books, varies wildly by market, and a tool configured for the wrong lead-time curve will misprice every weekend it touches. Below is twelve months of average booking lead time, with data from the [AirROI markets API](https://www.airroi.com/), across three different STR archetypes: Pigeon Forge (mountain leisure), Nashville-Davidson (event-driven urban), and Newport Beach (coastal premium).
+Signal #3 deserves a separate look. **Lead time**, how many days out a guest typically books, varies wildly by market, and a tool configured for the wrong lead-time curve will misprice every weekend it touches. Below is twelve months of average booking lead time, from RevFactor's May 2026 pull of AirROI market data, across three different STR archetypes: Pigeon Forge (mountain leisure), Nashville-Davidson (event-driven urban), and Newport Beach (coastal premium).
 
 <figure class="rf-diagram" aria-label="Line chart of average booking lead time in days across 12 months for three short-term rental markets">
   <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:880px; display:block; margin:0 auto;">
@@ -383,10 +383,12 @@ Signal #3 deserves a separate look. **Lead time**, how many days out a guest typ
       <text x="540" y="362" font-style="italic" font-family="Cormorant Garamond, Georgia, serif" fill="#76574C">event-driven · short windows, January 35d</text>
     </g>
   </svg>
-  <figcaption>Source: AirROI markets API, May 2025 – April 2026, 12-month average booking lead time. A pricing tool tuned for one curve will misprice the other two.</figcaption>
+  <figcaption>Source: RevFactor's May 2026 pull of AirROI market data, May 2025 to April 2026, 12-month average booking lead time. A pricing tool tuned for one curve will misprice the other two.</figcaption>
 </figure>
 
-The implication is structural. **Newport Beach's coastal premium guests book July 110 days ahead.** A strategist locks rates and minimum stays for that window 5-6 months in advance, before the booking curve opens. **Nashville's event-driven Januarys book 35 days out.** Same property, same tool, but a 90-day rate freeze would close out the demand window entirely. **Pigeon Forge sits in between with a steady 60-75 day curve through fall.** Smokies leaf-peepers and Christmas-week guests both book ahead, but on different signals.
+The implication is structural. In that pull, **Newport Beach's coastal premium guests book July 110 days ahead.** A strategist locks rates and minimum stays for that window 5-6 months in advance, before the booking curve opens. **Nashville's event-driven Januarys book 35 days out.** Same property, same tool, but a 90-day rate freeze would close out the demand window entirely. **Pigeon Forge sits in between with a steady 60-75 day curve through fall.** Smokies leaf-peepers and Christmas-week guests both book ahead, but on different signals.
+
+AirROI's current market pages, updated September 12, 2026, show the same shape: July is the longest window in [Newport Beach](https://www.airroi.com/airbnb-data/united-states/california/newport-beach) at 129 days, January is the shortest in [Nashville](https://www.airroi.com/airbnb-data/united-states/tennessee/nashville) at 30 days, and fall averages 71 days in [Pigeon Forge](https://www.airroi.com/airbnb-data/united-states/tennessee/pigeon-forge).
 
 A pricing tool's default lead-time curve is configured for the global average. Three months of mismatch between your local curve and the default is the difference between full peak weekends and partial ones.
 
@@ -406,9 +408,9 @@ A pricing tool's default lead-time curve is configured for the global average. T
   </div>
 </section>
 
-## The Three Major Pricing Tools
+## The Four Major Pricing Tools
 
-There are three dynamic pricing tools that own the short-term rental market. Each is good at different things. The right tool isn't a brand decision. It's a configuration decision.
+Three established dynamic pricing tools run most of the short-term rental market, and a fourth, AirDNA Adapt, launched in September 2026. Each is good at different things. The right tool isn't a brand decision. It's a configuration decision.
 
 | Tool | Best for | Strengths | Trade-offs |
 |---|---|---|---|
@@ -422,13 +424,13 @@ Beyond Pricing is genuinely simpler if you have one or two properties and don't 
 
 Pricing on the two most configurable engines is identical for one listing: PriceLabs and Wheelhouse Pro Flat both charge $19.99 per US listing per month, according to their own pricing pages ([PriceLabs](https://hello.pricelabs.co/pricing/), [Wheelhouse](https://www.usewheelhouse.com/pricing)), checked September 14, 2026.
 
-The wrong question is *which tool is best.* The right question is *who's going to operate it once it's running.* All three tools work. None of them runs itself.
+The wrong question is *which tool is best.* The right question is *who's going to operate it once it's running.* The established tools all work. None of them runs itself.
 
 ### The Newest Entrant: AirDNA Adapt
 
 In September 2026 the category gained a fourth serious name. [Skift reported on September 1, 2026](https://skift.com/2026/09/01/airdna-enters-revenue-management-market-with-host-dynamic-pricing-tool-exclusive/) that AirDNA, the short-term rental data company, was entering revenue management with Adapt, a dynamic pricing tool that had spent nearly three months in beta on up to 14,000 listings. According to [AirDNA's pricing page](https://www.airdna.co/pricing), Adapt costs **$20 per listing per month** with a 30-day free trial, the same money as PriceLabs or Wheelhouse on a single listing.
 
-The part that matters for a beginner is setup. You choose one of [four named strategies](https://www.airdna.co/adapt-pricing-strategies) and the engine prices every night to match, with comps drawn from Airbnb, Vrbo and Booking.com data. Per [AirDNA's integrations page](https://www.airdna.co/adapt-integrations), rates and minimum stays sync daily, directly to Airbnb or through Hostaway, Guesty and Uplisting.
+The part that matters for a beginner is setup. You choose one of [four named strategies](https://www.airdna.co/adapt-pricing-strategies) and the engine prices every night to match, with comps drawn from [Airbnb, Vrbo and Booking.com data](https://www.airdna.co/adapt). Per [AirDNA's integrations page](https://www.airdna.co/adapt-integrations), rates and minimum stays sync daily, directly to Airbnb or through Hostaway, Guesty and Uplisting.
 
 <div class="rf-scoreboard">
   <div class="rf-scoreboard-header">
@@ -744,7 +746,7 @@ The math has been studied externally too. According to a [2025 study by Your.Ren
 
 ### Three operating modes, one calendar
 
-Stack the three modes against the same twelve months of Pigeon Forge market data from [AirROI](https://www.airroi.com/airbnb-data/united-states/tennessee/pigeon-forge): static pricing held flat at the 12-month mean, dynamic pricing tracking the live market RevPAR curve, and strategist-layered dynamic pricing capturing the documented +24% premium on top of the curve. Same market. Same property class. Three completely different revenue outcomes.
+Stack the three modes against the same twelve months of Pigeon Forge data from RevFactor's pull of [AirROI](https://www.airroi.com/airbnb-data/united-states/tennessee/pigeon-forge) market data: static pricing held flat at the 12-month mean, dynamic pricing tracking the live market RevPAR curve, and strategist-layered dynamic pricing capturing the documented +24% premium on top of the curve. Same market. Same property class. Three completely different revenue outcomes.
 
 <figure class="rf-diagram" aria-label="Line chart comparing three pricing modes (static, dynamic, and strategist-layered) across 12 months of Pigeon Forge market data">
   <svg viewBox="0 0 880 400" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%; height:auto; max-width:880px; display:block; margin:0 auto;">
@@ -808,7 +810,7 @@ Stack the three modes against the same twelve months of Pigeon Forge market data
       <text x="620" y="392" font-style="italic" font-family="Cormorant Garamond, Georgia, serif" fill="#76574C">12-month flat rate · annual $64.6K</text>
     </g>
   </svg>
-  <figcaption>Source: AirROI Pigeon Forge market RevPAR (May 2025 – April 2026); strategist line projects the documented +24% RevFactor portfolio lift on top of dynamic pricing. Annual totals are RevPAR × 365.</figcaption>
+  <figcaption>Source: RevFactor's May 2026 pull of AirROI Pigeon Forge market RevPAR, May 2025 to April 2026; strategist line projects the documented +24% RevFactor portfolio lift on top of dynamic pricing. Annual totals are RevPAR × 365.</figcaption>
 </figure>
 
 The math at the annual level: the static operator clears about **$64.6K/yr** in RevPAR. Adding a dynamic pricing tool (same property, same market) lifts it to **$67.4K/yr** (+4% in this market, lower than the cross-market average because Pigeon Forge has steady seasonality the algorithm naturally captures). Adding the strategist layer on top (pacing review, comp-set audits, event capture, length-of-stay tuning) produces **$79.5K/yr**, a +24% lift over the dynamic baseline and +23% over static. The math compounds at the annual level. The compounding is what pays the strategist's flat fee 5-10× over.
@@ -862,7 +864,7 @@ This post is the engine. That post is the driver.
 
 Dynamic pricing isn't a software category to install and forget. It's a system you operate. The engine reads seven signals. You set the floor, the ceiling, and the rules. The rules need a quarterly refresh. The pacing needs a weekly read. The comp set needs an audit every couple of months. The base rate needs to track the market, not last summer's comfort.
 
-The whole reason dynamic pricing exists is the math of inventory you can't roll forward. Once tonight is gone, tonight is gone, at whatever rate cleared, or zero. That single constraint makes operating intent matter more than the brand of tool you choose. All three tools beat static pricing. The version that actually delivers the +15-25% revenue lift in industry studies is the version with someone reading the dashboard every week.
+The whole reason dynamic pricing exists is the math of inventory you can't roll forward. Once tonight is gone, tonight is gone, at whatever rate cleared, or zero. That single constraint makes operating intent matter more than the brand of tool you choose. The established tools all beat static pricing. The version behind the +15-25% range we see across the RevFactor portfolio is the version with someone reading the dashboard every week.
 
 If you take one thing from this guide, take this: stop thinking about dynamic pricing as a tool you turn on. Start thinking about it as a dashboard you read every week. Pacing, RevPAR, conversion, comp-set position. Four numbers. Weekly review. The rest is just configuration. For the metric-level treatment, see our [ADR vs RevPAR breakdown](/blog/adr-vs-revpar-airbnb-hosts/); for the strategist-layer operating rhythm, see [The RevFactor Method](/blog/the-revfactor-method/); for an honest comparison of vendors who run this for hosts at scale, see [the best STR revenue management companies of 2026](/blog/best-str-revenue-management-companies-2026/).
 
