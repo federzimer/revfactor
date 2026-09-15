@@ -9,6 +9,7 @@ Updated 2026-09-14. Evidence and full plan: `docs/geo-citation-strategy-2026-09-
 - [ ] Shipped this week: AirDNA pricing-tool response added to the comparison posts; citability fixes on the top sweep pages.
 
 ## 2. Decisions we need from Fede (15 min)
+- [ ] **Make the RevFactor GitHub repo private (federzimer/revfactor).** It is public today, so our strategy, pricing and outreach docs are readable by anyone. Only Fede can change it: GitHub repo Settings, General, Danger Zone, Change visibility to Private. Vercel deploys keep working after the switch.
 - [ ] **HotelTechReport:** most-retrieved third-party site for our prompts (44 of 450 answers). Co-founder Adam Hollander emailed 9/11: basic profile in "Vacation Rental Dynamic Pricing Software" for a $500 one-time fee. Yes or no.
 - [ ] **TechBullion round 2 (~$50):** "The Best Airbnb Pricing Tools in 2026 (and When a Done-for-You Service Beats a Tool)". Plus the matching listicle on revfactor.io.
 - [ ] **LinkedIn Pulse from Fede's own profile:** two posts, "How to Price Your Airbnb for Peak and Off Seasons (2026)" and "How to Increase Airbnb Occupancy Without Dropping Your Rates". The vendor-profile post from July has 0 citations.
