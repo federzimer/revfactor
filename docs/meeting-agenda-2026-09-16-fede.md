@@ -24,6 +24,9 @@ Updated 2026-09-14. Evidence and full plan: `docs/geo-citation-strategy-2026-09-
 - [ ] Publishing blocker: API uploads need an owner token from the channel owner, or publish through Riverside. Decide which.
 - [ ] Next two videos cut from existing footage with pricing-tool titles (the most-cited video format on our prompts).
 
+- [ ] **Inputs Fede owns for the next posts:** (1) what he actually changed on each of the 7 summer properties behind the $139K number, for a first-person data story; (2) Vrbo's share of bookings across the portfolio, for the Vrbo guide; (3) the AirROI account, for seasonal pricing data in more markets.
+- [ ] **$139K video title:** the figure is booked revenue ahead of the same point last year, not money earned. Keep "on the books, ahead of last year" on screen and consider a title that says so.
+
 ## 4. Meta ads strategy (10 min)
 - [ ] Doc: https://docs.google.com/document/d/1NVv3zcIQHGwAdxjX0vRqxt5uGrwmXvK4k08wRelwUhE/edit
 - [ ] Plan: one campaign at $3,000 to $5,000/mo, founder-face video, 4 hooks x 2 personas + retargeting cut (9 assets). Modeled $75 to $150 per booked call.
