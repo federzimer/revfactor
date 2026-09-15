@@ -3,7 +3,7 @@ title: "Orphan Nights & Gap Nights: How to Fix Them on Your STR Calendar"
 description: "Orphan nights are gaps your own minimum-stay rules make unbookable. The airline revenue manager's playbook to prevent, fill, and measure the leak ADR hides."
 subhead: "The nights your minimum stay makes unsellable, the leak your ADR will never show you, and the airline discipline that solved this forty years ago."
 pubDate: 2026-07-23
-updatedDate: 2026-07-23
+updatedDate: 2026-09-14
 author: "Federico Zimerman"
 category: "Strategy"
 tags: ["orphan nights", "gap nights", "minimum stay", "inventory controls", "RevPAR", "yield management", "short-term rental"]
@@ -20,7 +20,7 @@ faqs:
       Yes. Gap night, orphan night, orphan day, orphan gap, and booking gap all describe the same thing. "Orphan" comes from hotel and airline revenue management, where a unit stranded by an inventory restriction has carried that name for decades. "Gap night" is what most Airbnb hosts say. PriceLabs' documentation uses "orphan gap." One object, four vocabularies.
   - q: "What causes orphan nights?"
     a: >-
-      Two things together: a minimum stay above one night, and a checkout. Every checkout creates a window; the minimum decides whether that window is bookable. PriceLabs states it directly: orphan gaps occur when your default minimum stay exceeds one night. Preparation-time buffers, check-in/check-out restrictions, and static seasonal minimums all add more on top.
+      Two things together: a minimum stay above one night, and a checkout. Every checkout creates a window; the minimum decides whether that window is bookable. PriceLabs states it directly: orphan gaps only appear when your default minimum stay is longer than one night. Preparation-time buffers, check-in/check-out restrictions, and static seasonal minimums all add more on top.
   - q: "What's the difference between an orphan night and a normal turnover gap?"
     a: >-
       A turnover gap is a 0–1 night cleaning window you deliberately keep because your operation needs it. An orphan night is a sellable night your rule blocked. The test: if you'd take money for that night right now and the platform won't let a guest offer it, it's an orphan. Turnover gaps are solved operationally; orphans are solved with inventory rules.
@@ -62,9 +62,9 @@ faqs:
     <p class="caption">the precondition for orphan gaps · PriceLabs</p>
   </div>
   <div class="stat">
-    <p class="label">CHECK-INS PER YEAR, SAME OCCUPANCY</p>
-    <p class="number">52 vs 30</p>
-    <p class="caption">Gatlinburg vs. Scottsdale · AirROI</p>
+    <p class="label">BOOKINGS PER LISTING PER YEAR</p>
+    <p class="number">32.1 vs 23.6</p>
+    <p class="caption">Gatlinburg vs. Scottsdale · AirROI 2026</p>
   </div>
   <div class="stat">
     <p class="label">LISTINGS UNDER MANAGEMENT</p>
@@ -78,11 +78,11 @@ faqs:
 ## Key Takeaways
 
 - An orphan night, gap night, orphan day, and orphan gap are the same thing: a vacant night between two confirmed bookings that's shorter than the minimum stay you set for those dates.
-- The cause is self-inflicted. PriceLabs states it plainly in its own documentation: orphan gaps occur when your default minimum stay exceeds one night. The rule that earns you money is the same rule that strands nights.
+- The cause is self-inflicted. PriceLabs states it plainly in [its orphan gap guide](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/), updated September 5, 2026: orphan gaps only appear when your default minimum stay is longer than one night. The rule that earns you money is the same rule that strands nights.
 - Orphan nights never touch your ADR, because ADR only averages the nights that sold. They surface in occupancy and RevPAR. That's why a month can look full and leak double digits.
 - Prevention beats filling. A calendar designed not to fragment costs nothing; every recovery tactic costs rate, cleaning, or both.
 - Discount or premium is situational, and most operators get it backwards. The guest who needs one exact night at short notice is the least price-sensitive guest in your funnel.
-- Short-average-length-of-stay markets manufacture orphans structurally. At the same occupancy, a 3.4-night market produces roughly 1.7× the check-in events of a 5.9-night market, before you touch a setting.
+- Short-average-length-of-stay markets manufacture orphans structurally. According to [AirROI's 2026 Gatlinburg report](https://airroi.com/report/world/united-states/tennessee/gatlinburg), guests there stay about 3.6 nights and listings average 32.1 bookings a year, against 7 nights and 23.6 bookings in [Scottsdale](https://airroi.com/report/world/united-states/arizona/scottsdale), about 36% more check-ins before you touch a setting.
 - Every major tool automates the rule. None of them decides what the rule should say, or when to break it.
 
 </div>
@@ -149,19 +149,19 @@ Here's the thing about orphan nights: they are the only revenue leak in this bus
 
 An orphan night is a vacant night, sometimes two or three, sitting between two confirmed reservations that no guest can book, because the open window is shorter than the minimum stay you've set for those dates.
 
-The vocabulary is a mess, so let's clear it once. Orphan night, orphan day, gap night, orphan gap and booking gap all describe the same object. "Orphan" is the older word; it comes out of hotel and airline inventory control, where a unit stranded by a restriction has been called that for decades. "Gap night" is what most Airbnb hosts say. PriceLabs, the pricing engine most professional operators run, calls it an orphan gap and defines it as unoccupied days between bookings that go unbookable under your minimum length-of-stay requirements.
+The vocabulary is a mess, so let's clear it once. Orphan night, orphan day, gap night, orphan gap and booking gap all describe the same object. "Orphan" is the older word; it comes out of hotel and airline inventory control, where a unit stranded by a restriction has been called that for decades. "Gap night" is what most Airbnb hosts say. PriceLabs, the pricing engine most professional operators run, calls it an orphan gap; its guide describes orphan gaps, also called booking gaps, gap nights or orphan days, as unoccupied dates trapped between two bookings.
 
 Same night. Four names. One paradox:
 
 > The night isn't empty because nobody wants it. It's empty because you told the platform not to sell it.
 
-PriceLabs puts the mechanism on the record in [its own documentation](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/): orphan gaps occur when your default minimum stay exceeds one night. That's the whole precondition. Set a two-night minimum, and every one-night window on your calendar is now unsellable. Set a five-night minimum, and you've made four-night windows unsellable too.
+PriceLabs puts the mechanism on the record in [its orphan gap guide](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/), updated September 5, 2026: orphan gaps only appear when your default minimum stay is longer than one night. That's the whole precondition. Set a two-night minimum, and every one-night window on your calendar is now unsellable. Set a five-night minimum, and you've made four-night windows unsellable too.
 
 ### Orphan night vs. turnover gap: the distinction most posts blur
 
 A turnover gap is supposed to be there. An orphan is not.
 
-- **Turnover gap:** a 0–1 night vacancy that sits between checkout and the next check-in, kept open because your operation needs it. Cleaning and laundry, sometimes a maintenance visit. It's a cost you chose.
+- **Turnover gap:** a 0–1 night vacancy that sits between checkout and the next check-in, kept open because your operation needs it. Cleaning and laundry, sometimes a maintenance visit. It's a cost you chose. According to [Airbnb's Resource Center](https://www.airbnb.com/resources/hosting-homes/a/updating-your-availability-708), preparation time can be set to none, 1 night before and after each reservation or 2 nights before and after.
 - **Orphan night:** a sellable night your rule blocked. Nobody chose it. It's a byproduct.
 
 The test takes five seconds. Would you take money for that night right now, and the platform won't let a guest offer it? Orphan. Would you refuse the money because the cleaner physically cannot get there? Turnover gap.
@@ -170,13 +170,13 @@ The distinction matters because the fixes are opposite. You solve a turnover gap
 
 ### Where the term came from
 
-Orphan is a revenue-management word, not a short-term rental word. It comes from managing fixed, perishable inventory: a seat on a flight, a room-night in a hotel, where capacity is set, the clock is running, and the restrictions you use to protect high-value demand can strand units if nobody's watching. Airlines named it first. Hotels institutionalized it. Short-term rentals are the newest application of an old problem. I'll come back to that in §11, because the lineage is not decoration; it's where the answer already lives.
+Orphan is a revenue-management word, not a short-term rental word. It comes from managing fixed, perishable inventory: a seat on a flight, a room-night in a hotel, where capacity is set, the clock is running, and the restrictions you use to protect high-value demand can strand units if nobody's watching. Airlines named it first. According to [INFORMS' history of revenue management](https://www.informs.org/Explore/History-of-O.R.-Excellence/O.R.-Methodologies/Revenue-Management), the discipline started at American Airlines after U.S. airline deregulation in 1978. Hotels institutionalized it. Short-term rentals are the newest application of an old problem. I'll come back to that in §11, because the lineage is not decoration; it's where the answer already lives.
 
 ## 2. Why Orphan Nights Form (Root Causes)
 
 Orphan nights form at the intersection of two things: a minimum stay above one night, and a checkout. Every checkout creates a window. Every minimum above one night decides whether that window is bookable.
 
-It's arithmetic, not bad luck. Two reservations that don't abut leave a window of n nights. If n is smaller than the minimum stay live on those dates, the window is dead. That's it. There is no third variable.
+It's arithmetic, not bad luck. Two reservations that don't abut leave a window of n nights. If n is smaller than the minimum stay live on those dates, the window is dead. That's it. There is no third variable. PriceLabs' [orphan gap guide](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/), updated September 5, 2026, describes the result the same way: unoccupied dates trapped between two bookings.
 
 ### The minimum-stay × turnover engine
 
@@ -188,11 +188,11 @@ Not because they're careless. Because a minimum above one night is usually the r
 
 Four settings create most of what I find in an audit, and none of them looks like a pricing decision:
 
-**Preparation time.** Airbnb lets you block one or two nights before and after every reservation, and it blocks them automatically. Choose "1 night before and after" on a listing with real turnover volume, and you've converted every clean back-to-back into a guaranteed two-night hole. You won't spot it in a gap count, either. Those nights show as blocked, not available.
+**Preparation time.** According to [Airbnb's Resource Center](https://www.airbnb.com/resources/hosting-homes/a/updating-your-availability-708), you can block 1 or 2 nights before and after every reservation, and [Airbnb's Help Center](https://www.airbnb.com/help/article/3612) confirms the calendar blocks those nights automatically. Choose "1 night before and after" on a listing with real turnover volume, and you've converted every clean back-to-back into a guaranteed two-night hole. You won't spot it in a gap count, either. Those nights show as blocked, not available.
 
 **Static minimums.** A three-night rule that earns its keep in July is a gap factory in February, when the market is booking one- and two-night stays and you're invisible to all of them.
 
-**Check-in/check-out restrictions set around the cleaner.** Airbnb lets you [restrict arrivals or departures on up to six days a week](https://www.airbnb.com/help/article/2060). Those rules decide where stays can start and stop. Set them for crew scheduling without checking how the market actually arrives, and you've shaped your calendar into stubs.
+**Check-in/check-out restrictions set around the cleaner.** Airbnb lets you [restrict check-ins or checkouts on up to 6 days per week](https://www.airbnb.com/resources/hosting-homes/a/updating-your-availability-708), according to its Resource Center. Those rules decide where stays can start and stop. Set them for crew scheduling without checking how the market actually arrives, and you've shaped your calendar into stubs.
 
 **The far-out minimum you set once.** A seven-night minimum for bookings 90+ days out is a good rule. Left running inside 30 days, it's a machine.
 
@@ -200,34 +200,34 @@ Four settings create most of what I find in an audit, and none of them looks lik
 
 This is the variable almost nobody connects to gaps, and it's the biggest one.
 
-Run the arithmetic on two real markets. [AirROI's market data](https://www.airroi.com/report/world/united-states/tennessee/gatlinburg), trailing twelve months (figures update monthly):
+Run the numbers on two real markets. The figures below come from AirROI's 2026 market reports for [Gatlinburg](https://airroi.com/report/world/united-states/tennessee/gatlinburg) and [Scottsdale](https://airroi.com/report/world/united-states/arizona/scottsdale), covering August 2025 to July 2026 and last updated September 12, 2026. They update often, so check the live pages before you quote them.
 
 | | Gatlinburg, TN | Scottsdale, AZ |
 |---|---|---|
-| Average length of stay | 3.4 nights (shortest in AirROI's top 10) | 5.9 nights (longest in AirROI's top 10) |
-| Occupancy | 48% | 49% |
-| Booked nights per year | ~175 | ~179 |
-| Check-in events per year | ~52 | ~30 |
+| Average length of stay | about 3.6 nights | about 7 nights |
+| Occupancy | 41.1% | 45.1% |
+| Bookings per listing per year | 32.1 | 23.6 |
+| Booking lead time | about 61 days | about 58 days |
 
 <div class="rf-chart">
   <div class="rf-chart-header">
-    <p class="kicker">AirROI · trailing twelve months</p>
-    <h3>Same occupancy, 22 more chances to strand a night</h3>
-    <p class="lede">Two markets, nearly identical occupancy, but a short average stay manufactures far more check-in events, and every one is a chance to leave an orphan.</p>
+    <p class="kicker">AirROI · August 2025 to July 2026</p>
+    <h3>Similar occupancy, 8.5 more chances per listing to strand a night</h3>
+    <p class="lede">Two markets with similar occupancy, 41.1% and 45.1% according to <a href="https://airroi.com/report/world/united-states/tennessee/gatlinburg" target="_blank" rel="noopener">AirROI</a>, but the 3.6-night market books 32.1 stays per listing a year against 23.6, and every stay is a chance to leave an orphan.</p>
   </div>
   <div class="rf-chart-rows">
-    <div class="rf-chart-row"><span class="rf-chart-label">Gatlinburg</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">~52</span></div>
-    <div class="rf-chart-row"><span class="rf-chart-label">Scottsdale</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:58%"></span></span><span class="rf-chart-value">~30</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Gatlinburg</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">32.1</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Scottsdale</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:74%"></span></span><span class="rf-chart-value">23.6</span></div>
   </div>
   <div class="rf-chart-legend">
-    <span><span class="swatch cedar"></span>Gatlinburg · 3.4-night avg stay</span>
-    <span><span class="swatch walnut"></span>Scottsdale · 5.9-night avg stay</span>
+    <span><span class="swatch cedar"></span>Gatlinburg · 3.6-night avg stay</span>
+    <span><span class="swatch walnut"></span>Scottsdale · 7-night avg stay</span>
   </div>
 </div>
 
-Effectively identical occupancy. Fifty-two checkouts versus thirty. Twenty-two more chances a year to strand a night, before either operator has touched a single setting.
+Similar occupancy. About 32 bookings per listing versus about 24. Roughly eight more chances a year, per listing, to strand a night, before either operator has touched a single setting.
 
-AirROI's own read on Gatlinburg's short average stay is that it means higher turnover and cleaning costs, but also more bookings per year. Both are true. And more bookings per year is also more gap-creation events per year. Market choice is itself a risk factor. If you're buying into a short-LOS market, you're buying a structurally higher orphan rate, and it belongs in your model alongside the cleaning cost.
+A short average stay means higher turnover and cleaning costs, and it also means more bookings per year. Both are true. And more bookings per year is also more gap-creation events per year. Market choice is itself a risk factor. If you're buying into a short-LOS market, you're buying a structurally higher orphan rate, and it belongs in your model alongside the cleaning cost.
 
 The practical move is to benchmark your market's actual booked length of stay and your competitors' restrictions rather than assuming. That's a comp-set exercise, and the method is in our [guide to building an STR comp set](/blog/how-to-build-comp-set-str/).
 
@@ -243,15 +243,15 @@ The practical move is to benchmark your market's actual booked length of stay an
 
 ## 3. The Real Cost: The Leak Your ADR Can't See
 
-Orphan nights never appear in ADR, because ADR only averages nights that sold. They land in occupancy and RevPAR. That's the entire reason an operator can leak them for years without noticing.
+Orphan nights never appear in ADR, because ADR only averages nights that sold. They land in occupancy and RevPAR. That's the entire reason an operator can leak them for years without noticing. According to [AirDNA's Vacation Rental Glossary](https://www.airdna.co/glossary), ADR is the average revenue earned per booked night, so a night that never books never enters it.
 
 ### Why ADR is blind to it
 
-ADR divides revenue by booked nights. An orphan is not a booked night, so it's not in the denominator. Remove your orphans or leave them: ADR is identical either way. RevPAR divides by available nights, which is where the orphan lives. If you want the metric primer, we've written it: [ADR vs. RevPAR](/blog/adr-vs-revpar-airbnb-hosts/). I'm not going to re-derive it here. I'm going to show you what it does to a real month.
+ADR divides revenue by booked nights. An orphan is not a booked night, so it's not in the denominator. Remove your orphans or leave them: ADR is identical either way. RevPAR divides by available nights, which is where the orphan lives. AirDNA's glossary describes RevPAR as combining nightly rates and occupancy to show [actual income per available night](https://www.airdna.co/glossary). If you want the metric primer, we've written it: [ADR vs. RevPAR](/blog/adr-vs-revpar-airbnb-hosts/). I'm not going to re-derive it here. I'm going to show you what it does to a real month.
 
 ### The occupancy reconciliation
 
-Same market, same 30-night month, same $300 ADR, same four reservations covering 24 nights, same three-night minimum. The only difference is where the six vacant nights sit.
+Same market, same 30-night month, same $300 ADR, same four reservations covering 24 nights, same three-night minimum. The only difference is where the six vacant nights sit. The math uses the occupancy definition in [AirDNA's Vacation Rental Glossary](https://www.airdna.co/glossary): booked days divided by available days.
 
 | | Property A: block preserved | Property B: orphans stranded |
 |---|---|---|
@@ -268,7 +268,7 @@ Same market, same 30-night month, same $300 ADR, same four reservations covering
   <div class="rf-chart-header">
     <p class="kicker">Same month · same $300 ADR · same four reservations</p>
     <h3>The only difference is where the six vacant nights sit</h3>
-    <p class="lede">Property A keeps its vacancy in bookable blocks; Property B strands it as orphans. ADR is identical at $300. Every other number moves.</p>
+    <p class="lede">Property A keeps its vacancy in bookable blocks; Property B strands it as orphans. ADR is identical at $300. Every other number moves. Illustrative figures, using the ADR, occupancy and RevPAR definitions in <a href="https://www.airdna.co/glossary" target="_blank" rel="noopener">AirDNA's Vacation Rental Glossary</a>.</p>
   </div>
   <div class="rf-chart-rows">
     <div class="rf-chart-row"><span class="rf-chart-label">Occupancy · A</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:100%"></span></span><span class="rf-chart-value">90%</span></div>
@@ -292,7 +292,7 @@ And notice what Property A actually won. Not a booking, an option. One of A's tw
 
 ### The second-order costs almost nobody pays
 
-**Search eligibility.** This is the one that compounds. Airbnb states in [its own Help Center](https://www.airbnb.com/help/article/484) that if your requirements aren't met, and it names preparation time explicitly, your listing may not appear in a guest's search results. It also says the more flexibility a host offers around how long guests can stay, the more likely the listing will work with a guest's plans and show up in search. PriceLabs says the same thing from the other side: a three-night minimum means you don't appear for guests searching one- or two-night stays. So a three-night rule on a one-night window doesn't just decline that guest. It removes you from the search she ran.
+**Search eligibility.** This is the one that compounds. Airbnb states in [its own Help Center](https://www.airbnb.com/help/article/484) that if your requirements aren't met, and it names preparation time explicitly, your listing may not appear in a guest's search results. In [its article on how search results work](https://www.airbnb.com/help/article/39), Airbnb also says the more flexibility a host offers around how long guests can stay, the more likely the listing will work with a guest's plans and show up in search. PriceLabs says the same thing from the other side: according to [its minimum-stay guide](https://hello.pricelabs.co/blog/minimum-stay-restrictions/), a 3-night minimum means you won't show up for guests searching 1-night or 2-night stays. So a three-night rule on a one-night window doesn't just decline that guest. It removes you from the search she ran.
 
 **It compounds across a portfolio.** One listing running four orphans a month is an irritation. Ten listings running four orphans a month is 480 nights a year, and it never shows up as a line item anywhere.
 
@@ -323,7 +323,7 @@ That's the number. It's the only one that isolates this problem from everything 
   <div class="rf-chart-header">
     <p class="kicker">RevFactor managed portfolio · 198 listings</p>
     <h3>Orphan Rate, before and after management</h3>
-    <p class="lede">The average listing came in at a 25.0% orphan rate before management and settled at 11.9% after, and the portfolio-wide rate keeps falling year over year.</p>
+    <p class="lede">The average listing came in at a 25.0% orphan rate before management and settled at 11.9% after, and the portfolio-wide rate keeps falling year over year. Measured in 2026 and published in the <a href="/blog/str-revenue-benchmarks-2026/">RevFactor 2026 Revenue Benchmarks</a>.</p>
   </div>
   <div class="rf-chart-rows">
     <div class="rf-chart-row"><span class="rf-chart-label">Before mgmt</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:100%"></span></span><span class="rf-chart-value">25.0%</span></div>
@@ -347,7 +347,7 @@ At RevFactor, we already run two internal gauges on every property: a Market Pos
 
 ## 4. A Taxonomy of Orphan Nights (Six Types)
 
-Orphan nights aren't one thing. Six distinct mechanics produce them, and each has a different fix. Treating them as one undifferentiated problem, "turn on a gap discount," is why most operators solve a third of theirs and believe they're finished.
+Orphan nights aren't one thing. Six distinct mechanics produce them, and each has a different fix. Treating them as one undifferentiated problem, "turn on a gap discount," is why most operators solve a third of theirs and believe they're finished. Even PriceLabs, in its [orphan gap guide](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/) updated September 5, 2026, names four separate causes: minimum stays set above how the market books, cancellations, fixed check-in and check-out days, and booking windows that shortened faster than the rules did.
 
 <div class="rf-leaks">
   <div class="rf-leaks-header">
@@ -440,11 +440,32 @@ Second, orphans cluster. They are not randomly distributed. They pile up on the 
   </div>
 </figure>
 
+### Orphan Rate Calculator and Audit Checklist: A Worked Example You Can Copy
+
+Here is the audit above run on one listing, with illustrative inputs you can swap for your own. The formulas are the two from §3, and the benchmark row comes from our own measured portfolio data in the [RevFactor 2026 Revenue Benchmarks](/blog/str-revenue-benchmarks-2026/), where the average listing arrived at a 25.0% Orphan Rate and settled at 11.9% under management.
+
+| Input or output | Worked example | How to get it |
+|---|---|---|
+| Available nights in the quarter | 90 | Calendar days minus owner blocks |
+| Orphan nights found | 11 | Windows shorter than the minimum live on those dates |
+| Average rate those dates carried | $250 | Your pricing tool's rate for each orphan date |
+| **Orphan Rate** | **12.2%** | 11 ÷ 90 |
+| **Gross orphan leakage** | **$2,750** | 11 × $250 |
+| Portfolio benchmark | 25.0% before management, 11.9% after | RevFactor 2026 Revenue Benchmarks |
+
+Before you trust the number, run this checklist:
+
+- Prep time checked first, because Airbnb blocks those nights automatically and they won't show as gaps
+- Minimum stay pulled for the dates it was live, not today's setting
+- Orphan nights counted per listing, never blended across the portfolio
+- Leakage annualized by season, not by multiplying one quarter by four
+- Clusters noted by weekday, month and event, because a cluster points to a rule
+
 This is the Discover phase of [the RevFactor Method](/blog/the-revfactor-method/) pointed at one problem: read where you actually stand before you touch a price.
 
 ## 6. Prevention First: Designing a Calendar That Doesn't Manufacture Orphans
 
-The fill discount is the second-best fix. The best fix is a calendar that doesn't produce the gap. Prevention is a configuration problem, and it's cheaper than every recovery tactic in this article.
+The fill discount is the second-best fix. The best fix is a calendar that doesn't produce the gap. Prevention is a configuration problem, and it's cheaper than every recovery tactic in this article. PriceLabs' [minimum-stay guide](https://hello.pricelabs.co/blog/minimum-stay-restrictions/) gives a far-out ladder as its example: a 7-night minimum 6 or more months out, 5 nights at 3 to 4 months, relaxing to 3 nights inside 60 days.
 
 One minimum stay is the root cause. Three dimensions is the fix.
 
@@ -478,17 +499,17 @@ A working default for a leisure market:
   </div>
 </div>
 
-The step-down matters more than the baseline. PriceLabs' own minimum-stay recommendation engine is built on exactly this shape: hold longer minimums far out, where a lot of demand is yet to book, and reduce them as the date gets close so the shorter booking gets taken instead of nothing. Most operators never build the ladder. They set the far-out rule and run it right up to the arrival date.
+The step-down matters more than the baseline. PriceLabs' own [minimum-stay guide](https://hello.pricelabs.co/blog/minimum-stay-restrictions/) uses exactly this shape: hold longer minimums far out and relax them as the date gets close, so the shorter booking gets taken instead of nothing. Most operators never build the ladder. They set the far-out rule and run it right up to the arrival date.
 
-Now the honest check, and it comes from outside the vendor ecosystem. Cornell's revenue management teaching on length-of-stay controls, the discipline [Dr. Sheryl Kimes](https://journals.sagepub.com/doi/10.1177/109467059800100205) has taught to a generation of hotel revenue managers, states the trade-off without flinching: a minimum length of stay only works if the demand for longer stays is actually there, and without it the control can damage RevPAR rather than improve it. That's the sentence to read before you raise a minimum. Not only will this filter out short stays. Obviously it will. But is there a longer stay behind them?
+Now the honest check, and it comes from outside the vendor ecosystem. Cornell's revenue management teaching on length-of-stay controls, drawn from the course Dr. Sheryl Kimes teaches on hotel availability controls, states the trade-off without flinching. [eCornell's summary](https://ecornell-impact.cornell.edu/the-dos-and-donts-of-length-of-stay) says to be sure you have sufficient demand for longer lengths of stay; otherwise the control could have a detrimental effect on RevPAR instead of improving it. That's the sentence to read before you raise a minimum. Not only will this filter out short stays. Obviously it will. But is there a longer stay behind them?
 
 ### The finding everyone quotes, read the way a revenue manager reads it
 
-Hospitable and IntelliHost's May 2026 joint report, The New Rules of STR Performance, analyzed more than 4.1 million Airbnb listings and 342,000 reservations. As covered by Hospitality Technology, one-bedroom listings enforcing a four-night minimum earned a median of $32,060 a year against $23,822 for listings accepting single nights, about 35% more, with four-bedroom homes showing a 41% gap.
+Hospitable and IntelliHost's May 2026 joint report, The New Rules of STR Performance, analyzed more than 4.1 million Airbnb listings and 342,000 reservations. As covered by [ShortTermRentalz](https://shorttermrentalz.com/news/str-listings-with-3-4-night-minimum-stays-generate-higher-revenue-report-finds/), one-bedroom listings enforcing a four-night minimum earned a median of $32,060 a year against $23,822 for listings accepting single nights, about 35% more, with four-bedroom homes showing a 41% gap.
 
 Every blog on the internet is now using that finding to tell you to raise your minimum. Read it more carefully.
 
-It says the minimum-stay rule is one of the highest-leverage settings on your listing. It does not say raise it and walk away. What it actually implies, once you put it next to PriceLabs' definition, that orphan gaps occur when your default minimum stay exceeds one night, is uncomfortable and unavoidable: the industry's best minimum-stay advice is also, mechanically, advice to manufacture more orphan nights. The higher the floor, the more of your calendar sits underneath it.
+It says the minimum-stay rule is one of the highest-leverage settings on your listing. It does not say raise it and walk away. What it actually implies, once you put it next to PriceLabs' point that orphan gaps only appear when your default minimum stay is longer than one night, is uncomfortable and unavoidable: the industry's best minimum-stay advice is also, mechanically, advice to manufacture more orphan nights. The higher the floor, the more of your calendar sits underneath it.
 
 That is the entire argument of this article. You don't respond by lowering the floor and giving up the 35%. You respond by building the exception layer that lets the floor do its job without the collateral.
 
@@ -555,21 +576,21 @@ So don't leave it to chance. Make the edges the cheapest way into the block and 
 
 **Adjacent Factor**, set as a discount, drops the rate on the nights immediately before and after an existing booking. PriceLabs documents this explicitly as a way to prevent unbooked gaps between reservations. That's your edge incentive: it makes the back-to-back the cheap path in.
 
-**Minimum stay for "adjacent days after unavailable nights"** does the structural half. PriceLabs' own guidance: set the first night after a booking to your normal minimum, then set a much higher minimum, seven nights, or ninety-nine if you want it closed outright, on the second night after. A guest can start on the edge. A guest can't start in the middle unless the stay is long enough to be worth the fragmentation. Extend the same rule to three nights out, and you close two-night gaps as well.
+**Minimum stay for "adjacent days after unavailable nights"** does the structural half. PriceLabs' own guidance: set the first night after a booking to your normal minimum, then set a much higher minimum, seven nights, or ninety-nine if you want it closed outright, on the second night after. A guest can start on the edge. A guest can't start in the middle unless the stay is long enough to be worth the fragmentation. Extend the same rule to three nights out, and you close two-night gaps as well. PriceLabs lays out both numbers in [its orphan gap guide](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/), updated September 5, 2026: use a figure such as 99 to rule out one-night gaps entirely, and extend the 7-night or 99-night rule to within 3 nights after an unavailable night to close two-night gaps.
 
-Keep in mind PriceLabs is candid that a premium makes adjacent days less attractive but doesn't guarantee they won't book. This is a steering mechanism, not a lock. That's the right posture. You're shaping probability, not enforcing an outcome.
+Keep in mind a premium makes adjacent days less attractive but doesn't guarantee they won't book. This is a steering mechanism, not a lock. That's the right posture. You're shaping probability, not enforcing an outcome.
 
 ### Closed-to-arrival and closed-to-departure: the sharpest tool in the box
 
-Airbnb calls these check-in and check-out restrictions, and you can close arrivals or departures on up to six days a week. Hotels have run them for decades as closed to arrival (CTA) and closed to departure (CTD). PriceLabs' Smart Check-in/Check-out goes further: it can block a checkout on a date that would create a one-night gap, forcing the departure to the following day instead.
+Airbnb calls these check-in and check-out restrictions, and according to [its Resource Center](https://www.airbnb.com/resources/hosting-homes/a/updating-your-availability-708) you can restrict arrivals or departures on up to 6 days per week. Hotels have run them for decades as closed to arrival (CTA) and closed to departure (CTD). PriceLabs' Smart Check-in/Check-out goes further: its [orphan gap guide](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/) describes an option that blocks check-ins and check-outs that would leave orphan gaps.
 
-Powerful, and the most dangerous control in this article. Cornell's guidance on closed-to-arrival is blunt: be very careful, because closing a date to arrivals affects that day, the day after, and the day after that. You can win revenue on one date and lose it on three.
+Powerful, and the most dangerous control in this article. Cornell's guidance on closed-to-arrival is blunt. [eCornell's length-of-stay summary](https://ecornell-impact.cornell.edu/the-dos-and-donts-of-length-of-stay) says to be very, very careful, because the control affects the day you closed to arrivals, the day after and the day after that. You can win revenue on one date and lose it on three.
 
 So use CTA/CTD surgically. Event windows. Dates with a documented history of the block getting chopped. Never as a standing rule. And check the precondition: these controls only work if your PMS or channel supports them, and not all do.
 
 ### Buffer-night hygiene: the fastest free fix here
 
-Airbnb's preparation time offers three options: none, one night before and after, or two nights before and after. Airbnb blocks those nights automatically.
+Airbnb's preparation time offers three options, according to [its Resource Center](https://www.airbnb.com/resources/hosting-homes/a/updating-your-availability-708): none, 1 night before and after each reservation, or 2 nights before and after. Airbnb blocks those nights automatically.
 
 Do the arithmetic on "1 night before and after." On a listing with 50 turnovers a year, you have blocked up to 100 nights, better than a quarter of your calendar, to protect a cleaning window that in most markets takes four hours.
 
@@ -579,13 +600,63 @@ If the turn is serviceable same-day, set prep time to none and manage cleaning t
 
 The reflex, when a host finally sees their orphan rate, is to drop the minimum across the board. Don't.
 
-A blanket one-night minimum invites the demand you least want at the highest cost to serve. PriceLabs' own product reasoning is direct about it: check-ins and check-outs carry operational overhead that cuts into profit, and one-night weekend stays usually signal a party. You'd be trading a measurable leak for an immeasurable one.
+A blanket one-night minimum invites the demand you least want at the highest cost to serve. PriceLabs' own product reasoning is direct about it: according to [its minimum-stay recommendation article](https://hello.pricelabs.co/blog/minimum-stay-recommendation-engine/), last updated April 6, 2026, check-ins and check-outs carry operational overhead that cuts into profit, and one-night weekend stays usually signal a party. You'd be trading a measurable leak for an immeasurable one.
 
 Prevention is surgical. The goal is not fewer restrictions; it's the right restriction per date. Which, run properly, can be an offensive weapon rather than a defensive one; the survivorship-bias case for beating the market's minimum by a night is in the pillar, [Revenue Management for Short-Term Rentals](/blog/revenue-management-for-short-term-rentals/), along with the visibility play that comes with it.
 
 ## 7. Filling the Orphans You Can't Prevent, Without Eroding Your Rate
 
-You will never prevent all of them. The ones that get through get a conditional rule: an exception that fires only when a gap already exists between two confirmed bookings, and leaves your standard minimum untouched everywhere else.
+You will never prevent all of them. The ones that get through get a conditional rule: an exception that fires only when a gap already exists between two confirmed bookings, and leaves your standard minimum untouched everywhere else. Airbnb supports a version of this natively: its [Resource Center](https://www.airbnb.com/resources/hosting-homes/a/updating-your-availability-708) describes a custom trip length shorter than your minimum for certain dates, with the example of a 5-night minimum and 4 unbooked nights between reservations.
+
+### Ways to Handle an Orphan Night: Six Options, With Examples
+
+Once a gap exists, you have six options, and each one fits a different gap. PriceLabs' [orphan gap guide](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/), updated September 5, 2026, calls extending a stay that already exists the cheapest way to fill a gap, and it applies a 20 percent discount to gaps of two nights or less by default. The cards below show where each option earns its place.
+
+<div class="rf-leaks">
+  <div class="rf-leaks-header">
+    <p class="kicker">Six options, one white square</p>
+    <h3>ways to handle an orphan night, with examples</h3>
+    <p class="lede">Each option below is a real setting or move available in 2026. Pick by gap width, lead time and what the night nets after the turn.</p>
+  </div>
+  <div class="rf-leaks-grid">
+    <div class="rf-leak-card cedar">
+      <p class="num">01</p>
+      <p class="label">Rule</p>
+      <p class="title">Drop the minimum to the gap</p>
+      <p class="body"><em>Example:</em> a 2-night hole under a 3-night rule opens at 2 nights, for that window only. Airbnb's custom trip length and PriceLabs' Orphan Gaps both do this.</p>
+    </div>
+    <div class="rf-leak-card moss">
+      <p class="num">02</p>
+      <p class="label">Direct ask</p>
+      <p class="title">Extend the guest next door</p>
+      <p class="body"><em>Example:</em> offer the guest arriving after a 1-night hole an early arrival at a modest rate. No new acquisition cost and no extra clean.</p>
+    </div>
+    <div class="rf-leak-card tobacco">
+      <p class="num">03</p>
+      <p class="label">Price up</p>
+      <p class="title">Premium the exact fit</p>
+      <p class="body"><em>Example:</em> a single Wednesday, 3 days out, in a 3-night market. The few guests who can see it need that date.</p>
+    </div>
+    <div class="rf-leak-card walnut">
+      <p class="num">04</p>
+      <p class="label">Price down</p>
+      <p class="title">Seed the wide gap early</p>
+      <p class="body"><em>Example:</em> a 4-night gap 60 days out gets a modest discount so it books as inventory, not as a scrap.</p>
+    </div>
+    <div class="rf-leak-card moss">
+      <p class="num">05</p>
+      <p class="label">Judgment</p>
+      <p class="title">Hold the event shoulder</p>
+      <p class="body"><em>Example:</em> the Thursday before a sold-out race weekend stays closed until the comp set shows whether single-night demand is premium.</p>
+    </div>
+    <div class="rf-leak-card tobacco">
+      <p class="num">06</p>
+      <p class="label">Leave it</p>
+      <p class="title">Keep the night dark</p>
+      <p class="body"><em>Example:</em> a $150 night against a $100 turn, or a Saturday single in a market where one-night weekend stays signal a party.</p>
+    </div>
+  </div>
+</div>
 
 ### The conditional rule is the whole design
 
@@ -593,7 +664,7 @@ Your minimum stay is your strategy. The orphan rule is an exception to that stra
 
 The exception is safe precisely because the condition is narrow. A guest shopping your open calendar can't trigger it. Only geometry you already have can. That's what separates it from lowering your minimum: you keep the booking profile you designed, and you sell the nights that profile stranded.
 
-In PriceLabs, the customization is called Orphan Gaps, and it does what the name says. It overrides your other minimum-stay settings when there's a gap on your calendar, so all available nights become bookable. You set which gap lengths it applies to and what minimum it drops to. One piece of hierarchy is worth knowing: the orphan-gap minimum outranks your date-specific overrides. Set a four-night minimum for a specific week, and if a two-night gap opens inside it, the orphan rule still fires. Usually that's exactly what you want. During an event week, it may be exactly what you don't, which is the last part of this section.
+In PriceLabs, the customization is called Orphan Gaps, and it does what the name says. It adjusts your minimum stay when there's a gap on your calendar, so new bookings don't leave leftover scraps, according to [PriceLabs' minimum-stay guide](https://hello.pricelabs.co/blog/minimum-stay-restrictions/). You set which gap lengths it applies to and what minimum it drops to. One piece of hierarchy is worth checking in your own tool: whether the orphan-gap minimum outranks your date-specific overrides. If it does, a four-night minimum set for a specific week still gives way when a two-night gap opens inside it. Usually that's exactly what you want. During an event week, it may be exactly what you don't, which is the last part of this section.
 
 ### Discount or premium? The question most hosts answer backwards
 
@@ -612,9 +683,9 @@ Think about who books a single Wednesday, three days out, in a market with a thr
 
 And you're about to hand her 20% off.
 
-The defaults point the wrong way for this case. PriceLabs applies a 20% discount to gaps of two nights or less unless you say otherwise, and if the orphan is also a last-minute booking, it applies the larger of the two discounts. That's a sensible starting point for an engine that prices hundreds of thousands of listings without knowing anything about yours. It is not a strategy.
+The defaults point the wrong way for this case. According to [PriceLabs' orphan gap guide](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/), updated September 5, 2026, the tool applies a 20 percent discount to gaps of two nights or less by default, and you can replace that with your own percentage or a fixed rate. That's a sensible starting point for an engine that prices hundreds of thousands of listings without knowing anything about yours. It is not a strategy.
 
-PriceLabs' own documentation shows the other side, and it's telling how few people notice. In their worked example of the Orphan Day Gap Filler, a manager discounts two- and three-night gaps to pull short stays in, but accepts one-night stays only at a premium over the expected nightly price, to cover the operational and cleaning cost. Both moves are correct. For different gaps. The tool supports discount or premium on orphan days. Almost nobody uses the premium.
+The other side is the one few people set. Discounting two- and three-night gaps to pull short stays in, while accepting one-night stays only at a premium that covers the cleaning cost, is a pattern worth building. Both moves are correct. For different gaps. Check whether your tool's orphan-day setting accepts a premium as well as a discount, and use it.
 
 | Gap width | Lead time | Demand read | The move |
 |---|---|---|---|
@@ -622,7 +693,7 @@ PriceLabs' own documentation shows the other side, and it's telling how few peop
 | 1–2 nights | 14–45 days | Soft | Standard rate, minimum dropped to the gap length. Let it clear on its own merits. |
 | 1–2 nights | 14–45 days | Strong | Hold rate, or a small premium. Never discount a night the market already wants. |
 | 3+ nights | 60+ days out | Soft | Modest discount to seed it. A wide gap far out is a booking window, not a scrap. Treat it like inventory. |
-| Any | Event shoulder | Compressed | Judgment. See below. |
+| Any | Event shoulder | Compressed | Judgment, covered in the event-shoulder section. |
 | Any | Inside 48 hours | Any | Clear it. A night with two days left has almost no option value. Take the rate that moves it. |
 
 <figure class="rf-diagram" aria-label="A decision quadrant plotting gap width against lead time. Wide gaps far out call for a discount; exact-fit single nights at the last minute call for a premium.">
@@ -668,7 +739,7 @@ The principle underneath all six rows: as the window closes, the value of holdin
 
 ### Minimum-stay rule vs. length-of-stay discount: opposite jobs, constantly confused
 
-A minimum-stay rule sets the floor on how short a stay can be. A length-of-stay discount lowers the effective nightly rate to pull stays longer. One is a gate. The other is a magnet. They aren't interchangeable, and neither substitutes for the other.
+A minimum-stay rule sets the floor on how short a stay can be. A length-of-stay discount lowers the effective nightly rate to pull stays longer. On Airbnb, according to [its Help Center](https://www.airbnb.com/help/article/1344), those discounts apply to weekly stays of 7 or more nights and monthly stays of 28 or more, and discounts of 10% or more show in search results. One is a gate. The other is a magnet. They aren't interchangeable, and neither substitutes for the other.
 
 The confusion is expensive in one specific direction. A host reads that longer stays reduce orphan risk, which is true, and reaches for a weekly or monthly discount to encourage them. On a peak week, that discount just handed 15–20% off to a guest who was going to book seven nights anyway, at full rate. You solved an orphan problem you didn't have and paid for it out of your best week of the year.
 
@@ -682,7 +753,7 @@ Set a four-night minimum across a race weekend, and you've done the right thing 
 
 No rule answers this, because the answer depends on facts a rule can't see. Does the event's actual arrival pattern start on the Thursday? Has the comp set already closed those nights? Is the single-night demand around the event premium, people extending a good trip, or budget, people who couldn't get in? Sometimes you hold the shoulder for a premium single. Sometimes you fold it into the block and take the four-night stay. Sometimes you open it at rate and let the market decide.
 
-PriceLabs' own guidance on gap prevention says it outright: during major events, it may be worth relaxing gap prevention to grab premium rates. That's a vendor telling you to switch its feature off and think. Take the advice. What the shoulder is actually worth in a major event window is a demand-capture question, and we've worked it through for [F1 weekends](/blog/f1-race-weekend-str-pricing-playbook/) in Miami, Austin and Las Vegas and for the [2026 World Cup](/blog/fifa-2026-world-cup-str-pricing/) host cities.
+PriceLabs' own guidance says it outright: according to [its minimum-stay guide](https://hello.pricelabs.co/blog/minimum-stay-restrictions/), during major events it might be worth relaxing gap prevention to grab premium rates. That's a vendor telling you to switch its feature off and think. Take the advice. What the shoulder is actually worth in a major event window is a demand-capture question, and we've worked it through for [F1 weekends](/blog/f1-race-weekend-str-pricing-playbook/) in Miami, Austin and Las Vegas and for the [2026 World Cup](/blog/fifa-2026-world-cup-str-pricing/) host cities.
 
 ## 8. The Trade-Off Math: Cleaning Cost, Guest Quality, and NetRevPAR
 
@@ -700,7 +771,7 @@ A recovered orphan is a full turnover for one night of revenue. The rate you cle
  = what actually reaches the account
 ```
 
-Fill in your own numbers; the ratio is the point, not my arithmetic. On a $150 night against a $100 turn cost, you're working for the platform. On a $400 night against the same $100, you're not. Which is why the premium move in §7 isn't a rate trick. It's the thing that makes single-night recovery viable at all. Solve the cleaning-to-revenue ratio with price, not with a blanket policy about whether you "accept one-nighters."
+Fill in your own numbers; the ratio is the point, not my arithmetic. For the commission line, the [Airbnb Help Center](https://www.airbnb.com/help/article/1857) says most hosts on the single host-only fee pay 15.5%, while most hosts on the split fee pay 3%. On a $150 night against a $100 turn cost, you're working for the platform. On a $400 night against the same $100, you're not. Which is why the premium move in §7 isn't a rate trick. It's the thing that makes single-night recovery viable at all. Solve the cleaning-to-revenue ratio with price, not with a blanket policy about whether you "accept one-nighters."
 
 <div class="rf-chart">
   <div class="rf-chart-header">
@@ -737,16 +808,18 @@ Every major pricing tool can detect an orphan gap and adjust the minimum stay an
 
 ### What the tools actually do
 
-PriceLabs ships the deepest set: Orphan Gaps (overrides other minimum-stay settings when a gap exists, so available nights become bookable), Orphan Day prices (discount, premium, or a fixed rate, configurable by gap length), Adjacent Factor (price the days before and after a booking, up or down, 1–30 days out), minimum stay for adjacent days after unavailable nights, Smart Check-in/Check-out (blocks check-ins and check-outs that would create a gap), and a Lowest Orphan Gap Allowed floor. The stacking logic is documented and worth learning: among multiple discounts, the largest applies; multiple premiums stack.
+PriceLabs ships the deepest set. Its [orphan gap guide](https://hello.pricelabs.co/blog/how-to-use-orphan-gaps-for-increasing-revenue/), updated September 5, 2026, walks through five customizations that prevent and fill gaps, including Orphan Gaps, orphan-day pricing with a 20 percent default discount on gaps of two nights or less, minimum stay for adjacent days after unavailable nights, and Smart Check-in and Check-out, which can block check-ins and check-outs that leave orphan gaps. Read how your own account stacks multiple discounts and premiums before you trust the output.
 
 Beyond, Wheelhouse, Hospitable and OwnerRez all ship some version of gap detection and automated minimum-stay adjustment. The features differ in depth, not in kind. If you want the mechanics, which tool, which setting, in what order that's the [dynamic pricing guide](/blog/dynamic-pricing-str-beginners-guide/), not this article. This article is about what to tell them to do.
 
 ### Where automation stops: four things a rule can't do
 
+Markets book differently enough that one default can't fit them all. According to AirROI's 2026 reports, guests stay about 3.6 nights in [Gatlinburg](https://airroi.com/report/world/united-states/tennessee/gatlinburg) and about 7 nights in [Scottsdale](https://airroi.com/report/world/united-states/arizona/scottsdale).
+
 | Handled by the rule ✅ | Needs a human ⚠️ |
 |---|---|
 | Detect a gap the moment it forms | Judge an event shoulder. The rule sees a two-night gap. It doesn't see that the gap is the Thursday before a race weekend and worth $600 to the right guest. |
-| Drop the minimum to the gap length | Calibrate to the market's booked LOS. A 20% default on ≤2-night gaps is the same rule in Gatlinburg's 3.4-night market and Scottsdale's 5.9-night market. Those markets should not run the same rule. |
+| Drop the minimum to the gap length | Calibrate to the market's booked LOS. A 20% default on ≤2-night gaps is the same rule in Gatlinburg's 3.6-night market and Scottsdale's 7-night market, per AirROI's 2026 reports. Those markets should not run the same rule. |
 | Apply the discount or premium you configured | Decide discount versus premium by demand. It applies whatever you set. If you never set it, it applies the default, and the default points down. |
 | Re-price adjacent days after every booking | Catch a pacing-decay orphan hardening. A rule fires when its condition is met. It has no opinion about a fillable gap that's been losing value for six weeks while your lead-time ladder stayed put. |
 
@@ -756,7 +829,7 @@ The tool sets the rule. Somebody still has to decide what the rule should say, a
 
 One strategist across a portfolio does two things a per-listing rule cannot.
 
-**Calibration.** The same orphan rule gets three different configurations across three markets, because the markets book differently. That isn't a preference. It's arithmetic: the gap distribution in a 3.4-night market is a different distribution.
+**Calibration.** The same orphan rule gets three different configurations across three markets, because the markets book differently, from about 3.6-night stays to about 7-night stays in AirROI's 2026 data. That isn't a preference. It's arithmetic: the gap distribution in a 3.6-night market like Gatlinburg is a different distribution from a 7-night market like Scottsdale, according to [AirROI's 2026 length-of-stay figures](https://airroi.com/report/world/united-states/tennessee/gatlinburg).
 
 **Timing.** Gaps get caught while they're still soft. A gap noticed at 45 days is a pricing decision. The same gap at five days is a fire sale.
 
@@ -774,7 +847,7 @@ Across the 198 listings the RevFactor playbook runs on daily through Blackbird H
 
 ## 10. Measuring the Fix: Orphan Rate, Occupancy Reconciliation, RevPAR vs. Comp Set
 
-Three gauges, one cadence. Orphan rate trending down. Occupancy converging on what your booked stretches imply. RevPAR beating your comp set. If all three move, the fix worked. If only the first moves, you filled orphans at rates that didn't pay.
+Three gauges, one cadence. According to [AirDNA's Vacation Rental Glossary](https://www.airdna.co/glossary), pacing compares current booking activity against past performance, and that comparison is what the three gauges below depend on. Orphan rate trending down. Occupancy converging on what your booked stretches imply. RevPAR beating your comp set. If all three move, the fix worked. If only the first moves, you filled orphans at rates that didn't pay.
 
 1. **Orphan rate trend.** Per listing, month over month, and against the same month last year. Falling is winning. It's the only gauge that isolates this problem from everything else you're doing.
 2. **The occupancy reconciliation.** Take your booked stretches and ask what occupancy they'd imply if every window between them had been bookable. Compare that to reported occupancy. The distance between those two numbers is your leak, expressed as a percentage. Watch it closely.
@@ -784,7 +857,7 @@ The cadence is the discipline. Orphan rate: monthly. RevPAR vs. comp set: monthl
 
 ## 11. The Airline Lineage: LOS Controls and Nesting (Why This Is a Solved Problem)
 
-This is not a new problem, and it isn't an Airbnb problem. Airlines solved a structurally identical version of it in the 1980s. The inventory unit changed. The mathematics didn't.
+Orphan nights are not a new problem, and they aren't an Airbnb problem. Airlines solved a structurally identical version in the 1980s, after U.S. deregulation in 1978, according to [INFORMS](https://www.informs.org/Explore/History-of-O.R.-Excellence/O.R.-Methodologies/Revenue-Management). The inventory unit changed. The mathematics didn't.
 
 I spent ten years in revenue management at American Airlines before I priced my first cabin. Let me tell you what I recognized the first time I saw a stranded Wednesday.
 
@@ -835,7 +908,7 @@ The mechanism was nesting. American's implementation, developed in 1983, was cal
 
 > That sentence is the entire orphan-night playbook, written four decades before Airbnb existed.
 
-Hotels institutionalized the same logic under different names: minimum length of stay, maximum length of stay, closed to arrival, closed to departure. And they institutionalized the cautions with them. Cornell teaches these as a set with the trade-offs stated up front: MinLOS only works when there's longer-stay demand behind it, and closed-to-arrival ripples across three days rather than one. Those aren't warnings a vendor writes. They're what a discipline sounds like once it's old enough to have made every mistake twice.
+Hotels institutionalized the same logic under different names: minimum length of stay, maximum length of stay, closed to arrival, closed to departure. And they institutionalized the cautions with them. Cornell teaches these as a set with the trade-offs stated up front. According to [eCornell's summary of the length-of-stay controls](https://ecornell-impact.cornell.edu/the-dos-and-donts-of-length-of-stay), MinLOS needs sufficient demand for longer stays behind it, and closed-to-arrival ripples across three days rather than one. Those aren't warnings a vendor writes. They're what a discipline sounds like once it's old enough to have made every mistake twice.
 
 So, again: this discipline is older than your property, older than the platform you list on, and proven across industries that measure in trillions. What changed is the inventory unit. A seat became a room became a night. The problem, fixed capacity, perishable units, and restrictions that strand value when nobody's watching, never changed at all.
 
@@ -858,7 +931,7 @@ Here's where it breaks, and it isn't the setup. It's the maintenance and the per
 | You'll check pacing weekly, not when a month looks soft | Six months of a pricing tool running and no confident read on whether it's working |
 | Your orphan rate is trending down, and you know why | You've run the audit, you know your orphan rate, and it hasn't moved in two quarters |
 
-For context on what that layer costs: RevFactor is revenue-only. We operate PriceLabs inside your existing account as a co-host, no second subscription, and the orphan work runs inside the daily read: the audit at onboarding, the prevention config, the conditional rules, and the weekly pacing review that catches the type-6 orphan a rule never will. It's $350 per property per month, the same price whether you have one property or five, plus a one-time $150 onboarding, with enterprise pricing past five. Across the 198 listings the playbook runs on daily through Blackbird Hospitality, in 24 U.S. states and 67 markets, the documented result is +24% RevPAR versus comp set on a 24-month rolling average. You keep your cleaners, your OTAs, and your guest comms. We manage the revenue side and nothing else.
+For context on what that layer costs: RevFactor is revenue-only. We operate PriceLabs inside your existing account as a co-host, no second subscription, and the orphan work runs inside the daily read: the audit at onboarding, the prevention config, the conditional rules, and the weekly pacing review that catches the type-6 orphan a rule never will. It's $350 per property per month, the same price whether you have one property or five, plus a one-time $150 onboarding, with enterprise pricing past five. Across the 198 listings the playbook runs on daily through Blackbird Hospitality, in 24 U.S. states and 67 markets, the documented result is +24% RevPAR versus comp set on a 24-month rolling average, published in the [RevFactor 2026 Revenue Benchmarks](/blog/str-revenue-benchmarks-2026/). You keep your cleaners, your OTAs, and your guest comms. We manage the revenue side and nothing else.
 
 The way to think about the decision isn't the fee. It's the cognitive load. Nobody bought a short-term rental because they wanted to spend Saturday morning reconciling minimum-stay rules against a lead-time ladder in four markets. The question is whether that hour is worth more to you than what it recovers. For one listing in a market you understand, it usually isn't. Run it yourself and keep the money. For five listings across four states, one missed event weekend costs more than a year of the discipline.
 
@@ -866,7 +939,7 @@ This is a people business, not just real estate. The rules are the medium. Someb
 
 ## Closing
 
-Orphan nights are self-inflicted, and that's the good news: anything you built, you can design differently. Prevent the gaps upstream, price the exceptions with intent instead of reflex, and put a number on the leak your ADR will never show you.
+Orphan nights are self-inflicted, and that's the good news: anything you built, you can design differently. The measured version of that argument is in the [RevFactor 2026 Revenue Benchmarks](/blog/str-revenue-benchmarks-2026/), where the average listing's Orphan Rate fell from 25.0% to 11.9% under management. Prevent the gaps upstream, price the exceptions with intent instead of reflex, and put a number on the leak your ADR will never show you.
 
 > A night that is not sold can never be sold again. But almost no orphan night was ever bad luck. It was a setting.
 
