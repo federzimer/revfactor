@@ -41,6 +41,8 @@ Updated 2026-09-14. Evidence and full plan: `docs/geo-citation-strategy-2026-09-
 - [ ] Weekly sweep: the "Bing deindex" alarm was a broken metric. Fixed 9/14, Bing shows 24 pages indexed and the sitemap is healthy.
 
 ## 7. Carry-over
+- [ ] **Blackbird size, pick one number:** Fede's author bio and schema on every post say 198 listings in 24 states and 67 markets "through Blackbird Hospitality", but blackbirdhm.com says it "has managed more than 90 properties". The property-manager listicle now quotes the Blackbird site. Which is right, and are the 198 listings RevFactor's book or Blackbird's? We update the bio, the listicle or blackbirdhm.com to match.
+- [ ] **Roami on the property-manager listicle:** its site describes a hospitality brand running whole buildings in Miami and New Orleans, with no owner management offer. Keep or remove?
 - [ ] **Market pages (parked 8/16 plan, never started):** "Airbnb Revenue Management in {Market}" pages plus a paired "Best Airbnb Revenue Management Services for {Market} Hosts" listicle, 2 markets a month. Fede picks the first markets where we have real case data (candidates: Smoky Mountains, Gulf Shores/30A, Orlando/Kissimmee, Scottsdale, Broken Bow, Poconos, Big Bear, Hill Country TX). Plan: `docs/market-pages-addendum-2026-08-16.md`.
 - [ ] Booking conversion: bookings flat at 15 while sessions rose 68% (Thrive Local strategy v3). Who owns the funnel audit?
 - [ ] VRMA: Kevin and Dave confirmed supplier-membership fit and asked for a call. Take the call? Blake's VRMA 26 booth is a separate spend decision.
