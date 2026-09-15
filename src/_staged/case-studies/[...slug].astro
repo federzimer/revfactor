@@ -148,7 +148,7 @@ const breadcrumbSchema = {
             <div>
               <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62]">Onboarded</p>
               <p class="text-[14px] text-[#3F261F]" style="font-family: 'JetBrains Mono', monospace;">
-                {study.data.onboardedDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                {study.data.onboardedDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })}
               </p>
             </div>
           )}

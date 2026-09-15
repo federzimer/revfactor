@@ -21,11 +21,11 @@ const featuredPost = posts[0];
 const otherPosts = posts.filter((p) => p.id !== featuredPost?.id);
 
 const fmtShort = (d: Date) =>
-  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 const fmtLong = (d: Date) =>
-  d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+  d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', timeZone: 'UTC' });
 const fmtMonthDay = (d: Date) =>
-  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
 
 // LCP optimization: derive srcset for the featured image so mobile pulls the
 // 1200 variant instead of the 2400 file.

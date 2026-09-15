@@ -15,7 +15,7 @@ faqs:
   - q: "What is dynamic pricing for short-term rentals?"
     a: "Dynamic pricing for short-term rentals is software that automatically adjusts your nightly rate every day based on demand signals: seasonality, day of week, lead time, comp set movement, and local events. Tools like PriceLabs, Beyond Pricing, and Wheelhouse run the math; you set the floor, the ceiling, and the rules. The point isn't to charge more on every night. It's to price each night at the rate the market will actually clear, so empty calendar days shrink and high-demand nights aren't underpriced."
   - q: "Does Airbnb use dynamic pricing?"
-    a: "Airbnb has a built-in feature called Smart Pricing that adjusts your rate inside a min/max range you set, but most professional hosts treat it as a starting point rather than a strategy. Smart Pricing reacts to platform-wide signals; it doesn't read your specific comp set, your local events, or your booking pacing the way third-party tools do. The 41% of US Airbnb listings on dynamic pricing today are mostly running PriceLabs, Beyond Pricing, or Wheelhouse on top of (or instead of) Airbnb's built-in feature."
+    a: "Airbnb has a built-in feature called Smart Pricing that adjusts your rate inside a min/max range you set, but most professional hosts treat it as a starting point rather than a strategy. Smart Pricing reacts to platform-wide signals; it doesn't read your specific comp set, your local events, or your booking pacing the way third-party tools do. AirDNA estimates that only 31% of U.S. hosts use dynamic pricing at all, as reported by Skift in September 2026. Hosts who do can run PriceLabs, Beyond Pricing, Wheelhouse or AirDNA Adapt on top of, or instead of, Airbnb's built-in feature."
   - q: "What is the best dynamic pricing tool for Airbnb?"
     a: "PriceLabs is the most flexible and is the tool RevFactor uses across every client portfolio. It gives you the most control over base rate, customizations, day-of-week rules, length-of-stay logic, and minimum-stay strategy. Beyond Pricing is the simplest to start and runs more on autopilot. Wheelhouse sits in between with strong market data. AirDNA Adapt, launched in September 2026 at $20 per listing per month, is the newest option and prices around four named strategies instead of a long rule set. The right tool depends on how much you want to configure yourself; the better question is who's actually going to operate it once it's live."
   - q: "How can I stop guessing my Airbnb pricing?"
@@ -49,9 +49,9 @@ faqs:
 
 <div class="rf-key-stats">
   <div class="stat">
-    <p class="label">US AIRBNB LISTINGS ON DYNAMIC PRICING</p>
-    <p class="number">41%</p>
-    <p class="caption">Lighthouse / Key Data, 2025</p>
+    <p class="label">U.S. HOSTS USING DYNAMIC PRICING</p>
+    <p class="number">31%</p>
+    <p class="caption">AirDNA estimate via Skift, 2026</p>
   </div>
   <div class="stat">
     <p class="label">REVENUE LIFT, STATIC → DYNAMIC</p>
@@ -101,26 +101,25 @@ Dynamic pricing for short-term rentals is **software that adjusts your nightly r
 
 The tools (PriceLabs, Beyond Pricing, and Wheelhouse are the three most common) connect to your Airbnb and Vrbo listings via API, pull market data, and update your prices on a rolling 18-month calendar. A property under dynamic pricing has a different rate for every night of the year, and those rates keep moving as the booking window narrows.
 
-Adoption is uneven. According to Lighthouse / Key Data's Q4 2024 research, **41% of US Airbnb listings now use third-party dynamic pricing tools**, but the breakdown depends sharply on who's hosting:
+Adoption is still low. AirDNA estimates that only **31% of hosts in the U.S.** and 15% of hosts worldwide use dynamic pricing, according to [Skift's September 2026 report](https://skift.com/2026/09/01/airdna-enters-revenue-management-market-with-host-dynamic-pricing-tool-exclusive/) on AirDNA's entry into revenue management:
 
 <div class="rf-chart">
   <div class="rf-chart-header">
-    <p class="kicker">Dynamic pricing adoption · US Airbnb listings · Lighthouse 2024-2025</p>
-    <h3>Property managers adopt at 1.6× the rate of the overall market.</h3>
-    <p class="lede">Source: Lighthouse / Key Data via Jamie Lane, 2025. Solo hosts lean on rules-based or manual pricing; professional managers run dynamic-pricing software almost universally.</p>
+    <p class="kicker">Dynamic pricing adoption · share of hosts · AirDNA estimate, 2026</p>
+    <h3>Fewer than one in three U.S. hosts use dynamic pricing.</h3>
+    <p class="lede">Source: AirDNA estimates, as reported by <a href="https://skift.com/2026/09/01/airdna-enters-revenue-management-market-with-host-dynamic-pricing-tool-exclusive/" target="_blank" rel="noopener nofollow">Skift on September 1, 2026</a>. The figures count hosts, not listings.</p>
   </div>
   <div class="rf-chart-rows">
-    <div class="rf-chart-row"><span class="rf-chart-label">Property managers</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:55%"></span></span><span class="rf-chart-value">55%</span></div>
-    <div class="rf-chart-row"><span class="rf-chart-label">All US listings</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:41%"></span></span><span class="rf-chart-value">41%</span></div>
-    <div class="rf-chart-row"><span class="rf-chart-label">Manual / rules-based</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:35%"></span></span><span class="rf-chart-value">35%</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">U.S. hosts</span><span class="rf-chart-bar"><span class="rf-chart-fill" style="width:31%"></span></span><span class="rf-chart-value">31%</span></div>
+    <div class="rf-chart-row"><span class="rf-chart-label">Hosts worldwide</span><span class="rf-chart-bar"><span class="rf-chart-fill comp" style="width:15%"></span></span><span class="rf-chart-value">15%</span></div>
   </div>
   <div class="rf-chart-legend">
-    <span><span class="swatch cedar"></span>Dynamic pricing tool active</span>
-    <span><span class="swatch walnut"></span>Below-mean adoption</span>
+    <span><span class="swatch cedar"></span>U.S. hosts</span>
+    <span><span class="swatch walnut"></span>Hosts worldwide</span>
   </div>
 </div>
 
-AirDNA counts adoption a different way and gets a lower number. Its estimate, [reported by Skift in September 2026](https://skift.com/2026/09/01/airdna-enters-revenue-management-market-with-host-dynamic-pricing-tool-exclusive/), is that only 15% of hosts worldwide and 31% of hosts in the U.S. use dynamic pricing. The two figures measure different things, hosts in one case and listings in the other, and a professional manager running dozens of listings counts once as a host but many times as listings. Both can be true at once.
+Those numbers count hosts, not listings. A professional manager running dozens of listings counts once as a host, so the share of individual listings under dynamic pricing can differ from the share of hosts. AirDNA cited the estimate while launching its own pricing tool, so read it as a vendor sizing up its market.
 
 The gap is the entire premise of this guide. Solo hosts who haven't moved to dynamic pricing aren't competing for the same calendar position as the managed listings two streets over, and the rate gap shows up at every peak weekend they're underpriced for.
 

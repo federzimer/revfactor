@@ -23,8 +23,11 @@ export async function getStaticPaths() {
 const { post, allPosts } = Astro.props;
 const { Content, headings } = await render(post);
 
+// Dates are formatted in UTC. Frontmatter dates (2026-09-14) parse as UTC
+// midnight, so formatting in the build machine's local zone (e.g. US Central)
+// shows the previous day and disagrees with dateModified in the schema.
 const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
-  year: 'numeric', month: 'short', day: 'numeric',
+  year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC',
 });
 
 const toc = headings.filter((h) => h.depth === 2).map((h) => ({
@@ -56,7 +59,7 @@ const related = relatedSource.slice(0, 3).map((p) => {
   return {
     href: `/blog/${p.id}`,
     cat: p.data.category,
-    date: p.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    date: p.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }),
     read: p.data.readingTime ? `${p.data.readingTime} min` : '8 min',
     title: p.data.title,
     img: r.src,
@@ -520,10 +523,10 @@ const methodItemList = {
             <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Published</div>
             <div>{formattedDate}</div>
           </div>
-          {post.data.updatedDate && post.data.updatedDate.toDateString() !== post.data.pubDate.toDateString() && (
+          {post.data.updatedDate && post.data.updatedDate.toISOString().slice(0, 10) !== post.data.pubDate.toISOString().slice(0, 10) && (
             <div>
               <div class="font-bold uppercase text-[9.5px] tracking-[2px] text-[#E8E6E1] mb-1.5" style="font-family:inherit;">Last Updated</div>
-              <div>{post.data.updatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</div>
+              <div>{post.data.updatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</div>
             </div>
           )}
           {post.data.readingTime && (
