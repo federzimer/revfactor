@@ -21,7 +21,7 @@ Per engine today: Perplexity 10.7%, Claude 5.3%, ChatGPT 2.7%. Google AI Mode 3.
 
 | Page | May claim | Verified 2026-09-13 | What happened |
 |---|---|---|---|
-| HotelTechReport | 391 cites, buy Premium $2K | 0 RevFactor mentions on the RM systems page; Bing site search empty; Peec 148 cites/30d. **Correction 9/14:** on the tracker it is retrieved in 44 of 450 answers, more than any other third-party site | Pitched 6/24. Jordan Hollander and Adam (sales) replied; Adam sent the media kit and closed the loop 7/29 when we went quiet. Quote on file ~$1,000/yr (per the Thrive Local strategy v3, mailbox-checked 8/26). |
+| HotelTechReport | 391 cites, buy Premium $2K | 0 RevFactor mentions on the RM systems page; Bing site search empty; Peec 148 cites/30d. **Correction 9/14:** on the tracker it is retrieved in 44 of 450 answers, more than any other third-party site | Pitched 6/24. Jordan Hollander (media kit) and co-founder Adam Hollander replied. Adam's latest email (9/11, federico@ mailbox checked 9/14): basic profile in the "Vacation Rental Dynamic Pricing Software" category for a **$500 one-time listing fee**; the decision is ours. |
 | StaySTRA | 158 cites, free pitch | Site search "revfactor" returns nothing; no longer in Peec top 30 | Never pitched (no Order Tracker row). |
 | RentalScaleUp | 76 cites, $750 sponsored | Site search returns nothing; not in Peec top 30 | Pitched 6/24 and 6/27. No reply. |
 
@@ -56,19 +56,18 @@ Priority order = pages already cited in answers that name RevFactor but do not l
 
 | # | Page | Why | Path | Est. cost |
 |---|---|---|---|---|
-| 1 | hoteltechreport.com airbnb-pricing-tools + RM category | Retrieved in 44 of 450 answers; not listed | Revive Adam's thread. Confirm the free vendor profile first, then decide the ~$1,000/yr listing | Free to ~$1,000/yr |
+| 1 | hoteltechreport.com airbnb-pricing-tools + RM category | Retrieved in 44 of 450 answers; not listed | Answer Adam's 9/11 email: $500 one-time basic listing in Vacation Rental Dynamic Pricing Software | $500 one-time |
 | 2 | gowithsurge.com best-airbnb-management-companies-2026 | 9 cites, 11.6% of all answers retrieve gowithsurge | Inclusion or paid | Free to $150 |
 | 3 | airroi.com | Retrieved in 31 of 450 answers; RevFactor already uses AirROI data | Co-content or partner mention; pairs with Fede opening an AirROI account for the Revenue Check app | Free |
 | 4 | fairly.com best-airbnb-management-companies | 5 cites | Inclusion | Free |
 | 5 | stayfi.com best-vacation-rental-dynamic-pricing-software | 138 URL cites/30d, retrieved in 11.6% of answers | Pitch a "done-for-you alternative" section | Free to paid |
 | 6 | hostfully.com/blog/airbnb-pricing-tools | 139 URL cites/30d | Same angle (Hostfully is a PMS, not a pricing competitor) | Free |
-| 7 | rakidzich.com airbnb-pricing-tools-comparison + done-for-you-airbnb-management-2026 | 106 + retrieved in 12% of answers; was in the May plan, never worked | Avery is a coach; guest quote from Fede | Free |
 | 8 | truvi.com/blog/airbnb-pricing-tools | 67 URL cites | Partnership content | Free |
 | 9 | chekin, realestatebees, stepbystepbnb, redawning "best airbnb property management" pages | cited 3 to 4x each in RF answers | Inclusion | Free |
 | 10 | Vendor-list sites already cited 9 to 10x for our prompts but not listing us (sheet "Backlink-Only & AI Candidates"): getapp.com, cubi.casa, yesassistant.com | DEEPEN rows from 8/21 | Profile submission | Free |
 | 11 | TechBullion round 2 (see Ordering plan below) | Only proven paid STR domain: 24 of 450 answers retrieve techbullion.com | Order via Raheel | ~$50 |
 
-Not targets: revenuenaire.com and hostlyft.com (their cited pages are their own revenue management service pages; competitors will not list us). Drop from the plan: HotelTechReport Premium at $2K (the ~$1,000/yr listing replaces it), StaySTRA and RentalScaleUp (no longer cited), Wikipedia, Skift/PhocusWire sponsored, VRMA newsletter as a citation play (keep the membership only if Fede wants the booth). Also drop web-2.0 mention orders (Medium, Weebly, Strikingly, Smore, 8b): proven invisible.
+Not targets: revenuenaire.com, hostlyft.com, stepbystepbnb.com, triadvacationrentals.com and both rakidzich.com pages (each sells its own revenue management or pricing service; rakidzich runs Revande). Drop from the plan: HotelTechReport Premium at $2K (the $500 one-time listing replaces it), StaySTRA and RentalScaleUp (no longer cited), Wikipedia, Skift/PhocusWire sponsored, VRMA newsletter as a citation play (keep the membership only if Fede wants the booth). Also drop web-2.0 mention orders (Medium, Weebly, Strikingly, Smore, 8b): proven invisible.
 
 Budget: $300 to $600 for the quarter instead of $3K to $5K. The one paid placement that worked cost $50.
 
@@ -98,7 +97,12 @@ The tracker shows RevFactor named in 9.6% of answers to "which company" prompts 
 - Keep the RevFactor Peec project until the 3 readers are repointed; Peec is the only view of Google AI Overview and AI Mode.
 - Placement monitor already checks TechBullion and the LinkedIn post; add freewyldfoundry and uprev.co rows to Published Tracking so organic wins are tracked too.
 
-## 6. Housekeeping
+## 6. Outreach status (mailbox + Apollo checked 9/14)
+- 11 inclusion drafts ready for Fede's review: `~/Claude/RevFactor-outreach/inclusion-drafts-2026-09-14.md`. High priority: Chekin, Truvi, RealEstateBees, StayFi, Hostfully. Nothing sent; the Apollo "RevFactor Outreach" sequence has 0 contacts.
+- VRMA (Kevin Hurley, Dave Burnell) confirmed supplier-membership fit and asked for a call; Blake Zack pitched a VRMA 26 booth.
+- Suppress seth@retipster.com. Stop following up with Rental Scale-Up, PhocusWire, VRMB and ShortTermRentalz (7 to 8 emails each, no reply).
+
+## 7. Housekeeping
 - RevFactor pitch cron (Render crn-d7lss6m7r5hc739l5gb0) is suspended; the May plan counted on it for 5 to 10 placements a quarter. Retire it or fold the STR angles into digitalpr-app; decide, do not leave it half-on.
 - Cito web-2.0 links: 2 dead. Do not reorder.
 - Ideas carried from the Thrive Local strategy v3 (8/26): booking CRO (bookings flat at 15 while sessions rose 68%), entity audit (LinkedIn company page, Crunchbase, Clutch), HotelTechReport review seeding, free inclusion batch to rentalsunited, lodgify, smoobu, touchstay, zeevou, bnbcalc (not yet in the 9/14 draft batch), Fede first-person airline pricing essay, Airbnb Pricing Strategy guide (700 vol, KD 8). That doc still carries a Reddit section and a "drop" HTR framing that should be updated on its next rebuild.

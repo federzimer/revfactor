@@ -9,10 +9,10 @@ Updated 2026-09-14. Evidence and full plan: `docs/geo-citation-strategy-2026-09-
 - [ ] Shipped this week: AirDNA pricing-tool response added to the comparison posts; citability fixes on the top sweep pages.
 
 ## 2. Decisions we need from Fede (15 min)
-- [ ] **HotelTechReport:** most-retrieved third-party site for our prompts (44 of 450 answers). Revive Adam's thread, confirm the free vendor profile, then yes or no on the ~$1,000/yr listing.
+- [ ] **HotelTechReport:** most-retrieved third-party site for our prompts (44 of 450 answers). Co-founder Adam Hollander emailed 9/11: basic profile in "Vacation Rental Dynamic Pricing Software" for a $500 one-time fee. Yes or no.
 - [ ] **TechBullion round 2 (~$50):** "The Best Airbnb Pricing Tools in 2026 (and When a Done-for-You Service Beats a Tool)". Plus the matching listicle on revfactor.io.
 - [ ] **LinkedIn Pulse from Fede's own profile:** two posts, "How to Price Your Airbnb for Peak and Off Seasons (2026)" and "How to Increase Airbnb Occupancy Without Dropping Your Rates". The vendor-profile post from July has 0 citations.
-- [ ] **Listicle inclusion outreach:** approve the drafted pitches (gowithsurge, fairly, stayfi, hostfully, rakidzich, truvi and others) before anything sends from federico@revfactorwa.com.
+- [ ] **Listicle inclusion outreach:** 11 drafts ready (Chekin, Truvi, RealEstateBees, StayFi, Hostfully first). Fede approves the copy and the referral offers in 7 of them before anything sends from federico@revfactorwa.com.
 - [ ] **AirROI:** Fede opens an AirROI account (needed for the Revenue Check app below) and we ask AirROI for a co-content or partner mention (airroi.com shows up in 31 of 450 answers).
 
 ## 3. YouTube (10 min)
@@ -41,6 +41,6 @@ Updated 2026-09-14. Evidence and full plan: `docs/geo-citation-strategy-2026-09-
 
 ## 7. Carry-over
 - [ ] Booking conversion: bookings flat at 15 while sessions rose 68% (Thrive Local strategy v3). Who owns the funnel audit?
-- [ ] VRMA membership thread: reply owed to Blake (booth is a separate spend decision).
+- [ ] VRMA: Kevin and Dave confirmed supplier-membership fit and asked for a call. Take the call? Blake's VRMA 26 booth is a separate spend decision.
 - [ ] Sept keyword swap.
 - [ ] Case-studies v2 revisit with Gaston.
