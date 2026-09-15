@@ -1,6 +1,6 @@
 # RevFactor GEO Citation Strategy: 2026-09-13 validation and update
 
-**Validates:** `geo-citation-strategy.md` (built 2026-05-10). **Checked this session:** Peec history export (daily_brand_model.csv to 2026-09-12), ProCloser AI tracker (450 answers, 30d, ChatGPT/Perplexity/Claude), master placement sheet (Order Tracker, Published Tracking, RevFactor tab), backlinks.db, headless-browser renders of every target page named below.
+**Revised 2026-09-14** (HotelTechReport correction, Reddit removed, ordering plan, YouTube, Bing fixed). **Validates:** `geo-citation-strategy.md` (built 2026-05-10). **Checked this session:** Peec history export (daily_brand_model.csv to 2026-09-12), ProCloser AI tracker (450 answers, 30d, ChatGPT/Perplexity/Claude), master placement sheet (Order Tracker, Published Tracking, RevFactor tab), backlinks.db, headless-browser renders of every target page named below.
 
 ---
 
@@ -21,11 +21,11 @@ Per engine today: Perplexity 10.7%, Claude 5.3%, ChatGPT 2.7%. Google AI Mode 3.
 
 | Page | May claim | Verified 2026-09-13 | What happened |
 |---|---|---|---|
-| HotelTechReport | 391 cites, buy Premium $2K | 0 RevFactor mentions on the RM systems page; Bing site search empty; HTR now 148 cites/30d (rank 16, down 62%) | Pitched 6/24 from federico@revfactorwa.com. No profile, no purchase, no reply. |
+| HotelTechReport | 391 cites, buy Premium $2K | 0 RevFactor mentions on the RM systems page; Bing site search empty; Peec 148 cites/30d. **Correction 9/14:** on the tracker it is retrieved in 44 of 450 answers, more than any other third-party site | Pitched 6/24. Jordan Hollander and Adam (sales) replied; Adam sent the media kit and closed the loop 7/29 when we went quiet. Quote on file ~$1,000/yr (per the Thrive Local strategy v3, mailbox-checked 8/26). |
 | StaySTRA | 158 cites, free pitch | Site search "revfactor" returns nothing; no longer in Peec top 30 | Never pitched (no Order Tracker row). |
 | RentalScaleUp | 76 cites, $750 sponsored | Site search returns nothing; not in Peec top 30 | Pitched 6/24 and 6/27. No reply. |
 
-The thesis that these three pages were "~600 citations" is stale. The engines moved on. The pages that now feed the vendor-list prompts are mid-tier listicles, and one of ours already proves the mechanic.
+StaySTRA and RentalScaleUp are stale. HotelTechReport is not: it is still the most-retrieved third-party page for our prompts, so it moves back to Tier 1 (see Track A). The engines moved on. The pages that now feed the vendor-list prompts are mid-tier listicles, and one of ours already proves the mechanic.
 
 ## 3. What actually produced the mentions (tracker, 27 answers naming RevFactor)
 
@@ -56,9 +56,9 @@ Priority order = pages already cited in answers that name RevFactor but do not l
 
 | # | Page | Why | Path | Est. cost |
 |---|---|---|---|---|
-| 1 | revenuenaire.com/airbnb-revenue-management | Cited in 11 RF-naming answers, no mention | Inclusion pitch (they are an RM peer; offer reciprocal mention in our listicle) | Free |
+| 1 | hoteltechreport.com airbnb-pricing-tools + RM category | Retrieved in 44 of 450 answers; not listed | Revive Adam's thread. Confirm the free vendor profile first, then decide the ~$1,000/yr listing | Free to ~$1,000/yr |
 | 2 | gowithsurge.com best-airbnb-management-companies-2026 | 9 cites, 11.6% of all answers retrieve gowithsurge | Inclusion or paid | Free to $150 |
-| 3 | hostlyft.com/revenue-management | 9 cites | Inclusion | Free |
+| 3 | airroi.com | Retrieved in 31 of 450 answers; RevFactor already uses AirROI data | Co-content or partner mention; pairs with Fede opening an AirROI account for the Revenue Check app | Free |
 | 4 | fairly.com best-airbnb-management-companies | 5 cites | Inclusion | Free |
 | 5 | stayfi.com best-vacation-rental-dynamic-pricing-software | 138 URL cites/30d, retrieved in 11.6% of answers | Pitch a "done-for-you alternative" section | Free to paid |
 | 6 | hostfully.com/blog/airbnb-pricing-tools | 139 URL cites/30d | Same angle (Hostfully is a PMS, not a pricing competitor) | Free |
@@ -66,9 +66,9 @@ Priority order = pages already cited in answers that name RevFactor but do not l
 | 8 | truvi.com/blog/airbnb-pricing-tools | 67 URL cites | Partnership content | Free |
 | 9 | chekin, realestatebees, stepbystepbnb, redawning "best airbnb property management" pages | cited 3 to 4x each in RF answers | Inclusion | Free |
 | 10 | Vendor-list sites already cited 9 to 10x for our prompts but not listing us (sheet "Backlink-Only & AI Candidates"): getapp.com, cubi.casa, yesassistant.com | DEEPEN rows from 8/21 | Profile submission | Free |
-| 11 | Second paid listicle via Raheel / vetted vendor list on a different domain | Diversifies the one source we depend on | Order | ~$50 to $150 |
+| 11 | TechBullion round 2 (see Ordering plan below) | Only proven paid STR domain: 24 of 450 answers retrieve techbullion.com | Order via Raheel | ~$50 |
 
-Drop from the plan: HotelTechReport Premium (share collapsed, no response in 80 days, $2K), StaySTRA and RentalScaleUp (no longer cited), Wikipedia, Skift/PhocusWire sponsored, VRMA newsletter as a citation play (keep the membership only if Fede wants the booth). Also drop web-2.0 mention orders (Medium, Weebly, Strikingly, Smore, 8b): proven invisible.
+Not targets: revenuenaire.com and hostlyft.com (their cited pages are their own revenue management service pages; competitors will not list us). Drop from the plan: HotelTechReport Premium at $2K (the ~$1,000/yr listing replaces it), StaySTRA and RentalScaleUp (no longer cited), Wikipedia, Skift/PhocusWire sponsored, VRMA newsletter as a citation play (keep the membership only if Fede wants the booth). Also drop web-2.0 mention orders (Medium, Weebly, Strikingly, Smore, 8b): proven invisible.
 
 Budget: $300 to $600 for the quarter instead of $3K to $5K. The one paid placement that worked cost $50.
 
@@ -76,21 +76,30 @@ Budget: $300 to $600 for the quarter instead of $3K to $5K. The one paid placeme
 The own blog gets cited only on "best companies" prompts. Vrbo and PriceLabs own "how do I price for peak season / increase occupancy / know if I am underpriced". The 9/6 weekly-sweep backlog is the fix and it is unimplemented: per-passage source links and "according to X" attributions on the top 5 posts (comp-set guide has 43 failing passages, orphan-nights 32, pillar 28), plus Explore and Create-intent sections. Add one short answer-first post per unowned informational prompt cluster (peak/off-season pricing, underpriced-or-overpriced check, occupancy vs rate) anchored on the first-party orphan-rate benchmark (25% to 11.9%), which is the only stat we own that no competitor can cite.
 
 ### Track C: ChatGPT is the laggard (2.7%)
-ChatGPT search rides the Bing index. Confirm revfactor.io in Bing Webmaster Tools, IndexNow on every publish, and fix the broken Bing indexed-count check in the weekly sweep (12,500 to 1 to 111,000 on a 17-page site). The `seo-bing-chatgpt` skill is the checklist. Off-site signals Bing weights (LinkedIn, Reddit, G2/GetApp) overlap with Track A row 10.
+ChatGPT search rides the Bing index. **Done 9/14:** revfactor.io confirmed verified in Bing Webmaster Tools, child sitemap submitted, IndexNow key live at the site root, and the weekly sweep's Bing count now comes from the Webmaster API (InIndex 24). Still to do: fire IndexNow on every publish. Off-site signals Bing weights (LinkedIn, G2/GetApp) overlap with Track A.
 
-### Track D: Reddit, still the top UGC source (9.1% of answers, 217 Peec cites/30d)
-The 5/16 question to Fede (is his Reddit account 6+ months old with real STR comment history?) was never asked. Decide at the 9/16 sync: Fede warms up personally for 30 to 45 days, or the Cito Reddit pilot ($15 to $30 per thread, still "negotiating" in the Order Tracker) runs on aged accounts. Either way, no link drops; 3 draft cross-posts already exist in `reddit-crosspost-drafts-2026-05-16.md`.
+### Track D: YouTube (replaces Reddit, which is off for every client as of 9/14)
+Peec shows youtube.com cited 771 times in 30 days on our prompts, the #4 domain, up from about 535 a month in the prior 60 days. The most-cited videos are pricing-tool titles ("The BEST Airbnb Pricing Tool 2025", 36 to 42 cites each). The API tracker barely sees YouTube (5 of 450 answers), so this is a Google AI Overview, AI Mode and Gemini surface. RevFactor's channel has 1 video and Fede's has 4 (30 views total, YouTube API 9/14). Ship the $139K Playbook video Fede already has a script and shot list for, then two pricing-tool titled videos cut from existing footage. Caveat: YouTube's share of all citations fell 43% across our 9 projects between July and September, so track per-video citations before scaling past 4 videos.
 
 ### Track E: AirDNA response (new)
 Add AirDNA's new pricing tool to `pricelabs-vs-wheelhouse-vs-done-for-you`, the beginners guide and the tools listicle within two weeks, before the engines settle on a "PriceLabs vs AirDNA" narrative that leaves us out. Same "tool vs service" framing.
 
+### Ordering plan (what to buy next)
+The tracker shows RevFactor named in 9.6% of answers to "which company" prompts and 0% on pricing-tool (6 prompts), how-to pricing (12) and occupancy (10) prompts. Even on company prompts, the pages the engines pull are pricing-tools listicles (hostfully, hoteltechreport, stayfi, renttools, lodgify).
+1. **TechBullion round 2, ~$50 via Raheel:** "The Best Airbnb Pricing Tools in 2026 (and When a Done-for-You Service Beats a Tool)". Covers PriceLabs, Beyond, Wheelhouse, AirDNA's new tool, Airbnb Smart Pricing, with RevFactor as the service option. Targets the 0% pricing-tool cluster and the listicles engines already pull for company prompts.
+2. **On-site twin** of the same listicle on revfactor.io (our own listicle is our most-cited URL at 87 cites/30d). Not written yet.
+3. **LinkedIn Pulse, from Fede's own profile, free:** the vendor-profile Pulse listicle (placed 7/9) has 0 citations after 9 weeks, while L40's Pulse listicles earned 303 and 124. LinkedIn is retrieved in 22 of 450 RevFactor answers and its citation share rose 32% across our projects. Two query-echo posts: "How to Price Your Airbnb for Peak and Off Seasons (2026)" and "How to Increase Airbnb Occupancy Without Dropping Your Rates".
+4. **Hold other paid vendors.** Marketing LTB, Outsource Accelerator and analyticsinsight earn well for Thrive and L40 but appear in 0 of 450 RevFactor answers. finehomesandliving.com shows 4 retrievals: a $50 to $100 test at most.
+
 ### Measurement reset
 - Baseline = tracker 6.2% (week to 9/12). Targets: 10% at 30 days, 15% at 60, 20% at 90; ChatGPT to 8%; informational slice above 0; source domains naming RevFactor from 4 to 10.
 - Fix the prompt tags in `config/revfactor.json`: 21 prompts are tagged "branded" but contain no brand name, so the branded/non-branded slice on the dashboard is wrong.
+- Bing: fixed 9/14. revfactor.io is verified in Bing Webmaster Tools, sitemap-index crawled 9/13, child sitemap submitted, InIndex 24. The weekly sweep now reads the Bing Webmaster API; the 111,000 and "deindex" numbers were a broken site: scrape.
 - Keep the RevFactor Peec project until the 3 readers are repointed; Peec is the only view of Google AI Overview and AI Mode.
 - Placement monitor already checks TechBullion and the LinkedIn post; add freewyldfoundry and uprev.co rows to Published Tracking so organic wins are tracked too.
 
 ## 6. Housekeeping
 - RevFactor pitch cron (Render crn-d7lss6m7r5hc739l5gb0) is suspended; the May plan counted on it for 5 to 10 placements a quarter. Retire it or fold the STR angles into digitalpr-app; decide, do not leave it half-on.
 - Cito web-2.0 links: 2 dead. Do not reorder.
+- Ideas carried from the Thrive Local strategy v3 (8/26): booking CRO (bookings flat at 15 while sessions rose 68%), entity audit (LinkedIn company page, Crunchbase, Clutch), HotelTechReport review seeding, free inclusion batch to rentalsunited, lodgify, smoobu, touchstay, zeevou, bnbcalc (not yet in the 9/14 draft batch), Fede first-person airline pricing essay, Airbnb Pricing Strategy guide (700 vol, KD 8). That doc still carries a Reddit section and a "drop" HTR framing that should be updated on its next rebuild.
 - Outreach from 6/24 (hospitalitynet, phocuswire, vrmb, internationalhospitality.media): closed, no replies after 2 sends. VRMA membership thread still open (booth pitch).
