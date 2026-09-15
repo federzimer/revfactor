@@ -100,7 +100,7 @@ The tracker shows RevFactor named in 9.6% of answers to "which company" prompts 
 ## 6. Outreach status (mailbox + Apollo checked 9/14)
 - 11 inclusion drafts ready for Fede's review: `~/Claude/RevFactor-outreach/inclusion-drafts-2026-09-14.md`. High priority: Chekin, Truvi, RealEstateBees, StayFi, Hostfully. Nothing sent; the Apollo "RevFactor Outreach" sequence has 0 contacts.
 - VRMA (Kevin Hurley, Dave Burnell) confirmed supplier-membership fit and asked for a call; Blake Zack pitched a VRMA 26 booth.
-- Suppress seth@retipster.com. Stop following up with Rental Scale-Up, PhocusWire, VRMB and ShortTermRentalz (7 to 8 emails each, no reply).
+- Suppress the RETipster contact (asked to be removed 7/21). Stop following up with Rental Scale-Up, PhocusWire, VRMB and ShortTermRentalz (7 to 8 emails each, no reply).
 
 ## 7. Housekeeping
 - RevFactor pitch cron (Render crn-d7lss6m7r5hc739l5gb0) is suspended; the May plan counted on it for 5 to 10 placements a quarter. Retire it or fold the STR angles into digitalpr-app; decide, do not leave it half-on.

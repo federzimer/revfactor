@@ -7,7 +7,7 @@
         "@ahrefs/mcp"
       ],
       "env": {
-        "API_KEY": "M8K_PtZiP3ZMZnJV-cdgGGPioS_J4YxuXS7RQqSv"
+        "API_KEY": "${AHREFS_API_KEY}"
       }
     },
     "peec": {
