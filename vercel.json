@@ -4,16 +4,42 @@
       "source": "/sitemap.xml",
       "destination": "/sitemap-index.xml",
       "permanent": true
+    },
+    {
+      "source": "/journal",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/journal/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/best-airbnb-revenue-management-companies-2026",
+      "destination": "/blog/best-str-revenue-management-companies-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/best-airbnb-revenue-management-companies-2026/",
+      "destination": "/blog/best-str-revenue-management-companies-2026/",
+      "permanent": true
     }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "has": [
-        { "type": "host", "value": ".*\\.vercel\\.app" }
+        {
+          "type": "host",
+          "value": ".*\\.vercel\\.app"
+        }
       ],
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
       ]
     }
   ]
