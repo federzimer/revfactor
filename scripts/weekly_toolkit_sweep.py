@@ -44,6 +44,7 @@ REPORT_DIR = REPO / "docs" / "reports"
 LOG_DIR = SCRIPTS / "logs"
 HEARTBEAT = SCRIPTS / ".weekly_sweep_last_success"
 BING_HISTORY = SCRIPTS / ".bing_index_history.json"
+SITEMAP_URL_COUNT = 0
 SMS_SH = Path("/Users/aaronwhittaker/Claude/personal-automation/send-sms.sh")
 
 SITE = "https://www.revfactor.io"
@@ -215,8 +216,46 @@ def collect_page(env: dict[str, str], url: str) -> dict:
 
 
 # ---------------------------------------------------------------- site-level
+BING_WMT_SITE = "https://revfactor.io/"   # verified property in Bing WMT (www redirects here)
+BING_WMT_KEYCHAIN = ("bing-wmt-procloser",
+                     "/Users/aaronwhittaker/Library/Keychains/login.keychain-db")
+
+
+def bing_wmt_indexed() -> tuple[int | None, str]:
+    """Latest InIndex from Bing Webmaster Tools GetCrawlStats.
+
+    Key: env BING_WEBMASTER_API_KEY, else the login keychain item
+    `bing-wmt-procloser` (mirror of SSM /private/procloser/BING_WEBMASTER_API_KEY).
+    """
+    key = os.environ.get("BING_WEBMASTER_API_KEY", "").strip()
+    if not key:
+        try:
+            svc, kc = BING_WMT_KEYCHAIN
+            key = subprocess.run(
+                ["/usr/bin/security", "find-generic-password", "-s", svc, "-w", kc],
+                capture_output=True, text=True, timeout=10).stdout.strip()
+        except Exception as e:  # noqa: BLE001
+            return None, f"keychain read failed: {e}"
+    if not key:
+        return None, "no BING_WEBMASTER_API_KEY and no keychain item bing-wmt-procloser"
+    url = ("https://ssl.bing.com/webmaster/api.svc/json/GetCrawlStats?apikey="
+           + key + "&siteUrl=" + urllib.request.quote(BING_WMT_SITE, safe=""))
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}),
+                                    timeout=30) as r:
+            rows = json.loads(r.read().decode()).get("d") or []
+    except Exception as e:  # noqa: BLE001
+        return None, f"GetCrawlStats failed: {type(e).__name__}"
+    rows = [x for x in rows if x.get("InIndex") is not None]
+    if not rows:
+        return None, "GetCrawlStats returned no InIndex rows"
+    rows.sort(key=lambda x: int(re.search(r"\d+", x.get("Date", "0")).group()))
+    return int(rows[-1]["InIndex"]), ""
+
+
 def collect_site(env: dict[str, str], dry_run: bool) -> dict:
     site: dict = {"errors": {}}
+    site["sitemap_url_count"] = SITEMAP_URL_COUNT
 
     ok, sh, err = run_tool(env, ["sitemap-hygiene", "--sitemap", SITEMAP_INDEX],
                            timeout=PER_TOOL_TIMEOUT * 2)
@@ -229,13 +268,29 @@ def collect_site(env: dict[str, str], dry_run: bool) -> dict:
     if not ok:
         site["errors"]["signal-conflicts"] = err
 
-    bi_cmd = ["bing-index", "--domain", DOMAIN]
-    if dry_run:
-        bi_cmd.append("--no-record")   # don't pollute snapshot history
-    ok, bi, err = run_tool(env, bi_cmd)
-    site["bing_index"] = bi if ok else None
-    if not ok:
-        site["errors"]["bing-index"] = err
+    # Bing index count comes ONLY from the Bing Webmaster Tools API (InIndex).
+    # The scraped `site:` estimate swung 12,500 -> 1 -> 111,000 -> 50 on a
+    # ~17-page site (Aug-Sep 2026) and raised a false deindex alarm, so it is
+    # never used here. No WMT key or API failure = "unavailable", not a number.
+    wmt_count, wmt_err = bing_wmt_indexed()
+    if wmt_count is None:
+        site["bing_index"] = None
+        site["errors"]["bing-index"] = f"Bing WMT API unavailable ({wmt_err}); scraped site: counts are not used"
+    else:
+        bi_cmd = ["bing-index", "--domain", DOMAIN, "--webmaster-count", str(wmt_count)]
+        if dry_run:
+            bi_cmd.append("--no-record")   # don't pollute snapshot history
+        ok, bi, err = run_tool(env, bi_cmd)
+        if ok and bi is not None:
+            # Canary: an index many times larger than the sitemap is a broken
+            # metric, not a real index. Never let it raise a deindex alarm.
+            n_sitemap = site.get("sitemap_url_count") or 0
+            if n_sitemap and (wmt_count > 20 * n_sitemap):
+                bi["deindex_event"] = False
+                bi["unreliable"] = f"{wmt_count} indexed vs {n_sitemap} sitemap URLs"
+        site["bing_index"] = bi if ok else None
+        if not ok:
+            site["errors"]["bing-index"] = err
 
     ok, cb, err = run_tool(env, ["crawl-budget", "--sitemap", SITEMAP_INDEX],
                            timeout=PER_TOOL_TIMEOUT * 2)
@@ -351,8 +406,11 @@ def build_report(pages: list[dict], site: dict, skipped: list[str],
         line = f"- **Bing index**: {bi.get('indexed_count')} URLs indexed"
         if bi.get("delta") is not None:
             line += f" (Δ {bi['delta']:+d} vs last snapshot)"
-        if bi.get("deindex_event"):
-            line += " — ⚠ PROBABLE DEINDEX EVENT"
+        line += f" (source: {bi.get('source', '?')})"
+        if bi.get("unreliable"):
+            line += f" ⚠ metric looks broken, ignored: {bi['unreliable']}"
+        elif bi.get("deindex_event"):
+            line += " ⚠ PROBABLE DEINDEX EVENT (Bing WMT API count)"
         L.append(line)
     for tool, err in site.get("errors", {}).items():
         L.append(f"- ⚠ `{tool}` errored: {err}")
@@ -479,6 +537,8 @@ def main() -> int:
 
         urls = sitemap_urls(SITEMAP_INDEX)
         log(f"sitemap: {len(urls)} URLs")
+        global SITEMAP_URL_COUNT
+        SITEMAP_URL_COUNT = len(urls)      # full sitemap, before any --limit
         if args.limit:
             urls = urls[: args.limit]
             log(f"limit: scanning first {len(urls)}")

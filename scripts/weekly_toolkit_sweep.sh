@@ -5,10 +5,7 @@ set -u
 
 export PATH="/Users/aaronwhittaker/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
 
-# Doppler auth: prefer a keychain service token if present; otherwise the
-# doppler CLI's own login (already configured globally on this Mac) is used.
-if TOKEN=$(security find-generic-password -s doppler-token -w 2>/dev/null); then
-  export DOPPLER_TOKEN="$TOKEN"
-fi
+# Doppler: the CLI global login on this Mac is used (the old keychain token lookup
+# pointed at an entry that does not exist and could trigger a System-keychain prompt).
 
 exec /usr/bin/python3 /Users/aaronwhittaker/Claude/RevFactor/scripts/weekly_toolkit_sweep.py "$@"
