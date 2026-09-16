@@ -13,6 +13,7 @@
 //   );
 
 import { forwardLeadToHub, buildAttribution } from './_hub-lead';
+import { addContactToGhl } from './_ghl-contact';
 
 export const config = { runtime: 'edge' };
 
@@ -62,13 +63,21 @@ export default async function handler(req: Request): Promise<Response> {
     return json({ error: 'storage_failed' }, 502);
   }
 
-  // Mirror the signup into the Blackbird Hub pipeline (best-effort, never blocks).
+  // Mirror the signup into the Blackbird Hub pipeline and GHL (both best-effort,
+  // never block the visitor).
   const attribution = buildAttribution(body?.attribution);
-  await forwardLeadToHub({
-    email,
-    lead_source: `newsletter_${source}`,
-    ...(attribution ? { attribution } : {}),
-  });
+  await Promise.all([
+    forwardLeadToHub({
+      email,
+      lead_source: `newsletter_${source}`,
+      ...(attribution ? { attribution } : {}),
+    }),
+    addContactToGhl({
+      email,
+      tags: ['newsletter', `newsletter-${source}`],
+      source: 'RevFactor website newsletter',
+    }),
+  ]);
 
   return json({ ok: true });
 }
