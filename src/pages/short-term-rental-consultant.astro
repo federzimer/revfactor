@@ -64,8 +64,9 @@ const faqSchema = {
   }))
 };
 
-// Service schema with AggregateRating + Review: exposes consultant offering
-// as a typed service for AI search engines + closes the rich-result eligibility gap.
+// Service schema: exposes the consultant offering as a typed service for AI search engines.
+// Self-serving AggregateRating removed 2026-09-16: Google treats ratings a business
+// hosts about itself as ineligible review markup.
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -91,12 +92,6 @@ const serviceSchema = {
       "priceCurrency": "USD",
       "unitText": "month per property"
     }
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "3",
-    "bestRating": "5"
   }
 };
 ---
