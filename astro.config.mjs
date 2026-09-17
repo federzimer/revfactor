@@ -19,6 +19,11 @@ export default defineConfig({
     // should spend Google's attention on money and blog pages.
     sitemap({
       filter: (page) =>
+        // /case-studies/ and /markets/ are preview-only (noindex) until Fede
+        // signs off on figures, permissions and market priority. Keep them out
+        // of the sitemap so Google never sees "index me" next to a noindex.
+        !page.startsWith('https://www.revfactor.io/case-studies') &&
+        !page.startsWith('https://www.revfactor.io/markets') &&
         ![
           'https://www.revfactor.io/short-term-rental-consultant/',
           'https://www.revfactor.io/vs/pricelabs/',

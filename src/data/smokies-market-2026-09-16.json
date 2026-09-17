@@ -1,0 +1,300 @@
+{
+ "pulled_at": "2026-09-16",
+ "source": "AirROI market API (/markets/summary, /markets/metrics/average-daily-rate, /markets/metrics/occupancy, /markets/metrics/revpar), num_months=24, currency=native",
+ "markets": {
+  "gatlinburg": {
+   "summary": {
+    "occupancy": 0.46,
+    "average_daily_rate": 386.2,
+    "rev_par": 186.6,
+    "revenue": 51058.2,
+    "booking_lead_time": 59.2,
+    "length_of_stay": 3.5,
+    "min_nights": 2.1,
+    "active_listings_count": 3995.5
+   },
+   "monthly": [
+    {
+     "date": "2025-09-01",
+     "adr": 340.6,
+     "adr_p50": 288.3,
+     "occ": 0.44,
+     "revpar": 145.6
+    },
+    {
+     "date": "2025-10-01",
+     "adr": 402.0,
+     "adr_p50": 342.2,
+     "occ": 0.62,
+     "revpar": 243.9
+    },
+    {
+     "date": "2025-11-01",
+     "adr": 408.9,
+     "adr_p50": 341.3,
+     "occ": 0.52,
+     "revpar": 209.2
+    },
+    {
+     "date": "2025-12-01",
+     "adr": 477.7,
+     "adr_p50": 382.0,
+     "occ": 0.52,
+     "revpar": 248.9
+    },
+    {
+     "date": "2026-01-01",
+     "adr": 386.8,
+     "adr_p50": 320.8,
+     "occ": 0.3,
+     "revpar": 115.8
+    },
+    {
+     "date": "2026-02-01",
+     "adr": 334.0,
+     "adr_p50": 281.8,
+     "occ": 0.33,
+     "revpar": 110.5
+    },
+    {
+     "date": "2026-03-01",
+     "adr": 359.9,
+     "adr_p50": 300.2,
+     "occ": 0.47,
+     "revpar": 168.9
+    },
+    {
+     "date": "2026-04-01",
+     "adr": 348.0,
+     "adr_p50": 290.4,
+     "occ": 0.44,
+     "revpar": 152.1
+    },
+    {
+     "date": "2026-05-01",
+     "adr": 356.5,
+     "adr_p50": 297.9,
+     "occ": 0.45,
+     "revpar": 160.0
+    },
+    {
+     "date": "2026-06-01",
+     "adr": 425.6,
+     "adr_p50": 348.4,
+     "occ": 0.57,
+     "revpar": 261.8
+    },
+    {
+     "date": "2026-07-01",
+     "adr": 424.4,
+     "adr_p50": 342.7,
+     "occ": 0.52,
+     "revpar": 266.9
+    },
+    {
+     "date": "2026-08-01",
+     "adr": 348.0,
+     "adr_p50": 281.8,
+     "occ": 0.41,
+     "revpar": 145.7
+    }
+   ]
+  },
+  "pigeon-forge": {
+   "summary": {
+    "occupancy": 0.45,
+    "average_daily_rate": 370.8,
+    "rev_par": 173.5,
+    "revenue": 48160.6,
+    "booking_lead_time": 58.3,
+    "length_of_stay": 3.5,
+    "min_nights": 2.0,
+    "active_listings_count": 3314.6
+   },
+   "monthly": [
+    {
+     "date": "2025-09-01",
+     "adr": 334.3,
+     "adr_p50": 272.4,
+     "occ": 0.44,
+     "revpar": 141.0
+    },
+    {
+     "date": "2025-10-01",
+     "adr": 382.2,
+     "adr_p50": 311.9,
+     "occ": 0.59,
+     "revpar": 217.8
+    },
+    {
+     "date": "2025-11-01",
+     "adr": 393.8,
+     "adr_p50": 316.3,
+     "occ": 0.5,
+     "revpar": 195.8
+    },
+    {
+     "date": "2025-12-01",
+     "adr": 461.1,
+     "adr_p50": 365.7,
+     "occ": 0.5,
+     "revpar": 231.6
+    },
+    {
+     "date": "2026-01-01",
+     "adr": 377.1,
+     "adr_p50": 299.4,
+     "occ": 0.28,
+     "revpar": 101.5
+    },
+    {
+     "date": "2026-02-01",
+     "adr": 325.6,
+     "adr_p50": 263.2,
+     "occ": 0.32,
+     "revpar": 101.4
+    },
+    {
+     "date": "2026-03-01",
+     "adr": 342.1,
+     "adr_p50": 281.0,
+     "occ": 0.46,
+     "revpar": 158.0
+    },
+    {
+     "date": "2026-04-01",
+     "adr": 335.2,
+     "adr_p50": 270.0,
+     "occ": 0.44,
+     "revpar": 143.8
+    },
+    {
+     "date": "2026-05-01",
+     "adr": 337.4,
+     "adr_p50": 269.3,
+     "occ": 0.44,
+     "revpar": 148.1
+    },
+    {
+     "date": "2026-06-01",
+     "adr": 412.2,
+     "adr_p50": 319.3,
+     "occ": 0.57,
+     "revpar": 251.9
+    },
+    {
+     "date": "2026-07-01",
+     "adr": 410.0,
+     "adr_p50": 318.0,
+     "occ": 0.51,
+     "revpar": 253.3
+    },
+    {
+     "date": "2026-08-01",
+     "adr": 323.7,
+     "adr_p50": 257.4,
+     "occ": 0.41,
+     "revpar": 132.9
+    }
+   ]
+  },
+  "sevierville": {
+   "summary": {
+    "occupancy": 0.47,
+    "average_daily_rate": 417.0,
+    "rev_par": 204.1,
+    "revenue": 56136.1,
+    "booking_lead_time": 56.5,
+    "length_of_stay": 3.6,
+    "min_nights": 2.1,
+    "active_listings_count": 7207.8
+   },
+   "monthly": [
+    {
+     "date": "2025-09-01",
+     "adr": 359.5,
+     "adr_p50": 288.8,
+     "occ": 0.45,
+     "revpar": 157.3
+    },
+    {
+     "date": "2025-10-01",
+     "adr": 424.0,
+     "adr_p50": 351.0,
+     "occ": 0.62,
+     "revpar": 254.7
+    },
+    {
+     "date": "2025-11-01",
+     "adr": 438.9,
+     "adr_p50": 351.3,
+     "occ": 0.52,
+     "revpar": 222.4
+    },
+    {
+     "date": "2025-12-01",
+     "adr": 519.4,
+     "adr_p50": 413.2,
+     "occ": 0.52,
+     "revpar": 265.9
+    },
+    {
+     "date": "2026-01-01",
+     "adr": 413.7,
+     "adr_p50": 336.9,
+     "occ": 0.3,
+     "revpar": 119.8
+    },
+    {
+     "date": "2026-02-01",
+     "adr": 356.8,
+     "adr_p50": 296.9,
+     "occ": 0.34,
+     "revpar": 120.0
+    },
+    {
+     "date": "2026-03-01",
+     "adr": 390.4,
+     "adr_p50": 318.0,
+     "occ": 0.5,
+     "revpar": 194.1
+    },
+    {
+     "date": "2026-04-01",
+     "adr": 376.8,
+     "adr_p50": 306.3,
+     "occ": 0.45,
+     "revpar": 169.1
+    },
+    {
+     "date": "2026-05-01",
+     "adr": 386.6,
+     "adr_p50": 307.5,
+     "occ": 0.44,
+     "revpar": 174.0
+    },
+    {
+     "date": "2026-06-01",
+     "adr": 475.7,
+     "adr_p50": 362.0,
+     "occ": 0.58,
+     "revpar": 300.0
+    },
+    {
+     "date": "2026-07-01",
+     "adr": 475.1,
+     "adr_p50": 355.6,
+     "occ": 0.54,
+     "revpar": 307.8
+    },
+    {
+     "date": "2026-08-01",
+     "adr": 374.8,
+     "adr_p50": 290.7,
+     "occ": 0.44,
+     "revpar": 167.2
+    }
+   ]
+  }
+ }
+}

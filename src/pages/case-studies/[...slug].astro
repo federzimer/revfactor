@@ -25,7 +25,24 @@ const displayName = study.data.clientNamePublic
 
 const fmt = (n: number) => '$' + n.toLocaleString('en-US');
 const fmtPct = (n: number) => (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
-const fmtOcc = (n: number) => (n * 100).toFixed(1) + '%';
+
+// Hero metric tiles are built here so the template stays free of generic-type
+// syntax and so partial data (no MPI, no ADR, Q1-only) never renders an empty
+// or "undefined" cell.
+type Tile = { label: string; value: string; sub?: string; dark?: boolean };
+const tiles: Tile[] = [];
+if (p) {
+  tiles.push({ label: 'vs. STLY', value: fmtPct(p.liftPct), sub: '+' + fmt(p.otbRev - p.stlyRev), dark: true });
+  if (p.mpi !== undefined) tiles.push({ label: 'MPI', value: `${p.mpi.toFixed(2)}×`, sub: p.mktOcc !== undefined ? `vs. ${(p.mktOcc * 100).toFixed(0)}% mkt occ` : undefined });
+  tiles.push({ label: 'OTB Revenue', value: fmt(p.otbRev), sub: `STLY: ${fmt(p.stlyRev)}` });
+  if (p.otbAdr !== undefined) tiles.push({ label: 'ADR', value: fmt(p.otbAdr), sub: p.stlyAdr ? `STLY: ${fmt(p.stlyAdr)} (${fmtPct(((p.otbAdr - p.stlyAdr) / p.stlyAdr) * 100)})` : undefined });
+}
+if (study.data.q1) {
+  const q = study.data.q1;
+  tiles.push({ label: 'Q1 2026 vs. Q1 2025', value: fmtPct(q.liftPct), sub: '+' + fmt(q.rev - q.lyRev), dark: tiles.length === 0 });
+  if (q.mpi !== undefined) tiles.push({ label: 'MPI (Q1)', value: `${q.mpi.toFixed(2)}×` });
+  tiles.push({ label: 'Q1 2026 Revenue', value: fmt(q.rev), sub: `Q1 2025: ${fmt(q.lyRev)}` });
+}
 
 // Other studies for the "more case studies" rail
 const otherStudies = allStudies
@@ -84,6 +101,7 @@ const breadcrumbSchema = {
   type="article"
   publishedTime={study.data.pubDate.toISOString()}
   modifiedTime={(study.data.updatedDate ?? study.data.pubDate).toISOString()}
+  noindex={true}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
@@ -96,6 +114,10 @@ const breadcrumbSchema = {
     <!-- Hero: data-led, no image. The metrics ARE the hero. -->
     <section class="pt-32 md:pt-40 pb-12 md:pb-16 bg-[#DDDAD3]">
       <div class="max-w-5xl mx-auto px-6 md:px-12">
+        <div class="mb-8 rounded-[12px] bg-[#13342D] text-[#E8E6E1] py-3 px-5 text-[11px] leading-[1.6]" data-method-note>
+          <span class="font-bold uppercase tracking-[2px] text-[#A9BBA3]">Method note</span><br />
+          Figures on this page are summer 2026 booked pacing versus the same point last year, not earned revenue. Property names and figures are pending owner sign-off.
+        </div>
         <!-- Breadcrumb -->
         <nav aria-label="Breadcrumb" class="mb-8">
           <ol class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#8F6E62]">
@@ -160,41 +182,18 @@ const breadcrumbSchema = {
           )}
         </div>
 
-        <!-- Metric grid -->
-        {p && (
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-px rounded-[16px] overflow-hidden bg-[#C8C4BC]">
-            <div class="bg-[#13342D] p-6">
-              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#A9BBA3] mb-3">vs. STLY</p>
-              <p class="text-[clamp(28px,4vw,40px)] text-[#E8E6E1] leading-none" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">
-                {fmtPct(p.liftPct)}
-              </p>
-              <p class="text-[11px] text-[#A9BBA3]/70 mt-2">+{fmt(p.otbRev - p.stlyRev)}</p>
-            </div>
-            <div class="bg-[#E8E6E1] p-6">
-              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-3">MPI</p>
-              <p class="text-[clamp(28px,4vw,40px)] text-[#3F261F] leading-none" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">
-                {p.mpi?.toFixed(2)}×
-              </p>
-              <p class="text-[11px] text-[#76574C] mt-2">vs. {((p.mktOcc ?? 0) * 100).toFixed(0)}% mkt occ</p>
-            </div>
-            <div class="bg-[#E8E6E1] p-6">
-              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-3">OTB Revenue</p>
-              <p class="text-[clamp(22px,3vw,32px)] text-[#3F261F] leading-none" style="font-family: 'JetBrains Mono', monospace;">
-                {fmt(p.otbRev)}
-              </p>
-              <p class="text-[11px] text-[#76574C] mt-2">STLY: {fmt(p.stlyRev)}</p>
-            </div>
-            <div class="bg-[#E8E6E1] p-6">
-              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-3">ADR</p>
-              <p class="text-[clamp(22px,3vw,32px)] text-[#3F261F] leading-none" style="font-family: 'JetBrains Mono', monospace;">
-                {fmt(p.otbAdr ?? 0)}
-              </p>
-              {p.stlyAdr && (
-                <p class="text-[11px] text-[#76574C] mt-2">
-                  STLY: {fmt(p.stlyAdr)} ({fmtPct(((p.otbAdr! - p.stlyAdr) / p.stlyAdr) * 100)})
+        <!-- Metric grid: tiles render conditionally so partial data never surfaces empty cells -->
+        {tiles.length > 0 && (
+          <div class={`grid grid-cols-2 ${tiles.length >= 4 ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-px rounded-[16px] overflow-hidden bg-[#C8C4BC]`}>
+            {tiles.map((t) => (
+              <div class={t.dark ? 'bg-[#13342D] p-6' : 'bg-[#E8E6E1] p-6'}>
+                <p class={`text-[9px] font-bold uppercase tracking-[2px] mb-3 ${t.dark ? 'text-[#A9BBA3]' : 'text-[#8F6E62]'}`}>{t.label}</p>
+                <p class={`text-[clamp(22px,3.5vw,36px)] leading-none ${t.dark ? 'text-[#E8E6E1]' : 'text-[#3F261F]'}`} style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">
+                  {t.value}
                 </p>
-              )}
-            </div>
+                {t.sub && <p class={`text-[11px] mt-2 ${t.dark ? 'text-[#A9BBA3]/70' : 'text-[#76574C]'}`}>{t.sub}</p>}
+              </div>
+            ))}
           </div>
         )}
       </div>
@@ -246,7 +245,7 @@ const breadcrumbSchema = {
               {s.data.pacing && (
                 <div class="flex items-center gap-4 text-[11px]">
                   <span class="text-[#5D6D59] font-bold" style="font-family: 'JetBrains Mono', monospace;">{fmtPct(s.data.pacing.liftPct)}</span>
-                  <span class="text-[#76574C]" style="font-family: 'JetBrains Mono', monospace;">{s.data.pacing.mpi?.toFixed(2)}× MPI</span>
+                  {s.data.pacing.mpi !== undefined && <span class="text-[#76574C]" style="font-family: 'JetBrains Mono', monospace;">{s.data.pacing.mpi.toFixed(2)}× MPI</span>}
                 </div>
               )}
             </a>
@@ -312,6 +311,9 @@ const breadcrumbSchema = {
   .case-study-prose a { color: #13342D; text-decoration: underline; text-decoration-color: #5D6D59; text-underline-offset: 3px; }
   .case-study-prose a:hover { color: #5D6D59; }
   .case-study-prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
     width: 100%;
     margin: 1.5rem 0 2rem;
     border-collapse: collapse;

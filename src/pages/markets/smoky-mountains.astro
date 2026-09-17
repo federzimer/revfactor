@@ -1,0 +1,330 @@
+---
+/*
+  DRAFT market page (Aaron directive 8/13, addendum docs/market-pages-addendum-2026-08-16.md).
+  noindex until Fede confirms market priority and the RevFactor figures below.
+  Market data: RevFactor's 2026-09-16 pull of the AirROI market API, stored in
+  src/data/smokies-market-2026-09-16.json (raw responses in the outreach research folder).
+  Local rules: quoted from the official city and county pages linked inline. Nothing from memory.
+*/
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
+import BlogScheduleCTA from '../../components/BlogScheduleCTA.jsx';
+import market from '../../data/smokies-market-2026-09-16.json';
+import { MAP_MARKERS } from '../../data/mapData.js';
+import { STAT_LABELS } from '../../data/portfolio-stats';
+
+const PULL_DATE = 'September 16, 2026';
+const towns = [
+  { key: 'gatlinburg', name: 'Gatlinburg' },
+  { key: 'pigeon-forge', name: 'Pigeon Forge' },
+  { key: 'sevierville', name: 'Sevierville' },
+] as const;
+
+const months = market.markets['gatlinburg'].monthly.map((r) => r.date);
+const label = (d: string) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', year: '2-digit', timeZone: 'UTC' });
+const usd = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
+const pct = (n: number) => Math.round(n * 100) + '%';
+
+const rows = towns.map((t) => {
+  const m = market.markets[t.key];
+  const peak = [...m.monthly].sort((a, b) => b.revpar - a.revpar)[0];
+  const trough = [...m.monthly].sort((a, b) => a.revpar - b.revpar)[0];
+  const topOcc = [...m.monthly].sort((a, b) => b.occ - a.occ)[0];
+  const topAdr = [...m.monthly].sort((a, b) => b.adr - a.adr)[0];
+  return { ...t, s: m.summary, monthly: m.monthly, peak, trough, topOcc, topAdr, swing: peak.revpar / trough.revpar };
+});
+
+const smokies = MAP_MARKERS.find((mk) => mk.label === 'Smoky Mountains');
+
+/* FAQ questions are literal prompts from RevFactor's AI-visibility tracker (30-day export, 2026-09-16). */
+const faqs = [
+  {
+    q: 'how do i price my vacation rental for peak and off seasons',
+    a: `In the Smokies the calendar has two peaks and two troughs. RevFactor's ${PULL_DATE} pull of AirROI market data shows Gatlinburg RevPAR at ${usd(rows[0].peak.revpar)} in ${label(rows[0].peak.date)} and ${usd(rows[0].trough.revpar)} in ${label(rows[0].trough.date)}, a ${rows[0].swing.toFixed(1)}x swing. October carries the highest occupancy of the year and December the highest average rate, so "peak" means different things for rate and for occupancy. Price each month on its own demand curve, set minimum stays looser in the troughs and tighter in the peaks, and re-check the comp set weekly rather than once a season.`,
+  },
+  {
+    q: 'how do i know if my airbnb is underpriced or overpriced',
+    a: `Compare your revenue per available night to the market percentiles, not to your own last year. AirROI's Sevierville data in this pull puts the trailing 12-month market RevPAR at ${usd(rows[2].s.rev_par)} with an average rate of ${usd(rows[2].s.average_daily_rate)} at ${pct(rows[2].s.occupancy)} occupancy. If you sit well above market occupancy but below market rate, you are underpriced. If your rate is high and your calendar is empty 60 days out (the market books about ${Math.round(rows[2].s.booking_lead_time)} days ahead), you are overpriced for the window. RevFactor's revenue check does this read for you.`,
+  },
+  {
+    q: 'who can help me optimize minimum stay requirements for my rental',
+    a: `RevFactor sets minimum-stay rules per property and per season. The Smokies average length of stay is ${rows[0].s.length_of_stay} nights in Gatlinburg and ${rows[2].s.length_of_stay} in Sevierville, with market minimum nights around ${rows[0].s.min_nights}. A 3-night minimum through a 2-night market in February leaves the calendar dark; the same rule in July protects your rate. The rules move with the calendar, which is the part a static setting in a pricing tool misses.`,
+  },
+  {
+    q: 'what companies help adjust airbnb pricing based on local events',
+    a: `RevFactor does, as a managed service on top of your pricing tool. In the Smokies demand shifts week by week and the market books roughly two months out (AirROI puts average lead time near 59 days in Gatlinburg in this pull). A strategist reads pacing against the comp set each week and moves rate and minimum stays ahead of those windows instead of reacting after they fill.`,
+  },
+  {
+    q: 'who can manage my dynamic pricing for vacation rentals',
+    a: `RevFactor manages dynamic pricing for ${STAT_LABELS.propertiesLong} across ${STAT_LABELS.marketsLong}, including ${smokies?.count ?? 0} in the Smoky Mountains. You keep PriceLabs or your current tool; RevFactor runs the strategy on top of it for a flat $350 per month per property. Results are reported as pacing against the comp set, not as a promise.`,
+  },
+];
+
+const url = 'https://www.revfactor.io/markets/smoky-mountains';
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Airbnb Revenue Management in the Smoky Mountains',
+  serviceType: 'Short-Term Rental Revenue Management',
+  provider: { '@type': 'Organization', name: 'RevFactor', url: 'https://www.revfactor.io' },
+  areaServed: [
+    { '@type': 'City', name: 'Gatlinburg', containedInPlace: { '@type': 'State', name: 'Tennessee' } },
+    { '@type': 'City', name: 'Pigeon Forge', containedInPlace: { '@type': 'State', name: 'Tennessee' } },
+    { '@type': 'City', name: 'Sevierville', containedInPlace: { '@type': 'State', name: 'Tennessee' } },
+  ],
+  description: 'Managed revenue strategy for Gatlinburg, Pigeon Forge and Sevierville short-term rentals: weekly comp-set pacing, rate and minimum-stay strategy on top of your pricing tool. Flat $350 per month per property.',
+  url,
+  offers: {
+    '@type': 'Offer',
+    price: '350',
+    priceCurrency: 'USD',
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: '350', priceCurrency: 'USD', unitText: 'month per property' },
+  },
+};
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.revfactor.io' },
+    { '@type': 'ListItem', position: 2, name: 'Markets', item: 'https://www.revfactor.io/markets' },
+    { '@type': 'ListItem', position: 3, name: 'Smoky Mountains', item: url },
+  ],
+};
+---
+
+<BaseLayout
+  title="Airbnb Revenue Management in the Smoky Mountains | RevFactor"
+  description="Managed pricing strategy for Gatlinburg, Pigeon Forge and Sevierville short-term rentals. Monthly ADR, occupancy and RevPAR from a September 2026 AirROI pull, local permit and tax rules, and RevFactor's published Smokies results."
+  noindex={true}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <Navbar client:load />
+
+  <main class="min-h-screen bg-[#DDDAD3]">
+
+    <!-- Hero -->
+    <section class="pt-32 md:pt-40 pb-12 md:pb-16">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <div class="mb-8 rounded-[12px] bg-[#13342D] text-[#E8E6E1] py-3 px-5 text-[11px] leading-[1.6]" data-method-note>
+          <span class="font-bold uppercase tracking-[2px] text-[#A9BBA3]">Draft</span><br />
+          Market page for internal review. Market data is RevFactor's {PULL_DATE} pull of AirROI. RevFactor figures are limited to what is already published on revfactor.io. Not linked from the site and not in the sitemap.
+        </div>
+        <nav aria-label="Breadcrumb" class="mb-8">
+          <ol class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#8F6E62]">
+            <li><a href="/" class="hover:text-[#3F261F] transition-colors">Home</a></li>
+            <li aria-hidden="true" class="opacity-40">/</li>
+            <li class="text-[#8F6E62]">Markets</li>
+            <li aria-hidden="true" class="opacity-40">/</li>
+            <li aria-current="page" class="text-[#3F261F]">Smoky Mountains</li>
+          </ol>
+        </nav>
+        <div class="max-w-3xl">
+          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-5">MARKET GUIDE · TENNESSEE</p>
+          <h1 class="text-[clamp(34px,6vw,58px)] leading-[1.05] text-[#3F261F] mb-6" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; letter-spacing: 0.5px;">
+            Airbnb Revenue Management in the <em style="font-style: italic; color: #7A8B76;">Smoky Mountains</em>
+          </h1>
+          <p class="text-[16px] leading-[1.7] text-[#76574C] mb-4">
+            Gatlinburg, Pigeon Forge and Sevierville. What the market pays by month, where the calendar turns, what the cities and county require, and what RevFactor has published from its own Smokies properties.
+          </p>
+          <p class="text-[12px] leading-[1.6] text-[#8F6E62] italic">
+            Market data: RevFactor's {PULL_DATE} pull of the AirROI market API, trailing 12 months (September 2025 to August 2026). Sample: Gatlinburg {Math.round(rows[0].s.active_listings_count).toLocaleString('en-US')}, Pigeon Forge {Math.round(rows[1].s.active_listings_count).toLocaleString('en-US')} and Sevierville {Math.round(rows[2].s.active_listings_count).toLocaleString('en-US')} active listings.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Market at a glance -->
+    <section class="pb-16 md:pb-20">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <div class="mb-8 pb-4 border-b border-[#C8C4BC]">
+          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-2">TRAILING 12 MONTHS · AIRROI · PULLED {PULL_DATE.toUpperCase()}</p>
+          <h2 class="text-[clamp(24px,3.5vw,36px)] leading-[1.15] text-[#3F261F]" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">
+            Three towns, <em style="font-style: italic; color: #7A8B76;">one booking curve.</em>
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          {rows.map((r) => (
+            <article class="bg-[#E8E6E1] rounded-[16px] p-7" style="box-shadow: 0 1px 3px rgba(22,25,16,0.06);">
+              <h3 class="text-[24px] leading-[1.2] text-[#3F261F] mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">{r.name}</h3>
+              <dl class="grid grid-cols-2 gap-x-4 gap-y-4 text-[#3F261F]">
+                <div><dt class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">Occupancy</dt><dd class="text-[20px]" style="font-family: 'JetBrains Mono', monospace;">{pct(r.s.occupancy)}</dd></div>
+                <div><dt class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">ADR</dt><dd class="text-[20px]" style="font-family: 'JetBrains Mono', monospace;">{usd(r.s.average_daily_rate)}</dd></div>
+                <div><dt class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">RevPAR</dt><dd class="text-[20px] text-[#5D6D59]" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">{usd(r.s.rev_par)}</dd></div>
+                <div><dt class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">Annual revenue</dt><dd class="text-[20px]" style="font-family: 'JetBrains Mono', monospace;">{usd(r.s.revenue)}</dd></div>
+                <div><dt class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">Lead time</dt><dd class="text-[16px]" style="font-family: 'JetBrains Mono', monospace;">{Math.round(r.s.booking_lead_time)} days</dd></div>
+                <div><dt class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">Length of stay</dt><dd class="text-[16px]" style="font-family: 'JetBrains Mono', monospace;">{r.s.length_of_stay} nights</dd></div>
+              </dl>
+              <p class="text-[12px] leading-[1.6] text-[#76574C] mt-5">
+                Peak RevPAR {label(r.peak.date)} at {usd(r.peak.revpar)}; trough {label(r.trough.date)} at {usd(r.trough.revpar)}. A {r.swing.toFixed(1)}x swing inside one year.
+              </p>
+            </article>
+          ))}
+        </div>
+        <p class="text-[11px] text-[#8F6E62] mt-4 italic">
+          Market averages across all active listings on AirROI, native currency. Annual revenue is the trailing 12-month average per listing. Percentile spreads inside each town are wide; the medians sit well below these averages.
+        </p>
+      </div>
+    </section>
+
+    <!-- Seasonality table -->
+    <section class="py-16 md:py-20 bg-[#E8E6E1]">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <div class="mb-8 pb-4 border-b border-[#C8C4BC]">
+          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-2">SEASONALITY · SEPTEMBER 2025 TO AUGUST 2026</p>
+          <h2 class="text-[clamp(24px,3.5vw,36px)] leading-[1.15] text-[#3F261F] mb-3" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">
+            Month by month: <em style="font-style: italic; color: #7A8B76;">ADR, occupancy, RevPAR.</em>
+          </h2>
+          <p class="text-[14px] leading-[1.7] text-[#76574C] max-w-3xl">
+            Two things stand out in every town. October is the highest-occupancy month of the year and December carries the highest average rate, while June and July win on RevPAR because rate and occupancy peak together. January and February are the floor. A single "summer rate" and "winter rate" misses all four of those turns.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto rounded-[16px] bg-[#DDDAD3] border border-[#C8C4BC]/60">
+          <table class="w-full text-left text-[12px]">
+            <thead class="bg-[#13342D] text-[#E8E6E1]">
+              <tr>
+                <th rowspan="2" class="px-4 py-3 font-bold uppercase text-[9px] tracking-[2px] align-bottom">Month</th>
+                {rows.map((r) => <th colspan="3" class="px-4 py-2 font-bold uppercase text-[9px] tracking-[2px] text-center border-l border-[#E8E6E1]/15">{r.name}</th>)}
+              </tr>
+              <tr>
+                {rows.map(() => (<><th class="px-3 py-2 font-bold uppercase text-[8px] tracking-[1.5px] text-right border-l border-[#E8E6E1]/15">ADR</th><th class="px-3 py-2 font-bold uppercase text-[8px] tracking-[1.5px] text-right">Occ</th><th class="px-3 py-2 font-bold uppercase text-[8px] tracking-[1.5px] text-right">RevPAR</th></>))}
+              </tr>
+            </thead>
+            <tbody>
+              {months.map((d, i) => (
+                <tr class={i % 2 === 0 ? 'bg-[#DDDAD3]' : 'bg-[#E8E6E1]/50'}>
+                  <td class="px-4 py-2.5 text-[#3F261F] font-bold">{label(d)}</td>
+                  {rows.map((r) => { const m = r.monthly[i]; const hot = m.date === r.peak.date; const cold = m.date === r.trough.date; return (<>
+                    <td class="px-3 py-2.5 text-right text-[#3F261F] border-l border-[#C8C4BC]/40" style="font-family: 'JetBrains Mono', monospace;">{usd(m.adr)}</td>
+                    <td class="px-3 py-2.5 text-right text-[#3F261F]" style="font-family: 'JetBrains Mono', monospace;">{pct(m.occ)}</td>
+                    <td class={`px-3 py-2.5 text-right font-bold ${hot ? 'text-[#5D6D59]' : cold ? 'text-[#8B3A3A]' : 'text-[#3F261F]'}`} style="font-family: 'JetBrains Mono', monospace;">{usd(m.revpar)}</td>
+                  </>); })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[11px] text-[#8F6E62] mt-4 italic">
+          Green = peak RevPAR month, red = trough. Source: RevFactor's {PULL_DATE} pull of AirROI market metrics (average-daily-rate, occupancy, revpar endpoints, monthly averages across active listings). Raw responses are kept on file.
+        </p>
+      </div>
+    </section>
+
+    <!-- RevFactor in the Smokies -->
+    <section class="py-16 md:py-20">
+      <div class="max-w-3xl mx-auto px-6 md:px-12">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-4">REVFACTOR IN THIS MARKET</p>
+        <h2 class="text-[clamp(24px,3.5vw,36px)] leading-[1.15] text-[#3F261F] mb-6" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">
+          What we have <em style="font-style: italic; color: #7A8B76;">already published.</em>
+        </h2>
+        <div class="space-y-5 text-[15px] leading-[1.8] text-[#3F261F]">
+          <p>
+            The Smoky Mountains is RevFactor's largest single concentration: <strong>{smokies?.count ?? 0} listings</strong> across {smokies?.tooltip}, per the <a href="/about" class="underline decoration-[#5D6D59] underline-offset-4">portfolio map</a>. That density is the practical advantage. When one cabin's pacing diverges from the comp set, the read is confirmed or contradicted by thirty sister calendars in the same weeks.
+          </p>
+          <p>
+            <strong>A 6-bedroom Gatlinburg cabin, onboarded February 9, 2026.</strong> By the April data pull, summer 2026 on-the-books revenue stood at <strong>$68,960 against $21,501</strong> at the same point the year before, <strong>+$47,459</strong> ahead of pace (+220.7%), with the property outpacing the Gatlinburg market at a 1.33x market penetration index. These are booked-pacing figures, not earned revenue, and they are published in the <a href="/blog/str-revenue-benchmarks-2026" class="underline decoration-[#5D6D59] underline-offset-4">2026 STR revenue benchmarks</a> and the <a href="/blog/revenue-management-for-short-term-rentals" class="underline decoration-[#5D6D59] underline-offset-4">revenue management guide</a>. Measured against that property's final prior-year summer of $70,780, it was pacing slightly under with peak July still booking, which is the more honest of the two readings.
+          </p>
+          <p>
+            <strong>Pigeon Forge market RevPAR swings 2.4x</strong> from January to December in RevFactor's May 2026 pull of AirROI data, the example used in the <a href="/blog/dynamic-pricing-str-beginners-guide" class="underline decoration-[#5D6D59] underline-offset-4">dynamic pricing guide</a>. This September pull shows the same shape across all three towns (see the table above).
+          </p>
+          <p class="text-[13px] text-[#8F6E62] italic">
+            RevFactor publishes results as pacing against the comp set and against the property's own prior year. No earned-revenue figures for Smokies properties are published yet; those are pending owner sign-off.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Local rules -->
+    <section class="py-16 md:py-20 bg-[#E8E6E1]">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <div class="mb-8 pb-4 border-b border-[#C8C4BC]">
+          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-2">PERMITS AND TAXES · FROM THE OFFICIAL PAGES, CHECKED {PULL_DATE.toUpperCase()}</p>
+          <h2 class="text-[clamp(24px,3.5vw,36px)] leading-[1.15] text-[#3F261F] mb-3" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">
+            Four jurisdictions, <em style="font-style: italic; color: #7A8B76;">four rule sets.</em>
+          </h2>
+          <p class="text-[14px] leading-[1.7] text-[#76574C] max-w-3xl">
+            Each city runs its own permit and lodging tax, and Sevier County adds a safety permit on top. Rates and fees below are quoted from the linked pages on the date shown. Confirm with the office before relying on them; they change.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 text-[14px] leading-[1.7] text-[#3F261F]">
+          <article class="bg-[#DDDAD3] rounded-[16px] p-7">
+            <h3 class="text-[22px] mb-3" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">Gatlinburg</h3>
+            <ul class="list-disc ml-5 space-y-2">
+              <li>Overnight rentals inside city limits need a <a href="https://www.gatlinburgtn.gov/page/apply-for-a-tourist-residency-permit" rel="nofollow noopener" target="_blank" class="underline decoration-[#5D6D59] underline-offset-4">Tourist Residency Permit</a>, which requires correct zoning plus a fire and building inspection. The city lists a $200 application fee for a unit with two or fewer bedrooms; Building and Planning is at 865-436-7792.</li>
+              <li>The city's <a href="https://5il.co/26npe" rel="nofollow noopener" target="_blank" class="underline decoration-[#5D6D59] underline-offset-4">overnight rental procedures</a> add a $15 city business license, a $15 Sevier County business license and a state sales tax ID, a 3% hotel/motel tax on gross rental sales (12.75% total to the guest with the 9.75% state rate) and a 1.25% gross receipts tax paid by the owner. Marketplaces such as Airbnb and Vrbo remit the hotel/motel tax; the city states they do not remit gross receipts tax. Both are due by the 20th of the following month.</li>
+            </ul>
+          </article>
+          <article class="bg-[#DDDAD3] rounded-[16px] p-7">
+            <h3 class="text-[22px] mb-3" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">Pigeon Forge</h3>
+            <ul class="list-disc ml-5 space-y-2">
+              <li>The city's <a href="https://www.cityofpigeonforgetn.gov/169/Forms-License-Permits-Etc" rel="nofollow noopener" target="_blank" class="underline decoration-[#5D6D59] underline-offset-4">business license and tax page</a> lists a $15 business license application fee, a 1% gross receipts tax paid by the business and a 2.5% lodging tax on gross hotel sales (12.25% total to the guest).</li>
+              <li>The <a href="https://www.cityofpigeonforgetn.gov/DocumentCenter/View/271/Hotel-or-Motel-Tax-Form-PDF" rel="nofollow noopener" target="_blank" class="underline decoration-[#5D6D59] underline-offset-4">hotel/motel tax return</a> is monthly and becomes delinquent on the 21st of the following month, with penalty and 6% annual interest after that.</li>
+            </ul>
+          </article>
+          <article class="bg-[#DDDAD3] rounded-[16px] p-7">
+            <h3 class="text-[22px] mb-3" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">Sevierville</h3>
+            <ul class="list-disc ml-5 space-y-2">
+              <li>An annual <a href="https://www.seviervilletn.org/467/Short-Term-Rentals" rel="nofollow noopener" target="_blank" class="underline decoration-[#5D6D59] underline-offset-4">short-term rental operational permit</a> has been required since August 2021, run jointly by planning and the fire department. It takes documentation, a fee and a life-safety inspection of the property, and renews yearly.</li>
+              <li>The city's <a href="https://www.seviervilletn.org/189/Hospitality-Tax" rel="nofollow noopener" target="_blank" class="underline decoration-[#5D6D59] underline-offset-4">hospitality tax</a> includes a 3% lodging tax on monthly net proceeds from stays under 30 days inside city limits, filed online. Hosts renting through Airbnb or Vrbo are told to read the city's marketplace notice before applying for an account.</li>
+            </ul>
+          </article>
+          <article class="bg-[#DDDAD3] rounded-[16px] p-7">
+            <h3 class="text-[22px] mb-3" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">Sevier County</h3>
+            <ul class="list-disc ml-5 space-y-2">
+              <li>The county's <a href="https://www.seviercountytn.gov/news_detail_T2_R68.php" rel="nofollow noopener" target="_blank" class="underline decoration-[#5D6D59] underline-offset-4">Short-Term Rental Unit Permit Program</a> requires an annual operational permit per address, adopted by the county commission on June 26, 2023. The permit is $250 per year for a unit that sleeps 12 or fewer, plus $25 per additional occupant for units sleeping 13 or more.</li>
+              <li>The county inspection covers smoke alarms, carbon monoxide detectors, escape routes and electrical safety. Renewal notices go out by email.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 md:py-20">
+      <div class="max-w-3xl mx-auto px-6 md:px-12">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-4">QUESTIONS HOSTS ASK</p>
+        <h2 class="text-[clamp(24px,3.5vw,36px)] leading-[1.15] text-[#3F261F] mb-8" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">
+          Pricing a Smokies cabin, <em style="font-style: italic; color: #7A8B76;">answered.</em>
+        </h2>
+        <div class="space-y-3">
+          {faqs.map((f) => (
+            <details class="bg-[#E8E6E1] rounded-[12px] p-5 group">
+              <summary class="cursor-pointer text-[16px] text-[#3F261F] list-none flex justify-between items-center gap-4" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500;">
+                <span class="first-letter:uppercase">{f.q}?</span>
+                <span aria-hidden="true" class="text-[#8F6E62] group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p class="mt-3 text-[14px] leading-[1.75] text-[#76574C]">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 md:py-20 bg-[#13342D] text-[#E8E6E1]">
+      <div class="max-w-3xl mx-auto px-6 md:px-12 text-center">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-4">YOUR CABIN, NEXT</p>
+        <h2 class="text-[clamp(28px,4vw,42px)] leading-[1.15] mb-6" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">
+          Where is your Smokies calendar <em style="font-style: italic; color: #A9BBA3;">leaving money?</em>
+        </h2>
+        <p class="text-[15px] leading-[1.7] text-[#A9BBA3]/80 mb-8 max-w-xl mx-auto">
+          A 30-minute discovery call. We pull your comp set in Gatlinburg, Pigeon Forge or Sevierville, walk through pacing month by month, and tell you whether RevFactor is the right fit. Flat $350 per month per property if it is.
+        </p>
+        <BlogScheduleCTA client:load />
+      </div>
+    </section>
+  </main>
+
+  <Footer client:load />
+</BaseLayout>
