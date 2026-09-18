@@ -25,7 +25,7 @@ License-clean photos for RevFactor blog posts. Curated from Unsplash (free for c
 
 ---
 
-## Catalogue (28 photos)
+## Catalogue (28 blog photos)
 
 ### Cabin / Mountain (6)
 | slug | description |
@@ -82,6 +82,54 @@ License-clean photos for RevFactor blog posts. Curated from Unsplash (free for c
 | `season/winter-cabin-snow-fall` | Snowy cabin scene during a quiet snowfall |
 | `season/spring-meadow-house` | Spring meadow with a small modern house in the distance |
 | `season/summer-pool-deck` | Summer pool-deck scene at a beachfront STR |
+
+---
+
+## Case-study photography (9) in `public/photos/case-studies/`
+
+A separate set, outside the blog library, used by `/case-studies/` and the eight
+study pages. All nine are AI-generated (Gemini `gemini-3-pro-image`, 16:9, 4K
+source) and exported at **1200 / 1920 / 2400** as `<slug>-<width>.webp`.
+
+**These are REPRESENTATIVE images.** The case studies are anonymized, so every
+frame is a generic property of that type and region, never the real listing.
+Any surface that renders one must carry the caption
+"Representative image, generated for illustration. Properties are not identified."
+and alt text saying the same. `src/data/case-study-images.ts` is the single
+source for the paths, the alt text, and that caption.
+
+Every frame is graded to one system: dusk or blue hour, warm interior light,
+cedar and moss palette, restrained saturation, no people, no text, no logos.
+The **upper third of each frame is deliberately dark** because the fixed navbar
+renders cream links over it.
+
+| slug | description |
+|---|---|
+| `index-hero` | Aerial dusk view across a ridge, an inland lake and a coastline, scattered lit rentals. Index hero + OG image |
+| `2br-albion-mi-waterfront` | Small shingled waterfront cottage on a Michigan inland lake, dock and still reflection |
+| `2br-glenwood-springs-co-cabin` | Compact log-and-stone cabin in a Colorado river canyon, aspens turning |
+| `3br-norton-shores-mi-lake-home` | Lake Michigan shoreline home, birches and dune grass, stair path to the beach |
+| `4br-minneapolis-metro-home` | Two-storey Midwest suburban home on a tree-lined boulevard, early autumn |
+| `4br-norfolk-va-home` | Coastal Virginia brick home with a covered porch, crepe myrtles, tidewater inlet beyond |
+| `4br-san-diego-ca-rental` | Low stucco and wood Southern California beach rental with a roof deck, marine layer |
+| `5br-north-myrtle-beach-sc-home` | South Carolina beach house on pilings, stacked porches, sea oats and boardwalk |
+| `6br-gatlinburg-cabin` | Large timber-and-stone Smoky Mountain cabin on a ridge, layered blue ridgelines |
+
+**Regenerate or add one:**
+
+```bash
+export REVFACTOR_GEMINI_API_KEY="..."   # RevFactor Gemini key, from the secret store
+node scripts/gen-case-study-images.mjs                      # every slug in the manifest
+node scripts/gen-case-study-images.mjs 6br-gatlinburg-cabin # one slug
+node scripts/gen-case-study-images.mjs --force              # re-encode / regenerate
+node scripts/gen-case-study-images.mjs --slug x --prompt "..."
+```
+
+The script caches each raw 4K PNG in `.image-cache/case-studies/` (gitignored),
+so re-encoding at a different quality costs nothing. `RF_IGNORE_CACHE=1` forces
+a fresh generation. Every width is encoded down until it clears its byte budget
+(400KB at 2400, 340KB at 1920, 200KB at 1200), so a busy frame can never ship an
+oversized hero. The key is read from the environment and is never committed.
 
 ---
 

@@ -40,6 +40,12 @@ export default function Footer() {
                 >
                   Journal
                 </a>
+                <a
+                  href="/case-studies/"
+                  className="block text-[13px] text-[#8F6E62] hover:text-[#E8E6E1] transition-colors duration-200"
+                >
+                  Case studies
+                </a>
               </div>
             </div>
             <div>

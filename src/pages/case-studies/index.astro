@@ -3,6 +3,9 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
+import { heroImage, studyImage, socialImage, HERO_SLUG, REPRESENTATIVE_CAPTION } from '../../data/case-study-images';
+
+const hero = heroImage('100vw');
 
 const studies = (await getCollection('caseStudies')).sort(
   (a, b) => (b.data.pacing?.liftPct ?? 0) - (a.data.pacing?.liftPct ?? 0)
@@ -49,54 +52,85 @@ const breadcrumbSchema = {
 <BaseLayout
   title="Case Studies | RevFactor | Documented STR Revenue Management Results"
   description="Documented +57% to +293% summer 2026 booked-pacing lifts across short-term rental properties under RevFactor management, identified by size and market, with the full method and monthly data."
+  ogImage={socialImage(HERO_SLUG)}
+  ogImageAlt={hero.alt}
 >
   <Fragment slot="head">
+    <!-- LCP: preload the hero with the same srcset the <img> uses, so the
+         download starts alongside HTML parsing rather than after it. -->
+    <link
+      rel="preload"
+      as="image"
+      href={hero.src}
+      imagesrcset={hero.srcset}
+      imagesizes={hero.sizes}
+      fetchpriority="high"
+    />
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
 
   <Navbar client:load />
 
-  <main class="min-h-screen bg-[#DDDAD3]">
-    <!-- Header -->
-    <section class="pt-32 md:pt-40 pb-12 md:pb-16">
-      <div class="max-w-7xl mx-auto px-6 md:px-12">
-        <div class="mb-8 rounded-[12px] bg-[#13342D] text-[#E8E6E1] py-3 px-5 text-[11px] leading-[1.6]" data-method-note>
-          <span class="font-bold uppercase tracking-[2px] text-[#A9BBA3]">Method note</span><br />
-          Figures on this page are June to August 2026 booked pacing (on-the-books revenue as of the May 2026 data pull) versus the same point in 2025, not earned revenue. They will be updated to earned results once the summer closes. Properties are identified by size and market, and owners by first name only.
-        </div>
-        <!-- Breadcrumb -->
-        <nav aria-label="Breadcrumb" class="mb-8">
-          <ol class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#8F6E62]">
-            <li><a href="/" class="hover:text-[#3F261F] transition-colors">Home</a></li>
-            <li aria-hidden="true" class="opacity-40">/</li>
-            <li aria-current="page" class="text-[#3F261F]">Case Studies</li>
-          </ol>
-        </nav>
+  <!-- HERO. A dark full-bleed image behind the fixed navbar: the nav links are
+       cream, so anything lighter than this leaves them unreadable. -->
+  <section class="relative overflow-hidden text-[#E8E6E1]" style="min-height:74vh;">
+    <img
+      src={hero.src}
+      srcset={hero.srcset}
+      sizes={hero.sizes}
+      alt={hero.alt}
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      width="1920"
+      height="1080"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(12,16,22,0.78) 0%, rgba(12,16,22,0.52) 42%, rgba(12,16,22,0.88) 100%);"></div>
+    <div class="absolute top-0 inset-x-0 z-[2] h-44 pointer-events-none" style="background: linear-gradient(180deg, rgba(12,16,22,0.82) 0%, rgba(12,16,22,0.30) 65%, transparent 100%);"></div>
 
-        <div class="max-w-3xl">
-          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-5">
-            DOCUMENTED RESULTS
-          </p>
-          <h1
-            class="text-[clamp(36px,7vw,64px)] leading-[1.05] text-[#3F261F] mb-5"
-            style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; letter-spacing: 0.5px;"
+    <div class="relative z-[3] max-w-7xl mx-auto px-6 md:px-12 flex flex-col justify-end pb-14 md:pb-20 pt-36 md:pt-44" style="min-height:74vh;">
+      <!-- Breadcrumb -->
+      <nav aria-label="Breadcrumb" class="mb-7">
+        <ol class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#C8C4BC]">
+          <li><a href="/" class="hover:text-[#E8E6E1] transition-colors">Home</a></li>
+          <li aria-hidden="true" class="opacity-40">/</li>
+          <li aria-current="page" class="text-[#E8E6E1]">Case Studies</li>
+        </ol>
+      </nav>
+
+      <div class="max-w-2xl">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-5">
+          DOCUMENTED RESULTS
+        </p>
+        <h1 class="mb-6">
+          <span
+            class="block text-[#E8E6E1]"
+            style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(38px,7vw,64px); line-height:1.05; letter-spacing:0.5px;"
           >
-            Case<br />
-            <em style="font-style: italic; color: #7A8B76;">studies</em>
-          </h1>
-          <p class="text-[15px] leading-[1.7] text-[#76574C] max-w-xl mb-2">
-            Real properties, real markets, real numbers. Each study below is sourced from RevFactor's pacing reports: on-the-books revenue, occupancy, ADR and Market Penetration Index against same-time-last-year and final-year baselines, with the monthly table, what changed, and what it cost.
-          </p>
-          <p class="text-[12px] leading-[1.6] text-[#8F6E62] max-w-xl italic">
-            Every figure below is summer 2026 booked pacing measured against the same point in 2025, not earned revenue. Past performance is not indicative of future results. Properties are described by bedrooms and market rather than by listing name, and owners are identified by first name only.
-          </p>
-        </div>
+            Case
+          </span>
+          <span
+            class="block text-[#7A8B76]"
+            style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-style:italic; font-size:clamp(46px,9vw,80px); line-height:1.0; letter-spacing:0.5px;"
+          >
+            studies
+          </span>
+        </h1>
+        <p class="text-[15px] leading-[1.7] text-[#C8C4BC] max-w-[540px]">
+          Real properties, real markets, real numbers. Each study is sourced from RevFactor's pacing reports: on-the-books revenue, occupancy, ADR and Market Penetration Index against same-time-last-year and final-year baselines, with the monthly table, what changed, and what it cost.
+        </p>
+        <p class="text-[12px] leading-[1.6] text-[#8F8A80] max-w-[540px] mt-4">
+          Properties are described by bedrooms and market rather than by listing name. Owners are identified by first name only. Imagery on these pages is representative, not the listings themselves.
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
+  <main class="min-h-screen bg-[#DDDAD3]">
     <!-- Summer 2026 pacing: featured -->
-    <section class="pb-16 md:pb-24">
+    <section class="pb-12 md:pb-16">
       <div class="max-w-7xl mx-auto px-6 md:px-12">
         <div class="flex items-end justify-between mb-8 pb-4 border-b border-[#C8C4BC]">
           <div>
@@ -114,17 +148,38 @@ const breadcrumbSchema = {
           </div>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Quiet qualifier: the one line a reader needs before they read a
+             single number. The full method note sits at the foot of the page. -->
+        <p class="-mt-4 mb-8 text-[11px] leading-[1.6] text-[#8F6E62]">
+          June to August 2026 booked pacing versus the same point in 2025, not earned revenue. <a href="#method" class="underline decoration-[#C8C4BC] underline-offset-[3px] hover:text-[#3F261F] transition-colors">Full method</a>.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {studies.map((study) => {
             const p = study.data.pacing;
             return (
               <article
-                class="group bg-[#E8E6E1] rounded-[16px] overflow-hidden transition-all duration-[350ms]"
+                class="group bg-[#E8E6E1] rounded-[16px] overflow-hidden transition-all duration-[350ms] h-full"
                 style="box-shadow: 0 1px 3px rgba(22,25,16,0.06); transition-timing-function: cubic-bezier(0.25,0.1,0.25,1);"
                 onmouseenter="this.style.transform='translateY(-2px) scale(1.01)';this.style.boxShadow='0 12px 32px rgba(22,25,16,0.10)'"
                 onmouseleave="this.style.transform='';this.style.boxShadow='0 1px 3px rgba(22,25,16,0.06)'"
               >
-                <a href={`/case-studies/${study.id}`} class="block p-7">
+                <a href={`/case-studies/${study.id}`} class="flex flex-col h-full">
+                  <div class="relative w-full overflow-hidden bg-[#C8C4BC]" style="aspect-ratio: 16 / 10;">
+                    <img
+                      src={studyImage(study.id, study.data, '(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw').src}
+                      srcset={studyImage(study.id, study.data, '').srcset}
+                      sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                      alt={studyImage(study.id, study.data, '').alt}
+                      loading="lazy"
+                      decoding="async"
+                      width="1920"
+                      height="1200"
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"
+                      style="transition-timing-function:cubic-bezier(0.25,0.1,0.25,1);"
+                    />
+                  </div>
+                  <div class="flex flex-col flex-1 p-7">
                   <div class="flex items-center gap-2 mb-4">
                     <span class="inline-block px-2.5 py-1 rounded-full bg-[#5D6D59]/10 text-[#5D6D59] font-bold uppercase text-[8px] tracking-[2px]">
                       {study.data.bedrooms} BR
@@ -162,24 +217,27 @@ const breadcrumbSchema = {
                     </div>
                   )}
 
-                  <p class="text-[13px] leading-[1.6] text-[#76574C] mb-4 line-clamp-3">
+                  <p class="text-[13px] leading-[1.6] text-[#76574C] mb-5 line-clamp-3 flex-1">
                     {study.data.description}
                   </p>
 
-                  <span class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#13342D] group-hover:gap-3 transition-all">
+                  <span class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#13342D] group-hover:gap-3 transition-all mt-auto self-start">
                     Read case study
                     <span aria-hidden="true">→</span>
                   </span>
+                  </div>
                 </a>
               </article>
             );
           })}
         </div>
+
+        <p class="mt-6 text-[11px] text-[#8F6E62] italic">{REPRESENTATIVE_CAPTION}</p>
       </div>
     </section>
 
     <!-- Methodology -->
-    <section class="py-16 md:py-24">
+    <section class="pt-4 pb-16 md:pb-24">
       <div class="max-w-3xl mx-auto px-6 md:px-12">
         <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-4">METHODOLOGY</p>
         <h2
@@ -225,6 +283,15 @@ const breadcrumbSchema = {
         <p class="text-[12px] text-[#8F6E62] mt-8 italic">
           Past performance is not indicative of future results. Numbers reflect data as of the May 2026 pull; these pages will be updated to earned June to August results once the summer closes.
         </p>
+
+        <!-- METHOD. Demoted from the top of the page to here, but still plain
+             crawlable text: it qualifies every number above it. -->
+        <div id="method" class="mt-10 rounded-[12px] border border-[#C8C4BC] bg-[#E8E6E1]/60 py-4 px-5" data-method-note>
+          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-2">Method note</p>
+          <p class="text-[12px] leading-[1.7] text-[#76574C]">
+            Figures on this page are June to August 2026 booked pacing (on-the-books revenue as of the May 2026 data pull) versus the same point in 2025, not earned revenue. They will be updated to earned results once the summer closes. Properties are identified by size and market, and owners by first name only. Photography on these pages is representative of the property type and region and does not depict the listings described.
+          </p>
+        </div>
       </div>
     </section>
 

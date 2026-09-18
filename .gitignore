@@ -76,3 +76,4 @@ qa-screenshots/
 scripts/.brain_scan_last_success
 scripts/.weekly_sweep_last_success
 scripts/.DS_Store
+.image-cache/
