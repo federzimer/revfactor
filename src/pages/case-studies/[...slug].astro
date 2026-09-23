@@ -1,0 +1,447 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
+import { studyImage, socialImage, REPRESENTATIVE_CAPTION } from '../../data/case-study-images';
+
+export async function getStaticPaths() {
+  const studies = await getCollection('caseStudies');
+  return studies.map((study) => ({
+    params: { slug: study.id },
+    props: { study, allStudies: studies },
+  }));
+}
+
+const { study, allStudies } = Astro.props;
+const { Content } = await render(study);
+
+const hero = studyImage(study.id, study.data, '100vw');
+
+const p = study.data.pacing;
+const m = study.data.monthly ?? [];
+
+// Privacy guard: show first name only when written sign-off is pending.
+const displayName = study.data.clientNamePublic
+  ? study.data.clientName
+  : study.data.clientName.split(/\s+/)[0];
+
+// Measurement window sentence, built from the data on file so every page
+// states exactly what was measured and when.
+const onboardedLabel = study.data.onboardedDate
+  ? study.data.onboardedDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+  : null;
+const windowSentence = study.data.q1
+  ? 'Q1 2026 actuals (January to March) against Q1 2025, plus June to August 2026 booked pacing read at the May 2026 data pull against the same point in the 2025 booking curve.'
+  : 'June to August 2026 booked pacing (on-the-books revenue as of the May 2026 data pull) against the same point in the 2025 booking curve.';
+const monthsCovered = p ? Math.floor((p.otbRev - p.stlyRev - 150) / 350) : null;
+
+const fmt = (n: number) => '$' + n.toLocaleString('en-US');
+const fmtPct = (n: number) => (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
+
+// The single number that goes over the hero image. Pacing lift where we have
+// it, Q1 actuals where a study is Q1-only, nothing at all rather than a blank
+// tile if a study somehow carries neither.
+const headline = p
+  ? { label: 'Jun to Aug 2026 vs. same point 2025', value: fmtPct(p.liftPct), sub: '+' + fmt(p.otbRev - p.stlyRev) + ' booked' }
+  : study.data.q1
+  ? { label: 'Q1 2026 vs. Q1 2025', value: fmtPct(study.data.q1.liftPct), sub: '+' + fmt(study.data.q1.rev - study.data.q1.lyRev) }
+  : null;
+
+// Hero metric tiles are built here so the template stays free of generic-type
+// syntax and so partial data (no MPI, no ADR, Q1-only) never renders an empty
+// or "undefined" cell.
+type Tile = { label: string; value: string; sub?: string; dark?: boolean };
+const tiles: Tile[] = [];
+if (p) {
+  tiles.push({ label: 'vs. STLY', value: fmtPct(p.liftPct), sub: '+' + fmt(p.otbRev - p.stlyRev), dark: true });
+  if (p.mpi !== undefined) tiles.push({ label: 'MPI', value: `${p.mpi.toFixed(2)}x`, sub: p.mktOcc !== undefined ? `vs. ${(p.mktOcc * 100).toFixed(0)}% mkt occ` : undefined });
+  tiles.push({ label: 'OTB Revenue', value: fmt(p.otbRev), sub: `STLY: ${fmt(p.stlyRev)}` });
+  if (p.otbAdr !== undefined) tiles.push({ label: 'ADR', value: fmt(p.otbAdr), sub: p.stlyAdr ? `STLY: ${fmt(p.stlyAdr)} (${fmtPct(((p.otbAdr - p.stlyAdr) / p.stlyAdr) * 100)})` : undefined });
+}
+if (study.data.q1) {
+  const q = study.data.q1;
+  tiles.push({ label: 'Q1 2026 vs. Q1 2025', value: fmtPct(q.liftPct), sub: '+' + fmt(q.rev - q.lyRev), dark: tiles.length === 0 });
+  if (q.mpi !== undefined) tiles.push({ label: 'MPI (Q1)', value: `${q.mpi.toFixed(2)}×` });
+  tiles.push({ label: 'Q1 2026 Revenue', value: fmt(q.rev), sub: `Q1 2025: ${fmt(q.lyRev)}` });
+}
+
+// Other studies for the "more case studies" rail
+const otherStudies = allStudies
+  .filter((s) => s.id !== study.id)
+  .sort((a, b) => (b.data.pacing?.liftPct ?? 0) - (a.data.pacing?.liftPct ?? 0))
+  .slice(0, 3);
+
+// CaseStudy / Article schema: Article works best for AI engines, augmented with
+// a Place entity for the property location and Quantitative metrics.
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": study.data.title,
+  "description": study.data.description,
+  "datePublished": study.data.pubDate.toISOString(),
+  "dateModified": (study.data.updatedDate ?? study.data.pubDate).toISOString(),
+  "author": {
+    "@type": "Organization",
+    "name": "RevFactor",
+    "url": "https://www.revfactor.io"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "RevFactor",
+    "url": "https://www.revfactor.io",
+    "logo": { "@type": "ImageObject", "url": "https://www.revfactor.io/og-image.png" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
+  "about": {
+    "@type": "Place",
+    "name": study.data.listing,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": study.data.city,
+      "addressRegion": study.data.state,
+      "addressCountry": "US"
+    }
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.revfactor.io" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://www.revfactor.io/case-studies/" },
+    { "@type": "ListItem", "position": 3, "name": study.data.listing, "item": Astro.url.href }
+  ]
+};
+---
+
+<BaseLayout
+  title={`${study.data.listing} | RevFactor Case Study`}
+  description={study.data.description}
+  type="article"
+  publishedTime={study.data.pubDate.toISOString()}
+  modifiedTime={(study.data.updatedDate ?? study.data.pubDate).toISOString()}
+  ogImage={socialImage(study.id)}
+  ogImageAlt={hero.alt}
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href={hero.src}
+      imagesrcset={hero.srcset}
+      imagesizes={hero.sizes}
+      fetchpriority="high"
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <Navbar client:load />
+
+  <article>
+    <!-- HERO. A dark full-bleed representative image: the fixed navbar renders
+         cream links, so the top band of this frame has to stay dark. The
+         headline number sits over it; the full tile grid follows below. -->
+    <section class="relative overflow-hidden text-[#E8E6E1]" style="min-height:70vh;">
+      <img
+        src={hero.src}
+        srcset={hero.srcset}
+        sizes={hero.sizes}
+        alt={hero.alt}
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+        width="1920"
+        height="1080"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(12,16,22,0.80) 0%, rgba(12,16,22,0.50) 40%, rgba(12,16,22,0.90) 100%);"></div>
+      <div class="absolute top-0 inset-x-0 z-[2] h-44 pointer-events-none" style="background: linear-gradient(180deg, rgba(12,16,22,0.84) 0%, rgba(12,16,22,0.30) 65%, transparent 100%);"></div>
+
+      <div class="relative z-[3] max-w-5xl mx-auto px-6 md:px-12 flex flex-col justify-end pb-12 md:pb-16 pt-36 md:pt-44" style="min-height:70vh;">
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="mb-7">
+          <ol class="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#C8C4BC]">
+            <li><a href="/" class="hover:text-[#E8E6E1] transition-colors">Home</a></li>
+            <li aria-hidden="true" class="opacity-40">/</li>
+            <li><a href="/case-studies/" class="hover:text-[#E8E6E1] transition-colors">Case studies</a></li>
+            <li aria-hidden="true" class="opacity-40">/</li>
+            <li aria-current="page" class="text-[#E8E6E1]">{study.data.listing}</li>
+          </ol>
+        </nav>
+
+        <!-- Property header -->
+        <div class="flex flex-wrap items-center gap-2 mb-6">
+          <span class="inline-block px-2.5 py-1 rounded-full bg-[#7A8B76]/25 text-[#C5D3C0] font-bold uppercase text-[8px] tracking-[2px]">
+            CASE STUDY
+          </span>
+          <span class="inline-block px-2.5 py-1 rounded-full bg-[#E8E6E1]/12 text-[#E8E6E1] font-bold uppercase text-[8px] tracking-[2px]">
+            {study.data.bedrooms} BR
+          </span>
+          <span class="text-[10px] font-bold uppercase tracking-[2px] text-[#C8C4BC]">
+            {study.data.city}, {study.data.state}
+          </span>
+          {study.data.market && study.data.market !== `${study.data.city}, ${study.data.state}` && (
+            <span class="text-[10px] font-bold uppercase tracking-[2px] text-[#C8C4BC]/70">
+              · {study.data.market}
+            </span>
+          )}
+        </div>
+
+        <h1
+          class="text-[clamp(26px,4.5vw,50px)] leading-[1.12] text-[#E8E6E1] max-w-3xl"
+          style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; letter-spacing: 0.5px;"
+        >
+          {study.data.title}
+        </h1>
+
+        {headline && (
+          <div class="mt-8 flex flex-wrap items-end gap-x-5 gap-y-2">
+            <span class="text-[clamp(38px,7vw,64px)] leading-none text-[#A9BBA3]" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">
+              {headline.value}
+            </span>
+            <span class="pb-1">
+              <span class="block text-[11px] font-bold uppercase tracking-[2px] text-[#C8C4BC]">{headline.label}</span>
+              <span class="block text-[13px] text-[#A9BBA3]" style="font-family: 'JetBrains Mono', monospace;">{headline.sub}</span>
+            </span>
+          </div>
+        )}
+
+        <p class="mt-7 text-[11px] leading-[1.6] text-[#9C978D]">
+          {REPRESENTATIVE_CAPTION}
+        </p>
+      </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="py-12 md:py-16 bg-[#DDDAD3]">
+      <div class="max-w-5xl mx-auto px-6 md:px-12">
+        <!-- Owner + tenure meta -->
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-8 pb-8 border-b border-[#C8C4BC]">
+          <div>
+            <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62]">Owner</p>
+            <p class="text-[14px] text-[#3F261F]">{displayName}</p>
+          </div>
+          {study.data.tenureMonths && (
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62]">Tenure</p>
+              <p class="text-[14px] text-[#3F261F]" style="font-family: 'JetBrains Mono', monospace;">{study.data.tenureMonths.toFixed(1)} mo</p>
+            </div>
+          )}
+          {study.data.onboardedDate && (
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62]">Onboarded</p>
+              <p class="text-[14px] text-[#3F261F]" style="font-family: 'JetBrains Mono', monospace;">
+                {study.data.onboardedDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })}
+              </p>
+            </div>
+          )}
+          {p && (
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62]">Period</p>
+              <p class="text-[14px] text-[#3F261F]" style="font-family: 'JetBrains Mono', monospace;">{p.period}</p>
+            </div>
+          )}
+        </div>
+
+        <!-- Metric grid: tiles render conditionally so partial data never surfaces empty cells -->
+        {tiles.length > 0 && (
+          <div class={`grid grid-cols-2 ${tiles.length >= 4 ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-px rounded-[16px] overflow-hidden bg-[#C8C4BC]`}>
+            {tiles.map((t) => (
+              <div class={t.dark ? 'bg-[#13342D] p-6' : 'bg-[#E8E6E1] p-6'}>
+                <p class={`text-[9px] font-bold uppercase tracking-[2px] mb-3 ${t.dark ? 'text-[#A9BBA3]' : 'text-[#8F6E62]'}`}>{t.label}</p>
+                <p class={`text-[clamp(22px,3.5vw,36px)] leading-none ${t.dark ? 'text-[#E8E6E1]' : 'text-[#3F261F]'}`} style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">
+                  {t.value}
+                </p>
+                {t.sub && <p class={`text-[11px] mt-2 ${t.dark ? 'text-[#A9BBA3]/70' : 'text-[#76574C]'}`}>{t.sub}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        <!-- Quiet qualifier, right under the numbers it qualifies. The full
+             method note sits at the foot of the page. -->
+        <p class="mt-4 text-[11px] leading-[1.6] text-[#8F6E62]">
+          {study.data.q1 ? 'Q1 2026 actuals, plus June to August 2026 booked pacing versus the same point in 2025, not earned revenue.' : 'June to August 2026 booked pacing versus the same point in 2025, not earned revenue.'} <a href="#method" class="underline decoration-[#C8C4BC] underline-offset-[3px] hover:text-[#3F261F] transition-colors">Full method</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Body content (MDX) -->
+    <section class="py-16 md:py-20 bg-[#E8E6E1]">
+      <div class="max-w-3xl mx-auto px-6 md:px-12">
+        <div class="case-study-prose text-[15px] leading-[1.8] text-[#3F261F]">
+          <Content />
+        </div>
+
+        {study.data.testimonial && (
+          <blockquote class="mt-12 p-8 bg-[#13342D] text-[#E8E6E1] rounded-[16px]">
+            <p class="text-[20px] leading-[1.5] mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;">
+              "{study.data.testimonial.quote}"
+            </p>
+            <p class="text-[11px] font-bold uppercase tracking-[2px] text-[#A9BBA3]">{study.data.testimonial.author}</p>
+            {study.data.testimonial.source && (
+              <p class="text-[10px] text-[#A9BBA3]/60 mt-1">{study.data.testimonial.source}</p>
+            )}
+          </blockquote>
+        )}
+      </div>
+    </section>
+
+    <!-- METHOD. Demoted from the top of the page to here, but still plain
+         crawlable text: it qualifies every number above it. -->
+    <section id="method" class="py-14 md:py-18 bg-[#DDDAD3]">
+      <div class="max-w-3xl mx-auto px-6 md:px-12">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-4">Method</p>
+        <div class="rounded-[12px] border border-[#C8C4BC] bg-[#E8E6E1]/60 py-4 px-5 mb-6" data-method-note>
+          <p class="text-[12px] leading-[1.7] text-[#76574C]">
+            Figures on this page are booked pacing (on-the-books revenue as of the May 2026 data pull) versus the same point in 2025, not earned revenue. They will be updated to earned results once the summer closes. The property is identified by size and market, and the owner by first name only. The photograph above is representative of the property type and region and does not depict this listing.
+          </p>
+        </div>
+        <div class="rounded-[16px] bg-[#E8E6E1] p-6 md:p-8" data-measurement>
+          <p class="text-[9px] font-bold uppercase tracking-[3px] text-[#8F6E62] mb-3">How this was measured</p>
+          <p class="text-[14px] leading-[1.7] text-[#3F261F] mb-4">
+            <strong>Property:</strong> {study.data.bedrooms}-bedroom in {study.data.city}, {study.data.state}{study.data.market && study.data.market !== `${study.data.city}, ${study.data.state}` ? ` (${study.data.market})` : ''}.
+            {onboardedLabel && <> <strong>Onboarded:</strong> {onboardedLabel}{study.data.tenureMonths ? `, ${study.data.tenureMonths.toFixed(1)} months of tenure at measurement` : ''}.</>}
+            {' '}<strong>Window:</strong> {windowSentence}
+          </p>
+          <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-3 text-[13px] leading-[1.6] text-[#76574C]">
+            <div><dt class="font-bold text-[#3F261F] inline">OTB (on-the-books):</dt> <dd class="inline">revenue already committed via confirmed bookings for the window, as of the pull date.</dd></div>
+            <div><dt class="font-bold text-[#3F261F] inline">STLY (same-time-last-year):</dt> <dd class="inline">what the calendar held a year earlier for the same future window.</dd></div>
+            <div><dt class="font-bold text-[#3F261F] inline">LY (last-year final):</dt> <dd class="inline">final realized revenue for the same window in 2025.</dd></div>
+            <div><dt class="font-bold text-[#3F261F] inline">MPI (Market Penetration Index):</dt> <dd class="inline">the property's booked share divided by its fair share of the comp set. 1.00x paces the market; above 1.00x leads it.</dd></div>
+            <div><dt class="font-bold text-[#3F261F] inline">ADR (average daily rate):</dt> <dd class="inline">average price of booked nights.</dd></div>
+            <div><dt class="font-bold text-[#3F261F] inline">Occupancy:</dt> <dd class="inline">booked nights divided by available nights. "Mkt occ" is the comp set's average for the same window.</dd></div>
+          </dl>
+          <p class="text-[13px] leading-[1.6] text-[#3F261F] mt-4">
+            <strong>Cost:</strong> flat $350 per month plus a one-time $150 onboarding fee, no percent of revenue.
+            {monthsCovered !== null && monthsCovered > 0 && <> The booked lift shown above covers the onboarding fee and about {monthsCovered} months of management fees.</>}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Other case studies -->
+    <section class="py-16 md:py-20 bg-[#DDDAD3]">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <div class="flex items-end justify-between mb-8 pb-4 border-b border-[#C8C4BC]">
+          <h2
+            class="text-[clamp(22px,3vw,30px)] leading-[1.15] text-[#3F261F]"
+            style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
+          >
+            More <em style="font-style: italic; color: #7A8B76;">case studies</em>
+          </h2>
+          <a href="/case-studies/" class="text-[11px] font-bold uppercase tracking-[2px] text-[#13342D] hover:gap-3 inline-flex items-center gap-2 transition-all">
+            All studies →
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          {otherStudies.map((s) => (
+            <a href={`/case-studies/${s.id}`} class="block bg-[#E8E6E1] rounded-[16px] p-6 transition-all duration-[350ms] hover:-translate-y-1" style="box-shadow: 0 1px 3px rgba(22,25,16,0.06);">
+              <p class="text-[10px] font-bold uppercase tracking-[1.5px] text-[#8F6E62] mb-2">{s.data.city}, {s.data.state} · {s.data.bedrooms}BR</p>
+              <h3 class="text-[18px] leading-[1.25] text-[#3F261F] mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;">
+                {s.data.listing}
+              </h3>
+              {s.data.pacing && (
+                <div class="flex items-center gap-4 text-[11px]">
+                  <span class="text-[#5D6D59] font-bold" style="font-family: 'JetBrains Mono', monospace;">{fmtPct(s.data.pacing.liftPct)}</span>
+                  {s.data.pacing.mpi !== undefined && <span class="text-[#76574C]" style="font-family: 'JetBrains Mono', monospace;">{s.data.pacing.mpi.toFixed(2)}x MPI</span>}
+                </div>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 md:py-20 bg-[#13342D] text-[#E8E6E1]">
+      <div class="max-w-3xl mx-auto px-6 md:px-12 text-center">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-4">YOUR NUMBERS, NEXT</p>
+        <h2
+          class="text-[clamp(28px,4vw,42px)] leading-[1.15] mb-6"
+          style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
+        >
+          What would your <em style="font-style: italic; color: #A9BBA3;">comp-set look like</em> after a strategy call?
+        </h2>
+        <p class="text-[15px] leading-[1.7] text-[#A9BBA3]/80 mb-8 max-w-xl mx-auto">
+          A 30-minute strategy call. We pull your comp-set, walk through where pacing is leaving money, and tell you whether RevFactor is the right fit. No pitch deck.
+        </p>
+        <a
+          href="/#schedule"
+          class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#A9BBA3] text-[#13342D] font-bold uppercase text-[11px] tracking-[2px] rounded-full hover:scale-[1.02] transition-transform"
+          data-umami-event="case-study-cta-click"
+        >
+          Book a strategy call →
+        </a>
+      </div>
+    </section>
+  </article>
+
+  <Footer client:load />
+</BaseLayout>
+
+<style is:global>
+  .case-study-prose h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.2;
+    color: #3F261F;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.3px;
+  }
+  .case-study-prose h2:first-child { margin-top: 0; }
+  .case-study-prose h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(18px, 2vw, 22px);
+    color: #3F261F;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .case-study-prose p { margin-bottom: 1.25rem; }
+  .case-study-prose strong { color: #13342D; font-weight: 600; }
+  .case-study-prose em { color: #5D6D59; font-style: italic; }
+  .case-study-prose ol, .case-study-prose ul { margin: 1rem 0 1.5rem 1.5rem; }
+  .case-study-prose li { margin-bottom: 0.5rem; }
+  .case-study-prose ol { list-style: decimal; }
+  .case-study-prose ul { list-style: disc; }
+  .case-study-prose a { color: #13342D; text-decoration: underline; text-decoration-color: #5D6D59; text-underline-offset: 3px; }
+  .case-study-prose a:hover { color: #5D6D59; }
+  .case-study-prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    width: 100%;
+    margin: 1.5rem 0 2rem;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: #DDDAD3;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .case-study-prose th {
+    background: #13342D;
+    color: #E8E6E1;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-family: Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .case-study-prose td {
+    padding: 0.6rem 1rem;
+    border-top: 1px solid rgba(200,196,188,0.4);
+    color: #3F261F;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .case-study-prose td:first-child { font-family: Helvetica, sans-serif; }
+  .case-study-prose tr:nth-child(even) td { background: rgba(232,230,225,0.3); }
+</style>

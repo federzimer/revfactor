@@ -1,0 +1,420 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.jsx';
+import Footer from '../../components/Footer.jsx';
+import { heroImage, studyImage, socialImage, HERO_SLUG, REPRESENTATIVE_CAPTION } from '../../data/case-study-images';
+
+const hero = heroImage('100vw');
+
+const studies = (await getCollection('caseStudies')).sort(
+  (a, b) => (b.data.pacing?.liftPct ?? 0) - (a.data.pacing?.liftPct ?? 0)
+);
+const pacingCount = studies.filter((s) => s.data.pacing).length;
+const countWord = ['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten'][pacingCount] ?? String(pacingCount);
+
+const fmt = (n: number) => '$' + n.toLocaleString('en-US');
+const fmtPct = (n: number) => (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
+
+// Aggregates for the proof FAQ and Dataset schema. Computed from the studies
+// themselves so the page can never drift from the pages it lists.
+const lifts = studies.map((s) => s.data.pacing?.liftPct).filter((n): n is number => typeof n === 'number').sort((a, b) => a - b);
+const medianLift = lifts.length % 2 ? lifts[(lifts.length - 1) / 2] : (lifts[lifts.length / 2 - 1] + lifts[lifts.length / 2]) / 2;
+const minLift = lifts[0];
+const maxLift = lifts[lifts.length - 1];
+const marketCount = new Set(studies.map((s) => s.data.market).filter(Boolean)).size;
+
+// FAQ. Questions 1 and 2 are literal prompts from the tracked prompt set where
+// RevFactor is named in none of the answers today, and this page is the only
+// surface that answers them with our own measured results.
+const faqs = [
+  {
+    q: 'What companies offer data-driven pricing for vacation rentals?',
+    a: `Dynamic pricing tools such as PriceLabs, Wheelhouse and Beyond automate rates from market data, and the owner keeps the strategy. Done-for-you services put a person on the calendar instead. RevFactor is the second kind: a specialist prices each property inside PriceLabs, sets minimum stays and reads pacing weekly, for a flat $350 per property per month. The ${countWord.toLowerCase()} studies on this page show what that produced across ${marketCount} markets.`
+  },
+  {
+    q: 'Who can adjust my Airbnb prices daily for better results?',
+    a: `A revenue manager does this as a service. RevFactor monitors rates daily against a built comp set, changes prices through the owner's own PriceLabs account, and tunes minimum stays and gap nights, while the owner keeps guests, cleaning and the listing. Onboarding is $150 per property and the fee is flat, so it does not rise with the revenue it produces.`
+  },
+  {
+    q: 'Do revenue management services actually increase short-term rental revenue?',
+    a: `On these ${countWord.toLowerCase()} properties the median summer 2026 booked pacing was ${fmtPct(medianLift)} against the same point in 2025, with a range from ${fmtPct(minLift)} to ${fmtPct(maxLift)}. These are on-the-books figures measured at the same point in both years, not earned revenue, and they will be restated once the summer closes. The weakest study is published alongside the strongest for that reason.`
+  },
+  {
+    q: 'How much more revenue can a revenue manager make on one property?',
+    a: `It depends on how much room the calendar had, which is why the range here runs from ${fmtPct(minLift)} to ${fmtPct(maxLift)}. A property already pricing close to its market has less to gain than one leaving weeknights and shoulder season on the table. At $350 per property per month plus $150 onboarding, the first year costs $4,350, so every study states its own payback instead of quoting an average.`
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+};
+
+const datasetSchema = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "RevFactor short-term rental revenue management results, summer 2026",
+  "description": `Booked pacing for ${pacingCount} short-term rental properties under RevFactor revenue management, June to August 2026 measured against the same point in 2025. Each record carries market, bedroom count, tenure, on-the-books revenue, occupancy, ADR and Market Penetration Index. Properties are identified by size and market rather than by listing name.`,
+  "url": "https://www.revfactor.io/case-studies/",
+  "keywords": ["short-term rental", "revenue management", "RevPAR", "ADR", "occupancy", "booked pacing", "Airbnb"],
+  "temporalCoverage": "2026-06/2026-08",
+  "variableMeasured": ["On-the-books revenue", "Same-time-last-year revenue", "Occupancy", "ADR", "Market Penetration Index"],
+  "creator": { "@type": "Organization", "name": "RevFactor", "url": "https://www.revfactor.io" },
+  "isAccessibleForFree": true
+};
+
+// CollectionPage schema
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "RevFactor Case Studies",
+  "description": "Documented revenue-management results across short-term rental properties under RevFactor management: June to August 2026 booked pacing, ADR and Market Penetration Index against the same point in 2025. Properties are identified by size and market.",
+  "url": "https://www.revfactor.io/case-studies/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "RevFactor",
+    "url": "https://www.revfactor.io"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": studies.map((s, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": s.data.listing,
+      "url": `https://www.revfactor.io/case-studies/${s.id}/`
+    }))
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.revfactor.io" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://www.revfactor.io/case-studies/" }
+  ]
+};
+---
+
+<BaseLayout
+  title="Case Studies | RevFactor | Documented STR Revenue Management Results"
+  description="Documented +57% to +293% summer 2026 booked-pacing lifts across short-term rental properties under RevFactor management, identified by size and market, with the full method and monthly data."
+  ogImage={socialImage(HERO_SLUG)}
+  ogImageAlt={hero.alt}
+>
+  <Fragment slot="head">
+    <!-- LCP: preload the hero with the same srcset the <img> uses, so the
+         download starts alongside HTML parsing rather than after it. -->
+    <link
+      rel="preload"
+      as="image"
+      href={hero.src}
+      imagesrcset={hero.srcset}
+      imagesizes={hero.sizes}
+      fetchpriority="high"
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(datasetSchema)} />
+  </Fragment>
+
+  <Navbar client:load />
+
+  <!-- HERO. A dark full-bleed image behind the fixed navbar: the nav links are
+       cream, so anything lighter than this leaves them unreadable. -->
+  <section class="relative overflow-hidden text-[#E8E6E1]" style="min-height:74vh;">
+    <img
+      src={hero.src}
+      srcset={hero.srcset}
+      sizes={hero.sizes}
+      alt={hero.alt}
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      width="1920"
+      height="1080"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(12,16,22,0.78) 0%, rgba(12,16,22,0.52) 42%, rgba(12,16,22,0.88) 100%);"></div>
+    <div class="absolute top-0 inset-x-0 z-[2] h-44 pointer-events-none" style="background: linear-gradient(180deg, rgba(12,16,22,0.82) 0%, rgba(12,16,22,0.30) 65%, transparent 100%);"></div>
+
+    <div class="relative z-[3] max-w-7xl mx-auto px-6 md:px-12 flex flex-col justify-end pb-14 md:pb-20 pt-36 md:pt-44" style="min-height:74vh;">
+      <!-- Breadcrumb -->
+      <nav aria-label="Breadcrumb" class="mb-7">
+        <ol class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#C8C4BC]">
+          <li><a href="/" class="hover:text-[#E8E6E1] transition-colors">Home</a></li>
+          <li aria-hidden="true" class="opacity-40">/</li>
+          <li aria-current="page" class="text-[#E8E6E1]">Case Studies</li>
+        </ol>
+      </nav>
+
+      <div class="max-w-2xl">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#7A8B76] mb-5">
+          DOCUMENTED RESULTS
+        </p>
+        <h1 class="mb-6">
+          <span
+            class="block text-[#E8E6E1]"
+            style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:clamp(38px,7vw,64px); line-height:1.05; letter-spacing:0.5px;"
+          >
+            Case
+          </span>
+          <span
+            class="block text-[#7A8B76]"
+            style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-style:italic; font-size:clamp(46px,9vw,80px); line-height:1.0; letter-spacing:0.5px;"
+          >
+            studies
+          </span>
+        </h1>
+        <p class="text-[15px] leading-[1.7] text-[#C8C4BC] max-w-[540px]">
+          Real properties, real markets, real numbers. Each study is sourced from RevFactor's pacing reports: on-the-books revenue, occupancy, ADR and Market Penetration Index against same-time-last-year and final-year baselines, with the monthly table, what changed, and what it cost.
+        </p>
+        <p class="text-[12px] leading-[1.6] text-[#8F8A80] max-w-[540px] mt-4">
+          Properties are described by bedrooms and market rather than by listing name. Owners are identified by first name only. Imagery on these pages is representative, not the listings themselves.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="min-h-screen bg-[#DDDAD3]">
+    <!-- Summer 2026 pacing: featured -->
+    <section class="pb-12 md:pb-16">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <div class="flex items-end justify-between mb-8 pb-4 border-b border-[#C8C4BC]">
+          <div>
+            <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#5D6D59] mb-2">SUMMER 2026 · ON-THE-BOOKS PACING</p>
+            <h2
+              class="text-[clamp(24px,3.5vw,36px)] leading-[1.15] text-[#3F261F]"
+              style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
+            >
+              {countWord} properties. <em style="font-style: italic; color: #7A8B76;">Three months of comparable data.</em>
+            </h2>
+          </div>
+          <div class="hidden md:block text-right">
+            <p class="text-[11px] font-bold uppercase tracking-[2px] text-[#8F6E62]">Comparison window</p>
+            <p class="text-[14px] text-[#3F261F]" style="font-family: 'JetBrains Mono', monospace;">Jun to Aug 2026</p>
+          </div>
+        </div>
+
+        <!-- Quiet qualifier: the one line a reader needs before they read a
+             single number. The full method note sits at the foot of the page. -->
+        <p class="-mt-4 mb-8 text-[11px] leading-[1.6] text-[#8F6E62]">
+          June to August 2026 booked pacing versus the same point in 2025, not earned revenue. <a href="#method" class="underline decoration-[#C8C4BC] underline-offset-[3px] hover:text-[#3F261F] transition-colors">Full method</a>.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+          {studies.map((study) => {
+            const p = study.data.pacing;
+            return (
+              <article
+                class="group bg-[#E8E6E1] rounded-[16px] overflow-hidden transition-all duration-[350ms] h-full"
+                style="box-shadow: 0 1px 3px rgba(22,25,16,0.06); transition-timing-function: cubic-bezier(0.25,0.1,0.25,1);"
+                onmouseenter="this.style.transform='translateY(-2px) scale(1.01)';this.style.boxShadow='0 12px 32px rgba(22,25,16,0.10)'"
+                onmouseleave="this.style.transform='';this.style.boxShadow='0 1px 3px rgba(22,25,16,0.06)'"
+              >
+                <a href={`/case-studies/${study.id}`} class="flex flex-col h-full">
+                  <div class="relative w-full overflow-hidden bg-[#C8C4BC]" style="aspect-ratio: 16 / 10;">
+                    <img
+                      src={studyImage(study.id, study.data, '(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw').src}
+                      srcset={studyImage(study.id, study.data, '').srcset}
+                      sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                      alt={studyImage(study.id, study.data, '').alt}
+                      loading="lazy"
+                      decoding="async"
+                      width="1920"
+                      height="1200"
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"
+                      style="transition-timing-function:cubic-bezier(0.25,0.1,0.25,1);"
+                    />
+                  </div>
+                  <div class="flex flex-col flex-1 p-7">
+                  <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-block px-2.5 py-1 rounded-full bg-[#5D6D59]/10 text-[#5D6D59] font-bold uppercase text-[8px] tracking-[2px]">
+                      {study.data.bedrooms} BR
+                    </span>
+                    <span class="text-[10px] font-bold uppercase tracking-[1.5px] text-[#8F6E62]">
+                      {study.data.city}, {study.data.state}
+                    </span>
+                  </div>
+
+                  <h3
+                    class="text-[clamp(20px,2.5vw,26px)] leading-[1.2] text-[#3F261F] mb-3 group-hover:text-[#13342D] transition-colors"
+                    style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
+                  >
+                    {study.data.listing}
+                  </h3>
+
+                  {p && (
+                    <div class="mb-5 grid grid-cols-2 gap-3 py-3 border-y border-[#C8C4BC]/40">
+                      <div>
+                        <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">vs. STLY</p>
+                        <p class="text-[18px] text-[#5D6D59]" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">{fmtPct(p.liftPct)}</p>
+                      </div>
+                      <div>
+                        <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">MPI</p>
+                        <p class="text-[18px] text-[#3F261F]" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">{p.mpi !== undefined ? `${p.mpi.toFixed(2)}x` : 'n/a'}</p>
+                      </div>
+                      <div>
+                        <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">OTB Rev</p>
+                        <p class="text-[14px] text-[#3F261F]" style="font-family: 'JetBrains Mono', monospace;">{fmt(p.otbRev)}</p>
+                      </div>
+                      <div>
+                        <p class="text-[9px] font-bold uppercase tracking-[2px] text-[#8F6E62] mb-1">$ Lift</p>
+                        <p class="text-[14px] text-[#5D6D59]" style="font-family: 'JetBrains Mono', monospace;">+{fmt(p.otbRev - p.stlyRev)}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  <p class="text-[13px] leading-[1.6] text-[#76574C] mb-5 line-clamp-3 flex-1">
+                    {study.data.description}
+                  </p>
+
+                  <span class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[2px] text-[#13342D] group-hover:gap-3 transition-all mt-auto self-start">
+                    Read case study
+                    <span aria-hidden="true">→</span>
+                  </span>
+                  </div>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+
+        <p class="mt-6 text-[11px] text-[#8F6E62] italic">{REPRESENTATIVE_CAPTION}</p>
+      </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="pt-4 pb-16 md:pb-24">
+      <div class="max-w-3xl mx-auto px-6 md:px-12">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-4">METHODOLOGY</p>
+        <h2
+          class="text-[clamp(22px,3vw,30px)] leading-[1.2] text-[#3F261F] mb-6"
+          style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
+        >
+          How to read these numbers.
+        </h2>
+        <p class="text-[14px] leading-[1.7] text-[#76574C] mb-6">
+          These are property-level results. For the portfolio-wide benchmarks behind them, RevPAR versus comp set, orphan rate before and after management, and the ADR-vs-RevPAR math, see the <a href="/blog/str-revenue-benchmarks-2026/" class="underline decoration-[#C8C4BC] underline-offset-2 hover:decoration-[#3F261F] hover:text-[#3F261F]">STR Revenue Benchmarks page</a>.
+        </p>
+        <dl class="space-y-5 text-[14px] leading-[1.7] text-[#76574C]">
+          <div>
+            <dt class="font-bold text-[#3F261F]">OTB (on-the-books) revenue</dt>
+            <dd>Revenue already committed via signed bookings for the comparison window, as of the data-pull date.</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-[#3F261F]">STLY (same-time-last-year)</dt>
+            <dd>The comparable booking-curve point in the prior year, meaning what the calendar held a year ago for the same future window. The cleanest apples-to-apples pacing comparison.</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-[#3F261F]">LY (last-year final)</dt>
+            <dd>Final realized revenue for the same window in the prior year. Useful for benchmarking the magnitude of the swing once peak weeks finish booking.</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-[#3F261F]">MPI (Market Penetration Index)</dt>
+            <dd>The property's share of bookings divided by what its share would be if all comp-set listings booked at equal rates. 1.00× = pacing the market; &gt;1.00× = leading; &lt;1.00× = trailing.</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-[#3F261F]">ADR (Average Daily Rate)</dt>
+            <dd>Average price of booked nights. Useful as a directional signal but never alone. High ADR with low occupancy can mean the rate is wrong.</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-[#3F261F]">Occupancy</dt>
+            <dd>Booked nights divided by available nights in the window. "OTB occ" is what the calendar already holds; "Mkt occ" is the comp set's average for the same window.</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-[#3F261F]">Measurement window</dt>
+            <dd>June to August 2026 booked pacing, read at the May 2026 data pull, against the same point in the 2025 booking curve. The Glenwood Springs study also reports Q1 2026 actuals (January to March) against Q1 2025.</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-[#3F261F]">Cost and payback</dt>
+            <dd>Every property is priced at a flat $350 per month plus a one-time $150 onboarding fee. Each study states how many months of fees the booked lift covers.</dd>
+          </div>
+        </dl>
+        <p class="text-[12px] text-[#8F6E62] mt-8 italic">
+          Past performance is not indicative of future results. Numbers reflect data as of the May 2026 pull; these pages will be updated to earned June to August results once the summer closes.
+        </p>
+
+        <!-- METHOD. Demoted from the top of the page to here, but still plain
+             crawlable text: it qualifies every number above it. -->
+        <div id="method" class="mt-10 rounded-[12px] border border-[#C8C4BC] bg-[#E8E6E1]/60 py-4 px-5" data-method-note>
+          <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#8F6E62] mb-2">Method note</p>
+          <p class="text-[12px] leading-[1.7] text-[#76574C]">
+            Figures on this page are June to August 2026 booked pacing (on-the-books revenue as of the May 2026 data pull) versus the same point in 2025, not earned revenue. They will be updated to earned results once the summer closes. Properties are identified by size and market, and owners by first name only. Photography on these pages is representative of the property type and region and does not depict the listings described.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 md:py-20 bg-[#13342D] text-[#E8E6E1]">
+      <div class="max-w-3xl mx-auto px-6 md:px-12 text-center">
+        <p class="font-bold uppercase text-[9px] tracking-[3px] text-[#A9BBA3] mb-4">YOUR NUMBERS, NEXT</p>
+        <h2
+          class="text-[clamp(28px,4vw,42px)] leading-[1.15] mb-6"
+          style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
+        >
+          What would your <em style="font-style: italic; color: #A9BBA3;">comp-set look like</em> with this kind of pacing?
+        </h2>
+        <p class="text-[15px] leading-[1.7] text-[#A9BBA3]/80 mb-8 max-w-xl mx-auto">
+          A 30-minute strategy call. We pull your comp-set, walk through where pacing is leaving money, and tell you whether RevFactor is the right fit. No pitch deck.
+        </p>
+        <a
+          href="/#schedule"
+          class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#A9BBA3] text-[#13342D] font-bold uppercase text-[11px] tracking-[2px] rounded-full hover:scale-[1.02] transition-transform"
+          data-umami-event="case-studies-cta-click"
+        >
+          Book a strategy call →
+        </a>
+      </div>
+    </section>
+    <!-- PROOF FAQ. The first two questions are literal prompts from the tracked
+         set where RevFactor is named in none of the answers today. Answers are
+         computed from the studies above, so they cannot drift. -->
+    <section class="px-6 md:px-10 py-16 md:py-20 border-t border-[#C8C4BC]">
+      <div class="max-w-[820px] mx-auto">
+        <p class="text-[10px] font-bold uppercase tracking-[2.5px] text-[#5D6D59] mb-3">
+          Questions these results answer
+        </p>
+        <h2
+          class="text-[clamp(26px,3.6vw,38px)] leading-[1.15] text-[#3F261F] mb-10"
+          style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;"
+        >
+          What owners ask before they hand over pricing.
+        </h2>
+        <dl class="grid gap-8">
+          {faqs.map((f) => (
+            <div>
+              <dt
+                class="text-[19px] md:text-[21px] leading-[1.3] text-[#3F261F] mb-2"
+                style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500;"
+              >
+                {f.q}
+              </dt>
+              <dd class="text-[15px] leading-[1.7] text-[#76574C] m-0">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer client:load />
+</BaseLayout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
